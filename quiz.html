@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descubra seu Perfil de Viagem | Rotta Curadoria</title>
+<meta name="description" content="Descubra seu perfil de viajante com o quiz da Rotta Curadoria. Viagens premium curadas por Marcelo & Alexandra.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0E0E0E;--card:#1A1A1A;--gold:#C5A572;--text:#F2EDE8;--muted:#999;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.3)}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;display:flex;flex-direction:column;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
+
+/* Header */
+.header{display:flex;align-items:center;justify-content:center;padding:1.25rem 1rem .75rem;position:relative;z-index:10}
+.logo{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--gold);font-weight:700;letter-spacing:.02em}
+
+/* Progress */
+.progress-wrap{padding:0 1.5rem;margin-bottom:.5rem}
+.progress-bar{height:3px;background:rgba(197,165,114,.15);border-radius:2px;overflow:hidden;transition:opacity .4s}
+.progress-fill{height:100%;background:var(--gold);border-radius:2px;width:0%;transition:width .5s cubic-bezier(.4,0,.2,1)}
+.progress-text{font-size:.7rem;color:var(--muted);text-align:right;margin-top:.35rem;letter-spacing:.04em;font-weight:500;transition:opacity .4s}
+
+/* Main */
+.main{flex:1;display:flex;flex-direction:column;align-items:center;padding:1rem 1rem 2rem;position:relative}
+
+/* Screens */
+.screen{display:none;width:100%;max-width:520px;flex-direction:column;align-items:center}
+.screen.active{display:flex}
+
+/* Intro */
+.intro{text-align:center;padding-top:2rem;animation:fadeUp .7s ease both}
+.intro h1{font-size:clamp(1.6rem,5vw,2.2rem);color:var(--text);line-height:1.25;margin-bottom:.75rem}
+.intro h1 span{color:var(--gold);font-style:italic}
+.intro p{color:var(--muted);font-size:.95rem;line-height:1.6;max-width:400px;margin:0 auto 2rem;font-weight:300}
+.btn-start{display:inline-flex;align-items:center;gap:.5rem;background:var(--gold);color:var(--bg);font-family:'Inter',sans-serif;font-weight:600;font-size:.95rem;padding:.9rem 2.2rem;border:none;border-radius:50px;cursor:pointer;transition:transform .2s,box-shadow .2s;letter-spacing:.02em}
+.btn-start:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(197,165,114,.25)}
+.btn-start:active{transform:translateY(0)}
+
+/* Question */
+.question-screen{animation:fadeUp .45s ease both}
+.question-number{font-size:.75rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;font-weight:600;margin-bottom:.75rem}
+.question-text{font-family:'Playfair Display',serif;font-size:clamp(1.15rem,4vw,1.45rem);color:var(--text);line-height:1.4;text-align:center;margin-bottom:1.75rem;min-height:3.5rem}
+.answers{display:flex;flex-direction:column;gap:.65rem;width:100%}
+.answer-card{background:var(--card);border:1.5px solid transparent;border-radius:14px;padding:1rem 1.15rem;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;display:flex;align-items:flex-start;gap:.75rem;user-select:none;-webkit-tap-highlight-color:transparent}
+.answer-card:hover{border-color:var(--gold-glow);background:#1f1f1f}
+.answer-card:active{transform:scale(.985)}
+.answer-card.selected{border-color:var(--gold);background:var(--gold-dim)}
+.answer-card.selected .answer-letter{background:var(--gold);color:var(--bg)}
+.answer-letter{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--muted);display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:600;color:var(--muted);flex-shrink:0;transition:background .2s,color .2s,border-color .2s;margin-top:1px}
+.answer-text{font-size:.9rem;line-height:1.5;color:var(--text);font-weight:400}
+
+/* Result */
+.result-screen{text-align:center;animation:fadeScale .6s ease both;padding-top:1rem}
+.result-icon{width:80px;height:80px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;position:relative;overflow:hidden}
+.result-icon::after{content:'';position:absolute;inset:0;background:var(--gold-dim);border-radius:50%}
+.result-icon svg{position:relative;z-index:1}
+.result-label{font-size:.7rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;font-weight:600;margin-bottom:.5rem}
+.result-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,5vw,1.9rem);color:var(--gold);line-height:1.3;margin-bottom:1.25rem}
+.result-desc{color:var(--muted);font-size:.92rem;line-height:1.7;max-width:440px;margin:0 auto 2rem;font-weight:300}
+.btn-cta{display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:var(--bg);font-family:'Inter',sans-serif;font-weight:600;font-size:.92rem;padding:.85rem 2rem;border:none;border-radius:50px;cursor:pointer;text-decoration:none;transition:transform .2s,box-shadow .2s;letter-spacing:.02em;margin-bottom:.85rem}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(197,165,114,.25)}
+.btn-cta svg{flex-shrink:0}
+.btn-secondary{display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:var(--muted);font-family:'Inter',sans-serif;font-weight:500;font-size:.82rem;padding:.6rem 1.4rem;border:1px solid rgba(153,153,153,.25);border-radius:50px;cursor:pointer;transition:border-color .2s,color .2s;text-decoration:none;margin-bottom:.5rem}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+.result-links{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-top:.25rem}
+
+/* Footer */
+.footer{text-align:center;padding:1.5rem 1rem;border-top:1px solid rgba(153,153,153,.1)}
+.footer p{font-size:.72rem;color:var(--muted);letter-spacing:.06em;font-weight:400}
+.footer span{color:var(--gold)}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeScale{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.progress-fill{background:linear-gradient(90deg,var(--gold) 0%,#d4bc8a 50%,var(--gold) 100%);background-size:200% 100%;animation:shimmer 2s infinite linear}
+
+/* Transitions between questions */
+.question-screen.exit{animation:fadeOut .25s ease both}
+@keyframes fadeOut{to{opacity:0;transform:translateY(-12px)}}
+
+/* Responsive */
+@media(min-width:600px){
+  .main{padding:2rem 2rem 3rem}
+  .intro{padding-top:3rem}
+  .answer-card{padding:1.1rem 1.3rem}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">R</div>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  <div class="progress-text" id="progressText"></div>
+</div>
+
+<main class="main">
+
+  <!-- INTRO SCREEN -->
+  <div class="screen active" id="introScreen">
+    <div class="intro">
+      <h1>Descubra seu<br><span>Perfil de Viagem</span></h1>
+      <p>7 perguntas rapidas para revelar o tipo de viajante que voce e &mdash; e a experiencia perfeita para voce.</p>
+      <button class="btn-start" onclick="startQuiz()">
+        Comecar
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- QUESTION SCREEN -->
+  <div class="screen" id="questionScreen">
+    <div class="question-number" id="qNumber"></div>
+    <div class="question-text" id="qText"></div>
+    <div class="answers" id="answersContainer"></div>
+  </div>
+
+  <!-- RESULT SCREEN -->
+  <div class="screen" id="resultScreen">
+    <div class="result-icon">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C5A572" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    </div>
+    <div class="result-label">Seu perfil de viagem</div>
+    <h2 class="result-title" id="resultTitle"></h2>
+    <p class="result-desc" id="resultDesc"></p>
+    <div class="result-links">
+      <a class="btn-cta" id="resultCTA" href="#" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.685-1.228A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.24 0-4.326-.683-6.058-1.852l-.424-.296-3.088.81.848-3.003-.325-.472A9.96 9.96 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/></svg>
+        Quero minha viagem
+      </a>
+    </div>
+    <div class="result-links" style="margin-top:.5rem">
+      <a class="btn-secondary" href="https://instagram.com/rotta.curadoria" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @rotta.curadoria
+      </a>
+      <button class="btn-secondary" onclick="resetQuiz()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 105.46-10.46L1 10"/></svg>
+        Refazer quiz
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <p>Curado por <span>Marcelo & Alexandra</span></p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  var questions = [
+    {
+      q: "Qual e a primeira coisa que voce faz quando chega num destino novo?",
+      a: [
+        {letter:"A", text:"Procuro o melhor restaurante da regiao"},
+        {letter:"B", text:"Saio explorando as ruas sem roteiro"},
+        {letter:"C", text:"Vou direto pro hotel descansar e planejar"},
+        {letter:"D", text:"Procuro uma experiencia unica (mergulho, trilha, aula de culinaria)"}
+      ]
+    },
+    {
+      q: "Como voce prefere viajar?",
+      a: [
+        {letter:"A", text:"So nos dois \u2014 sem filhos, sem amigos"},
+        {letter:"B", text:"Em familia \u2014 quanto mais gente, melhor"},
+        {letter:"C", text:"Com amigos \u2014 a energia do grupo e tudo"},
+        {letter:"D", text:"Sozinho(a) primeiro, depois com companhia"}
+      ]
+    },
+    {
+      q: "O que mais te frustra numa viagem?",
+      a: [
+        {letter:"A", text:"Lugar lotado de turistas"},
+        {letter:"B", text:"Nao ter tempo de aproveitar com calma"},
+        {letter:"C", text:"Comida ruim ou sem opcoes boas"},
+        {letter:"D", text:"Ter que organizar tudo sozinho(a)"}
+      ]
+    },
+    {
+      q: "Quando voce pensa em \u2018viagem dos sonhos\u2019, o que vem primeiro?",
+      a: [
+        {letter:"A", text:"Uma praia deserta com agua cristalina"},
+        {letter:"B", text:"Uma cidade historica cheia de cultura"},
+        {letter:"C", text:"Uma aventura na natureza (montanhas, safari, vulcoes)"},
+        {letter:"D", text:"Um hotel incrivel com spa e gastronomia"}
+      ]
+    },
+    {
+      q: "Qual frase mais combina com voce?",
+      a: [
+        {letter:"A", text:"\u201CEu mereco essa viagem\u201D"},
+        {letter:"B", text:"\u201CQuero algo que ninguem fez\u201D"},
+        {letter:"C", text:"\u201CPrecisamos de um tempo so nosso\u201D"},
+        {letter:"D", text:"\u201CBora! Chama a galera!\u201D"}
+      ]
+    },
+    {
+      q: "Quanto voce costuma planejar antes de viajar?",
+      a: [
+        {letter:"A", text:"Planejo TUDO nos minimos detalhes"},
+        {letter:"B", text:"Planejo o basico e improviso o resto"},
+        {letter:"C", text:"Quero que alguem planeje pra mim"},
+        {letter:"D", text:"Nao planejo \u2014 vou e vejo o que rola"}
+      ]
+    },
+    {
+      q: "O que voce mais valoriza numa experiencia de viagem?",
+      a: [
+        {letter:"A", text:"Gastronomia e cultura local"},
+        {letter:"B", text:"Aventura e adrenalina"},
+        {letter:"C", text:"Romance e conexao com meu par"},
+        {letter:"D", text:"Descanso e conforto total"}
+      ]
+    }
+  ];
+
+  // Scoring map: for each question index, maps answer letter to array of persona keys
+  // carolina, roberto, silvia, squad, lucas
+  var scoring = [
+    {B:["carolina"],D:["roberto"],A:["silvia","lucas"],B:["carolina","squad"]},
+    {D:["carolina"],A:["roberto","silvia","lucas"],C:["squad"]},
+    {A:["carolina","roberto"],B:["silvia"],C:["squad"],D:["lucas"]},
+    {B:["carolina"],C:["roberto"],D:["silvia"],A:["squad","lucas"]},
+    {A:["carolina","lucas"],B:["roberto"],C:["silvia"],D:["squad"]},
+    {B:["carolina"],A:["roberto"],C:["silvia","lucas"],D:["squad"]},
+    {A:["carolina"],B:["roberto","squad"],C:["silvia","lucas"],D:[]}
+  ];
+
+  // Fix scoring - redefine properly since JS objects can't have duplicate keys
+  scoring = [
+    // Q1: Carolina=B, Roberto=D, Silvia=A, Squad=B, Lucas=A
+    {A:["silvia","lucas"], B:["carolina","squad"], C:[], D:["roberto"]},
+    // Q2: Carolina=D, Roberto=A, Silvia=A, Squad=C, Lucas=A
+    {A:["roberto","silvia","lucas"], B:[], C:["squad"], D:["carolina"]},
+    // Q3: Carolina=A, Roberto=A, Silvia=B, Squad=C, Lucas=D
+    {A:["carolina","roberto"], B:["silvia"], C:["squad"], D:["lucas"]},
+    // Q4: Carolina=B, Roberto=C, Silvia=D, Squad=A, Lucas=A
+    {A:["squad","lucas"], B:["carolina"], C:["roberto"], D:["silvia"]},
+    // Q5: Carolina=A, Roberto=B, Silvia=C, Squad=D, Lucas=A
+    {A:["carolina","lucas"], B:["roberto"], C:["silvia"], D:["squad"]},
+    // Q6: Carolina=B, Roberto=A, Silvia=C, Squad=D, Lucas=C
+    {A:["roberto"], B:["carolina"], C:["silvia","lucas"], D:["squad"]},
+    // Q7: Carolina=A, Roberto=B, Silvia=C, Squad=B, Lucas=C
+    {A:["carolina"], B:["roberto","squad"], C:["silvia","lucas"], D:[]}
+  ];
+
+  var results = {
+    carolina: {
+      title: "Voce e a Exploradora Aspiracional",
+      desc: "Voce merece essa viagem e sabe disso. Busca experiencias que combinem cultura, gastronomia e aquele toque de \u201Ceu mereco\u201D. Destinos como Italia, Portugal e Croacia foram feitos pra voce.",
+      cta: "https://wa.me/5511968152123?text=Oi!%20Fiz%20o%20quiz%20e%20sou%20Exploradora%20Aspiracional.%20Quero%20saber%20mais!"
+    },
+    roberto: {
+      title: "Voce e o Colecionador de Experiencias",
+      desc: "Viagem de turista? Nunca. Voce quer o que ninguem fez, o restaurante que nao esta no Google, a trilha que so os locais conhecem.",
+      cta: "https://wa.me/5511968152123?text=Oi!%20Fiz%20o%20quiz%20e%20sou%20Colecionador%20de%20Experi%C3%AAncias.%20Quero%20saber%20mais!"
+    },
+    silvia: {
+      title: "Voces sao o Casal Reconectando",
+      desc: "A rotina engoliu voces e a viagem e o reset que precisam. Querem conforto, gastronomia e tempo de qualidade so dos dois.",
+      cta: "https://wa.me/5511968152123?text=Oi!%20Fizemos%20o%20quiz%20e%20somos%20o%20Casal%20Reconectando.%20Queremos%20saber%20mais!"
+    },
+    squad: {
+      title: "Voce e do Squad Aventureiro",
+      desc: "Viagem boa e viagem com a galera! Voce quer risada, aventura e memorias em grupo.",
+      cta: "https://wa.me/5511968152123?text=Oi!%20Fiz%20o%20quiz%20e%20sou%20do%20Squad%20Aventureiro.%20Quero%20saber%20mais!"
+    },
+    lucas: {
+      title: "Voces sao o Casal que Celebra",
+      desc: "A vida ta passando e voces querem marcar os momentos juntos. Romance, fotos lindas e experiencias que ficam pra sempre.",
+      cta: "https://wa.me/5511968152123?text=Oi!%20Fizemos%20o%20quiz%20e%20somos%20o%20Casal%20que%20Celebra.%20Queremos%20saber%20mais!"
+    }
+  };
+
+  var currentQ = 0;
+  var scores = {carolina:0, roberto:0, silvia:0, squad:0, lucas:0};
+  var locked = false;
+
+  var introScreen = document.getElementById("introScreen");
+  var questionScreen = document.getElementById("questionScreen");
+  var resultScreen = document.getElementById("resultScreen");
+  var progressFill = document.getElementById("progressFill");
+  var progressText = document.getElementById("progressText");
+  var progressBar = document.getElementById("progressBar");
+  var qNumber = document.getElementById("qNumber");
+  var qText = document.getElementById("qText");
+  var answersContainer = document.getElementById("answersContainer");
+
+  function showScreen(screen) {
+    [introScreen, questionScreen, resultScreen].forEach(function(s){
+      s.classList.remove("active");
+    });
+    screen.classList.add("active");
+  }
+
+  function updateProgress() {
+    var pct = ((currentQ + 1) / questions.length) * 100;
+    progressFill.style.width = pct + "%";
+    progressText.textContent = (currentQ + 1) + " de " + questions.length;
+  }
+
+  function renderQuestion() {
+    locked = false;
+    var q = questions[currentQ];
+    qNumber.textContent = "Pergunta " + (currentQ + 1);
+    qText.textContent = q.q;
+    answersContainer.innerHTML = "";
+
+    q.a.forEach(function(ans) {
+      var card = document.createElement("div");
+      card.className = "answer-card";
+      card.setAttribute("role", "button");
+      card.setAttribute("tabindex", "0");
+      card.setAttribute("aria-label", ans.letter + ": " + ans.text);
+      card.innerHTML = '<div class="answer-letter">' + ans.letter + '</div><div class="answer-text">' + ans.text + '</div>';
+
+      card.addEventListener("click", function(){ selectAnswer(ans.letter, card); });
+      card.addEventListener("keydown", function(e){
+        if(e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          selectAnswer(ans.letter, card);
+        }
+      });
+
+      answersContainer.appendChild(card);
+    });
+
+    updateProgress();
+    questionScreen.classList.remove("exit");
+    questionScreen.style.animation = "none";
+    questionScreen.offsetHeight; // reflow
+    questionScreen.style.animation = "fadeUp .4s ease both";
+  }
+
+  function selectAnswer(letter, card) {
+    if (locked) return;
+    locked = true;
+
+    // Highlight selected
+    var cards = answersContainer.querySelectorAll(".answer-card");
+    cards.forEach(function(c){ c.classList.remove("selected"); });
+    card.classList.add("selected");
+
+    // Score
+    var map = scoring[currentQ];
+    var personas = map[letter] || [];
+    personas.forEach(function(p){ scores[p]++; });
+
+    // Auto-advance after 300ms
+    setTimeout(function(){
+      currentQ++;
+      if (currentQ < questions.length) {
+        questionScreen.classList.add("exit");
+        setTimeout(function(){
+          renderQuestion();
+        }, 250);
+      } else {
+        showResult();
+      }
+    }, 300);
+  }
+
+  function showResult() {
+    // Find winner
+    var maxScore = 0;
+    var winner = "carolina";
+    var keys = Object.keys(scores);
+    for (var i = 0; i < keys.length; i++) {
+      if (scores[keys[i]] > maxScore) {
+        maxScore = scores[keys[i]];
+        winner = keys[i];
+      }
+    }
+
+    var r = results[winner];
+    document.getElementById("resultTitle").textContent = r.title;
+    document.getElementById("resultDesc").textContent = r.desc;
+    document.getElementById("resultCTA").href = r.cta;
+
+    progressFill.style.width = "100%";
+    progressText.textContent = "Resultado";
+
+    showScreen(resultScreen);
+  }
+
+  window.startQuiz = function() {
+    showScreen(questionScreen);
+    progressBar.style.opacity = "1";
+    progressText.style.opacity = "1";
+    renderQuestion();
+  };
+
+  window.resetQuiz = function() {
+    currentQ = 0;
+    scores = {carolina:0, roberto:0, silvia:0, squad:0, lucas:0};
+    progressFill.style.width = "0%";
+    progressText.textContent = "";
+    showScreen(introScreen);
+  };
+
+  // Initial state
+  progressBar.style.opacity = "0";
+  progressText.style.opacity = "0";
+
+})();
+</script>
+
+</body>
+</html>
