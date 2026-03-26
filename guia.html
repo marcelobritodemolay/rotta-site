@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Destinos Imperdiveis | Rotta Curadoria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @media print {
+            body { background: white !important; }
+            .page { break-after: page; }
+            .no-print { display: none !important; }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0E0E0E;
+            --bg-card: #1A1A1A;
+            --bg-layer: #2A2A2A;
+            --gold: #C5A572;
+            --gold-dim: rgba(197, 165, 114, 0.15);
+            --text: #F2EDE8;
+            --text-muted: #999;
+            --text-dim: #666;
+            --coral: #E8785A;
+            --blue: #5B8DEF;
+            --green: #4CAF7D;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== COVER ===== */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 24px;
+            position: relative;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center top, rgba(197,165,114,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cover-badge {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 32px;
+            border: 1px solid rgba(197,165,114,0.3);
+            padding: 8px 20px;
+            border-radius: 100px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(36px, 6vw, 52px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            max-width: 600px;
+        }
+
+        .cover h1 span {
+            color: var(--gold);
+        }
+
+        .cover .subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 480px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cover .authors {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-dim);
+        }
+
+        .cover .authors .avatar-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1.5px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .cover .authors strong {
+            color: var(--text);
+        }
+
+        .cover-footer {
+            position: absolute;
+            bottom: 32px;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        /* ===== INTRO ===== */
+        .intro {
+            padding: 80px 0;
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+
+        .intro p {
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .intro .signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--gold);
+            margin-top: 32px;
+            font-size: 16px;
+        }
+
+        /* ===== HOW TO USE ===== */
+        .how-to-use {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 60px;
+            border: 1px solid var(--bg-layer);
+        }
+
+        .how-to-use h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .legend-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        /* ===== DESTINATION CARDS ===== */
+        .destination {
+            margin-bottom: 80px;
+            padding-top: 40px;
+        }
+
+        .dest-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 700;
+            color: rgba(197,165,114,0.1);
+            line-height: 1;
+            margin-bottom: -20px;
+        }
+
+        .dest-header {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .dest-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .dest-header .flag {
+            font-size: 24px;
+        }
+
+        .dest-tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--gold);
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        .dest-intro {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid var(--bg-layer);
+        }
+
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Highlights */
+        .highlights {
+            margin-bottom: 28px;
+        }
+
+        .highlights h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .highlight-list {
+            list-style: none;
+        }
+
+        .highlight-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--bg-layer);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .highlight-list li:last-child {
+            border-bottom: none;
+        }
+
+        .highlight-list .hl-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .highlight-list strong {
+            color: var(--text);
+        }
+
+        /* Food Section */
+        .food-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 28px;
+            border-left: 3px solid var(--coral);
+        }
+
+        .food-section .food-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--coral);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .food-section p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Tips */
+        .tips-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 28px;
+            border-left: 3px solid var(--gold);
+        }
+
+        .tips-box .tips-header {
+            font-size: 13px;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .tips-box ul {
+            list-style: none;
+        }
+
+        .tips-box li {
+            font-size: 14px;
+            color: var(--text-muted);
+            padding: 6px 0;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .tips-box li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Budget */
+        .budget-table {
+            width: 100%;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 28px;
+            border: 1px solid var(--bg-layer);
+        }
+
+        .budget-table .bt-header {
+            background: var(--bg-layer);
+            padding: 12px 20px;
+            font-size: 13px;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .budget-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 20px;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(42,42,42,0.5);
+        }
+
+        .budget-row:last-child {
+            border-bottom: none;
+        }
+
+        .budget-row .item {
+            color: var(--text-muted);
+        }
+
+        .budget-row .price {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .budget-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            background: var(--gold-dim);
+            border-top: 1px solid rgba(197,165,114,0.3);
+        }
+
+        .budget-total .price {
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+        }
+
+        /* Persona Tag */
+        .persona-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            background: var(--bg-card);
+            padding: 6px 14px;
+            border-radius: 100px;
+            border: 1px solid var(--bg-layer);
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #1F1A14 100%);
+            border: 1px solid rgba(197,165,114,0.3);
+            border-radius: 16px;
+            padding: 48px 32px;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 28px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--bg);
+            padding: 14px 36px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: #D4B87F;
+            transform: translateY(-2px);
+        }
+
+        /* ===== CLOSING ===== */
+        .closing {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .closing .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--gold);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .closing .tagline {
+            font-size: 13px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .closing .social-links {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .closing .social-links a {
+            color: var(--gold);
+            text-decoration: none;
+            margin: 0 12px;
+        }
+
+        /* Divider */
+        .divider {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 40px auto;
+            opacity: 0.3;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .stats-grid { grid-template-columns: 1fr; }
+            .legend { grid-template-columns: 1fr; }
+            .cover h1 { font-size: 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== CAPA ===== -->
+<section class="cover page">
+    <div class="cover-badge">Guia Gratuito 2026</div>
+    <h1>7 Destinos que Valem <span>Cada Centavo</span></h1>
+    <p class="subtitle">
+        Orcamento real, dicas praticas e a opiniao honesta de quem ja foi.
+        Sem romantizar. Sem enrolacao.
+    </p>
+    <div class="authors">
+        <div class="avatar-circle">R</div>
+        <div>
+            <strong>Marcelo & Alexandra</strong><br>
+            Rotta Curadoria
+        </div>
+    </div>
+    <p class="cover-footer">rottacuradoria.com</p>
+</section>
+
+<!-- ===== INTRODUCAO ===== -->
+<section class="intro container page">
+    <p class="section-label">Antes de comecar</p>
+    <h2>Por que esse guia existe</h2>
+    <p>
+        A gente viaja junto ha mais de 15 anos. Ja visitamos 22 paises em 5 continentes. Com 4 filhas. E durante todo esse tempo, a pergunta que mais ouvimos e sempre a mesma:
+    </p>
+    <p>
+        <strong>"Pra onde eu deveria ir? E quanto vou gastar de verdade?"</strong>
+    </p>
+    <p>
+        Esse guia responde as duas perguntas. Sem truque. Sem preco de 2019. Sem aquele "depende" que nao ajuda ninguem.
+    </p>
+    <p>
+        Sao 7 destinos que a gente conhece pessoalmente e recomenda com seguranca. Pra cada um, voce vai encontrar: quanto custa de verdade uma semana, o que comer, o que fazer, e por que vale (ou nao vale) pra voce.
+    </p>
+    <p>
+        Eu (Marcelo) trago a logistica e os numeros. Alexandra traz a gastronomia e o olhar de mae. Juntos, a gente tenta te dar a informacao mais honesta possivel.
+    </p>
+    <p class="signature">Curado com carinho por Marcelo & Alexandra</p>
+
+    <div class="divider"></div>
+
+    <!-- How to use -->
+    <div class="how-to-use">
+        <h3>Como usar este guia</h3>
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-icon" style="background: var(--gold-dim); color: var(--gold);">$</div>
+                <span>Orcamento real (por pessoa, 7 dias)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon" style="background: rgba(232,120,90,0.15); color: var(--coral);">F</div>
+                <span>Dica de Alexandra (gastronomia)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon" style="background: rgba(91,141,239,0.15); color: var(--blue);">!</div>
+                <span>Dica que economiza dinheiro</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon" style="background: rgba(76,175,125,0.15); color: var(--green);">P</div>
+                <span>Ideal pra qual perfil</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== DESTINO 1: PORTUGAL ===== -->
+<section class="destination container page">
+    <div class="dest-number">01</div>
+    <div class="dest-header">
+        <h2>Portugal</h2>
+    </div>
+    <p class="dest-tagline">"O destino mais facil pra quem nunca foi pra Europa"</p>
+
+    <div>
+        <span class="persona-tag">Casais</span>
+        <span class="persona-tag">Familias</span>
+        <span class="persona-tag">Primeira viagem</span>
+    </div>
+
+    <p class="dest-intro">
+        Zero barreira de idioma. Comida incrivel. 250 dias de sol por ano. E o mais acessivel da Europa ocidental. Se voce nunca viajou pra fora e quer comecar com seguranca, Portugal e a escolha mais inteligente que existe.
+    </p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">R$80</div>
+            <div class="stat-label">Refeicao media</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">250</div>
+            <div class="stat-label">Dias de sol/ano</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Visto necessario</div>
+        </div>
+    </div>
+
+    <div class="highlights">
+        <h3>Por que vale cada centavo</h3>
+        <ul class="highlight-list">
+            <li><span class="hl-icon">1.</span> <span><strong>Lisboa e Porto sao cidades que se exploram a pe.</strong> Voce nao precisa de carro nem de metro pra viver o melhor — os bairros historicos sao compactos e lindos</span></li>
+            <li><span class="hl-icon">2.</span> <span><strong>O Algarve tem praias que competem com o Caribe</strong> — falesias douradas, agua cristalina, e sem a multidao do Mediterraneo</span></li>
+            <li><span class="hl-icon">3.</span> <span><strong>Vinhos de classe mundial por R$30 a garrafa.</strong> Em Bordeaux voce pagaria R$150 pelo mesmo nivel</span></li>
+            <li><span class="hl-icon">4.</span> <span><strong>O povo portugues e genuinamente acolhedor com brasileiros.</strong> Voce se sente em casa. Isso muda a experiencia inteira</span></li>
+            <li><span class="hl-icon">5.</span> <span><strong>35 estancias termais</strong> — perfeito pra casais que querem relaxar ou familias com avos</span></li>
+        </ul>
+    </div>
+
+    <div class="food-section">
+        <div class="food-header">Dica da Alexandra</div>
+        <p>
+            Os pasteis de nata da Manteigaria em Lisboa sao melhores que os de Belem (e sem fila de 40 minutos). O bacalhau a Bras no Ramiro e o melhor que ja comi. E por favor: nao saia de Portugal sem provar um francesinha no Porto. E uma experiencia culinaria que nao existe em nenhum outro lugar do mundo.
+        </p>
+    </div>
+
+    <div class="tips-box">
+        <div class="tips-header">Dicas que economizam</div>
+        <ul>
+            <li>Compre o Lisboa Card (24h ou 48h) — inclui transporte + entrada em 30+ museus</li>
+            <li>Almoco e MUITO mais barato que jantar nos mesmos restaurantes. O "prato do dia" custa R$40-50</li>
+            <li>Use o trem (CP) entre Lisboa e Porto — R$50 o trecho, 3h de viagem. Aviao nao compensa</li>
+            <li>Evite julho/agosto: precos sobem 40% e o calor em Lisboa passa de 40 graus</li>
+        </ul>
+    </div>
+
+    <div class="budget-table">
+        <div class="bt-header">Orcamento real — 7 dias por pessoa</div>
+        <div class="budget-row"><span class="item">Passagem aerea (ida e volta)</span><span class="price">R$3.500</span></div>
+        <div class="budget-row"><span class="item">Hospedagem (hotel 3-4 estrelas)</span><span class="price">R$2.800</span></div>
+        <div class="budget-row"><span class="item">Alimentacao (3 refeicoes/dia)</span><span class="price">R$1.400</span></div>
+        <div class="budget-row"><span class="item">Transporte local + passeios</span><span class="price">R$700</span></div>
+        <div class="budget-row"><span class="item">Seguro viagem</span><span class="price">R$100</span></div>
+        <div class="budget-total"><span class="item">Total estimado</span><span class="price">R$8.500</span></div>
+    </div>
+</section>
+
+<!-- ===== DESTINO 2: ARGENTINA ===== -->
+<section class="destination container page">
+    <div class="dest-number">02</div>
+    <div class="dest-header">
+        <h2>Argentina</h2>
+    </div>
+    <p class="dest-tagline">"O paraiso dos vinhos a um voo de distancia"</p>
+
+    <div>
+        <span class="persona-tag">Casais</span>
+        <span class="persona-tag">Vinhos</span>
+        <span class="persona-tag">Gastronomia</span>
+    </div>
+
+    <p class="dest-intro">
+        Mendoza e onde o vinho argentino nasce — aos pes dos Andes, com o Aconcagua como pano de fundo. Vinicolas premiadas internacionalmente, almocos ao ar livre entre parreiras, e o melhor asado do mundo. Com o peso argentino desvalorizado, experiencias que custariam uma fortuna na Europa saem por uma fracao do preco. E o voo de SP leva apenas 3 horas.
+    </p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">R$50</div>
+            <div class="stat-label">Refeicao media</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">3h</div>
+            <div class="stat-label">Voo de SP</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Visto necessario</div>
+        </div>
+    </div>
+
+    <div class="highlights">
+        <h3>Por que vale cada centavo</h3>
+        <ul class="highlight-list">
+            <li><span class="hl-icon">1.</span> <span><strong>Vinicolas de classe mundial por R$30 a degustacao</strong> — Catena Zapata, Zuccardi, Salentein. Vinhos que ganham premios internacionais a R$15 a garrafa</span></li>
+            <li><span class="hl-icon">2.</span> <span><strong>Aconcagua: a montanha mais alta das Americas</strong> como pano de fundo. Trekking, cavalgada nos Andes, e paisagens que tiram o folego</span></li>
+            <li><span class="hl-icon">3.</span> <span><strong>Ruta del Vino de bicicleta:</strong> pedalar entre vinicolas, parar pra degustar, almocar ao ar livre com vista pros Andes. O passeio mais romantico da America do Sul</span></li>
+            <li><span class="hl-icon">4.</span> <span><strong>Asado mendocino e experiencia religiosa.</strong> Carne grelhada por horas, acompanhada de Malbec da vinicola ao lado. Jantar completo por R$60</span></li>
+            <li><span class="hl-icon">5.</span> <span><strong>Sem visto, sem passaporte</strong> (vai com RG), voo curto. A viagem internacional mais facil e acessivel que um brasileiro pode fazer</span></li>
+        </ul>
+    </div>
+
+    <div class="food-section">
+        <div class="food-header">Dica da Alexandra</div>
+        <p>
+            Em Mendoza, reserve almoco na vinicola Zuccardi (eleita melhor vinicola do mundo em 2023). O menu harmonizado com vinhos da casa e uma aula de gastronomia. Pra jantar, Francis Mallmann tem restaurante la — 1884 Restaurante. E pra algo mais simples, qualquer parrilla de esquina em Mendoza serve carne melhor que 90% dos restaurantes de carne do Brasil.
+        </p>
+    </div>
+
+    <div class="tips-box">
+        <div class="tips-header">Dicas que economizam</div>
+        <ul>
+            <li>Pague TUDO em dolar blue (cambio paralelo) — voce ganha 30-40% a mais. Use Western Union ou leve dolares em especie</li>
+            <li>Nao use cartao de credito brasileiro — o cambio oficial e muito pior que o blue</li>
+            <li>Voo + hotel em Buenos Aires: R$2.000 por pessoa em feriados com busca antecipada</li>
+            <li>Subte (metro) de Buenos Aires custa menos de R$1 — use sem medo</li>
+        </ul>
+    </div>
+
+    <div class="budget-table">
+        <div class="bt-header">Orcamento real — 7 dias por pessoa</div>
+        <div class="budget-row"><span class="item">Passagem aerea (ida e volta)</span><span class="price">R$1.800</span></div>
+        <div class="budget-row"><span class="item">Hospedagem (hotel boutique)</span><span class="price">R$1.400</span></div>
+        <div class="budget-row"><span class="item">Alimentacao (3 refeicoes/dia)</span><span class="price">R$700</span></div>
+        <div class="budget-row"><span class="item">Transporte local + passeios</span><span class="price">R$400</span></div>
+        <div class="budget-row"><span class="item">Seguro viagem</span><span class="price">R$70</span></div>
+        <div class="budget-total"><span class="item">Total estimado</span><span class="price">R$4.370</span></div>
+    </div>
+</section>
+
+<!-- ===== DESTINO 3: ITALIA ===== -->
+<section class="destination container page">
+    <div class="dest-number">03</div>
+    <div class="dest-header">
+        <h2>Italia</h2>
+    </div>
+    <p class="dest-tagline">"O destino que justifica cada centavo pelo que voce sente"</p>
+
+    <div>
+        <span class="persona-tag">Casais</span>
+        <span class="persona-tag">Familias</span>
+        <span class="persona-tag">Lua de mel</span>
+    </div>
+
+    <p class="dest-intro">
+        A Italia e mais cara que Portugal. Mas ha uma razao pra ser o queridinho dos brasileiros: cada cidade e um universo diferente. Roma te deixa sem palavras. Florenca te faz chorar de beleza. As Dolomitas parecem outro planeta. O Lago di Garda e o segredo mais bem guardado do norte. E a comida? A comida muda sua vida. Nao e exagero.
+    </p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">R$120</div>
+            <div class="stat-label">Refeicao media</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">5</div>
+            <div class="stat-label">Cidades imperdíveis</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">2mm</div>
+            <div class="stat-label">Dolomitas / UNESCO</div>
+        </div>
+    </div>
+
+    <div class="highlights">
+        <h3>Por que vale cada centavo</h3>
+        <ul class="highlight-list">
+            <li><span class="hl-icon">1.</span> <span><strong>Roma e um museu a ceu aberto</strong> — Coliseu, Vaticano, Fontana di Trevi. Cada esquina tem 2.000 anos de historia</span></li>
+            <li><span class="hl-icon">2.</span> <span><strong>A Toscana e o cenario mais romantico da Terra.</strong> Estradas de terra entre ciprestes, vinicolas escondidas, por do sol que nao parece real</span></li>
+            <li><span class="hl-icon">3.</span> <span><strong>Dolomitas: outro planeta dentro da Italia.</strong> Tre Cime, Val di Funes, Lago di Braies — paisagens que parecem cenario de filme. Patrimonio UNESCO e trekking inesquecivel</span></li>
+            <li><span class="hl-icon">4.</span> <span><strong>Lago di Garda: o segredo do norte.</strong> Sirmione, Limone, Malcesine — vilarejos de cartao postal com lago turquesa. Perfeito pra familias e casais</span></li>
+            <li><span class="hl-icon">5.</span> <span><strong>A comida italiana NAO e a comida "italiana" do Brasil.</strong> A diferenca e tao grande que voce vai questionar tudo que comeu antes</span></li>
+        </ul>
+    </div>
+
+    <div class="food-section">
+        <div class="food-header">Dica da Alexandra</div>
+        <p>
+            A pizza em Napoles custa R$20 e e a melhor que voce vai comer na vida. O gelato na Giolitti em Roma (desde 1900) e uma experiencia que nao tem preco. Mas a regra de ouro e: fuja de restaurantes com cardapio em 10 idiomas e foto da comida na porta. Ande 3 quarteiroes pra longe de qualquer ponto turistico. A Italia real esta la.
+        </p>
+    </div>
+
+    <div class="tips-box">
+        <div class="tips-header">Dicas que economizam</div>
+        <ul>
+            <li>Reserve ingressos do Vaticano e Coliseu com 2+ meses. Sem reserva = 3h de fila ou nao entra</li>
+            <li>Trem regional (Regionale) e 3x mais barato que o Freccia (alta velocidade) entre cidades</li>
+            <li>Aproveite o "coperto" — taxa de servico obrigatoria (R$5-10). Gorjeta adicional nao e esperada</li>
+            <li>Maio e setembro: clima perfeito, precos 30% menores que junho-agosto</li>
+        </ul>
+    </div>
+
+    <div class="budget-table">
+        <div class="bt-header">Orcamento real — 7 dias por pessoa</div>
+        <div class="budget-row"><span class="item">Passagem aerea (ida e volta)</span><span class="price">R$4.000</span></div>
+        <div class="budget-row"><span class="item">Hospedagem (hotel 3-4 estrelas)</span><span class="price">R$3.200</span></div>
+        <div class="budget-row"><span class="item">Alimentacao (3 refeicoes/dia)</span><span class="price">R$2.100</span></div>
+        <div class="budget-row"><span class="item">Transporte local + passeios</span><span class="price">R$1.000</span></div>
+        <div class="budget-row"><span class="item">Seguro viagem</span><span class="price">R$100</span></div>
+        <div class="budget-total"><span class="item">Total estimado</span><span class="price">R$10.400</span></div>
+    </div>
+</section>
+
+<!-- ===== DESTINO 4: COLOMBIA ===== -->
+<section class="destination container page">
+    <div class="dest-number">04</div>
+    <div class="dest-header">
+        <h2>Colombia</h2>
+    </div>
+    <p class="dest-tagline">"A surpresa que ninguem espera — e que supera tudo"</p>
+
+    <div>
+        <span class="persona-tag">Casais</span>
+        <span class="persona-tag">Romantico</span>
+        <span class="persona-tag">Praia + cultura</span>
+    </div>
+
+    <p class="dest-intro">
+        Cartagena e o destino romantico mais subestimado do mundo. Cidade murada com ruas de pedra, praias caribenhas a 40 minutos de barco, gastronomia que mistura frutos do mar com temperos unicos. E custa METADE do que voce gastaria em destinos "classicos" europeus.
+    </p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">R$60</div>
+            <div class="stat-label">Refeicao media</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">28&deg;</div>
+            <div class="stat-label">Temperatura media</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Visto necessario</div>
+        </div>
+    </div>
+
+    <div class="highlights">
+        <h3>Por que vale cada centavo</h3>
+        <ul class="highlight-list">
+            <li><span class="hl-icon">1.</span> <span><strong>Cartagena: a cidade murada e puro romance.</strong> Varandas coloridas, musica ao vivo, por do sol no Cafe del Mar. Perfeito pra casais</span></li>
+            <li><span class="hl-icon">2.</span> <span><strong>Ilhas do Rosario:</strong> 40 minutos de barco ate praias caribenhas com agua transparente. Snorkel, ceviche fresco, hammock na areia</span></li>
+            <li><span class="hl-icon">3.</span> <span><strong>Bogota surpreende:</strong> museus de classe mundial (Museu do Ouro), grafite como arte urbana, restaurantes que rivalam com os melhores da America Latina</span></li>
+            <li><span class="hl-icon">4.</span> <span><strong>Voo direto do Brasil,</strong> sem visto, sem passaporte (RG basta). Facilidade maxima</span></li>
+            <li><span class="hl-icon">5.</span> <span><strong>O cafe colombiano</strong> provado NA ORIGEM e uma experiencia sensorial que nao tem preco</span></li>
+        </ul>
+    </div>
+
+    <div class="food-section">
+        <div class="food-header">Dica da Alexandra</div>
+        <p>
+            O ceviche em Cartagena e diferente de tudo que voce ja provou — fresco, picante, com banana frita do lado. No restaurante La Cevicheria (sim, o do Anthony Bourdain) custa R$45 por porcao generosa. E as arepas de queijo na rua? R$5. Coma todas que encontrar.
+        </p>
+    </div>
+
+    <div class="budget-table">
+        <div class="bt-header">Orcamento real — 7 dias por pessoa</div>
+        <div class="budget-row"><span class="item">Passagem aerea (ida e volta)</span><span class="price">R$2.200</span></div>
+        <div class="budget-row"><span class="item">Hospedagem (hotel boutique)</span><span class="price">R$2.100</span></div>
+        <div class="budget-row"><span class="item">Alimentacao (3 refeicoes/dia)</span><span class="price">R$840</span></div>
+        <div class="budget-row"><span class="item">Transporte local + passeios</span><span class="price">R$500</span></div>
+        <div class="budget-row"><span class="item">Seguro viagem</span><span class="price">R$70</span></div>
+        <div class="budget-total"><span class="item">Total estimado</span><span class="price">R$5.710</span></div>
+    </div>
+</section>
+
+<!-- ===== DESTINO 5: CHILE ===== -->
+<section class="destination container page">
+    <div class="dest-number">05</div>
+    <div class="dest-header">
+        <h2>Chile</h2>
+    </div>
+    <p class="dest-tagline">"Paisagens que nao parecem reais — e cabem no orcamento"</p>
+
+    <div>
+        <span class="persona-tag">Aventureiros</span>
+        <span class="persona-tag">Familias</span>
+        <span class="persona-tag">Natureza</span>
+    </div>
+
+    <p class="dest-intro">
+        Do deserto mais seco do mundo (Atacama) a geleiras da Patagonia, o Chile e um pais que parece ter sido desenhado pra impressionar. Vinhos incriveis, paisagens impossíveis e uma cultura que mistura modernidade com tradicao. E o melhor: esta aqui do lado.
+    </p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">R$70</div>
+            <div class="stat-label">Refeicao media</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">4.300km</div>
+            <div class="stat-label">De comprimento</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">0</div>
+            <div class="stat-label">Visto necessario</div>
+        </div>
+    </div>
+
+    <div class="highlights">
+        <h3>Por que vale cada centavo</h3>
+        <ul class="highlight-list">
+            <li><span class="hl-icon">1.</span> <span><strong>Atacama: geisers, lagunas altiplânicas, Vale da Lua.</strong> Parece outro planeta. As criancas ficam hipnotizadas</span></li>
+            <li><span class="hl-icon">2.</span> <span><strong>Santiago e sofisticada sem ser cara.</strong> Restaurantes de nivel internacional, vinicolas a 1h de carro, vista dos Andes da cidade</span></li>
+            <li><span class="hl-icon">3.</span> <span><strong>A regiao dos lagos</strong> (Puerto Varas, Pucon) e perfeita pra familias — vulcoes, lagos, termas, trilhas faceis</span></li>
+            <li><span class="hl-icon">4.</span> <span><strong>Vinicolas chilenas</strong> oferecem degustacao + almoco por R$100. O Carmenere e a uva que so o Chile faz bem</span></li>
+            <li><span class="hl-icon">5.</span> <span><strong>Voo curto de SP</strong> (4h), sem visto, e o peso chileno esta acessivel em 2026</span></li>
+        </ul>
+    </div>
+
+    <div class="food-section">
+        <div class="food-header">Dica da Alexandra</div>
+        <p>
+            Em Santiago, va ao Mercado Central pro almoco — o melhor ceviche e caldillo de congrio (sopa de peixe que Neruda imortalizou) custam R$40. No Atacama, o cafe da manha nos hoteis-boutique e uma experiencia: quinoa, frutas do altiplano, pao caseiro. E as empanadas de pino? R$8. Coma 3 por dia sem culpa.
+        </p>
+    </div>
+
+    <div class="budget-table">
+        <div class="bt-header">Orcamento real — 7 dias por pessoa</div>
+        <div class="budget-row"><span class="item">Passagem aerea (ida e volta)</span><span class="price">R$2.000</span></div>
+        <div class="budget-row"><span class="item">Hospedagem (hotel 3-4 estrelas)</span><span class="price">R$2.100</span></div>
+        <div class="budget-row"><span class="item">Alimentacao (3 refeicoes/dia)</span><span class="price">R$980</span></div>
+        <div class="budget-row"><span class="item">Transporte local + passeios</span><span class="price">R$700</span></div>
+        <div class="budget-row"><span class="item">Seguro viagem</span><span class="price">R$70</span></div>
+        <div class="budget-total"><span class="item">Total estimado</span><span class="price">R$5.850</span></div>
+    </div>
+</section>
+
+<!-- ===== DESTINO 6: GRECIA ===== -->
+<section class="destination container page">
+    <div class="dest-number">06</div>
+    <div class="dest-header">
+        <h2>Grecia</h2>
+    </div>
+    <p class="dest-tagline">"O sonho de todo casal — e mais acessivel do que parece"</p>
+
+    <div>
+        <span class="persona-tag">Casais</span>
+        <span class="persona-tag">Lua de mel</span>
+        <span class="persona-tag">Pedido de casamento</span>
+    </div>
+
+    <p class="dest-intro">
+        Santorini e o sonho. Mas a Grecia e muito maior que Santorini. E se voce viajar inteligente — epoca certa, ilhas certas — custa muito menos do que imagina. Ilhas como Milos e Naxos tem a mesma beleza por metade do preco.
+    </p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">R$90</div>
+            <div class="stat-label">Refeicao media</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">6.000</div>
+            <div class="stat-label">Ilhas (227 habitadas)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">Mai/Set</div>
+            <div class="stat-label">Melhor epoca</div>
+        </div>
+    </div>
+
+    <div class="highlights">
+        <h3>Por que vale cada centavo</h3>
+        <ul class="highlight-list">
+            <li><span class="hl-icon">1.</span> <span><strong>O por do sol em Oia (Santorini) e o mais famoso do mundo</strong> — e e realmente tao lindo quanto nas fotos. Casinhas brancas, cupulas azuis, mar infinito</span></li>
+            <li><span class="hl-icon">2.</span> <span><strong>Milos: a Santorini secreta.</strong> Mesma beleza, 1/3 do preco, sem as hordas de turistas. Praias surreais (Sarakiniko parece a Lua)</span></li>
+            <li><span class="hl-icon">3.</span> <span><strong>Atenas e subestimada.</strong> Acrópole ao vivo e de chorar. Os bairros de Plaka e Monastiraki sao vibrantes e cheios de historia</span></li>
+            <li><span class="hl-icon">4.</span> <span><strong>Gyros e souvlaki: R$12.</strong> Comida de rua grega e barata, gostosa e te sustenta o dia. Voce nao precisa gastar muito pra comer incrivelmente bem</span></li>
+            <li><span class="hl-icon">5.</span> <span><strong>Ferries entre ilhas</strong> sao parte da experiencia — o mar Egeu visto do deck e inesquecivel</span></li>
+        </ul>
+    </div>
+
+    <div class="food-section">
+        <div class="food-header">Dica da Alexandra</div>
+        <p>
+            A salada grega NA Grecia e outra coisa. O tomate, o pepino, o feta — tudo fresco, tudo do dia. Peco em todo almoco e nunca cansa. Em Milos, va no O! Hamos (reserva obrigatoria) — frutos do mar grelhados com vista pro mar por R$80 por pessoa. E o iogurte grego com mel e nozes no cafe da manha? Voce nunca mais vai aceitar o "grego" do supermercado brasileiro.
+        </p>
+    </div>
+
+    <div class="tips-box">
+        <div class="tips-header">Dicas que economizam</div>
+        <ul>
+            <li>Maio e setembro: mesmo clima, metade do preco, sem multidao. Evite julho-agosto</li>
+            <li>Ferry noturno entre ilhas = economia de 1 noite de hotel + transporte junto</li>
+            <li>Reserve com 2 meses pra ferries e ganha 25% de desconto</li>
+            <li>3 quarteiroes longe de ponto turistico = comida 300% melhor, 50% mais barata</li>
+        </ul>
+    </div>
+
+    <div class="budget-table">
+        <div class="bt-header">Orcamento real — 7 dias por pessoa</div>
+        <div class="budget-row"><span class="item">Passagem aerea (ida e volta)</span><span class="price">R$4.200</span></div>
+        <div class="budget-row"><span class="item">Hospedagem (hotel boutique)</span><span class="price">R$3.000</span></div>
+        <div class="budget-row"><span class="item">Alimentacao (3 refeicoes/dia)</span><span class="price">R$1.260</span></div>
+        <div class="budget-row"><span class="item">Transporte + ferries + passeios</span><span class="price">R$1.000</span></div>
+        <div class="budget-row"><span class="item">Seguro viagem</span><span class="price">R$100</span></div>
+        <div class="budget-total"><span class="item">Total estimado</span><span class="price">R$9.560</span></div>
+    </div>
+</section>
+
+<!-- ===== DESTINO 7: JAPAO ===== -->
+<section class="destination container page">
+    <div class="dest-number">07</div>
+    <div class="dest-header">
+        <h2>Japao</h2>
+    </div>
+    <p class="dest-tagline">"A experiencia que muda como voce ve o mundo"</p>
+
+    <div>
+        <span class="persona-tag">Experiencia transformadora</span>
+        <span class="persona-tag">Gastronomia</span>
+        <span class="persona-tag">Cultura</span>
+    </div>
+
+    <p class="dest-intro">
+        O Japao nao e um destino. E uma mudanca de perspectiva. O iene despencou e tornou o pais mais acessivel do que nunca pra estrangeiros. Toquio tem mais restaurantes estrelados Michelin que qualquer outra cidade do mundo. O trem que atrasa 30 segundos e noticia. E a gentileza do povo japones redefine o conceito de hospitalidade.
+    </p>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-value">R$40</div>
+            <div class="stat-label">Ramen incrivel</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">321</div>
+            <div class="stat-label">Estrelados Michelin (Toquio)</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value">30s</div>
+            <div class="stat-label">Atraso = noticia</div>
+        </div>
+    </div>
+
+    <div class="highlights">
+        <h3>Por que vale cada centavo</h3>
+        <ul class="highlight-list">
+            <li><span class="hl-icon">1.</span> <span><strong>A gastronomia japonesa NO Japao e outra dimensao.</strong> Ramen por R$40 que faria um chef europeu chorar. Sushi que redefine tudo que voce achava que sabia</span></li>
+            <li><span class="hl-icon">2.</span> <span><strong>Quioto e o Japao dos sonhos:</strong> templos dourados, jardins zen, gueixas no bairro de Gion. Parece ter viajado no tempo</span></li>
+            <li><span class="hl-icon">3.</span> <span><strong>O trem-bala (Shinkansen)</strong> e uma experiencia em si — 320km/h, pontualidade absurda, paisagem do Monte Fuji pela janela</span></li>
+            <li><span class="hl-icon">4.</span> <span><strong>Seguranca incomparavel.</strong> Voce pode andar com carteira no bolso de tras as 3 da manha em Toquio. Criancas de 6 anos pegam metro sozinhas</span></li>
+            <li><span class="hl-icon">5.</span> <span><strong>O iene fraco em 2026</strong> tornou o Japao mais barato que muitos destinos europeus. Uma oportunidade historica</span></li>
+        </ul>
+    </div>
+
+    <div class="food-section">
+        <div class="food-header">Dica da Alexandra</div>
+        <p>
+            O cafe da manha japones tradicional (ryokan) e uma experiencia que nao existe em nenhum outro lugar: peixe grelhado, arroz, miso, vegetais em conserva, cha verde. Parece simples, mas a delicadeza e o sabor sao inesqueciveis. Em Toquio, va ao Tsukiji Outer Market as 7h da manha — sushi fresco por R$25 que voce vai lembrar pro resto da vida. E os konbini (lojas de conveniencia)? Os onigiri de R$5 sao melhores que muitos restaurantes caros de SP.
+        </p>
+    </div>
+
+    <div class="tips-box">
+        <div class="tips-header">Dicas que economizam</div>
+        <ul>
+            <li>JR Pass (Japan Rail Pass): R$1.200 por 7 dias de trem ilimitado incluindo Shinkansen. Economiza MUITO</li>
+            <li>Google Translate com camera traduz cardapios em tempo real — resolve 90% da barreira linguistica</li>
+            <li>Konbini (7-Eleven, Lawson, FamilyMart) tem refeicoes completas por R$15-25. Qualidade surpreendente</li>
+            <li>Abril (cerejeiras) e novembro (folhagem) sao as epocas mais bonitas — mas reserve com 3+ meses</li>
+        </ul>
+    </div>
+
+    <div class="budget-table">
+        <div class="bt-header">Orcamento real — 7 dias por pessoa</div>
+        <div class="budget-row"><span class="item">Passagem aerea (ida e volta)</span><span class="price">R$5.000</span></div>
+        <div class="budget-row"><span class="item">Hospedagem (hotel + 1 ryokan)</span><span class="price">R$3.500</span></div>
+        <div class="budget-row"><span class="item">Alimentacao (3 refeicoes/dia)</span><span class="price">R$1.400</span></div>
+        <div class="budget-row"><span class="item">JR Pass + transporte local</span><span class="price">R$1.500</span></div>
+        <div class="budget-row"><span class="item">Seguro viagem</span><span class="price">R$120</span></div>
+        <div class="budget-total"><span class="item">Total estimado</span><span class="price">R$11.520</span></div>
+    </div>
+</section>
+
+<!-- ===== COMPARATIVO ===== -->
+<section class="container page" style="padding: 60px 0;">
+    <p class="section-label">Comparativo</p>
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 32px;">Todos os 7 destinos lado a lado</h2>
+
+    <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            <thead>
+                <tr style="border-bottom: 1px solid var(--bg-layer);">
+                    <th style="text-align: left; padding: 12px 8px; color: var(--gold); font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Destino</th>
+                    <th style="text-align: center; padding: 12px 8px; color: var(--gold); font-size: 12px; letter-spacing: 1px;">Total 7d</th>
+                    <th style="text-align: center; padding: 12px 8px; color: var(--gold); font-size: 12px; letter-spacing: 1px;">Refeicao</th>
+                    <th style="text-align: center; padding: 12px 8px; color: var(--gold); font-size: 12px; letter-spacing: 1px;">Visto</th>
+                    <th style="text-align: center; padding: 12px 8px; color: var(--gold); font-size: 12px; letter-spacing: 1px;">Ideal pra</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid rgba(42,42,42,0.5);">
+                    <td style="padding: 14px 8px; font-weight: 600;">Argentina</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--green); font-weight: 600;">R$4.370</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">R$50</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--green);">Nao</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">Casais, amigos</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(42,42,42,0.5);">
+                    <td style="padding: 14px 8px; font-weight: 600;">Colombia</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--green); font-weight: 600;">R$5.710</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">R$60</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--green);">Nao</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">Casais, romantico</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(42,42,42,0.5);">
+                    <td style="padding: 14px 8px; font-weight: 600;">Chile</td>
+                    <td style="text-align: center; padding: 14px 8px; font-weight: 600;">R$5.850</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">R$70</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--green);">Nao</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">Aventura, familia</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(42,42,42,0.5);">
+                    <td style="padding: 14px 8px; font-weight: 600;">Portugal</td>
+                    <td style="text-align: center; padding: 14px 8px; font-weight: 600;">R$8.500</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">R$80</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--blue);">ETIAS</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">1a viagem, familia</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(42,42,42,0.5);">
+                    <td style="padding: 14px 8px; font-weight: 600;">Grecia</td>
+                    <td style="text-align: center; padding: 14px 8px; font-weight: 600;">R$9.560</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">R$90</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--blue);">ETIAS</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">Casais, lua de mel</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(42,42,42,0.5);">
+                    <td style="padding: 14px 8px; font-weight: 600;">Italia</td>
+                    <td style="text-align: center; padding: 14px 8px; font-weight: 600;">R$10.400</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">R$120</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--blue);">ETIAS</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">Todos os perfis</td>
+                </tr>
+                <tr>
+                    <td style="padding: 14px 8px; font-weight: 600;">Japao</td>
+                    <td style="text-align: center; padding: 14px 8px; font-weight: 600;">R$11.520</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">R$40</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--green);">Nao</td>
+                    <td style="text-align: center; padding: 14px 8px; color: var(--text-muted);">Experiencia unica</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p style="font-size: 12px; color: var(--text-dim); margin-top: 16px; text-align: center;">
+        * Valores por pessoa, 7 dias, em reais (marco 2026). Inclui passagem, hospedagem, alimentacao, transporte e seguro.
+        <br>ETIAS = autorizacao eletronica obrigatoria para Europa em 2026 (20 euros).
+    </p>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="container">
+    <div class="cta-section">
+        <p class="section-label">Proximo passo</p>
+        <h2>Quer um roteiro curado pra voce?</h2>
+        <p>
+            Esse guia e o comeco. Se voce quer um roteiro personalizado — com restaurantes, hoteis, passeios e orcamento feito sob medida pro seu perfil — a gente faz isso pra voce.
+        </p>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Baixei%20o%20guia%20dos%207%20destinos%20e%20quero%20saber%20mais%20sobre%20roteiro%20personalizado" class="cta-button">
+            Fale com a gente no WhatsApp
+        </a>
+    </div>
+</section>
+
+<!-- ===== FECHAMENTO ===== -->
+<section class="closing container">
+    <div class="divider"></div>
+    <p class="brand">Rotta Curadoria</p>
+    <p class="tagline">Curado por Marcelo & Alexandra</p>
+    <div class="social-links">
+        <a href="https://instagram.com/rotta.curadoria">@rotta.curadoria</a>
+    </div>
+    <p style="font-size: 11px; color: var(--text-dim); margin-top: 24px; line-height: 1.6;">
+        Este guia foi criado com base em experiencias reais de viagem.<br>
+        Precos sao estimativas para marco de 2026 e podem variar.<br>
+        Nao somos agencia de viagem. Somos curadores de experiencias.
+    </p>
+    <div style="height: 40px;"></div>
+</section>
+
+</body>
+</html>
