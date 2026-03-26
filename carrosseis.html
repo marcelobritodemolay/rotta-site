@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrosseis - Rotta Curadoria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0E0E0E;
+      --card: #1A1A1A;
+      --gold: #C5A572;
+      --text: #F2EDE8;
+      --text-muted: #A09A93;
+      --card-border: #2A2A2A;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    h1.page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 48px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .carousel-section {
+      margin-bottom: 64px;
+    }
+
+    .carousel-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--text);
+      margin-bottom: 20px;
+      padding-left: 8px;
+      border-left: 3px solid var(--gold);
+      font-weight: 600;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 10px 0 20px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .slide {
+      flex: 0 0 auto;
+      width: min(360px, 85vw);
+      aspect-ratio: 4 / 5;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle corner accents */
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 32px;
+      height: 32px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .slide::after {
+      content: '';
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-bottom: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .slide-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    .slide-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .slide-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .slide-heading .gold { color: var(--gold); }
+
+    .slide-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 90%;
+    }
+
+    .slide-solution {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--gold);
+      margin-top: 16px;
+      font-weight: 500;
+      padding-top: 14px;
+      border-top: 1px solid rgba(197, 165, 114, 0.2);
+    }
+
+    .slide-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* Cover slides */
+    .slide.cover .slide-heading {
+      font-size: 1.7rem;
+      line-height: 1.25;
+    }
+
+    /* CTA slides */
+    .slide.cta {
+      background: linear-gradient(135deg, #1A1A1A 0%, #222018 100%);
+    }
+    .slide.cta .slide-heading {
+      font-size: 1.55rem;
+      color: var(--gold);
+      line-height: 1.35;
+    }
+
+    /* Signature slides */
+    .slide.signature {
+      background: linear-gradient(180deg, #1A1A1A 0%, #151510 100%);
+    }
+    .signature-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .signature-handle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    .signature-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 16px auto;
+      opacity: 0.6;
+    }
+    .signature-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    /* Summary list */
+    .summary-list {
+      text-align: left;
+      width: 100%;
+      list-style: none;
+      padding: 0;
+    }
+    .summary-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(242, 237, 232, 0.06);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+    .summary-list li span.num {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.85rem;
+      min-width: 18px;
+    }
+
+    /* Value slides (Carousel 2) */
+    .value-range {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 12px 0 6px;
+      line-height: 1.2;
+    }
+    .value-detail {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+    .value-category {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* Total slide */
+    .total-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .total-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .total-installment {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(197, 165, 114, 0.2);
+    }
+
+    /* Checklist slides */
+    .checklist {
+      text-align: left;
+      width: 100%;
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 7px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.45;
+    }
+    .checklist li .checkbox {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      border: 2px solid var(--gold);
+      border-radius: 3px;
+      margin-top: 2px;
+    }
+    .checklist li.gold-item {
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .checklist li.gold-item .checkbox {
+      background: var(--gold);
+    }
+
+    .timeline-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 20px;
+      text-align: left;
+      width: 100%;
+    }
+
+    /* Nav arrows */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .nav-arrow:hover {
+      background: rgba(197, 165, 114, 0.15);
+      transform: translateY(-50%) scale(1.05);
+    }
+    .nav-arrow.left { left: -8px; }
+    .nav-arrow.right { right: -8px; }
+    .nav-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    /* Dot indicators */
+    .dot-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--card-border);
+      transition: background 0.3s, width 0.3s;
+    }
+    .dot.active {
+      background: var(--gold);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    /* Decorative elements */
+    .icon-plane { font-size: 2.2rem; margin-bottom: 12px; }
+    .icon-check { font-size: 2.2rem; margin-bottom: 12px; }
+
+    .rotta-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .cover-deco {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 14px auto;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 24px 12px; }
+      .slide { width: 85vw; padding: 32px 24px; }
+      .slide-heading { font-size: 1.3rem; }
+      .slide.cover .slide-heading { font-size: 1.45rem; }
+      .slide-number { font-size: 3.8rem; }
+      .nav-arrow { display: none; }
+      h1.page-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">Carrosseis Instagram - Rotta Curadoria</h1>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 1: 5 Erros Europa                  -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 1 - 5 Erros que Destroem sua Viagem</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <!-- Slide 1: Cover -->
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">5 ERROS que <span class="gold">destroem</span> sua viagem pra Europa</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">O numero 4 custa caro e quase ninguem percebe</p>
+        </div>
+
+        <!-- Slide 2: Erro 01 -->
+        <div class="slide">
+          <span class="slide-label">Erro</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Querer conhecer 5 paises em 10 dias</h3>
+          <p class="slide-body">Voce nao viaja, voce corre. Passa mais tempo no aeroporto do que curtindo.</p>
+          <p class="slide-solution">Escolha 2 a 3 cidades e viva cada uma de verdade. Qualidade vence quantidade.</p>
+        </div>
+
+        <!-- Slide 3: Erro 02 -->
+        <div class="slide">
+          <span class="slide-label">Erro</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Nao saber o que e ETIAS</h3>
+          <p class="slide-body">A partir de 2026, brasileiros precisam de autorizacao eletronica pra entrar na Europa.</p>
+          <p class="slide-solution">Solicite o ETIAS com antecedencia pelo site oficial. E rapido, online e obrigatorio.</p>
+        </div>
+
+        <!-- Slide 4: Erro 03 -->
+        <div class="slide">
+          <span class="slide-label">Erro</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Contar so com cartao de credito</h3>
+          <p class="slide-body">Taxas absurdas de IOF e cambio. Voce perde dinheiro em cada compra sem perceber.</p>
+          <p class="slide-solution">Use cartao de debito internacional (Wise, Nomad) e leve um pouco de dinheiro em especie como reserva.</p>
+        </div>
+
+        <!-- Slide 5: Erro 04 -->
+        <div class="slide">
+          <span class="slide-label">Erro</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Nao reservar experiencias com antecedencia</h3>
+          <p class="slide-body">Museus lotados, ingressos esgotados, filas de 3 horas. Voce perde o melhor da viagem.</p>
+          <p class="slide-solution">Reserve ingressos e tours com 30 a 60 dias de antecedencia. Os melhores horarios acabam primeiro.</p>
+        </div>
+
+        <!-- Slide 6: Erro 05 -->
+        <div class="slide">
+          <span class="slide-label">Erro</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Comer nos restaurantes dos pontos turisticos</h3>
+          <p class="slide-body">Preco alto, comida generica e experiencia zero. Voce paga caro pelo endereco, nao pela comida.</p>
+          <p class="slide-solution">Ande 2 quadras pra dentro. Procure onde os locais comem. Use Google Maps e veja avaliacoes reais.</p>
+        </div>
+
+        <!-- Slide 7: Resumo -->
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Os 5 erros</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Querer conhecer tudo de uma vez</li>
+            <li><span class="num">2.</span> Ignorar o ETIAS</li>
+            <li><span class="num">3.</span> Depender so do cartao de credito</li>
+            <li><span class="num">4.</span> Nao reservar experiencias antes</li>
+            <li><span class="num">5.</span> Comer em armadilhas turisticas</li>
+          </ol>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide cta">
+          <span class="icon-plane">&#9992;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">EUROPA</span> que a gente te manda o guia completo</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">A gente cuida de cada detalhe pra voce so aproveitar.</p>
+        </div>
+
+        <!-- Slide 9: Signature -->
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 2: Quanto custa Italia             -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 2 - Quanto Custa 7 Dias na Italia</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <!-- Slide 1: Cover -->
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">ITALIA 2026 quanto custa <span class="gold">DE VERDADE?</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">7 dias, casal, com tudo detalhado</p>
+        </div>
+
+        <!-- Slide 2: Passagem -->
+        <div class="slide">
+          <span class="slide-number">&#9992;</span>
+          <span class="value-category">Passagem Aerea</span>
+          <p class="value-range">R$4.000 - 6.500</p>
+          <p class="value-detail">por pessoa, ida e volta</p>
+          <p class="slide-solution">Casal: R$8.000 - 13.000</p>
+        </div>
+
+        <!-- Slide 3: Hospedagem -->
+        <div class="slide">
+          <span class="slide-number">&#127968;</span>
+          <span class="value-category">Hospedagem</span>
+          <p class="value-range">R$600 - 1.200</p>
+          <p class="value-detail">por noite, hotel 4 estrelas ou Airbnb premium</p>
+          <p class="slide-solution">7 noites: R$4.200 - 8.400</p>
+        </div>
+
+        <!-- Slide 4: Alimentacao -->
+        <div class="slide">
+          <span class="slide-number">&#127837;</span>
+          <span class="value-category">Alimentacao</span>
+          <p class="value-range">R$150 - 350</p>
+          <p class="value-detail">por dia, casal (cafe, almoco e jantar)</p>
+          <p class="slide-solution">7 dias: R$1.050 - 2.450</p>
+        </div>
+
+        <!-- Slide 5: Transporte -->
+        <div class="slide">
+          <span class="slide-number">&#128646;</span>
+          <span class="value-category">Transporte Interno</span>
+          <p class="value-range">R$800 - 1.500</p>
+          <p class="value-detail">total (trens, metro, taxi, transfers)</p>
+          <p class="slide-solution">Dica: o trem italiano e eficiente e lindo</p>
+        </div>
+
+        <!-- Slide 6: Passeios -->
+        <div class="slide">
+          <span class="slide-number">&#127963;</span>
+          <span class="value-category">Passeios e Experiencias</span>
+          <p class="value-range">R$500 - 1.200</p>
+          <p class="value-detail">total casal (museus, tours, degustacoes)</p>
+          <p class="slide-solution">Reserve com antecedencia pra pegar os melhores precos</p>
+        </div>
+
+        <!-- Slide 7: Seguro -->
+        <div class="slide">
+          <span class="slide-number">&#128737;</span>
+          <span class="value-category">Seguro Viagem</span>
+          <p class="value-range">R$250 - 500</p>
+          <p class="value-detail">por pessoa, obrigatorio pra Europa</p>
+          <p class="slide-solution">Casal: R$500 - 1.000</p>
+        </div>
+
+        <!-- Slide 8: Total -->
+        <div class="slide">
+          <span class="total-label">Total estimado casal</span>
+          <p class="total-value">R$15.050 - 27.550</p>
+          <p class="value-detail">7 dias na Italia, com conforto e boas experiencias</p>
+          <p class="total-installment">Em 12x: a partir de R$628/pessoa/mes</p>
+        </div>
+
+        <!-- Slide 9: CTA -->
+        <div class="slide cta">
+          <span class="icon-plane">&#128172;</span>
+          <h3 class="slide-heading"><span class="gold">Salva</span> e manda pro casal que ta planejando a Italia</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Porque viajar bem e questao de planejamento, nao de sorte.</p>
+        </div>
+
+        <!-- Slide 10: Signature -->
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 3: Checklist Viagem Internacional  -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 3 - Checklist Viagem Internacional</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <!-- Slide 1: Cover -->
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading"><span class="gold">CHECKLIST</span> tudo que voce precisa ANTES de viajar</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Salva esse carrossel e nao esquece nada</p>
+        </div>
+
+        <!-- Slide 2: 6 meses antes -->
+        <div class="slide">
+          <p class="timeline-label">6 MESES ANTES</p>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Definir destino e datas da viagem</li>
+            <li><span class="checkbox"></span>Verificar validade do passaporte (minimo 6 meses)</li>
+            <li><span class="checkbox"></span>Comecar a pesquisar passagens aereas</li>
+            <li><span class="checkbox"></span>Criar uma reserva financeira mensal para a viagem</li>
+          </ul>
+        </div>
+
+        <!-- Slide 3: 3 meses antes -->
+        <div class="slide">
+          <p class="timeline-label">3 MESES ANTES</p>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Comprar passagens aereas</li>
+            <li><span class="checkbox"></span>Reservar hospedagem</li>
+            <li><span class="checkbox"></span>Solicitar ETIAS (se for pra Europa)</li>
+            <li><span class="checkbox"></span>Pesquisar e reservar experiencias e ingressos</li>
+          </ul>
+        </div>
+
+        <!-- Slide 4: 1 mes antes -->
+        <div class="slide">
+          <p class="timeline-label">1 MES ANTES</p>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Contratar seguro viagem</li>
+            <li><span class="checkbox"></span>Abrir conta em cartao de debito internacional</li>
+            <li><span class="checkbox"></span>Avisar o banco sobre a viagem internacional</li>
+          </ul>
+        </div>
+
+        <!-- Slide 5: 15 dias antes -->
+        <div class="slide">
+          <p class="timeline-label">15 DIAS ANTES</p>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Fazer check-in online quando disponivel</li>
+            <li><span class="checkbox"></span>Comprar euros/dolares ou carregar cartao internacional</li>
+            <li><span class="checkbox"></span>Organizar documentos digitais e fisicos</li>
+            <li><span class="checkbox"></span>Baixar mapas offline e apps uteis</li>
+          </ul>
+        </div>
+
+        <!-- Slide 6: 1 semana antes -->
+        <div class="slide">
+          <p class="timeline-label">1 SEMANA ANTES</p>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Fazer as malas com antecedencia</li>
+            <li><span class="checkbox"></span>Separar roupas por dia (facilita muito)</li>
+            <li><span class="checkbox"></span>Conferir clima do destino e ajustar mala</li>
+            <li><span class="checkbox"></span>Deixar copia dos documentos com alguem de confianca</li>
+          </ul>
+        </div>
+
+        <!-- Slide 7: Dia da viagem -->
+        <div class="slide">
+          <p class="timeline-label">DIA DA VIAGEM</p>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Chegar no aeroporto com 3h de antecedencia</li>
+            <li><span class="checkbox"></span>Conferir passaporte, cartao de embarque e documentos</li>
+            <li><span class="checkbox"></span>Carregar celular e powerbank 100%</li>
+            <li class="gold-item"><span class="checkbox"></span>Relaxar. Voce planejou tudo.</li>
+          </ul>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide cta">
+          <span class="icon-check">&#9989;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">CHECKLIST</span> que a gente manda no seu DM</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">A versao completa com ainda mais detalhes pra voce nao esquecer nada.</p>
+        </div>
+
+        <!-- Slide 9: Signature -->
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+  </section>
+
+  <script>
+    // Minimal JS: scroll-snap navigation arrows and dot indicators only
+    document.querySelectorAll('.carousel-wrapper').forEach(function(wrapper) {
+      var track = wrapper.querySelector('.carousel-track');
+      var leftBtn = wrapper.querySelector('.nav-arrow.left');
+      var rightBtn = wrapper.querySelector('.nav-arrow.right');
+      var dotsContainer = wrapper.querySelector('.dot-indicators');
+      var slides = track.querySelectorAll('.slide');
+
+      // Create dot indicators
+      for (var i = 0; i < slides.length; i++) {
+        var dot = document.createElement('span');
+        dot.className = 'dot';
+        if (i === 0) dot.className = 'dot active';
+        dotsContainer.appendChild(dot);
+      }
+
+      var dots = dotsContainer.querySelectorAll('.dot');
+
+      function getSlideWidth() {
+        var slide = slides[0];
+        var style = getComputedStyle(slide);
+        return slide.offsetWidth + parseInt(style.marginRight || 0) + 20;
+      }
+
+      function updateState() {
+        var scrollLeft = track.scrollLeft;
+        var slideWidth = getSlideWidth();
+        var currentIndex = Math.round(scrollLeft / slideWidth);
+
+        if (currentIndex < 0) currentIndex = 0;
+        if (currentIndex >= slides.length) currentIndex = slides.length - 1;
+
+        // Update arrows
+        if (scrollLeft <= 10) {
+          leftBtn.classList.add('hidden');
+        } else {
+          leftBtn.classList.remove('hidden');
+        }
+        if (scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+          rightBtn.classList.add('hidden');
+        } else {
+          rightBtn.classList.remove('hidden');
+        }
+
+        // Update dots
+        for (var j = 0; j < dots.length; j++) {
+          if (j === currentIndex) {
+            dots[j].className = 'dot active';
+          } else {
+            dots[j].className = 'dot';
+          }
+        }
+      }
+
+      leftBtn.addEventListener('click', function() {
+        track.scrollBy({ left: -getSlideWidth(), behavior: 'smooth' });
+      });
+
+      rightBtn.addEventListener('click', function() {
+        track.scrollBy({ left: getSlideWidth(), behavior: 'smooth' });
+      });
+
+      track.addEventListener('scroll', updateState);
+      updateState();
+    });
+  </script>
+
+</body>
+</html>
