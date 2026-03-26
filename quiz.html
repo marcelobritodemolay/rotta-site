@@ -433,17 +433,7 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
       if (!email) document.getElementById("leadEmail").style.borderColor = "#E8785A";
       return;
     }
-    // Store lead data (can be sent to API later)
-    window._rottaLead = {name: name, whatsapp: whatsapp, email: email, persona: "", timestamp: new Date().toISOString()};
-    showResult();
-  };
-
-  window.skipLead = function() {
-    showResult();
-  };
-
-  function showResult() {
-    // Find winner
+    // Calculate winner persona BEFORE sending to Google Sheets
     var maxScore = 0;
     var winner = "carolina";
     var keys = Object.keys(scores);
@@ -454,8 +444,43 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
       }
     }
 
+    // Store lead data
+    window._rottaLead = {name: name, whatsapp: whatsapp, email: email, persona: winner, timestamp: new Date().toISOString()};
+    window._rottaWinner = winner;
+
+    // Send to Google Sheets (fire-and-forget)
+    try {
+      fetch("https://script.google.com/macros/s/AKfycbzLUpMancq_5sI_8dmar1ZoSkU4XjVVzqVIiMIoXsHvEK-2VBYntMG6IhcIncicppzPEA/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({name: name, whatsapp: whatsapp, email: email, persona: winner})
+      });
+    } catch(e) { /* silently fail — don't block UX */ }
+
+    showResult();
+  };
+
+  window.skipLead = function() {
+    showResult();
+  };
+
+  function showResult() {
+    // Use pre-calculated winner if available, otherwise calculate
+    var winner = window._rottaWinner;
+    if (!winner) {
+      var maxScore = 0;
+      winner = "carolina";
+      var keys = Object.keys(scores);
+      for (var i = 0; i < keys.length; i++) {
+        if (scores[keys[i]] > maxScore) {
+          maxScore = scores[keys[i]];
+          winner = keys[i];
+        }
+      }
+    }
+
     var r = results[winner];
-    if (window._rottaLead) { window._rottaLead.persona = winner; }
     document.getElementById("resultTitle").textContent = r.title;
     document.getElementById("resultDesc").textContent = r.desc;
     // Personalize WhatsApp CTA with lead name if available
