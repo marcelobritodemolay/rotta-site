@@ -15,6 +15,22 @@ html{font-size:16px;-webkit-text-size-adjust:100%}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;display:flex;flex-direction:column;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
 
+/* Lead Capture */
+.lead-wrap{max-width:400px;width:100%;text-align:center;padding:1rem}
+.lead-icon{font-size:2.5rem;margin-bottom:1rem}
+.lead-title{font-size:1.75rem;margin-bottom:.5rem;color:var(--gold)}
+.lead-desc{color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1.5rem}
+.lead-form{display:flex;flex-direction:column;gap:1rem}
+.lead-field{text-align:left}
+.lead-field label{display:block;font-size:.75rem;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;font-weight:500}
+.lead-field input{width:100%;padding:.85rem 1rem;background:var(--card);border:1px solid #2A2A2A;border-radius:10px;color:var(--text);font-family:'Inter',sans-serif;font-size:.95rem;outline:none;transition:border-color .3s}
+.lead-field input:focus{border-color:var(--gold)}
+.lead-field input::placeholder{color:#555}
+.btn-lead{width:100%;padding:1rem;background:var(--gold);color:var(--bg);border:none;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:1rem;cursor:pointer;transition:all .3s;margin-top:.5rem}
+.btn-lead:hover{background:#D4B87F;transform:translateY(-1px)}
+.btn-skip{width:100%;padding:.75rem;background:transparent;color:var(--muted);border:none;font-family:'Inter',sans-serif;font-size:.8rem;cursor:pointer;text-decoration:underline;transition:color .3s}
+.btn-skip:hover{color:var(--text)}
+
 /* Header */
 .header{display:flex;align-items:center;justify-content:center;padding:1.25rem 1rem .75rem;position:relative;z-index:10}
 .logo{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--gold);font-weight:700;letter-spacing:.02em}
@@ -124,6 +140,31 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
     <div class="question-number" id="qNumber"></div>
     <div class="question-text" id="qText"></div>
     <div class="answers" id="answersContainer"></div>
+  </div>
+
+  <!-- LEAD CAPTURE SCREEN -->
+  <div class="screen" id="leadScreen">
+    <div class="lead-wrap">
+      <div class="lead-icon">&#x2728;</div>
+      <h2 class="lead-title">Quase l&aacute;!</h2>
+      <p class="lead-desc">Pra ver seu perfil completo e receber recomenda&ccedil;&otilde;es personalizadas, preencha abaixo:</p>
+      <form class="lead-form" id="leadForm" onsubmit="return false;">
+        <div class="lead-field">
+          <label for="leadName">Seu nome</label>
+          <input type="text" id="leadName" placeholder="Como podemos te chamar?" autocomplete="given-name" required>
+        </div>
+        <div class="lead-field">
+          <label for="leadWhatsApp">WhatsApp</label>
+          <input type="tel" id="leadWhatsApp" placeholder="(00) 00000-0000" autocomplete="tel" required>
+        </div>
+        <div class="lead-field">
+          <label for="leadEmail">Email</label>
+          <input type="email" id="leadEmail" placeholder="seu@email.com" autocomplete="email" required>
+        </div>
+        <button class="btn-lead" type="button" onclick="submitLead()">Ver meu resultado</button>
+        <button class="btn-skip" type="button" onclick="skipLead()">Pular e ver resultado</button>
+      </form>
+    </div>
   </div>
 
   <!-- RESULT SCREEN -->
@@ -292,6 +333,7 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
 
   var introScreen = document.getElementById("introScreen");
   var questionScreen = document.getElementById("questionScreen");
+  var leadScreen = document.getElementById("leadScreen");
   var resultScreen = document.getElementById("resultScreen");
   var progressFill = document.getElementById("progressFill");
   var progressText = document.getElementById("progressText");
@@ -301,7 +343,7 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
   var answersContainer = document.getElementById("answersContainer");
 
   function showScreen(screen) {
-    [introScreen, questionScreen, resultScreen].forEach(function(s){
+    [introScreen, questionScreen, leadScreen, resultScreen].forEach(function(s){
       s.classList.remove("active");
     });
     screen.classList.add("active");
@@ -369,10 +411,36 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
           renderQuestion();
         }, 250);
       } else {
-        showResult();
+        showLeadCapture();
       }
     }, 300);
   }
+
+  function showLeadCapture() {
+    progressFill.style.width = "100%";
+    progressText.textContent = "Resultado";
+    showScreen(leadScreen);
+  }
+
+  window.submitLead = function() {
+    var name = document.getElementById("leadName").value.trim();
+    var whatsapp = document.getElementById("leadWhatsApp").value.trim();
+    var email = document.getElementById("leadEmail").value.trim();
+    if (!name || !whatsapp || !email) {
+      // highlight empty fields
+      if (!name) document.getElementById("leadName").style.borderColor = "#E8785A";
+      if (!whatsapp) document.getElementById("leadWhatsApp").style.borderColor = "#E8785A";
+      if (!email) document.getElementById("leadEmail").style.borderColor = "#E8785A";
+      return;
+    }
+    // Store lead data (can be sent to API later)
+    window._rottaLead = {name: name, whatsapp: whatsapp, email: email, persona: "", timestamp: new Date().toISOString()};
+    showResult();
+  };
+
+  window.skipLead = function() {
+    showResult();
+  };
 
   function showResult() {
     // Find winner
@@ -387,9 +455,16 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
     }
 
     var r = results[winner];
+    if (window._rottaLead) { window._rottaLead.persona = winner; }
     document.getElementById("resultTitle").textContent = r.title;
     document.getElementById("resultDesc").textContent = r.desc;
-    document.getElementById("resultCTA").href = r.cta;
+    // Personalize WhatsApp CTA with lead name if available
+    var leadName = (window._rottaLead && window._rottaLead.name) ? window._rottaLead.name : "";
+    var ctaUrl = r.cta;
+    if (leadName) {
+      ctaUrl = ctaUrl.replace("Oi!", "Oi!%20Sou%20" + encodeURIComponent(leadName) + ".");
+    }
+    document.getElementById("resultCTA").href = ctaUrl;
 
     progressFill.style.width = "100%";
     progressText.textContent = "Resultado";
