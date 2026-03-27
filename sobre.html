@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós | Rotta Curadoria — Marcelo & Alexandra</title>
+    <meta name="description" content="Conheça a história de Marcelo & Alexandra: de viajantes apaixonados a curadores de experiências premium. Mais de 22 países, 4 filhas e 15+ anos viajando juntos.">
+    <meta property="og:title" content="Sobre Nós | Rotta Curadoria">
+    <meta property="og:description" content="De viajantes apaixonados a curadores de experiências. Conheça quem está por trás da Rotta.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://rottacuradoria.com.br/sobre">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --coral:#E8785A;--green:#4CAF7D;--blue:#5B8DEF
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:1080px;margin:0 auto;padding:0 24px}
+        .container-narrow{max-width:720px;margin:0 auto;padding:0 24px}
+
+        /* Animations */
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+
+        /* Section Label */
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .divider{width:60px;height:1px;background:var(--gold);margin:0 auto;opacity:.3}
+
+        /* ===== NAV ===== */
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:rgba(14,14,14,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(42,42,42,.5)}
+        .nav-brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;text-decoration:none}
+        .nav-links{display:flex;gap:24px;align-items:center}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .3s}
+        .nav-links a:hover{color:var(--gold)}
+
+        /* ===== HERO ===== */
+        .hero-sobre{min-height:70vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 24px 80px;position:relative}
+        .hero-sobre::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .hero-sobre .hero-badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:32px}
+        .hero-sobre h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5.5vw,56px);font-weight:700;line-height:1.12;margin-bottom:24px;max-width:700px;margin-left:auto;margin-right:auto}
+        .hero-sobre h1 em{font-style:italic;color:var(--gold)}
+        .hero-sobre .subtitle{font-size:18px;color:var(--muted);max-width:560px;margin:0 auto;line-height:1.6}
+
+        /* ===== HISTORIA / TIMELINE ===== */
+        .historia{padding:100px 0;background:var(--card)}
+        .historia h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);text-align:center;margin-bottom:60px;line-height:1.3}
+        .historia h2 span{color:var(--gold)}
+        .timeline{max-width:700px;margin:0 auto;position:relative;padding-left:40px}
+        .timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),rgba(197,165,114,.15))}
+        .timeline-item{position:relative;margin-bottom:48px}
+        .timeline-item::before{content:'';position:absolute;left:-33px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:3px solid var(--bg);z-index:1}
+        .timeline-item .year{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);letter-spacing:2px;margin-bottom:8px;text-transform:uppercase}
+        .timeline-item h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:10px;line-height:1.3}
+        .timeline-item p{color:var(--muted);font-size:15px;line-height:1.7}
+
+        /* ===== PHOTO PLACEHOLDER ===== */
+        .couple-photo{background:var(--card);border:1px solid var(--layer);border-radius:16px;height:360px;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px;max-width:600px;margin:0 auto 60px}
+        .couple-photo .placeholder{color:var(--dim);font-size:14px;line-height:1.6}
+        .couple-photo .placeholder .icon{font-size:48px;margin-bottom:16px;opacity:.5}
+
+        /* ===== NOME ===== */
+        .nome{padding:100px 0}
+        .nome-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:900px;margin:0 auto}
+        .nome-visual{background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:48px;text-align:center}
+        .nome-visual .word{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,72px);font-weight:700;color:var(--text);letter-spacing:4px}
+        .nome-visual .word .tt{color:var(--gold)}
+        .nome-visual .translation{font-size:13px;color:var(--dim);margin-top:12px;letter-spacing:1px;text-transform:uppercase}
+        .nome-content h2{font-family:'Playfair Display',serif;font-size:32px;margin-bottom:20px;line-height:1.3}
+        .nome-content h2 em{font-style:italic;color:var(--gold)}
+        .nome-content p{color:var(--muted);font-size:15px;margin-bottom:16px;line-height:1.7}
+        .nome-content .highlight{color:var(--gold);font-family:'Playfair Display',serif;font-style:italic;font-size:17px}
+
+        /* ===== FILOSOFIA ===== */
+        .filosofia{padding:100px 0;background:var(--card)}
+        .filosofia h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:60px}
+        .filo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1000px;margin:0 auto}
+        .filo-card{background:var(--bg);border:1px solid var(--layer);border-radius:16px;padding:32px 24px;transition:all .3s;position:relative;overflow:hidden}
+        .filo-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+        .filo-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s}
+        .filo-card:hover::before{opacity:1}
+        .filo-card .filo-icon{font-size:28px;margin-bottom:16px}
+        .filo-card h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:12px;color:var(--gold)}
+        .filo-card p{color:var(--muted);font-size:14px;line-height:1.7}
+
+        /* ===== NUMEROS ===== */
+        .numeros{padding:100px 0}
+        .numeros h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:60px}
+        .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:900px;margin:0 auto}
+        .stat-card{text-align:center;padding:32px 16px;background:var(--card);border:1px solid var(--layer);border-radius:16px;transition:all .3s}
+        .stat-card:hover{border-color:var(--gold)}
+        .stat-card .stat-num{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);font-weight:700;color:var(--gold);margin-bottom:8px}
+        .stat-card .stat-label{font-size:13px;color:var(--muted);line-height:1.4}
+
+        /* ===== MANIFESTO ===== */
+        .manifesto{padding:100px 0;background:var(--card);text-align:center;position:relative}
+        .manifesto::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,var(--gold-glow) 0%,transparent 60%);pointer-events:none}
+        .manifesto .quote-mark{font-family:'Playfair Display',serif;font-size:80px;color:var(--gold);opacity:.3;line-height:1;margin-bottom:-20px}
+        .manifesto blockquote{font-family:'Playfair Display',serif;font-size:clamp(20px,3.5vw,32px);font-style:italic;color:var(--text);max-width:700px;margin:0 auto 24px;line-height:1.4}
+        .manifesto .attribution{font-size:14px;color:var(--dim);letter-spacing:1px}
+
+        /* ===== CTA FINAL ===== */
+        .cta-final{padding:100px 0;text-align:center;position:relative}
+        .cta-final::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,var(--gold-glow) 0%,transparent 60%);pointer-events:none}
+        .cta-final h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,40px);margin-bottom:20px;line-height:1.2}
+        .cta-final h2 em{font-style:italic;color:var(--gold)}
+        .cta-final .sub{color:var(--muted);font-size:16px;max-width:500px;margin:0 auto 40px;line-height:1.6}
+        .cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+        .cta-quiz{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--bg);padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s}
+        .cta-quiz:hover{background:#D4B87F;transform:translateY(-2px);box-shadow:0 12px 32px rgba(197,165,114,.2)}
+        .cta-whatsapp{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s}
+        .cta-whatsapp:hover{background:#20BD5A;transform:translateY(-2px)}
+
+        /* ===== FOOTER ===== */
+        footer{padding:48px 0;text-align:center;border-top:1px solid var(--layer)}
+        footer .brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+        footer .tagline{font-size:12px;color:var(--dim);margin-bottom:16px}
+        footer .social a{color:var(--dim);text-decoration:none;margin:0 12px;font-size:13px;transition:color .3s}
+        footer .social a:hover{color:var(--gold)}
+        footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
+
+        /* ===== FLOATING WHATSAPP ===== */
+        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
+        .float-wa:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(37,211,102,.4)}
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:768px){
+            .nome-grid{grid-template-columns:1fr;gap:40px}
+            .stats-grid{grid-template-columns:repeat(2,1fr)}
+            .timeline{padding-left:32px}
+            .timeline::before{left:8px}
+            .timeline-item::before{left:-29px}
+            .nav-links{gap:16px}
+        }
+        @media(max-width:480px){
+            .stats-grid{grid-template-columns:1fr}
+            .nav-links a:not(:last-child){display:none}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <a href="/" class="nav-brand">Rotta Curadoria</a>
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/quiz.html">Quiz</a>
+        <a href="/guia.html">Guia</a>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Vi%20o%20site%20da%20Rotta%20e%20quero%20saber%20mais" style="color:var(--gold)">WhatsApp</a>
+    </div>
+</nav>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/5511968152123?text=Oi!%20Vi%20o%20site%20da%20Rotta%20e%20quero%20saber%20mais" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
+
+<!-- ===== HERO ===== -->
+<section class="hero-sobre">
+    <div>
+        <div class="hero-badge fade-up">Sobre Nos</div>
+        <h1 class="fade-up stagger-1">Nossa <em>Historia</em></h1>
+        <p class="subtitle fade-up stagger-2">De viajantes apaixonados a curadores de experiencias</p>
+    </div>
+</section>
+
+<!-- ===== FOTO DO CASAL ===== -->
+<section style="padding:0 0 60px">
+    <div class="container">
+        <div class="couple-photo fade-up">
+            <div class="placeholder">
+                <div class="icon">&#x1F4F8;</div>
+                <p>Foto de Marcelo & Alexandra<br>viajando juntos<br><br><strong>Em breve: registros da Italia, Maio 2026</strong><br><br><a href="https://instagram.com/rotta.curadoria" style="color:var(--gold);text-decoration:none;">@rotta.curadoria</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== A HISTORIA ===== -->
+<section class="historia">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">A historia</p>
+        <h2 class="fade-up">Como dois profissionais da saude<br>viraram <span>curadores de viagem</span></h2>
+
+        <div class="timeline">
+            <div class="timeline-item fade-up">
+                <div class="year">O Marcelo</div>
+                <h3>Medico ha 22 anos. Mais de 16.000 procedimentos.</h3>
+                <p>Marcelo e oftalmologista em Campo Mourao-PR. Conhecido pela precisao, pelo cuidado e por tratar cada paciente como unico. A mesma atencao aos detalhes que aplica na medicina, aplica em cada roteiro que cria.</p>
+            </div>
+            <div class="timeline-item fade-up stagger-1">
+                <div class="year">A Alexandra</div>
+                <h3>Nutricionista com paladar de curadora.</h3>
+                <p>Alexandra e nutricionista e traz um olhar unico pra cada viagem: saber onde comer bem de verdade. Nao o restaurante turistico da esquina, mas aquele lugar que so quem mora la conhece. Cada recomendacao gastronomica passa por ela.</p>
+            </div>
+            <div class="timeline-item fade-up stagger-2">
+                <div class="year">A Familia</div>
+                <h3>Casados, com 4 filhas de casamentos anteriores.</h3>
+                <p>Uma familia unida que aprendeu a viajar junta. As 4 filhas, de idades diferentes, tornaram Marcelo e Alexandra especialistas em viagens que funcionam pra todo mundo — do casal romantico a familia grande.</p>
+            </div>
+            <div class="timeline-item fade-up stagger-3">
+                <div class="year">15+ anos</div>
+                <h3>Mais de 22 paises. 5 continentes.</h3>
+                <p>Da Argentina a Russia, da Croacia a Italia, do Japao aos Estados Unidos. Cada viagem foi planejada por eles mesmos, com pesquisa, vivencia e aquela obsessao por encontrar o melhor de cada lugar.</p>
+            </div>
+            <div class="timeline-item fade-up stagger-4">
+                <div class="year">O pedido que sempre vinha</div>
+                <h3>"Monta um roteiro pra gente?"</h3>
+                <p>Toda vez que voltavam de viagem, amigos e familiares pediam a mesma coisa: "Onde voces ficaram? Qual restaurante? Me manda o roteiro?" O que comecou como favor entre amigos virou uma demanda real.</p>
+            </div>
+            <div class="timeline-item fade-up">
+                <div class="year">2025</div>
+                <h3>Nasceu a Rotta Curadoria.</h3>
+                <p>A decisao foi simples: transformar em negocio aquilo que ja faziam naturalmente. Criar roteiros personalizados com a mesma dedicacao que colocam na propria vida. Cada viagem curada como se fosse pra eles mesmos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== POR QUE ROTTA ===== -->
+<section class="nome">
+    <div class="container">
+        <div class="nome-grid">
+            <div class="nome-visual fade-up">
+                <div class="word">Ro<span class="tt">tt</span>a</div>
+                <div class="translation">Do italiano: caminho, percurso, rota</div>
+            </div>
+            <div class="nome-content fade-up stagger-2">
+                <p class="section-label">O nome</p>
+                <h2>Por que <em>"Rotta"</em>?</h2>
+                <p>O nome vem de "rota" em italiano — caminho, percurso. A lingua que inspira algumas das viagens mais inesqueciveis do mundo.</p>
+                <p>Mas com duplo T. Porque toda grande viagem merece <strong>atencao aos detalhes</strong>.</p>
+                <p class="highlight">Cada letra extra e intencional. Assim como cada detalhe do seu roteiro.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FILOSOFIA ===== -->
+<section class="filosofia">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Nossa filosofia</p>
+        <h2 class="fade-up">No que a gente acredita</h2>
+        <div class="filo-grid">
+            <div class="filo-card fade-up stagger-1">
+                <div class="filo-icon">&#x2716;</div>
+                <h3>Nao somos agencia</h3>
+                <p>Nao vendemos pacotes genericos. Cada roteiro e unico, pensado pra voce, pro seu estilo, pro seu orcamento e pro seu momento de vida. Curadoria de verdade, nao catalogo.</p>
+            </div>
+            <div class="filo-card fade-up stagger-2">
+                <div class="filo-icon">&#x1F30D;</div>
+                <h3>Vivencia real</h3>
+                <p>So indicamos o que ja vivemos ou validamos pessoalmente. Se a gente nao foi, a gente nao recomenda. Cada dica passou pelo crivo de Marcelo e Alexandra.</p>
+            </div>
+            <div class="filo-card fade-up stagger-3">
+                <div class="filo-icon">&#x1F50D;</div>
+                <h3>Detalhe e tudo</h3>
+                <p>Do restaurante certo ao horario ideal pra foto. Da mesa com vista ao atalho que ninguem conhece. Nada e generico. Tudo e pensado.</p>
+            </div>
+            <div class="filo-card fade-up stagger-4">
+                <div class="filo-icon">&#x2728;</div>
+                <h3>Viagem e memoria</h3>
+                <p>O objetivo nao e so viajar. E criar momentos que voces vao contar pra sempre. O jantar que emocionou, o por do sol que calou, a surpresa que marcou.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== NOSSOS NUMEROS ===== -->
+<section class="numeros">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Nossos numeros</p>
+        <h2 class="fade-up">A experiencia por tras da curadoria</h2>
+        <div class="stats-grid">
+            <div class="stat-card fade-up stagger-1">
+                <div class="stat-num">22+</div>
+                <div class="stat-label">Paises visitados</div>
+            </div>
+            <div class="stat-card fade-up stagger-2">
+                <div class="stat-num">4</div>
+                <div class="stat-label">Jornadas curadas</div>
+            </div>
+            <div class="stat-card fade-up stagger-3">
+                <div class="stat-num">5</div>
+                <div class="stat-label">Perfis de viajante mapeados</div>
+            </div>
+            <div class="stat-card fade-up stagger-4">
+                <div class="stat-num">99%</div>
+                <div class="stat-label">Satisfacao<br><span style="font-size:11px;color:var(--dim)">(projecao baseada em feedback)</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== O QUE NOS MOVE ===== -->
+<section class="manifesto">
+    <div class="container">
+        <p class="section-label fade-up">O que nos move</p>
+        <div class="quote-mark fade-up">"</div>
+        <blockquote class="fade-up stagger-1">A melhor viagem e a que voce nao precisou planejar — mas que parece que foi feita so pra voce.</blockquote>
+        <p class="attribution fade-up stagger-2">— Marcelo & Alexandra</p>
+        <div class="divider fade-up stagger-3" style="margin-top:48px"></div>
+    </div>
+</section>
+
+<!-- ===== FOTO DO CASAL 2 ===== -->
+<section style="padding:80px 0;background:var(--bg)">
+    <div class="container">
+        <div class="couple-photo fade-up" style="max-width:700px;height:300px;border-radius:16px">
+            <div class="placeholder">
+                <div class="icon">&#x1F3DE;</div>
+                <p>Foto do casal em uma das viagens<br><br><strong>Italia, Croacia, Argentina...</strong><br>Imagens reais vindo em breve</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA FINAL ===== -->
+<section class="cta-final">
+    <div class="container">
+        <div class="divider" style="margin-bottom:48px"></div>
+        <h2 class="fade-up">Pronto pra descobrir<br>que tipo de viajante <em>voce e</em>?</h2>
+        <p class="sub fade-up">Faca nosso quiz gratuito e descubra o destino perfeito pro seu perfil. Ou fale direto com a gente — a conversa e sem compromisso.</p>
+        <div class="cta-buttons fade-up">
+            <a href="/quiz.html" class="cta-quiz">&#x1F9ED; Descubra seu perfil de viajante</a>
+            <a href="https://wa.me/5511968152123?text=Oi!%20Vi%20a%20pagina%20Sobre%20da%20Rotta%20e%20quero%20conversar" class="cta-whatsapp">&#x1F4AC; Fale conosco</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <div class="container">
+        <p class="brand">Rotta Curadoria</p>
+        <p class="tagline">Curado por Marcelo & Alexandra</p>
+        <div class="social">
+            <a href="https://instagram.com/rotta.curadoria">Instagram</a>
+            <a href="https://youtube.com/@rotta.curadoria">YouTube</a>
+            <a href="https://tiktok.com/@rotta.curadoria">TikTok</a>
+        </div>
+        <p class="legal">Nao somos agencia de viagem. Somos curadores de experiencias.<br>Todos os precos sao estimativas e podem variar conforme a data e destino.<br>&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<!-- SCROLL ANIMATION -->
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

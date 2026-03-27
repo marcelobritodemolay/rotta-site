@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotta Curadoria — 25 Emails de Nutricao (Brevo)</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0E0E0E;
+    color: #F2EDE8;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 1px solid #222;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: #C5A572;
+    margin-bottom: 8px;
+  }
+  .header p {
+    color: #888;
+    font-size: 0.95rem;
+  }
+  /* Tabs */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    background: #0E0E0E;
+    z-index: 100;
+    border-bottom: 1px solid #222;
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 14px 22px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .tab-btn:hover { color: #F2EDE8; }
+  .tab-btn.active {
+    color: #C5A572;
+    border-bottom-color: #C5A572;
+  }
+  .tab-content {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  .tab-content.active { display: block; }
+  /* Persona Header */
+  .persona-header {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: #1A1A1A;
+    border-radius: 12px;
+    border-left: 3px solid #C5A572;
+  }
+  .persona-header h2 {
+    font-family: 'Playfair Display', serif;
+    color: #C5A572;
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+  }
+  .persona-header .subtitle {
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  .persona-header .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 0.82rem;
+    color: #777;
+  }
+  .persona-header .meta span {
+    background: #222;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  /* Email Card */
+  .email-card {
+    background: #1A1A1A;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .email-card-header {
+    background: #151515;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #222;
+    cursor: pointer;
+  }
+  .email-card-header:hover { background: #191919; }
+  .email-number {
+    font-family: 'Playfair Display', serif;
+    color: #C5A572;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .email-day {
+    font-size: 0.75rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .email-objective {
+    font-size: 0.8rem;
+    color: #999;
+    background: #222;
+    padding: 3px 10px;
+    border-radius: 12px;
+  }
+  .email-body {
+    padding: 24px;
+  }
+  .field-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #C5A572;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .field-value {
+    margin-bottom: 20px;
+    color: #ddd;
+    font-size: 0.92rem;
+  }
+  .subject-line {
+    background: #111;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+    border-left: 2px solid #C5A572;
+  }
+  .subject-line .label {
+    color: #C5A572;
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin-right: 8px;
+  }
+  .email-content-box {
+    background: #111;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #ddd;
+    position: relative;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #C5A572;
+    color: #0E0E0E;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    z-index: 10;
+  }
+  .copy-btn:hover { background: #d4b882; }
+  .copy-btn.copied { background: #4CAF50; color: #fff; }
+  .cta-box {
+    background: linear-gradient(135deg, #1a1510, #1A1A1A);
+    border: 1px solid #C5A57233;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .cta-box .cta-link {
+    color: #C5A572;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .toggle-arrow {
+    color: #555;
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+  }
+  .email-card.open .toggle-arrow { transform: rotate(180deg); }
+  @media (max-width: 768px) {
+    .tabs { gap: 0; }
+    .tab-btn { padding: 12px 14px; font-size: 0.72rem; }
+    .header h1 { font-size: 1.6rem; }
+    .email-body { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Rotta Curadoria</h1>
+  <p>25 Emails de Nutricao por Persona — Prontos para Brevo</p>
+  <p style="color:#555; font-size:0.8rem; margin-top:8px;">WhatsApp: 44 99945-0929 &bull; @rotta.curadoria</p>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('carolina')">Carolina</button>
+  <button class="tab-btn" onclick="switchTab('roberto')">Roberto</button>
+  <button class="tab-btn" onclick="switchTab('silvia')">Silvia &amp; Marcos</button>
+  <button class="tab-btn" onclick="switchTab('squad')">O Squad</button>
+  <button class="tab-btn" onclick="switchTab('lucas')">Lucas &amp; Bia</button>
+</div>
+
+<!-- ============================================================ -->
+<!-- CAROLINA -->
+<!-- ============================================================ -->
+<div class="tab-content active" id="tab-carolina">
+
+<div class="persona-header">
+  <h2>Carolina — A Exploradora Aspiracional</h2>
+  <div class="subtitle">"Eu mereco essa viagem. So preciso de alguem que me diga que vale a pena."</div>
+  <div class="meta">
+    <span>28-40 anos</span>
+    <span>R$8-15k/mes</span>
+    <span>Produto: Curadoria Express R$497-797</span>
+    <span>Assinatura: Alexandra</span>
+  </div>
+</div>
+
+<!-- Carolina E1 -->
+<div class="email-card open">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 1</span>
+      <span class="email-day">Dia 0 — Imediato</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Resultado do Quiz + 3 Destinos</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Seu perfil de viajante ficou pronto, Carolina</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> Descobri 3 destinos perfeitos pra voce</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">E nenhum deles precisa de 30 abas abertas no navegador.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>Oi, {{contact.FIRSTNAME}}!
+
+Que bom que voce fez o quiz. Agora a gente se conhece um pouquinho melhor.
+
+Seu perfil: Exploradora Aspiracional.
+
+Isso significa que voce sabe EXATAMENTE o que quer viver — mas na hora de decidir, as opcoes travam tudo. Trinta abas abertas, quinze destinos salvos, e nenhuma passagem comprada. Soa familiar?
+
+A gente entende. E e exatamente por isso que a Rotta existe.
+
+Com base no seu perfil, separei 3 destinos que combinam com voce agora:
+
+1. Lisboa, Portugal — Cultura, gastronomia e um ritmo que respeita quem quer absorver tudo sem correria. Perfeita pra primeira viagem internacional ou pra quem quer se sentir em casa longe de casa.
+
+2. Buenos Aires, Argentina — Vibrante, acessivel e com uma cena gastronomica que surpreende. Da pra ir num feriado prolongado e voltar com historias que duram anos.
+
+3. Florianopolis (sim, nacional tambem conta) — Praias, trilhas, gastronomia local incrivel. Perfeita pra quem quer comecar mais perto e criar confianca pra ir mais longe.
+
+Nenhum desses destinos precisa de 6 meses de planejamento. E nenhum precisa te dar dor de cabeca.
+
+Nos proximos dias vou te mandar mais conteudo sobre como sair da pesquisa e entrar na experiencia de verdade. Fique de olho.
+
+Um abraco,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Nenhum CTA de venda neste email — valor puro</div>
+    </div>
+  </div>
+</div>
+
+<!-- Carolina E2 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 2</span>
+      <span class="email-day">Dia 2</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Amplificar Dor — Paralisia por Opcoes</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> O erro que faz voce pesquisar 30 destinos e nao ir pra nenhum</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> 47 hoteis pesquisados. Zero reservas. Te conheco?</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Nao e falta de dinheiro. Nao e falta de tempo. E outra coisa.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}}, me conta uma coisa:
+
+Quantas vezes voce ja abriu o Google num domingo a noite, pesquisou "melhores destinos para viajar sozinha", abriu 15 abas, comparou hoteis, leu avaliacoes... e na segunda-feira de manha, fechou tudo sem reservar nada?
+
+Se a resposta e "varias", voce nao esta sozinha.
+
+Esse e o erro numero 1 que a gente ve em viajantes com o seu perfil: a paralisia por excesso de opcoes.
+
+Funciona assim:
+— Voce pesquisa porque quer ir
+— Encontra 30 opcoes porque a internet tem 30 milhoes de opcoes
+— Cada opcao gera uma duvida nova
+— Cada duvida gera uma nova pesquisa
+— E no fim, a pesquisa VIRA a experiencia
+
+Voce esta consumindo viagem em vez de viver viagem.
+
+O problema nunca foi falta de dinheiro ou falta de tempo. O problema e que ninguem filtrou essas opcoes PRA VOCE. Ninguem sentou, ouviu o que voce quer, e disse: "vai nesse. Confia."
+
+E por isso que curadoria existe. Nao e sobre tirar sua autonomia — e sobre devolver ela. Porque autonomia de verdade e decidir entre 3 opcoes excelentes, nao se perder em 300 mediocres.
+
+No proximo email vou te contar a historia de uma viajante que ficou 3 anos no modo pesquisa. O que mudou? Voce vai se reconhecer.
+
+Ate la,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Nenhum CTA de venda — educativo</div>
+    </div>
+  </div>
+</div>
+
+<!-- Carolina E3 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 3</span>
+      <span class="email-day">Dia 4</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Prova Social — Historia da Fernanda</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Fernanda pesquisou por 3 anos. Viajou em 11 dias.</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> "Eu achava que nao era pra mim" — a historia que muda tudo</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Ela tinha 380 pins no Pinterest e zero carimbos no passaporte.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}}, preciso te contar sobre a Fernanda.
+
+Fernanda tem 32 anos, e analista de marketing e morava em Londrina. Ha 3 anos ela pesquisava viagens. Toda noite. Religiosamente.
+
+Tinha uma pasta no Pinterest chamada "Viagens dos Sonhos" com 380 pins. Tinha 47 hoteis salvos em Lisboa. Tinha planilhas de comparacao de precos. Tinha TUDO.
+
+Menos a viagem.
+
+Sabe o que ela me disse quando a gente se conheceu? "Alexandra, eu acho que viagem nao e pra mim. Eu pesquiso, pesquiso, e nunca vou."
+
+Ai eu perguntei: "Fernanda, voce pesquisou 47 hoteis. Mas em algum momento alguem sentou com voce e perguntou o que VOCE quer sentir nessa viagem?"
+
+Silencio.
+
+Ninguem nunca tinha perguntado isso. Nem ela mesma.
+
+Em 30 minutos de conversa, a gente descobriu que o que ela queria nao era Lisboa (apesar de amar a ideia). O que ela queria era se sentir capaz de viajar sozinha. De provar pra ela mesma que dava conta.
+
+A gente montou um roteiro de 8 dias em Porto e Lisboa. Pensado pra ela. Pro ritmo dela. Com restaurantes que ela ia amar, bairros que combinavam com ela, e momentos de respiro planejados pra quem viaja solo pela primeira vez.
+
+Do dia que falamos ate o embarque: 11 dias.
+
+3 anos de pesquisa. 30 minutos de curadoria. 11 dias ate o aeroporto.
+
+Ela voltou com 3 amizades novas, um favorito em cada bairro de Lisboa, e uma certeza: "Eu devia ter feito isso antes."
+
+Se voce se reconhece na Fernanda, fica de olho no proximo email.
+
+Com carinho,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Storytelling — sem CTA direto</div>
+    </div>
+  </div>
+</div>
+
+<!-- Carolina E4 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 4</span>
+      <span class="email-day">Dia 7</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Oferta Suave — Curadoria Express</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> E se alguem fizesse a pesquisa toda por voce?</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> Seu roteiro personalizado por 12x de R$41</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Sem 30 abas. Sem duvida. Sem paralisia.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}}, vou ser direta com voce.
+
+Voce fez o quiz. Leu sobre os 3 destinos. Entendeu que o problema nao e falta de opcao — e excesso. Conheceu a historia da Fernanda e provavelmente se viu nela.
+
+Agora a pergunta: o que muda a partir daqui?
+
+Voce pode continuar pesquisando. Mais abas, mais hoteis, mais comparacoes. E daqui a 6 meses estar exatamente onde esta agora: querendo ir e nao indo.
+
+Ou voce pode deixar a gente cuidar disso.
+
+Apresento a Curadoria Express:
+
+O que e: Um roteiro 100% personalizado de 5 a 10 dias, feito sob medida pra voce.
+
+Como funciona:
+1. Voce responde um questionario rapido sobre o que gosta, quanto quer investir e o que espera sentir
+2. A gente tem uma conversa de 30 minutos (por video ou telefone)
+3. Em 7 dias voce recebe seu roteiro completo, dia a dia, com restaurantes, experiencias e dicas que so quem ja foi sabe
+4. Uma revisao inclusa pra ajustar qualquer detalhe
+5. Suporte no WhatsApp ate o embarque
+
+Quanto custa:
+Nacional: R$497 (ou 12x de R$41)
+Internacional: R$797 (ou 12x de R$66)
+
+O que NAO e: Nao e roteiro generico de blog. Nao e PDF copiado da internet. E curadoria real, feita por quem ja esteve la e sabe a diferenca entre "ir" e "viver".
+
+A Fernanda gastou 3 anos pesquisando. Com a Curadoria Express, ela teria economizado 3 anos e provavelmente gastado menos — porque roteiro ruim custa caro em experiencias desperdicadas.
+
+Se faz sentido, me manda um "QUERO MINHA VIAGEM" no WhatsApp e a gente conversa. Sem compromisso, sem pressao. So uma conversa entre quem quer viajar e quem pode ajudar.
+
+WhatsApp: 44 99945-0929
+
+So falta voce dizer sim. O resto a gente resolve.
+
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria
+
+PS: Lembra da sua pasta de destinos salvos? Imagina transformar um deles em roteiro real em 7 dias.</div>
+    <div class="cta-box">
+      <div class="field-label">CTA WhatsApp</div>
+      <div class="cta-link">Mensagem: "QUERO MINHA VIAGEM" → 44 99945-0929</div>
+    </div>
+  </div>
+</div>
+
+<!-- Carolina E5 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 5</span>
+      <span class="email-day">Dia 10</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Urgencia + Condicao Especial Quiz</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Ultima mensagem sobre sua viagem, {{contact.FIRSTNAME}}</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> 10% off na sua Curadoria Express (so ate amanha)</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Depois disso, o valor volta ao normal. A decisao e sua.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Esse e meu ultimo email desta sequencia. E quero ser honesta com voce.
+
+Nos ultimos 10 dias eu te mostrei seu perfil de viajante, te contei sobre a paralisia que trava quem pesquisa demais, e te apresentei a Fernanda — que se libertou de 3 anos de indecisao em 11 dias.
+
+Agora, voce esta num de dois lugares:
+
+1. Pensando "faz sentido, mas nao e a hora" — e provavelmente vai continuar pensando isso daqui a 3 meses, 6 meses, 1 ano. Porque a "hora certa" nao existe. Existe a decisao.
+
+2. Pensando "quero fazer isso" — e so precisa de um empurraozinho.
+
+Se voce esta no segundo grupo, aqui vai:
+
+Como voce fez o quiz e leu ate aqui, quero te dar uma condicao especial:
+
+10% de desconto na Curadoria Express.
+Nacional: de R$497 por R$447 (12x de R$37)
+Internacional: de R$797 por R$717 (12x de R$59)
+
+Essa condicao vale por 48 horas a partir de agora. Depois disso, o valor volta ao normal.
+
+Pra garantir, manda "QUERO MINHA VIAGEM" no WhatsApp com a palavra QUIZ, e a gente aplica o desconto automaticamente.
+
+WhatsApp: 44 99945-0929
+
+Nao vou te mandar mais emails sobre isso. A decisao e 100% sua.
+
+Mas se lembrar deste email daqui a 6 meses — ainda pesquisando, ainda salvando pins, ainda querendo ir — lembra que teve um momento onde era so dizer sim.
+
+Com carinho de verdade,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria
+
+PS: So falta voce dizer sim. O resto a gente resolve.</div>
+    <div class="cta-box">
+      <div class="field-label">CTA WhatsApp</div>
+      <div class="cta-link">Mensagem: "QUERO MINHA VIAGEM" + QUIZ → 44 99945-0929 (10% off, 48h)</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-carolina -->
+
+<!-- ============================================================ -->
+<!-- ROBERTO -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-roberto">
+
+<div class="persona-header">
+  <h2>Roberto — O Colecionador de Experiencias</h2>
+  <div class="subtitle">"Nao quero viagem de turista. Quero algo que ninguem fez."</div>
+  <div class="meta">
+    <span>35-55 anos</span>
+    <span>R$15-40k/mes</span>
+    <span>Produto: Curadoria Completa R$3.997+</span>
+    <span>Assinatura: Marcelo (E3) / Alexandra</span>
+  </div>
+</div>
+
+<!-- Roberto E1 -->
+<div class="email-card open">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 1</span>
+      <span class="email-day">Dia 0 — Imediato</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Resultado do Quiz + 3 Experiencias</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Seu perfil ficou pronto. E nao e o que voce espera.</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> 3 experiencias que voce nao encontra no Google</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Voce nao quer viagem. Voce quer historia pra contar.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Obrigado por fazer o quiz. Seu perfil: Colecionador de Experiencias.
+
+Voce nao quer viagem de turista. Voce nao quer fila, multidao, ou roteiro que todo mundo faz. O que voce quer e aquele momento que vira historia — o tipo de experiencia que, quando voce conta num jantar, as pessoas param de comer pra ouvir.
+
+A gente entende. E trabalha exatamente pra isso.
+
+Com base no seu perfil, separei 3 experiencias que combinam com quem voce e:
+
+1. Jantar privado com sommelier em vinicola boutique no Chile — Nao e degustacao com 40 pessoas. E uma mesa pra voce, harmonizacao pensada, e conversa direta com quem faz o vinho. Nivel de exclusividade que nao aparece em TripAdvisor.
+
+2. Trekking ao amanhecer na Patagonia com guia local — Nao e o circuito turistico. E uma trilha que o guia so leva quem ele confia. Amanhecer no Torres del Paine sem mais ninguem. A foto nao faz justica.
+
+3. Rota gastronomica secreta em San Sebastian, Espanha — 4 restaurantes que os moradores frequentam e os turistas nao conhecem. Pintxos, txakoli e historias que so quem vive la pode contar.
+
+Percebeu o padrao? Nenhuma dessas experiencias aparece numa pesquisa generica. Todas precisam de alguem que ja esteve la, que conhece as pessoas, que sabe como acessar.
+
+Isso e curadoria.
+
+Nos proximos dias, vou compartilhar mais sobre como a gente monta esse tipo de experiencia. Acompanhe.
+
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Nenhum CTA de venda — valor puro</div>
+    </div>
+  </div>
+</div>
+
+<!-- Roberto E2 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 2</span>
+      <span class="email-day">Dia 2</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Amplificar Dor — Tedio com Viagens Genericas</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Voce ja cansou de contar a mesma historia de viagem</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> A viagem generica esta te custando mais do que voce pensa</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">O problema nao e viajar pouco. E viajar errado.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Deixa eu te fazer uma pergunta direta:
+
+Qual foi sua melhor viagem?
+
+Se a resposta demorou mais de 3 segundos — ou se a historia e de mais de 5 anos atras — a gente precisa conversar.
+
+Veja, o problema de quem tem o seu perfil nao e falta de recursos. Voce pode viajar quando quiser, pra onde quiser. O problema e que as viagens que voce fez ate agora nao estao a altura do que voce construiu.
+
+O resort all-inclusive com buffet e piscina lotada? Funciona pra descansar. Mas nao gera historia.
+
+A viagem corporativa com cenario bonito e agenda cheia? Nao conta.
+
+O roteiro copiado de blog que todo mundo faz? Voce faz questao de nao fazer o que todo mundo faz em negocios. Por que aceitaria isso em viagem?
+
+O que acontece e o seguinte: quando voce viaja sem curadoria, voce esta terceirizando a experiencia pro algoritmo. O Google te mostra o que e popular. Popular e o oposto de exclusivo. E exclusividade e o que voce busca em tudo na vida.
+
+A consequencia? Voce vai, volta, e quando alguem pergunta "como foi?", voce diz "legal" — e muda de assunto. Porque "legal" nao e o que voce quer sentir. Voce quer "inesquecivel".
+
+No proximo email, vou te contar sobre um jantar que o Marcelo viveu em Santiago e que, anos depois, ele ainda conta como uma das experiencias mais marcantes da vida dele.
+
+Ate la,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Nenhum CTA de venda — educativo</div>
+    </div>
+  </div>
+</div>
+
+<!-- Roberto E3 — Marcelo em primeira pessoa -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 3</span>
+      <span class="email-day">Dia 4</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Prova Social — Jantar em Santiago (Marcelo 1a pessoa)</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> O jantar em Santiago que mudou minha forma de viajar</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> "Eu nao sabia que viajar podia ser assim" — Marcelo</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Uma mesa, um sommelier, e uma garrafa que nao esta em nenhum cardapio.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}}, aqui e o Marcelo.
+
+Preciso te contar sobre um jantar em Santiago.
+
+Eu estava no Chile com a Alexandra e um amigo, o Francisco. O Francisco e daquelas pessoas que vivem pra colecionar experiencias — nao destinos, experiencias.
+
+Numa noite, em vez de ir pra um restaurante famoso, ele nos levou a uma vinicola boutique nos arredores da cidade. Nada turistico. Sem placa na estrada. Voce so chega se alguem te levar.
+
+Quando entramos, tinha uma mesa preparada pra 6 pessoas no meio da adega. O proprietario, um chileno de 65 anos que faz vinho ha 40, sentou com a gente. Nao tinha cardapio. Ele abriu garrafas que nao estao a venda — safras pessoais, lotes experimentais, vinhos que ele guarda pra momentos especiais.
+
+A cada tainha, ele contava a historia daquela uva, daquela safra, daquele ano. Os pratos vinham em harmonia perfeita. A conversa fluia entre portugues, espanhol e risadas.
+
+Quando saimos, a Alexandra olhou pra mim e disse: "Agora voce entende por que eu insisto que a gente nao faca viagem generica?"
+
+Entendi.
+
+Naquela noite eu nao "jantei em Santiago". Eu vivi uma experiencia que nao se repete, nao se compra em site, e nao aparece no Google. Eu estava na mesa certa, com as pessoas certas, no momento certo.
+
+E isso que separa "ir pra algum lugar" de "viver algo que ninguem mais viveu".
+
+Quando a gente monta uma curadoria pra alguem com o seu perfil, essa e a referencia. Nao e sobre hotel 5 estrelas e transfer de luxo. E sobre acessar o que nao esta disponivel pra todo mundo.
+
+Voce construiu o patrimonio. A gente constroi a experiencia.
+
+No proximo email, a Alexandra vai te mostrar como funciona na pratica.
+
+Abraco,
+Marcelo
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Storytelling — sem CTA direto</div>
+    </div>
+  </div>
+</div>
+
+<!-- Roberto E4 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 4</span>
+      <span class="email-day">Dia 7</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Oferta Suave — Curadoria Completa</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Como funciona uma Curadoria Completa (por dentro)</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> A viagem em que voce so precisa embarcar</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Roteiro, reservas, restaurantes, experiencias. Tudo pensado. Voce so vive.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Voce leu sobre o jantar em Santiago. Entendeu a diferenca entre viagem generica e experiencia curada. Agora, como isso funciona na pratica?
+
+Apresento a Curadoria Completa:
+
+E o nosso servico ponta a ponta. Voce nos conta o que quer viver — e a gente monta tudo.
+
+O processo:
+1. Imersao inicial (60 minutos) — Conversa profunda sobre o que voce busca. Nao e questionario generico. E uma conversa de verdade sobre experiencias, limites, desejos e expectativas.
+
+2. Roteiro ultra-detalhado — Dia a dia, com alternativas pra cada momento. Restaurantes que a gente ja testou. Experiencias que nao estao em nenhum blog. Dicas que so quem esteve la sabe.
+
+3. Reservas completas — Hoteis, restaurantes, experiencias exclusivas, transfers. Voce nao reserva nada. A gente cuida de tudo.
+
+4. Kit viagem — Seguro, chip internacional, documentacao necessaria, mapa offline, contatos locais.
+
+5. Suporte 24h durante a viagem — Qualquer imprevisto, a gente resolve em tempo real.
+
+6. Album digital pos-viagem — Porque a memoria merece ser preservada com a mesma qualidade da experiencia.
+
+Investimento: A partir de R$3.997 por pessoa (servico de curadoria — hospedagem e voos a parte)
+
+Pra quem e: Quem nao quer viagem de turista. Quem quer chegar no destino e viver — sem pesquisar, sem comparar, sem improvisar.
+
+Pra quem NAO e: Quem quer o roteiro mais barato possivel. Quem quer all-inclusive com pulseirinha.
+
+Neste momento temos 4 vagas na agenda para curadorias de Maio e Junho. Duas ja foram preenchidas.
+
+Se isso faz sentido pra voce, manda "EXCLUSIVO" no WhatsApp e eu mesmo respondo.
+
+WhatsApp: 44 99945-0929
+
+Experiencias que voce nao encontra sozinho.
+
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria
+
+PS: A mesma precisao que o Marcelo traz pros procedimentos, a gente traz pra sua viagem. Cada detalhe pensado.</div>
+    <div class="cta-box">
+      <div class="field-label">CTA WhatsApp</div>
+      <div class="cta-link">Mensagem: "EXCLUSIVO" → 44 99945-0929</div>
+    </div>
+  </div>
+</div>
+
+<!-- Roberto E5 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 5</span>
+      <span class="email-day">Dia 10</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Urgencia — Vagas Limitadas</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> 2 vagas restantes para curadoria em Maio/Junho</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> {{contact.FIRSTNAME}}, essa e a ultima mensagem</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">A agenda fecha e so reabre em Agosto. A decisao e sua.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Esse e meu ultimo email desta sequencia. Vou ser direto — como voce gosta.
+
+Das 4 vagas que tinhamos na agenda de curadoria para Maio e Junho, 2 foram preenchidas na ultima semana.
+
+Restam 2.
+
+Nao e urgencia artificial. E logistica. Cada curadoria completa exige em media 15 dias de trabalho dedicado entre imersao, pesquisa, contatos, reservas e revisoes. A gente nao faz 10 ao mesmo tempo porque a qualidade cairia. E qualidade e o unico motivo pelo qual voce esta lendo este email.
+
+Quando essas 2 vagas forem preenchidas, a proxima janela de agenda abre em Agosto — para viagens a partir de Setembro.
+
+Voce calculou uma vez quantas viagens serias ainda cabem na sua vida? Se viajar uma vez por ano, 10 dias cada, e tiver saude e disposicao por mais 20-25 anos... sao 20 a 25 experiencias. Um numero finito.
+
+Cada uma conta.
+
+Se voce quer que uma delas seja diferente de tudo que voce ja fez, manda "EXCLUSIVO" no WhatsApp. Eu respondo pessoalmente e a gente marca a imersao inicial.
+
+WhatsApp: 44 99945-0929
+
+Sem formulario, sem fila, sem robo. Uma conversa entre quem entende o valor do seu tempo.
+
+Abraco,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria
+
+PS: Voce construiu o patrimonio. A gente constroi a experiencia. As 2 vagas restantes fecham essa semana.</div>
+    <div class="cta-box">
+      <div class="field-label">CTA WhatsApp</div>
+      <div class="cta-link">Mensagem: "EXCLUSIVO" → 44 99945-0929 (2 vagas restantes)</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-roberto -->
+
+<!-- ============================================================ -->
+<!-- SILVIA & MARCOS -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-silvia">
+
+<div class="persona-header">
+  <h2>Silvia &amp; Marcos — O Casal Reconectando</h2>
+  <div class="subtitle">"Precisamos de uma viagem so nossa. Sem filhos, sem rotina."</div>
+  <div class="meta">
+    <span>40-60 anos</span>
+    <span>R$12-25k/mes familiar</span>
+    <span>Produto: Escapada Romantica R$1.497+</span>
+    <span>Assinatura: Alexandra</span>
+  </div>
+</div>
+
+<!-- Silvia E1 -->
+<div class="email-card open">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 1</span>
+      <span class="email-day">Dia 0 — Imediato</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Resultado do Quiz + 3 Destinos pra Casal</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> O perfil de viagem de voces ficou pronto</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> 3 destinos perfeitos pra voces dois — so voces dois</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Sem filhos, sem rotina, sem agenda. So voces.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>Oi, {{contact.FIRSTNAME}}!
+
+Que bom que voces fizeram o quiz juntos (ou talvez voce tenha feito sozinha e vai mostrar pro Marcos depois — a gente conhece a dinamica).
+
+O perfil de voces: Casal Reconectando.
+
+Isso significa que voces se amam, tem uma vida construida juntos, mas faz tempo que nao vivem algo que e SO de voces dois. Sem filhos na mesa ao lado, sem rotina ditando o horario, sem celular apitando com coisas do trabalho.
+
+Com base no perfil, separei 3 destinos que combinam com casais como voces:
+
+1. Mendoza, Argentina — Vinicoulas ao pe da Cordilheira, jantares ao ar livre, ritmo lento e romantico. Perfeita pra quem quer desacelerar JUNTOS. Da pra ir num feriado prolongado.
+
+2. Gramado/Canela, RS — Perto, acessivel e com uma atmosfera que convida a caminhar de maos dadas. Fondue, chocolates, friozinho. As vezes o destino nao precisa ser longe — precisa ser a dois.
+
+3. Santiago + Vale do Casablanca, Chile — Gastronomia de nivel internacional, vinhos excepcionais, cidade vibrante. Urbano e bucolico no mesmo roteiro.
+
+Nenhum desses destinos precisa de 15 dias. Uma escapada de 3 a 5 dias ja transforma.
+
+Nos proximos dias, vou te mandar conteudo que pode mudar a forma como voces pensam sobre viagem a dois. Fique de olho.
+
+Com carinho,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Nenhum CTA de venda — valor puro</div>
+    </div>
+  </div>
+</div>
+
+<!-- Silvia E2 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 2</span>
+      <span class="email-day">Dia 2</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Amplificar Dor — "Quando foi a ultima vez?"</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Ha quanto tempo voces nao viajam SO os dois?</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> O erro que casais cometem sem perceber (voces tambem)</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Se a resposta demorou... e hora de ler esse email.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Responde pra voce mesma (nao precisa me contar):
+
+Ha quanto tempo voces nao viajam SO os dois?
+
+Nao vale viagem em familia. Nao vale feriado com os filhos. Nao vale aquele fim de semana no sitio com cunhado e sogra.
+
+Viagem so de voces. Onde o unico compromisso e estar junto.
+
+Se a resposta demorou — ou se voce nao lembra — voce nao esta sozinha. Esse e o padrao mais comum que a gente ve em casais com 15, 20, 25 anos juntos.
+
+Funciona assim:
+— Os filhos nascem e toda viagem vira viagem de familia
+— O trabalho aperta e ferias viram "descanso" em casa
+— Quando surge a oportunidade, um dos dois diz "nao e o momento"
+— Os anos passam e o casamento vira logistica: quem busca o filho, quem paga a conta, quem resolve o problema
+
+E em algum momento, voces percebem que tem saudade um do outro ESTANDO JUNTOS. Que e o paradoxo mais doloroso que um casal pode viver.
+
+Nao e que voces nao se amam. E que voces esqueceram de alimentar o que conecta voces fora da rotina.
+
+E sabe o que alimenta? Experiencia nova. Lugar novo. Tempo so de voces.
+
+Viagem nao e gasto. E o melhor investimento que um casal pode fazer.
+
+No proximo email, vou te contar a historia da Ana e do Ricardo — 22 anos casados, que voltaram de uma escapada em Mendoza e disseram algo que me arrepiou.
+
+Ate la,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Nenhum CTA de venda — educativo</div>
+    </div>
+  </div>
+</div>
+
+<!-- Silvia E3 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 3</span>
+      <span class="email-day">Dia 4</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Prova Social — Ana e Ricardo em Mendoza</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> 22 anos casados. 4 dias em Mendoza. Voltaram diferentes.</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> "A gente voltou a namorar" — Ana, 48 anos</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Ela marcou. Ele resistiu. Depois, agradeceu.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}}, preciso te contar sobre a Ana e o Ricardo.
+
+Casados ha 22 anos. Dois filhos (19 e 16). Ele engenheiro, ela administradora. Moravam em Maringa.
+
+A ultima viagem so dos dois tinha sido ha 9 anos — lua de mel de "renovacao" que virou roteiro com criancas porque nao tinha com quem deixar os filhos.
+
+Quando a Ana me procurou, ela disse: "Alexandra, eu preciso viajar com o Ricardo. Mas ele vai dizer que nao e hora."
+
+E disse mesmo.
+
+Ricardo listou 5 motivos racionais pra nao ir: o filho mais novo tinha prova, a empresa dele estava num projeto importante, "quem sabe no segundo semestre", e por ai vai.
+
+Sabe o que convenceu ele? Nao fui eu. Foi o formato.
+
+Quando ele viu que era uma escapada de 4 dias — quinta a domingo — com tudo organizado, sem ele precisar pesquisar nada, sem estresse de planejamento, com voo direto e um roteiro que respeitava o tempo dele... a resistencia caiu.
+
+Eles foram pra Mendoza.
+
+No primeiro dia, jantaram numa vinicola ao pe dos Andes. Sem celular na mesa (combinaram antes). Comecaram a conversar sobre coisas que nao conversavam ha anos — nao problemas, mas sonhos. O que queriam fazer juntos, onde queriam ir, como queriam viver os proximos 20 anos.
+
+No segundo dia, fizeram um passeio de bike entre as vinicoulas. Riam como nao riam faz tempo.
+
+Quando voltaram, a Ana me mandou um audio que eu guardo ate hoje. Ela disse:
+
+"Alexandra, a gente voltou a namorar. Eu olhei pro Ricardo naquela mesa e lembrei por que casei com ele. Fazia anos que eu nao sentia isso."
+
+4 dias. Nao 15. Nao uma viagem cara de 3 semanas pela Europa. 4 dias em Mendoza com curadoria.
+
+Se voce se reconhece na Ana, o proximo email e pra voce.
+
+Com carinho,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Storytelling — sem CTA direto</div>
+    </div>
+  </div>
+</div>
+
+<!-- Silvia E4 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 4</span>
+      <span class="email-day">Dia 7</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Oferta Suave — Escapada Romantica</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Uma escapada de 3 noites so pra voces — tudo pronto</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> 12x de R$124 pra reconectar voces dois</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Hotel reservado, jantar especial, experiencia a dois. Voces so embarcam.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Voce leu sobre a Ana e o Ricardo. Talvez tenha ate mostrado pro Marcos (espero que sim).
+
+Agora, como transformar isso em realidade pra voces?
+
+Apresento a Escapada Romantica:
+
+Uma experiencia de 2 a 3 noites pensada exclusivamente pra casais que precisam de tempo juntos. Sem complicacao, sem planejamento, sem estresse.
+
+O que esta incluso:
+— Hotel reservado (curadoria pessoal — nao e o primeiro que aparece no Google)
+— 1 jantar especial a dois (restaurante selecionado por nos)
+— 1 experiencia unica no destino (varia: degustacao, passeio, spa)
+— Roteiro dia a dia com sugestoes e alternativas
+— Suporte no WhatsApp antes e durante
+
+Destinos disponiveis pra escapada:
+— Mendoza (como Ana e Ricardo)
+— Gramado/Canela
+— Santiago + Casablanca
+— Campos do Jordao
+— Monte Verde
+
+Investimento: A partir de R$1.497 por casal (12x de R$124)
+
+Pra quem e: Casais que querem reconectar mas nao tem tempo (nem paciencia) pra planejar sozinhos.
+
+Pra quem NAO e: Casais que querem viagem de familia disfarçada de viagem a dois.
+
+Funciona assim: voce manda "QUIZ" no WhatsApp, a gente conversa sobre o que voces gostam, e em uma semana voces tem a escapada pronta. So embarcar.
+
+WhatsApp: 44 99945-0929
+
+Ha quanto tempo voces nao viajam SO os dois?
+Talvez seja hora.
+
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria
+
+PS: Voces merecem isso. E os filhos vao ficar bem — provavelmente vao ate agradecer.</div>
+    <div class="cta-box">
+      <div class="field-label">CTA WhatsApp</div>
+      <div class="cta-link">Mensagem: "QUIZ" → 44 99945-0929</div>
+    </div>
+  </div>
+</div>
+
+<!-- Silvia E5 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 5</span>
+      <span class="email-day">Dia 10</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Urgencia + 15% Desconto Quiz</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Ultima mensagem — e uma condicao especial pra voces</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> 15% off na Escapada Romantica (vale ate amanha)</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">12x de R$106 pra reconectar voces. Depois, valor cheio.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Esse e meu ultimo email desta sequencia.
+
+Nos ultimos 10 dias voce recebeu:
+— O perfil de viagem de voces
+— A reflexao sobre quanto tempo faz desde a ultima viagem a dois
+— A historia da Ana e do Ricardo
+— A Escapada Romantica em detalhe
+
+Agora, a realidade: voce esta num de dois lugares.
+
+Ou voce leu tudo e ja mostrou pro Marcos (ou vai mostrar hoje). Ou voce leu tudo e guardou pra "pensar depois".
+
+Se voce esta no primeiro grupo — ou quer estar — aqui vai algo especial:
+
+15% de desconto na Escapada Romantica por voces terem feito o quiz.
+
+De R$1.497 por R$1.272 (12x de R$106)
+
+Essa condicao vale por 48 horas. Depois, volta ao valor normal.
+
+Pra garantir: manda "QUIZ" no WhatsApp e menciona o email. A gente aplica o desconto na hora.
+
+WhatsApp: 44 99945-0929
+
+Voce sabe o que a Ana me disse depois de Mendoza? "Eu devia ter feito isso 5 anos atras."
+
+Nao espera 5 anos, {{contact.FIRSTNAME}}.
+
+Os filhos crescem. A rotina engole. A janela nao fica aberta pra sempre.
+
+Ha quanto tempo voces nao viajam SO os dois?
+
+Com todo carinho,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria
+
+PS: Mostra esse email pro Marcos. Ele vai entender — especialmente o preco e o "tudo pronto, so embarcar".</div>
+    <div class="cta-box">
+      <div class="field-label">CTA WhatsApp</div>
+      <div class="cta-link">Mensagem: "QUIZ" → 44 99945-0929 (15% off, 48h) — R$1.272 / 12x R$106</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-silvia -->
+
+<!-- ============================================================ -->
+<!-- O SQUAD -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-squad">
+
+<div class="persona-header">
+  <h2>O Squad — Familia Escolhida</h2>
+  <div class="subtitle">"A gente fala em viajar junto faz 2 anos. Ninguem organiza. Ninguem vai."</div>
+  <div class="meta">
+    <span>25-40 anos</span>
+    <span>R$5-15k/mes individual</span>
+    <span>Produto: Rotta Crew R$797/pessoa</span>
+    <span>Assinatura: Alexandra</span>
+  </div>
+</div>
+
+<!-- Squad E1 -->
+<div class="email-card open">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 1</span>
+      <span class="email-day">Dia 0 — Imediato</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Resultado do Quiz + 3 Destinos de Grupo</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Seu perfil de viajante ficou pronto — e ele explica TUDO</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> 3 destinos pro seu grupo (que dessa vez vai sair do WhatsApp)</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Voce e a pessoa que organiza. A gente sabe. E veio te ajudar.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>Oi, {{contact.FIRSTNAME}}!
+
+Voce fez o quiz e a gente ja te conhece um pouco.
+
+Seu perfil: A Organizadora do Squad.
+
+Traduzindo: voce e a pessoa que pesquisa, manda no grupo, anima todo mundo... e depois assiste a empolgacao morrer em 48 horas quando ninguem responde. Soa familiar?
+
+Com base no seu perfil, separei 3 destinos perfeitos pra grupo:
+
+1. Jericoacoara, CE — Praia, dunas, lagoas, por do sol icônico. Funciona pra 4, 6 ou 8 pessoas. Voos com conexao acessiveis. Roteiro de 5 dias que todo mundo concorda.
+
+2. Chapada dos Veadeiros, GO — Trilhas, cachoeiras, noites estreladas, gastronomia surpreendente. Perfeita pro grupo que quer algo alem de praia.
+
+3. Florianopolis, SC — Praia durante o dia, gastronomia a noite, trilhas no meio. Agrada o grupo inteiro porque tem de tudo. Logistica simples.
+
+Os tres sao nacionais, acessiveis, e nao precisam de passaporte nem de 15 dias de ferias.
+
+Nos proximos dias vou te mandar conteudo que pode ser a diferenca entre "mais uma viagem que nao acontece" e "a viagem que o grupo nunca vai esquecer".
+
+Fica de olho.
+
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Nenhum CTA de venda — valor puro</div>
+    </div>
+  </div>
+</div>
+
+<!-- Squad E2 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 2</span>
+      <span class="email-day">Dia 2</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Amplificar Dor — Paralisia Coletiva</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Por que seu grupo fala em viajar ha 2 anos e nao vai</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> O ciclo "bora!" > silencio > esquecimento (e como quebrar)</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Nao e culpa do grupo. E de como voces estao tentando organizar.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Me diz se isso soa familiar:
+
+Alguem manda no grupo: "Gente, bora viajar?"
+Todo mundo: "Boraaaa!"
+Silencio.
+3 dias depois, a conversa morreu. Ninguem marcou data. Ninguem pesquisou preco. O "bora" era real. A acao, nao.
+
+Esse ciclo tem um nome: paralisia coletiva.
+
+E funciona assim:
+
+1. Muita gente decidindo = ninguem decide
+2. Orcamentos diferentes = constrangimento de falar sobre dinheiro
+3. Agendas diferentes = "quando 4 podem, 2 nao podem"
+4. Sem lider com ferramenta = pesquisa infinita, reserva zero
+5. Trauma de tentativas anteriores = "ja tentamos, nao deu certo"
+
+O resultado? O grupo que se ama acaba virando grupo de WhatsApp que manda meme em vez de criar memoria.
+
+E aqui esta a verdade que ninguem fala: a cada mes que passa sem a viagem acontecer, a motivacao coletiva morre um pouco. Alguem casa. Alguem engravida. Alguem muda de cidade. E a janela onde TODOS podem ir fecha sem ninguem perceber.
+
+O problema nunca foi vontade. Todo mundo quer ir.
+
+O problema e que viagem de grupo precisa de uma coisa que grupo nao tem: alguem de fora que organiza, define preco por pessoa, e fala "quem confirma ate sexta, vai. Quem nao confirma, fica".
+
+No proximo email, vou te contar sobre a Fernanda e as 6 amigas dela. Do "bora?" no WhatsApp ao embarque: 18 dias.
+
+Ate la,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Nenhum CTA de venda — educativo</div>
+    </div>
+  </div>
+</div>
+
+<!-- Squad E3 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 3</span>
+      <span class="email-day">Dia 4</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Prova Social — Fernanda e 6 Amigas</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> 7 amigas. 18 dias do WhatsApp ao embarque.</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> "Pela primeira vez nao fui eu que tive que organizar tudo"</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Elas falavam em viajar ha 3 anos. Em 18 dias, estavam la.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}}, preciso te contar sobre a Fernanda.
+
+Fernanda tem 31 anos e e a "organizadora oficial" do grupo de 7 amigas desde a faculdade. Sabe aquela pessoa que pesquisa tudo, manda link no grupo, cria planilha, cobra todo mundo... e no fim ninguem confirma?
+
+Fernanda.
+
+O grupo falava em viajar junto ha 3 anos. Ja tinham tentado 4 vezes:
+— Tentativa 1: Ninguem concordou no destino.
+— Tentativa 2: Concordaram no destino, nao concordaram na data.
+— Tentativa 3: Concordaram em tudo, 2 desistiram na ultima hora.
+— Tentativa 4: Fernanda cansou e parou de tentar.
+
+Quando a Fernanda nos procurou, ela disse: "Alexandra, eu amo essas meninas mas se eu tiver que organizar mais uma viagem que nao acontece, vou surtar."
+
+A gente entendeu.
+
+Fizemos o seguinte:
+
+1. Montamos um roteiro de 5 dias em Jericoacoara com preco POR PESSOA
+2. Criamos um link individual de confirmacao — cada uma confirma e paga a sua parte, sem constrangimento
+3. Definimos um prazo: "quem confirma ate sexta, vai. Quem nao confirma, fica pra proxima"
+4. Mandamos tudo pronto: hospedagem, roteiro dia a dia, experiencias, divisao de custos
+
+Resultado? Fernanda mandou no grupo numa terca. Ate sexta, 6 das 7 confirmaram. A setima confirmou no sabado ("nao quero ficar de fora").
+
+Do WhatsApp ao embarque: 18 dias.
+
+Sabe o que a Fernanda me disse quando voltou? "Pela primeira vez em 3 anos, eu nao fui a organizadora. Eu fui so mais uma amiga curtindo."
+
+Isso e o que acontece quando alguem de fora tira o peso da organizadora.
+
+Se voce e a Fernanda do seu grupo, o proximo email e pra voce.
+
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Storytelling — sem CTA direto</div>
+    </div>
+  </div>
+</div>
+
+<!-- Squad E4 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 4</span>
+      <span class="email-day">Dia 7</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Oferta Suave — Rotta Crew</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Rotta Crew: preco por pessoa, tudo pronto, quem confirma vai</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> 12x de R$66 por pessoa — a viagem do seu grupo finalmente</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Roteiro pronto + preco individual + prazo definido. So mandar no grupo.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Voce conheceu a Fernanda. Viu como um grupo que tentou 4 vezes e falhou conseguiu embarcar em 18 dias. A diferenca? Alguem fez por elas o que elas nao conseguiam fazer sozinhas.
+
+Agora, como isso funciona pro SEU grupo?
+
+Apresento o Rotta Crew:
+
+Uma experiencia de grupo curada, com preco por pessoa, link individual, e prazo definido. Voce manda no grupo e a gente cuida do resto.
+
+Como funciona:
+1. Voce nos procura e conta sobre o grupo: quantas pessoas, preferencias, orcamento medio
+2. A gente monta o roteiro com destino, hospedagem, experiencias e preco POR PESSOA
+3. Voce recebe um material pronto pra mandar no grupo — bonito, claro, com preco e prazo
+4. Cada pessoa confirma e paga individualmente (sem voce ter que cobrar ninguem)
+5. Quem confirma ate o prazo, vai. Quem nao confirma, fica pra proxima
+6. A gente cuida de hospedagem, roteiro e experiencias. O grupo so aparece
+
+Destinos Rotta Crew (nacionais):
+— Jericoacoara, CE
+— Chapada dos Veadeiros, GO
+— Florianopolis, SC
+— Bonito, MS
+— Sao Miguel dos Milagres, AL
+
+Investimento: A partir de R$797 por pessoa (12x de R$66)
+Minimo: 4 pessoas confirmadas
+
+O que voce NAO precisa fazer:
+— Pesquisar hotel
+— Cobrar amigo
+— Criar planilha
+— Ser a "chata" que fica cobrando
+— Assumir risco financeiro pelo grupo
+
+Manda "CREW" no WhatsApp e a gente monta a proposta pro seu grupo. Voce so encaminha.
+
+WhatsApp: 44 99945-0929
+
+Montei tudo. Preco por pessoa. Quem confirma?
+
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria
+
+PS: Imagina mandar no grupo algo pronto, bonito, com preco e prazo. Em vez de "gente, bora?" — "gente, ta aqui. Quem vai?"</div>
+    <div class="cta-box">
+      <div class="field-label">CTA WhatsApp</div>
+      <div class="cta-link">Mensagem: "CREW" → 44 99945-0929</div>
+    </div>
+  </div>
+</div>
+
+<!-- Squad E5 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 5</span>
+      <span class="email-day">Dia 10</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Urgencia — Proximo Crew Fecha Sexta</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> O proximo Rotta Crew fecha sexta — seu grupo vai?</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> Ultima chamada, {{contact.FIRSTNAME}}</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Se nao for agora, quando todo mundo vai poder de novo?</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Esse e meu ultimo email. E vou te dizer algo que talvez voce ja saiba mas nao quer ouvir:
+
+Se essa viagem nao acontecer agora, provavelmente nao vai acontecer.
+
+Nao porque voces nao querem. Mas porque a cada mes que passa, a janela fica menor. Alguem do grupo vai casar. Alguem vai engravidar. Alguem vai mudar de cidade. Alguem vai estar "num momento complicado".
+
+E daqui a 2 anos, voce vai abrir o grupo de WhatsApp e ver a mesma conversa: "Gente, bora viajar?" — e sentir aquele aperto de quem sabe que "bora" nao vira "foi".
+
+Eu sei porque ja vi isso acontecer. Muitas vezes.
+
+Agora, a informacao pratica:
+
+O proximo Rotta Crew fecha inscricoes na sexta-feira. Depois disso, a gente so abre novas turmas no mes seguinte — e ai depende de todo mundo poder de novo.
+
+O investimento continua: R$797 por pessoa (12x de R$66)
+
+Voce nao precisa confirmar o grupo inteiro. So precisa dar o primeiro passo.
+
+Manda "CREW" no WhatsApp. A gente monta a proposta personalizada pro seu grupo. Voce encaminha. E pela primeira vez, em vez de ser a organizadora que ninguem ouve, voce vai ser a amiga que FEZ ACONTECER.
+
+WhatsApp: 44 99945-0929
+
+Para de planejar. A gente montou tudo. Quem vai?
+
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria
+
+PS: A Fernanda mandou no grupo numa terca. Sexta, 7 de 7 tinham confirmado. Voce so precisa de 18 dias.</div>
+    <div class="cta-box">
+      <div class="field-label">CTA WhatsApp</div>
+      <div class="cta-link">Mensagem: "CREW" → 44 99945-0929 (inscricoes fecham sexta)</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-squad -->
+
+<!-- ============================================================ -->
+<!-- LUCAS & BIA -->
+<!-- ============================================================ -->
+<div class="tab-content" id="tab-lucas">
+
+<div class="persona-header">
+  <h2>Lucas &amp; Bia — O Casal que Celebra</h2>
+  <div class="subtitle">"A gente merece marcar esse momento. Nao pode ser so um jantar."</div>
+  <div class="meta">
+    <span>25-38 anos</span>
+    <span>R$8-20k/mes familiar</span>
+    <span>Produto: Rotta Surprise R$97-997</span>
+    <span>Assinatura: Alexandra</span>
+  </div>
+</div>
+
+<!-- Lucas E1 -->
+<div class="email-card open">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 1</span>
+      <span class="email-day">Dia 0 — Imediato</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Resultado do Quiz + 3 Ideias pra Celebrar</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> O perfil de voces ficou pronto (e e lindo)</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> 3 formas de celebrar voces dois — que nao sao jantar</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">O aniversario de voces merece mais que um restaurante.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>Oi, {{contact.FIRSTNAME}}!
+
+Adorei que voces fizeram o quiz. O perfil de voces: O Casal que Celebra.
+
+Isso significa que voces dois sabem que tem marcos importantes pra viver — aniversario de namoro, aniversario de casamento, aquela data que so de voces sabem o significado — mas na hora de celebrar... jantar. De novo.
+
+Nao que jantar seja ruim. Mas voces merecem mais.
+
+Com base no perfil, separei 3 ideias pra celebrar de um jeito que vira memoria:
+
+1. Escapada de 3 dias em Campos do Jordao — Friozinho, chocolate quente, lareira, e nenhum compromisso alem de estar juntos. Funciona pra qualquer data especial (ou pra criar uma data especial do nada).
+
+2. Fim de semana gastronomico em Gramado — Fondue, vinicoulas, lojas de chocolate, e aquele ritmo lento que so cidade pequena tem. Romantico sem ser cliche.
+
+3. Noite surpresa + roteiro secreto — E se um de voces planejasse tudo sem o outro saber? Destino surpresa, roteiro secreto, revelacao no dia. Existe algo mais romantico?
+
+Nos proximos dias, vou te contar historias de casais que transformaram datas comuns em memorias que duram a vida inteira. Fique de olho.
+
+Com carinho,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Nenhum CTA de venda — valor puro</div>
+    </div>
+  </div>
+</div>
+
+<!-- Lucas E2 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 2</span>
+      <span class="email-day">Dia 2</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Amplificar Dor — Marcos Nao Celebrados</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Ha quantos aniversarios voces comemoram com pizza?</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> O erro que casais jovens cometem (e so percebem depois)</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Voces merecem mais que "a gente vai viajar algum dia".</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Me responde uma coisa:
+
+Qual foi a celebracao mais marcante que voces tiveram como casal?
+
+Se a resposta demorou — ou se foi o proprio casamento/noivado — a gente precisa conversar.
+
+Sabe o que acontece com a maioria dos casais jovens? Eles prometem, prometem, prometem... e celebram com jantar.
+
+"A gente vai viajar no nosso aniversario" → pizza.
+"Quando fizer 3 anos de casados, a gente vai" → rodizio.
+"Ano que vem, com certeza" → o ano que vem nao chega nunca.
+
+E nao e porque voces nao querem. E porque:
+— Ninguem planeja (e planejar da trabalho)
+— Parece "caro demais" (mas voce gasta o mesmo em coisas que esquece em 3 meses)
+— "Nao e o momento certo" (e nunca vai ser, se depender de esperar)
+
+O resultado? Voces tem 3, 5, 7 anos juntos e nenhuma memoria de viagem a dois. O album de fotos e de restaurante e selfie no sofá.
+
+Enquanto isso, aquele casal que voces seguem no Instagram esta na quarta viagem do ano. E voces pensam "deve ganhar muito mais que a gente" — sem considerar que talvez eles so tenham decidido que experiencia vale mais que espera.
+
+O aniversario de voces merece mais que um jantar.
+
+No proximo email, vou te contar sobre o Thiago — e o envelope que mudou tudo no aniversario da Camila.
+
+Ate la,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Nenhum CTA de venda — educativo</div>
+    </div>
+  </div>
+</div>
+
+<!-- Lucas E3 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 3</span>
+      <span class="email-day">Dia 4</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Prova Social — Thiago e o Envelope</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> O envelope que fez a Camila chorar no aniversario</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> "Ele nunca planeja nada" — ate o dia que planejou</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Ela abriu. Leu. E nao conseguiu falar por 2 minutos.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}}, preciso te contar sobre o Thiago e a Camila.
+
+Eles namoram ha 4 anos. Ele, desenvolvedor de software. Ela, designer. Moravam em Curitiba.
+
+A Camila e daquelas que salva post de viagem todo dia, manda pro Thiago, e recebe de volta: "que legal, amor". E so. Sem acao, sem plano, sem nada.
+
+Todo aniversario de namoro era jantar no mesmo restaurante. Todo aniversario dela, presente material. Bonito, caro as vezes, mas nenhum era memoria. Era coisa.
+
+Ai o Thiago me procurou. E disse algo que eu nunca esqueci:
+
+"Alexandra, eu quero surpreender a Camila. Mas eu nao sei planejar viagem. Se eu tentar, vou errar e vai ser pior do que nao tentar."
+
+Ouviu isso? "Vai ser pior do que nao tentar."
+
+Essa e a frase que paralisa. O medo de errar e maior que o desejo de acertar.
+
+A gente montou tudo. Escolhemos Gramado — 4 dias, hotel romantico, jantar especial, passeio de vinicola, tudo no ritmo deles. O Thiago nao precisou pesquisar uma linha sequer.
+
+No aniversario da Camila, ele entregou um envelope.
+
+Dentro: uma carta escrita a mao (a gente ajudou com o texto, confesso) e um cartao com o destino, as datas e um QR code que levava pra um video nosso dizendo "Camila, seu amor planejou tudo. Voce so precisa fazer a mala."
+
+Ela abriu. Leu a carta. Olhou pro Thiago. E nao conseguiu falar por 2 minutos. So chorou.
+
+A viagem foi incrivel. Mas o momento do envelope? Esse ela conta ate hoje.
+
+Nao foi o destino que mudou tudo. Foi o fato de que ELE planejou. De que ela nao precisou pedir. De que o presente nao era uma coisa — era uma experiencia feita pra eles dois.
+
+Se voce se identificou — seja como Camila ou como Thiago — o proximo email e pra voce.
+
+Com carinho,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria</div>
+    <div class="cta-box">
+      <div class="field-label">CTA</div>
+      <div class="cta-link">Storytelling — sem CTA direto</div>
+    </div>
+  </div>
+</div>
+
+<!-- Lucas E4 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 4</span>
+      <span class="email-day">Dia 7</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Oferta Suave — Rotta Surprise</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> Rotta Surprise: o presente que nao cabe em caixa</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> Surpreenda seu amor por 12x de R$83</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">Voce planeja nada. A gente planeja tudo. Seu amor so faz a mala.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Voce conheceu a historia do Thiago e da Camila. Viu o que um envelope pode fazer.
+
+Agora: e se voce pudesse fazer a mesma coisa?
+
+Apresento o Rotta Surprise:
+
+Um presente que nao e coisa. E experiencia. Voce compra, a gente planeja, seu amor so descobre na hora.
+
+Duas opcoes:
+
+ROTTA SURPRISE MINI — R$97
+— Roteiro digital de escapada 3-4 dias
+— Carta personalizada escrita pra voces
+— Instrucoes de revelacao (como e quando entregar)
+— Suporte por WhatsApp
+Perfeita pra: quem quer surpreender gastando pouco e organizando a viagem por conta
+
+ROTTA SURPRISE FULL — R$997 (12x de R$83)
+— Kit FISICO entregue na sua casa: caixa premium + carta + envelope lacrado com destino
+— QR code com video personalizado nosso
+— Roteiro completo de 5-7 dias
+— Instrucoes de revelacao passo a passo
+— Suporte antes e durante a viagem
+Perfeita pra: quem quer surpreender de verdade, sem precisar planejar nada
+
+Como funciona:
+1. Voce manda "SURPRISE" no WhatsApp (de preferencia de um celular que seu amor nao veja)
+2. A gente conversa sobre gostos, datas, orcamento
+3. Montamos tudo — roteiro, carta, kit (se Full)
+4. Voce recebe e entrega no momento que quiser: aniversario, Dia dos Namorados, pedido de casamento, ou "so porque sim"
+
+Seu amor nao sabe de nada. Voce nao precisa planejar nada. A gente cuida de tudo.
+
+O resultado? Aquele momento que nenhum presente material consegue criar. O olhar. O choro. A frase "voce fez isso por mim?". O story que gera 200 mensagens.
+
+WhatsApp: 44 99945-0929
+Mensagem: "SURPRISE"
+
+O aniversario de voces merece mais que um jantar.
+
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria
+
+PS: Se voce esta lendo isso e pensou "quero fazer pro(a) meu(minha) amor", nao mostra esse email. Salva e manda a mensagem. O resto e com a gente.</div>
+    <div class="cta-box">
+      <div class="field-label">CTA WhatsApp</div>
+      <div class="cta-link">Mensagem: "SURPRISE" → 44 99945-0929</div>
+    </div>
+  </div>
+</div>
+
+<!-- Lucas E5 -->
+<div class="email-card">
+  <div class="email-card-header" onclick="toggleCard(this)">
+    <div>
+      <span class="email-number">Email 5</span>
+      <span class="email-day">Dia 10</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="email-objective">Urgencia + 15% Off Surprise Full</span>
+      <span class="toggle-arrow">&#9662;</span>
+    </div>
+  </div>
+  <div class="email-body" style="display:none;">
+    <div class="field-label">Assunto A</div>
+    <div class="subject-line"><span class="label">A</span> 15% off no Rotta Surprise Full — so ate amanha</div>
+    <div class="field-label">Assunto B</div>
+    <div class="subject-line"><span class="label">B</span> Ultima mensagem, {{contact.FIRSTNAME}} — depois e preco cheio</div>
+    <div class="field-label">Preview</div>
+    <div class="field-value">De R$997 por R$847 (12x de R$70). A decisao e sua.</div>
+    <div class="field-label">Corpo do Email</div>
+    <div class="email-content-box">
+      <button class="copy-btn" onclick="copyEmail(this)">Copiar</button>{{contact.FIRSTNAME}},
+
+Ultimo email. Vou direto ao ponto.
+
+Voce fez o quiz. Leu sobre marcos nao celebrados. Conheceu a historia do Thiago e da Camila. Viu como funciona o Rotta Surprise.
+
+Se voce chegou ate aqui, e porque algo ressoou.
+
+Talvez voce seja a pessoa que quer surpreender e nao sabe como.
+Talvez voce seja a pessoa que cansou de pedir e quer que aconteca.
+Talvez voces dois queiram, mas ninguem da o primeiro passo.
+
+Aqui esta o primeiro passo:
+
+15% off no Rotta Surprise Full — condicao exclusiva pra quem fez o quiz.
+
+De R$997 por R$847 (12x de R$70)
+
+Kit fisico + carta + roteiro + video personalizado + suporte completo.
+
+Essa condicao vale por 48 horas. Depois disso, valor cheio.
+
+Pra garantir, manda "SURPRISE" no WhatsApp e menciona o quiz. A gente aplica na hora.
+
+WhatsApp: 44 99945-0929
+
+Nao vou te mandar mais emails sobre isso. Mas antes de fechar, uma reflexao:
+
+Ha quantos anos voces estao juntos? E qual foi a viagem mais marcante que fizeram? Se a resposta demorou... e hora.
+
+O proximo aniversario pode ser diferente. Pode ser o marco que voces dois lembram pra sempre.
+
+Ou pode ser mais um jantar.
+
+A decisao e de voces.
+
+Com carinho,
+Alexandra
+
+Marcelo & Alexandra
+Curado por Rotta
+@rotta.curadoria
+
+PS: Se voce esta lendo isso e quer surpreender — nao mostra esse email. Salva. Manda "SURPRISE". E espera o sorriso.</div>
+    <div class="cta-box">
+      <div class="field-label">CTA WhatsApp</div>
+      <div class="cta-link">Mensagem: "SURPRISE" → 44 99945-0929 (15% off, 48h) — R$847 / 12x R$70</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /tab-lucas -->
+
+<!-- ============================================================ -->
+<!-- JAVASCRIPT -->
+<!-- ============================================================ -->
+<script>
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleCard(header) {
+  const card = header.closest('.email-card');
+  const body = card.querySelector('.email-body');
+  const isOpen = card.classList.contains('open');
+  if (isOpen) {
+    card.classList.remove('open');
+    body.style.display = 'none';
+  } else {
+    card.classList.add('open');
+    body.style.display = 'block';
+  }
+}
+
+function copyEmail(btn) {
+  const box = btn.closest('.email-content-box');
+  // Get only text content, excluding the button text
+  const clone = box.cloneNode(true);
+  clone.querySelector('.copy-btn').remove();
+  const text = clone.textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = 'Copiado!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copiar';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// Initialize: show/hide email bodies based on open class
+document.querySelectorAll('.email-card').forEach(card => {
+  const body = card.querySelector('.email-body');
+  if (!card.classList.contains('open')) {
+    body.style.display = 'none';
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotta Curadoria — Plano de Negocios 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --green:#4CAF7D;--blue:#5B8DEF;--coral:#E8785A;--purple:#9B72CF;
+        }
+        html,body{height:100%;overflow:hidden;font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+        /* ===== PRESENTATION CONTAINER ===== */
+        .presentation{position:relative;width:100%;height:100vh;overflow:hidden}
+        .slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 80px;opacity:0;transform:translateX(60px);transition:opacity .5s ease,transform .5s ease;pointer-events:none;overflow-y:auto}
+        .slide.active{opacity:1;transform:translateX(0);pointer-events:all;z-index:2}
+        .slide.prev{opacity:0;transform:translateX(-60px)}
+        .slide-inner{max-width:1100px;width:100%}
+
+        /* ===== TYPOGRAPHY ===== */
+        h1,h2,h3{font-family:'Playfair Display',serif}
+        h1{font-size:clamp(36px,5vw,64px);font-weight:700;line-height:1.1;margin-bottom:16px}
+        h2{font-size:clamp(28px,3.5vw,44px);font-weight:700;line-height:1.15;margin-bottom:24px}
+        h3{font-size:clamp(18px,2vw,24px);font-weight:600;line-height:1.3}
+        .gold{color:var(--gold)}
+        .italic{font-style:italic}
+        .subtitle{font-size:clamp(16px,1.8vw,20px);color:var(--muted);max-width:680px;line-height:1.6}
+        .label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block}
+        .divider{width:60px;height:2px;background:var(--gold);margin:20px 0;opacity:.4}
+        .center{text-align:center;display:flex;flex-direction:column;align-items:center}
+
+        /* ===== NAVIGATION ===== */
+        .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:100;background:rgba(26,26,26,.8);border:1px solid var(--layer);color:var(--text);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;font-size:18px;backdrop-filter:blur(8px);border:none;outline:none}
+        .nav-arrow:hover{background:var(--gold);color:var(--bg)}
+        .nav-prev{left:24px}
+        .nav-next{right:24px}
+
+        /* ===== PROGRESS BAR ===== */
+        .progress-bar{position:fixed;bottom:0;left:0;height:3px;background:var(--gold);transition:width .4s ease;z-index:100}
+        .slide-counter{position:fixed;bottom:16px;right:24px;font-size:12px;color:var(--dim);z-index:100;letter-spacing:1px}
+
+        /* ===== CARDS ===== */
+        .card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px;transition:all .3s}
+        .card:hover{border-color:rgba(197,165,114,.3)}
+        .card-gold{border-color:var(--gold);background:linear-gradient(135deg,var(--card) 0%,#1F1A14 100%)}
+        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+        .grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+
+        /* ===== ANIMATE ON SLIDE ENTRY ===== */
+        .anim{opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+        .slide.active .anim{opacity:1;transform:translateY(0)}
+        .slide.active .anim.d1{transition-delay:.1s}
+        .slide.active .anim.d2{transition-delay:.2s}
+        .slide.active .anim.d3{transition-delay:.3s}
+        .slide.active .anim.d4{transition-delay:.4s}
+        .slide.active .anim.d5{transition-delay:.5s}
+        .slide.active .anim.d6{transition-delay:.6s}
+        .slide.active .anim.d7{transition-delay:.7s}
+
+        /* ===== SPECIFIC COMPONENTS ===== */
+        .stat-box{text-align:center;padding:20px}
+        .stat-num{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,42px);font-weight:700;color:var(--gold)}
+        .stat-label{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
+        .check-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;font-size:14px;color:var(--muted)}
+        .check-item .icon{color:var(--green);flex-shrink:0;font-size:16px;margin-top:1px}
+        .check-item.pending .icon{color:var(--coral)}
+
+        /* Ladder */
+        .ladder{display:flex;align-items:flex-end;gap:12px;justify-content:center;height:320px;padding-bottom:20px}
+        .ladder-step{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;text-align:center;border-radius:12px 12px 4px 4px;padding:16px 12px;background:var(--card);border:1px solid var(--layer);transition:all .3s;width:18%;position:relative}
+        .ladder-step:hover{border-color:var(--gold);transform:translateY(-4px)}
+        .ladder-step .level{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+        .ladder-step .step-title{font-family:'Playfair Display',serif;font-size:13px;font-weight:600;margin-bottom:6px;min-height:36px}
+        .ladder-step .step-price{font-size:12px;color:var(--gold);font-weight:600;margin-bottom:4px}
+        .ladder-step .step-desc{font-size:10px;color:var(--dim);line-height:1.4}
+        .ladder-step:nth-child(1){height:20%}
+        .ladder-step:nth-child(2){height:35%}
+        .ladder-step:nth-child(3){height:55%}
+        .ladder-step:nth-child(4){height:75%}
+        .ladder-step:nth-child(5){height:95%;border-color:var(--gold);background:linear-gradient(135deg,var(--card) 0%,#1F1A14 100%)}
+
+        /* Funnel */
+        .funnel{display:flex;flex-direction:column;align-items:center;gap:4px;max-width:600px;margin:0 auto}
+        .funnel-step{display:flex;align-items:center;justify-content:center;text-align:center;padding:14px 24px;font-size:13px;font-weight:500;border-radius:8px;color:var(--text);transition:all .3s;position:relative}
+        .funnel-step:hover{transform:scale(1.02)}
+
+        /* Bar Chart CSS */
+        .bar-chart{display:flex;align-items:flex-end;gap:12px;height:220px;padding:0 20px}
+        .bar-col{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end}
+        .bar{width:100%;border-radius:6px 6px 0 0;transition:height 1s ease;position:relative;min-height:4px}
+        .bar-value{font-size:11px;color:var(--text);font-weight:600;margin-bottom:4px;white-space:nowrap}
+        .bar-label{font-size:10px;color:var(--dim);margin-top:6px;text-align:center}
+
+        /* Timeline */
+        .timeline{position:relative;padding-left:40px}
+        .timeline::before{content:'';position:absolute;left:14px;top:0;bottom:0;width:2px;background:var(--layer)}
+        .timeline-item{position:relative;margin-bottom:20px;padding-left:20px}
+        .timeline-item::before{content:'';position:absolute;left:-30px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--bg)}
+        .timeline-item h4{font-size:14px;font-weight:600;margin-bottom:2px}
+        .timeline-item p{font-size:12px;color:var(--muted)}
+
+        /* Persona cards */
+        .persona-card{text-align:center;padding:20px 16px}
+        .persona-avatar{width:56px;height:56px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:24px}
+        .persona-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;margin-bottom:4px}
+        .persona-desc{font-size:11px;color:var(--dim);margin-bottom:6px;min-height:30px}
+        .persona-ticket{font-size:12px;color:var(--gold);font-weight:600}
+
+        /* Journey cards */
+        .journey-card{padding:20px;position:relative;overflow:hidden}
+        .journey-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--gold);opacity:.5}
+        .journey-dest{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;margin-bottom:6px}
+        .journey-detail{font-size:12px;color:var(--muted);margin-bottom:4px}
+        .journey-price{font-size:16px;color:var(--gold);font-weight:700;margin-top:8px}
+
+        /* Cost table */
+        .cost-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--layer);font-size:14px}
+        .cost-row .cost-name{color:var(--muted)}
+        .cost-row .cost-val{color:var(--text);font-weight:500}
+        .cost-row.total{border-top:2px solid var(--gold);border-bottom:none;margin-top:8px;padding-top:12px}
+        .cost-row.total .cost-name,.cost-row.total .cost-val{color:var(--gold);font-weight:700;font-size:16px}
+
+        /* Tag */
+        .tag{display:inline-block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:100px;font-weight:600}
+        .tag-gold{background:var(--gold-dim);color:var(--gold)}
+        .tag-green{background:rgba(76,175,125,.15);color:var(--green)}
+        .tag-blue{background:rgba(91,141,239,.15);color:var(--blue)}
+
+        /* Contact */
+        .contact-link{display:flex;align-items:center;gap:12px;padding:16px 24px;background:var(--card);border:1px solid var(--layer);border-radius:12px;font-size:15px;color:var(--text);transition:all .3s;text-decoration:none}
+        .contact-link:hover{border-color:var(--gold);transform:translateY(-2px)}
+        .contact-icon{width:44px;height:44px;border-radius:10px;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+
+        /* Checklist grid */
+        .checklist-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+
+        /* ===== PRINT ===== */
+        @media print{
+            body{overflow:visible;background:#fff;color:#111}
+            .presentation{height:auto;overflow:visible}
+            .slide{position:relative!important;opacity:1!important;transform:none!important;pointer-events:all!important;page-break-after:always;page-break-inside:avoid;padding:40px;height:auto;min-height:90vh;display:flex!important}
+            .nav-arrow,.progress-bar,.slide-counter,.keyboard-hint{display:none!important}
+            .card{border-color:#ddd;background:#f5f5f5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+            .card-gold{background:#f9f5ee}
+            .gold{color:#8B6914}
+            h1,h2,h3{color:#111}
+            .subtitle,.check-item,.persona-desc,.cost-row .cost-name,.timeline-item p{color:#555}
+            .anim{opacity:1!important;transform:none!important}
+            .label{color:#8B6914}
+            .stat-num{color:#8B6914}
+            .bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+            .progress-bar{display:none}
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:900px){
+            .slide{padding:40px 24px}
+            .grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr 1fr}
+            .ladder{flex-wrap:wrap;height:auto;gap:8px}
+            .ladder-step{width:45%;height:auto!important}
+            .bar-chart{height:160px}
+            .nav-arrow{width:36px;height:36px;font-size:14px}
+            .nav-prev{left:8px}
+            .nav-next{right:8px}
+        }
+        @media(max-width:600px){
+            .slide{padding:30px 16px}
+            .grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr}
+            .ladder{flex-direction:column;align-items:stretch}
+            .ladder-step{width:100%;height:auto!important}
+            .funnel-step{font-size:11px;padding:10px 16px}
+            h1{font-size:32px}
+            h2{font-size:26px}
+        }
+
+        /* Keyboard hint */
+        .keyboard-hint{position:fixed;bottom:16px;left:24px;font-size:11px;color:var(--dim);z-index:100;letter-spacing:.5px}
+        .keyboard-hint kbd{display:inline-block;background:var(--layer);padding:2px 8px;border-radius:4px;font-family:'Inter',sans-serif;font-size:10px;margin:0 2px}
+    </style>
+</head>
+<body>
+
+<div class="presentation" id="presentation">
+
+    <!-- ==================== SLIDE 1: CAPA ==================== -->
+    <div class="slide active" data-slide="0">
+        <div class="slide-inner center">
+            <span class="label anim" style="letter-spacing:4px;margin-bottom:24px">Plano de Negocios 2026</span>
+            <div class="anim d1" style="margin-bottom:16px">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                    <circle cx="40" cy="40" r="38" stroke="#C5A572" stroke-width="1.5" opacity=".4"/>
+                    <circle cx="40" cy="40" r="28" stroke="#C5A572" stroke-width="1"/>
+                    <path d="M40 12 L43 38 L40 42 L37 38 Z" fill="#C5A572" opacity=".8"/>
+                    <path d="M40 68 L37 42 L40 38 L43 42 Z" fill="#C5A572" opacity=".4"/>
+                    <path d="M12 40 L38 37 L42 40 L38 43 Z" fill="#C5A572" opacity=".6"/>
+                    <path d="M68 40 L42 43 L38 40 L42 37 Z" fill="#C5A572" opacity=".3"/>
+                    <text x="40" y="45" text-anchor="middle" font-family="Playfair Display,serif" font-size="16" font-weight="700" fill="#C5A572">R</text>
+                </svg>
+            </div>
+            <h1 class="anim d2">Rotta <span class="gold italic">Curadoria</span></h1>
+            <div class="divider anim d3" style="margin:16px auto 24px"></div>
+            <p class="subtitle anim d4" style="text-align:center;font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:18px">
+                "Viagem nao e gasto. E o melhor investimento que um casal pode fazer."
+            </p>
+            <p class="anim d5" style="color:var(--dim);font-size:14px;margin-top:32px">
+                Dr. Marcelo Brito & Alexandra Dagostin
+            </p>
+            <p class="anim d6" style="color:var(--dim);font-size:12px;margin-top:8px">
+                Campo Mourao, PR | Marco 2026
+            </p>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 2: QUEM SOMOS ==================== -->
+    <div class="slide" data-slide="1">
+        <div class="slide-inner">
+            <span class="label anim">Quem Somos</span>
+            <h2 class="anim d1">O Casal por Tras<br>da <span class="gold">Curadoria</span></h2>
+            <div class="grid-2 anim d2" style="margin-top:32px">
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+                        <div style="width:56px;height:56px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;font-family:'Playfair Display',serif;font-weight:700;color:var(--gold)">M</div>
+                        <div>
+                            <h3 style="font-size:18px">Dr. Marcelo Brito</h3>
+                            <span style="font-size:12px;color:var(--gold)">Estrategia & Logistica</span>
+                        </div>
+                    </div>
+                    <p style="font-size:14px;color:var(--muted);margin-bottom:12px">Medico oftalmologista com <strong style="color:var(--text)">22 anos de carreira</strong> e mais de <strong style="color:var(--text)">16.000 procedimentos</strong> realizados.</p>
+                    <p style="font-size:14px;color:var(--muted)">A mesma precisao e atencao aos detalhes que aplica na medicina, traz para o planejamento de cada viagem. Visao estrategica, logistica impecavel, roteiros milimetricos.</p>
+                </div>
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+                        <div style="width:56px;height:56px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;font-family:'Playfair Display',serif;font-weight:700;color:var(--gold)">A</div>
+                        <div>
+                            <h3 style="font-size:18px">Alexandra Dagostin</h3>
+                            <span style="font-size:12px;color:var(--gold)">Sensibilidade & Gastronomia</span>
+                        </div>
+                    </div>
+                    <p style="font-size:14px;color:var(--muted);margin-bottom:12px">Nutricionista com olhar unico para gastronomia local e bem-estar em viagem.</p>
+                    <p style="font-size:14px;color:var(--muted)">Traz o <strong style="color:var(--text)">olhar feminino</strong>, a curadoria gastronomica e a sensibilidade que transforma roteiro em experiencia. Saude, sabor e alma em cada destino.</p>
+                </div>
+            </div>
+            <div class="card card-gold anim d3" style="margin-top:20px;text-align:center;padding:20px">
+                <p style="font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:16px">"A gente ja foi, ja voltou, e separou o melhor pra voce."</p>
+                <p style="font-size:12px;color:var(--dim);margin-top:8px">Casal real. 4 filhas. Vida real. Viagens reais.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 3: O PROBLEMA ==================== -->
+    <div class="slide" data-slide="2">
+        <div class="slide-inner">
+            <span class="label anim">O Problema</span>
+            <h2 class="anim d1">Por Que Viajantes <span class="gold">Perdem</span><br>Tempo e Dinheiro</h2>
+            <div class="grid-2 anim d2" style="margin-top:32px">
+                <div class="card" style="border-left:3px solid var(--coral)">
+                    <h3 style="font-size:16px;margin-bottom:8px">Informacao Fragmentada</h3>
+                    <p style="font-size:13px;color:var(--muted)">Blogs, YouTube, TikTok, Google... centenas de fontes, nenhuma confiavel. O viajante perde <strong style="color:var(--text)">40+ horas</strong> planejando e ainda erra.</p>
+                </div>
+                <div class="card" style="border-left:3px solid var(--coral)">
+                    <h3 style="font-size:16px;margin-bottom:8px">Armadilhas Turisticas</h3>
+                    <p style="font-size:13px;color:var(--muted)">Restaurantes turisticos, hoteis com fotos enganosas, experiencias genericas. Quem nao conhece, <strong style="color:var(--text)">cai em todas</strong>.</p>
+                </div>
+                <div class="card" style="border-left:3px solid var(--coral)">
+                    <h3 style="font-size:16px;margin-bottom:8px">Agencias Genericas</h3>
+                    <p style="font-size:13px;color:var(--muted)">Pacotes padronizados, sem personalizacao. O mesmo roteiro pra todo mundo. <strong style="color:var(--text)">Zero curadoria</strong>, zero alma.</p>
+                </div>
+                <div class="card" style="border-left:3px solid var(--coral)">
+                    <h3 style="font-size:16px;margin-bottom:8px">Paralisia de Decisao</h3>
+                    <p style="font-size:13px;color:var(--muted)">Excesso de opcoes paralisa. O casal discute, o grupo desiste, a viagem <strong style="color:var(--text)">nunca sai do papel</strong>.</p>
+                </div>
+            </div>
+            <div class="anim d3" style="text-align:center;margin-top:32px">
+                <p style="font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:18px">"Nao e sobre o destino — e sobre como voce vive ele."</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 4: A SOLUCAO ==================== -->
+    <div class="slide" data-slide="3">
+        <div class="slide-inner">
+            <span class="label anim">A Solucao</span>
+            <h2 class="anim d1">Nao Somos Agencia.<br>Somos <span class="gold italic">Curadores</span>.</h2>
+            <div class="grid-3 anim d2" style="margin-top:36px">
+                <div class="card" style="text-align:center;padding:32px 20px">
+                    <div style="font-size:36px;margin-bottom:16px;color:var(--gold)">&#9733;</div>
+                    <h3 style="font-size:16px;margin-bottom:10px">Curadoria Personalizada</h3>
+                    <p style="font-size:13px;color:var(--muted)">Quiz inteligente identifica seu perfil de viajante. Roteiros criados sob medida para cada pessoa.</p>
+                </div>
+                <div class="card" style="text-align:center;padding:32px 20px">
+                    <div style="font-size:36px;margin-bottom:16px;color:var(--gold)">&#10003;</div>
+                    <h3 style="font-size:16px;margin-bottom:10px">Vivencia Real</h3>
+                    <p style="font-size:13px;color:var(--muted)">Tudo que recomendamos, nos vivemos. Cada hotel, restaurante e experiencia passou pelo crivo do casal.</p>
+                </div>
+                <div class="card" style="text-align:center;padding:32px 20px">
+                    <div style="font-size:36px;margin-bottom:16px;color:var(--gold)">&#9878;</div>
+                    <h3 style="font-size:16px;margin-bottom:10px">Do Plano a Reserva</h3>
+                    <p style="font-size:13px;color:var(--muted)">Desde um roteiro PDF ate concierge completo com reservas, suporte 24h e album digital.</p>
+                </div>
+            </div>
+            <div class="grid-2 anim d3" style="margin-top:20px">
+                <div class="card" style="display:flex;align-items:center;gap:16px">
+                    <div style="font-size:28px">&#9764;</div>
+                    <div>
+                        <h3 style="font-size:14px;margin-bottom:4px">Precisao Medica</h3>
+                        <p style="font-size:12px;color:var(--muted)">22 anos de medicina trouxeram metodo, atencao ao detalhe e obsessao por resultado.</p>
+                    </div>
+                </div>
+                <div class="card" style="display:flex;align-items:center;gap:16px">
+                    <div style="font-size:28px">&#127860;</div>
+                    <div>
+                        <h3 style="font-size:14px;margin-bottom:4px">Curadoria Gastronomica</h3>
+                        <p style="font-size:12px;color:var(--muted)">Alexandra garante: voce vai comer BEM. Nutricao e sabor em cada destino.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 5: PUBLICO-ALVO ==================== -->
+    <div class="slide" data-slide="4">
+        <div class="slide-inner">
+            <span class="label anim">Publico-Alvo</span>
+            <h2 class="anim d1">5 <span class="gold">Personas</span> Profundas</h2>
+            <p class="subtitle anim d2">Cada persona foi mapeada em 30 dimensoes. Toda comunicacao, produto e funil e adaptado ao perfil.</p>
+            <div class="grid-5 anim d3" style="margin-top:32px">
+                <div class="card persona-card">
+                    <div class="persona-avatar">&#127758;</div>
+                    <div class="persona-name">Carolina</div>
+                    <div class="persona-desc">28-40 anos, exploradora aspiracional</div>
+                    <div class="persona-ticket">R$67 — R$797</div>
+                    <div style="font-size:10px;color:var(--dim);margin-top:4px">R$8-15k/mes</div>
+                </div>
+                <div class="card persona-card">
+                    <div class="persona-avatar">&#127942;</div>
+                    <div class="persona-name">Roberto</div>
+                    <div class="persona-desc">35-55 anos, colecionador de experiencias</div>
+                    <div class="persona-ticket">R$3.997 — R$15.000+</div>
+                    <div style="font-size:10px;color:var(--dim);margin-top:4px">R$15-40k/mes</div>
+                </div>
+                <div class="card persona-card">
+                    <div class="persona-avatar">&#10084;&#65039;</div>
+                    <div class="persona-name">Silvia & Marcos</div>
+                    <div class="persona-desc">40-60 anos, casal reconectando</div>
+                    <div class="persona-ticket">R$67 — R$6.997</div>
+                    <div style="font-size:10px;color:var(--dim);margin-top:4px">R$12-25k/mes</div>
+                </div>
+                <div class="card persona-card">
+                    <div class="persona-avatar">&#128101;</div>
+                    <div class="persona-name">O Squad</div>
+                    <div class="persona-desc">Multi-perfil, grupo de amigos</div>
+                    <div class="persona-ticket">R$797 — R$5.997/pp</div>
+                    <div style="font-size:10px;color:var(--dim);margin-top:4px">Variavel</div>
+                </div>
+                <div class="card persona-card">
+                    <div class="persona-avatar">&#128150;</div>
+                    <div class="persona-name">Lucas & Bia</div>
+                    <div class="persona-desc">25-38 anos, casal jovem</div>
+                    <div class="persona-ticket">R$97 — R$1.997</div>
+                    <div style="font-size:10px;color:var(--dim);margin-top:4px">R$5-12k/mes</div>
+                </div>
+            </div>
+            <div class="card card-gold anim d4" style="margin-top:20px;text-align:center;padding:16px">
+                <p style="font-size:13px;color:var(--muted)">Classe <strong style="color:var(--gold)">A/B</strong> | Investem em saude e experiencia | Valorizam curadoria sobre preco</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 6: ESCADA DE PRODUTOS ==================== -->
+    <div class="slide" data-slide="5">
+        <div class="slide-inner center">
+            <span class="label anim">Escada de Produtos</span>
+            <h2 class="anim d1">5 Niveis de <span class="gold">Valor</span></h2>
+            <p class="subtitle anim d2" style="text-align:center;margin-bottom:36px">Cada nivel constroi confianca para o proximo. Do conteudo gratuito ao concierge total.</p>
+            <div class="ladder anim d3">
+                <div class="ladder-step">
+                    <div class="level">L0</div>
+                    <div class="step-title">Conteudo Gratuito</div>
+                    <div class="step-price">R$0</div>
+                    <div class="step-desc">Quiz, Guia 7 Destinos, Kit Organizadora</div>
+                </div>
+                <div class="ladder-step">
+                    <div class="level">L1</div>
+                    <div class="step-title">Low Ticket</div>
+                    <div class="step-price">R$37 — R$197</div>
+                    <div class="step-desc">Roteiros PDF, Workshop, Rotta Surprise Mini</div>
+                </div>
+                <div class="ladder-step">
+                    <div class="level">L2</div>
+                    <div class="step-title">Mid Ticket</div>
+                    <div class="step-price">R$497 — R$1.997</div>
+                    <div class="step-desc">Roteiro Express, Escapada Romantica, Rotta Crew</div>
+                </div>
+                <div class="ladder-step">
+                    <div class="level">L3</div>
+                    <div class="step-title">High Ticket</div>
+                    <div class="step-price">R$2.997 — R$7.997</div>
+                    <div class="step-desc">Curadoria Completa com reservas, Crew International</div>
+                </div>
+                <div class="ladder-step">
+                    <div class="level">L4</div>
+                    <div class="step-title">Ultra Premium</div>
+                    <div class="step-price">R$8.000 — R$15.000+</div>
+                    <div class="step-desc">Travel Club Anual, Viagem Bespoke sob medida</div>
+                </div>
+            </div>
+            <div class="anim d4" style="margin-top:20px">
+                <span class="tag tag-gold">Margem: 70-85%</span>
+                <span class="tag tag-green" style="margin-left:8px">Produto digital + servico</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 7: MODELO DE RECEITA ==================== -->
+    <div class="slide" data-slide="6">
+        <div class="slide-inner">
+            <span class="label anim">Modelo de Receita</span>
+            <h2 class="anim d1">Projecao <span class="gold">Realista</span> — 12 Meses</h2>
+            <div class="grid-3 anim d2" style="margin-top:24px;margin-bottom:28px">
+                <div class="card" style="text-align:center;border-top:3px solid var(--dim)">
+                    <span class="tag tag-blue" style="margin-bottom:12px;display:inline-block">Conservador</span>
+                    <div class="stat-num">R$66.000</div>
+                    <div class="stat-label">Receita Ano 1</div>
+                    <p style="font-size:11px;color:var(--dim);margin-top:8px">~50 vendas/ano<br>Ticket medio R$1.300</p>
+                </div>
+                <div class="card card-gold" style="text-align:center;border-top:3px solid var(--gold)">
+                    <span class="tag tag-gold" style="margin-bottom:12px;display:inline-block">Moderado</span>
+                    <div class="stat-num">R$108.000</div>
+                    <div class="stat-label">Receita Ano 1</div>
+                    <p style="font-size:11px;color:var(--dim);margin-top:8px">~72 vendas/ano<br>Ticket medio R$1.500</p>
+                </div>
+                <div class="card" style="text-align:center;border-top:3px solid var(--green)">
+                    <span class="tag tag-green" style="margin-bottom:12px;display:inline-block">Otimista</span>
+                    <div class="stat-num">R$162.000</div>
+                    <div class="stat-label">Receita Ano 1</div>
+                    <p style="font-size:11px;color:var(--dim);margin-top:8px">~108 vendas/ano<br>Ticket medio R$1.500</p>
+                </div>
+            </div>
+            <div class="anim d3">
+                <p style="font-size:12px;color:var(--dim);margin-bottom:12px;text-transform:uppercase;letter-spacing:2px">Receita Mensal — Cenario Moderado</p>
+                <div class="bar-chart" id="revenueChart">
+                    <div class="bar-col"><div class="bar-value">R$0</div><div class="bar" style="height:2%;background:var(--layer)"></div><div class="bar-label">M1</div></div>
+                    <div class="bar-col"><div class="bar-value">R$0</div><div class="bar" style="height:2%;background:var(--layer)"></div><div class="bar-label">M2</div></div>
+                    <div class="bar-col"><div class="bar-value">R$1.5k</div><div class="bar" style="height:8%;background:var(--gold);opacity:.5"></div><div class="bar-label">M3</div></div>
+                    <div class="bar-col"><div class="bar-value">R$4.5k</div><div class="bar" style="height:15%;background:var(--gold);opacity:.6"></div><div class="bar-label">M4</div></div>
+                    <div class="bar-col"><div class="bar-value">R$6k</div><div class="bar" style="height:20%;background:var(--gold);opacity:.65"></div><div class="bar-label">M5</div></div>
+                    <div class="bar-col"><div class="bar-value">R$7.5k</div><div class="bar" style="height:25%;background:var(--gold);opacity:.7"></div><div class="bar-label">M6</div></div>
+                    <div class="bar-col"><div class="bar-value">R$10.5k</div><div class="bar" style="height:35%;background:var(--gold);opacity:.75"></div><div class="bar-label">M7</div></div>
+                    <div class="bar-col"><div class="bar-value">R$12k</div><div class="bar" style="height:40%;background:var(--gold);opacity:.8"></div><div class="bar-label">M8</div></div>
+                    <div class="bar-col"><div class="bar-value">R$13.5k</div><div class="bar" style="height:45%;background:var(--gold);opacity:.85"></div><div class="bar-label">M9</div></div>
+                    <div class="bar-col"><div class="bar-value">R$15k</div><div class="bar" style="height:50%;background:var(--gold);opacity:.9"></div><div class="bar-label">M10</div></div>
+                    <div class="bar-col"><div class="bar-value">R$18k</div><div class="bar" style="height:60%;background:var(--gold);opacity:.95"></div><div class="bar-label">M11</div></div>
+                    <div class="bar-col"><div class="bar-value">R$19.5k</div><div class="bar" style="height:65%;background:var(--gold)"></div><div class="bar-label">M12</div></div>
+                </div>
+            </div>
+            <div class="anim d4" style="margin-top:12px;display:flex;gap:20px;flex-wrap:wrap;font-size:11px;color:var(--dim)">
+                <span><strong style="color:var(--muted)">M1-3:</strong> Audiencia, 0-1 vendas/mes</span>
+                <span><strong style="color:var(--muted)">M4-6:</strong> 3-5 vendas/mes, ~R$1.500 ticket</span>
+                <span><strong style="color:var(--muted)">M7-12:</strong> 7-13 vendas/mes, mix L1-L3</span>
+                <span><strong style="color:var(--muted)">Custo:</strong> ~R$500/mes (dominio, tools, ads M3+)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 8: INFRAESTRUTURA ==================== -->
+    <div class="slide" data-slide="7">
+        <div class="slide-inner">
+            <span class="label anim">Infraestrutura Digital</span>
+            <h2 class="anim d1">Stack <span class="gold">Tecnologico</span></h2>
+            <p class="subtitle anim d2">Tudo ja configurado. Custo operacional proximo de zero nos planos gratuitos.</p>
+            <div class="grid-3 anim d3" style="margin-top:28px">
+                <div class="card" style="text-align:center;padding:24px 16px">
+                    <div style="font-size:28px;margin-bottom:8px">&#127760;</div>
+                    <h3 style="font-size:14px;margin-bottom:6px">Hospedagem</h3>
+                    <p style="font-size:12px;color:var(--muted)">Vercel (Hobby) + Cloudflare DNS<br><span style="color:var(--gold)">rottacuradoria.com.br</span></p>
+                </div>
+                <div class="card" style="text-align:center;padding:24px 16px">
+                    <div style="font-size:28px;margin-bottom:8px">&#128202;</div>
+                    <h3 style="font-size:14px;margin-bottom:6px">Captura de Leads</h3>
+                    <p style="font-size:12px;color:var(--muted)">Quiz HTML + Google Sheets<br>Apps Script automatico</p>
+                </div>
+                <div class="card" style="text-align:center;padding:24px 16px">
+                    <div style="font-size:28px;margin-bottom:8px">&#9889;</div>
+                    <h3 style="font-size:14px;margin-bottom:6px">Automacao</h3>
+                    <p style="font-size:12px;color:var(--muted)">Make.com (1.000 ops gratis)<br>Router 5 rotas por persona</p>
+                </div>
+                <div class="card" style="text-align:center;padding:24px 16px">
+                    <div style="font-size:28px;margin-bottom:8px">&#9993;</div>
+                    <h3 style="font-size:14px;margin-bottom:6px">Email Marketing</h3>
+                    <p style="font-size:12px;color:var(--muted)">Brevo (300 emails/dia gratis)<br>5 listas segmentadas</p>
+                </div>
+                <div class="card" style="text-align:center;padding:24px 16px">
+                    <div style="font-size:28px;margin-bottom:8px">&#128172;</div>
+                    <h3 style="font-size:14px;margin-bottom:6px">DM Automatica</h3>
+                    <p style="font-size:12px;color:var(--muted)">ManyChat Pro<br>7 keywords configuradas</p>
+                </div>
+                <div class="card" style="text-align:center;padding:24px 16px">
+                    <div style="font-size:28px;margin-bottom:8px">&#128241;</div>
+                    <h3 style="font-size:14px;margin-bottom:6px">Redes Sociais</h3>
+                    <p style="font-size:12px;color:var(--muted)">Instagram + YouTube + TikTok<br>@rotta.curadoria</p>
+                </div>
+            </div>
+            <div class="card card-gold anim d4" style="margin-top:16px;text-align:center;padding:14px">
+                <p style="font-size:13px">Fase 2 (500+ seguidores): Integracao <strong style="color:var(--gold)">Claude API</strong> para respostas inteligentes no ManyChat</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 9: FUNIL DE VENDAS ==================== -->
+    <div class="slide" data-slide="8">
+        <div class="slide-inner center">
+            <span class="label anim">Funil de Vendas</span>
+            <h2 class="anim d1">Da Descoberta a <span class="gold">Experiencia</span></h2>
+            <div class="anim d2" style="margin-top:32px">
+                <div class="funnel">
+                    <div class="funnel-step" style="width:100%;background:linear-gradient(135deg,#2A3A5B,#1A2A4B)">
+                        &#128241; Instagram / Google / Indicacao &rarr; <strong style="margin-left:6px">DESCOBERTA</strong>
+                    </div>
+                    <div style="color:var(--dim);font-size:18px">&#9660;</div>
+                    <div class="funnel-step" style="width:88%;background:linear-gradient(135deg,#2A3A4B,#1A2A3B)">
+                        &#127760; Site (rottacuradoria.com.br) &rarr; <strong style="margin-left:6px">INTERESSE</strong>
+                    </div>
+                    <div style="color:var(--dim);font-size:18px">&#9660;</div>
+                    <div class="funnel-step" style="width:76%;background:linear-gradient(135deg,#3A2A3B,#2A1A2B)">
+                        &#128203; Quiz "Qual Viagem Voce Merece?" &rarr; <strong style="margin-left:6px">CAPTURA</strong>
+                    </div>
+                    <div style="color:var(--dim);font-size:18px">&#9660;</div>
+                    <div class="funnel-step" style="width:64%;background:linear-gradient(135deg,#3A3A2B,#2A2A1B)">
+                        &#9993; 25 Emails Personalizados (5/persona) &rarr; <strong style="margin-left:6px">NUTRICAO</strong>
+                    </div>
+                    <div style="color:var(--dim);font-size:18px">&#9660;</div>
+                    <div class="funnel-step" style="width:52%;background:linear-gradient(135deg,#2A3B2A,#1A2B1A)">
+                        &#128172; WhatsApp / ManyChat &rarr; <strong style="margin-left:6px">QUALIFICACAO</strong>
+                    </div>
+                    <div style="color:var(--dim);font-size:18px">&#9660;</div>
+                    <div class="funnel-step" style="width:40%;background:linear-gradient(135deg,#3A2E1A,#2A1E0A);border:1px solid var(--gold)">
+                        &#10024; Curadoria Personalizada &rarr; <strong style="color:var(--gold);margin-left:6px">VENDA</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-3 anim d3" style="margin-top:28px;max-width:700px">
+                <div class="stat-box">
+                    <div class="stat-num">7</div>
+                    <div class="stat-label">Fluxos ManyChat</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">25</div>
+                    <div class="stat-label">Emails de Nutricao</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">5</div>
+                    <div class="stat-label">Listas Segmentadas</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 10: CONTEUDO ==================== -->
+    <div class="slide" data-slide="9">
+        <div class="slide-inner">
+            <span class="label anim">Conteudo</span>
+            <h2 class="anim d1">Banco de <span class="gold">Conteudo</span> Pronto</h2>
+            <div class="grid-2 anim d2" style="margin-top:28px">
+                <div>
+                    <div class="card" style="margin-bottom:16px">
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                            <div class="stat-num" style="font-size:32px">20</div>
+                            <div>
+                                <h3 style="font-size:14px">Roteiros de Video</h3>
+                                <p style="font-size:12px;color:var(--dim)">Reels com Alexandra integrada</p>
+                            </div>
+                        </div>
+                        <div style="font-size:12px;color:var(--muted);line-height:1.8">
+                            &#8226; Veredito 7 Destinos (60-90s)<br>
+                            &#8226; Romantica Nao e Paris (45-60s)<br>
+                            &#8226; Pedir em Casamento na Viagem (60-75s)<br>
+                            &#8226; 5 Erros Europa (60-75s)<br>
+                            &#8226; Copa EUA 2026 (45-60s)<br>
+                            &#8226; + 15 roteiros adicionais
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="card" style="margin-bottom:16px">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                            <div>
+                                <h3 style="font-size:14px;margin-bottom:8px">Calendario 90 Dias</h3>
+                                <p style="font-size:12px;color:var(--muted)">Pre, durante e pos-Italia</p>
+                            </div>
+                            <span class="tag tag-gold">Abr-Jun 2026</span>
+                        </div>
+                        <div style="margin-top:12px;font-size:12px;color:var(--muted);line-height:1.8">
+                            <strong style="color:var(--text)">Fase 1 (Abril):</strong> 9 posts iniciais + 5 Reels<br>
+                            <strong style="color:var(--text)">Fase 2 (Maio):</strong> Italia ao vivo — Stories + Reels diarios<br>
+                            <strong style="color:var(--text)">Fase 3 (Junho):</strong> Pos-Italia, lancamento L1
+                        </div>
+                    </div>
+                    <div class="grid-2">
+                        <div class="card" style="text-align:center;padding:16px">
+                            <div class="stat-num" style="font-size:24px">3</div>
+                            <div class="stat-label">Carrosseis</div>
+                        </div>
+                        <div class="card" style="text-align:center;padding:16px">
+                            <div class="stat-num" style="font-size:24px">1</div>
+                            <div class="stat-label">Guia 7 Destinos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card anim d3" style="margin-top:16px;display:flex;align-items:center;gap:16px;padding:16px 24px">
+                <div style="font-size:24px">&#127470;&#127481;</div>
+                <div>
+                    <h3 style="font-size:14px;margin-bottom:4px">Viagem Italia — Maio 2026</h3>
+                    <p style="font-size:12px;color:var(--muted)">14 dias com a familia inteira. Content goldmine: Stories diarios, 1 Reel/dia, banco de imagens e videos reais para todo o ano.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 11: AUTOMACOES ==================== -->
+    <div class="slide" data-slide="10">
+        <div class="slide-inner">
+            <span class="label anim">Automacoes</span>
+            <h2 class="anim d1">Maquina de <span class="gold">Nutricao</span></h2>
+            <div class="grid-2 anim d2" style="margin-top:28px">
+                <div class="card">
+                    <h3 style="font-size:16px;margin-bottom:16px;color:var(--gold)">&#9889; Make.com &rarr; Brevo</h3>
+                    <div style="font-size:13px;color:var(--muted);line-height:2">
+                        1. Lead completa quiz no site<br>
+                        2. Google Sheets recebe dados<br>
+                        3. Make detecta novo lead<br>
+                        4. Router identifica persona (5 rotas)<br>
+                        5. Brevo adiciona na lista certa<br>
+                        6. Sequencia de 5 emails personalizados
+                    </div>
+                </div>
+                <div class="card">
+                    <h3 style="font-size:16px;margin-bottom:16px;color:var(--gold)">&#128172; ManyChat — 7 Fluxos</h3>
+                    <div style="font-size:13px;color:var(--muted);line-height:2">
+                        <strong style="color:var(--text)">EUROPA</strong> &rarr; Dica + link carrossel<br>
+                        <strong style="color:var(--text)">CHECKLIST</strong> &rarr; PDF mala de viagem<br>
+                        <strong style="color:var(--text)">CASAL</strong> &rarr; Roteiro romantico<br>
+                        <strong style="color:var(--text)">FAMILIA</strong> &rarr; Dicas com filhas<br>
+                        <strong style="color:var(--text)">JAPAO</strong> &rarr; Roteiro tematico<br>
+                        <strong style="color:var(--text)">PEDIDO</strong> &rarr; Surpresa romantica<br>
+                        <strong style="color:var(--text)">ITALIA</strong> &rarr; Roteiro Italia
+                    </div>
+                </div>
+            </div>
+            <div class="card card-gold anim d3" style="margin-top:16px;text-align:center;padding:16px">
+                <p style="font-size:14px"><strong style="color:var(--gold)">25 emails</strong> de nutricao prontos &mdash; 5 por persona, personalizados por tom de voz, dor e desejo de cada perfil</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 12: DIFERENCIAIS ==================== -->
+    <div class="slide" data-slide="11">
+        <div class="slide-inner">
+            <span class="label anim">Diferenciais Competitivos</span>
+            <h2 class="anim d1">Por Que a Rotta e <span class="gold">Diferente</span></h2>
+            <div class="grid-2 anim d2" style="margin-top:28px">
+                <div>
+                    <h3 style="font-size:13px;color:var(--dim);margin-bottom:16px;text-transform:uppercase;letter-spacing:2px">Somos</h3>
+                    <div class="card" style="margin-bottom:10px;border-left:3px solid var(--green)">
+                        <p style="font-size:13px;color:var(--muted)">Casal que viaja junto e divide o que aprendeu</p>
+                    </div>
+                    <div class="card" style="margin-bottom:10px;border-left:3px solid var(--green)">
+                        <p style="font-size:13px;color:var(--muted)">Curadores com vivencia real em cada destino</p>
+                    </div>
+                    <div class="card" style="margin-bottom:10px;border-left:3px solid var(--green)">
+                        <p style="font-size:13px;color:var(--muted)">Premium acessivel — valor, nao ostentacao</p>
+                    </div>
+                    <div class="card" style="margin-bottom:10px;border-left:3px solid var(--green)">
+                        <p style="font-size:13px;color:var(--muted)">Precisos e confiaveis — heranca medica</p>
+                    </div>
+                    <div class="card" style="border-left:3px solid var(--green)">
+                        <p style="font-size:13px;color:var(--muted)">Parceiros de experiencia — acompanhamos ate o fim</p>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-size:13px;color:var(--dim);margin-bottom:16px;text-transform:uppercase;letter-spacing:2px">Nao Somos</h3>
+                    <div class="card" style="margin-bottom:10px;border-left:3px solid var(--coral);opacity:.7">
+                        <p style="font-size:13px;color:var(--muted)">Influencers de viagem patrocinados</p>
+                    </div>
+                    <div class="card" style="margin-bottom:10px;border-left:3px solid var(--coral);opacity:.7">
+                        <p style="font-size:13px;color:var(--muted)">Agentes de turismo vendendo pacote</p>
+                    </div>
+                    <div class="card" style="margin-bottom:10px;border-left:3px solid var(--coral);opacity:.7">
+                        <p style="font-size:13px;color:var(--muted)">Elitistas que julgam quem viaja diferente</p>
+                    </div>
+                    <div class="card" style="margin-bottom:10px;border-left:3px solid var(--coral);opacity:.7">
+                        <p style="font-size:13px;color:var(--muted)">Genericos que copiam roteiro do Google</p>
+                    </div>
+                    <div class="card" style="border-left:3px solid var(--coral);opacity:.7">
+                        <p style="font-size:13px;color:var(--muted)">Vendedores que somem depois da venda</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 13: JORNADAS CURADAS ==================== -->
+    <div class="slide" data-slide="12">
+        <div class="slide-inner">
+            <span class="label anim">Jornadas Curadas</span>
+            <h2 class="anim d1">4 Roteiros <span class="gold">Prontos</span></h2>
+            <p class="subtitle anim d2">Paginas individuais no site com roteiro completo, dia a dia, orcamento e formulario de interesse.</p>
+            <div class="grid-4 anim d3" style="margin-top:28px">
+                <div class="card journey-card">
+                    <div style="font-size:28px;margin-bottom:8px">&#127879;</div>
+                    <div class="journey-dest">Mendoza</div>
+                    <div class="journey-detail">5 dias | Argentina</div>
+                    <div class="journey-detail">Vinhos, Andes, gastronomia</div>
+                    <div class="journey-price">R$4.370 <small style="font-size:11px;color:var(--dim)">/casal</small></div>
+                </div>
+                <div class="card journey-card">
+                    <div style="font-size:28px;margin-bottom:8px">&#9973;</div>
+                    <div class="journey-dest">Croacia</div>
+                    <div class="journey-detail">7 dias | Europa</div>
+                    <div class="journey-detail">Adriatico, Dubrovnik, ilhas</div>
+                    <div class="journey-price">R$9.400 <small style="font-size:11px;color:var(--dim)">/casal</small></div>
+                </div>
+                <div class="card journey-card">
+                    <div style="font-size:28px;margin-bottom:8px">&#127837;</div>
+                    <div class="journey-dest">Italia</div>
+                    <div class="journey-detail">14 dias | Europa</div>
+                    <div class="journey-detail">Dolomitas, Lago Garda, Roma</div>
+                    <div class="journey-price">R$10.400 <small style="font-size:11px;color:var(--dim)">/casal</small></div>
+                    <div style="margin-top:8px"><span class="tag tag-gold">Maio 2026</span></div>
+                </div>
+                <div class="card journey-card">
+                    <div style="font-size:28px;margin-bottom:8px">&#127963;</div>
+                    <div class="journey-dest">Russia</div>
+                    <div class="journey-detail">10 dias | Europa/Asia</div>
+                    <div class="journey-detail">Moscou, Petersburgo, Transiberiana</div>
+                    <div class="journey-price">R$7.700 <small style="font-size:11px;color:var(--dim)">/casal</small></div>
+                </div>
+            </div>
+            <div class="anim d4" style="margin-top:20px;text-align:center">
+                <p style="font-size:13px;color:var(--dim)">Cada jornada tem pagina propria no site com roteiro dia a dia, custos detalhados e formulario de interesse.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 14: O QUE JA FOI CONSTRUIDO ==================== -->
+    <div class="slide" data-slide="13">
+        <div class="slide-inner">
+            <span class="label anim">O Que Ja Construimos</span>
+            <h2 class="anim d1"><span class="gold">Tudo</span> Pronto Para Operar</h2>
+            <div class="grid-2 anim d2" style="margin-top:24px">
+                <div>
+                    <h3 style="font-size:13px;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:2px">Infraestrutura</h3>
+                    <div class="checklist-grid">
+                        <div class="check-item"><span class="icon">&#10003;</span> Dominio registrado</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> DNS Cloudflare</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Hospedagem Vercel</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> GitHub repo</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Instagram criado</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> YouTube criado</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> TikTok criado</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Gmail criado</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Logo no Canva</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> ManyChat Pro</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-size:13px;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:2px">Site — 16 Paginas HTML</h3>
+                    <div class="checklist-grid">
+                        <div class="check-item"><span class="icon">&#10003;</span> Landing page</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Links (Linktree)</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Quiz viajante</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Guia 7 destinos</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> 3 carrosseis</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Media kit</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> 4 jornadas curadas</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> 5 teleprompters</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Guia producao</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Emails Brevo</div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-2 anim d3" style="margin-top:16px">
+                <div>
+                    <h3 style="font-size:13px;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:2px">Conteudo</h3>
+                    <div class="checklist-grid">
+                        <div class="check-item"><span class="icon">&#10003;</span> 20 roteiros de video</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Calendario 90 dias</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> 3 carrosseis grid</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> 25 emails nutricao</div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="font-size:13px;color:var(--gold);margin-bottom:12px;text-transform:uppercase;letter-spacing:2px">Estrategia</h3>
+                    <div class="checklist-grid">
+                        <div class="check-item"><span class="icon">&#10003;</span> 5 personas (30 dim.)</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Voz da marca v2</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Escada 5 niveis</div>
+                        <div class="check-item"><span class="icon">&#10003;</span> Skill IA (40+ arqs)</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-gold anim d4" style="margin-top:16px;text-align:center;padding:14px">
+                <p style="font-size:14px"><strong style="color:var(--gold)">40+ arquivos</strong> de referencia na skill de IA &mdash; personas, conteudo, marca, funil, produtos, landing pages</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 15: O QUE FALTA ==================== -->
+    <div class="slide" data-slide="14">
+        <div class="slide-inner">
+            <span class="label anim">Proximos Passos</span>
+            <h2 class="anim d1">O Que <span class="gold">Falta</span></h2>
+            <div class="grid-2 anim d2" style="margin-top:28px">
+                <div>
+                    <h3 style="font-size:13px;color:var(--coral);margin-bottom:16px;text-transform:uppercase;letter-spacing:2px">Prioridade Alta</h3>
+                    <div class="check-item pending"><span class="icon">&#9679;</span> <div>Deploy completo do site na Vercel<br><span style="font-size:11px;color:var(--dim)">Push GitHub + verificar DNS</span></div></div>
+                    <div class="check-item pending"><span class="icon">&#9679;</span> <div>Gravar 5 Reels + 7 Stories com Alexandra<br><span style="font-size:11px;color:var(--dim)">Roteiros e teleprompters prontos</span></div></div>
+                    <div class="check-item pending"><span class="icon">&#9679;</span> <div>Publicar 9 posts iniciais do grid<br><span style="font-size:11px;color:var(--dim)">3 carrosseis + 6 posts</span></div></div>
+                    <div class="check-item pending"><span class="icon">&#9679;</span> <div>Ativar automacao Make &rarr; Brevo<br><span style="font-size:11px;color:var(--dim)">Router 5 rotas + listas + sequencias</span></div></div>
+                    <div class="check-item pending"><span class="icon">&#9679;</span> <div>Atualizar Guia 7 Destinos<br><span style="font-size:11px;color:var(--dim)">Croacia, Russia, EUA, Espanha</span></div></div>
+                </div>
+                <div>
+                    <h3 style="font-size:13px;color:var(--blue);margin-bottom:16px;text-transform:uppercase;letter-spacing:2px">Proximos Marcos</h3>
+                    <div class="check-item pending" style="color:var(--muted)"><span class="icon" style="color:var(--blue)">&#9679;</span> <div>Viagem Italia (Maio 2026)<br><span style="font-size:11px;color:var(--dim)">14 dias, banco de conteudo principal</span></div></div>
+                    <div class="check-item pending" style="color:var(--muted)"><span class="icon" style="color:var(--blue)">&#9679;</span> <div>Lancar Guia Italia gratuito (Junho)<br><span style="font-size:11px;color:var(--dim)">PDF premium 20-30 paginas, lead magnet</span></div></div>
+                    <div class="check-item pending" style="color:var(--muted)"><span class="icon" style="color:var(--blue)">&#9679;</span> <div>Primeiro produto pago L1 (Julho)<br><span style="font-size:11px;color:var(--dim)">Roteiro Italia R$67-147</span></div></div>
+                    <div class="check-item pending" style="color:var(--muted)"><span class="icon" style="color:var(--blue)">&#9679;</span> <div>500 seguidores &rarr; Claude API no ManyChat<br><span style="font-size:11px;color:var(--dim)">Respostas personalizadas por IA</span></div></div>
+                    <div class="check-item pending" style="color:var(--muted)"><span class="icon" style="color:var(--blue)">&#9679;</span> <div>Capas Highlights + Banner YouTube<br><span style="font-size:11px;color:var(--dim)">Identidade visual completa</span></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 16: PROJECAO 12 MESES ==================== -->
+    <div class="slide" data-slide="15">
+        <div class="slide-inner">
+            <span class="label anim">Projecao 12 Meses</span>
+            <h2 class="anim d1">Cronograma <span class="gold">Estrategico</span></h2>
+            <div class="grid-2 anim d2" style="margin-top:28px">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4 style="color:var(--gold)">Abril 2026 — Lancamento</h4>
+                        <p>Perfil publico, 9 posts iniciais, 5 Reels gravados, site no ar, automacoes ativas</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 style="color:var(--gold)">Maio 2026 — Italia ao Vivo</h4>
+                        <p>14 dias de conteudo diario. Stories, Reels, banco de imagens. Familia inteira.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 style="color:var(--gold)">Junho 2026 — Monetizacao</h4>
+                        <p>Guia Italia gratuito (lead magnet). Primeiras vendas L1. Serie "Licoes da Italia".</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 style="color:var(--gold)">Jul-Set 2026 — Escala L1-L2</h4>
+                        <p>Workshop, Surprise Mini, Roteiro Express. Trafego pago a partir de R$500/mes.</p>
+                    </div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4 style="color:var(--gold)">Out-Nov 2026 — Subir Ticket</h4>
+                        <p>Escapada Romantica, Rotta Crew Nacional. Primeiras curadorias L2 completas.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 style="color:var(--gold)">Jan 2027 — High Ticket</h4>
+                        <p>Curadoria Completa L3. Lista de espera. Lancamento com autoridade consolidada.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4 style="color:var(--gold)">Mar 2027+ — Ultra Premium</h4>
+                        <p>Travel Club Anual (30 membros max). Viagem Bespoke sob medida total.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-4 anim d3" style="margin-top:24px">
+                <div class="card" style="text-align:center;padding:16px">
+                    <div class="stat-num" style="font-size:20px">5-10k</div>
+                    <div class="stat-label">Seguidores Meta</div>
+                    <div style="font-size:10px;color:var(--dim)">Em 90 dias</div>
+                </div>
+                <div class="card" style="text-align:center;padding:16px">
+                    <div class="stat-num" style="font-size:20px">500+</div>
+                    <div class="stat-label">Leads via Quiz</div>
+                    <div style="font-size:10px;color:var(--dim)">Em 90 dias</div>
+                </div>
+                <div class="card" style="text-align:center;padding:16px">
+                    <div class="stat-num" style="font-size:20px">72+</div>
+                    <div class="stat-label">Vendas Ano 1</div>
+                    <div style="font-size:10px;color:var(--dim)">Cenario moderado</div>
+                </div>
+                <div class="card" style="text-align:center;padding:16px">
+                    <div class="stat-num" style="font-size:20px">R$108k</div>
+                    <div class="stat-label">Receita Ano 1</div>
+                    <div style="font-size:10px;color:var(--dim)">Cenario moderado</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 17: INVESTIMENTO ==================== -->
+    <div class="slide" data-slide="16">
+        <div class="slide-inner">
+            <span class="label anim">Investimento</span>
+            <h2 class="anim d1">Custos <span class="gold">Operacionais</span></h2>
+            <div class="grid-2 anim d2" style="margin-top:28px">
+                <div class="card">
+                    <h3 style="font-size:16px;margin-bottom:20px;color:var(--gold)">Custo Mensal</h3>
+                    <div class="cost-row"><span class="cost-name">Dominio (rottacuradoria.com.br)</span><span class="cost-val">R$7/mes*</span></div>
+                    <div class="cost-row"><span class="cost-name">Vercel (Hobby plan)</span><span class="cost-val">R$0</span></div>
+                    <div class="cost-row"><span class="cost-name">Cloudflare DNS</span><span class="cost-val">R$0</span></div>
+                    <div class="cost-row"><span class="cost-name">Google Sheets / Apps Script</span><span class="cost-val">R$0</span></div>
+                    <div class="cost-row"><span class="cost-name">Make.com (1.000 ops)</span><span class="cost-val">R$0</span></div>
+                    <div class="cost-row"><span class="cost-name">Brevo (300 emails/dia)</span><span class="cost-val">R$0</span></div>
+                    <div class="cost-row"><span class="cost-name">ManyChat Pro</span><span class="cost-val">R$75/mes</span></div>
+                    <div class="cost-row"><span class="cost-name">Trafego pago (a partir M3)</span><span class="cost-val">R$500/mes</span></div>
+                    <div class="cost-row total"><span class="cost-name">Total Mensal (M3+)</span><span class="cost-val">~R$582/mes</span></div>
+                    <p style="font-size:10px;color:var(--dim);margin-top:8px">*R$80/ano rateado. M1-M2 sem trafego pago = ~R$82/mes</p>
+                </div>
+                <div>
+                    <div class="card" style="margin-bottom:16px;text-align:center;padding:24px">
+                        <h3 style="font-size:14px;margin-bottom:12px">Custo Total Ano 1</h3>
+                        <div class="stat-num">~R$6.000</div>
+                        <p style="font-size:12px;color:var(--dim);margin-top:8px">R$82 x 2 meses + R$582 x 10 meses</p>
+                    </div>
+                    <div class="card" style="margin-bottom:16px;text-align:center;padding:24px">
+                        <h3 style="font-size:14px;margin-bottom:12px">ROI Cenario Moderado</h3>
+                        <div class="stat-num" style="color:var(--green)">18x</div>
+                        <p style="font-size:12px;color:var(--dim);margin-top:8px">R$108.000 receita / R$6.000 custo</p>
+                    </div>
+                    <div class="card" style="text-align:center;padding:24px">
+                        <h3 style="font-size:14px;margin-bottom:12px">Margem Liquida</h3>
+                        <div class="stat-num" style="color:var(--green)">70-85%</div>
+                        <p style="font-size:12px;color:var(--dim);margin-top:8px">Produto digital + servico. Sem estoque.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== SLIDE 18: CONTATO ==================== -->
+    <div class="slide" data-slide="17">
+        <div class="slide-inner center">
+            <span class="label anim" style="letter-spacing:4px;margin-bottom:16px">Vamos Conversar</span>
+            <div class="anim d1" style="margin-bottom:16px">
+                <svg width="64" height="64" viewBox="0 0 80 80" fill="none">
+                    <circle cx="40" cy="40" r="38" stroke="#C5A572" stroke-width="1.5" opacity=".4"/>
+                    <circle cx="40" cy="40" r="28" stroke="#C5A572" stroke-width="1"/>
+                    <path d="M40 12 L43 38 L40 42 L37 38 Z" fill="#C5A572" opacity=".8"/>
+                    <path d="M40 68 L37 42 L40 38 L43 42 Z" fill="#C5A572" opacity=".4"/>
+                    <path d="M12 40 L38 37 L42 40 L38 43 Z" fill="#C5A572" opacity=".6"/>
+                    <path d="M68 40 L42 43 L38 40 L42 37 Z" fill="#C5A572" opacity=".3"/>
+                    <text x="40" y="45" text-anchor="middle" font-family="Playfair Display,serif" font-size="16" font-weight="700" fill="#C5A572">R</text>
+                </svg>
+            </div>
+            <h2 class="anim d2" style="font-size:clamp(32px,4vw,48px)">Rotta <span class="gold italic">Curadoria</span></h2>
+            <p class="anim d3" style="font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:16px;margin:16px 0 40px">"A gente seleciona, voce aproveita."</p>
+
+            <div style="display:flex;flex-direction:column;gap:16px;max-width:420px;width:100%">
+                <a class="contact-link anim d3" href="https://instagram.com/rotta.curadoria" target="_blank">
+                    <div class="contact-icon">&#128247;</div>
+                    <div>
+                        <div style="font-weight:600">@rotta.curadoria</div>
+                        <div style="font-size:12px;color:var(--dim)">Instagram</div>
+                    </div>
+                </a>
+                <a class="contact-link anim d4" href="https://wa.me/5511968152123" target="_blank">
+                    <div class="contact-icon">&#128172;</div>
+                    <div>
+                        <div style="font-weight:600">(11) 96815-2123</div>
+                        <div style="font-size:12px;color:var(--dim)">WhatsApp</div>
+                    </div>
+                </a>
+                <a class="contact-link anim d5" href="https://rottacuradoria.com.br" target="_blank">
+                    <div class="contact-icon">&#127760;</div>
+                    <div>
+                        <div style="font-weight:600">rottacuradoria.com.br</div>
+                        <div style="font-size:12px;color:var(--dim)">Site</div>
+                    </div>
+                </a>
+                <a class="contact-link anim d6" href="mailto:rottacuradoria@gmail.com">
+                    <div class="contact-icon">&#9993;</div>
+                    <div>
+                        <div style="font-weight:600">rottacuradoria@gmail.com</div>
+                        <div style="font-size:12px;color:var(--dim)">Email</div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="anim d7" style="margin-top:40px">
+                <p style="font-size:13px;color:var(--dim)">Dr. Marcelo Brito & Alexandra Dagostin</p>
+                <p style="font-size:12px;color:var(--dim);margin-top:4px">Campo Mourao, PR | 2026</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<button class="nav-arrow nav-prev" onclick="prevSlide()" aria-label="Slide anterior">&#8592;</button>
+<button class="nav-arrow nav-next" onclick="nextSlide()" aria-label="Proximo slide">&#8594;</button>
+
+<!-- Progress bar -->
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Slide counter -->
+<div class="slide-counter" id="slideCounter">1 / 18</div>
+
+<!-- Keyboard hint -->
+<div class="keyboard-hint"><kbd>&#8592;</kbd> <kbd>&#8594;</kbd> para navegar</div>
+
+<script>
+(function(){
+    var slides = document.querySelectorAll('.slide');
+    var total = slides.length;
+    var current = 0;
+    var isTransitioning = false;
+
+    var progressBar = document.getElementById('progressBar');
+    var slideCounter = document.getElementById('slideCounter');
+
+    function updateUI(){
+        progressBar.style.width = ((current + 1) / total * 100) + '%';
+        slideCounter.textContent = (current + 1) + ' / ' + total;
+    }
+
+    function goToSlide(n){
+        if(isTransitioning || n === current || n < 0 || n >= total) return;
+        isTransitioning = true;
+
+        var prev = slides[current];
+        var next = slides[n];
+        var direction = n > current ? 1 : -1;
+
+        // Remove active
+        prev.classList.remove('active');
+        prev.style.transform = 'translateX(' + (direction > 0 ? -60 : 60) + 'px)';
+        prev.style.opacity = '0';
+
+        // Prepare next slide
+        next.style.transition = 'none';
+        next.style.transform = 'translateX(' + (direction > 0 ? 60 : -60) + 'px)';
+        next.style.opacity = '0';
+
+        // Force reflow
+        void next.offsetHeight;
+
+        // Animate in
+        next.style.transition = 'opacity .5s ease, transform .5s ease';
+        next.classList.add('active');
+        next.style.transform = 'translateX(0)';
+        next.style.opacity = '1';
+
+        current = n;
+        updateUI();
+
+        setTimeout(function(){
+            isTransitioning = false;
+            prev.style.transform = '';
+            prev.style.opacity = '';
+            prev.style.transition = '';
+        }, 550);
+    }
+
+    window.nextSlide = function(){ goToSlide(current + 1); };
+    window.prevSlide = function(){ goToSlide(current - 1); };
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e){
+        if(e.key === 'ArrowRight' || e.key === ' '){
+            e.preventDefault();
+            window.nextSlide();
+        } else if(e.key === 'ArrowLeft'){
+            e.preventDefault();
+            window.prevSlide();
+        } else if(e.key === 'Home'){
+            e.preventDefault();
+            goToSlide(0);
+        } else if(e.key === 'End'){
+            e.preventDefault();
+            goToSlide(total - 1);
+        }
+    });
+
+    // Touch support for mobile
+    var touchStartX = 0;
+    document.addEventListener('touchstart', function(e){ touchStartX = e.changedTouches[0].screenX; }, {passive:true});
+    document.addEventListener('touchend', function(e){
+        var diff = touchStartX - e.changedTouches[0].screenX;
+        if(Math.abs(diff) > 50){
+            if(diff > 0) window.nextSlide();
+            else window.prevSlide();
+        }
+    }, {passive:true});
+
+    // Initialize
+    updateUI();
+})();
+</script>
+
+</body>
+</html>

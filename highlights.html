@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotta Curadoria — Highlights Instagram</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0E0E0E;
+  --card: #1A1A1A;
+  --gold: #C5A572;
+  --gold-light: #D4BB8A;
+  --text: #F2EDE8;
+  --muted: #999;
+  --card-w: 360px;
+  --card-h: 640px;
+  --ratio: 0.5625;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+body.export-mode {
+  --card-w: 1080px;
+  --card-h: 1920px;
+}
+
+/* Header */
+.page-header {
+  padding: 24px 32px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.page-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.mode-toggle button {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid #333;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  transition: all .2s;
+}
+
+.mode-toggle button.active,
+.mode-toggle button:hover {
+  background: var(--gold);
+  color: var(--bg);
+  border-color: var(--gold);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  padding: 20px 32px 0;
+  flex-wrap: wrap;
+}
+
+.tab {
+  background: var(--card);
+  color: var(--muted);
+  border: 1px solid #2a2a2a;
+  padding: 10px 20px;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all .2s;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.tab:hover { color: var(--text); border-color: #444; }
+
+.tab.active {
+  background: var(--gold);
+  color: var(--bg);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+
+/* Content */
+.highlights-container {
+  padding: 24px 32px 48px;
+}
+
+.highlight-section {
+  display: none;
+}
+
+.highlight-section.active {
+  display: block;
+}
+
+.stories-strip {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  scroll-behavior: smooth;
+}
+
+body.export-mode .stories-strip {
+  flex-direction: column;
+  align-items: center;
+  overflow-x: visible;
+  gap: 48px;
+}
+
+.stories-strip::-webkit-scrollbar { height: 6px; }
+.stories-strip::-webkit-scrollbar-track { background: #111; border-radius: 3px; }
+.stories-strip::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* Story Card */
+.story-card {
+  flex-shrink: 0;
+  width: var(--card-w);
+  height: var(--card-h);
+  background: var(--card);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.story-card .slide-num {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: calc(var(--card-w) * 0.033);
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 1px;
+  z-index: 5;
+}
+
+.story-card .top-line {
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.story-card .bottom-grad {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 30%;
+  background: linear-gradient(to top, rgba(197,165,114,0.08), transparent);
+  pointer-events: none;
+}
+
+.story-card .side-accent {
+  position: absolute;
+  left: 0; top: 20%; bottom: 20%;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+}
+
+/* Typography inside cards */
+.story-card .heading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
+}
+
+.story-card .subheading {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.story-card .body-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.story-card .muted-text {
+  color: var(--muted);
+  font-size: calc(var(--card-w) * 0.036);
+}
+
+.story-card .gold-text {
+  color: var(--gold);
+}
+
+.story-card .gold-btn {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--bg);
+  padding: calc(var(--card-w)*0.04) calc(var(--card-w)*0.1);
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: calc(var(--card-w)*0.044);
+  letter-spacing: 0.5px;
+}
+
+.story-card .gold-btn-outline {
+  display: inline-block;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  padding: calc(var(--card-w)*0.025) calc(var(--card-w)*0.06);
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: calc(var(--card-w)*0.036);
+}
+
+/* SVG icons */
+.icon-svg {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Cover specific */
+.story-card.cover .heading {
+  font-size: calc(var(--card-w) * 0.1);
+}
+
+.story-card.cover .icon-svg {
+  width: calc(var(--card-w) * 0.22);
+  height: calc(var(--card-w) * 0.22);
+  margin-bottom: calc(var(--card-w) * 0.06);
+}
+
+.story-card:not(.cover) .heading {
+  font-size: calc(var(--card-w) * 0.072);
+}
+
+.story-card .content-wrap {
+  padding: calc(var(--card-w)*0.08);
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--card-w)*0.04);
+}
+
+.story-card.cover .content-wrap {
+  gap: calc(var(--card-w)*0.03);
+}
+
+.story-card .swipe-up {
+  position: absolute;
+  bottom: calc(var(--card-w)*0.08);
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--muted);
+  font-size: calc(var(--card-w)*0.033);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  z-index: 5;
+}
+
+/* Mini cards grid */
+.mini-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--card-w)*0.025);
+  width: 100%;
+}
+
+.mini-card {
+  background: rgba(197,165,114,0.08);
+  border: 1px solid rgba(197,165,114,0.2);
+  border-radius: 8px;
+  padding: calc(var(--card-w)*0.03);
+  text-align: center;
+}
+
+.mini-card .mini-icon {
+  width: calc(var(--card-w)*0.07);
+  height: calc(var(--card-w)*0.07);
+  margin: 0 auto calc(var(--card-w)*0.015);
+}
+
+.mini-card .mini-label {
+  font-size: calc(var(--card-w)*0.028);
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.mini-cards .mini-card:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+/* Checklist */
+.checklist {
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--card-w)*0.025);
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--card-w)*0.03);
+  font-size: calc(var(--card-w)*0.04);
+  color: var(--text);
+}
+
+.checklist-item .ck {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: calc(var(--card-w)*0.05);
+  flex-shrink: 0;
+}
+
+/* Destination cards */
+.dest-card {
+  background: rgba(197,165,114,0.06);
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  padding: calc(var(--card-w)*0.05);
+  width: 100%;
+  text-align: left;
+}
+
+.dest-card .dest-name {
+  font-family: 'Playfair Display', serif;
+  font-size: calc(var(--card-w)*0.06);
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: calc(var(--card-w)*0.015);
+  letter-spacing: 2px;
+}
+
+.dest-card .dest-details {
+  font-size: calc(var(--card-w)*0.034);
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: calc(var(--card-w)*0.02);
+}
+
+.dest-card .dest-price {
+  font-size: calc(var(--card-w)*0.036);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.dest-card .dest-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--bg);
+  font-size: calc(var(--card-w)*0.028);
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 4px;
+  margin-bottom: calc(var(--card-w)*0.015);
+  letter-spacing: 1px;
+}
+
+/* Enquete options */
+.enquete-options {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--card-w)*0.025);
+}
+
+.enquete-opt {
+  background: rgba(197,165,114,0.08);
+  border: 1px solid rgba(197,165,114,0.3);
+  border-radius: 10px;
+  padding: calc(var(--card-w)*0.035) calc(var(--card-w)*0.05);
+  font-size: calc(var(--card-w)*0.04);
+  color: var(--text);
+  font-weight: 500;
+  text-align: left;
+}
+
+/* Bullet list */
+.bullet-list {
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--card-w)*0.03);
+}
+
+.bullet-item {
+  display: flex;
+  align-items: baseline;
+  gap: calc(var(--card-w)*0.025);
+  font-size: calc(var(--card-w)*0.044);
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.bullet-item .dot {
+  color: var(--gold);
+  font-size: calc(var(--card-w)*0.05);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Dica card layout */
+.dica-icon {
+  width: calc(var(--card-w)*0.15);
+  height: calc(var(--card-w)*0.15);
+  margin-bottom: calc(var(--card-w)*0.02);
+}
+
+.dica-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: calc(var(--card-w)*0.038);
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: calc(var(--card-w)*0.01);
+}
+
+/* Quote */
+.big-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: calc(var(--card-w)*0.25);
+  color: var(--gold);
+  line-height: 0.5;
+  margin-bottom: calc(var(--card-w)*0.04);
+}
+
+/* Print */
+@media print {
+  body { background: #fff !important; }
+  .page-header, .tabs, .mode-toggle { display: none !important; }
+  .story-card { break-inside: avoid; page-break-inside: avoid; margin: 0 auto; }
+  .stories-strip { flex-direction: column; align-items: center; gap: 20px; overflow: visible; }
+  .highlight-section { display: block !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Rotta Curadoria — Highlights</h1>
+  <div class="mode-toggle">
+    <button class="active" onclick="setMode('preview')">Preview</button>
+    <button onclick="setMode('export')">Export 1080x1920</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="quiz">Quiz</div>
+  <div class="tab" data-tab="europa">Europa</div>
+  <div class="tab" data-tab="casal">Casal</div>
+  <div class="tab" data-tab="jornadas">Jornadas</div>
+  <div class="tab" data-tab="dicas">Dicas</div>
+  <div class="tab" data-tab="sobre">Sobre N&oacute;s</div>
+</div>
+
+<div class="highlights-container">
+
+<!-- ==================== QUIZ ==================== -->
+<div class="highlight-section active" id="hl-quiz">
+<div class="stories-strip">
+
+  <!-- Quiz 1: Cover -->
+  <div class="story-card cover">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">1/6</div>
+    <div class="content-wrap">
+      <svg class="icon-svg" width="80" height="80" viewBox="0 0 80 80" fill="none" style="width:calc(var(--card-w)*0.22);height:calc(var(--card-w)*0.22)">
+        <circle cx="40" cy="40" r="36" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <circle cx="40" cy="40" r="3" fill="#C5A572"/>
+        <line x1="40" y1="40" x2="40" y2="12" stroke="#C5A572" stroke-width="2" stroke-linecap="round"/>
+        <line x1="40" y1="40" x2="58" y2="28" stroke="#C5A572" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="40" y1="4" x2="40" y2="10" stroke="#C5A572" stroke-width="1.5"/>
+        <line x1="40" y1="70" x2="40" y2="76" stroke="#C5A572" stroke-width="1.5"/>
+        <line x1="4" y1="40" x2="10" y2="40" stroke="#C5A572" stroke-width="1.5"/>
+        <line x1="70" y1="40" x2="76" y2="40" stroke="#C5A572" stroke-width="1.5"/>
+        <text x="40" y="9" text-anchor="middle" fill="#C5A572" font-size="7" font-family="Inter">N</text>
+        <text x="40" y="79" text-anchor="middle" fill="#C5A572" font-size="7" font-family="Inter">S</text>
+        <text x="78" y="43" text-anchor="middle" fill="#C5A572" font-size="7" font-family="Inter">L</text>
+        <text x="3" y="43" text-anchor="middle" fill="#C5A572" font-size="7" font-family="Inter">O</text>
+      </svg>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.09)">Descubra seu<br>perfil de<br>viajante</div>
+      <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:calc(var(--card-w)*0.02) 0"></div>
+      <div class="muted-text" style="font-size:calc(var(--card-w)*0.03);letter-spacing:2px;text-transform:uppercase">Rotta Curadoria</div>
+    </div>
+    <div class="swipe-up">Arraste pra cima &uarr;</div>
+  </div>
+
+  <!-- Quiz 2 -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">2/6</div>
+    <div class="content-wrap">
+      <div style="width:60px;height:2px;background:var(--gold);margin-bottom:calc(var(--card-w)*0.02)"></div>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.072)">Voc&ecirc; sabe<br>que tipo de<br>viajante<br>voc&ecirc; &eacute;?</div>
+      <div style="width:60px;height:2px;background:var(--gold);margin-top:calc(var(--card-w)*0.02)"></div>
+    </div>
+  </div>
+
+  <!-- Quiz 3 -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">3/6</div>
+    <div class="content-wrap">
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.042);color:var(--muted);margin-bottom:calc(var(--card-w)*0.03)">Cada pessoa viaja por um motivo diferente:</div>
+      <div class="bullet-list">
+        <div class="bullet-item"><span class="dot">&bull;</span><span style="font-family:'Playfair Display',serif;font-size:calc(var(--card-w)*0.055)">Reconex&atilde;o</span></div>
+        <div class="bullet-item"><span class="dot">&bull;</span><span style="font-family:'Playfair Display',serif;font-size:calc(var(--card-w)*0.055)">Aventura</span></div>
+        <div class="bullet-item"><span class="dot">&bull;</span><span style="font-family:'Playfair Display',serif;font-size:calc(var(--card-w)*0.055)">Descanso</span></div>
+        <div class="bullet-item"><span class="dot">&bull;</span><span style="font-family:'Playfair Display',serif;font-size:calc(var(--card-w)*0.055)">Cultura</span></div>
+        <div class="bullet-item"><span class="dot">&bull;</span><span style="font-family:'Playfair Display',serif;font-size:calc(var(--card-w)*0.055)">Liberdade</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz 4 -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">4/6</div>
+    <div class="content-wrap" style="gap:calc(var(--card-w)*0.025)">
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.038);color:var(--muted);margin-bottom:calc(var(--card-w)*0.01)">Seu perfil pode ser:</div>
+      <div class="mini-cards">
+        <div class="mini-card">
+          <svg class="mini-icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="16" stroke="#C5A572" stroke-width="1"/><path d="M20 8l3 8h8l-6 5 2 8-7-5-7 5 2-8-6-5h8z" fill="#C5A572" opacity="0.3"/></svg>
+          <div class="mini-label">Exploradora<br>Aspiracional</div>
+        </div>
+        <div class="mini-card">
+          <svg class="mini-icon" viewBox="0 0 40 40" fill="none"><rect x="8" y="12" width="24" height="18" rx="3" stroke="#C5A572" stroke-width="1"/><circle cx="20" cy="21" r="5" stroke="#C5A572" stroke-width="1"/><line x1="20" y1="8" x2="20" y2="12" stroke="#C5A572" stroke-width="1"/></svg>
+          <div class="mini-label">Colecionador de<br>Experi&ecirc;ncias</div>
+        </div>
+        <div class="mini-card">
+          <svg class="mini-icon" viewBox="0 0 40 40" fill="none"><path d="M20 12c-4-6-12-2-12 5 0 8 12 15 12 15s12-7 12-15c0-7-8-11-12-5z" stroke="#C5A572" stroke-width="1" fill="rgba(197,165,114,0.15)"/></svg>
+          <div class="mini-label">Casal<br>Reconectando</div>
+        </div>
+        <div class="mini-card">
+          <svg class="mini-icon" viewBox="0 0 40 40" fill="none"><circle cx="14" cy="16" r="4" stroke="#C5A572" stroke-width="1"/><circle cx="26" cy="16" r="4" stroke="#C5A572" stroke-width="1"/><path d="M8 30c0-5 5-8 12-8s12 3 12 8" stroke="#C5A572" stroke-width="1" fill="none"/></svg>
+          <div class="mini-label">Squad<br>Aventureiro</div>
+        </div>
+        <div class="mini-card">
+          <svg class="mini-icon" viewBox="0 0 40 40" fill="none"><path d="M10 30l10-20 10 20" stroke="#C5A572" stroke-width="1" fill="none"/><line x1="14" y1="24" x2="26" y2="24" stroke="#C5A572" stroke-width="1"/></svg>
+          <div class="mini-label">Jovens Destemidos</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz 5 -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">5/6</div>
+    <div class="content-wrap">
+      <div class="heading" style="font-size:calc(var(--card-w)*0.065);line-height:1.4">S&atilde;o <span class="gold-text">7 perguntas</span>.</div>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.065);line-height:1.4">Menos de <span class="gold-text">2 minutos</span>.</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.02) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.042);line-height:1.6">E voc&ecirc; descobre qual viagem &eacute; perfeita pra voc&ecirc;.</div>
+    </div>
+  </div>
+
+  <!-- Quiz 6: CTA -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">6/6</div>
+    <div class="content-wrap">
+      <svg class="icon-svg" width="48" height="48" viewBox="0 0 48 48" fill="none" style="width:calc(var(--card-w)*0.13);height:calc(var(--card-w)*0.13)">
+        <circle cx="24" cy="24" r="20" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <path d="M24 14v12M18 20l6-6 6 6" stroke="#C5A572" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="gold-btn" style="font-size:calc(var(--card-w)*0.05)">Fa&ccedil;a o quiz agora</div>
+      <div style="margin-top:calc(var(--card-w)*0.04)">
+        <div class="muted-text" style="font-size:calc(var(--card-w)*0.036)">Link na bio</div>
+        <div class="gold-text" style="font-size:calc(var(--card-w)*0.06);margin-top:4px">&uarr;</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== EUROPA ==================== -->
+<div class="highlight-section" id="hl-europa">
+<div class="stories-strip">
+
+  <!-- Europa 1: Cover -->
+  <div class="story-card cover">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">1/6</div>
+    <div class="content-wrap">
+      <svg class="icon-svg" width="80" height="80" viewBox="0 0 80 80" fill="none" style="width:calc(var(--card-w)*0.22);height:calc(var(--card-w)*0.22)">
+        <!-- European architecture silhouette -->
+        <line x1="10" y1="65" x2="70" y2="65" stroke="#C5A572" stroke-width="1"/>
+        <rect x="14" y="35" width="12" height="30" stroke="#C5A572" stroke-width="1" fill="none"/>
+        <rect x="17" y="40" width="3" height="5" stroke="#C5A572" stroke-width="0.5" fill="none"/>
+        <rect x="22" y="40" width="3" height="5" stroke="#C5A572" stroke-width="0.5" fill="none"/>
+        <rect x="17" y="50" width="3" height="5" stroke="#C5A572" stroke-width="0.5" fill="none"/>
+        <rect x="22" y="50" width="3" height="5" stroke="#C5A572" stroke-width="0.5" fill="none"/>
+        <polygon points="14,35 20,22 26,35" stroke="#C5A572" stroke-width="1" fill="none"/>
+        <line x1="20" y1="22" x2="20" y2="18" stroke="#C5A572" stroke-width="1"/>
+        <rect x="34" y="42" width="16" height="23" stroke="#C5A572" stroke-width="1" fill="none"/>
+        <path d="M34 42 Q42 30 50 42" stroke="#C5A572" stroke-width="1" fill="none"/>
+        <rect x="38" y="48" width="3" height="4" stroke="#C5A572" stroke-width="0.5" fill="none"/>
+        <rect x="45" y="48" width="3" height="4" stroke="#C5A572" stroke-width="0.5" fill="none"/>
+        <rect x="40" y="56" width="6" height="9" stroke="#C5A572" stroke-width="0.5" fill="none"/>
+        <rect x="56" y="38" width="10" height="27" stroke="#C5A572" stroke-width="1" fill="none"/>
+        <polygon points="56,38 61,28 66,38" stroke="#C5A572" stroke-width="1" fill="none"/>
+        <rect x="59" y="43" width="3" height="4" stroke="#C5A572" stroke-width="0.5" fill="none"/>
+        <rect x="59" y="52" width="3" height="4" stroke="#C5A572" stroke-width="0.5" fill="none"/>
+      </svg>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.1)">Europa<br>sem<br>perrengue</div>
+      <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+      <div class="muted-text" style="font-size:calc(var(--card-w)*0.03);letter-spacing:2px;text-transform:uppercase">Rotta Curadoria</div>
+    </div>
+  </div>
+
+  <!-- Europa 2 -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">2/6</div>
+    <div class="content-wrap">
+      <svg class="dica-icon" viewBox="0 0 60 60" fill="none" style="width:calc(var(--card-w)*0.15);height:calc(var(--card-w)*0.15)">
+        <path d="M30 10c-8 0-14 6-14 14 0 5 2 8 5 12h18c3-4 5-7 5-12 0-8-6-14-14-14z" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <circle cx="30" cy="24" r="3" fill="#C5A572"/>
+        <line x1="30" y1="27" x2="30" y2="50" stroke="#C5A572" stroke-width="1.5"/>
+        <line x1="24" y1="42" x2="36" y2="42" stroke="#C5A572" stroke-width="1"/>
+      </svg>
+      <div class="dica-title">Dica 01</div>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.055)">N&atilde;o reserve hotel<br>pela localiza&ccedil;&atilde;o<br>no mapa</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.015) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.04)">Reserve pela <span class="gold-text" style="font-weight:600">VIZINHAN&Ccedil;A</span>.<br>O bairro define sua experi&ecirc;ncia.</div>
+    </div>
+  </div>
+
+  <!-- Europa 3 -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">3/6</div>
+    <div class="content-wrap">
+      <svg class="dica-icon" viewBox="0 0 60 60" fill="none" style="width:calc(var(--card-w)*0.15);height:calc(var(--card-w)*0.15)">
+        <rect x="10" y="10" width="40" height="40" rx="4" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <line x1="10" y1="22" x2="50" y2="22" stroke="#C5A572" stroke-width="1"/>
+        <line x1="22" y1="10" x2="22" y2="50" stroke="#C5A572" stroke-width="0.5" opacity="0.3"/>
+        <line x1="34" y1="10" x2="34" y2="50" stroke="#C5A572" stroke-width="0.5" opacity="0.3"/>
+        <line x1="10" y1="32" x2="50" y2="32" stroke="#C5A572" stroke-width="0.5" opacity="0.3"/>
+        <line x1="10" y1="42" x2="50" y2="42" stroke="#C5A572" stroke-width="0.5" opacity="0.3"/>
+        <circle cx="30" cy="37" r="6" stroke="#C5A572" stroke-width="1.5" fill="rgba(197,165,114,0.15)"/>
+      </svg>
+      <div class="dica-title">Dica 02</div>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.06)">Setembro &eacute; o<br>m&ecirc;s de ouro</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.015) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.038)">Pre&ccedil;os de baixa temporada,<br>clima de alta.<br><br>Menos turistas,<br>mais autenticidade.</div>
+    </div>
+  </div>
+
+  <!-- Europa 4 -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">4/6</div>
+    <div class="content-wrap">
+      <svg class="dica-icon" viewBox="0 0 60 60" fill="none" style="width:calc(var(--card-w)*0.15);height:calc(var(--card-w)*0.15)">
+        <rect x="5" y="30" width="50" height="14" rx="7" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <circle cx="18" cy="37" r="5" stroke="#C5A572" stroke-width="1" fill="none"/>
+        <circle cx="42" cy="37" r="5" stroke="#C5A572" stroke-width="1" fill="none"/>
+        <rect x="12" y="24" width="36" height="6" rx="2" stroke="#C5A572" stroke-width="1" fill="none"/>
+        <line x1="20" y1="20" x2="20" y2="24" stroke="#C5A572" stroke-width="1"/>
+        <line x1="40" y1="20" x2="40" y2="24" stroke="#C5A572" stroke-width="1"/>
+        <path d="M12 24 Q15 18 20 20" stroke="#C5A572" stroke-width="0.8" fill="none"/>
+      </svg>
+      <div class="dica-title">Dica 03</div>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.055)">Trem &gt; Avi&atilde;o<br>pra dist&acirc;ncias<br>at&eacute; 4h</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.015) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.038)">Mais barato, mais bonito,<br>sem fila de check-in.<br><br>E a paisagem &eacute; o passeio.</div>
+    </div>
+  </div>
+
+  <!-- Europa 5 -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">5/6</div>
+    <div class="content-wrap">
+      <svg class="dica-icon" viewBox="0 0 60 60" fill="none" style="width:calc(var(--card-w)*0.15);height:calc(var(--card-w)*0.15)">
+        <rect x="16" y="8" width="28" height="44" rx="4" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <line x1="16" y1="16" x2="44" y2="16" stroke="#C5A572" stroke-width="0.8"/>
+        <line x1="16" y1="44" x2="44" y2="44" stroke="#C5A572" stroke-width="0.8"/>
+        <circle cx="30" cy="48" r="2" stroke="#C5A572" stroke-width="0.8" fill="none"/>
+        <path d="M22 26l4 4 8-8" stroke="#C5A572" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="dica-title">Dica 04</div>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.055)">Compre eSIM<br>ANTES de<br>embarcar</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.015) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.038)">N&atilde;o no aeroporto.<br>N&atilde;o no destino. <span class="gold-text" style="font-weight:600">Antes</span>.<br><br>Chega conectado.</div>
+    </div>
+  </div>
+
+  <!-- Europa 6: CTA -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">6/6</div>
+    <div class="content-wrap">
+      <div class="heading" style="font-size:calc(var(--card-w)*0.065)">Quer um roteiro<br>completo?</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.01) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.042)">Baixe nosso guia de<br><span class="gold-text" style="font-weight:600">7 destinos</span></div>
+      <div style="margin-top:calc(var(--card-w)*0.04)">
+        <div class="gold-btn">Link na bio</div>
+        <div class="gold-text" style="font-size:calc(var(--card-w)*0.06);margin-top:12px">&uarr;</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== CASAL ==================== -->
+<div class="highlight-section" id="hl-casal">
+<div class="stories-strip">
+
+  <!-- Casal 1: Cover -->
+  <div class="story-card cover">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">1/7</div>
+    <div class="content-wrap">
+      <svg class="icon-svg" width="80" height="80" viewBox="0 0 80 80" fill="none" style="width:calc(var(--card-w)*0.22);height:calc(var(--card-w)*0.22)">
+        <circle cx="30" cy="40" r="14" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <circle cx="50" cy="40" r="14" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <path d="M40 30c-2 3-2 7-2 10s0 7 2 10" stroke="#C5A572" stroke-width="0.8" fill="none" opacity="0.4"/>
+      </svg>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.085)">Viagem a dois<br>que reconecta<br>de verdade</div>
+      <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+      <div class="muted-text" style="font-size:calc(var(--card-w)*0.03);letter-spacing:2px;text-transform:uppercase">Rotta Curadoria</div>
+    </div>
+  </div>
+
+  <!-- Casal 2 -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">2/7</div>
+    <div class="content-wrap">
+      <div class="heading" style="font-size:calc(var(--card-w)*0.06)">Quando foi<br>a &uacute;ltima viagem<br><span class="gold-text">S&Oacute;</span> de voc&ecirc;s dois?</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.03) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.04);color:var(--muted)">Sem filhos.<br>Sem agenda.<br>Sem celular apitando.</div>
+    </div>
+  </div>
+
+  <!-- Casal 3 -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">3/7</div>
+    <div class="content-wrap">
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.042);color:var(--muted)">A gente sabe como &eacute;:</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.015) 0"></div>
+      <div class="subheading" style="font-size:calc(var(--card-w)*0.055);line-height:1.5;padding:0 calc(var(--card-w)*0.02)">A rotina engole.<br>O casal vira s&oacute;cios de uma empresa chamada<br><span class="gold-text" style="font-weight:600;font-style:normal">fam&iacute;lia</span>.</div>
+    </div>
+  </div>
+
+  <!-- Casal 4: Mendoza -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">4/7</div>
+    <div class="content-wrap">
+      <div class="dest-card">
+        <div class="dest-name">MENDOZA</div>
+        <div class="body-text" style="font-size:calc(var(--card-w)*0.042);color:var(--gold);margin-bottom:calc(var(--card-w)*0.02)">5 dias &middot; R$4.370/casal</div>
+        <div class="dest-details">
+          Vin&iacute;cola ao p&ocirc;r do sol<br>
+          Jantar sob as estrelas<br>
+          Andes de tirar o f&ocirc;lego
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Casal 5: Croacia -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">5/7</div>
+    <div class="content-wrap">
+      <div class="dest-card">
+        <div class="dest-name">CRO&Aacute;CIA</div>
+        <div class="body-text" style="font-size:calc(var(--card-w)*0.042);color:var(--gold);margin-bottom:calc(var(--card-w)*0.02)">7 dias &middot; R$9.400/casal</div>
+        <div class="dest-details">
+          Praias secretas<br>
+          Cidades medievais<br>
+          Barco privativo
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Casal 6: Depoimento -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">6/7</div>
+    <div class="content-wrap">
+      <div class="big-quote">&ldquo;</div>
+      <div class="subheading" style="font-size:calc(var(--card-w)*0.05);line-height:1.6;padding:0 calc(var(--card-w)*0.03)">Foi a primeira viagem em 8 anos s&oacute; nossa. Voltamos diferentes.</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.025) 0"></div>
+      <div class="muted-text" style="font-size:calc(var(--card-w)*0.033)">Casal, 52 e 49 anos</div>
+    </div>
+  </div>
+
+  <!-- Casal 7: CTA -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">7/7</div>
+    <div class="content-wrap">
+      <div class="heading" style="font-size:calc(var(--card-w)*0.058);line-height:1.4">A gente cuida<br>de tudo.</div>
+      <div class="subheading" style="font-size:calc(var(--card-w)*0.05)">Voc&ecirc; s&oacute; precisa ir.</div>
+      <div style="margin-top:calc(var(--card-w)*0.05)">
+        <div class="gold-btn" style="display:flex;align-items:center;gap:10px;justify-content:center">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#0E0E0E"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.67-1.228A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.153 0-4.16-.578-5.895-1.586l-.424-.253-2.752.724.666-2.635-.271-.432A9.935 9.935 0 012 12C2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z" fill-rule="evenodd"/></svg>
+          Mande oi no WhatsApp
+        </div>
+        <div class="gold-text" style="font-size:calc(var(--card-w)*0.06);margin-top:12px">&uarr;</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== JORNADAS ==================== -->
+<div class="highlight-section" id="hl-jornadas">
+<div class="stories-strip">
+
+  <!-- Jornadas 1: Cover -->
+  <div class="story-card cover">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">1/7</div>
+    <div class="content-wrap">
+      <svg class="icon-svg" width="80" height="80" viewBox="0 0 80 80" fill="none" style="width:calc(var(--card-w)*0.22);height:calc(var(--card-w)*0.22)">
+        <rect x="15" y="25" width="50" height="35" rx="4" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <rect x="15" y="25" width="50" height="10" rx="4" stroke="#C5A572" stroke-width="1.5" fill="rgba(197,165,114,0.1)"/>
+        <line x1="25" y1="18" x2="25" y2="28" stroke="#C5A572" stroke-width="2" stroke-linecap="round"/>
+        <line x1="55" y1="18" x2="55" y2="28" stroke="#C5A572" stroke-width="2" stroke-linecap="round"/>
+        <rect x="22" y="42" width="8" height="6" rx="1" stroke="#C5A572" stroke-width="0.8" fill="rgba(197,165,114,0.15)"/>
+        <rect x="36" y="42" width="8" height="6" rx="1" stroke="#C5A572" stroke-width="0.8" fill="rgba(197,165,114,0.15)"/>
+        <rect x="50" y="42" width="8" height="6" rx="1" stroke="#C5A572" stroke-width="0.8" fill="rgba(197,165,114,0.15)"/>
+        <rect x="22" y="52" width="8" height="6" rx="1" stroke="#C5A572" stroke-width="0.8" fill="none"/>
+        <rect x="36" y="52" width="8" height="6" rx="1" stroke="#C5A572" stroke-width="0.8" fill="none"/>
+      </svg>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.09)">Jornadas<br>curadas<br>por n&oacute;s</div>
+      <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+      <div class="muted-text" style="font-size:calc(var(--card-w)*0.03);letter-spacing:2px;text-transform:uppercase">Rotta Curadoria</div>
+    </div>
+  </div>
+
+  <!-- Jornadas 2: Mendoza -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">2/7</div>
+    <div class="content-wrap">
+      <div class="dest-card">
+        <div class="dest-name">MENDOZA &middot; 5 DIAS</div>
+        <div class="dest-details">
+          Vin&iacute;colas premiadas<br>
+          Cordilheira dos Andes<br>
+          Gastronomia argentina
+        </div>
+        <div class="dest-price">A partir de R$4.370/casal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jornadas 3: Croacia -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">3/7</div>
+    <div class="content-wrap">
+      <div class="dest-card">
+        <div class="dest-name">CRO&Aacute;CIA &middot; 7 DIAS</div>
+        <div class="dest-details">
+          Dubrovnik medieval<br>
+          Ilhas de Hvar<br>
+          Costa dalm&aacute;cia
+        </div>
+        <div class="dest-price">A partir de R$9.400/casal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jornadas 4: Italia -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">4/7</div>
+    <div class="content-wrap">
+      <div class="dest-card">
+        <div class="dest-badge">MAIO 2026</div>
+        <div class="dest-name">IT&Aacute;LIA &middot; 14 DIAS</div>
+        <div class="dest-details">
+          Dolomitas &middot; Lago di Garda<br>
+          Toscana &middot; Roma
+        </div>
+        <div class="dest-price">A partir de R$10.400/casal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jornadas 5: Russia -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">5/7</div>
+    <div class="content-wrap">
+      <div class="dest-card">
+        <div class="dest-name">R&Uacute;SSIA &middot; 10 DIAS</div>
+        <div class="dest-details">
+          Moscou &middot; S&atilde;o Petersburgo<br>
+          Transiberiana
+        </div>
+        <div class="dest-price">A partir de R$7.700/casal</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jornadas 6: Todas incluem -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">6/7</div>
+    <div class="content-wrap">
+      <div class="heading" style="font-size:calc(var(--card-w)*0.06);margin-bottom:calc(var(--card-w)*0.03)">Todas incluem:</div>
+      <div class="checklist">
+        <div class="checklist-item"><span class="ck">&#10003;</span> Roteiro dia a dia</div>
+        <div class="checklist-item"><span class="ck">&#10003;</span> Reservas de hotel</div>
+        <div class="checklist-item"><span class="ck">&#10003;</span> Restaurantes testados</div>
+        <div class="checklist-item"><span class="ck">&#10003;</span> Experi&ecirc;ncias locais</div>
+        <div class="checklist-item"><span class="ck">&#10003;</span> Suporte WhatsApp</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Jornadas 7: Enquete CTA -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">7/7</div>
+    <div class="content-wrap">
+      <div class="heading" style="font-size:calc(var(--card-w)*0.05);margin-bottom:calc(var(--card-w)*0.02)">Qual jornada te chamou<br>mais aten&ccedil;&atilde;o?</div>
+      <div class="enquete-options">
+        <div class="enquete-opt">&#127751; Mendoza</div>
+        <div class="enquete-opt">&#127965; Cro&aacute;cia</div>
+        <div class="enquete-opt">&#127837; It&aacute;lia</div>
+        <div class="enquete-opt">&#9971; R&uacute;ssia</div>
+      </div>
+      <div class="muted-text" style="font-size:calc(var(--card-w)*0.033);margin-top:calc(var(--card-w)*0.03)">Responda nos stories!</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== DICAS ==================== -->
+<div class="highlight-section" id="hl-dicas">
+<div class="stories-strip">
+
+  <!-- Dicas 1: Cover -->
+  <div class="story-card cover">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">1/7</div>
+    <div class="content-wrap">
+      <svg class="icon-svg" width="80" height="80" viewBox="0 0 80 80" fill="none" style="width:calc(var(--card-w)*0.22);height:calc(var(--card-w)*0.22)">
+        <path d="M40 12c-9 0-16 7-16 16 0 6 3 11 8 14v6h16v-6c5-3 8-8 8-14 0-9-7-16-16-16z" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <line x1="32" y1="52" x2="48" y2="52" stroke="#C5A572" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="34" y1="56" x2="46" y2="56" stroke="#C5A572" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="36" y1="60" x2="44" y2="60" stroke="#C5A572" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="40" y1="28" x2="40" y2="40" stroke="#C5A572" stroke-width="1" opacity="0.5"/>
+        <line x1="34" y1="34" x2="40" y2="28" stroke="#C5A572" stroke-width="1" opacity="0.5"/>
+        <line x1="46" y1="34" x2="40" y2="28" stroke="#C5A572" stroke-width="1" opacity="0.5"/>
+      </svg>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.085)">Dicas de<br>quem viaja<br>de verdade</div>
+      <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+      <div class="muted-text" style="font-size:calc(var(--card-w)*0.03);letter-spacing:2px;text-transform:uppercase">Rotta Curadoria</div>
+    </div>
+  </div>
+
+  <!-- Dicas 2: Mala de mao -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">2/7</div>
+    <div class="content-wrap">
+      <svg class="dica-icon" viewBox="0 0 60 60" fill="none" style="width:calc(var(--card-w)*0.15);height:calc(var(--card-w)*0.15)">
+        <rect x="12" y="20" width="36" height="28" rx="4" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <line x1="22" y1="14" x2="22" y2="20" stroke="#C5A572" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="38" y1="14" x2="38" y2="20" stroke="#C5A572" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="22" y1="14" x2="38" y2="14" stroke="#C5A572" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="12" y1="32" x2="48" y2="32" stroke="#C5A572" stroke-width="1"/>
+      </svg>
+      <div class="dica-title">Mala de M&atilde;o</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.01) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.042);line-height:1.7;padding:0 calc(var(--card-w)*0.02)">Leve <span class="gold-text" style="font-weight:600">SEMPRE</span> uma muda de roupa na mala de m&atilde;o.<br><br>Malas despachadas somem mais do que voc&ecirc; imagina.</div>
+    </div>
+  </div>
+
+  <!-- Dicas 3: Documentos -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">3/7</div>
+    <div class="content-wrap">
+      <svg class="dica-icon" viewBox="0 0 60 60" fill="none" style="width:calc(var(--card-w)*0.15);height:calc(var(--card-w)*0.15)">
+        <rect x="14" y="8" width="28" height="38" rx="2" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <rect x="18" y="8" width="24" height="12" stroke="#C5A572" stroke-width="0.8" fill="rgba(197,165,114,0.1)"/>
+        <circle cx="30" cy="14" r="3" stroke="#C5A572" stroke-width="0.8" fill="none"/>
+        <line x1="20" y1="28" x2="36" y2="28" stroke="#C5A572" stroke-width="0.8"/>
+        <line x1="20" y1="33" x2="36" y2="33" stroke="#C5A572" stroke-width="0.8"/>
+        <line x1="20" y1="38" x2="30" y2="38" stroke="#C5A572" stroke-width="0.8"/>
+        <rect x="22" y="48" width="20" height="4" rx="1" stroke="#C5A572" stroke-width="0.8" fill="rgba(197,165,114,0.15)"/>
+      </svg>
+      <div class="dica-title">Documentos</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.01) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.042);line-height:1.7;padding:0 calc(var(--card-w)*0.02)">Foto do passaporte no e-mail + c&oacute;pia f&iacute;sica separada da original.<br><br>Se perder um, tem o outro.</div>
+    </div>
+  </div>
+
+  <!-- Dicas 4: Seguro -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">4/7</div>
+    <div class="content-wrap">
+      <svg class="dica-icon" viewBox="0 0 60 60" fill="none" style="width:calc(var(--card-w)*0.15);height:calc(var(--card-w)*0.15)">
+        <path d="M30 6L10 16v14c0 14 10 22 20 26 10-4 20-12 20-26V16L30 6z" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <path d="M24 30l4 4 8-8" stroke="#C5A572" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="dica-title">Seguro Viagem</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.01) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.042);line-height:1.7;padding:0 calc(var(--card-w)*0.02)">N&atilde;o &eacute; opcional.<br>&Eacute; o <span class="gold-text" style="font-weight:600">PRIMEIRO</span> item do checklist.<br><br>Antes da passagem,<br>antes do hotel.</div>
+    </div>
+  </div>
+
+  <!-- Dicas 5: Cambio -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">5/7</div>
+    <div class="content-wrap">
+      <svg class="dica-icon" viewBox="0 0 60 60" fill="none" style="width:calc(var(--card-w)*0.15);height:calc(var(--card-w)*0.15)">
+        <circle cx="30" cy="30" r="20" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <text x="30" y="36" text-anchor="middle" fill="#C5A572" font-size="18" font-family="Playfair Display" font-weight="600">$</text>
+        <line x1="26" y1="40" x2="34" y2="40" stroke="#C5A572" stroke-width="1"/>
+        <line x1="26" y1="20" x2="34" y2="20" stroke="#C5A572" stroke-width="1"/>
+      </svg>
+      <div class="dica-title">C&acirc;mbio</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.01) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.042);line-height:1.7;padding:0 calc(var(--card-w)*0.02)"><span class="gold-text" style="font-weight:600">30%</span> em esp&eacute;cie,<br><span class="gold-text" style="font-weight:600">70%</span> no cart&atilde;o internacional.<br><br>E avise o banco antes de viajar.</div>
+    </div>
+  </div>
+
+  <!-- Dicas 6: Restaurante -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">6/7</div>
+    <div class="content-wrap">
+      <svg class="dica-icon" viewBox="0 0 60 60" fill="none" style="width:calc(var(--card-w)*0.15);height:calc(var(--card-w)*0.15)">
+        <line x1="20" y1="10" x2="20" y2="50" stroke="#C5A572" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M16 10c0 8 4 12 4 12s4-4 4-12" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <line x1="40" y1="10" x2="40" y2="50" stroke="#C5A572" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M34 10v16c0 4 6 4 6 4V10" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <line x1="37" y1="10" x2="37" y2="22" stroke="#C5A572" stroke-width="0.8"/>
+        <line x1="43" y1="10" x2="43" y2="22" stroke="#C5A572" stroke-width="0.8"/>
+      </svg>
+      <div class="dica-title">Restaurante</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.01) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.042);line-height:1.7;padding:0 calc(var(--card-w)*0.02)">Fuja dos que tem foto no card&aacute;pio e ficam na rua principal.<br><br>Ande <span class="gold-text" style="font-weight:600">2 quadras</span> pra dentro.<br>Agrade&ccedil;a depois.</div>
+    </div>
+  </div>
+
+  <!-- Dicas 7: CTA -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">7/7</div>
+    <div class="content-wrap">
+      <div class="heading" style="font-size:calc(var(--card-w)*0.06)">Baixe nosso<br>checklist<br>completo</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.02) 0"></div>
+      <div style="margin-top:calc(var(--card-w)*0.03)">
+        <div class="gold-btn">Link na bio</div>
+        <div class="gold-text" style="font-size:calc(var(--card-w)*0.06);margin-top:12px">&uarr;</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== SOBRE NOS ==================== -->
+<div class="highlight-section" id="hl-sobre">
+<div class="stories-strip">
+
+  <!-- Sobre 1: Cover -->
+  <div class="story-card cover">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">1/7</div>
+    <div class="content-wrap">
+      <svg class="icon-svg" width="80" height="80" viewBox="0 0 80 80" fill="none" style="width:calc(var(--card-w)*0.22);height:calc(var(--card-w)*0.22)">
+        <circle cx="28" cy="28" r="10" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <path d="M18 50c0-6 4-10 10-10s10 4 10 10" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <circle cx="48" cy="28" r="10" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <path d="M38 50c0-6 4-10 10-10s10 4 10 10" stroke="#C5A572" stroke-width="1.5" fill="none"/>
+        <path d="M34 58c-2-2-6-6-6-10" stroke="#C5A572" stroke-width="0.8" fill="none" opacity="0.3"/>
+        <path d="M42 58c2-2 6-6 6-10" stroke="#C5A572" stroke-width="0.8" fill="none" opacity="0.3"/>
+      </svg>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.1)">Quem<br>somos<br>n&oacute;s</div>
+      <div style="width:60%;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
+      <div class="muted-text" style="font-size:calc(var(--card-w)*0.03);letter-spacing:2px;text-transform:uppercase">Rotta Curadoria</div>
+    </div>
+  </div>
+
+  <!-- Sobre 2 -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">2/7</div>
+    <div class="content-wrap">
+      <div style="width:calc(var(--card-w)*0.35);height:calc(var(--card-w)*0.35);border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;background:rgba(197,165,114,0.05)">
+        <div style="font-family:'Playfair Display',serif;font-size:calc(var(--card-w)*0.055);color:var(--gold)">M &amp; A</div>
+      </div>
+      <div class="heading" style="font-size:calc(var(--card-w)*0.065)">Marcelo &amp;<br>Alexandra</div>
+      <div style="width:40px;height:1px;background:var(--gold)"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.04);color:var(--muted)">Casados &middot; 4 filhas<br>Campo Mour&atilde;o &ndash; PR</div>
+    </div>
+  </div>
+
+  <!-- Sobre 3 -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">3/7</div>
+    <div class="content-wrap">
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.044);line-height:1.7;padding:0 calc(var(--card-w)*0.02)">
+        <span class="gold-text" style="font-weight:600">Marcelo</span> &eacute; oftalmologista h&aacute; 22 anos.<br><br>
+        <span class="gold-text" style="font-weight:600">Alexandra</span> &eacute; nutricionista.<br><br>
+        <span style="color:var(--muted)">Mas nossa paix&atilde;o &eacute;<br>viajar juntos.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sobre 4 -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">4/7</div>
+    <div class="content-wrap">
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.044);line-height:1.8;padding:0 calc(var(--card-w)*0.02)">Em <span class="gold-text" style="font-weight:600">2025</span>, depois de mais de <span class="gold-text" style="font-weight:600">15 pa&iacute;ses</span> visitados, decidimos transformar o que vivemos em curadoria pra outras pessoas.</div>
+    </div>
+  </div>
+
+  <!-- Sobre 5: Manifesto -->
+  <div class="story-card">
+    <div class="side-accent"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">5/7</div>
+    <div class="content-wrap">
+      <div class="heading" style="font-size:calc(var(--card-w)*0.07);color:var(--gold)">N&Atilde;O somos<br>ag&ecirc;ncia.</div>
+      <div style="width:50px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.025) 0"></div>
+      <div class="body-text" style="font-size:calc(var(--card-w)*0.042);line-height:1.7">N&atilde;o vendemos pacotes.<br><br>Cada roteiro &eacute; &uacute;nico.<br>Cada detalhe &eacute; pensado.<br><br>Como se fosse a <span class="gold-text" style="font-weight:600">NOSSA</span> viagem.</div>
+    </div>
+  </div>
+
+  <!-- Sobre 6: Lema -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">6/7</div>
+    <div class="content-wrap">
+      <div class="muted-text" style="font-size:calc(var(--card-w)*0.036);text-transform:uppercase;letter-spacing:2px;margin-bottom:calc(var(--card-w)*0.02)">Nosso lema:</div>
+      <div class="big-quote" style="font-size:calc(var(--card-w)*0.18);margin-bottom:0">&ldquo;</div>
+      <div class="subheading" style="font-size:calc(var(--card-w)*0.048);line-height:1.6;padding:0 calc(var(--card-w)*0.02)">A melhor viagem &eacute; a que voc&ecirc; n&atilde;o precisou planejar &mdash; mas que parece que foi feita s&oacute; pra voc&ecirc;.</div>
+      <div style="font-size:calc(var(--card-w)*0.15);font-family:'Playfair Display',serif;color:var(--gold);line-height:0.3;margin-top:calc(var(--card-w)*0.02)">&rdquo;</div>
+    </div>
+  </div>
+
+  <!-- Sobre 7: CTA -->
+  <div class="story-card">
+    <div class="top-line"></div>
+    <div class="bottom-grad"></div>
+    <div class="slide-num">7/7</div>
+    <div class="content-wrap">
+      <div class="heading" style="font-size:calc(var(--card-w)*0.058)">Faz o quiz e<br>descobre seu<br>perfil!</div>
+      <div style="width:40px;height:1px;background:var(--gold);margin:calc(var(--card-w)*0.02) 0"></div>
+      <div style="margin-top:calc(var(--card-w)*0.03)">
+        <div class="gold-btn">Link na bio</div>
+        <div class="gold-text" style="font-size:calc(var(--card-w)*0.06);margin-top:12px">&uarr;</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+</div><!-- end highlights-container -->
+
+<script>
+// Tab switching
+document.querySelectorAll('.tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.highlight-section').forEach(function(s) { s.classList.remove('active'); });
+    tab.classList.add('active');
+    document.getElementById('hl-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Mode toggle
+function setMode(mode) {
+  document.querySelectorAll('.mode-toggle button').forEach(function(b) { b.classList.remove('active'); });
+  if (mode === 'export') {
+    document.body.classList.add('export-mode');
+    document.querySelectorAll('.mode-toggle button')[1].classList.add('active');
+  } else {
+    document.body.classList.remove('export-mode');
+    document.querySelectorAll('.mode-toggle button')[0].classList.add('active');
+  }
+}
+</script>
+
+</body>
+</html>
