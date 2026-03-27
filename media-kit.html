@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Kit 2026 — Rotta Curadoria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C5A572;
+            --dark: #1A1A1A;
+            --white: #FFFFFF;
+            --light-gray: #F5F3EF;
+            --mid-gray: #E8E4DD;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background: var(--white);
+            font-size: 11pt;
+            line-height: 1.5;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* ======================== PAGE 1 ======================== */
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 20mm 22mm;
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold) 0%, transparent 100%);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--mid-gray);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-circle {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .header-text h1 {
+            font-size: 20pt;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--dark);
+            text-transform: uppercase;
+        }
+
+        .header-text .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 8pt;
+            font-weight: 400;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .header-badge {
+            font-family: 'Inter', sans-serif;
+            font-size: 8pt;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 6px 14px;
+            border-radius: 2px;
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 13pt;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--gold);
+            display: inline-block;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        /* About */
+        .about-text {
+            font-size: 10.5pt;
+            line-height: 1.65;
+            color: #333;
+            font-style: italic;
+            border-left: 3px solid var(--gold);
+            padding-left: 16px;
+            margin-top: 8px;
+        }
+
+        /* Numbers grid */
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .number-card {
+            text-align: center;
+            padding: 12px 6px;
+            background: var(--light-gray);
+            border-radius: 4px;
+        }
+
+        .number-card .value {
+            font-family: 'Playfair Display', serif;
+            font-size: 18pt;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+        }
+
+        .number-card .label {
+            font-size: 7.5pt;
+            font-weight: 500;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* Countries */
+        .countries-list {
+            margin-top: 8px;
+            font-size: 9.5pt;
+            line-height: 2;
+            color: #444;
+        }
+
+        .countries-list span {
+            display: inline-block;
+            margin-right: 4px;
+        }
+
+        .country-sep {
+            color: var(--gold);
+            margin: 0 2px;
+        }
+
+        /* Audience */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 20px;
+            margin-top: 8px;
+        }
+
+        .audience-item {
+            font-size: 9.5pt;
+            padding-left: 14px;
+            position: relative;
+            color: #444;
+        }
+
+        .audience-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 7px;
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        /* Channels */
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px 16px;
+            margin-top: 8px;
+        }
+
+        .channel-item {
+            font-size: 9pt;
+            color: #444;
+        }
+
+        .channel-item strong {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        /* Two column layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* ======================== PAGE 2 ======================== */
+
+        /* Content formats */
+        .formats-list {
+            list-style: none;
+            margin-top: 8px;
+        }
+
+        .formats-list li {
+            font-size: 9.5pt;
+            padding: 5px 0 5px 18px;
+            position: relative;
+            color: #444;
+            border-bottom: 1px solid #f0ede8;
+        }
+
+        .formats-list li:last-child {
+            border-bottom: none;
+        }
+
+        .formats-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* Packages table */
+        .packages-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 9.5pt;
+        }
+
+        .packages-table th {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 9.5pt;
+            text-align: left;
+            padding: 10px 12px;
+            background: var(--dark);
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+
+        .packages-table th:first-child {
+            border-radius: 4px 0 0 0;
+        }
+
+        .packages-table th:last-child {
+            border-radius: 0 4px 0 0;
+        }
+
+        .packages-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--mid-gray);
+            vertical-align: top;
+        }
+
+        .packages-table tr:nth-child(even) td {
+            background: var(--light-gray);
+        }
+
+        .packages-table td:first-child {
+            font-weight: 600;
+            color: var(--gold);
+            white-space: nowrap;
+            width: 160px;
+        }
+
+        /* Diferencial quote */
+        .diferencial-box {
+            background: var(--light-gray);
+            border-left: 4px solid var(--gold);
+            padding: 14px 18px;
+            margin-top: 10px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .diferencial-box p {
+            font-size: 10pt;
+            font-style: italic;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Next trips */
+        .trips-list {
+            margin-top: 8px;
+        }
+
+        .trip-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0ede8;
+            font-size: 9.5pt;
+        }
+
+        .trip-item:last-child {
+            border-bottom: none;
+        }
+
+        .trip-flag {
+            font-size: 16pt;
+        }
+
+        .trip-dest {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .trip-details {
+            color: #888;
+            font-size: 8.5pt;
+        }
+
+        /* Contact box */
+        .contact-box {
+            background: var(--dark);
+            color: var(--white);
+            padding: 20px 24px;
+            border-radius: 6px;
+            margin-top: 16px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 24px;
+        }
+
+        .contact-box .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 13pt;
+            color: var(--gold);
+            grid-column: 1 / -1;
+            margin-bottom: 4px;
+        }
+
+        .contact-box .contact-item {
+            font-size: 9.5pt;
+            color: #ccc;
+        }
+
+        .contact-box .contact-item strong {
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 16mm;
+            left: 22mm;
+            right: 22mm;
+            text-align: center;
+            font-size: 8pt;
+            color: #999;
+            letter-spacing: 1px;
+            border-top: 1px solid var(--mid-gray);
+            padding-top: 10px;
+        }
+
+        .footer span {
+            color: var(--gold);
+        }
+
+        /* Page break */
+        .page-break {
+            page-break-after: always;
+            break-after: page;
+        }
+
+        /* ======================== PRINT STYLES ======================== */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            .page {
+                width: 210mm;
+                height: 297mm;
+                min-height: 297mm;
+                max-height: 297mm;
+                margin: 0;
+                padding: 20mm 22mm;
+                page-break-inside: avoid;
+                overflow: hidden;
+            }
+
+            .page-break {
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .number-card {
+                background: var(--light-gray) !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+
+            .packages-table th {
+                background: var(--dark) !important;
+                color: var(--white) !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+
+            .contact-box {
+                background: var(--dark) !important;
+                color: var(--white) !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+
+            .diferencial-box {
+                background: var(--light-gray) !important;
+                -webkit-print-color-adjust: exact !important;
+            }
+
+            .page::before {
+                -webkit-print-color-adjust: exact !important;
+            }
+        }
+
+        /* ======================== SCREEN PREVIEW ======================== */
+        @media screen {
+            body {
+                background: #e0ddd8;
+                padding: 20px 0;
+            }
+
+            .page {
+                box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+                margin: 20px auto;
+                border-radius: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1 — QUEM SOMOS ==================== -->
+<div class="page">
+    <div class="page::before"></div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <div class="logo-circle">R</div>
+            <div class="header-text">
+                <h1>Rotta Curadoria</h1>
+                <div class="subtitle">Viagens com curadoria premium</div>
+            </div>
+        </div>
+        <div class="header-badge">Media Kit 2026</div>
+    </div>
+
+    <!-- Quem Somos -->
+    <div class="section">
+        <h2 class="section-title">Quem Somos</h2>
+        <p class="about-text">
+            Somos Marcelo e Alexandra — um casal que transforma viagens comuns em experiências que mudam perspectivas.
+            Ele é médico com 22 anos de precisão cirúrgica. Ela é nutricionista com paladar exigente.
+            Juntos, curamos roteiros premium para casais e famílias que querem mais do que um destino — querem uma memória.
+        </p>
+    </div>
+
+    <!-- Números -->
+    <div class="section">
+        <h2 class="section-title">Em Números</h2>
+        <div class="numbers-grid">
+            <div class="number-card">
+                <span class="value">22+</span>
+                <span class="label">Países visitados</span>
+            </div>
+            <div class="number-card">
+                <span class="value">5</span>
+                <span class="label">Continentes</span>
+            </div>
+            <div class="number-card">
+                <span class="value">4</span>
+                <span class="label">Filhas viajantes</span>
+            </div>
+            <div class="number-card">
+                <span class="value">15+</span>
+                <span class="label">Anos viajando</span>
+            </div>
+            <div class="number-card">
+                <span class="value">14</span>
+                <span class="label">Países documentados</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Países -->
+    <div class="section">
+        <h2 class="section-title">Países Visitados</h2>
+        <div class="countries-list">
+            <span>🇧🇷 Brasil</span> <span class="country-sep">|</span>
+            <span>🇦🇷 Argentina</span> <span class="country-sep">|</span>
+            <span>🇵🇾 Paraguai</span> <span class="country-sep">|</span>
+            <span>🇺🇸 EUA</span> <span class="country-sep">|</span>
+            <span>🇵🇹 Portugal</span> <span class="country-sep">|</span>
+            <span>🇪🇸 Espanha</span> <span class="country-sep">|</span>
+            <span>🇫🇷 França</span> <span class="country-sep">|</span>
+            <span>🇮🇹 Itália</span> <span class="country-sep">|</span>
+            <span>🇭🇷 Croácia</span> <span class="country-sep">|</span>
+            <span>🇷🇺 Rússia</span> <span class="country-sep">|</span>
+            <span>🇨🇭 Suíça</span> <span class="country-sep">|</span>
+            <span>🇩🇪 Alemanha</span> <span class="country-sep">|</span>
+            <span>🇦🇹 Áustria</span> <span class="country-sep">|</span>
+            <span>🇨🇿 Rep. Tcheca</span>
+        </div>
+    </div>
+
+    <!-- Público + Canais (two columns) -->
+    <div class="two-col">
+        <div class="section">
+            <h2 class="section-title">Nosso Público</h2>
+            <div class="audience-grid" style="grid-template-columns: 1fr;">
+                <div class="audience-item">Casais classe A/B, 28–60 anos</div>
+                <div class="audience-item">Famílias que viajam com crianças</div>
+                <div class="audience-item">Grupos de amigos (25–40 anos)</div>
+                <div class="audience-item">Investem em experiência acima de preço</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Canais</h2>
+            <div style="margin-top: 8px; font-size: 9.5pt; line-height: 2; color: #444;">
+                <div><strong style="color: var(--dark);">Instagram:</strong> @rotta.curadoria</div>
+                <div><strong style="color: var(--dark);">YouTube:</strong> @rotta.curadoria</div>
+                <div><strong style="color: var(--dark);">TikTok:</strong> @rotta.curadoria</div>
+                <div><strong style="color: var(--dark);">Site:</strong> rottacuradoria.com.br</div>
+                <div><strong style="color: var(--dark);">WhatsApp:</strong> +55 11 96815-2123</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">Curado por <span>Marcelo & Alexandra</span> &nbsp;|&nbsp; rottacuradoria.com.br</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- ==================== PAGE 2 — O QUE OFERECEMOS ==================== -->
+<div class="page">
+
+    <!-- Header (repeated for print) -->
+    <div class="header">
+        <div class="header-left">
+            <div class="logo-circle">R</div>
+            <div class="header-text">
+                <h1>Rotta Curadoria</h1>
+                <div class="subtitle">O que oferecemos</div>
+            </div>
+        </div>
+        <div class="header-badge">Media Kit 2026</div>
+    </div>
+
+    <!-- Formatos de conteúdo -->
+    <div class="section">
+        <h2 class="section-title">Formatos de Conteúdo</h2>
+        <ul class="formats-list">
+            <li>Reels (15–90s) com roteiro, produção e copy</li>
+            <li>Carrosséis educativos (8–10 slides)</li>
+            <li>Stories sequenciais com review completo</li>
+            <li>Posts de feed com fotografia própria</li>
+            <li>Review detalhado no Google Maps + TripAdvisor</li>
+            <li>Menção permanente no site (guia de destinos)</li>
+        </ul>
+    </div>
+
+    <!-- Pacotes -->
+    <div class="section">
+        <h2 class="section-title">Entregáveis por Parceria</h2>
+        <table class="packages-table">
+            <thead>
+                <tr>
+                    <th>Pacote</th>
+                    <th>Inclui</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Review Básico</td>
+                    <td>3 Stories + 1 Post + Review Google/TripAdvisor</td>
+                </tr>
+                <tr>
+                    <td>Review Completo</td>
+                    <td>1 Reel + 5 Stories + 2 Posts + Review + Menção no site</td>
+                </tr>
+                <tr>
+                    <td>Produção de Conteúdo</td>
+                    <td>Fotos e vídeos profissionais com direitos de uso para marketing do parceiro</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Diferencial -->
+    <div class="section">
+        <h2 class="section-title">Nosso Diferencial</h2>
+        <div class="diferencial-box">
+            <p>
+                Não somos influenciadores genéricos. Somos curadores com olhar médico para detalhes
+                e paladar de nutricionista para gastronomia. Nosso conteúdo é honesto, premium e permanente
+                — cada review fica no nosso site como referência para nossos clientes.
+            </p>
+        </div>
+    </div>
+
+    <!-- Próximas viagens -->
+    <div class="section">
+        <h2 class="section-title">Próximas Viagens Documentadas</h2>
+        <div class="trips-list">
+            <div class="trip-item">
+                <span class="trip-flag">🇮🇹</span>
+                <div>
+                    <span class="trip-dest">Itália</span>
+                    <span class="trip-details">— Maio 2026 · 14 dias · 5 cidades · família completa</span>
+                </div>
+            </div>
+            <div class="trip-item">
+                <span class="trip-flag">🇦🇷</span>
+                <div>
+                    <span class="trip-dest">Argentina (Mendoza)</span>
+                    <span class="trip-details">— planejada</span>
+                </div>
+            </div>
+            <div class="trip-item">
+                <span class="trip-flag">🇭🇷</span>
+                <div>
+                    <span class="trip-dest">Croácia</span>
+                    <span class="trip-details">— planejada</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contato -->
+    <div class="contact-box">
+        <div class="contact-title">Vamos conversar?</div>
+        <div class="contact-item"><strong>Marcelo & Alexandra</strong></div>
+        <div class="contact-item"><strong>Instagram:</strong> @rotta.curadoria</div>
+        <div class="contact-item"><strong>E-mail:</strong> rottacuradoria@gmail.com</div>
+        <div class="contact-item"><strong>Site:</strong> rottacuradoria.com.br</div>
+        <div class="contact-item"><strong>WhatsApp:</strong> +55 11 96815-2123</div>
+    </div>
+
+    <div class="footer">Curado por <span>Marcelo & Alexandra</span> &nbsp;|&nbsp; rottacuradoria.com.br</div>
+</div>
+
+</body>
+</html>

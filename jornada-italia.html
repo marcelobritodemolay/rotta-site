@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italia: Dolomitas, Lago di Garda e Alem | Rotta Curadoria</title>
+    <meta name="description" content="Roteiro curado de 14 dias na Italia em familia. Roma, Toscana, Dolomitas, Lago di Garda, Verona. Nossa proxima jornada — maio 2026.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#8A8A8A;--dim:#666;
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:800px;margin:0 auto;padding:0 24px}
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .back-link{position:fixed;top:24px;left:24px;z-index:100;display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:14px;transition:color .3s}
+        .back-link:hover{color:var(--gold)}
+        .back-link svg{width:20px;height:20px}
+        .site-header{text-align:center;padding:80px 24px 0}
+        .logo-circle{width:56px;height:56px;border-radius:50%;border:2px solid var(--gold);display:inline-flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold);margin-bottom:16px}
+        .header-sub{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+        .hero{padding:60px 24px 80px;text-align:center;position:relative}
+        .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .hero-badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:24px}
+        .hero-badge.upcoming{background:var(--gold-dim);border-color:var(--gold)}
+        .hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,52px);font-weight:700;line-height:1.15;margin-bottom:20px}
+        .hero h1 em{font-style:italic;color:var(--gold)}
+        .hero .subtitle{font-size:17px;color:var(--muted);max-width:560px;margin:0 auto 32px;line-height:1.65}
+        .hero-meta{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+        .hero-meta-item{text-align:center}
+        .hero-meta-item .value{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold)}
+        .hero-meta-item .label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+        .section{padding:80px 0}
+        .section-alt{background:var(--card)}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;text-align:center}
+        .section-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);text-align:center;margin-bottom:48px;line-height:1.3}
+        .section-title em{font-style:italic;color:var(--gold)}
+        .divider{width:60px;height:1px;background:var(--gold);margin:0 auto 48px;opacity:.3}
+        .photo-placeholder{width:100%;height:400px;background:var(--layer);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:15px;font-style:italic;margin:32px 0;border:1px dashed rgba(197,165,114,.2)}
+        .overview-text{color:var(--muted);font-size:16px;line-height:1.8;text-align:center;max-width:640px;margin:0 auto 40px}
+        .day-card{background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:32px;margin-bottom:24px;position:relative;overflow:hidden}
+        .section-alt .day-card{background:var(--bg)}
+        .day-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:.5}
+        .day-number{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+        .day-title{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:20px}
+        .time-block{margin-bottom:16px}
+        .time-block:last-child{margin-bottom:0}
+        .time-label{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+        .time-block p{color:var(--muted);font-size:15px;line-height:1.7}
+        .food-card{background:linear-gradient(135deg,var(--card) 0%,#1F1A14 100%);border:1px solid rgba(197,165,114,.15);border-radius:16px;padding:32px;margin-bottom:20px}
+        .food-card h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:16px}
+        .food-card p{color:var(--muted);font-size:15px;line-height:1.7}
+        .alexandra-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-dim);padding:6px 16px;border-radius:100px;font-size:12px;color:var(--gold);margin-bottom:24px;letter-spacing:.5px}
+        .budget-table{width:100%;max-width:600px;margin:0 auto;border-collapse:collapse}
+        .budget-table tr{border-bottom:1px solid var(--layer)}
+        .budget-table td{padding:14px 0;font-size:15px}
+        .budget-table td:first-child{color:var(--muted)}
+        .budget-table td:last-child{text-align:right;font-weight:600;color:var(--text)}
+        .budget-total{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);text-align:center;margin-top:32px;font-weight:700}
+        .budget-note{text-align:center;color:var(--dim);font-size:13px;margin-top:12px}
+        .cta-section{padding:100px 0;text-align:center}
+        .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);margin-bottom:16px;line-height:1.3}
+        .cta-section p{color:var(--muted);font-size:16px;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto}
+        .cta-btn{display:inline-block;background:var(--gold);color:var(--bg);padding:18px 48px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s;letter-spacing:.5px}
+        .cta-btn:hover{background:#D4B87F;transform:translateY(-2px);box-shadow:0 12px 32px rgba(197,165,114,.25)}
+        .cta-btn-outline{display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:18px 48px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s;letter-spacing:.5px}
+        .cta-btn-outline:hover{background:var(--gold-dim);transform:translateY(-2px)}
+        .site-footer{padding:48px 24px;text-align:center;border-top:1px solid var(--layer)}
+        .footer-brand{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px}
+        .footer-brand span{color:var(--gold)}
+        .footer-sub{font-size:13px;color:var(--dim)}
+        .footer-handle{color:var(--gold);text-decoration:none;font-size:13px}
+        .footer-handle:hover{text-decoration:underline}
+        .whatsapp-float{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.3);z-index:1000;transition:transform .3s}
+        .whatsapp-float:hover{transform:scale(1.1)}
+        .whatsapp-float svg{width:28px;height:28px;fill:#fff}
+        .upcoming-banner{background:linear-gradient(135deg,var(--gold-dim) 0%,rgba(197,165,114,.05) 100%);border:1px solid rgba(197,165,114,.25);border-radius:16px;padding:32px;text-align:center;margin:0 auto 40px;max-width:640px}
+        .upcoming-banner h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);margin-bottom:8px}
+        .upcoming-banner p{color:var(--muted);font-size:15px}
+        .phase-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);background:var(--gold-dim);display:inline-block;padding:4px 14px;border-radius:100px;margin-bottom:24px}
+        @media(max-width:600px){
+            .hero-meta{gap:20px}
+            .day-card{padding:24px 20px}
+            .back-link{top:16px;left:16px}
+        }
+    </style>
+</head>
+<body>
+
+<a href="/" class="back-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Voltar
+</a>
+
+<header class="site-header fade-up">
+    <div class="logo-circle">R</div>
+    <div class="header-sub">Rotta Curadoria</div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <div class="fade-up">
+            <span class="hero-badge upcoming">Nossa proxima jornada &middot; Maio 2026</span>
+            <h1>Italia: Dolomitas, Lago di Garda e <em>Alem</em></h1>
+            <p class="subtitle">14 dias em familia pela Italia que vai alem dos roteiros tradicionais. Roma, Toscana, as montanhas das Dolomitas, o azul do Lago di Garda e a romantiquissima Verona. A gente vai viver isso — e voce vai acompanhar tudo.</p>
+        </div>
+        <div class="hero-meta fade-up">
+            <div class="hero-meta-item">
+                <div class="value">14</div>
+                <div class="label">Dias</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="value">R$10.400</div>
+                <div class="label">Por casal (sem aereo)</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="value">Italia</div>
+                <div class="label">Destino</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="fade-up">
+            <p class="section-label">A Experiencia</p>
+            <h2 class="section-title">Da cidade eterna ate os <em>picos nevados</em></h2>
+        </div>
+        <div class="upcoming-banner fade-up">
+            <h3>Essa viagem ainda vai acontecer</h3>
+            <p>Estamos embarcando em maio de 2026. Acompanhe essa jornada em tempo real no nosso Instagram — com fotos, dicas e bastidores do que vai funcionar (e do que nao vai).</p>
+        </div>
+        <p class="overview-text fade-up">A Italia e o destino que todo mundo acha que ja conhece, ate ir de verdade. Esse roteiro vai alem de Roma e Florenca. A gente vai subir as Dolomitas pra ver Tre Cime di Lavaredo, descer ate o Lago di Garda pra aquele azul impossivel, parar em Verona pra jantar na cidade de Romeu e Julieta, e ainda passar pela Toscana com seus ciprestes e vinhedos infinitos. Tudo em familia, no nosso ritmo.</p>
+        <div class="photo-placeholder fade-up">Sua foto aqui — familia na Italia</div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="fade-up">
+            <p class="section-label">Dia a Dia</p>
+            <h2 class="section-title">Nosso roteiro <em>curado</em></h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="phase-label fade-up">Fase 1 — Roma</div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dias 1–3</div>
+            <div class="day-title">Roma — A Cidade Eterna</div>
+            <div class="time-block">
+                <div class="time-label">Dia 1</div>
+                <p>Chegada em Roma. Check-in no hotel proximo ao Trastevere — o bairro mais charmoso da cidade, cheio de ruelas, restaurantes e vida noturna. Passeio leve pela vizinhanca, jantar em uma trattoria local. Cacio e Pepe obrigatorio logo no primeiro dia.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Dia 2</div>
+                <p>Coliseu, Forum Romano e Palatino pela manha (comprar ingresso antecipado). Almoco no bairro Monti. Tarde no Vaticano: Basilica de Sao Pedro e Museus Vaticanos (incluindo Capela Sistina). Jantar com vista pro Castel Sant'Angelo.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Dia 3</div>
+                <p>Fontana di Trevi, Piazza Navona, Pantheon. Almoco no Campo de' Fiori. Tarde livre pra se perder pelas ruas — a melhor coisa de Roma. Sorvete na Giolitti ou Fatamorgana. Jantar de despedida no Trastevere.</p>
+            </div>
+        </div>
+
+        <div class="photo-placeholder fade-up">Sua foto aqui — Roma (Coliseu, ruas, comida)</div>
+
+        <div class="phase-label fade-up">Fase 2 — Toscana</div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dias 4–6</div>
+            <div class="day-title">Toscana — Vinhos, ciprestes e silencio</div>
+            <div class="time-block">
+                <div class="time-label">Dia 4</div>
+                <p>Carro alugado de Roma ate a Toscana (~3h). Parada em Orvieto no caminho — cidade medieval no topo de um penhasco vulcanico. Chegada na regiao do Val d'Orcia. Check-in em um agriturismo (fazenda-hotel) com piscina e vista pros vinhedos.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Dia 5</div>
+                <p>Dia de explorar o Val d'Orcia: Pienza (a cidade do queijo pecorino), Montalcino (terra do Brunello di Montalcino), e a famosa estrada dos ciprestes de Agriturismo Poggio Covili. Almoco em uma vinicola com degustacao. Jantar no agriturismo com ingredientes da fazenda.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Dia 6</div>
+                <p>Manha em Siena — a Piazza del Campo e a catedral que impressiona ate quem ja viu tudo. Tarde livre na Toscana pra descansar, nadar na piscina do agriturismo, e aproveitar o ritmo lento da vida italiana.</p>
+            </div>
+        </div>
+
+        <div class="photo-placeholder fade-up">Sua foto aqui — paisagens da Toscana</div>
+
+        <div class="phase-label fade-up">Fase 3 — Dolomitas</div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dias 7–10</div>
+            <div class="day-title">Dolomitas — O teto da Italia</div>
+            <div class="time-block">
+                <div class="time-label">Dia 7</div>
+                <p>Estrada da Toscana ate as Dolomitas (~5h, mas a paisagem compensa cada km). Parada em Bologna pra almocar — a capital gastronomica da Italia. Tortellini em caldo, tagliatelle al ragu. Chegada em Val di Funes ao fim do dia.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Dia 8</div>
+                <p>Val di Funes e a Igreja de Santa Maddalena — aquela foto que todo mundo ja viu, com a igrejinha e os picos das Odle atras. Ao vivo, e 10x mais impressionante. Trilha leve ate o mirante principal. Almoco em um refugio de montanha com speck tiroleses e polenta.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Dia 9</div>
+                <p>Tre Cime di Lavaredo — o cartao postal das Dolomitas. Trilha circular de ~10km (moderada) ao redor das tres torres de rocha que parecem esculpidas por gigantes. Uma das experiencias mais impactantes da viagem inteira. Leve casaco — mesmo em maio pode estar frio la em cima.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Dia 10</div>
+                <p>Lago di Braies pela manha — o lago verde esmeralda mais fotografado das Dolomitas. Passeio de barco a remo. Depois, descida rumo ao Lago di Garda (~2h30). A transicao das montanhas nevadas pro lago azul e surreal.</p>
+            </div>
+        </div>
+
+        <div class="photo-placeholder fade-up">Sua foto aqui — Dolomitas (Tre Cime ou Val di Funes)</div>
+
+        <div class="phase-label fade-up">Fase 4 — Lago di Garda & Verona</div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dias 11–13</div>
+            <div class="day-title">Lago di Garda e Verona — Azul e romance</div>
+            <div class="time-block">
+                <div class="time-label">Dia 11</div>
+                <p>Sirmione — a vila medieval que fica numa peninsula estreita dentro do lago. Castelo Scaligero na entrada, aguas termais naturais (Grotte di Catullo), e aquele azul caribenho que voce nao espera encontrar no norte da Italia. Almoco a beira do lago com peixe fresco.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Dia 12</div>
+                <p>Limone sul Garda — a vila dos limoeiros, com ruelas estreitas, casas coloridas e limoncellos artesanais. Passeio de barco pelo lago ate Malcesine. Se der tempo, subida de teleferico ao Monte Baldo pra ver o lago de cima — vista de tirar o folego.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Dia 13</div>
+                <p>Verona — a cidade de Romeu e Julieta. Arena de Verona (anfiteatro romano em uso ate hoje), Piazza delle Erbe, a sacada de Julieta. Jantar especial de despedida numa enoteca historica com Amarone della Valpolicella, o vinho mais nobre do Veneto.</p>
+            </div>
+        </div>
+
+        <div class="photo-placeholder fade-up">Sua foto aqui — Lago di Garda (Sirmione ou Limone)</div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dia 14</div>
+            <div class="day-title">Arrivederci, Italia</div>
+            <div class="time-block">
+                <div class="time-label">Manha</div>
+                <p>Ultimo cafe italiano. Devolucao do carro alugado. Transfer ao aeroporto de Verona (ou Milao Bergamo, ~1h30). Volta pra casa com a mala cheia de memorias, queijos contrabandeados e a promessa de voltar.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="fade-up">
+            <p class="section-label">Gastronomia</p>
+            <h2 class="section-title">Curadoria de sabores <em>por Alexandra</em></h2>
+        </div>
+        <div class="alexandra-badge fade-up">&#9733; Selecao Alexandra — cidade a cidade</div>
+
+        <div class="food-card fade-up">
+            <h3>Roma — Cacio e Pepe & Carbonara</h3>
+            <p>Os dois pratos mais iconicos de Roma. O Cacio e Pepe e so queijo pecorino e pimenta — e o resultado e uma alquimia impossivel de reproduzir em casa. A Carbonara verdadeira nao leva creme de leite (heresia!): ovo, guanciale, pecorino e pimenta. Restaurantes favoritos: Da Enzo al 29, Roscioli.</p>
+        </div>
+        <div class="food-card fade-up">
+            <h3>Toscana — Bistecca alla Fiorentina & Brunello</h3>
+            <p>A bistecca e um corte de T-bone de boi Chianina, grelhada no ponto (mal passada por fora, crua por dentro), servida com azeite extra-virgem toscano e nada mais. Acompanha com Brunello di Montalcino — um dos vinhos mais nobres da Italia. Juntos, sao uma experiencia quase religiosa.</p>
+        </div>
+        <div class="food-card fade-up">
+            <h3>Dolomitas — Speck, Polenta & Strudel</h3>
+            <p>A cozinha das Dolomitas e tirolesa, nao italiana. Speck (presunto defumado), polenta cremosa, canederli (bolinhos de pao), e o strudel de maca mais honesto que voce vai provar. Tudo servido em refugios de montanha com chamine acesa e vista pros Alpes. Confort food de altitude.</p>
+        </div>
+        <div class="food-card fade-up">
+            <h3>Lago di Garda — Peixe do Lago & Limoncello</h3>
+            <p>O Lago di Garda tem sua propria gastronomia: peixe de agua doce grelhado, azeite de oliva produzido nas margens (o mais setentrional da Italia), e o limoncello artesanal de Limone sul Garda — mais sutil e perfumado que o da Amalfi. Peca a truta do lago com alcaparras e azeite local.</p>
+        </div>
+
+        <div class="photo-placeholder fade-up">Sua foto aqui — comida italiana (massa, bistecca, ou mesa farta)</div>
+
+        <div class="food-card fade-up">
+            <h3>Verona — Amarone & Risotto all'Amarone</h3>
+            <p>Verona e a terra do Amarone della Valpolicella, um tinto encorpado feito com uvas secas que concentram sabor. O risotto feito com Amarone tem uma profundidade de sabor que e dificil descrever — voce precisa provar. Enoteca favorita: Antica Bottega del Vino, aberta desde 1890.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="fade-up">
+            <p class="section-label">Investimento</p>
+            <h2 class="section-title">Orcamento <em>estimado</em></h2>
+            <div class="divider"></div>
+        </div>
+        <div class="fade-up">
+            <table class="budget-table">
+                <tr><td>Hospedagem (13 noites, mix hotel + agriturismo)</td><td>R$ 4.200</td></tr>
+                <tr><td>Alimentacao (14 dias, casal)</td><td>R$ 2.800</td></tr>
+                <tr><td>Aluguel de carro (11 dias + combustivel + pedagio)</td><td>R$ 1.600</td></tr>
+                <tr><td>Passeios e entradas (museus, trilhas, barco)</td><td>R$ 1.000</td></tr>
+                <tr><td>Degustacoes, vinhos e extras</td><td>R$ 800</td></tr>
+            </table>
+            <div class="budget-total">~ R$ 10.400 / casal</div>
+            <p class="budget-note">* Valores estimados sem passagens aereas internacionais. Cotacao pode variar. Roteiro adaptavel para familia com criancas.</p>
+        </div>
+    </div>
+</section>
+
+<div class="photo-placeholder fade-up" style="max-width:800px;margin:0 auto">Sua foto aqui — foto da familia (Marcelo, Alexandra e filhos)</div>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="fade-up">
+            <p class="section-label">Acompanhe Essa Jornada</p>
+            <h2>A gente vai viver isso em <em style="color:var(--gold);font-style:italic">maio de 2026</em></h2>
+            <p>Fotos reais, dicas de quem esta la, bastidores e tudo que funcionou (e o que nao funcionou). Segue a gente no Instagram pra acompanhar em tempo real.</p>
+            <a href="https://instagram.com/rotta.curadoria" target="_blank" class="cta-btn" style="margin-right:12px;margin-bottom:12px">Acompanhe no @rotta.curadoria</a>
+            <a href="https://wa.me/5511968152123?text=Oi!%20Vi%20o%20roteiro%20da%20Italia%20e%20quero%20saber%20mais!" class="cta-btn-outline">Quero montar meu roteiro</a>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-brand">Curado por <span>Marcelo & Alexandra</span></div>
+    <a href="https://instagram.com/rotta.curadoria" target="_blank" class="footer-handle">@rotta.curadoria</a>
+    <p class="footer-sub" style="margin-top:12px">&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+</footer>
+
+<a href="https://wa.me/5511968152123?text=Oi!%20Vi%20o%20roteiro%20da%20Italia%20e%20quero%20saber%20mais!" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+(function(){
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+    }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croacia: O Segredo do Adriatico | Rotta Curadoria</title>
+    <meta name="description" content="Roteiro curado de 7 dias na Croacia para casais e grupos. Split, Hvar, Dubrovnik, Lagos Plitvice. Por Marcelo & Alexandra.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#8A8A8A;--dim:#666;
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:800px;margin:0 auto;padding:0 24px}
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .back-link{position:fixed;top:24px;left:24px;z-index:100;display:flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:14px;transition:color .3s}
+        .back-link:hover{color:var(--gold)}
+        .back-link svg{width:20px;height:20px}
+        .site-header{text-align:center;padding:80px 24px 0}
+        .logo-circle{width:56px;height:56px;border-radius:50%;border:2px solid var(--gold);display:inline-flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold);margin-bottom:16px}
+        .header-sub{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+        .hero{padding:60px 24px 80px;text-align:center;position:relative}
+        .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .hero-badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:24px}
+        .hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,52px);font-weight:700;line-height:1.15;margin-bottom:20px}
+        .hero h1 em{font-style:italic;color:var(--gold)}
+        .hero .subtitle{font-size:17px;color:var(--muted);max-width:520px;margin:0 auto 32px;line-height:1.65}
+        .hero-meta{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+        .hero-meta-item{text-align:center}
+        .hero-meta-item .value{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold)}
+        .hero-meta-item .label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+        .section{padding:80px 0}
+        .section-alt{background:var(--card)}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;text-align:center}
+        .section-title{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);text-align:center;margin-bottom:48px;line-height:1.3}
+        .section-title em{font-style:italic;color:var(--gold)}
+        .divider{width:60px;height:1px;background:var(--gold);margin:0 auto 48px;opacity:.3}
+        .photo-placeholder{width:100%;height:400px;background:var(--layer);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:15px;font-style:italic;margin:32px 0;border:1px dashed rgba(197,165,114,.2)}
+        .overview-text{color:var(--muted);font-size:16px;line-height:1.8;text-align:center;max-width:640px;margin:0 auto 40px}
+        .day-card{background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:32px;margin-bottom:24px;position:relative;overflow:hidden}
+        .section-alt .day-card{background:var(--bg)}
+        .day-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:.5}
+        .day-number{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+        .day-title{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:20px}
+        .time-block{margin-bottom:16px}
+        .time-block:last-child{margin-bottom:0}
+        .time-label{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+        .time-block p{color:var(--muted);font-size:15px;line-height:1.7}
+        .food-card{background:linear-gradient(135deg,var(--card) 0%,#1F1A14 100%);border:1px solid rgba(197,165,114,.15);border-radius:16px;padding:32px;margin-bottom:20px}
+        .food-card h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:16px}
+        .food-card p{color:var(--muted);font-size:15px;line-height:1.7}
+        .alexandra-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-dim);padding:6px 16px;border-radius:100px;font-size:12px;color:var(--gold);margin-bottom:24px;letter-spacing:.5px}
+        .budget-table{width:100%;max-width:600px;margin:0 auto;border-collapse:collapse}
+        .budget-table tr{border-bottom:1px solid var(--layer)}
+        .budget-table td{padding:14px 0;font-size:15px}
+        .budget-table td:first-child{color:var(--muted)}
+        .budget-table td:last-child{text-align:right;font-weight:600;color:var(--text)}
+        .budget-total{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);text-align:center;margin-top:32px;font-weight:700}
+        .budget-note{text-align:center;color:var(--dim);font-size:13px;margin-top:12px}
+        .cta-section{padding:100px 0;text-align:center}
+        .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);margin-bottom:16px;line-height:1.3}
+        .cta-section p{color:var(--muted);font-size:16px;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto}
+        .cta-btn{display:inline-block;background:var(--gold);color:var(--bg);padding:18px 48px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s;letter-spacing:.5px}
+        .cta-btn:hover{background:#D4B87F;transform:translateY(-2px);box-shadow:0 12px 32px rgba(197,165,114,.25)}
+        .site-footer{padding:48px 24px;text-align:center;border-top:1px solid var(--layer)}
+        .footer-brand{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px}
+        .footer-brand span{color:var(--gold)}
+        .footer-sub{font-size:13px;color:var(--dim)}
+        .footer-handle{color:var(--gold);text-decoration:none;font-size:13px}
+        .footer-handle:hover{text-decoration:underline}
+        .whatsapp-float{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.3);z-index:1000;transition:transform .3s}
+        .whatsapp-float:hover{transform:scale(1.1)}
+        .whatsapp-float svg{width:28px;height:28px;fill:#fff}
+        .tip-box{background:var(--gold-dim);border:1px solid rgba(197,165,114,.2);border-radius:12px;padding:20px 24px;margin:24px 0;font-size:14px;color:var(--text)}
+        .tip-box strong{color:var(--gold)}
+        @media(max-width:600px){
+            .hero-meta{gap:20px}
+            .day-card{padding:24px 20px}
+            .back-link{top:16px;left:16px}
+        }
+    </style>
+</head>
+<body>
+
+<a href="/" class="back-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Voltar
+</a>
+
+<header class="site-header fade-up">
+    <div class="logo-circle">R</div>
+    <div class="header-sub">Rotta Curadoria</div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <div class="fade-up">
+            <span class="hero-badge">7 dias &middot; Casais & Grupos</span>
+            <h1>Croacia: O Segredo do <em>Adriatico</em></h1>
+            <p class="subtitle">Muralhas medievais, ilhas de agua cristalina e uma gastronomia que mistura Italia com os Balcas. A Europa que pouca gente conhece — e que voce vai amar.</p>
+        </div>
+        <div class="hero-meta fade-up">
+            <div class="hero-meta-item">
+                <div class="value">7</div>
+                <div class="label">Dias</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="value">R$9.400</div>
+                <div class="label">Por casal</div>
+            </div>
+            <div class="hero-meta-item">
+                <div class="value">Croacia</div>
+                <div class="label">Destino</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="fade-up">
+            <p class="section-label">A Experiencia</p>
+            <h2 class="section-title">Mar, historia e <em>sabores inesquecíveis</em></h2>
+        </div>
+        <p class="overview-text fade-up">A Croacia e aquele destino que parece montagem de tao bonito. Dubrovnik com suas muralhas sobre o mar, Hvar com suas lavandas e festas, Split com o palacio romano que virou cidade, e os Lagos Plitvice que parecem saidos de um conto de fadas. E tudo isso conectado por estradas com vista pro Adriatico.</p>
+        <div class="photo-placeholder fade-up">Sua foto aqui — muralhas de Dubrovnik</div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="fade-up">
+            <p class="section-label">Dia a Dia</p>
+            <h2 class="section-title">Seu roteiro <em>curado</em></h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dia 1</div>
+            <div class="day-title">Split — Onde Roma encontra o mar</div>
+            <div class="time-block">
+                <div class="time-label">Manha</div>
+                <p>Chegada ao Aeroporto de Split. Transfer ao hotel no centro historico, dentro ou proximo ao Palacio de Diocleciano — patrimonio UNESCO que voce vai poder explorar a pe.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Tarde</div>
+                <p>Passeio pelo Palacio de Diocleciano: a catedral, o peristilo, os subterraneos. Cafe na Riva, o calçadao a beira-mar onde os locais se encontram ao fim do dia.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Noite</div>
+                <p>Jantar no Restaurante Zoi, cozinha dalmatina contemporanea. Peca o polvo grelhado com batatas ao forno — classico croata que e pura simplicidade deliciosa.</p>
+            </div>
+        </div>
+
+        <div class="photo-placeholder fade-up">Sua foto aqui — Palacio de Diocleciano em Split</div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dia 2</div>
+            <div class="day-title">Split — Trogir e praias secretas</div>
+            <div class="time-block">
+                <div class="time-label">Manha</div>
+                <p>Bate-volta a Trogir (30min de carro), uma mini cidade medieval numa ilha conectada por pontes. Parece cenario de filme. Passeio pelo centro historico e Catedral de Sao Lourenco.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Tarde</div>
+                <p>Praia de Kasuni ou Bacvice em Split. Agua cristalina, sol do Adriatico. Se preferir, visita ao Mercado Verde de Split pra experimentar frutas locais, queijos e presunto defumado da Dalmacia.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Noite</div>
+                <p>Jantar no Konoba Matejuska, um restaurante de frutos do mar escondido nas ruelas de Split. Peça o buzara de camarao — cozido no vinho branco com tomate.</p>
+            </div>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dia 3</div>
+            <div class="day-title">Hvar — A ilha mais glamourosa</div>
+            <div class="time-block">
+                <div class="time-label">Manha</div>
+                <p>Ferry rapido de Split a Hvar (~1h). Chegada na cidade de Hvar, com sua praca central, marina cheia de veleiros e campos de lavanda ao redor. Check-in no hotel.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Tarde</div>
+                <p>Subida ate a Fortaleza Espanhola pra ver o por do sol mais bonito da Croacia. La de cima, voce ve as Ilhas Pakleni espalhadas no horizonte. Depois, passeio de barco pelas ilhas com parada pra mergulho.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Noite</div>
+                <p>Jantar no Gariful, restaurante icone de Hvar a beira-mar. Lagosta fresca, vinho Plavac Mali local, e o barulho do mar como trilha sonora. Noite perfeita.</p>
+            </div>
+        </div>
+
+        <div class="photo-placeholder fade-up">Sua foto aqui — por do sol em Hvar</div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dia 4</div>
+            <div class="day-title">Hvar — Vinhedos e Stari Grad</div>
+            <div class="time-block">
+                <div class="time-label">Manha</div>
+                <p>Visita a Stari Grad Plain, o campo agricola mais antigo da Europa em uso continuo (desde os gregos!). Tour por vinicolas locais com degustacao de Plavac Mali e Bogdanusa.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Tarde</div>
+                <p>Almoco em uma konoba (taverna) rural — cozinha caseira croata com ingredientes do quintal. Passeio pelos campos de lavanda (se for verao, a ilha inteira fica roxa).</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Noite</div>
+                <p>Noite livre em Hvar. A cidade tem uma vida noturna surpreendente pra uma ilha — bares na marina, musica ao vivo, cocktails com vista pro mar.</p>
+            </div>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dia 5</div>
+            <div class="day-title">Dubrovnik — A Perola do Adriatico</div>
+            <div class="time-block">
+                <div class="time-label">Manha</div>
+                <p>Ferry de Hvar a Dubrovnik (~3h30 pelo catamara rapido, ou voo domestico de Split). Chegada em Dubrovnik. Check-in no hotel com vista pra cidade antiga.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Tarde</div>
+                <p>Caminhada pelas muralhas de Dubrovnik — o circuito completo tem 2km e as vistas sao absurdas. Voce ve os telhados laranja, o mar turquesa, e as montanhas ao fundo. Pausa pra um suco fresco no bar da muralha.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Noite</div>
+                <p>Jantar no Nautika, restaurante com vista pra entrada da cidade velha e pro mar. Considerado um dos melhores restaurantes da Croacia. Pedimos o risoto de tinta de lula — inesquecivel.</p>
+            </div>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dia 6</div>
+            <div class="day-title">Ston — Ostras e muralhas escondidas</div>
+            <div class="time-block">
+                <div class="time-label">Manha</div>
+                <p>Bate-volta a Ston (1h de carro), a "mini muralha da China" da Croacia. As muralhas de Ston sao as mais longas da Europa e poucos turistas sabem que existem.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Tarde</div>
+                <p>A estrela de Ston: degustacao de ostras frescas direto do criadouro. Voce vai de barco ate as fazendas de ostras na Baia de Mali Ston e experimenta direto da agua. Acompanha com vinho branco croata gelado. Experiencia unica.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Noite</div>
+                <p>Retorno a Dubrovnik. Jantar leve na cidade velha, passeio pela Stradun (rua principal) iluminada, sorvete artesanal e o som dos musicos de rua.</p>
+            </div>
+        </div>
+
+        <div class="photo-placeholder fade-up">Sua foto aqui — barco no Adriatico</div>
+
+        <div class="day-card fade-up">
+            <div class="day-number">Dia 7</div>
+            <div class="day-title">Lagos Plitvice e despedida</div>
+            <div class="time-block">
+                <div class="time-label">Manha</div>
+                <p>Voo domestico de Dubrovnik a Zagreb + transfer ao Parque Nacional dos Lagos Plitvice. Alternativa: se o roteiro permitir, incluir Plitvice entre Split e Dubrovnik (fica mais logico geograficamente).</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Tarde</div>
+                <p>Dia inteiro no parque: 16 lagos conectados por cachoeiras em tons de azul turquesa e verde esmeralda. Trilhas em passarelas de madeira sobre a agua. Um dos lugares mais bonitos do planeta — sem exagero.</p>
+            </div>
+            <div class="time-block">
+                <div class="time-label">Noite</div>
+                <p>Transfer ao aeroporto de Zagreb ou pernoite pra voo no dia seguinte. Volta pra casa com a sensacao de ter descoberto um segredo que pouca gente conhece.</p>
+            </div>
+        </div>
+
+        <div class="tip-box fade-up">
+            <strong>Dica de logistica:</strong> A melhor forma de fazer esse roteiro e: Split (2 noites) → Hvar (2 noites) → Dubrovnik (2 noites) → Plitvice/Zagreb (1 noite). Ferrys entre as cidades sao frequentes no verao e a experiencia pelo mar e incrivel.
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="container">
+        <div class="fade-up">
+            <p class="section-label">Gastronomia</p>
+            <h2 class="section-title">Curadoria de sabores <em>por Alexandra</em></h2>
+        </div>
+        <div class="alexandra-badge fade-up">&#9733; Selecao Alexandra</div>
+
+        <div class="food-card fade-up">
+            <h3>Peka — O assado lento croata</h3>
+            <p>Peka e o prato que resume a alma da cozinha da Dalmacia. Carne (ou polvo) coberta com legumes, azeite e ervas, cozida lentamente debaixo de uma tampa de ferro coberta de brasas. O resultado: carne que desfia no garfo e batatas que absorvem todo o sabor. Precisa encomendar com antecedencia nos restaurantes — e vale cada minuto de espera.</p>
+        </div>
+        <div class="food-card fade-up">
+            <h3>Trufas da Istria</h3>
+            <p>A regiao da Istria, no norte da Croacia, e um dos maiores produtores de trufas do mundo. Trufas brancas e negras aparecem em tudo: massas, omeletes, queijos, ate sorvetes. Se conseguir fazer um desvio por Motovun, vai encontrar produtores que vendem trufas frescas por precos que em Paris custariam 10x mais.</p>
+        </div>
+        <div class="food-card fade-up">
+            <h3>Frutos do mar do Adriatico</h3>
+            <p>O Adriatico croata e um dos mares mais limpos da Europa, e isso se reflete nos frutos do mar. Polvo grelhado, camarao buzara, ostras de Ston, lula recheada. Tudo fresco, preparado com simplicidade — azeite, alho, vinho branco, e pronto. Acompanhe com Plavac Mali ou Posip, os melhores vinhos brancos locais.</p>
+        </div>
+
+        <div class="photo-placeholder fade-up">Sua foto aqui — frutos do mar na Croacia</div>
+
+        <div class="food-card fade-up">
+            <h3>Plavac Mali — O vinho que voce nao conhece (ainda)</h3>
+            <p>Primo do Zinfandel americano, o Plavac Mali e o tinto mais famoso da Croacia. Encorpado, frutado, com notas de cereja escura e especiarias. Os melhores vem da Peninsula de Peljesac (entre Split e Dubrovnik). Experimentar na fonte, com vista pro mar, e uma experiencia que nenhuma enoteca do mundo reproduz.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="fade-up">
+            <p class="section-label">Investimento</p>
+            <h2 class="section-title">Orcamento <em>estimado</em></h2>
+            <div class="divider"></div>
+        </div>
+        <div class="fade-up">
+            <table class="budget-table">
+                <tr><td>Hospedagem (6 noites, hoteis boutique)</td><td>R$ 3.600</td></tr>
+                <tr><td>Alimentacao (7 dias, casal)</td><td>R$ 2.100</td></tr>
+                <tr><td>Ferrys e transporte entre cidades</td><td>R$ 1.200</td></tr>
+                <tr><td>Passeios e tours (muralhas, barco, Plitvice)</td><td>R$ 1.400</td></tr>
+                <tr><td>Degustacoes, entradas e extras</td><td>R$ 1.100</td></tr>
+            </table>
+            <div class="budget-total">~ R$ 9.400 / casal</div>
+            <p class="budget-note">* Valores estimados. Nao inclui passagens aereas internacionais. Cotacao pode variar.</p>
+        </div>
+    </div>
+</section>
+
+<div class="photo-placeholder fade-up" style="max-width:800px;margin:0 auto">Sua foto aqui — Lagos Plitvice</div>
+
+<section class="cta-section">
+    <div class="container">
+        <div class="fade-up">
+            <p class="section-label">Proximo Passo</p>
+            <h2>Quero descobrir a <em style="color:var(--gold);font-style:italic">Croacia</em></h2>
+            <p>Esse roteiro e so o comeco. Manda mensagem e a gente personaliza tudo pra voce.</p>
+            <a href="https://wa.me/5511968152123?text=Oi!%20Vi%20o%20roteiro%20da%20Croacia%20e%20quero%20saber%20mais!" class="cta-btn">Quero essa experiencia</a>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
+    <div class="footer-brand">Curado por <span>Marcelo & Alexandra</span></div>
+    <a href="https://instagram.com/rotta.curadoria" target="_blank" class="footer-handle">@rotta.curadoria</a>
+    <p class="footer-sub" style="margin-top:12px">&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+</footer>
+
+<a href="https://wa.me/5511968152123?text=Oi!%20Vi%20o%20roteiro%20da%20Croacia%20e%20quero%20saber%20mais!" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+(function(){
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+    }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+})();
+</script>
+</body>
+</html>

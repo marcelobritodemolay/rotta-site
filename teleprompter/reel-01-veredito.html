@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REEL 01 — Veredito 7 Destinos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 18px; scroll-behavior: smooth; }
+  body {
+    background: #0E0E0E;
+    color: #F2EDE8;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .title-bar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: linear-gradient(180deg, #0E0E0E 60%, transparent);
+    padding: 16px 24px 32px;
+  }
+  .title-bar h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700; color: #C5A572;
+    line-height: 1.3;
+  }
+  .title-bar .meta {
+    font-size: 0.8rem; color: #666; margin-top: 4px;
+  }
+  .timer {
+    position: fixed; top: 16px; right: 24px; z-index: 101;
+    font-family: 'Inter', monospace; font-size: 1.6rem; font-weight: 700;
+    color: #C5A572; background: rgba(14,14,14,0.9);
+    padding: 8px 16px; border-radius: 8px;
+    border: 1px solid #333;
+    min-width: 90px; text-align: center;
+  }
+  .controls {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+    background: linear-gradient(0deg, #0E0E0E 70%, transparent);
+    padding: 32px 24px 24px;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .controls button {
+    font-family: 'Inter', sans-serif; font-weight: 600;
+    border: none; border-radius: 8px; padding: 12px 24px;
+    font-size: 1rem; cursor: pointer; transition: all 0.2s;
+    touch-action: manipulation;
+  }
+  .btn-play { background: #C5A572; color: #0E0E0E; }
+  .btn-play:hover { background: #d4b882; }
+  .btn-play.active { background: #e74c3c; color: #fff; }
+  .btn-speed {
+    background: #1a1a1a; color: #888; border: 1px solid #333 !important;
+  }
+  .btn-speed:hover { color: #F2EDE8; border-color: #555 !important; }
+  .btn-speed.active { color: #C5A572; border-color: #C5A572 !important; }
+  .speed-label { font-size: 0.8rem; color: #555; margin: 0 4px; }
+  .script-container {
+    padding: 100px 24px 160px;
+    max-width: 900px; margin: 0 auto;
+  }
+  .block {
+    margin-bottom: 40px; padding: 20px 0;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .block:last-child { border-bottom: none; }
+  .time-marker {
+    font-size: 0.85rem; color: #444; font-weight: 600;
+    margin-bottom: 12px; letter-spacing: 0.5px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; color: #C5A572; margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .line { margin-bottom: 16px; line-height: 1.7; }
+  .line .speaker {
+    font-weight: 800; font-size: 0.85rem; letter-spacing: 1.5px;
+    display: block; margin-bottom: 4px;
+  }
+  .line .text { font-size: 1.55rem; font-weight: 400; line-height: 1.6; }
+  .marcelo .speaker { color: #999; }
+  .marcelo .text { color: #F2EDE8; }
+  .alexandra .speaker { color: #C5A572; }
+  .alexandra .text { color: #C5A572; }
+  .production-notes {
+    margin-top: 60px; padding: 24px;
+    background: #141414; border-radius: 12px; border: 1px solid #222;
+  }
+  .production-notes h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: #C5A572; margin-bottom: 16px;
+  }
+  .production-notes ul { list-style: none; padding: 0; }
+  .production-notes li {
+    font-size: 0.95rem; color: #666; padding: 6px 0;
+    border-bottom: 1px solid #1a1a1a; line-height: 1.5;
+  }
+  .production-notes li:last-child { border-bottom: none; }
+  .production-notes li::before { content: ">>  "; color: #333; }
+  @media (min-width: 768px) {
+    .script-container { padding: 110px 48px 180px; }
+    .line .text { font-size: 1.8rem; }
+    .section-title { font-size: 1.6rem; }
+  }
+  @media (max-width: 480px) {
+    .line .text { font-size: 1.3rem; }
+    .timer { font-size: 1.2rem; }
+    .controls button { padding: 10px 16px; font-size: 0.9rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="title-bar">
+  <div>
+    <h1>REEL 01 -- Meu veredito sobre os 7 destinos</h1>
+    <div class="meta">60-90s | Sala de estar ou parede escura</div>
+  </div>
+</div>
+
+<div class="timer" id="timer">00:00</div>
+
+<div class="script-container" id="script">
+
+  <div class="block">
+    <div class="time-marker">[0-3s]</div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Esse e o nosso veredito sobre os 7 destinos que todo brasileiro quer conhecer. E a gente nao vai romantizar nada."</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="time-marker">[3-5s]</div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"Eu sou a Alexandra, nutricionista, e vou dar meu veredito sobre a comida de cada um."</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="time-marker">[5-8s]</div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Salva esse video porque voce vai economizar muito dinheiro e evitar varias decepcoes."</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="time-marker">[8-16s]</div>
+    <div class="section-title">ITALIA</div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Italia. O queridinho dos brasileiros. Roma te deixa sem palavras, mas prepare o bolso: refeicao a partir de R$120 por pessoa."</span>
+    </div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"Mas a comida compensa CADA centavo. A pizza de la nao tem comparacao. E o gelato? Esquece."</span>
+    </div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Curiosidade: Veneza ta afundando 2mm por ano e agora cobra 5 euros so pra entrar."</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="time-marker">[16-23s]</div>
+    <div class="section-title">PORTUGAL</div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Portugal. O mais facil pra brasileiro. Voce fala portugues, nao precisa de visto, e Lisboa e linda."</span>
+    </div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"Refeicao: R$80 em media. E os pasteis de nata? Gente. Nao tem como descrever."</span>
+    </div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"250 dias de sol por ano. Mais que a maioria da Europa."</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="time-marker">[23-30s]</div>
+    <div class="section-title">ESTADOS UNIDOS</div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Estados Unidos. Primeiro no ranking dos sonhos em 2025. Orlando pras criancas, Nova York pra cultura."</span>
+    </div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"Mas refeicao simples: R$100 a 150. O dolar pesa. Compensa MUITO se voce pegar passagem em promocao."</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="time-marker">[30-37s]</div>
+    <div class="section-title">ARGENTINA</div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"Argentina. Meninas, Buenos Aires e INCRIVEL pra casais."</span>
+    </div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Mendoza tem vinhos espetaculares. E o melhor: ta super barato. Refeicao excelente: R$40 a 60."</span>
+    </div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"As sorveterias de la? As criancas piram."</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="time-marker">[37-44s]</div>
+    <div class="section-title">FRANCA</div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Franca. Paris e o sonho, mas vai alem da Torre Eiffel. A Provenca e subestimada."</span>
+    </div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"A comida e arte. Literalmente. Mas R$150 por refeicao e o normal."</span>
+    </div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Nao e a toa que e o pais mais visitado do mundo. 90 milhoes de turistas por ano."</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="time-marker">[44-50s]</div>
+    <div class="section-title">CHILE</div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Chile. Do Atacama a Patagonia -- paisagens que nao parecem reais."</span>
+    </div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"Refeicao: R$70. E pra familias aventureiras, as criancas amam os vulcoes e lagos."</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="time-marker">[50-56s]</div>
+    <div class="section-title">ESPANHA</div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"Espanha. Barcelona com Gaudi, Madrid com museus, praias incriveis."</span>
+    </div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"R$90 por refeicao. E super family-friendly -- criancas brincam nas pracas ate tarde la."</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="time-marker">[56-65s]</div>
+    <div class="section-title">CTA</div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"Compartilha esse video com quem ta planejando viagem internacional."</span>
+    </div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"E comenta aqui: qual desses destinos ta no topo da lista de voces?"</span>
+    </div>
+    <div class="line marcelo">
+      <span class="speaker">MARCELO</span>
+      <span class="text">"A gente e Marcelo e Alexandra. A gente cura experiencias de viagem pra casais e familias que querem viver algo de verdade."</span>
+    </div>
+    <div class="line alexandra">
+      <span class="speaker">ALEXANDRA</span>
+      <span class="text">"Me segue que toda semana tem conteudo novo com a nossa opiniao honesta."</span>
+    </div>
+  </div>
+
+  <div class="production-notes">
+    <h2>Notas de Producao</h2>
+    <ul>
+      <li>Camera: Frontal, ambos enquadrados. Cortes rapidos a cada destino</li>
+      <li>Marcelo fala logistica/preco. Alexandra fala gastronomia/emocao</li>
+      <li>Texto overlay: Nome do pais + bandeira + preco medio</li>
+      <li>Cenario: Parede escura ou sala de estar</li>
+      <li>Roupa: Casual elegante, cores neutras</li>
+      <li>Gravar 2x: primeiro "certinho", segundo mais solto</li>
+    </ul>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="btn-speed" data-speed="0.5">Lento</button>
+  <button class="btn-speed active" data-speed="1">Normal</button>
+  <button class="btn-speed" data-speed="1.5">Rapido</button>
+  <button class="btn-speed" data-speed="2">2x</button>
+  <span class="speed-label">|</span>
+  <button class="btn-play" id="btnPlay">&#9654; Auto Scroll</button>
+</div>
+
+<script>
+  (function() {
+    var timerSeconds = 0;
+    var timerInterval = null;
+    var timerRunning = false;
+    var scrolling = false;
+    var scrollSpeed = 1;
+    var scrollRAF = null;
+    var btnPlay = document.getElementById('btnPlay');
+    var timerEl = document.getElementById('timer');
+
+    function formatTime(s) {
+      var m = Math.floor(s / 60);
+      var sec = s % 60;
+      return String(m).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
+    }
+
+    function startTimer() {
+      if (timerRunning) return;
+      timerRunning = true;
+      timerInterval = setInterval(function() {
+        timerSeconds++;
+        timerEl.textContent = formatTime(timerSeconds);
+      }, 1000);
+    }
+
+    function stopTimer() {
+      timerRunning = false;
+      clearInterval(timerInterval);
+    }
+
+    function autoScroll() {
+      if (!scrolling) return;
+      window.scrollBy(0, 0.8 * scrollSpeed);
+      scrollRAF = requestAnimationFrame(autoScroll);
+    }
+
+    btnPlay.addEventListener('click', function() {
+      if (scrolling) {
+        scrolling = false;
+        cancelAnimationFrame(scrollRAF);
+        stopTimer();
+        btnPlay.textContent = '\u25B6 Auto Scroll';
+        btnPlay.classList.remove('active');
+      } else {
+        scrolling = true;
+        startTimer();
+        btnPlay.textContent = '\u23F8 Pause';
+        btnPlay.classList.add('active');
+        autoScroll();
+      }
+    });
+
+    document.querySelectorAll('.btn-speed').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.btn-speed').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        scrollSpeed = parseFloat(btn.dataset.speed);
+      });
+    });
+
+    timerEl.addEventListener('dblclick', function() {
+      timerSeconds = 0;
+      timerEl.textContent = '00:00';
+    });
+  })();
+</script>
+</body>
+</html>
