@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curadoria Completa | Rotta Curadoria</title>
+    <meta name="description" content="Sua viagem dos sonhos, do zero ao embarque, com tudo reservado. A partir de R$3.997. Roteiro personalizado + todas as reservas + suporte 24h durante a viagem.">
+    <meta property="og:title" content="Curadoria Completa | Rotta Curadoria">
+    <meta property="og:description" content="Sua viagem dos sonhos, do zero ao embarque, com tudo reservado. A partir de R$3.997.">
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="https://www.rottacuradoria.com/produto-curadoria-completa.html">
+    <meta property="og:site_name" content="Rotta Curadoria">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Curadoria Completa",
+        "description": "Sua viagem dos sonhos, do zero ao embarque, com tudo reservado. Roteiro personalizado + todas as reservas + suporte 24h durante a viagem.",
+        "brand": { "@type": "Brand", "name": "Rotta Curadoria" },
+        "offers": {
+            "@type": "Offer",
+            "price": "3997",
+            "priceCurrency": "BRL",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --coral:#E8785A;--green:#4CAF7D;--blue:#5B8DEF
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:1080px;margin:0 auto;padding:0 24px}
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .divider{width:60px;height:1px;background:var(--gold);margin:0 auto;opacity:.3}
+
+        /* Nav */
+        nav{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto}
+        nav .logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+        nav .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:24px;transition:color .3s}
+        nav .nav-links a:hover{color:var(--gold)}
+
+        /* Breadcrumb */
+        .breadcrumb{padding:0 24px;max-width:1080px;margin:0 auto}
+        .breadcrumb a,.breadcrumb span{font-size:13px;color:var(--dim);text-decoration:none}
+        .breadcrumb a:hover{color:var(--gold)}
+        .breadcrumb .sep{margin:0 8px;color:var(--dim)}
+        .breadcrumb .current{color:var(--gold)}
+
+        /* Hero */
+        .product-hero{padding:60px 24px 80px;text-align:center;position:relative}
+        .product-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .product-hero .badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:24px}
+        .product-hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);font-weight:700;line-height:1.15;margin-bottom:16px;max-width:700px;margin-left:auto;margin-right:auto}
+        .product-hero h1 em{font-style:italic;color:var(--gold)}
+        .product-hero .subtitle{font-size:18px;color:var(--muted);max-width:520px;margin:0 auto 16px;line-height:1.6}
+        .product-hero .price-block{margin:32px auto;max-width:400px}
+        .product-hero .price-main{font-family:'Playfair Display',serif;font-size:42px;color:var(--gold);font-weight:700}
+        .product-hero .price-main small{font-size:20px;color:var(--dim);font-weight:400}
+        .product-hero .price-installment{font-size:14px;color:var(--dim);margin-top:4px}
+        .product-hero .cta{display:inline-block;background:var(--gold);color:var(--bg);padding:16px 48px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s;letter-spacing:.5px;margin-top:24px}
+        .product-hero .cta:hover{background:#D4B87F;transform:translateY(-2px);box-shadow:0 12px 32px rgba(197,165,114,.2)}
+
+        /* Steps */
+        .steps-section{padding:80px 0;background:var(--card)}
+        .steps-section h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:60px}
+        .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;max-width:960px;margin:0 auto}
+        .step{text-align:center;padding:32px 24px;background:var(--bg);border-radius:16px;border:1px solid var(--layer);position:relative}
+        .step-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--gold);opacity:.2;position:absolute;top:16px;right:20px}
+        .step-icon{font-size:32px;margin-bottom:16px}
+        .step h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:12px}
+        .step p{color:var(--muted);font-size:14px;line-height:1.6}
+
+        /* Includes */
+        .includes{padding:80px 0}
+        .includes h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:48px}
+        .includes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:900px;margin:0 auto}
+        .include-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px;border-left:3px solid var(--gold)}
+        .include-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px}
+        .include-card p{color:var(--muted);font-size:14px;line-height:1.6}
+
+        /* For Who */
+        .for-who{padding:80px 0;background:var(--card)}
+        .for-who h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:48px}
+        .persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:900px;margin:0 auto}
+        .persona-card{background:var(--bg);border:1px solid var(--layer);border-radius:12px;padding:24px;text-align:center}
+        .persona-card .emoji{font-size:32px;margin-bottom:12px}
+        .persona-card h4{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:8px}
+        .persona-card p{color:var(--muted);font-size:14px;line-height:1.6}
+
+        /* Guarantee */
+        .guarantee{padding:60px 0;text-align:center}
+        .guarantee-box{max-width:600px;margin:0 auto;background:var(--card);border:1px solid var(--gold);border-radius:16px;padding:40px 32px}
+        .guarantee-box .emoji{font-size:40px;margin-bottom:16px}
+        .guarantee-box h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:12px}
+        .guarantee-box p{color:var(--muted);font-size:15px;line-height:1.7}
+
+        /* FAQ */
+        .faq{padding:80px 0}
+        .faq h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:48px}
+        .faq-list{max-width:700px;margin:0 auto}
+        .faq-item{border-bottom:1px solid var(--layer);overflow:hidden}
+        .faq-q{padding:20px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:500;transition:color .3s}
+        .faq-q:hover{color:var(--gold)}
+        .faq-q .arrow{color:var(--gold);font-size:20px;transition:transform .3s}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+        .faq-a p{color:var(--muted);font-size:14px;line-height:1.7;padding-bottom:20px}
+        .faq-item.open .faq-a{max-height:300px}
+        .faq-item.open .arrow{transform:rotate(45deg)}
+
+        /* CTA Final */
+        .cta-final{padding:80px 0;text-align:center;position:relative}
+        .cta-final::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,var(--gold-glow) 0%,transparent 60%);pointer-events:none}
+        .cta-final h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,36px);margin-bottom:20px;line-height:1.2}
+        .cta-final h2 em{font-style:italic;color:var(--gold)}
+        .cta-final .sub{color:var(--muted);font-size:16px;max-width:500px;margin:0 auto 32px;line-height:1.6}
+        .cta-whatsapp{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s}
+        .cta-whatsapp:hover{background:#20BD5A;transform:translateY(-2px)}
+
+        /* Footer */
+        footer{padding:48px 0;text-align:center;border-top:1px solid var(--layer)}
+        footer .brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+        footer .tagline{font-size:12px;color:var(--dim);margin-bottom:16px}
+        footer .social a{color:var(--dim);text-decoration:none;margin:0 12px;font-size:13px;transition:color .3s}
+        footer .social a:hover{color:var(--gold)}
+        footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
+
+        /* Float WA */
+        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
+        .float-wa:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(37,211,102,.4)}
+
+        /* Hamburger */
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:200}
+        .hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
+        .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(14,14,14,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+        .mobile-menu.open{display:flex}
+        .mobile-menu a{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);text-decoration:none;transition:color .3s}
+        .mobile-menu a:hover{color:var(--gold)}
+
+        @media(max-width:768px){
+            .steps{grid-template-columns:1fr;max-width:400px}
+            .includes-grid{grid-template-columns:1fr}
+            .persona-grid{grid-template-columns:1fr}
+            nav .nav-links{display:none}
+            .hamburger{display:flex}
+        }
+    </style>
+</head>
+<body>
+
+<a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20a%20Curadoria%20Completa" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
+
+<nav>
+    <a href="/index.html" class="logo">Rotta Curadoria</a>
+    <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#produtos">Produtos</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/sobre.html">Sobre</a>
+        <a href="/quiz.html">Quiz</a>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20curadoria%20de%20viagem">Contato</a>
+    </div>
+    <div class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+<div class="mobile-menu">
+    <a href="/index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="/index.html#produtos" onclick="closeMobileMenu()">Produtos</a>
+    <a href="/blog.html" onclick="closeMobileMenu()">Blog</a>
+    <a href="/sobre.html" onclick="closeMobileMenu()">Sobre</a>
+    <a href="/quiz.html" onclick="closeMobileMenu()">Quiz</a>
+    <a href="https://wa.me/5511968152123" onclick="closeMobileMenu()">Contato</a>
+</div>
+
+<div class="breadcrumb">
+    <a href="/index.html">Home</a><span class="sep">/</span>
+    <a href="/index.html#produtos">Produtos</a><span class="sep">/</span>
+    <span class="current">Curadoria Completa</span>
+</div>
+
+<!-- HERO -->
+<section class="product-hero">
+    <div class="badge fade-up">Experiencia completa</div>
+    <h1 class="fade-up stagger-1">Sua viagem dos sonhos, do zero ao embarque,<br><em>com tudo reservado</em></h1>
+    <p class="subtitle fade-up stagger-2">A gente planeja, pesquisa, reserva e acompanha. Voc&ecirc; s&oacute; precisa fazer as malas e aproveitar cada momento.</p>
+    <div class="price-block fade-up stagger-3">
+        <div class="price-main">R$3.997</div>
+        <div class="price-installment">a partir de &mdash; ou at&eacute; 12x sem juros</div>
+    </div>
+    <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20a%20Curadoria%20Completa" class="cta fade-up stagger-4">Solicitar or&ccedil;amento</a>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="steps-section">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Como funciona</p>
+        <h2 class="fade-up">Do sonho ao embarque em quatro passos</h2>
+        <div class="steps">
+            <div class="step fade-up stagger-1">
+                <div class="step-num">01</div>
+                <div class="step-icon">&#x1F3A7;</div>
+                <h3>Imers&atilde;o</h3>
+                <p>Uma call de 2 horas pra entender tudo sobre voc&ecirc;: estilo, sonhos, restri&ccedil;&otilde;es, datas, or&ccedil;amento e o que faz seus olhos brilharem numa viagem.</p>
+            </div>
+            <div class="step fade-up stagger-2">
+                <div class="step-num">02</div>
+                <div class="step-icon">&#x1F9ED;</div>
+                <h3>Pesquisa &amp; Curadoria</h3>
+                <p>Em 2 semanas, montamos o roteiro completo e pesquisamos cada detalhe: hot&eacute;is, restaurantes, experi&ecirc;ncias, transfers e tudo mais.</p>
+            </div>
+            <div class="step fade-up stagger-3">
+                <div class="step-num">03</div>
+                <div class="step-icon">&#x2705;</div>
+                <h3>Reservas &amp; Confirma&ccedil;&otilde;es</h3>
+                <p>Fazemos todas as reservas por voc&ecirc;. Hotel, restaurante, passeio, ingresso &mdash; tudo confirmado e organizado antes do embarque.</p>
+            </div>
+            <div class="step fade-up stagger-4">
+                <div class="step-num">04</div>
+                <div class="step-icon">&#x1F30D;</div>
+                <h3>Suporte na Viagem</h3>
+                <p>Durante toda a viagem, estamos no WhatsApp 24h. Qualquer imprevisto, mudan&ccedil;a de plano ou d&uacute;vida &mdash; a gente resolve em tempo real.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- O QUE INCLUI -->
+<section class="includes">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">O que est&aacute; incluso</p>
+        <h2 class="fade-up">Tudo que voc&ecirc; precisa &mdash; e mais um pouco</h2>
+        <div class="includes-grid">
+            <div class="include-card fade-up stagger-1">
+                <h4>Roteiro personalizado dia a dia</h4>
+                <p>Cada dia planejado com hor&aacute;rios, trajetos otimizados, alternativas e dicas exclusivas baseadas na nossa experi&ecirc;ncia.</p>
+            </div>
+            <div class="include-card fade-up stagger-2">
+                <h4>Todas as reservas feitas</h4>
+                <p>Hot&eacute;is, restaurantes, passeios, ingressos &mdash; tudo reservado e confirmado. Voc&ecirc; n&atilde;o precisa mexer um dedo.</p>
+            </div>
+            <div class="include-card fade-up stagger-3">
+                <h4>Curadoria gastron&ocirc;mica</h4>
+                <p>Lista de restaurantes selecionados pela Alexandra, com faixa de pre&ccedil;o, prato recomendado e reserva garantida.</p>
+            </div>
+            <div class="include-card fade-up stagger-4">
+                <h4>Suporte 24h por WhatsApp</h4>
+                <p>Durante toda a viagem, estamos dispon&iacute;veis no WhatsApp. Qualquer imprevisto, a gente resolve junto com voc&ecirc;.</p>
+            </div>
+            <div class="include-card fade-up stagger-1">
+                <h4>&Aacute;lbum digital de viagem</h4>
+                <p>Ap&oacute;s a viagem, organizamos suas melhores fotos num &aacute;lbum digital exclusivo. Uma lembran&ccedil;a pra guardar pra sempre.</p>
+            </div>
+            <div class="include-card fade-up stagger-2">
+                <h4>2 rodadas de revis&atilde;o</h4>
+                <p>Apresentamos o plano e voc&ecirc; pede os ajustes que quiser. At&eacute; 2 revis&otilde;es inclusas pra ficar exatamente como voc&ecirc; sonhou.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRA QUEM E -->
+<section class="for-who">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Pra quem &eacute;</p>
+        <h2 class="fade-up">Esse servi&ccedil;o &eacute; perfeito se voc&ecirc;...</h2>
+        <div class="persona-grid">
+            <div class="persona-card fade-up stagger-1">
+                <div class="emoji">&#x23F3;</div>
+                <h4>Valoriza seu tempo</h4>
+                <p>Sua agenda &eacute; cheia e voc&ecirc; n&atilde;o quer perder horas pesquisando. Prefere delegar e receber tudo pronto, com qualidade.</p>
+            </div>
+            <div class="persona-card fade-up stagger-2">
+                <div class="emoji">&#x1F46B;</div>
+                <h4>Quer uma experi&ecirc;ncia impec&aacute;vel a dois</h4>
+                <p>Voc&ecirc; e seu par querem uma viagem especial, sem surpresas desagrad&aacute;veis. Cada detalhe pensado pra criar mem&oacute;rias inesquec&iacute;veis.</p>
+            </div>
+            <div class="persona-card fade-up stagger-3">
+                <div class="emoji">&#x2728;</div>
+                <h4>Quer zero preocupa&ccedil;&atilde;o</h4>
+                <p>N&atilde;o quer se preocupar com reserva, fila, ingresso ou log&iacute;stica. Quer chegar, curtir e saber que tudo j&aacute; est&aacute; cuidado.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="guarantee">
+    <div class="container">
+        <div class="guarantee-box fade-up">
+            <div class="emoji">&#x1F6E1;</div>
+            <h3>Garantia total de satisfa&ccedil;&atilde;o</h3>
+            <p>Se voc&ecirc; n&atilde;o ficar satisfeito com o planejamento antes do in&iacute;cio da viagem, devolvemos 100% do valor investido. Simples assim.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">D&uacute;vidas frequentes</p>
+        <h2 class="fade-up">Perguntas sobre a Curadoria Completa</h2>
+        <div class="faq-list">
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Qual a diferen&ccedil;a entre a Curadoria Completa e o Roteiro Express?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>No Roteiro Express, entregamos o roteiro com sugest&otilde;es e links pra voc&ecirc; reservar. Na Curadoria Completa, a gente faz tudo: pesquisa, reserva, confirma e ainda acompanha durante a viagem inteira pelo WhatsApp.</p></div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">O pre&ccedil;o inclui as di&aacute;rias de hotel e passagens?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>N&atilde;o. O valor da Curadoria Completa &eacute; pelo servi&ccedil;o de planejamento, pesquisa, reservas e acompanhamento. Os custos de hotel, passagem, restaurantes e experi&ecirc;ncias s&atilde;o por sua conta &mdash; mas a gente negocia as melhores condi&ccedil;&otilde;es pra voc&ecirc;.</p></div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Com quanto tempo de anteced&ecirc;ncia preciso contratar?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>O ideal &eacute; pelo menos 45 dias antes da viagem. Assim temos tempo de fazer uma pesquisa caprichada e garantir as melhores reservas. Em casos urgentes, conversamos pra ver o que &eacute; poss&iacute;vel.</p></div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">E se acontecer um imprevisto durante a viagem?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>Estamos no WhatsApp 24h durante toda a sua viagem. Voo cancelado, restaurante fechou, quer mudar o plano &mdash; a gente resolve em tempo real, sem voc&ecirc; precisar se estressar.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+    <div class="container">
+        <div class="divider" style="margin-bottom:48px"></div>
+        <h2 class="fade-up">Pronto pra viver uma viagem<br><em>sem se preocupar com nada?</em></h2>
+        <p class="sub fade-up">Fale com a gente, conte o que voc&ecirc; sonha &mdash; e a gente cuida de cada detalhe pra voc&ecirc;.</p>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20a%20Curadoria%20Completa" class="cta-whatsapp fade-up">&#x1F4AC; Solicitar or&ccedil;amento via WhatsApp</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p class="brand">Rotta Curadoria</p>
+        <p class="tagline">Curado por Marcelo & Alexandra</p>
+        <div class="social">
+            <a href="https://instagram.com/rotta.curadoria">Instagram</a>
+            <a href="https://youtube.com/@rotta.curadoria">YouTube</a>
+            <a href="https://tiktok.com/@rotta.curadoria">TikTok</a>
+        </div>
+        <p class="legal">N&atilde;o somos ag&ecirc;ncia de viagem. Somos curadores de experi&ecirc;ncias.<br>Todos os pre&ccedil;os s&atilde;o estimativas e podem variar conforme a data e destino.<br>&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+function closeMobileMenu(){document.querySelector('.hamburger').classList.remove('open');document.querySelector('.mobile-menu').classList.remove('open')}
+</script>
+
+</body>
+</html>

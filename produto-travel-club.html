@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Club Anual | Rotta Curadoria</title>
+    <meta name="description" content="Seu curador pessoal de viagens, o ano inteiro. A partir de R$8.000/ano ou R$697/mes. Consultas ilimitadas, sugestoes trimestrais e acesso VIP.">
+    <meta property="og:title" content="Travel Club Anual | Rotta Curadoria">
+    <meta property="og:description" content="Seu curador pessoal de viagens, o ano inteiro. A partir de R$8.000/ano ou R$697/mes.">
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="https://www.rottacuradoria.com/produto-travel-club.html">
+    <meta property="og:site_name" content="Rotta Curadoria">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Travel Club Anual",
+        "description": "Seu curador pessoal de viagens, o ano inteiro. Consultas ilimitadas, sugestoes trimestrais exclusivas e acesso VIP.",
+        "brand": { "@type": "Brand", "name": "Rotta Curadoria" },
+        "offers": {
+            "@type": "Offer",
+            "price": "8000",
+            "priceCurrency": "BRL",
+            "availability": "https://schema.org/InStock"
+        }
+    }
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --coral:#E8785A;--green:#4CAF7D;--blue:#5B8DEF
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:1080px;margin:0 auto;padding:0 24px}
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .divider{width:60px;height:1px;background:var(--gold);margin:0 auto;opacity:.3}
+
+        nav{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto}
+        nav .logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+        nav .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:24px;transition:color .3s}
+        nav .nav-links a:hover{color:var(--gold)}
+
+        .breadcrumb{padding:0 24px;max-width:1080px;margin:0 auto}
+        .breadcrumb a,.breadcrumb span{font-size:13px;color:var(--dim);text-decoration:none}
+        .breadcrumb a:hover{color:var(--gold)}
+        .breadcrumb .sep{margin:0 8px;color:var(--dim)}
+        .breadcrumb .current{color:var(--gold)}
+
+        .product-hero{padding:60px 24px 80px;text-align:center;position:relative}
+        .product-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .product-hero .badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:24px}
+        .product-hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);font-weight:700;line-height:1.15;margin-bottom:16px;max-width:700px;margin-left:auto;margin-right:auto}
+        .product-hero h1 em{font-style:italic;color:var(--gold)}
+        .product-hero .subtitle{font-size:18px;color:var(--muted);max-width:520px;margin:0 auto 16px;line-height:1.6}
+        .product-hero .price-block{margin:32px auto;max-width:400px}
+        .product-hero .price-main{font-family:'Playfair Display',serif;font-size:42px;color:var(--gold);font-weight:700}
+        .product-hero .price-main small{font-size:20px;color:var(--dim);font-weight:400}
+        .product-hero .price-installment{font-size:14px;color:var(--dim);margin-top:4px}
+        .product-hero .cta{display:inline-block;background:var(--gold);color:var(--bg);padding:16px 48px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s;letter-spacing:.5px;margin-top:24px}
+        .product-hero .cta:hover{background:#D4B87F;transform:translateY(-2px);box-shadow:0 12px 32px rgba(197,165,114,.2)}
+
+        .steps-section{padding:80px 0;background:var(--card)}
+        .steps-section h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:60px}
+        .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:900px;margin:0 auto}
+        .step{text-align:center;padding:32px 24px;background:var(--bg);border-radius:16px;border:1px solid var(--layer);position:relative}
+        .step-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--gold);opacity:.2;position:absolute;top:16px;right:20px}
+        .step-icon{font-size:32px;margin-bottom:16px}
+        .step h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:12px}
+        .step p{color:var(--muted);font-size:14px;line-height:1.6}
+
+        .includes{padding:80px 0}
+        .includes h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:48px}
+        .includes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:900px;margin:0 auto}
+        .include-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px;border-left:3px solid var(--gold)}
+        .include-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px}
+        .include-card p{color:var(--muted);font-size:14px;line-height:1.6}
+
+        .for-who{padding:80px 0;background:var(--card)}
+        .for-who h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:48px}
+        .persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:900px;margin:0 auto}
+        .persona-card{background:var(--bg);border:1px solid var(--layer);border-radius:12px;padding:24px;text-align:center}
+        .persona-card .emoji{font-size:32px;margin-bottom:12px}
+        .persona-card h4{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:8px}
+        .persona-card p{color:var(--muted);font-size:14px;line-height:1.6}
+
+        .guarantee{padding:60px 0;text-align:center}
+        .guarantee-box{max-width:600px;margin:0 auto;background:var(--card);border:1px solid var(--gold);border-radius:16px;padding:40px 32px}
+        .guarantee-box .emoji{font-size:40px;margin-bottom:16px}
+        .guarantee-box h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:12px}
+        .guarantee-box p{color:var(--muted);font-size:15px;line-height:1.7}
+
+        .faq{padding:80px 0}
+        .faq h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:48px}
+        .faq-list{max-width:700px;margin:0 auto}
+        .faq-item{border-bottom:1px solid var(--layer);overflow:hidden}
+        .faq-q{padding:20px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:500;transition:color .3s}
+        .faq-q:hover{color:var(--gold)}
+        .faq-q .arrow{color:var(--gold);font-size:20px;transition:transform .3s}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+        .faq-a p{color:var(--muted);font-size:14px;line-height:1.7;padding-bottom:20px}
+        .faq-item.open .faq-a{max-height:300px}
+        .faq-item.open .arrow{transform:rotate(45deg)}
+
+        .cta-final{padding:80px 0;text-align:center;position:relative}
+        .cta-final::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,var(--gold-glow) 0%,transparent 60%);pointer-events:none}
+        .cta-final h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,36px);margin-bottom:20px;line-height:1.2}
+        .cta-final h2 em{font-style:italic;color:var(--gold)}
+        .cta-final .sub{color:var(--muted);font-size:16px;max-width:500px;margin:0 auto 32px;line-height:1.6}
+        .cta-whatsapp{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s}
+        .cta-whatsapp:hover{background:#20BD5A;transform:translateY(-2px)}
+
+        footer{padding:48px 0;text-align:center;border-top:1px solid var(--layer)}
+        footer .brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+        footer .tagline{font-size:12px;color:var(--dim);margin-bottom:16px}
+        footer .social a{color:var(--dim);text-decoration:none;margin:0 12px;font-size:13px;transition:color .3s}
+        footer .social a:hover{color:var(--gold)}
+        footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
+
+        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
+        .float-wa:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(37,211,102,.4)}
+
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:200}
+        .hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
+        .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(14,14,14,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+        .mobile-menu.open{display:flex}
+        .mobile-menu a{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);text-decoration:none;transition:color .3s}
+        .mobile-menu a:hover{color:var(--gold)}
+
+        @media(max-width:768px){
+            .steps{grid-template-columns:1fr;max-width:400px}
+            .includes-grid{grid-template-columns:1fr}
+            .persona-grid{grid-template-columns:1fr}
+            nav .nav-links{display:none}
+            .hamburger{display:flex}
+        }
+    </style>
+</head>
+<body>
+
+<a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20Travel%20Club%20Anual" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
+
+<nav>
+    <a href="/index.html" class="logo">Rotta Curadoria</a>
+    <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#produtos">Produtos</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/sobre.html">Sobre</a>
+        <a href="/quiz.html">Quiz</a>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20curadoria%20de%20viagem">Contato</a>
+    </div>
+    <div class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+<div class="mobile-menu">
+    <a href="/index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="/index.html#produtos" onclick="closeMobileMenu()">Produtos</a>
+    <a href="/blog.html" onclick="closeMobileMenu()">Blog</a>
+    <a href="/sobre.html" onclick="closeMobileMenu()">Sobre</a>
+    <a href="/quiz.html" onclick="closeMobileMenu()">Quiz</a>
+    <a href="https://wa.me/5511968152123" onclick="closeMobileMenu()">Contato</a>
+</div>
+
+<div class="breadcrumb">
+    <a href="/index.html">Home</a><span class="sep">/</span>
+    <a href="/index.html#produtos">Produtos</a><span class="sep">/</span>
+    <span class="current">Travel Club Anual</span>
+</div>
+
+<!-- HERO -->
+<section class="product-hero">
+    <div class="badge fade-up">Assinatura anual</div>
+    <h1 class="fade-up stagger-1">Seu curador pessoal de viagens,<br><em>o ano inteiro</em></h1>
+    <p class="subtitle fade-up stagger-2">Consultas ilimitadas, sugest&otilde;es trimestrais exclusivas, reservas priorit&aacute;rias e acesso a condi&ccedil;&otilde;es especiais &mdash; 365 dias por ano.</p>
+    <div class="price-block fade-up stagger-3">
+        <div class="price-main">R$8.000 <small>/ano</small></div>
+        <div class="price-installment">ou R$697/m&ecirc;s &mdash; cancele a qualquer momento ap&oacute;s 3 meses</div>
+    </div>
+    <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20Travel%20Club%20Anual" class="cta fade-up stagger-4">Quero ser membro</a>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="steps-section">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Como funciona</p>
+        <h2 class="fade-up">Tr&ecirc;s passos pra ter seu curador o ano todo</h2>
+        <div class="steps">
+            <div class="step fade-up stagger-1">
+                <div class="step-num">01</div>
+                <div class="step-icon">&#x1F3A7;</div>
+                <h3>Onboarding</h3>
+                <p>Uma call de boas-vindas pra entender seu perfil de viajante: destinos dos sonhos, frequ&ecirc;ncia, estilo, or&ccedil;amento e prefer&ecirc;ncias.</p>
+            </div>
+            <div class="step fade-up stagger-2">
+                <div class="step-num">02</div>
+                <div class="step-icon">&#x1F4CB;</div>
+                <h3>Mapeamento de perfil</h3>
+                <p>Criamos seu perfil exclusivo de viajante. Cada sugest&atilde;o que fizermos ao longo do ano ser&aacute; baseada nesse mapeamento.</p>
+            </div>
+            <div class="step fade-up stagger-3">
+                <div class="step-num">03</div>
+                <div class="step-icon">&#x2728;</div>
+                <h3>Sugest&otilde;es &amp; Acesso VIP</h3>
+                <p>A cada trimestre, voc&ecirc; recebe sugest&otilde;es curadas de viagem. Al&eacute;m disso, tem acesso priorit&aacute;rio a ofertas e reservas exclusivas.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- O QUE INCLUI -->
+<section class="includes">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">O que est&aacute; incluso</p>
+        <h2 class="fade-up">Tudo que um viajante frequente precisa</h2>
+        <div class="includes-grid">
+            <div class="include-card fade-up stagger-1">
+                <h4>Consultas ilimitadas</h4>
+                <p>Sempre que quiser planejar uma viagem, tirar d&uacute;vidas ou pedir recomenda&ccedil;&otilde;es &mdash; &eacute; s&oacute; chamar. Sem limite de mensagens ou calls.</p>
+            </div>
+            <div class="include-card fade-up stagger-2">
+                <h4>4 sugest&otilde;es trimestrais curadas</h4>
+                <p>A cada trimestre, receba uma curadoria personalizada com destino, roteiro resumido e estimativa de investimento &mdash; tudo baseado no seu perfil.</p>
+            </div>
+            <div class="include-card fade-up stagger-3">
+                <h4>Reservas priorit&aacute;rias</h4>
+                <p>Membros do Club t&ecirc;m prioridade na fila. Quando decidir viajar, a gente come&ccedil;a a trabalhar imediatamente.</p>
+            </div>
+            <div class="include-card fade-up stagger-4">
+                <h4>Ofertas e condi&ccedil;&otilde;es exclusivas</h4>
+                <p>Acesso a tarifas especiais de hot&eacute;is, experi&ecirc;ncias e pacotes que s&oacute; nossos membros conseguem.</p>
+            </div>
+            <div class="include-card fade-up stagger-1">
+                <h4>Comunidade VIP</h4>
+                <p>Grupo exclusivo com outros membros do Club. Troca de experi&ecirc;ncias, dicas e acesso a eventos especiais.</p>
+            </div>
+            <div class="include-card fade-up stagger-2">
+                <h4>1 roteiro completo por trimestre</h4>
+                <p>Al&eacute;m das sugest&otilde;es, voc&ecirc; tem direito a 1 roteiro completo e personalizado a cada trimestre &mdash; incluso na assinatura.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRA QUEM E -->
+<section class="for-who">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Pra quem &eacute;</p>
+        <h2 class="fade-up">Esse servi&ccedil;o &eacute; perfeito se voc&ecirc;...</h2>
+        <div class="persona-grid">
+            <div class="persona-card fade-up stagger-1">
+                <div class="emoji">&#x2708;</div>
+                <h4>Viaja com frequ&ecirc;ncia</h4>
+                <p>Voc&ecirc; viaja 2 a 3 vezes por ano e quer ter sempre algu&eacute;m de confian&ccedil;a pra cuidar do planejamento.</p>
+            </div>
+            <div class="persona-card fade-up stagger-2">
+                <div class="emoji">&#x1F46A;</div>
+                <h4>Planeja viagens em fam&iacute;lia</h4>
+                <p>Com fam&iacute;lia, cada viagem precisa de cuidado especial. Ter um curador o ano todo facilita tudo.</p>
+            </div>
+            <div class="persona-card fade-up stagger-3">
+                <div class="emoji">&#x1F48E;</div>
+                <h4>Quer acesso a condi&ccedil;&otilde;es especiais</h4>
+                <p>Voc&ecirc; sabe que boas conex&otilde;es abrem portas. Quer acesso a tarifas e experi&ecirc;ncias que n&atilde;o est&atilde;o dispon&iacute;veis pro p&uacute;blico geral.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="guarantee">
+    <div class="container">
+        <div class="guarantee-box fade-up">
+            <div class="emoji">&#x1F513;</div>
+            <h3>Cancele quando quiser</h3>
+            <p>Ap&oacute;s os primeiros 3 meses, voc&ecirc; pode cancelar a assinatura a qualquer momento. Sem multa, sem burocracia. A gente confia no valor que entrega.</p>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">D&uacute;vidas frequentes</p>
+        <h2 class="fade-up">Perguntas sobre o Travel Club Anual</h2>
+        <div class="faq-list">
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">O que significa &ldquo;consultas ilimitadas&rdquo;?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>Voc&ecirc; pode nos chamar por WhatsApp ou agendar calls sempre que quiser pra discutir viagens, pedir recomenda&ccedil;&otilde;es, tirar d&uacute;vidas sobre destinos ou pedir ajuda com qualquer aspecto de viagem. Sem limite.</p></div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">O roteiro trimestral inclui reservas?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>O roteiro trimestral incluso &eacute; o planejamento completo com sugest&otilde;es e links. Se quiser que a gente fa&ccedil;a as reservas tamb&eacute;m, &eacute; poss&iacute;vel com condi&ccedil;&otilde;es especiais de membro.</p></div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Posso usar o Club pra viagens de trabalho tamb&eacute;m?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>Com certeza! Muitos membros usam o Club tanto pra viagens de lazer quanto de neg&oacute;cios. A gente adapta as recomenda&ccedil;&otilde;es pro contexto de cada viagem.</p></div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">E se eu n&atilde;o viajar num trimestre, perco o roteiro?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>N&atilde;o! O roteiro acumula. Se n&atilde;o usar num trimestre, voc&ecirc; pode usar no pr&oacute;ximo. O importante &eacute; que esteja dispon&iacute;vel quando voc&ecirc; precisar.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+    <div class="container">
+        <div class="divider" style="margin-bottom:48px"></div>
+        <h2 class="fade-up">Pronto pra ter um curador de viagens<br><em>dispon&iacute;vel o ano inteiro?</em></h2>
+        <p class="sub fade-up">Fale com a gente e descubra como o Travel Club pode transformar a forma como voc&ecirc; viaja.</p>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20Travel%20Club%20Anual" class="cta-whatsapp fade-up">&#x1F4AC; Quero ser membro via WhatsApp</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p class="brand">Rotta Curadoria</p>
+        <p class="tagline">Curado por Marcelo & Alexandra</p>
+        <div class="social">
+            <a href="https://instagram.com/rotta.curadoria">Instagram</a>
+            <a href="https://youtube.com/@rotta.curadoria">YouTube</a>
+            <a href="https://tiktok.com/@rotta.curadoria">TikTok</a>
+        </div>
+        <p class="legal">N&atilde;o somos ag&ecirc;ncia de viagem. Somos curadores de experi&ecirc;ncias.<br>Todos os pre&ccedil;os s&atilde;o estimativas e podem variar conforme a data e destino.<br>&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+function closeMobileMenu(){document.querySelector('.hamburger').classList.remove('open');document.querySelector('.mobile-menu').classList.remove('open')}
+</script>
+
+</body>
+</html>
