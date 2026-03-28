@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Croacia — 7 Dias pelo Adriatico | Rotta Curadoria</title>
+    <meta name="description" content="Roteiro curado de 7 dias na Croacia: Split, Hvar, Dubrovnik e Lagos Plitvice. R$9.400 por casal com tudo planejado.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;--gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);--text:#F2EDE8;--muted:#999;--dim:#666}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:800px;margin:0 auto;padding:0 24px}
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;background:rgba(14,14,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(42,42,42,.5)}
+        .nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .nav-brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;text-decoration:none}
+        .nav-links{display:flex;gap:24px;align-items:center}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .3s}
+        .nav-links a:hover{color:var(--gold)}
+        .nav-links a.active{color:var(--gold);font-weight:500}
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:200}
+        .hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
+        .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(14,14,14,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+        .mobile-menu.open{display:flex}
+        .mobile-menu a{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);text-decoration:none;transition:color .3s}
+        .mobile-menu a:hover{color:var(--gold)}
+        .journey-hero{padding:140px 24px 60px;text-align:center;position:relative}
+        .journey-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .journey-hero .back{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;margin-bottom:24px;transition:opacity .3s}
+        .journey-hero .back:hover{opacity:.7}
+        .journey-hero .flag{font-size:56px;margin-bottom:16px}
+        .journey-hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);font-weight:700;margin-bottom:12px}
+        .journey-hero .meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:8px}
+        .journey-hero .meta span{font-size:13px;color:var(--muted)}
+        .journey-hero .meta span strong{color:var(--gold)}
+        .journey-hero .price-hero{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);font-weight:700;margin-top:16px}
+        .journey-hero .price-hero small{font-size:14px;color:var(--dim);font-weight:400}
+        .photo-placeholder{background:var(--card);border:1px solid var(--layer);border-radius:16px;height:320px;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px;margin-bottom:48px}
+        .photo-placeholder p{color:var(--dim);font-size:13px;line-height:1.6;max-width:300px}
+        .section{padding:48px 0;border-top:1px solid var(--layer)}
+        .section:first-of-type{border-top:none}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .section h2{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:24px;line-height:1.3}
+        .section p{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:16px}
+        .day-card{background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:28px 24px;margin-bottom:16px;position:relative;overflow:hidden}
+        .day-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:.5}
+        .day-card .day-num{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+        .day-card h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:10px;color:var(--text)}
+        .day-card p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+        .day-card .highlight{display:inline-block;background:var(--gold-dim);color:var(--gold);font-size:11px;padding:4px 10px;border-radius:20px;margin-top:10px;font-weight:500}
+        .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+        .info-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px}
+        .info-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px;color:var(--text)}
+        .info-card p{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
+        .info-card .tag{font-size:11px;color:var(--gold);margin-top:8px;display:block}
+        .cost-table{width:100%;border-collapse:collapse;margin-bottom:16px}
+        .cost-table th{text-align:left;font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid var(--layer)}
+        .cost-table td{padding:12px 0;font-size:14px;color:var(--muted);border-bottom:1px solid rgba(42,42,42,.3)}
+        .cost-table td:last-child{text-align:right;color:var(--text);font-weight:500}
+        .cost-table tr.total td{color:var(--gold);font-weight:700;font-size:16px;border-top:2px solid var(--gold);border-bottom:none}
+        .tip-card{background:linear-gradient(135deg,var(--card) 0%,#1F1A14 100%);border:1px solid rgba(197,165,114,.2);border-radius:16px;padding:28px 24px;margin-bottom:16px}
+        .tip-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:10px;color:var(--gold)}
+        .tip-card p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+        .cta-section{padding:80px 0;text-align:center;position:relative}
+        .cta-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,var(--gold-glow) 0%,transparent 60%);pointer-events:none}
+        .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,32px);margin-bottom:16px}
+        .cta-section h2 em{font-style:italic;color:var(--gold)}
+        .cta-section p{color:var(--muted);font-size:15px;max-width:480px;margin:0 auto 32px}
+        .cta-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s}
+        .cta-wa:hover{background:#20BD5A;transform:translateY(-2px)}
+        .cta-alt{display:inline-block;margin-top:16px;color:var(--gold);text-decoration:none;font-size:14px;transition:opacity .3s}
+        .cta-alt:hover{opacity:.7}
+        .related{padding:60px 0;border-top:1px solid var(--layer)}
+        .related h2{font-family:'Playfair Display',serif;font-size:24px;text-align:center;margin-bottom:32px}
+        .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .related-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px;text-align:center;text-decoration:none;color:var(--text);transition:all .3s}
+        .related-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+        .related-card .r-flag{font-size:28px;margin-bottom:8px}
+        .related-card h4{font-family:'Playfair Display',serif;font-size:15px;margin-bottom:4px}
+        .related-card .r-price{font-size:13px;color:var(--gold)}
+        footer{padding:48px 0;text-align:center;border-top:1px solid var(--layer)}
+        footer .brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+        footer .tagline{font-size:12px;color:var(--dim);margin-bottom:16px}
+        footer .social a{color:var(--dim);text-decoration:none;margin:0 12px;font-size:13px;transition:color .3s}
+        footer .social a:hover{color:var(--gold)}
+        footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
+        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
+        .float-wa:hover{transform:scale(1.1)}
+        @media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.info-grid{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/index.html" class="nav-brand">Rotta Curadoria</a>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/index.html#produtos">Produtos</a>
+            <a href="/jornadas.html" class="active">Destinos</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/sobre.html">Sobre</a>
+            <a href="/quiz.html">Quiz</a>
+        </div>
+        <div class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+<div class="mobile-menu">
+    <a href="/index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="/index.html#produtos" onclick="closeMobileMenu()">Produtos</a>
+    <a href="/jornadas.html" onclick="closeMobileMenu()">Destinos</a>
+    <a href="/blog.html" onclick="closeMobileMenu()">Blog</a>
+    <a href="/sobre.html" onclick="closeMobileMenu()">Sobre</a>
+    <a href="/quiz.html" onclick="closeMobileMenu()">Quiz</a>
+</div>
+<a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20roteiro%20da%20Croacia" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
+
+<!-- HERO -->
+<section class="journey-hero">
+    <a href="/jornadas.html" class="back fade-up">&#x2190; Todos os destinos</a>
+    <div class="flag fade-up">&#x1F1ED;&#x1F1F7;</div>
+    <h1 class="fade-up">Croacia</h1>
+    <div class="meta fade-up">
+        <span><strong>7</strong> dias</span>
+        <span><strong>Split</strong> · Hvar · Dubrovnik · Plitvice</span>
+        <span>Ideal pra <strong>casais</strong></span>
+    </div>
+    <div class="price-hero fade-up">R$9.400 <small>/casal</small></div>
+</section>
+
+<div class="container">
+
+    <div class="photo-placeholder fade-up">
+        <p>Foto: muralhas de Dubrovnik vistas do mar, com telhados laranjas, mar Adriatico azul turquesa e ceu limpo ao fundo</p>
+    </div>
+
+    <div class="section fade-up">
+        <p class="section-label">Sobre essa jornada</p>
+        <h2>7 dias pelo Adriatico cristalino</h2>
+        <p>A Croacia e a Europa que pouca gente conhece — e quando conhece, nao esquece mais. Mar com tons de azul que nao existem no Caribe, cidades medievais que parecem cenario de filme (e sao — Game of Thrones foi filmado aqui) e uma gastronomia que surpreende a cada refeicao.</p>
+        <p>Esse roteiro combina historia, natureza e praia de um jeito que so a Croacia consegue. De Split a Dubrovnik, passando pela ilha de Hvar e pelos lagos de Plitvice — cada dia e um cenario diferente.</p>
+    </div>
+
+    <!-- DAY BY DAY -->
+    <div class="section fade-up">
+        <p class="section-label">Dia a dia</p>
+        <h2>Roteiro completo</h2>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 1</div>
+            <h3>Chegada em Split</h3>
+            <p>Voo ate Split (via conexao europeia — geralmente Frankfurt, Munique ou Istambul). Check-in no hotel no centro historico. Tarde livre pra explorar o Palacio de Diocleciano — o centro vivo mais antigo do mundo. Jantar no Riva, a beira-mar.</p>
+            <span class="highlight">Palacio de Diocleciano: 1.700 anos e ainda vivo</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 2</div>
+            <h3>Split — Exploracao completa</h3>
+            <p>Manha no Mercado de Split (frutas, queijos, presuntos). Subida ao campanario da Catedral de Sao Domnius (melhor vista da cidade). Tarde na Praia de Bacvice. Noite: jantar no Dvor — restaurante nas pedras com vista pro mar e por do sol.</p>
+            <span class="highlight">Dvor: reserve mesa ao por do sol — imperdivel</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 3</div>
+            <h3>Ilha de Hvar</h3>
+            <p>Ferry de Split ate Hvar (1h). Chegada na ilha mais glamourosa da Croacia. Fortaleza Espanhola (vista panoramica). Almoco no Gariful (frutos do mar). Tarde nas Ilhas Pakleni (barco pra praias isoladas). Noite no Hula Hula Bar — por do sol lendario.</p>
+            <span class="highlight">Hvar: a "Ibiza da Croacia" — mas com muito mais charme</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 4</div>
+            <h3>Hvar + Transfer pra Dubrovnik</h3>
+            <p>Manha livre em Hvar — praia ou alugue um scooter pra explorar vilas do interior (lavanda em junho!). Tarde: ferry ou catamara ate Dubrovnik (4h de viagem panoramica pelo Adriatico). Check-in em Dubrovnik. Jantar na cidade velha.</p>
+            <span class="highlight">A viagem de ferry e um passeio em si — fique no deck</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 5</div>
+            <h3>Dubrovnik — A Perola do Adriatico</h3>
+            <p>Manha: caminhada pelas muralhas de Dubrovnik (2km de circuito com vistas absurdas). Rua Stradun. Almoco no Nautika (restaurante estrelado com vista pro mar). Tarde: teleferico pro Monte Srd (panoramica da cidade inteira). Noite: Buza Bar — drinks nas pedras sobre o mar.</p>
+            <span class="highlight">Muralhas: va as 8h da manha pra evitar multidao</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 6</div>
+            <h3>Lagos Plitvice (bate-volta ou pernoite)</h3>
+            <p>Carro alugado ou tour ate o Parque Nacional dos Lagos Plitvice (3h30 de Dubrovnik, ou faca a partir de Split no dia 2). 16 lagos em cascata com agua verde-esmeralda. Trilhas de madeira sobre as aguas. Um dos lugares mais bonitos do planeta. Volta a Dubrovnik a noite.</p>
+            <span class="highlight">Plitvice: UNESCO — chegue cedo, limite de visitantes</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 7</div>
+            <h3>Dubrovnik + Despedida</h3>
+            <p>Manha livre — praia de Banje, compras de artesanato local (lavanda, azeite de oliva, vinho croata). Ultimo almoco com vista pro Adriatico. Transfer ao aeroporto. Volta com saudade e mil fotos que parecem cartao postal.</p>
+            <span class="highlight">Leve azeite de oliva croata — dos melhores do mundo</span>
+        </div>
+    </div>
+
+    <!-- ONDE FICAR -->
+    <div class="section fade-up">
+        <p class="section-label">Onde ficar</p>
+        <h2>Hospedagem curada</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Heritage Hotel Antique Split</h4>
+                <p>Dentro do Palacio de Diocleciano. Quartos com historia, servico impecavel e localizacao perfeita. Boutique de verdade.</p>
+                <span class="tag">$$$$ — a partir de R$700/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Adriana Hvar Spa Hotel</h4>
+                <p>De frente pro porto de Hvar, com rooftop bar e spa com vista pro mar. A melhor opcao da ilha pra casais.</p>
+                <span class="tag">$$$$ — a partir de R$800/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Hotel Stari Grad Dubrovnik</h4>
+                <p>Dentro das muralhas da cidade velha. Charme medieval com conforto moderno. Acordar dentro de Dubrovnik nao tem preco.</p>
+                <span class="tag">$$$ — a partir de R$550/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Apartamento no centro (Airbnb)</h4>
+                <p>Opcao mais economica em todas as cidades. Apartamentos com cozinha, vista e localizacao central. Otimo custo-beneficio.</p>
+                <span class="tag">$$ — a partir de R$250/noite</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ONDE COMER -->
+    <div class="section fade-up">
+        <p class="section-label">Onde comer — dicas da Alexandra</p>
+        <h2>Gastronomia curada</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Dvor (Split)</h4>
+                <p>Restaurante nas pedras sobre o mar. Frutos do mar frescos, risoto negro e vinho Plavac Mali local. Romantico ao extremo.</p>
+                <span class="tag">$$$ — jantar imperdivel</span>
+            </div>
+            <div class="info-card">
+                <h4>Gariful (Hvar)</h4>
+                <p>Frutos do mar direto do barco pra mesa. Lagosta grelhada, polvo e macarrao com tinta de lula. Mesas na beira do porto.</p>
+                <span class="tag">$$$$ — experiencia premium</span>
+            </div>
+            <div class="info-card">
+                <h4>Nautika (Dubrovnik)</h4>
+                <p>O melhor restaurante de Dubrovnik. Vista pra muralhas e pro mar. Menu degustacao excelente. Reserve com 1 semana de antecedencia.</p>
+                <span class="tag">$$$$ — experiencia gastronomica</span>
+            </div>
+            <div class="info-card">
+                <h4>Konoba Marjan (Split)</h4>
+                <p>Taberna tipica croata com pratos caseiros, vinho da casa e precos honestos. Prove o pasticada (carne com nhoque) — prato nacional.</p>
+                <span class="tag">$$ — almoco autentico</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUANTO CUSTA -->
+    <div class="section fade-up">
+        <p class="section-label">Investimento</p>
+        <h2>Quanto custa essa jornada</h2>
+        <table class="cost-table">
+            <tr><th>Item</th><th style="text-align:right">Estimativa / casal</th></tr>
+            <tr><td>Passagens aereas (ida e volta)</td><td>R$4.000</td></tr>
+            <tr><td>Hospedagem (6 noites)</td><td>R$2.800</td></tr>
+            <tr><td>Alimentacao (7 dias)</td><td>R$1.200</td></tr>
+            <tr><td>Transporte interno (ferry + carro)</td><td>R$600</td></tr>
+            <tr><td>Passeios e ingressos</td><td>R$400</td></tr>
+            <tr><td>Seguro viagem</td><td>R$200</td></tr>
+            <tr><td>Extras</td><td>R$200</td></tr>
+            <tr class="total"><td>Total estimado</td><td>R$9.400</td></tr>
+        </table>
+        <p style="font-size:13px;color:var(--dim)">* Valores estimados para 2026. Passagens saindo de Sao Paulo com 1 conexao. Precos podem variar conforme temporada e antecedencia de compra.</p>
+    </div>
+
+    <!-- MELHOR EPOCA -->
+    <div class="section fade-up">
+        <p class="section-label">Quando ir</p>
+        <h2>Melhor epoca</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Maio a Junho</h4>
+                <p>Melhor epoca. Mar ja esta quentinho pra nadar, menos turistas que julho/agosto, precos moderados e dias longos (ate 21h de luz).</p>
+                <span class="tag">Melhor epoca — recomendamos</span>
+            </div>
+            <div class="info-card">
+                <h4>Setembro</h4>
+                <p>Mar ainda quente, turistas ja diminuindo, precos caindo. Setembro e o "segredo" da Croacia. Quase tao bom quanto junho.</p>
+                <span class="tag">Excelente alternativa</span>
+            </div>
+            <div class="info-card">
+                <h4>Julho a Agosto</h4>
+                <p>Alta temporada. Lotado e caro, especialmente Dubrovnik e Hvar. Mar perfeito, mas multidoes podem atrapalhar. Reserve tudo com antecedencia.</p>
+                <span class="tag">Lotado — evitar se possivel</span>
+            </div>
+            <div class="info-card">
+                <h4>Outubro a Abril</h4>
+                <p>Baixa temporada. Muitos restaurantes e hoteis fecham nas ilhas. Plitvice fica lindo no outono mas frio. Split e Dubrovnik funcionam, mas sem praia.</p>
+                <span class="tag">Apenas cidades — sem ilhas</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- DICAS -->
+    <div class="section fade-up">
+        <p class="section-label">Dicas do curador</p>
+        <h2>O que a gente aprendeu la</h2>
+
+        <div class="tip-card">
+            <h4>Game of Thrones: va no tour</h4>
+            <p>Mesmo se voce nao e fa, o tour de Game of Thrones em Dubrovnik e incrivel — passa pelos cenarios reais e conta a historia da cidade. Vale cada centavo e dura 2 horas.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Leve sapato pra pedra</h4>
+            <p>As praias da Croacia sao de pedra (nao areia). Leve sapatilhas aquaticas — custam R$30 e salvam seus pes. Voce vai agradecer no dia 1.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Kunas ja nao existem — e Euro agora</h4>
+            <p>Desde 2023, a Croacia adotou o Euro. Cartao internacional funciona em todo lugar. Leve pouco dinheiro em especie, apenas pra mercados e konobas pequenas.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Ostras de Ston — experiencia obrigatoria</h4>
+            <p>No caminho entre Split e Dubrovnik, pare em Ston (40min de Dubrovnik). Ostras frescas a beira-mar por precos absurdamente baixos. Uma das melhores experiencias gastronomicas da viagem.</p>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section fade-up">
+        <h2>Quer esse roteiro <em>personalizado</em>?</h2>
+        <p>A gente adapta tudo — combinamos com Montenegro, Bosnia ou Italia se voce quiser estender.</p>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20o%20roteiro%20personalizado%20da%20Croacia%20%F0%9F%87%AD%F0%9F%87%B7" class="cta-wa">&#x1F4AC; Personalizar esse roteiro</a>
+        <br>
+        <a href="/produto-curadoria-completa.html" class="cta-alt">Ou veja nossos servicos de curadoria &#x2192;</a>
+    </div>
+
+    <!-- RELATED -->
+    <div class="related fade-up">
+        <h2>Destinos parecidos</h2>
+        <div class="related-grid">
+            <a href="/jornadas/italia.html" class="related-card">
+                <div class="r-flag">&#x1F1EE;&#x1F1F9;</div>
+                <h4>Italia</h4>
+                <div class="r-price">R$10.400/casal</div>
+            </a>
+            <a href="/jornadas/cote-dazur.html" class="related-card">
+                <div class="r-flag">&#x1F1EB;&#x1F1F7;</div>
+                <h4>Franca (Cote d'Azur)</h4>
+                <div class="r-price">R$8.500/casal</div>
+            </a>
+            <a href="/jornadas/portugal.html" class="related-card">
+                <div class="r-flag">&#x1F1F5;&#x1F1F9;</div>
+                <h4>Portugal</h4>
+                <div class="r-price">R$9.000/casal</div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container" style="max-width:1080px">
+        <p class="brand">Rotta Curadoria</p>
+        <p class="tagline">Curado por Marcelo & Alexandra</p>
+        <div class="social">
+            <a href="https://instagram.com/rotta.curadoria">Instagram</a>
+            <a href="https://youtube.com/@rotta.curadoria">YouTube</a>
+            <a href="https://tiktok.com/@rotta.curadoria">TikTok</a>
+        </div>
+        <p class="legal">Nao somos agencia de viagem. Somos curadores de experiencias.<br>Todos os precos sao estimativas e podem variar conforme a data e destino.<br>&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+function closeMobileMenu() {
+    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.mobile-menu').classList.remove('open');
+}
+</script>
+</body>
+</html>

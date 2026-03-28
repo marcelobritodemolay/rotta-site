@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mendoza, Argentina — 5 Dias | Rotta Curadoria</title>
+    <meta name="description" content="Roteiro curado de 5 dias em Mendoza: vinicolas, Andes, asado argentino e Malbec de altitude. R$4.370 por casal com tudo incluso.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;--gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);--text:#F2EDE8;--muted:#999;--dim:#666}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:800px;margin:0 auto;padding:0 24px}
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+
+        /* NAV */
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;background:rgba(14,14,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(42,42,42,.5)}
+        .nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .nav-brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;text-decoration:none}
+        .nav-links{display:flex;gap:24px;align-items:center}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .3s}
+        .nav-links a:hover{color:var(--gold)}
+        .nav-links a.active{color:var(--gold);font-weight:500}
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:200}
+        .hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
+        .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(14,14,14,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+        .mobile-menu.open{display:flex}
+        .mobile-menu a{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);text-decoration:none;transition:color .3s}
+        .mobile-menu a:hover{color:var(--gold)}
+
+        /* HERO */
+        .journey-hero{padding:140px 24px 60px;text-align:center;position:relative}
+        .journey-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .journey-hero .back{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;margin-bottom:24px;transition:opacity .3s}
+        .journey-hero .back:hover{opacity:.7}
+        .journey-hero .flag{font-size:56px;margin-bottom:16px}
+        .journey-hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);font-weight:700;margin-bottom:12px}
+        .journey-hero .meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:8px}
+        .journey-hero .meta span{font-size:13px;color:var(--muted)}
+        .journey-hero .meta span strong{color:var(--gold)}
+        .journey-hero .price-hero{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);font-weight:700;margin-top:16px}
+        .journey-hero .price-hero small{font-size:14px;color:var(--dim);font-weight:400}
+
+        /* PHOTO PLACEHOLDER */
+        .photo-placeholder{background:var(--card);border:1px solid var(--layer);border-radius:16px;height:320px;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px;margin-bottom:48px}
+        .photo-placeholder p{color:var(--dim);font-size:13px;line-height:1.6;max-width:300px}
+
+        /* SECTIONS */
+        .section{padding:48px 0;border-top:1px solid var(--layer)}
+        .section:first-of-type{border-top:none}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .section h2{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:24px;line-height:1.3}
+        .section h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:12px;color:var(--gold)}
+        .section p{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:16px}
+
+        /* DAY CARDS */
+        .day-card{background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:28px 24px;margin-bottom:16px;position:relative;overflow:hidden}
+        .day-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:.5}
+        .day-card .day-num{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+        .day-card h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:10px;color:var(--text)}
+        .day-card p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+        .day-card .highlight{display:inline-block;background:var(--gold-dim);color:var(--gold);font-size:11px;padding:4px 10px;border-radius:20px;margin-top:10px;font-weight:500}
+
+        /* GRID CARDS */
+        .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+        .info-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px}
+        .info-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px;color:var(--text)}
+        .info-card p{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
+        .info-card .tag{font-size:11px;color:var(--gold);margin-top:8px;display:block}
+
+        /* TABLE */
+        .cost-table{width:100%;border-collapse:collapse;margin-bottom:16px}
+        .cost-table th{text-align:left;font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid var(--layer)}
+        .cost-table td{padding:12px 0;font-size:14px;color:var(--muted);border-bottom:1px solid rgba(42,42,42,.3)}
+        .cost-table td:last-child{text-align:right;color:var(--text);font-weight:500}
+        .cost-table tr.total td{color:var(--gold);font-weight:700;font-size:16px;border-top:2px solid var(--gold);border-bottom:none}
+
+        /* TIPS */
+        .tip-card{background:linear-gradient(135deg,var(--card) 0%,#1F1A14 100%);border:1px solid rgba(197,165,114,.2);border-radius:16px;padding:28px 24px;margin-bottom:16px}
+        .tip-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:10px;color:var(--gold)}
+        .tip-card p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+
+        /* CTA */
+        .cta-section{padding:80px 0;text-align:center;position:relative}
+        .cta-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,var(--gold-glow) 0%,transparent 60%);pointer-events:none}
+        .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,32px);margin-bottom:16px}
+        .cta-section h2 em{font-style:italic;color:var(--gold)}
+        .cta-section p{color:var(--muted);font-size:15px;max-width:480px;margin:0 auto 32px}
+        .cta-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s}
+        .cta-wa:hover{background:#20BD5A;transform:translateY(-2px)}
+        .cta-alt{display:inline-block;margin-top:16px;color:var(--gold);text-decoration:none;font-size:14px;transition:opacity .3s}
+        .cta-alt:hover{opacity:.7}
+
+        /* RELATED */
+        .related{padding:60px 0;border-top:1px solid var(--layer)}
+        .related h2{font-family:'Playfair Display',serif;font-size:24px;text-align:center;margin-bottom:32px}
+        .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .related-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px;text-align:center;text-decoration:none;color:var(--text);transition:all .3s}
+        .related-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+        .related-card .r-flag{font-size:28px;margin-bottom:8px}
+        .related-card h4{font-family:'Playfair Display',serif;font-size:15px;margin-bottom:4px}
+        .related-card .r-price{font-size:13px;color:var(--gold)}
+
+        /* FOOTER */
+        footer{padding:48px 0;text-align:center;border-top:1px solid var(--layer)}
+        footer .brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+        footer .tagline{font-size:12px;color:var(--dim);margin-bottom:16px}
+        footer .social a{color:var(--dim);text-decoration:none;margin:0 12px;font-size:13px;transition:color .3s}
+        footer .social a:hover{color:var(--gold)}
+        footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
+
+        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
+        .float-wa:hover{transform:scale(1.1)}
+
+        @media(max-width:768px){
+            .nav-links{display:none}
+            .hamburger{display:flex}
+            .info-grid{grid-template-columns:1fr}
+            .related-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/index.html" class="nav-brand">Rotta Curadoria</a>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/index.html#produtos">Produtos</a>
+            <a href="/jornadas.html" class="active">Destinos</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/sobre.html">Sobre</a>
+            <a href="/quiz.html">Quiz</a>
+        </div>
+        <div class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+<div class="mobile-menu">
+    <a href="/index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="/index.html#produtos" onclick="closeMobileMenu()">Produtos</a>
+    <a href="/jornadas.html" onclick="closeMobileMenu()">Destinos</a>
+    <a href="/blog.html" onclick="closeMobileMenu()">Blog</a>
+    <a href="/sobre.html" onclick="closeMobileMenu()">Sobre</a>
+    <a href="/quiz.html" onclick="closeMobileMenu()">Quiz</a>
+</div>
+<a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20roteiro%20de%20Mendoza" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
+
+<!-- HERO -->
+<section class="journey-hero">
+    <a href="/jornadas.html" class="back fade-up">&#x2190; Todos os destinos</a>
+    <div class="flag fade-up">&#x1F1E6;&#x1F1F7;</div>
+    <h1 class="fade-up">Mendoza, Argentina</h1>
+    <div class="meta fade-up">
+        <span><strong>5</strong> dias</span>
+        <span><strong>Vinicolas</strong> · Andes · Asado</span>
+        <span>Ideal pra <strong>casais</strong></span>
+    </div>
+    <div class="price-hero fade-up">R$4.370 <small>/casal</small></div>
+</section>
+
+<div class="container">
+
+    <!-- PHOTO -->
+    <div class="photo-placeholder fade-up">
+        <p>Foto: vinhedos ao pe dos Andes nevados, tacas de Malbec na mesa, luz dourada de fim de tarde sobre a cordilheira</p>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="section fade-up">
+        <p class="section-label">Sobre essa jornada</p>
+        <h2>5 dias entre vinhedos e montanhas</h2>
+        <p>Mendoza e daqueles destinos que surpreendem. Voce vai esperando vinho e volta com memorias dos Andes, do asado mais suculento da sua vida e de por do sol que muda a cor do ceu inteiro.</p>
+        <p>Esse roteiro foi montado pra casais que querem romantismo sem frescura — com boa comida, bons vinhos e paisagens de tirar o folego. Tudo testado pessoalmente.</p>
+    </div>
+
+    <!-- DAY BY DAY -->
+    <div class="section fade-up">
+        <p class="section-label">Dia a dia</p>
+        <h2>Roteiro completo</h2>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 1</div>
+            <h3>Chegada + Primeiro Malbec</h3>
+            <p>Voo ate Mendoza (via Buenos Aires ou direto). Transfer ao hotel, check-in e descanso. A noite, jantar na Avenida Aristides com seu primeiro Malbec de altitude. Nada de correria — o ritmo aqui e outro.</p>
+            <span class="highlight">Dica: peca o corte de carne "entraña" — confia</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 2</div>
+            <h3>Rota dos vinhos em Maipu</h3>
+            <p>Manha no Valle de Maipu — vinicolas boutique acessiveis de bicicleta ou carro. Degustacao em 3 a 4 vinicolas, almoco entre os vinhedos. Tarde livre pra descansar ou visitar o Museu del Vino. Noite: restaurante Francis Mallmann (se o orcamento permitir) ou parrilla local.</p>
+            <span class="highlight">Vinicola imperdivel: Familia Zuccardi</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 3</div>
+            <h3>Alta Montanha + Aconcagua</h3>
+            <p>Tour de dia inteiro pela Ruta 7 ate a Alta Montanha. Paradas no Puente del Inca, mirador do Aconcagua (6.962m — o mais alto das Americas), estacao de ski de Los Penitentes. Almoco na montanha. Volta ao entardecer com a cordilheira pintada de rosa.</p>
+            <span class="highlight">Vista do Aconcagua: inesquecivel</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 4</div>
+            <h3>Valle de Uco — os grandes vinhos</h3>
+            <p>Dia no Valle de Uco — a regiao premium de Mendoza. Vinicolas como Salentein, Andeluna e Alfa Crux. Almoco harmonizado. Degustacao de vinhos de alta gama que voce nao encontra no Brasil. Volta ao hotel e noite livre — sugestao: spa do hotel ou jantar romantico.</p>
+            <span class="highlight">Os melhores Malbecs do mundo vem daqui</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 5</div>
+            <h3>Compras + Despedida</h3>
+            <p>Manha livre pra compras — vinhos (voce pode despachar na mala!), azeites, doce de leite e artesanato local. Ultimo almoco argentino com calma. Transfer ao aeroporto. Volta pra casa com a mala cheia e o coracao mais cheio ainda.</p>
+            <span class="highlight">Leve vinhos na mala despachada — vale a pena</span>
+        </div>
+    </div>
+
+    <!-- ONDE FICAR -->
+    <div class="section fade-up">
+        <p class="section-label">Onde ficar</p>
+        <h2>Hospedagem curada</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Lares de Chacras</h4>
+                <p>Hotel boutique em Chacras de Coria, a 15min do centro. Piscina, jardim e cafe da manha com medialunas frescas. Perfeito pra casais.</p>
+                <span class="tag">$$$ — a partir de R$450/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Huentala Hotel</h4>
+                <p>No centro de Mendoza, com spa e rooftop bar com vista pra cordilheira. Localizacao perfeita pra quem quer sair a pe a noite.</p>
+                <span class="tag">$$$ — a partir de R$380/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Between Grapes</h4>
+                <p>Pousada charmosa entre os vinhedos de Maipu. Acordar com vista pras videiras e tomar cafe entre parreiras. Experiencia unica.</p>
+                <span class="tag">$$ — a partir de R$280/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Diplomatic Hotel</h4>
+                <p>Opcao classica no centro com piscina, academia e bom custo-beneficio. Quartos amplos e servico eficiente.</p>
+                <span class="tag">$$ — a partir de R$320/noite</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ONDE COMER -->
+    <div class="section fade-up">
+        <p class="section-label">Onde comer — dicas da Alexandra</p>
+        <h2>Gastronomia curada</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Siete Cocinas</h4>
+                <p>Gastronomia regional com ingredientes locais. Prove o cabrito e a empanada mendocina. Reserva obrigatoria.</p>
+                <span class="tag">$$$ — jantar romantico</span>
+            </div>
+            <div class="info-card">
+                <h4>La Marchigiana</h4>
+                <p>O melhor da culinaria italiana-argentina. Massas frescas, molhos intensos e vinhos da casa excepcionais. Classico de Mendoza.</p>
+                <span class="tag">$$ — almoco ou jantar</span>
+            </div>
+            <div class="info-card">
+                <h4>Azafran</h4>
+                <p>Restaurante moderno na Av. Sarmiento com menu degustacao e harmonizacao perfeita. Experiencia gastronomica completa.</p>
+                <span class="tag">$$$$ — experiencia premium</span>
+            </div>
+            <div class="info-card">
+                <h4>Mercado Central</h4>
+                <p>Pra quem quer o autentico. Empanadas, choripan e vinho em tacas enormes no meio dos locals. Sem frescura, so sabor.</p>
+                <span class="tag">$ — almoco casual</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUANTO CUSTA -->
+    <div class="section fade-up">
+        <p class="section-label">Investimento</p>
+        <h2>Quanto custa essa jornada</h2>
+        <table class="cost-table">
+            <tr><th>Item</th><th style="text-align:right">Estimativa / casal</th></tr>
+            <tr><td>Passagens aereas (ida e volta)</td><td>R$1.800</td></tr>
+            <tr><td>Hospedagem (4 noites)</td><td>R$1.200</td></tr>
+            <tr><td>Alimentacao (5 dias)</td><td>R$600</td></tr>
+            <tr><td>Passeios (Alta Montanha + vinicolas)</td><td>R$500</td></tr>
+            <tr><td>Seguro viagem</td><td>R$120</td></tr>
+            <tr><td>Extras (compras, gorjetas)</td><td>R$150</td></tr>
+            <tr class="total"><td>Total estimado</td><td>R$4.370</td></tr>
+        </table>
+        <p style="font-size:13px;color:var(--dim)">* Valores estimados para 2026, podendo variar conforme datas, cambio e disponibilidade. Passagens saindo de Sao Paulo.</p>
+    </div>
+
+    <!-- MELHOR EPOCA -->
+    <div class="section fade-up">
+        <p class="section-label">Quando ir</p>
+        <h2>Melhor epoca</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Marco a Maio (outono)</h4>
+                <p>Epoca da colheita — vinhedos dourados, festivais de vinho e temperatura perfeita (15-25°C). A melhor epoca pra ir.</p>
+                <span class="tag">Recomendado</span>
+            </div>
+            <div class="info-card">
+                <h4>Setembro a Novembro (primavera)</h4>
+                <p>Vinhedos florescendo, temperaturas agradaveis e menos turistas. Otima alternativa ao outono.</p>
+                <span class="tag">Boa opcao</span>
+            </div>
+            <div class="info-card">
+                <h4>Junho a Agosto (inverno)</h4>
+                <p>Frio intenso, ideal se quiser combinar com ski em Las Lenas. Vinicolas abertas, mas paisagem mais seca.</p>
+                <span class="tag">Para quem curte frio</span>
+            </div>
+            <div class="info-card">
+                <h4>Dezembro a Fevereiro (verao)</h4>
+                <p>Calor forte (35°C+). Boa pra quem gosta de piscina no hotel, mas menos confortavel pra passeios longos.</p>
+                <span class="tag">Evitar se possivel</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- DICAS DO CURADOR -->
+    <div class="section fade-up">
+        <p class="section-label">Dicas do curador</p>
+        <h2>O que a gente aprendeu na pratica</h2>
+
+        <div class="tip-card">
+            <h4>Leve uma mala vazia so pra vinhos</h4>
+            <p>Serio. Voce vai querer trazer pelo menos 6 garrafas. Malbec de alta gama em Mendoza custa 1/3 do que pagaria no Brasil. Enrole em roupa e despache — nunca tivemos problema.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Nao troque todo o dinheiro antes</h4>
+            <p>O cambio em Mendoza e melhor que no Brasil. Leve dolares e troque la nas "cuevas" (casas de cambio informais) — o peso argentino vale mais assim. Cartao de credito internacional tambem funciona bem.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Reserve as vinicolas premium com antecedencia</h4>
+            <p>Zuccardi, Salentein e Catena Zapata lotam rapido. Reserve pelo menos 2 semanas antes pelo site ou WhatsApp deles. Vinicolas menores aceitam walk-in.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>O jantar comeca tarde</h4>
+            <p>Argentinos jantam as 21h-22h. Nao estranhe restaurante vazio as 19h. Adapte o ritmo e curta — sem pressa e o lema de Mendoza.</p>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section fade-up">
+        <h2>Quer esse roteiro <em>personalizado</em>?</h2>
+        <p>A gente adapta tudo ao seu estilo, orcamento e datas. So falar com a gente.</p>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20o%20roteiro%20personalizado%20de%20Mendoza%20%F0%9F%87%A6%F0%9F%87%B7" class="cta-wa">&#x1F4AC; Personalizar esse roteiro</a>
+        <br>
+        <a href="/produto-curadoria-completa.html" class="cta-alt">Ou veja nossos servicos de curadoria &#x2192;</a>
+    </div>
+
+    <!-- RELATED -->
+    <div class="related fade-up">
+        <h2>Destinos parecidos</h2>
+        <div class="related-grid">
+            <a href="/jornadas/buenos-aires.html" class="related-card">
+                <div class="r-flag">&#x1F1E6;&#x1F1F7;</div>
+                <h4>Buenos Aires</h4>
+                <div class="r-price">R$3.200/casal</div>
+            </a>
+            <a href="/jornadas/colonia-del-sacramento.html" class="related-card">
+                <div class="r-flag">&#x1F1FA;&#x1F1FE;</div>
+                <h4>Colonia del Sacramento</h4>
+                <div class="r-price">R$2.800/casal</div>
+            </a>
+            <a href="/jornadas/california-napa.html" class="related-card">
+                <div class="r-flag">&#x1F1FA;&#x1F1F8;</div>
+                <h4>California (Napa Valley)</h4>
+                <div class="r-price">R$12.000/casal</div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container" style="max-width:1080px">
+        <p class="brand">Rotta Curadoria</p>
+        <p class="tagline">Curado por Marcelo & Alexandra</p>
+        <div class="social">
+            <a href="https://instagram.com/rotta.curadoria">Instagram</a>
+            <a href="https://youtube.com/@rotta.curadoria">YouTube</a>
+            <a href="https://tiktok.com/@rotta.curadoria">TikTok</a>
+        </div>
+        <p class="legal">Nao somos agencia de viagem. Somos curadores de experiencias.<br>Todos os precos sao estimativas e podem variar conforme a data e destino.<br>&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+function closeMobileMenu() {
+    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.mobile-menu').classList.remove('open');
+}
+</script>
+</body>
+</html>

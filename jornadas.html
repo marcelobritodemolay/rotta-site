@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destinos Curados | Rotta Curadoria</title>
+    <meta name="description" content="30 destinos curados por quem ja viveu cada um. Brasil e mundo. Roteiros com orcamento real, dicas gastronomicas e tudo que voce precisa saber.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --coral:#E8785A;--green:#4CAF7D;--blue:#5B8DEF
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:1080px;margin:0 auto;padding:0 24px}
+
+        /* Animations */
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+
+        /* NAV */
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;background:rgba(14,14,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(42,42,42,.5)}
+        .nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .nav-brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;text-decoration:none}
+        .nav-links{display:flex;gap:24px;align-items:center}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .3s}
+        .nav-links a:hover{color:var(--gold)}
+        .nav-links a.active{color:var(--gold);font-weight:500}
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:200}
+        .hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
+        .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(14,14,14,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+        .mobile-menu.open{display:flex}
+        .mobile-menu a{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);text-decoration:none;transition:color .3s}
+        .mobile-menu a:hover{color:var(--gold)}
+
+        /* HERO */
+        .hero-dest{padding:140px 24px 80px;text-align:center;position:relative}
+        .hero-dest::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .hero-dest .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .hero-dest h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.15;margin-bottom:20px}
+        .hero-dest h1 em{font-style:italic;color:var(--gold)}
+        .hero-dest .subtitle{font-size:17px;color:var(--muted);max-width:560px;margin:0 auto 32px;line-height:1.6}
+        .hero-dest .stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
+        .hero-dest .stat-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--gold)}
+        .hero-dest .stat-label{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+
+        /* FILTERS */
+        .filters{padding:0 24px 48px;text-align:center}
+        .filter-pills{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:800px;margin:0 auto}
+        .filter-pill{background:var(--card);border:1px solid var(--layer);color:var(--muted);padding:10px 22px;border-radius:100px;cursor:pointer;font-size:13px;letter-spacing:.5px;transition:all .3s;font-family:'Inter',sans-serif;outline:none}
+        .filter-pill:hover{border-color:var(--gold);color:var(--text)}
+        .filter-pill.active{background:var(--gold);color:var(--bg);border-color:var(--gold);font-weight:600}
+
+        /* GRID */
+        .dest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:1080px;margin:0 auto;padding:0 24px 80px}
+        .dest-card{background:var(--card);border:1px solid var(--layer);border-radius:16px;overflow:hidden;transition:all .4s;text-decoration:none;color:var(--text);display:block;opacity:1;transform:scale(1)}
+        .dest-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+        .dest-card.hidden{display:none}
+        .dest-card .card-img{background:var(--layer);height:180px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;position:relative;overflow:hidden}
+        .dest-card .card-img .flag{font-size:48px;margin-bottom:8px}
+        .dest-card .card-img .img-hint{font-size:11px;color:var(--dim);line-height:1.4;max-width:180px}
+        .dest-card .card-img .badge-tag{position:absolute;top:12px;right:12px;background:var(--gold);color:var(--bg);font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+        .dest-card .card-body{padding:20px}
+        .dest-card .card-body h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:6px}
+        .dest-card .card-body .dur{font-size:12px;color:var(--gold);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+        .dest-card .card-body .desc{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:14px}
+        .dest-card .card-body .price-row{display:flex;justify-content:space-between;align-items:center}
+        .dest-card .card-body .price{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);font-weight:600}
+        .dest-card .card-body .price small{font-size:11px;color:var(--dim);font-weight:400}
+        .dest-card .card-body .link{color:var(--gold);font-size:13px;font-weight:500;transition:opacity .3s}
+        .dest-card .card-body .link:hover{opacity:.8}
+
+        /* Section divider */
+        .section-divider{text-align:center;padding:60px 24px 40px}
+        .section-divider h2{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:8px}
+        .section-divider p{color:var(--muted);font-size:14px}
+        .section-divider .divider{width:60px;height:1px;background:var(--gold);margin:20px auto 0;opacity:.3}
+
+        /* CTA */
+        .cta-section{padding:80px 24px;text-align:center;position:relative;background:var(--card)}
+        .cta-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,var(--gold-glow) 0%,transparent 60%);pointer-events:none}
+        .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);margin-bottom:16px;line-height:1.3}
+        .cta-section h2 em{font-style:italic;color:var(--gold)}
+        .cta-section p{color:var(--muted);font-size:15px;max-width:500px;margin:0 auto 32px;line-height:1.6}
+        .cta-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s}
+        .cta-wa:hover{background:#20BD5A;transform:translateY(-2px)}
+
+        /* FOOTER */
+        footer{padding:48px 0;text-align:center;border-top:1px solid var(--layer)}
+        footer .brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+        footer .tagline{font-size:12px;color:var(--dim);margin-bottom:16px}
+        footer .social a{color:var(--dim);text-decoration:none;margin:0 12px;font-size:13px;transition:color .3s}
+        footer .social a:hover{color:var(--gold)}
+        footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
+
+        /* FLOATING WA */
+        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
+        .float-wa:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(37,211,102,.4)}
+
+        /* Count badge */
+        .result-count{text-align:center;padding:0 24px 24px;font-size:13px;color:var(--dim)}
+
+        @media(max-width:768px){
+            .nav-links{display:none}
+            .hamburger{display:flex}
+            .dest-grid{grid-template-columns:1fr 1fr}
+            .hero-dest .stats{gap:20px}
+            .filter-pills{gap:8px}
+            .filter-pill{padding:8px 16px;font-size:12px}
+        }
+        @media(max-width:480px){
+            .dest-grid{grid-template-columns:1fr}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/index.html" class="nav-brand">Rotta Curadoria</a>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/index.html#produtos">Produtos</a>
+            <a href="/jornadas.html" class="active">Destinos</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/sobre.html">Sobre</a>
+            <a href="/quiz.html">Quiz</a>
+        </div>
+        <div class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+<div class="mobile-menu">
+    <a href="/index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="/index.html#produtos" onclick="closeMobileMenu()">Produtos</a>
+    <a href="/jornadas.html" onclick="closeMobileMenu()">Destinos</a>
+    <a href="/blog.html" onclick="closeMobileMenu()">Blog</a>
+    <a href="/sobre.html" onclick="closeMobileMenu()">Sobre</a>
+    <a href="/quiz.html" onclick="closeMobileMenu()">Quiz</a>
+</div>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/5511968152123?text=Oi!%20Vi%20a%20pagina%20de%20destinos%20da%20Rotta%20e%20quero%20saber%20mais" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
+
+<!-- HERO -->
+<section class="hero-dest">
+    <div class="fade-up section-label">Curadoria de destinos</div>
+    <h1 class="fade-up">Destinos <em>Curados</em></h1>
+    <p class="subtitle fade-up">30 roteiros vividos por quem organiza cada detalhe pra voce. Brasil e mundo, com orcamento real e dicas que so quem foi sabe dar.</p>
+    <div class="stats fade-up">
+        <div style="text-align:center"><div class="stat-num">30</div><div class="stat-label">Destinos</div></div>
+        <div style="text-align:center"><div class="stat-num">15</div><div class="stat-label">No Brasil</div></div>
+        <div style="text-align:center"><div class="stat-num">15</div><div class="stat-label">Internacionais</div></div>
+    </div>
+</section>
+
+<!-- FILTERS -->
+<section class="filters">
+    <div class="filter-pills">
+        <button class="filter-pill active" data-filter="todos">Todos</button>
+        <button class="filter-pill" data-filter="brasil">Brasil</button>
+        <button class="filter-pill" data-filter="internacional">Internacional</button>
+        <button class="filter-pill" data-filter="casal">Casal</button>
+        <button class="filter-pill" data-filter="familia">Familia</button>
+        <button class="filter-pill" data-filter="aventura">Aventura</button>
+        <button class="filter-pill" data-filter="romance">Romance</button>
+        <button class="filter-pill" data-filter="gastronomia">Gastronomia</button>
+    </div>
+</section>
+
+<div class="result-count" id="resultCount">Mostrando 30 destinos</div>
+
+<!-- ===== INTERNATIONAL DESTINATIONS ===== -->
+<div class="section-divider fade-up">
+    <h2>Destinos Internacionais</h2>
+    <p>Da America do Sul a Europa — experiencias curadas em 15 destinos</p>
+    <div class="divider"></div>
+</div>
+
+<div class="dest-grid" id="gridInternacional">
+
+    <!-- 1. Mendoza -->
+    <a href="/jornadas/mendoza.html" class="dest-card fade-up" data-tags="internacional casal gastronomia romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E6;&#x1F1F7;</div>
+                <div class="img-hint">Foto: vinhedos ao pe dos Andes com neve ao fundo, tacas de Malbec em primeiro plano</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Mendoza, Argentina</h3>
+            <div class="dur">5 dias · vinicolas · Andes · asado</div>
+            <p class="desc">Vinicolas de altitude, asado argentino, passeio pelo Aconcagua e Malbec em cada brinde. O destino perfeito pra casais que amam vinho.</p>
+            <div class="price-row">
+                <span class="price">R$4.370 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 2. Buenos Aires -->
+    <a href="/jornadas/buenos-aires.html" class="dest-card fade-up" data-tags="internacional casal gastronomia romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E6;&#x1F1F7;</div>
+                <div class="img-hint">Foto: casal dancando tango em rua de San Telmo com luzes quentes e predios coloridos ao fundo</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Buenos Aires, Argentina</h3>
+            <div class="dur">4 dias · tango · Recoleta · San Telmo</div>
+            <p class="desc">Tango em San Telmo, livraria El Ateneo, carnes na parrilla e o charme de Recoleta. Buenos Aires e emocao em cada esquina.</p>
+            <div class="price-row">
+                <span class="price">R$3.200 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 3. Colonia del Sacramento -->
+    <a href="/jornadas/colonia-del-sacramento.html" class="dest-card fade-up" data-tags="internacional casal romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1FA;&#x1F1FE;</div>
+                <div class="img-hint">Foto: rua de pedras coloniais com por do sol dourado sobre o Rio da Prata</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Colonia del Sacramento, Uruguai</h3>
+            <div class="dur">3 dias · charme colonial · por do sol</div>
+            <p class="desc">Ruas de pedra, por do sol no Rio da Prata, vinhos Tannat e o ritmo lento que todo casal merece. Charme puro.</p>
+            <div class="price-row">
+                <span class="price">R$2.800 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 4. Orlando -->
+    <a href="/jornadas/orlando.html" class="dest-card fade-up" data-tags="internacional familia aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1FA;&#x1F1F8;</div>
+                <div class="img-hint">Foto: familia sorridente em frente ao castelo da Cinderela com fogos de artificio ao fundo</div>
+            </div>
+            <div class="badge-tag">FAMILIA</div>
+        </div>
+        <div class="card-body">
+            <h3>Orlando, EUA</h3>
+            <div class="dur">10 dias · Disney · Universal · familia</div>
+            <p class="desc">O sonho de toda familia. Disney, Universal, outlets e aquela magia que so Orlando tem. Roteiro otimizado pra aproveitar cada minuto.</p>
+            <div class="price-row">
+                <span class="price">R$18.000 <small>/familia</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 5. Nova York -->
+    <a href="/jornadas/nova-york.html" class="dest-card fade-up" data-tags="internacional casal gastronomia aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1FA;&#x1F1F8;</div>
+                <div class="img-hint">Foto: skyline de Manhattan ao entardecer visto do Brooklyn Bridge com luzes da cidade acendendo</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Nova York, EUA</h3>
+            <div class="dur">7 dias · cultura · Broadway · gastronomia</div>
+            <p class="desc">Central Park, Broadway, SoHo, pizza no Village e por do sol no Top of the Rock. A cidade que nunca dorme, curada pra voce.</p>
+            <div class="price-row">
+                <span class="price">R$15.000 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 6. California (Napa Valley) -->
+    <a href="/jornadas/california-napa.html" class="dest-card fade-up" data-tags="internacional casal gastronomia romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1FA;&#x1F1F8;</div>
+                <div class="img-hint">Foto: vinicolas de Napa Valley com fileiras de videiras verdes e montanhas ao fundo sob ceu azul</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>California (Napa Valley), EUA</h3>
+            <div class="dur">5 dias · vinicolas · Pacific Highway · SF</div>
+            <p class="desc">Vinicolas premiadas, Pacific Coast Highway, Golden Gate e a gastronomia de Sao Francisco. Sofisticacao californiana.</p>
+            <div class="price-row">
+                <span class="price">R$12.000 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 7. Portugal -->
+    <a href="/jornadas/portugal.html" class="dest-card fade-up" data-tags="internacional casal gastronomia romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1F5;&#x1F1F9;</div>
+                <div class="img-hint">Foto: bondinho amarelo subindo ladeira em Lisboa com telhados terracota e rio Tejo ao fundo</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Portugal</h3>
+            <div class="dur">10 dias · Lisboa · Porto · Algarve · Sintra</div>
+            <p class="desc">Pasteis de Belem, caves do Porto, falesias do Algarve e os palacios de Sintra. Portugal e abraco de casa com sabor europeu.</p>
+            <div class="price-row">
+                <span class="price">R$9.000 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 8. Espanha -->
+    <a href="/jornadas/espanha.html" class="dest-card fade-up" data-tags="internacional casal gastronomia aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1EA;&#x1F1F8;</div>
+                <div class="img-hint">Foto: Sagrada Familia de Barcelona ao entardecer com luzes douradas nas vitrais</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Espanha</h3>
+            <div class="dur">8 dias · Barcelona · Madrid · Andaluzia</div>
+            <p class="desc">Gaudi em Barcelona, tapas em Madrid, flamenco em Sevilha e a luz unica da Andaluzia. Espanha e paixao em cada detalhe.</p>
+            <div class="price-row">
+                <span class="price">R$10.500 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 9. Italia -->
+    <a href="/jornadas/italia.html" class="dest-card fade-up" data-tags="internacional casal familia gastronomia romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1EE;&#x1F1F9;</div>
+                <div class="img-hint">Foto: colinas da Toscana com ciprestes, vila italiana ao fundo e luz dourada de entardecer</div>
+            </div>
+            <div class="badge-tag">MAIO 2026</div>
+        </div>
+        <div class="card-body">
+            <h3>Italia</h3>
+            <div class="dur">14 dias · Roma · Toscana · Dolomitas · Lago di Garda</div>
+            <p class="desc">Coliseu, Toscana de carro, Dolomitas de tirar o folego e Lago di Garda. Nossa proxima jornada em familia.</p>
+            <div class="price-row">
+                <span class="price">R$10.400 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 10. Croacia -->
+    <a href="/jornadas/croacia.html" class="dest-card fade-up" data-tags="internacional casal aventura romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1ED;&#x1F1F7;</div>
+                <div class="img-hint">Foto: muralhas de Dubrovnik com mar Adriatico azul turquesa e telhados laranjas</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Croacia</h3>
+            <div class="dur">7 dias · Split · Hvar · Dubrovnik · Plitvice</div>
+            <p class="desc">Adriatico cristalino, muralhas de Dubrovnik, ilha de Hvar e os lagos encantados de Plitvice. Europa sem cliche.</p>
+            <div class="price-row">
+                <span class="price">R$9.400 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 11. Franca (Cote d'Azur) -->
+    <a href="/jornadas/cote-dazur.html" class="dest-card fade-up" data-tags="internacional casal gastronomia romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1EB;&#x1F1F7;</div>
+                <div class="img-hint">Foto: vista panoramica de Nice com mar azul, praia de pedrinhas e Promenade des Anglais</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Franca (Cote d'Azur)</h3>
+            <div class="dur">5 dias · Nice · Monaco · Cannes · Eze</div>
+            <p class="desc">Riviera Francesa na sua essencia. Nice, Monaco, Cannes e a vila medieval de Eze com vista pro Mediterraneo.</p>
+            <div class="price-row">
+                <span class="price">R$8.500 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 12. Suica + Austria -->
+    <a href="/jornadas/suica-austria.html" class="dest-card fade-up" data-tags="internacional casal aventura romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E8;&#x1F1ED; &#x1F1E6;&#x1F1F9;</div>
+                <div class="img-hint">Foto: trem panoramico suico cruzando ponte sobre vale alpino com montanhas nevadas</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Suica + Austria</h3>
+            <div class="dur">7 dias · Alpes · trens panoramicos · Viena</div>
+            <p class="desc">Alpes suicos de trem, chocolate em Lucerna, valsas em Viena e paisagens que parecem pintura. Elegancia europeia.</p>
+            <div class="price-row">
+                <span class="price">R$14.000 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 13. Russia -->
+    <a href="/jornadas/russia.html" class="dest-card fade-up" data-tags="internacional casal aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1F7;&#x1F1FA;</div>
+                <div class="img-hint">Foto: Catedral de Sao Basilio na Praca Vermelha ao anoitecer com cupulas coloridas iluminadas</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Russia</h3>
+            <div class="dur">10 dias · Moscou · Sao Petersburgo · Transiberiana</div>
+            <p class="desc">Praca Vermelha, Hermitage, bales, Transiberiana e a grandiosidade que so a Russia tem. Imersao cultural completa.</p>
+            <div class="price-row">
+                <span class="price">R$7.700 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 14. Alemanha + Republica Tcheca -->
+    <a href="/jornadas/alemanha-tcheca.html" class="dest-card fade-up" data-tags="internacional casal gastronomia aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E9;&#x1F1EA; &#x1F1E8;&#x1F1FF;</div>
+                <div class="img-hint">Foto: Ponte Carlos em Praga ao amanhecer com neblina sobre o rio Vltava e torres goticas</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Alemanha + Republica Tcheca</h3>
+            <div class="dur">7 dias · Berlim · Praga · castelos</div>
+            <p class="desc">Muro de Berlim, cervejas tchecas, castelo de Praga e o Neuschwanstein. Historia e cerveja em cada parada.</p>
+            <div class="price-row">
+                <span class="price">R$8.200 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 15. Las Vegas + Grand Canyon -->
+    <a href="/jornadas/las-vegas-grand-canyon.html" class="dest-card fade-up" data-tags="internacional casal aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1FA;&#x1F1F8;</div>
+                <div class="img-hint">Foto: Grand Canyon ao por do sol com camadas de rocha vermelha e ceu em tons de laranja e roxo</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Las Vegas + Grand Canyon</h3>
+            <div class="dur">5 dias · shows · deserto · road trip</div>
+            <p class="desc">Shows da Strip, helicóptero no Grand Canyon, road trip pelo deserto e a energia unica de Vegas. Adrenalina pura.</p>
+            <div class="price-row">
+                <span class="price">R$10.000 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+</div>
+
+<!-- ===== NATIONAL DESTINATIONS ===== -->
+<div class="section-divider fade-up">
+    <h2>Destinos Nacionais</h2>
+    <p>De Foz do Iguacu a Fernando de Noronha — o melhor do Brasil curado pra voce</p>
+    <div class="divider"></div>
+</div>
+
+<div class="dest-grid" id="gridBrasil">
+
+    <!-- 16. Foz do Iguacu -->
+    <a href="/jornadas/foz-do-iguacu.html" class="dest-card fade-up" data-tags="brasil familia aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: Cataratas do Iguacu com arco-iris sobre as quedas e vegetacao exuberante</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Foz do Iguacu</h3>
+            <div class="dur">4 dias · cataratas BR+AR · Itaipu · aves</div>
+            <p class="desc">Cataratas dos dois lados, Itaipu iluminada, Parque das Aves e aquele espanto que nao cabe em foto. Imperdivel.</p>
+            <div class="price-row">
+                <span class="price">R$3.500 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 17. Gramado + Canela -->
+    <a href="/jornadas/gramado.html" class="dest-card fade-up" data-tags="brasil casal familia gastronomia romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: rua charmosa de Gramado com hortensias, lojas de chocolate e neblina ao fundo</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Gramado + Canela</h3>
+            <div class="dur">5 dias · serra gaucha · fondue · inverno</div>
+            <p class="desc">Fondue, chocolate artesanal, vinhos da serra e o aconchego que so Gramado tem. Perfeito pra casais e familias.</p>
+            <div class="price-row">
+                <span class="price">R$4.200 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 18. Curitiba + Morretes -->
+    <a href="/jornadas/curitiba-morretes.html" class="dest-card fade-up" data-tags="brasil casal gastronomia">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: trem da Serra do Mar entre montanhas verdes com neblina e vegetacao atlantica</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Curitiba + Morretes</h3>
+            <div class="dur">3 dias · trem · Litorina · barreado</div>
+            <p class="desc">Trem pela Serra do Mar, barreado em Morretes, parques de Curitiba e a Litorina panoramica. Escapada perfeita.</p>
+            <div class="price-row">
+                <span class="price">R$2.800 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 19. Balneario Camboriu -->
+    <a href="/jornadas/balneario-camboriu.html" class="dest-card fade-up" data-tags="brasil casal aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: vista aerea de Balneario Camboriu com predios a beira-mar, roda-gigante e por do sol</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Balneario Camboriu</h3>
+            <div class="dur">4 dias · praias · teleferico · vida noturna</div>
+            <p class="desc">Praia, teleferico do Parque Unipraias, gastronomia de alto nivel e a vida noturna mais agitada do Sul. Energia total.</p>
+            <div class="price-row">
+                <span class="price">R$3.800 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 20. Manaus + Amazonia -->
+    <a href="/jornadas/manaus-amazonia.html" class="dest-card fade-up" data-tags="brasil casal familia aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: encontro das aguas do Rio Negro e Solimoes com barco navegando na fronteira das cores</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Manaus + Amazonia</h3>
+            <div class="dur">5 dias · selva · encontro das aguas · boto</div>
+            <p class="desc">Encontro das Aguas, hotel de selva, boto cor-de-rosa e a imensidao da floresta. Uma experiencia unica no planeta.</p>
+            <div class="price-row">
+                <span class="price">R$5.500 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 21. Fortaleza + Jericoacoara -->
+    <a href="/jornadas/fortaleza-jeri.html" class="dest-card fade-up" data-tags="brasil casal aventura romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: por do sol na Duna do Por do Sol em Jericoacoara com silhuetas de pessoas assistindo</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Fortaleza + Jericoacoara</h3>
+            <div class="dur">7 dias · dunas · lagoas · Beach Park</div>
+            <p class="desc">Dunas de Jeri, lagoa do Paraiso, Beach Park e os melhores por do sol do Brasil. Nordeste na veia.</p>
+            <div class="price-row">
+                <span class="price">R$4.800 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 22. Sao Miguel dos Milagres -->
+    <a href="/jornadas/sao-miguel-milagres.html" class="dest-card fade-up" data-tags="brasil casal romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: piscina natural com agua cristalina e coqueiros ao fundo em praia deserta de Alagoas</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Sao Miguel dos Milagres (AL)</h3>
+            <div class="dur">5 dias · piscinas naturais · slow travel</div>
+            <p class="desc">Piscinas naturais de agua cristalina, pousadas pe na areia e o ritmo lento que renova a alma. Slow travel de verdade.</p>
+            <div class="price-row">
+                <span class="price">R$4.500 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 23. Ilhabela -->
+    <a href="/jornadas/ilhabela.html" class="dest-card fade-up" data-tags="brasil casal aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: praia de Castelhanos em Ilhabela com mata atlantica descendo ate a areia e mar verde</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Ilhabela</h3>
+            <div class="dur">4 dias · praias · trilhas · cachoeiras</div>
+            <p class="desc">Praias escondidas, trilhas na Mata Atlantica, cachoeiras e veleiros no canal. A ilha mais bonita de Sao Paulo.</p>
+            <div class="price-row">
+                <span class="price">R$3.200 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 24. Rio de Janeiro -->
+    <a href="/jornadas/rio-de-janeiro.html" class="dest-card fade-up" data-tags="brasil casal familia aventura gastronomia">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: vista do Pao de Acucar ao por do sol com Corcovado e Cristo Redentor ao fundo</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Rio de Janeiro</h3>
+            <div class="dur">5 dias · Cristo · Pao de Acucar · Lapa · praias</div>
+            <p class="desc">Cristo, bondinho, Lapa, praias e a energia carioca. O Rio que voce conhece das fotos, mas vive de um jeito que ninguem conta.</p>
+            <div class="price-row">
+                <span class="price">R$4.000 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 25. Ilha do Mel -->
+    <a href="/jornadas/ilha-do-mel.html" class="dest-card fade-up" data-tags="brasil casal romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: farol das Conchas na Ilha do Mel com ceu estrelado e mar calmo refletindo a luz</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Ilha do Mel</h3>
+            <div class="dur">3 dias · desconexao · farol · fortaleza</div>
+            <p class="desc">Sem carros, sem sinal, sem pressa. Farol das Conchas, Fortaleza e trilhas pe na areia. Desconexao total no Parana.</p>
+            <div class="price-row">
+                <span class="price">R$2.200 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 26. Entre Rios (Guarapuava) -->
+    <a href="/jornadas/entre-rios-guarapuava.html" class="dest-card fade-up" data-tags="brasil casal aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: Salto Sao Francisco com queda d'agua imponente cercada por vegetacao verde e rochas</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Entre Rios (Guarapuava)</h3>
+            <div class="dur">2 dias · Salto Sao Francisco · natureza</div>
+            <p class="desc">A maior queda d'agua do Sul do Brasil, trilhas ecologicas e a tranquilidade do interior do Parana. Escapada rapida.</p>
+            <div class="price-row">
+                <span class="price">R$1.500 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 27. Santuario Madre Paulina -->
+    <a href="/jornadas/madre-paulina.html" class="dest-card fade-up" data-tags="brasil casal familia">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: Santuario Santa Paulina em Nova Trento com jardins floridos e montanhas da serra catarinense</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Santuario Madre Paulina (Nova Trento)</h3>
+            <div class="dur">2 dias · turismo religioso · serra</div>
+            <p class="desc">Fe, paz e a beleza da serra catarinense. Santuario Santa Paulina, trilhas contemplativas e gastronomia italiana colonial.</p>
+            <div class="price-row">
+                <span class="price">R$1.800 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 28. Bonito (MS) -->
+    <a href="/jornadas/bonito.html" class="dest-card fade-up" data-tags="brasil casal familia aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: flutuacao em rio cristalino de Bonito com peixes coloridos e vegetacao subaquatica visivel</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Bonito (MS)</h3>
+            <div class="dur">5 dias · flutuacao · grutas · Rio da Prata</div>
+            <p class="desc">Flutuacao em aguas cristalinas, Gruta do Lago Azul, Rio da Prata e a natureza mais preservada do Brasil. Ecoturismo de elite.</p>
+            <div class="price-row">
+                <span class="price">R$5.000 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 29. Chapada dos Veadeiros -->
+    <a href="/jornadas/chapada-veadeiros.html" class="dest-card fade-up" data-tags="brasil casal aventura">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: Vale da Lua na Chapada dos Veadeiros com formacoes rochosas lunares e agua correndo entre elas</div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h3>Chapada dos Veadeiros</h3>
+            <div class="dur">4 dias · cachoeiras · Vale da Lua · misticismo</div>
+            <p class="desc">Cachoeiras de tirar o folego, Vale da Lua, cristais e a energia mistica do cerrado. Reconexao com a natureza.</p>
+            <div class="price-row">
+                <span class="price">R$3.500 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+    <!-- 30. Fernando de Noronha -->
+    <a href="/jornadas/fernando-de-noronha.html" class="dest-card fade-up" data-tags="brasil casal aventura romance">
+        <div class="card-img">
+            <div>
+                <div class="flag">&#x1F1E7;&#x1F1F7;</div>
+                <div class="img-hint">Foto: Morro Dois Irmaos ao por do sol com mar verde-esmeralda e praia do Sancho ao fundo</div>
+            </div>
+            <div class="badge-tag">PREMIUM</div>
+        </div>
+        <div class="card-body">
+            <h3>Fernando de Noronha</h3>
+            <div class="dur">5 dias · mergulho · praias intocadas</div>
+            <p class="desc">A praia mais bonita do mundo, mergulho com tartarugas, golfinhos ao amanhecer e o privilegio de pisar num paraiso preservado.</p>
+            <div class="price-row">
+                <span class="price">R$8.000 <small>/casal</small></span>
+                <span class="link">Conhecer &#x2192;</span>
+            </div>
+        </div>
+    </a>
+
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+    <h2>Nao encontrou seu <em>destino</em>?</h2>
+    <p>A gente cura qualquer roteiro. Conta pra gente pra onde voce quer ir e a gente monta tudo — do voo ao restaurante.</p>
+    <a href="https://wa.me/5511968152123?text=Oi!%20Vi%20a%20pagina%20de%20destinos%20da%20Rotta%20e%20quero%20um%20roteiro%20personalizado" class="cta-wa">&#x1F4AC; Fale com a gente</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p class="brand">Rotta Curadoria</p>
+        <p class="tagline">Curado por Marcelo & Alexandra</p>
+        <div class="social">
+            <a href="https://instagram.com/rotta.curadoria">Instagram</a>
+            <a href="https://youtube.com/@rotta.curadoria">YouTube</a>
+            <a href="https://tiktok.com/@rotta.curadoria">TikTok</a>
+        </div>
+        <p class="legal">Nao somos agencia de viagem. Somos curadores de experiencias.<br>Todos os precos sao estimativas e podem variar conforme a data e destino.<br>&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script>
+// Scroll animation
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Mobile menu
+function closeMobileMenu() {
+    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.mobile-menu').classList.remove('open');
+}
+
+// Filter
+const pills = document.querySelectorAll('.filter-pill');
+const cards = document.querySelectorAll('.dest-card');
+const countEl = document.getElementById('resultCount');
+const sectionInt = document.querySelector('#gridInternacional').previousElementSibling;
+const sectionBr = document.querySelector('#gridBrasil').previousElementSibling;
+
+pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filter = pill.dataset.filter;
+        let visible = 0;
+        let intVisible = 0, brVisible = 0;
+
+        cards.forEach(card => {
+            const tags = card.dataset.tags;
+            if (filter === 'todos' || tags.includes(filter)) {
+                card.classList.remove('hidden');
+                visible++;
+                if (tags.includes('internacional')) intVisible++;
+                if (tags.includes('brasil')) brVisible++;
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+
+        countEl.textContent = 'Mostrando ' + visible + ' destino' + (visible !== 1 ? 's' : '');
+
+        // Hide section headers if no cards visible in that section
+        sectionInt.style.display = intVisible > 0 ? '' : 'none';
+        sectionBr.style.display = brVisible > 0 ? '' : 'none';
+    });
+});
+</script>
+
+</body>
+</html>

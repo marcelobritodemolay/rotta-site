@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gramado + Canela — 5 Dias | Rotta Curadoria</title>
+    <meta name="description" content="Roteiro curado de 5 dias em Gramado e Canela: fondue, chocolate, vinicolas da serra gaucha e muito romance. R$4.200 por casal.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;--gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);--text:#F2EDE8;--muted:#999;--dim:#666}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:800px;margin:0 auto;padding:0 24px}
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;background:rgba(14,14,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(42,42,42,.5)}
+        .nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .nav-brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;text-decoration:none}
+        .nav-links{display:flex;gap:24px;align-items:center}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .3s}
+        .nav-links a:hover{color:var(--gold)}
+        .nav-links a.active{color:var(--gold);font-weight:500}
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:200}
+        .hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
+        .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(14,14,14,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+        .mobile-menu.open{display:flex}
+        .mobile-menu a{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);text-decoration:none;transition:color .3s}
+        .mobile-menu a:hover{color:var(--gold)}
+        .journey-hero{padding:140px 24px 60px;text-align:center;position:relative}
+        .journey-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .journey-hero .back{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;margin-bottom:24px;transition:opacity .3s}
+        .journey-hero .back:hover{opacity:.7}
+        .journey-hero .flag{font-size:56px;margin-bottom:16px}
+        .journey-hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);font-weight:700;margin-bottom:12px}
+        .journey-hero .meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:8px}
+        .journey-hero .meta span{font-size:13px;color:var(--muted)}
+        .journey-hero .meta span strong{color:var(--gold)}
+        .journey-hero .price-hero{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);font-weight:700;margin-top:16px}
+        .journey-hero .price-hero small{font-size:14px;color:var(--dim);font-weight:400}
+        .photo-placeholder{background:var(--card);border:1px solid var(--layer);border-radius:16px;height:320px;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px;margin-bottom:48px}
+        .photo-placeholder p{color:var(--dim);font-size:13px;line-height:1.6;max-width:300px}
+        .section{padding:48px 0;border-top:1px solid var(--layer)}
+        .section:first-of-type{border-top:none}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .section h2{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:24px;line-height:1.3}
+        .section p{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:16px}
+        .day-card{background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:28px 24px;margin-bottom:16px;position:relative;overflow:hidden}
+        .day-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:.5}
+        .day-card .day-num{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+        .day-card h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:10px;color:var(--text)}
+        .day-card p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+        .day-card .highlight{display:inline-block;background:var(--gold-dim);color:var(--gold);font-size:11px;padding:4px 10px;border-radius:20px;margin-top:10px;font-weight:500}
+        .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+        .info-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px}
+        .info-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px;color:var(--text)}
+        .info-card p{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
+        .info-card .tag{font-size:11px;color:var(--gold);margin-top:8px;display:block}
+        .cost-table{width:100%;border-collapse:collapse;margin-bottom:16px}
+        .cost-table th{text-align:left;font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid var(--layer)}
+        .cost-table td{padding:12px 0;font-size:14px;color:var(--muted);border-bottom:1px solid rgba(42,42,42,.3)}
+        .cost-table td:last-child{text-align:right;color:var(--text);font-weight:500}
+        .cost-table tr.total td{color:var(--gold);font-weight:700;font-size:16px;border-top:2px solid var(--gold);border-bottom:none}
+        .tip-card{background:linear-gradient(135deg,var(--card) 0%,#1F1A14 100%);border:1px solid rgba(197,165,114,.2);border-radius:16px;padding:28px 24px;margin-bottom:16px}
+        .tip-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:10px;color:var(--gold)}
+        .tip-card p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+        .cta-section{padding:80px 0;text-align:center;position:relative}
+        .cta-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,var(--gold-glow) 0%,transparent 60%);pointer-events:none}
+        .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,32px);margin-bottom:16px}
+        .cta-section h2 em{font-style:italic;color:var(--gold)}
+        .cta-section p{color:var(--muted);font-size:15px;max-width:480px;margin:0 auto 32px}
+        .cta-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s}
+        .cta-wa:hover{background:#20BD5A;transform:translateY(-2px)}
+        .cta-alt{display:inline-block;margin-top:16px;color:var(--gold);text-decoration:none;font-size:14px;transition:opacity .3s}
+        .cta-alt:hover{opacity:.7}
+        .related{padding:60px 0;border-top:1px solid var(--layer)}
+        .related h2{font-family:'Playfair Display',serif;font-size:24px;text-align:center;margin-bottom:32px}
+        .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .related-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px;text-align:center;text-decoration:none;color:var(--text);transition:all .3s}
+        .related-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+        .related-card .r-flag{font-size:28px;margin-bottom:8px}
+        .related-card h4{font-family:'Playfair Display',serif;font-size:15px;margin-bottom:4px}
+        .related-card .r-price{font-size:13px;color:var(--gold)}
+        footer{padding:48px 0;text-align:center;border-top:1px solid var(--layer)}
+        footer .brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+        footer .tagline{font-size:12px;color:var(--dim);margin-bottom:16px}
+        footer .social a{color:var(--dim);text-decoration:none;margin:0 12px;font-size:13px;transition:color .3s}
+        footer .social a:hover{color:var(--gold)}
+        footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
+        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
+        .float-wa:hover{transform:scale(1.1)}
+        @media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.info-grid{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/index.html" class="nav-brand">Rotta Curadoria</a>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/index.html#produtos">Produtos</a>
+            <a href="/jornadas.html" class="active">Destinos</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/sobre.html">Sobre</a>
+            <a href="/quiz.html">Quiz</a>
+        </div>
+        <div class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+<div class="mobile-menu">
+    <a href="/index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="/index.html#produtos" onclick="closeMobileMenu()">Produtos</a>
+    <a href="/jornadas.html" onclick="closeMobileMenu()">Destinos</a>
+    <a href="/blog.html" onclick="closeMobileMenu()">Blog</a>
+    <a href="/sobre.html" onclick="closeMobileMenu()">Sobre</a>
+    <a href="/quiz.html" onclick="closeMobileMenu()">Quiz</a>
+</div>
+<a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20roteiro%20de%20Gramado" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
+
+<!-- HERO -->
+<section class="journey-hero">
+    <a href="/jornadas.html" class="back fade-up">&#x2190; Todos os destinos</a>
+    <div class="flag fade-up">&#x1F1E7;&#x1F1F7;</div>
+    <h1 class="fade-up">Gramado + Canela</h1>
+    <div class="meta fade-up">
+        <span><strong>5</strong> dias</span>
+        <span><strong>Serra Gaucha</strong> · Fondue · Inverno</span>
+        <span>Ideal pra <strong>casais e familias</strong></span>
+    </div>
+    <div class="price-hero fade-up">R$4.200 <small>/casal</small></div>
+</section>
+
+<div class="container">
+
+    <div class="photo-placeholder fade-up">
+        <p>Foto: rua charmosa de Gramado com hortensias azuis, lojas de chocolate artesanal e neblina suave envolvendo os pinheiros ao fundo</p>
+    </div>
+
+    <div class="section fade-up">
+        <p class="section-label">Sobre essa jornada</p>
+        <h2>5 dias de aconchego na serra</h2>
+        <p>Gramado e Canela sao daqueles destinos que funcionam o ano inteiro, mas no frio viram magicos. Fondue, chocolate, vinicolas, lareira e aquele clima europeu que nao precisa de passaporte.</p>
+        <p>Esse roteiro foi pensado pra casais que querem romance e familias que querem criar memorias juntas. Tudo pertinho (20min entre Gramado e Canela) e com muito pra fazer sem correria.</p>
+    </div>
+
+    <!-- DAY BY DAY -->
+    <div class="section fade-up">
+        <p class="section-label">Dia a dia</p>
+        <h2>Roteiro completo</h2>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 1</div>
+            <h3>Chegada + Centro de Gramado</h3>
+            <p>Voo ate Porto Alegre + carro alugado (1h40 de estrada linda). Check-in no hotel. Tarde livre pra caminhar pela Rua Coberta, lojas de chocolate (Prawer, Lugano, Florybal). Jantar com fondue no Chez Pierre ou La Caceria.</p>
+            <span class="highlight">Pare na estrada em Sao Francisco de Paula pra comprar queijos</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 2</div>
+            <h3>Canela — Cascata e Alambique</h3>
+            <p>Manha no Parque do Caracol — Cascata do Caracol (131m de queda). Tarde no Alambique Flor do Mato (degustacao de cachacas artesanais e licores). Parque da Ferradura pra vista panoramica do canyon. Jantar em Canela no Restaurante Colosseo.</p>
+            <span class="highlight">Cascata do Caracol: va pela manha, menos gente</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 3</div>
+            <h3>Rota dos Vinhos</h3>
+            <p>Dia dedicado as vinicolas da serra. Don Laurindo (premiada), Vinicola Ravanello (tour completo) e Cave Geisse (espumantes excepcionais). Almoco harmonizado na vinicola. Tarde livre no hotel. Noite: jantar no Belle du Valais (melhor fondue da serra).</p>
+            <span class="highlight">Cave Geisse: espumantes nivel Champagne frances</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 4</div>
+            <h3>Mini Mundo + Experiencias</h3>
+            <p>Manha no Mini Mundo (encantador pra familias) ou Mundo de Chocolate (tour pela fabrica). Tarde: Snowland (parque de neve indoor) ou SkyGlass (plataforma de vidro com vista pra serra). Noite: Natal Luz (se for entre outubro e janeiro) ou jantar especial.</p>
+            <span class="highlight">Snowland: neve de verdade no Brasil — criancas piram</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 5</div>
+            <h3>Compras + Despedida</h3>
+            <p>Manha pra compras finais — chocolates, vinhos, malhas e queijos coloniais. Almoco no Malbec Restô (carnes nobres e vinhos argentinos). Estrada de volta a Porto Alegre com pausa em Nova Petropolis (jardins e cucas alemas). Voo de volta.</p>
+            <span class="highlight">Compre queijo serrano e salame colonial pra levar</span>
+        </div>
+    </div>
+
+    <!-- ONDE FICAR -->
+    <div class="section fade-up">
+        <p class="section-label">Onde ficar</p>
+        <h2>Hospedagem curada</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Hotel Casa da Montanha</h4>
+                <p>Charme puro no centro de Gramado. Lareira, cafe da manha colonial, spa e vista pra serra. Perfeito pra casais.</p>
+                <span class="tag">$$$$ — a partir de R$600/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Pousada Encantos da Terra</h4>
+                <p>Pousada intimista com chalés individuais, banheira de hidromassagem e cafe colonial incluso. Romance garantido.</p>
+                <span class="tag">$$$ — a partir de R$400/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Hotel Laghetto Stilo Centro</h4>
+                <p>Moderno, bem localizado e com bom custo-beneficio. Piscina aquecida e academia. Otimo pra familias.</p>
+                <span class="tag">$$ — a partir de R$280/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Wyndham Gramado Termas</h4>
+                <p>Resort com piscinas termais, kids club e restaurante no hotel. Ideal pra familias que querem conforto total.</p>
+                <span class="tag">$$$ — a partir de R$450/noite</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ONDE COMER -->
+    <div class="section fade-up">
+        <p class="section-label">Onde comer — dicas da Alexandra</p>
+        <h2>Gastronomia curada</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Belle du Valais</h4>
+                <p>O melhor fondue de Gramado. Ambiente acolhedor, fondue de queijo suico e de chocolate belga. Reserve com antecedencia.</p>
+                <span class="tag">$$$$ — jantar romantico obrigatorio</span>
+            </div>
+            <div class="info-card">
+                <h4>Malbec Restô</h4>
+                <p>Carnes nobres com toque argentino e carta de vinhos impressionante. Ambiente sofisticado sem ser estirado.</p>
+                <span class="tag">$$$ — almoco ou jantar especial</span>
+            </div>
+            <div class="info-card">
+                <h4>Cafe Colonial Bela Vista</h4>
+                <p>A experiencia mais gaucha da viagem. Mesa farta com cucas, geleias, queijos, embutidos e muito mais. Voce nao almoca depois.</p>
+                <span class="tag">$$ — experiencia regional</span>
+            </div>
+            <div class="info-card">
+                <h4>Chocolate Prawer (fabrica)</h4>
+                <p>Tour pela fabrica + degustacao + loja. O chocolate quente deles e o melhor que voce vai tomar na vida. Nao e exagero.</p>
+                <span class="tag">$ — passeio + degustacao</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUANTO CUSTA -->
+    <div class="section fade-up">
+        <p class="section-label">Investimento</p>
+        <h2>Quanto custa essa jornada</h2>
+        <table class="cost-table">
+            <tr><th>Item</th><th style="text-align:right">Estimativa / casal</th></tr>
+            <tr><td>Passagens aereas (ida e volta ate POA)</td><td>R$1.200</td></tr>
+            <tr><td>Aluguel de carro (5 dias)</td><td>R$500</td></tr>
+            <tr><td>Hospedagem (4 noites)</td><td>R$1.400</td></tr>
+            <tr><td>Alimentacao (5 dias com fondues)</td><td>R$700</td></tr>
+            <tr><td>Passeios e ingressos</td><td>R$300</td></tr>
+            <tr><td>Extras (compras, degustacoes)</td><td>R$100</td></tr>
+            <tr class="total"><td>Total estimado</td><td>R$4.200</td></tr>
+        </table>
+        <p style="font-size:13px;color:var(--dim)">* Valores estimados para 2026. Compras pessoais (chocolates, vinhos) nao incluidas. Passagens saindo de Sao Paulo.</p>
+    </div>
+
+    <!-- MELHOR EPOCA -->
+    <div class="section fade-up">
+        <p class="section-label">Quando ir</p>
+        <h2>Melhor epoca</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Junho a Agosto (inverno)</h4>
+                <p>A epoca mais magica. Frio de verdade (0-10°C), lareiras acesas, fondue com gosto diferente. Chance de geada e neve em anos especiais.</p>
+                <span class="tag">Melhor epoca — reserve com antecedencia</span>
+            </div>
+            <div class="info-card">
+                <h4>Outubro a Janeiro (Natal Luz)</h4>
+                <p>Festival Natal Luz transforma Gramado em uma vila natalina. Desfiles, shows de luz e decoracao encantadora. Lota, mas vale a pena.</p>
+                <span class="tag">Otimo pra familias</span>
+            </div>
+            <div class="info-card">
+                <h4>Marco a Maio (outono)</h4>
+                <p>Folhas caindo, temperaturas amenas e precos mais baixos. Gramado fica linda com as cores do outono e menos turistas.</p>
+                <span class="tag">Melhor custo-beneficio</span>
+            </div>
+            <div class="info-card">
+                <h4>Setembro (Festival de Cinema)</h4>
+                <p>Festival de Cinema de Gramado — um dos maiores do Brasil. Cidade agitada com premiacoes e eventos culturais. Reservar cedo.</p>
+                <span class="tag">Para amantes de cultura</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- DICAS -->
+    <div class="section fade-up">
+        <p class="section-label">Dicas do curador</p>
+        <h2>O que a gente aprendeu indo varias vezes</h2>
+
+        <div class="tip-card">
+            <h4>Alugue carro — nao dependa de transfer</h4>
+            <p>As vinicolas, Canela e os melhores restaurantes ficam espalhados. Com carro voce tem liberdade e a estrada entre Porto Alegre e Gramado ja e um passeio (especialmente pela Rota Romantica).</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Reserve fondues com antecedencia</h4>
+            <p>Belle du Valais e Chez Pierre lotam, especialmente no inverno e feriados. Reserve pelo menos 3 dias antes. Sem reserva, prepare-se pra esperar 1-2 horas.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Cafe colonial substitui almoco</h4>
+            <p>Nao cometa o erro de almocar e depois ir pro cafe colonial. O cafe colonial e uma refeicao completa (e enorme). Va de estomago vazio e pule o almoco desse dia.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Leve mala com espaco pra compras</h4>
+            <p>Voce vai querer trazer chocolates, vinhos, queijos, salames e malhas. Leve uma mala extra ou pelo menos espaco na bagagem. Os chocolates artesanais sao irresistiveis.</p>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section fade-up">
+        <h2>Quer esse roteiro <em>personalizado</em>?</h2>
+        <p>A gente adapta tudo — datas, estilo de hotel, restaurantes e passeios de acordo com seu perfil.</p>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20o%20roteiro%20personalizado%20de%20Gramado%20%F0%9F%87%A7%F0%9F%87%B7" class="cta-wa">&#x1F4AC; Personalizar esse roteiro</a>
+        <br>
+        <a href="/produto-curadoria-completa.html" class="cta-alt">Ou veja nossos servicos de curadoria &#x2192;</a>
+    </div>
+
+    <!-- RELATED -->
+    <div class="related fade-up">
+        <h2>Destinos parecidos</h2>
+        <div class="related-grid">
+            <a href="/jornadas/curitiba-morretes.html" class="related-card">
+                <div class="r-flag">&#x1F1E7;&#x1F1F7;</div>
+                <h4>Curitiba + Morretes</h4>
+                <div class="r-price">R$2.800/casal</div>
+            </a>
+            <a href="/jornadas/mendoza.html" class="related-card">
+                <div class="r-flag">&#x1F1E6;&#x1F1F7;</div>
+                <h4>Mendoza</h4>
+                <div class="r-price">R$4.370/casal</div>
+            </a>
+            <a href="/jornadas/foz-do-iguacu.html" class="related-card">
+                <div class="r-flag">&#x1F1E7;&#x1F1F7;</div>
+                <h4>Foz do Iguacu</h4>
+                <div class="r-price">R$3.500/casal</div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container" style="max-width:1080px">
+        <p class="brand">Rotta Curadoria</p>
+        <p class="tagline">Curado por Marcelo & Alexandra</p>
+        <div class="social">
+            <a href="https://instagram.com/rotta.curadoria">Instagram</a>
+            <a href="https://youtube.com/@rotta.curadoria">YouTube</a>
+            <a href="https://tiktok.com/@rotta.curadoria">TikTok</a>
+        </div>
+        <p class="legal">Nao somos agencia de viagem. Somos curadores de experiencias.<br>Todos os precos sao estimativas e podem variar conforme a data e destino.<br>&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+function closeMobileMenu() {
+    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.mobile-menu').classList.remove('open');
+}
+</script>
+</body>
+</html>

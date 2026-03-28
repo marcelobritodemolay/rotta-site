@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orlando, EUA — 10 Dias em Familia | Rotta Curadoria</title>
+    <meta name="description" content="Roteiro curado de 10 dias em Orlando: Disney, Universal, outlets e diversao em familia. R$18.000 por familia com tudo planejado.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;--gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);--text:#F2EDE8;--muted:#999;--dim:#666}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:800px;margin:0 auto;padding:0 24px}
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;background:rgba(14,14,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(42,42,42,.5)}
+        .nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .nav-brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;text-decoration:none}
+        .nav-links{display:flex;gap:24px;align-items:center}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .3s}
+        .nav-links a:hover{color:var(--gold)}
+        .nav-links a.active{color:var(--gold);font-weight:500}
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:200}
+        .hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
+        .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(14,14,14,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+        .mobile-menu.open{display:flex}
+        .mobile-menu a{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);text-decoration:none;transition:color .3s}
+        .mobile-menu a:hover{color:var(--gold)}
+        .journey-hero{padding:140px 24px 60px;text-align:center;position:relative}
+        .journey-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .journey-hero .back{display:inline-block;color:var(--gold);text-decoration:none;font-size:13px;margin-bottom:24px;transition:opacity .3s}
+        .journey-hero .back:hover{opacity:.7}
+        .journey-hero .flag{font-size:56px;margin-bottom:16px}
+        .journey-hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);font-weight:700;margin-bottom:12px}
+        .journey-hero .meta{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:8px}
+        .journey-hero .meta span{font-size:13px;color:var(--muted)}
+        .journey-hero .meta span strong{color:var(--gold)}
+        .journey-hero .price-hero{font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);font-weight:700;margin-top:16px}
+        .journey-hero .price-hero small{font-size:14px;color:var(--dim);font-weight:400}
+        .photo-placeholder{background:var(--card);border:1px solid var(--layer);border-radius:16px;height:320px;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px;margin-bottom:48px}
+        .photo-placeholder p{color:var(--dim);font-size:13px;line-height:1.6;max-width:300px}
+        .section{padding:48px 0;border-top:1px solid var(--layer)}
+        .section:first-of-type{border-top:none}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .section h2{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:24px;line-height:1.3}
+        .section p{color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:16px}
+        .day-card{background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:28px 24px;margin-bottom:16px;position:relative;overflow:hidden}
+        .day-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:.5}
+        .day-card .day-num{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+        .day-card h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:10px;color:var(--text)}
+        .day-card p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+        .day-card .highlight{display:inline-block;background:var(--gold-dim);color:var(--gold);font-size:11px;padding:4px 10px;border-radius:20px;margin-top:10px;font-weight:500}
+        .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+        .info-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px}
+        .info-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px;color:var(--text)}
+        .info-card p{color:var(--muted);font-size:13px;line-height:1.5;margin:0}
+        .info-card .tag{font-size:11px;color:var(--gold);margin-top:8px;display:block}
+        .cost-table{width:100%;border-collapse:collapse;margin-bottom:16px}
+        .cost-table th{text-align:left;font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid var(--layer)}
+        .cost-table td{padding:12px 0;font-size:14px;color:var(--muted);border-bottom:1px solid rgba(42,42,42,.3)}
+        .cost-table td:last-child{text-align:right;color:var(--text);font-weight:500}
+        .cost-table tr.total td{color:var(--gold);font-weight:700;font-size:16px;border-top:2px solid var(--gold);border-bottom:none}
+        .tip-card{background:linear-gradient(135deg,var(--card) 0%,#1F1A14 100%);border:1px solid rgba(197,165,114,.2);border-radius:16px;padding:28px 24px;margin-bottom:16px}
+        .tip-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:10px;color:var(--gold)}
+        .tip-card p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+        .cta-section{padding:80px 0;text-align:center;position:relative}
+        .cta-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,var(--gold-glow) 0%,transparent 60%);pointer-events:none}
+        .cta-section h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,32px);margin-bottom:16px}
+        .cta-section h2 em{font-style:italic;color:var(--gold)}
+        .cta-section p{color:var(--muted);font-size:15px;max-width:480px;margin:0 auto 32px}
+        .cta-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s}
+        .cta-wa:hover{background:#20BD5A;transform:translateY(-2px)}
+        .cta-alt{display:inline-block;margin-top:16px;color:var(--gold);text-decoration:none;font-size:14px;transition:opacity .3s}
+        .cta-alt:hover{opacity:.7}
+        .related{padding:60px 0;border-top:1px solid var(--layer)}
+        .related h2{font-family:'Playfair Display',serif;font-size:24px;text-align:center;margin-bottom:32px}
+        .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .related-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px;text-align:center;text-decoration:none;color:var(--text);transition:all .3s}
+        .related-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+        .related-card .r-flag{font-size:28px;margin-bottom:8px}
+        .related-card h4{font-family:'Playfair Display',serif;font-size:15px;margin-bottom:4px}
+        .related-card .r-price{font-size:13px;color:var(--gold)}
+        footer{padding:48px 0;text-align:center;border-top:1px solid var(--layer)}
+        footer .brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+        footer .tagline{font-size:12px;color:var(--dim);margin-bottom:16px}
+        footer .social a{color:var(--dim);text-decoration:none;margin:0 12px;font-size:13px;transition:color .3s}
+        footer .social a:hover{color:var(--gold)}
+        footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
+        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
+        .float-wa:hover{transform:scale(1.1)}
+        @media(max-width:768px){.nav-links{display:none}.hamburger{display:flex}.info-grid{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/index.html" class="nav-brand">Rotta Curadoria</a>
+        <div class="nav-links">
+            <a href="/index.html">Home</a>
+            <a href="/index.html#produtos">Produtos</a>
+            <a href="/jornadas.html" class="active">Destinos</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/sobre.html">Sobre</a>
+            <a href="/quiz.html">Quiz</a>
+        </div>
+        <div class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+<div class="mobile-menu">
+    <a href="/index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="/index.html#produtos" onclick="closeMobileMenu()">Produtos</a>
+    <a href="/jornadas.html" onclick="closeMobileMenu()">Destinos</a>
+    <a href="/blog.html" onclick="closeMobileMenu()">Blog</a>
+    <a href="/sobre.html" onclick="closeMobileMenu()">Sobre</a>
+    <a href="/quiz.html" onclick="closeMobileMenu()">Quiz</a>
+</div>
+<a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20roteiro%20de%20Orlando" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
+
+<!-- HERO -->
+<section class="journey-hero">
+    <a href="/jornadas.html" class="back fade-up">&#x2190; Todos os destinos</a>
+    <div class="flag fade-up">&#x1F1FA;&#x1F1F8;</div>
+    <h1 class="fade-up">Orlando, EUA</h1>
+    <div class="meta fade-up">
+        <span><strong>10</strong> dias</span>
+        <span><strong>Disney</strong> · Universal · Familia</span>
+        <span>Ideal pra <strong>familias</strong></span>
+    </div>
+    <div class="price-hero fade-up">R$18.000 <small>/familia</small></div>
+</section>
+
+<div class="container">
+
+    <div class="photo-placeholder fade-up">
+        <p>Foto: familia sorridente em frente ao castelo da Cinderela no Magic Kingdom com fogos de artificio ao fundo</p>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="section fade-up">
+        <p class="section-label">Sobre essa jornada</p>
+        <h2>10 dias de magia pra familia inteira</h2>
+        <p>Orlando e o destino que toda familia quer fazer pelo menos uma vez. O problema? Sao tantos parques, tantas opcoes e tanta informacao que da pra se perder antes de embarcar.</p>
+        <p>Esse roteiro foi testado com as nossas 4 filhas. Cada dia foi pensado pra maximizar diversao e minimizar cansaco — com pausas estrategicas, ordem de parques otimizada e dicas que so quem ja foi varias vezes conhece.</p>
+    </div>
+
+    <!-- DAY BY DAY -->
+    <div class="section fade-up">
+        <p class="section-label">Dia a dia</p>
+        <h2>Roteiro completo</h2>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 1</div>
+            <h3>Chegada + Ambientacao</h3>
+            <p>Voo ate Orlando. Retirada do carro alugado (essencial em Orlando). Check-in no hotel/casa alugada. Supermercado (Publix ou Walmart) pra abastecer. Noite tranquila — descanso pro que vem.</p>
+            <span class="highlight">Dica: alugue casa pelo Airbnb — mais espaco e cozinha</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 2</div>
+            <h3>Magic Kingdom</h3>
+            <p>O parque mais iconico da Disney. Chegue cedo (antes de abrir). Priorize: Space Mountain, Splash Mountain, Pirates of the Caribbean e Big Thunder Mountain. Almoco no Be Our Guest. Encerre com o show de fogos Happily Ever After.</p>
+            <span class="highlight">Use o Lightning Lane pra economizar fila</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 3</div>
+            <h3>EPCOT</h3>
+            <p>Manha nas atracoes (Guardians of the Galaxy, Test Track, Frozen). Tarde no World Showcase — prove comidas de 11 paises. As criancas adoram o programa de carimbos dos paises. Noite: show de fogos Luminous.</p>
+            <span class="highlight">Prove o school bread da Noruega — viciante</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 4</div>
+            <h3>Hollywood Studios</h3>
+            <p>Star Wars Galaxy's Edge pela manha (Smuggler's Run e Rise of the Resistance). Toy Story Land a tarde (Slinky Dog Dash). Tower of Terror pra quem tem coragem. Show Fantasmic a noite.</p>
+            <span class="highlight">Rise of the Resistance: a melhor atracao da Disney</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 5</div>
+            <h3>Dia de Descanso + Outlets</h3>
+            <p>Dia estrategico de pausa. Manha na piscina do hotel. Tarde no Premium Outlets (Vineland ou International). Compras com calma. Jantar no Olive Garden ou Bonefish Grill.</p>
+            <span class="highlight">Nao pule o dia de descanso — faz toda diferenca</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 6</div>
+            <h3>Animal Kingdom</h3>
+            <p>Avatar Flight of Passage (chegue 30min antes de abrir). Safari Kilimanjaro pela manha (animais mais ativos). Expedition Everest. Tarde tranquila no parque. Jantar no Disney Springs.</p>
+            <span class="highlight">Flight of Passage: fila longa, mas vale cada minuto</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 7</div>
+            <h3>Universal Studios</h3>
+            <p>Manha no Wizarding World of Harry Potter (Diagon Alley). Hogwarts Express ate o Islands of Adventure. Tarde: Hagrid's Motorbike Adventure e Velocicoaster. Noite na CityWalk.</p>
+            <span class="highlight">Tome cerveja amanteigada — as criancas piram</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 8</div>
+            <h3>Islands of Adventure + Volcano Bay</h3>
+            <p>Manha no Islands (Hulk, Spider-Man, Jurassic World). Se fizer calor, tarde no Volcano Bay (parque aquatico). Se preferir, segundo dia de Magic Kingdom ou parque aquatico da Disney.</p>
+            <span class="highlight">Volcano Bay: chegue cedo, depois das 14h lota</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 9</div>
+            <h3>Kennedy Space Center ou Dia Livre</h3>
+            <p>Opcao A: Kennedy Space Center (1h de carro) — incrivel pra criancas e adultos. Opcao B: revisitar parque favorito. Opcao C: dia de compras finais no Florida Mall ou Outlet. Jantar especial de despedida.</p>
+            <span class="highlight">Kennedy Space Center surpreende ate quem nao gosta de ciencia</span>
+        </div>
+
+        <div class="day-card fade-up">
+            <div class="day-num">Dia 10</div>
+            <h3>Despedida + Volta</h3>
+            <p>Manha pra arrumar malas (voce vai precisar de tempo — compras!). Devolucao do carro. Voo de volta. Chegada no Brasil com a familia inteira querendo voltar.</p>
+            <span class="highlight">Pese as malas antes — limite de 23kg por mala</span>
+        </div>
+    </div>
+
+    <!-- ONDE FICAR -->
+    <div class="section fade-up">
+        <p class="section-label">Onde ficar</p>
+        <h2>Hospedagem curada</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Casa alugada (Reunion Resort)</h4>
+                <p>Casa com 3-4 quartos, piscina privativa e cozinha completa. Ideal pra familias grandes. 15min dos parques Disney.</p>
+                <span class="tag">$$$ — R$500-800/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Hilton Bonnet Creek</h4>
+                <p>Dentro do complexo Disney, com piscina com preguica river e transporte pros parques. Otimo custo-beneficio.</p>
+                <span class="tag">$$$ — R$600/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Universal's Cabana Bay</h4>
+                <p>Hotel tematico retro dentro do Universal. Acesso antecipado aos parques e transporte incluso. Criancas adoram.</p>
+                <span class="tag">$$ — R$400/noite</span>
+            </div>
+            <div class="info-card">
+                <h4>Disney's Art of Animation</h4>
+                <p>Hotel tematico da Disney com suites familiares (Nemo, Carros, Rei Leao). Transporte gratuito pros parques Disney.</p>
+                <span class="tag">$$$ — R$550/noite</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ONDE COMER -->
+    <div class="section fade-up">
+        <p class="section-label">Onde comer — dicas da Alexandra</p>
+        <h2>Gastronomia curada</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Be Our Guest (Magic Kingdom)</h4>
+                <p>Jantar dentro do castelo da Fera. Menu frances, ambiente magico. Reservar com 60 dias de antecedencia.</p>
+                <span class="tag">$$$$ — experiencia unica</span>
+            </div>
+            <div class="info-card">
+                <h4>Bonefish Grill</h4>
+                <p>Frutos do mar frescos, bang bang shrimp lendario. Fora dos parques, preco justo e qualidade excelente.</p>
+                <span class="tag">$$ — jantar em familia</span>
+            </div>
+            <div class="info-card">
+                <h4>The Boathouse (Disney Springs)</h4>
+                <p>Restaurante a beira do lago com carros anfibios. Steaks e frutos do mar. Vista incrivel ao por do sol.</p>
+                <span class="tag">$$$ — jantar especial</span>
+            </div>
+            <div class="info-card">
+                <h4>Publix Subs</h4>
+                <p>O segredo local: sanduiches do supermercado Publix sao lendarios (principalmente o chicken tender sub). Barato e delicioso.</p>
+                <span class="tag">$ — almoco rapido</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUANTO CUSTA -->
+    <div class="section fade-up">
+        <p class="section-label">Investimento</p>
+        <h2>Quanto custa essa jornada</h2>
+        <table class="cost-table">
+            <tr><th>Item</th><th style="text-align:right">Estimativa / familia (4 pessoas)</th></tr>
+            <tr><td>Passagens aereas (4 pessoas)</td><td>R$8.000</td></tr>
+            <tr><td>Hospedagem (9 noites — casa alugada)</td><td>R$4.500</td></tr>
+            <tr><td>Aluguel de carro (10 dias)</td><td>R$1.200</td></tr>
+            <tr><td>Ingressos parques (4 Disney + 2 Universal)</td><td>R$2.800</td></tr>
+            <tr><td>Alimentacao (10 dias)</td><td>R$1.000</td></tr>
+            <tr><td>Seguro viagem (4 pessoas)</td><td>R$300</td></tr>
+            <tr><td>Extras (compras pessoais nao incluidas)</td><td>R$200</td></tr>
+            <tr class="total"><td>Total estimado</td><td>R$18.000</td></tr>
+        </table>
+        <p style="font-size:13px;color:var(--dim)">* Valores estimados para familia de 4 pessoas (2 adultos + 2 criancas) em 2026. Compras pessoais nao incluidas. Passagens saindo de Sao Paulo.</p>
+    </div>
+
+    <!-- MELHOR EPOCA -->
+    <div class="section fade-up">
+        <p class="section-label">Quando ir</p>
+        <h2>Melhor epoca</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Setembro a Novembro</h4>
+                <p>Parques mais vazios, precos menores, clima agradavel (25-30°C). Evento de Halloween nos parques. Melhor custo-beneficio.</p>
+                <span class="tag">Melhor epoca</span>
+            </div>
+            <div class="info-card">
+                <h4>Fevereiro a Marco</h4>
+                <p>Apos o pico do inverno, precos moderados e filas menores. Clima perfeito (20-28°C). Boa opcao pra Carnaval.</p>
+                <span class="tag">Otima opcao</span>
+            </div>
+            <div class="info-card">
+                <h4>Junho a Agosto (ferias)</h4>
+                <p>Parques lotados, calor intenso (35°C+) e precos altos. Mas e quando as criancas tem ferias. Planeje com antecedencia.</p>
+                <span class="tag">Lotado mas possivel</span>
+            </div>
+            <div class="info-card">
+                <h4>Dezembro (Natal)</h4>
+                <p>Decoracao natalina magica, mas parques superlotados entre 20/12 e 02/01. Se for, va no inicio de dezembro.</p>
+                <span class="tag">Lindo mas cheio</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- DICAS -->
+    <div class="section fade-up">
+        <p class="section-label">Dicas do curador</p>
+        <h2>O que a gente aprendeu com 4 filhas</h2>
+
+        <div class="tip-card">
+            <h4>Dia de descanso nao e opcional</h4>
+            <p>A gente ja fez Orlando sem pausa e com pausa. Com pausa e outro nivel. No dia 5 todo mundo recarrega e os ultimos dias rendem muito mais. Nao pule esse dia.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Compre ingressos com antecedencia</h4>
+            <p>Ingressos comprados online sao mais baratos (10-20%). Alem disso, voce ja pode agendar Lightning Lane e reservar restaurantes. Quanto antes, melhor.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Leve poncho de chuva descartavel</h4>
+            <p>Orlando chove forte a tarde quase todo dia no verao. Compre ponchos no Dollar Tree (1 dolar cada) em vez de pagar 15 dolares dentro do parque.</p>
+        </div>
+
+        <div class="tip-card">
+            <h4>Cozinhe no cafe e no jantar</h4>
+            <p>Se alugar casa, faca cafe da manha e alguns jantares em casa. A economia e brutal e as criancas descansam melhor comendo no ritmo delas.</p>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section fade-up">
+        <h2>Quer esse roteiro <em>personalizado</em>?</h2>
+        <p>A gente adapta pra sua familia — numero de filhos, idades, orcamento e datas. Tudo sob medida.</p>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20o%20roteiro%20personalizado%20de%20Orlando%20pra%20minha%20familia%20%F0%9F%87%BA%F0%9F%87%B8" class="cta-wa">&#x1F4AC; Personalizar esse roteiro</a>
+        <br>
+        <a href="/produto-curadoria-completa.html" class="cta-alt">Ou veja nossos servicos de curadoria &#x2192;</a>
+    </div>
+
+    <!-- RELATED -->
+    <div class="related fade-up">
+        <h2>Destinos parecidos</h2>
+        <div class="related-grid">
+            <a href="/jornadas/nova-york.html" class="related-card">
+                <div class="r-flag">&#x1F1FA;&#x1F1F8;</div>
+                <h4>Nova York</h4>
+                <div class="r-price">R$15.000/casal</div>
+            </a>
+            <a href="/jornadas/las-vegas-grand-canyon.html" class="related-card">
+                <div class="r-flag">&#x1F1FA;&#x1F1F8;</div>
+                <h4>Las Vegas + Grand Canyon</h4>
+                <div class="r-price">R$10.000/casal</div>
+            </a>
+            <a href="/jornadas/california-napa.html" class="related-card">
+                <div class="r-flag">&#x1F1FA;&#x1F1F8;</div>
+                <h4>California (Napa Valley)</h4>
+                <div class="r-price">R$12.000/casal</div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container" style="max-width:1080px">
+        <p class="brand">Rotta Curadoria</p>
+        <p class="tagline">Curado por Marcelo & Alexandra</p>
+        <div class="social">
+            <a href="https://instagram.com/rotta.curadoria">Instagram</a>
+            <a href="https://youtube.com/@rotta.curadoria">YouTube</a>
+            <a href="https://tiktok.com/@rotta.curadoria">TikTok</a>
+        </div>
+        <p class="legal">Nao somos agencia de viagem. Somos curadores de experiencias.<br>Todos os precos sao estimativas e podem variar conforme a data e destino.<br>&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+function closeMobileMenu() {
+    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.mobile-menu').classList.remove('open');
+}
+</script>
+</body>
+</html>
