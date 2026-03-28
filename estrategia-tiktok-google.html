@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotta Curadoria | Estratégia TikTok + Google Ads</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --coral:#E8785A;--green:#4CAF7D;--blue:#5B8DEF;
+            --purple:#9B7FE6
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+        /* Animations */
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+
+        /* Header */
+        .doc-header{padding:60px 0 40px;text-align:center;border-bottom:1px solid var(--layer)}
+        .doc-header .badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:24px}
+        .doc-header h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,48px);font-weight:700;line-height:1.15;margin-bottom:16px}
+        .doc-header h1 em{font-style:italic;color:var(--gold)}
+        .doc-header .subtitle{font-size:16px;color:var(--muted);max-width:600px;margin:0 auto}
+
+        /* Tabs Navigation */
+        .tabs-nav{display:flex;justify-content:center;gap:0;margin:40px auto 0;max-width:600px;border-bottom:2px solid var(--layer)}
+        .tab-btn{background:none;border:none;color:var(--muted);font-family:'Inter',sans-serif;font-size:15px;font-weight:600;padding:16px 32px;cursor:pointer;position:relative;transition:color .3s;letter-spacing:.5px}
+        .tab-btn:hover{color:var(--text)}
+        .tab-btn.active{color:var(--gold)}
+        .tab-btn.active::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;background:var(--gold)}
+        .tab-content{display:none;padding:48px 0 80px}
+        .tab-content.active{display:block}
+
+        /* Section styles */
+        .section{margin-bottom:48px}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .section h2{font-family:'Playfair Display',serif;font-size:clamp(22px,3.5vw,32px);margin-bottom:20px;line-height:1.3}
+        .section h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:16px;color:var(--text)}
+        .section h4{font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:12px;margin-top:24px}
+        .section p{color:var(--muted);font-size:15px;margin-bottom:12px}
+        .divider{width:60px;height:1px;background:var(--gold);opacity:.3;margin:48px 0}
+
+        /* Bio Cards */
+        .bio-grid{display:grid;gap:20px;margin-bottom:32px}
+        .bio-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px;position:relative;overflow:hidden}
+        .bio-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:.5}
+        .bio-card .bio-number{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);font-weight:700;margin-bottom:8px}
+        .bio-card .bio-text{font-size:15px;color:var(--text);line-height:1.5;margin-bottom:8px}
+        .bio-card .bio-chars{font-size:12px;color:var(--dim)}
+        .bio-card .copy-btn{position:absolute;top:16px;right:16px;background:var(--gold-dim);border:1px solid rgba(197,165,114,.3);color:var(--gold);font-size:12px;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
+        .bio-card .copy-btn:hover{background:var(--gold);color:var(--bg)}
+
+        /* Checklist */
+        .checklist{list-style:none;padding:0}
+        .checklist li{padding:12px 16px;background:var(--card);border:1px solid var(--layer);border-radius:8px;margin-bottom:8px;display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted)}
+        .checklist li .check{width:20px;height:20px;border:2px solid var(--gold);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s}
+        .checklist li .check.checked{background:var(--gold);border-color:var(--gold)}
+        .checklist li .check.checked::after{content:'✓';color:var(--bg);font-size:12px;font-weight:700}
+        .checklist li strong{color:var(--text)}
+
+        /* Content Cards */
+        .content-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:24px}
+        .content-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px;transition:border-color .3s}
+        .content-card:hover{border-color:rgba(197,165,114,.3)}
+        .content-card .card-icon{font-size:28px;margin-bottom:12px}
+        .content-card h4{color:var(--text);text-transform:none;letter-spacing:0;font-size:16px;margin-bottom:8px;margin-top:0}
+        .content-card p{font-size:14px;color:var(--muted);margin-bottom:0}
+        .content-card ul{list-style:none;padding:0;margin-top:12px}
+        .content-card ul li{font-size:13px;color:var(--muted);padding:4px 0;padding-left:16px;position:relative}
+        .content-card ul li::before{content:'→';position:absolute;left:0;color:var(--gold)}
+
+        /* Schedule Table */
+        .schedule-table{width:100%;border-collapse:collapse;margin-bottom:24px}
+        .schedule-table th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);padding:12px 16px;border-bottom:1px solid var(--layer);background:var(--card)}
+        .schedule-table td{padding:12px 16px;font-size:14px;color:var(--muted);border-bottom:1px solid rgba(42,42,42,.5)}
+        .schedule-table td strong{color:var(--text)}
+        .schedule-table tr:hover td{background:rgba(197,165,114,.03)}
+
+        /* Hashtag Tags */
+        .tag-container{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+        .tag{background:var(--gold-dim);color:var(--gold);font-size:13px;padding:6px 14px;border-radius:100px;border:1px solid rgba(197,165,114,.2)}
+
+        /* Accordion */
+        .accordion{margin-bottom:8px}
+        .accordion-header{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .3s}
+        .accordion-header:hover{border-color:rgba(197,165,114,.3)}
+        .accordion-header.open{border-radius:12px 12px 0 0;border-bottom-color:transparent}
+        .accordion-header h3{margin:0;font-size:16px;font-family:'Inter',sans-serif;font-weight:600}
+        .accordion-header .acc-badge{font-size:11px;background:var(--gold-dim);color:var(--gold);padding:4px 12px;border-radius:100px;margin-left:12px}
+        .accordion-header .arrow{color:var(--gold);font-size:18px;transition:transform .3s}
+        .accordion-header.open .arrow{transform:rotate(180deg)}
+        .accordion-body{background:var(--card);border:1px solid var(--layer);border-top:none;border-radius:0 0 12px 12px;padding:0 24px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
+        .accordion-body.open{max-height:3000px;padding:24px}
+
+        /* Keyword Table */
+        .kw-table{width:100%;border-collapse:collapse;margin:16px 0}
+        .kw-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);padding:10px 12px;border-bottom:1px solid var(--layer);background:rgba(197,165,114,.05)}
+        .kw-table td{padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid rgba(42,42,42,.3)}
+        .kw-table td:first-child{color:var(--text);font-weight:500}
+        .kw-table tr:hover td{background:rgba(197,165,114,.03)}
+
+        /* Budget Chart */
+        .budget-visual{display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin:24px 0}
+        .budget-chart{width:200px;height:200px;border-radius:50%;position:relative;flex-shrink:0;background:conic-gradient(
+            var(--gold) 0deg 54deg,
+            var(--coral) 54deg 216deg,
+            var(--blue) 216deg 324deg,
+            var(--green) 324deg 360deg
+        )}
+        .budget-chart::after{content:'R$ 2.000/mês';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg);width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;color:var(--text);text-align:center}
+        .budget-legend{display:flex;flex-direction:column;gap:12px}
+        .legend-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--muted)}
+        .legend-dot{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+
+        /* Ad Copy Box */
+        .ad-copy{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px;margin:12px 0;position:relative}
+        .ad-copy .copy-btn{position:absolute;top:12px;right:12px;background:var(--gold-dim);border:1px solid rgba(197,165,114,.3);color:var(--gold);font-size:12px;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
+        .ad-copy .copy-btn:hover{background:var(--gold);color:var(--bg)}
+        .ad-copy .ad-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:8px}
+        .ad-copy .headline{font-size:16px;font-weight:600;color:var(--blue);margin-bottom:4px}
+        .ad-copy .desc{font-size:14px;color:var(--muted)}
+        .ad-copy .url{font-size:12px;color:var(--green);margin-top:8px}
+
+        /* Negative KW */
+        .neg-kw{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+        .neg-kw span{background:rgba(232,120,90,.1);color:var(--coral);font-size:12px;padding:4px 10px;border-radius:4px;border:1px solid rgba(232,120,90,.2)}
+
+        /* Implementation Steps */
+        .impl-steps{counter-reset:step}
+        .impl-step{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px;padding-left:72px;margin-bottom:12px;position:relative;counter-increment:step}
+        .impl-step::before{content:counter(step);position:absolute;left:24px;top:24px;width:32px;height:32px;border-radius:8px;background:var(--gold-dim);color:var(--gold);font-family:'Playfair Display',serif;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center}
+        .impl-step h4{margin-top:0;color:var(--text);text-transform:none;letter-spacing:0}
+        .impl-step p{font-size:14px;color:var(--muted);margin-bottom:0}
+
+        /* Tip Box */
+        .tip-box{background:rgba(197,165,114,.05);border:1px solid rgba(197,165,114,.2);border-radius:12px;padding:20px;margin:20px 0}
+        .tip-box .tip-label{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:8px;font-weight:600}
+        .tip-box p{font-size:14px;color:var(--muted);margin-bottom:0}
+
+        /* Toast */
+        .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--gold);color:var(--bg);padding:12px 24px;border-radius:8px;font-size:14px;font-weight:600;z-index:9999;transition:transform .3s ease;pointer-events:none}
+        .toast.show{transform:translateX(-50%) translateY(0)}
+
+        /* Back link */
+        .back-link{display:inline-flex;align-items:center;gap:8px;color:var(--muted);text-decoration:none;font-size:14px;padding:24px 0;transition:color .3s}
+        .back-link:hover{color:var(--gold)}
+
+        /* Responsive */
+        @media(max-width:768px){
+            .tabs-nav{flex-direction:column;border-bottom:none;gap:8px;max-width:100%}
+            .tab-btn{border:1px solid var(--layer);border-radius:8px;text-align:center}
+            .tab-btn.active{border-color:var(--gold)}
+            .tab-btn.active::after{display:none}
+            .content-grid{grid-template-columns:1fr}
+            .budget-visual{flex-direction:column;align-items:center}
+            .kw-table{font-size:12px}
+            .kw-table th,.kw-table td{padding:6px 8px}
+            .schedule-table{font-size:13px}
+            .schedule-table th,.schedule-table td{padding:8px 10px}
+        }
+    </style>
+</head>
+<body>
+
+<!-- Toast notification -->
+<div class="toast" id="toast">Copiado!</div>
+
+<div class="container">
+    <a href="index.html" class="back-link">← Voltar ao site</a>
+
+    <header class="doc-header fade-up">
+        <div class="badge">Documento Estratégico</div>
+        <h1>TikTok + <em>Google Ads</em></h1>
+        <p class="subtitle">Estratégia completa de expansão de canais para a Rotta Curadoria — TikTok orgânico e tráfego pago no Google.</p>
+    </header>
+
+    <!-- Tabs -->
+    <nav class="tabs-nav">
+        <button class="tab-btn active" data-tab="tiktok">TikTok</button>
+        <button class="tab-btn" data-tab="google">Google Ads</button>
+    </nav>
+
+    <!-- ==================== TIKTOK TAB ==================== -->
+    <div class="tab-content active" id="tab-tiktok">
+
+        <!-- BIO OPTIONS -->
+        <div class="section fade-up">
+            <p class="section-label">Bio do TikTok</p>
+            <h2>3 Opções de Bio <span style="color:var(--dim);font-family:'Inter',sans-serif;font-size:16px;font-weight:400">(máx. 150 caracteres)</span></h2>
+            <p>Escolha a que mais combina com o tom atual do perfil. Todas incluem prova social, identidade e CTA.</p>
+
+            <div class="bio-grid" style="margin-top:24px">
+                <div class="bio-card">
+                    <div class="bio-number">Opção 1 — Explorador</div>
+                    <div class="bio-text">Curadoria de viagens por quem vive cada destino 🧭 22 países · 5 continentes · Marcelo & Alexandra ✈️ Link na bio pra roteiro grátis 👇</div>
+                    <div class="bio-chars">143 caracteres</div>
+                    <button class="copy-btn" onclick="copyText(this, this.parentElement.querySelector('.bio-text').textContent)">Copiar</button>
+                </div>
+                <div class="bio-card">
+                    <div class="bio-number">Opção 2 — Direto ao Ponto</div>
+                    <div class="bio-text">Viagens curadas por um casal que já foi pra 22 países 🌍 Roteiros reais · Dicas sem enrolação 🧭 Quiz grátis 👇</div>
+                    <div class="bio-chars">111 caracteres</div>
+                    <button class="copy-btn" onclick="copyText(this, this.parentElement.querySelector('.bio-text').textContent)">Copiar</button>
+                </div>
+                <div class="bio-card">
+                    <div class="bio-number">Opção 3 — Confiante</div>
+                    <div class="bio-text">Seu curador de viagens 🧭 22 países reais · 0% blá blá blá · Marcelo & Alexandra ✈️ Roteiro grátis 👇</div>
+                    <div class="bio-chars">101 caracteres</div>
+                    <button class="copy-btn" onclick="copyText(this, this.parentElement.querySelector('.bio-text').textContent)">Copiar</button>
+                </div>
+            </div>
+
+            <div class="tip-box">
+                <div class="tip-label">Recomendação</div>
+                <p><strong>Opção 1</strong> é a mais completa (prova social + casal + CTA). <strong>Opção 2</strong> funciona melhor se o tom do TikTok for mais casual. <strong>Opção 3</strong> é a mais ousada e funciona se o público já conhece vocês.</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- PROFILE SETUP CHECKLIST -->
+        <div class="section fade-up">
+            <p class="section-label">Setup do Perfil</p>
+            <h2>Checklist de Configuração</h2>
+            <p>Antes de postar o primeiro conteúdo, garanta que tudo está configurado corretamente.</p>
+
+            <ul class="checklist" style="margin-top:20px">
+                <li><span class="check" onclick="this.classList.toggle('checked')"></span><strong>Username:</strong>&nbsp;@rotta.curadoria (igual ao Instagram)</li>
+                <li><span class="check" onclick="this.classList.toggle('checked')"></span><strong>Foto de perfil:</strong>&nbsp;Mesma logo/foto do Instagram</li>
+                <li><span class="check" onclick="this.classList.toggle('checked')"></span><strong>Nome de exibição:</strong>&nbsp;Rotta Curadoria ✈️</li>
+                <li><span class="check" onclick="this.classList.toggle('checked')"></span><strong>Bio:</strong>&nbsp;Colar uma das 3 opções acima</li>
+                <li><span class="check" onclick="this.classList.toggle('checked')"></span><strong>Link:</strong>&nbsp;Linktree ou direto para o quiz (rottacuradoria.com.br/quiz.html)</li>
+                <li><span class="check" onclick="this.classList.toggle('checked')"></span><strong>Categoria:</strong>&nbsp;Travel & Events</li>
+                <li><span class="check" onclick="this.classList.toggle('checked')"></span><strong>Conta Business:</strong>&nbsp;Trocar para conta Business (Configurações → Gerenciar conta → Mudar para conta Business)</li>
+                <li><span class="check" onclick="this.classList.toggle('checked')"></span><strong>Email vinculado:</strong>&nbsp;rottacuradoria@gmail.com</li>
+                <li><span class="check" onclick="this.classList.toggle('checked')"></span><strong>Instagram vinculado:</strong>&nbsp;Conectar @rotta.curadoria</li>
+                <li><span class="check" onclick="this.classList.toggle('checked')"></span><strong>YouTube vinculado:</strong>&nbsp;Conectar @rotta.curadoria</li>
+            </ul>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- CONTENT STRATEGY -->
+        <div class="section fade-up">
+            <p class="section-label">Estratégia de Conteúdo</p>
+            <h2>O que Postar no TikTok</h2>
+
+            <h4>Repostar do Instagram (Reels que funcionam nos dois)</h4>
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">🔄</div>
+                    <h4>Reels para Repostar</h4>
+                    <p>Esses formatos do Instagram funcionam nativamente no TikTok sem edição:</p>
+                    <ul>
+                        <li>Vereditos de destinos ("Vale ou não vale?")</li>
+                        <li>Listas rápidas ("5 erros na Europa")</li>
+                        <li>Antes/depois de viagem</li>
+                        <li>POV chegando em destino</li>
+                        <li>Dicas de economia em viagem</li>
+                        <li>Comparativos (destino A vs B)</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <div class="card-icon">⚠️</div>
+                    <h4>Reels que NÃO repostar</h4>
+                    <p>Esses formatos não performam no TikTok:</p>
+                    <ul>
+                        <li>Carrosséis (formato Instagram, não roda no TikTok)</li>
+                        <li>Reels com mais de 90 segundos</li>
+                        <li>Conteúdo com marca d'água do Instagram</li>
+                        <li>Vídeos muito "polidos" demais (TikTok prefere autenticidade)</li>
+                        <li>Posts institucionais ou "sobre nós"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h4 style="margin-top:32px">Conteúdo Nativo do TikTok</h4>
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">🪡</div>
+                    <h4>Stitches</h4>
+                    <p>Reagir a vídeos de outros creators de viagem:</p>
+                    <ul>
+                        <li>"Ela disse que a Itália é cara..." + sua experiência real</li>
+                        <li>"Ele falou que Croácia não vale..." + suas fotos/vídeos</li>
+                        <li>Stitch com vídeos virais de destinos errados</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <div class="card-icon">🎭</div>
+                    <h4>Duets</h4>
+                    <p>Lado a lado com conteúdo relevante:</p>
+                    <ul>
+                        <li>Duet com "expectativa vs realidade" de destinos</li>
+                        <li>Reagindo a roteiros ruins de agências</li>
+                        <li>Duet com casal contando perrengue de viagem</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <div class="card-icon">🔥</div>
+                    <h4>Trends para Surfar</h4>
+                    <p>Adapte essas trends ao universo de viagem:</p>
+                    <ul>
+                        <li>"Put a finger down" versão viajante</li>
+                        <li>"Tell me without telling me" — destinos</li>
+                        <li>Trend de ranking (tier list de destinos)</li>
+                        <li>"Day in my life" em destino internacional</li>
+                        <li>Green screen com fotos das viagens</li>
+                    </ul>
+                </div>
+                <div class="content-card">
+                    <div class="card-icon">💡</div>
+                    <h4>Formatos Exclusivos TikTok</h4>
+                    <p>Conteúdo criado só pro TikTok:</p>
+                    <ul>
+                        <li>"Responda nos comentários" — perguntas sobre destinos</li>
+                        <li>Storytime: histórias reais de viagem (perrengues, surpresas)</li>
+                        <li>"3 coisas que ninguém te conta sobre [destino]"</li>
+                        <li>GRWM (Get Ready With Me) pra viagem</li>
+                        <li>Packing: mala pra X dias na Itália</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- POSTING SCHEDULE -->
+        <div class="section fade-up">
+            <p class="section-label">Frequência</p>
+            <h2>Calendário de Postagem</h2>
+            <p>Frequência ideal: 4x por semana. Horários sugeridos: 12h ou 19h (picos do TikTok Brasil).</p>
+
+            <table class="schedule-table" style="margin-top:20px">
+                <thead>
+                    <tr>
+                        <th>Dia</th>
+                        <th>Tipo de Conteúdo</th>
+                        <th>Formato</th>
+                        <th>Origem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Segunda</strong></td>
+                        <td>Dica rápida / Erro comum</td>
+                        <td>Talking head 30-60s</td>
+                        <td>Repost do Reels</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Terça</strong></td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Descanso</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quarta</strong></td>
+                        <td>Trend / Stitch / Duet</td>
+                        <td>Nativo TikTok 15-45s</td>
+                        <td>Criado pro TikTok</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quinta</strong></td>
+                        <td>Storytime / Curiosidade</td>
+                        <td>Talking head 30-90s</td>
+                        <td>Repost adaptado</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sexta</strong></td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Descanso</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sábado</strong></td>
+                        <td>Ranking / Comparativo / Quiz</td>
+                        <td>Green screen / Voiceover</td>
+                        <td>Criado pro TikTok</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Domingo</strong></td>
+                        <td>POV / Vlog curto de destino</td>
+                        <td>B-roll + texto 15-30s</td>
+                        <td>Repost do Reels</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <div class="tip-label">Dica de Performance</div>
+                <p>No TikTok, os primeiros 3 segundos definem se o vídeo vai viralizar. Sempre comece com um gancho forte: uma pergunta polêmica, uma afirmação ousada ou uma imagem impactante. Nunca comece com "Oi gente" ou "Nesse vídeo eu vou..."</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- HASHTAG STRATEGY -->
+        <div class="section fade-up">
+            <p class="section-label">Hashtags</p>
+            <h2>Estratégia de Hashtags</h2>
+            <p>Use 3-5 hashtags por vídeo. Misture sempre uma grande + uma média + uma de nicho.</p>
+
+            <h4>Hashtags Grandes (alcance)</h4>
+            <div class="tag-container">
+                <span class="tag">#viagem</span>
+                <span class="tag">#travel</span>
+                <span class="tag">#dicasdeviagem</span>
+                <span class="tag">#tiktokviagem</span>
+                <span class="tag">#europa</span>
+                <span class="tag">#viageminternacional</span>
+            </div>
+
+            <h4>Hashtags Médias (relevância)</h4>
+            <div class="tag-container">
+                <span class="tag">#roteirodeviagem</span>
+                <span class="tag">#viagememcasal</span>
+                <span class="tag">#viagemitalia</span>
+                <span class="tag">#croacia</span>
+                <span class="tag">#mendoza</span>
+                <span class="tag">#viagemcomfilhos</span>
+                <span class="tag">#destinosinternacionais</span>
+            </div>
+
+            <h4>Hashtags de Nicho (conversão)</h4>
+            <div class="tag-container">
+                <span class="tag">#curadoriaviagem</span>
+                <span class="tag">#rotta</span>
+                <span class="tag">#rottacuradoria</span>
+                <span class="tag">#viajantesbrasileiros</span>
+                <span class="tag">#viagempremium</span>
+                <span class="tag">#planejamentodeviagem</span>
+            </div>
+
+            <div class="tip-box" style="margin-top:24px">
+                <div class="tip-label">Regra de Ouro</div>
+                <p><strong>Fórmula por vídeo:</strong> 1 hashtag grande + 2 médias + 1-2 de nicho + a hashtag do destino específico. Nunca use mais de 5. No TikTok, menos é mais.</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- ADAPTING REELS -->
+        <div class="section fade-up">
+            <p class="section-label">Adaptação</p>
+            <h2>Como Adaptar Reels para TikTok</h2>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">⚡</div>
+                    <h4>Hook mais rápido</h4>
+                    <p>No Instagram você tem 5s de atenção. No TikTok, 2s. Corte a introdução e comece direto na frase de impacto. Exemplo: troque "Hoje vou falar sobre erros na Europa" por "3 erros que vão destruir sua viagem".</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-icon">✂️</div>
+                    <h4>Duração menor</h4>
+                    <p>Reels de 60-90s devem virar 30-45s no TikTok. Corte redundâncias, elimine transições longas. Cada segundo precisa entregar valor.</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-icon">🎵</div>
+                    <h4>Texto na tela</h4>
+                    <p>TikTok é assistido sem som em 30-40% dos casos. Sempre adicione legendas/captions. Use o editor nativo do TikTok para isso (ajuda no algoritmo).</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-icon">📱</div>
+                    <h4>Formato vertical puro</h4>
+                    <p>Nunca reposte com bordas pretas ou watermark do Instagram. Exporte o vídeo original sem marca d'água e reposte limpo.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- SOUND STRATEGY -->
+        <div class="section fade-up">
+            <p class="section-label">Sons e Música</p>
+            <h2>Estratégia de Áudio</h2>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="card-icon">🎧</div>
+                    <h4>Sons Trending</h4>
+                    <p>Sempre verifique a aba "Descobrir" antes de postar. Se houver um som trending que encaixa no tema, use-o — o algoritmo prioriza vídeos com sons em alta.</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-icon">🎤</div>
+                    <h4>Voz Original</h4>
+                    <p>Para vídeos educativos e storytimes, use sua própria voz. O TikTok valoriza conteúdo original. Use "som original - rotta.curadoria" para criar identidade sonora.</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-icon">🎶</div>
+                    <h4>Música de Fundo</h4>
+                    <p>Para B-rolls e POVs de destinos, use músicas da biblioteca do TikTok (conta Business tem acesso à Commercial Music Library — sem risco de copyright).</p>
+                </div>
+                <div class="content-card">
+                    <div class="card-icon">🔊</div>
+                    <h4>Dica: Biblioteca de Sons</h4>
+                    <p>Salve sons que combinam com viagem na aba "Favoritos" toda semana. Quando for criar conteúdo, já terá um banco de áudios prontos. Busque: cinematic, travel, adventure, epic.</p>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /tab-tiktok -->
+
+    <!-- ==================== GOOGLE ADS TAB ==================== -->
+    <div class="tab-content" id="tab-google">
+
+        <!-- OVERVIEW -->
+        <div class="section fade-up">
+            <p class="section-label">Visão Geral</p>
+            <h2>Estrutura de Campanhas Google Ads</h2>
+            <p>Orçamento total sugerido: <strong>R$ 2.000/mês</strong> distribuído em 4 campanhas com objetivos distintos. Foco em captura de demanda existente (pesquisa) + remarketing para conversão.</p>
+
+            <div class="budget-visual" style="margin-top:32px">
+                <div class="budget-chart"></div>
+                <div class="budget-legend">
+                    <div class="legend-item"><div class="legend-dot" style="background:var(--gold)"></div><strong>Brand Search</strong> — R$ 300/mês (15%)</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:var(--coral)"></div><strong>Destination Search</strong> — R$ 900/mês (45%)</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div><strong>Intent-Based</strong> — R$ 600/mês (30%)</div>
+                    <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div><strong>Remarketing Display</strong> — R$ 200/mês (10%)</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- CAMPAIGN 1 -->
+        <div class="section fade-up">
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div style="display:flex;align-items:center"><h3>Campanha 1: Brand Search</h3><span class="acc-badge">R$ 300/mês</span></div>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body">
+                    <h4>Objetivo</h4>
+                    <p>Capturar quem já conhece a marca ou busca especificamente curadoria de viagens. Proteção de marca + conversão direta.</p>
+
+                    <h4>Keywords (20)</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Keyword</th><th>Tipo</th><th>CPC Estimado</th></tr></thead>
+                        <tbody>
+                            <tr><td>rotta curadoria</td><td>Exata</td><td>R$ 0,30</td></tr>
+                            <tr><td>rotta viagens</td><td>Exata</td><td>R$ 0,35</td></tr>
+                            <tr><td>curadoria de viagens</td><td>Frase</td><td>R$ 1,20</td></tr>
+                            <tr><td>curadoria viagem brasil</td><td>Frase</td><td>R$ 0,90</td></tr>
+                            <tr><td>roteiro de viagem personalizado</td><td>Frase</td><td>R$ 1,80</td></tr>
+                            <tr><td>viagem personalizada</td><td>Frase</td><td>R$ 1,50</td></tr>
+                            <tr><td>consultoria de viagem</td><td>Frase</td><td>R$ 2,00</td></tr>
+                            <tr><td>planejamento viagem personalizado</td><td>Frase</td><td>R$ 1,40</td></tr>
+                            <tr><td>montar roteiro viagem</td><td>Frase</td><td>R$ 1,10</td></tr>
+                            <tr><td>personal travel planner brasil</td><td>Frase</td><td>R$ 1,60</td></tr>
+                            <tr><td>assessoria viagem internacional</td><td>Frase</td><td>R$ 1,70</td></tr>
+                            <tr><td>concierge viagem</td><td>Frase</td><td>R$ 2,20</td></tr>
+                            <tr><td>viagem curada</td><td>Frase</td><td>R$ 0,80</td></tr>
+                            <tr><td>roteiro viagem sob medida</td><td>Frase</td><td>R$ 1,50</td></tr>
+                            <tr><td>curador de viagens</td><td>Exata</td><td>R$ 1,00</td></tr>
+                            <tr><td>quem organiza viagem pra mim</td><td>Frase</td><td>R$ 1,30</td></tr>
+                            <tr><td>ajuda planejar viagem</td><td>Frase</td><td>R$ 0,90</td></tr>
+                            <tr><td>viagem premium brasil</td><td>Frase</td><td>R$ 1,80</td></tr>
+                            <tr><td>roteiro exclusivo viagem</td><td>Frase</td><td>R$ 1,40</td></tr>
+                            <tr><td>viagem de luxo personalizada</td><td>Frase</td><td>R$ 2,50</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Keywords Negativas</h4>
+                    <div class="neg-kw">
+                        <span>grátis</span><span>free</span><span>emprego</span><span>vaga</span><span>curso</span><span>faculdade</span><span>agência</span><span>cvc</span><span>decolar</span><span>123milhas</span><span>passagem barata</span><span>hotel barato</span><span>mochilão</span><span>hostel</span><span>intercâmbio</span>
+                    </div>
+
+                    <h4>Anúncios (3 Responsivos)</h4>
+
+                    <div class="ad-copy">
+                        <button class="copy-btn" onclick="copyAdText(this)">Copiar</button>
+                        <div class="ad-label">Anúncio 1</div>
+                        <div class="headline">Rotta Curadoria | Viagens Sob Medida</div>
+                        <div class="headline">Roteiros Personalizados por Quem Já Visitou 22 Países</div>
+                        <div class="headline">Pare de Planejar Sozinho — Descubra Seu Roteiro Ideal</div>
+                        <div class="desc">Curadoria de viagens por Marcelo & Alexandra. Roteiros reais, testados pessoalmente em 22 países e 5 continentes. Faça o quiz gratuito e descubra seu destino ideal.</div>
+                        <div class="url">rottacuradoria.com.br/quiz</div>
+                    </div>
+
+                    <div class="ad-copy">
+                        <button class="copy-btn" onclick="copyAdText(this)">Copiar</button>
+                        <div class="ad-label">Anúncio 2</div>
+                        <div class="headline">Viagem Personalizada Sem Estresse</div>
+                        <div class="headline">Curadoria Premium | 22 Países Reais</div>
+                        <div class="headline">Seu Roteiro Perfeito em 48h</div>
+                        <div class="desc">Chega de ficar horas pesquisando no Google. A Rotta monta seu roteiro completo, personalizado pro seu estilo, orçamento e datas. Quiz gratuito disponível.</div>
+                        <div class="url">rottacuradoria.com.br</div>
+                    </div>
+
+                    <div class="ad-copy">
+                        <button class="copy-btn" onclick="copyAdText(this)">Copiar</button>
+                        <div class="ad-label">Anúncio 3</div>
+                        <div class="headline">Rotta — Curadoria de Viagens Premium</div>
+                        <div class="headline">Roteiro Feito Por Quem Vive Cada Destino</div>
+                        <div class="headline">De Mendoza à Croácia: Viaje Com Quem Já Foi</div>
+                        <div class="desc">Mais que roteiro: uma experiência curada. Marcelo & Alexandra já percorreram 22 países pra criar os melhores itinerários pra você. Conheça a Rotta.</div>
+                        <div class="url">rottacuradoria.com.br</div>
+                    </div>
+
+                    <h4>Extensões de Anúncio</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Tipo</th><th>Conteúdo</th></tr></thead>
+                        <tbody>
+                            <tr><td>Sitelink 1</td><td>Quiz Gratuito — Descubra seu destino ideal → /quiz.html</td></tr>
+                            <tr><td>Sitelink 2</td><td>Roteiro Itália — Dolomitas, Lago Garda e mais → /jornada-italia.html</td></tr>
+                            <tr><td>Sitelink 3</td><td>Roteiro Croácia — O segredo da Europa → /jornada-croacia.html</td></tr>
+                            <tr><td>Sitelink 4</td><td>Roteiro Mendoza — Vinhos e montanhas → /jornada-mendoza.html</td></tr>
+                            <tr><td>Callout 1</td><td>22 Países Visitados</td></tr>
+                            <tr><td>Callout 2</td><td>Roteiros Personalizados</td></tr>
+                            <tr><td>Callout 3</td><td>5 Continentes</td></tr>
+                            <tr><td>Callout 4</td><td>Quiz Gratuito</td></tr>
+                            <tr><td>Snippets</td><td>Destinos: Itália, Croácia, Argentina, Rússia, EUA, Espanha</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Landing Page</h4>
+                    <p><strong>rottacuradoria.com.br</strong> (homepage) ou <strong>/quiz.html</strong> para tráfego de conversão direta.</p>
+
+                    <h4>Estratégia de Lance</h4>
+                    <p><strong>Maximizar conversões</strong> com CPA desejado de R$ 15-25 (lead via quiz). Nas primeiras 2 semanas, usar Maximizar cliques para coletar dados.</p>
+
+                    <h4>CPC Estimado</h4>
+                    <p>R$ 0,80 - R$ 2,50 | Média esperada: R$ 1,20</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAMPAIGN 2 -->
+        <div class="section fade-up">
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div style="display:flex;align-items:center"><h3>Campanha 2: Destination Search</h3><span class="acc-badge">R$ 900/mês</span></div>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body">
+                    <h4>Objetivo</h4>
+                    <p>Capturar demanda de quem pesquisa destinos específicos. Maior volume de busca, custo moderado. Cada grupo de anúncios é organizado por região.</p>
+
+                    <!-- Ad Group: Europa -->
+                    <h4 style="color:var(--coral)">Ad Group 1: Europa</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Keyword</th><th>Tipo</th><th>CPC Est.</th></tr></thead>
+                        <tbody>
+                            <tr><td>roteiro itália</td><td>Frase</td><td>R$ 1,50</td></tr>
+                            <tr><td>viagem itália roteiro completo</td><td>Frase</td><td>R$ 1,80</td></tr>
+                            <tr><td>quanto custa viajar pra itália</td><td>Frase</td><td>R$ 1,20</td></tr>
+                            <tr><td>roteiro croácia</td><td>Frase</td><td>R$ 0,80</td></tr>
+                            <tr><td>quanto custa viajar pra croácia</td><td>Frase</td><td>R$ 0,70</td></tr>
+                            <tr><td>viagem croácia dicas</td><td>Frase</td><td>R$ 0,60</td></tr>
+                            <tr><td>roteiro espanha</td><td>Frase</td><td>R$ 1,30</td></tr>
+                            <tr><td>dolomitas itália como chegar</td><td>Frase</td><td>R$ 0,90</td></tr>
+                            <tr><td>lago garda roteiro</td><td>Frase</td><td>R$ 0,70</td></tr>
+                            <tr><td>dubrovnik roteiro</td><td>Frase</td><td>R$ 0,60</td></tr>
+                            <tr><td>viagem europa roteiro</td><td>Frase</td><td>R$ 2,00</td></tr>
+                            <tr><td>roteiro rússia turismo</td><td>Frase</td><td>R$ 0,50</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="ad-copy">
+                        <button class="copy-btn" onclick="copyAdText(this)">Copiar</button>
+                        <div class="ad-label">Anúncio Europa</div>
+                        <div class="headline">Roteiro Europa Personalizado | Rotta Curadoria</div>
+                        <div class="headline">Itália, Croácia, Espanha — Por Quem Já Esteve Lá</div>
+                        <div class="headline">Seu Roteiro Europa Sem Perder Tempo</div>
+                        <div class="desc">Roteiros reais de quem já percorreu a Europa inteira. Dolomitas, Dubrovnik, Barcelona — cada dia planejado pro seu ritmo. Faça o quiz e receba seu roteiro.</div>
+                        <div class="url">rottacuradoria.com.br/jornada-italia</div>
+                    </div>
+
+                    <!-- Ad Group: América do Sul -->
+                    <h4 style="color:var(--green)">Ad Group 2: América do Sul</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Keyword</th><th>Tipo</th><th>CPC Est.</th></tr></thead>
+                        <tbody>
+                            <tr><td>viagem mendoza argentina</td><td>Frase</td><td>R$ 0,80</td></tr>
+                            <tr><td>roteiro mendoza 5 dias</td><td>Frase</td><td>R$ 0,60</td></tr>
+                            <tr><td>quanto custa viajar pra mendoza</td><td>Frase</td><td>R$ 0,50</td></tr>
+                            <tr><td>viagem argentina casal</td><td>Frase</td><td>R$ 0,70</td></tr>
+                            <tr><td>vinícolas mendoza roteiro</td><td>Frase</td><td>R$ 0,50</td></tr>
+                            <tr><td>roteiro argentina completo</td><td>Frase</td><td>R$ 0,90</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="ad-copy">
+                        <button class="copy-btn" onclick="copyAdText(this)">Copiar</button>
+                        <div class="ad-label">Anúncio América do Sul</div>
+                        <div class="headline">Mendoza: Vinhos, Andes e Roteiro Sob Medida</div>
+                        <div class="headline">Roteiro Argentina Personalizado | Rotta</div>
+                        <div class="headline">5 Dias em Mendoza — Roteiro Testado Pessoalmente</div>
+                        <div class="desc">Mendoza como você nunca viu. Vinícolas premiadas, Cordilheira dos Andes e experiências únicas. Roteiro real de quem já esteve lá. Comece pelo quiz gratuito.</div>
+                        <div class="url">rottacuradoria.com.br/jornada-mendoza</div>
+                    </div>
+
+                    <!-- Ad Group: EUA -->
+                    <h4 style="color:var(--blue)">Ad Group 3: EUA</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Keyword</th><th>Tipo</th><th>CPC Est.</th></tr></thead>
+                        <tbody>
+                            <tr><td>roteiro estados unidos</td><td>Frase</td><td>R$ 1,80</td></tr>
+                            <tr><td>viagem eua roteiro</td><td>Frase</td><td>R$ 1,60</td></tr>
+                            <tr><td>roteiro nova york</td><td>Frase</td><td>R$ 2,00</td></tr>
+                            <tr><td>viagem orlando roteiro</td><td>Frase</td><td>R$ 1,50</td></tr>
+                            <tr><td>quanto custa viagem eua</td><td>Frase</td><td>R$ 1,40</td></tr>
+                            <tr><td>viagem copa do mundo 2026</td><td>Frase</td><td>R$ 0,80</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="ad-copy">
+                        <button class="copy-btn" onclick="copyAdText(this)">Copiar</button>
+                        <div class="ad-label">Anúncio EUA</div>
+                        <div class="headline">Roteiro EUA Personalizado | Rotta Curadoria</div>
+                        <div class="headline">Nova York, Orlando, Copa 2026 — Planeje Agora</div>
+                        <div class="headline">Viagem EUA Sem Complicação</div>
+                        <div class="desc">Roteiros completos pros Estados Unidos, feitos por quem já esteve lá. De Nova York a Orlando, cada dia otimizado. Copa do Mundo 2026? A gente cuida do seu roteiro.</div>
+                        <div class="url">rottacuradoria.com.br</div>
+                    </div>
+
+                    <!-- Ad Group: Brasil Nacional -->
+                    <h4 style="color:var(--purple)">Ad Group 4: Brasil Nacional</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Keyword</th><th>Tipo</th><th>CPC Est.</th></tr></thead>
+                        <tbody>
+                            <tr><td>roteiro viagem brasil</td><td>Frase</td><td>R$ 1,20</td></tr>
+                            <tr><td>viagem nordeste roteiro</td><td>Frase</td><td>R$ 1,00</td></tr>
+                            <tr><td>roteiro sul do brasil</td><td>Frase</td><td>R$ 0,80</td></tr>
+                            <tr><td>viagem romântica brasil</td><td>Frase</td><td>R$ 0,90</td></tr>
+                            <tr><td>destinos brasil casal</td><td>Frase</td><td>R$ 0,70</td></tr>
+                            <tr><td>viagem premium brasil destinos</td><td>Frase</td><td>R$ 1,10</td></tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Ad Group: Ásia -->
+                    <h4 style="color:var(--gold)">Ad Group 5: Ásia</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Keyword</th><th>Tipo</th><th>CPC Est.</th></tr></thead>
+                        <tbody>
+                            <tr><td>roteiro japão</td><td>Frase</td><td>R$ 1,50</td></tr>
+                            <tr><td>viagem japão dicas</td><td>Frase</td><td>R$ 1,20</td></tr>
+                            <tr><td>quanto custa viajar pro japão</td><td>Frase</td><td>R$ 1,00</td></tr>
+                            <tr><td>roteiro tailândia</td><td>Frase</td><td>R$ 1,10</td></tr>
+                            <tr><td>viagem ásia roteiro</td><td>Frase</td><td>R$ 1,30</td></tr>
+                            <tr><td>bali roteiro completo</td><td>Frase</td><td>R$ 0,90</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Keywords Negativas (todas os ad groups)</h4>
+                    <div class="neg-kw">
+                        <span>grátis</span><span>free</span><span>emprego</span><span>vaga</span><span>trabalho</span><span>cvc</span><span>decolar</span><span>123milhas</span><span>passagem barata</span><span>hostel</span><span>mochilão</span><span>intercâmbio</span><span>estudar</span><span>morar</span><span>imigrar</span><span>visto trabalho</span>
+                    </div>
+
+                    <h4>Landing Pages por Ad Group</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Ad Group</th><th>Landing Page</th></tr></thead>
+                        <tbody>
+                            <tr><td>Europa</td><td>/jornada-italia.html ou /jornada-croacia.html (por destino)</td></tr>
+                            <tr><td>América do Sul</td><td>/jornada-mendoza.html</td></tr>
+                            <tr><td>EUA</td><td>/blog.html (artigos sobre EUA) → quiz</td></tr>
+                            <tr><td>Brasil Nacional</td><td>/quiz.html</td></tr>
+                            <tr><td>Ásia</td><td>/quiz.html</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Estratégia de Lance</h4>
+                    <p><strong>Maximizar cliques</strong> nas primeiras 4 semanas para coleta de dados. Depois migrar para <strong>Maximizar conversões</strong> com CPA de R$ 20-30.</p>
+
+                    <h4>CPC Estimado</h4>
+                    <p>R$ 0,50 - R$ 2,00 | Média esperada: R$ 1,10</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAMPAIGN 3 -->
+        <div class="section fade-up">
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div style="display:flex;align-items:center"><h3>Campanha 3: Intent-Based</h3><span class="acc-badge">R$ 600/mês</span></div>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body">
+                    <h4>Objetivo</h4>
+                    <p>Capturar quem está no momento de decisão — pesquisando ativamente como planejar uma viagem, buscando dicas e querendo ajuda profissional.</p>
+
+                    <h4>Keywords (25)</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Keyword</th><th>Tipo</th><th>CPC Est.</th></tr></thead>
+                        <tbody>
+                            <tr><td>planejar viagem internacional</td><td>Frase</td><td>R$ 1,50</td></tr>
+                            <tr><td>como planejar viagem</td><td>Frase</td><td>R$ 1,20</td></tr>
+                            <tr><td>roteiro de viagem pronto</td><td>Frase</td><td>R$ 1,40</td></tr>
+                            <tr><td>dicas de viagem europa</td><td>Frase</td><td>R$ 1,60</td></tr>
+                            <tr><td>viagem em casal internacional</td><td>Frase</td><td>R$ 1,30</td></tr>
+                            <tr><td>viagem em casal</td><td>Ampla mod.</td><td>R$ 1,00</td></tr>
+                            <tr><td>viagem romântica internacional</td><td>Frase</td><td>R$ 1,10</td></tr>
+                            <tr><td>lua de mel destinos</td><td>Frase</td><td>R$ 1,80</td></tr>
+                            <tr><td>lua de mel europa</td><td>Frase</td><td>R$ 1,90</td></tr>
+                            <tr><td>viagem família internacional</td><td>Frase</td><td>R$ 1,20</td></tr>
+                            <tr><td>primeira viagem internacional</td><td>Frase</td><td>R$ 0,90</td></tr>
+                            <tr><td>melhor destino pra casal</td><td>Frase</td><td>R$ 0,80</td></tr>
+                            <tr><td>onde viajar em 2026</td><td>Frase</td><td>R$ 0,70</td></tr>
+                            <tr><td>viagem dos sonhos</td><td>Ampla mod.</td><td>R$ 1,00</td></tr>
+                            <tr><td>quanto custa viagem internacional</td><td>Frase</td><td>R$ 1,10</td></tr>
+                            <tr><td>dicas viagem primeiro mundo</td><td>Frase</td><td>R$ 0,80</td></tr>
+                            <tr><td>roteiro viagem 15 dias europa</td><td>Frase</td><td>R$ 1,70</td></tr>
+                            <tr><td>roteiro viagem 7 dias</td><td>Frase</td><td>R$ 1,30</td></tr>
+                            <tr><td>viagem aniversário casamento</td><td>Frase</td><td>R$ 0,90</td></tr>
+                            <tr><td>presente viagem casal</td><td>Frase</td><td>R$ 0,60</td></tr>
+                            <tr><td>planejar viagem europa passo a passo</td><td>Frase</td><td>R$ 1,50</td></tr>
+                            <tr><td>comparar destinos viagem</td><td>Frase</td><td>R$ 0,70</td></tr>
+                            <tr><td>qual destino combina comigo</td><td>Frase</td><td>R$ 0,50</td></tr>
+                            <tr><td>teste destino viagem</td><td>Frase</td><td>R$ 0,40</td></tr>
+                            <tr><td>quiz viagem destino ideal</td><td>Frase</td><td>R$ 0,30</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Keywords Negativas</h4>
+                    <div class="neg-kw">
+                        <span>grátis</span><span>free</span><span>emprego</span><span>vaga</span><span>curso</span><span>barato</span><span>econômico</span><span>mochilão</span><span>hostel</span><span>cvc</span><span>decolar</span><span>booking</span><span>airbnb</span><span>hotel</span><span>passagem aérea</span><span>milhas</span>
+                    </div>
+
+                    <h4>Anúncios</h4>
+
+                    <div class="ad-copy">
+                        <button class="copy-btn" onclick="copyAdText(this)">Copiar</button>
+                        <div class="ad-label">Anúncio Intent 1</div>
+                        <div class="headline">Qual Destino Combina Com Você? | Quiz Gratuito</div>
+                        <div class="headline">Descubra Seu Roteiro Ideal em 2 Minutos</div>
+                        <div class="headline">Pare de Pesquisar — Deixe a Rotta Planejar Pra Você</div>
+                        <div class="desc">Faça o quiz gratuito e descubra qual destino combina com seu perfil, orçamento e estilo de viagem. Roteiros criados por quem já visitou 22 países pessoalmente.</div>
+                        <div class="url">rottacuradoria.com.br/quiz</div>
+                    </div>
+
+                    <div class="ad-copy">
+                        <button class="copy-btn" onclick="copyAdText(this)">Copiar</button>
+                        <div class="ad-label">Anúncio Intent 2</div>
+                        <div class="headline">Viagem em Casal? A Rotta Cuida de Tudo</div>
+                        <div class="headline">Roteiro Personalizado Pro Seu Estilo</div>
+                        <div class="headline">22 Países · 5 Continentes · Experiência Real</div>
+                        <div class="desc">Lua de mel, aniversário ou só porque vocês merecem. A Rotta cria roteiros sob medida pra casais que querem mais que turismo — querem memórias. Quiz gratuito.</div>
+                        <div class="url">rottacuradoria.com.br/quiz</div>
+                    </div>
+
+                    <div class="ad-copy">
+                        <button class="copy-btn" onclick="copyAdText(this)">Copiar</button>
+                        <div class="ad-label">Anúncio Intent 3</div>
+                        <div class="headline">Planejar Viagem Dá Trabalho. A Rotta Faz Por Você</div>
+                        <div class="headline">Roteiros Testados em 22 Países</div>
+                        <div class="headline">Viagem Personalizada Sem Estresse</div>
+                        <div class="desc">Hotel, restaurante, passeio, transporte — tudo planejado dia a dia. Roteiros reais de Marcelo & Alexandra, que já percorreram 5 continentes. Comece pelo quiz.</div>
+                        <div class="url">rottacuradoria.com.br/quiz</div>
+                    </div>
+
+                    <h4>Landing Pages</h4>
+                    <p><strong>/quiz.html</strong> (conversão principal) | <strong>/comparador.html</strong> (para keywords de comparação) | <strong>/catalogo-produtos.html</strong> (para keywords de produto)</p>
+
+                    <h4>Estratégia de Lance</h4>
+                    <p><strong>Maximizar conversões</strong> com CPA desejado de R$ 15-20. A intenção é alta — o lead está mais quente.</p>
+
+                    <h4>CPC Estimado</h4>
+                    <p>R$ 0,30 - R$ 1,90 | Média esperada: R$ 1,00</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CAMPAIGN 4 -->
+        <div class="section fade-up">
+            <div class="accordion">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div style="display:flex;align-items:center"><h3>Campanha 4: Remarketing Display</h3><span class="acc-badge">R$ 200/mês</span></div>
+                    <span class="arrow">▼</span>
+                </div>
+                <div class="accordion-body">
+                    <h4>Objetivo</h4>
+                    <p>Reimpactar visitantes do site que não converteram. Custo baixo, alta relevância. Funciona como "lembrete" para quem já demonstrou interesse.</p>
+
+                    <h4>Audiências</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Audiência</th><th>Janela</th><th>Prioridade</th></tr></thead>
+                        <tbody>
+                            <tr><td>Visitou o site e não fez o quiz</td><td>30 dias</td><td>Alta</td></tr>
+                            <tr><td>Iniciou o quiz e não terminou</td><td>14 dias</td><td>Muito alta</td></tr>
+                            <tr><td>Visitou página de jornada (Itália, Croácia, etc.)</td><td>60 dias</td><td>Média</td></tr>
+                            <tr><td>Visitou o blog</td><td>30 dias</td><td>Média</td></tr>
+                            <tr><td>Visitou comparador de destinos</td><td>21 dias</td><td>Alta</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Criativos Display (formatos)</h4>
+                    <table class="kw-table">
+                        <thead><tr><th>Tamanho</th><th>Mensagem</th></tr></thead>
+                        <tbody>
+                            <tr><td>300x250 (Retângulo médio)</td><td>"Ainda pensando naquela viagem? Seu roteiro personalizado te espera."</td></tr>
+                            <tr><td>728x90 (Leaderboard)</td><td>"Rotta Curadoria — Roteiros personalizados por quem já visitou 22 países. Faça o quiz."</td></tr>
+                            <tr><td>160x600 (Skyscraper)</td><td>"Seu destino ideal está a 1 quiz de distância."</td></tr>
+                            <tr><td>320x480 (Mobile interstitial)</td><td>"Esqueceu algo? Seu roteiro personalizado ainda está esperando. Volte ao quiz."</td></tr>
+                            <tr><td>Responsivo (Google recomendado)</td><td>Imagens dos destinos + headline dinâmica com o destino que a pessoa viu</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Keywords Negativas (Display)</h4>
+                    <div class="neg-kw">
+                        <span>jogos</span><span>games</span><span>receitas</span><span>fofoca</span><span>futebol</span><span>novela</span><span>famosos</span><span>política</span><span>crime</span><span>acidente</span>
+                    </div>
+
+                    <h4>Estratégia de Lance</h4>
+                    <p><strong>CPC manual</strong> de R$ 0,20 - R$ 0,50. Remarketing display tem CPC naturalmente baixo. Foco em frequência controlada: máximo 3 impressões por dia por pessoa.</p>
+
+                    <h4>CPC Estimado</h4>
+                    <p>R$ 0,10 - R$ 0,50 | Média esperada: R$ 0,25</p>
+
+                    <div class="tip-box">
+                        <div class="tip-label">Dica de Remarketing</div>
+                        <p>Crie criativos dinâmicos que mostrem o destino que a pessoa viu. Se ela visitou a jornada da Itália, o banner mostra Dolomitas. Se visitou Mendoza, mostra vinícolas. Isso aumenta o CTR em até 3x comparado com banners genéricos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- IMPLEMENTATION CHECKLIST -->
+        <div class="section fade-up">
+            <p class="section-label">Implementação</p>
+            <h2>Passo a Passo para Configurar</h2>
+            <p>Siga esta ordem para lançar as campanhas de Google Ads de forma estruturada.</p>
+
+            <div class="impl-steps" style="margin-top:24px">
+                <div class="impl-step">
+                    <h4>Criar conta Google Ads</h4>
+                    <p>Acesse ads.google.com com a conta rottacuradoria@gmail.com. Escolha o modo "Especialista" (não o Smart Campaigns). Configure fuso horário Brasil e moeda BRL.</p>
+                </div>
+                <div class="impl-step">
+                    <h4>Instalar Google Tag no site</h4>
+                    <p>No Google Ads, vá em Ferramentas → Conversões → Nova ação de conversão → Website. Copie a tag global (gtag.js) e cole no &lt;head&gt; de todas as páginas do site. Configure como conversão: "quiz_complete" (quando o quiz é enviado).</p>
+                </div>
+                <div class="impl-step">
+                    <h4>Vincular Google Analytics 4</h4>
+                    <p>Crie uma propriedade GA4 para rottacuradoria.com.br. Vincule ao Google Ads (Ferramentas → Contas vinculadas). Isso permite usar audiências do GA4 para remarketing.</p>
+                </div>
+                <div class="impl-step">
+                    <h4>Criar as 4 campanhas na ordem</h4>
+                    <p>Comece pela Campanha 1 (Brand) e Campanha 3 (Intent) — são as de maior conversão. Depois Campanha 2 (Destinations). Por último, Campanha 4 (Remarketing) — precisa de pelo menos 100 visitantes no site para funcionar.</p>
+                </div>
+                <div class="impl-step">
+                    <h4>Configurar orçamentos diários</h4>
+                    <p>Brand: R$ 10/dia | Destinations: R$ 30/dia | Intent: R$ 20/dia | Remarketing: R$ 6,60/dia. O Google pode gastar até 2x o diário em dias bons, mas nunca ultrapassa o mensal.</p>
+                </div>
+                <div class="impl-step">
+                    <h4>Adicionar extensões de anúncio</h4>
+                    <p>Configure sitelinks, callouts e structured snippets conforme listado na Campanha 1. Extensões aumentam o CTR em 10-15% e são gratuitas.</p>
+                </div>
+                <div class="impl-step">
+                    <h4>Configurar listas de remarketing</h4>
+                    <p>No GA4, crie as 5 audiências listadas na Campanha 4. Compartilhe com o Google Ads. Mínimo de 100 usuários na lista para ativar remarketing na rede de pesquisa, 1.000 para display.</p>
+                </div>
+                <div class="impl-step">
+                    <h4>Lançar e monitorar</h4>
+                    <p>Semana 1-2: fase de aprendizado — não altere nada. Semana 3: primeira otimização — pause keywords com CTR abaixo de 2% e CPC acima de R$ 3. Semana 4: ajuste de lances e adição de novas keywords negativas. Mensal: relatório de performance com CPA, CTR e conversões.</p>
+                </div>
+            </div>
+
+            <div class="tip-box" style="margin-top:24px">
+                <div class="tip-label">Cronograma sugerido</div>
+                <p><strong>Semana 1:</strong> Steps 1-3 (contas e tracking). <strong>Semana 2:</strong> Steps 4-6 (campanhas e extensões). <strong>Semana 3:</strong> Step 7 (remarketing quando tiver tráfego). <strong>Semana 4+:</strong> Step 8 (otimização contínua).</p>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- SUMMARY TABLE -->
+        <div class="section fade-up">
+            <p class="section-label">Resumo</p>
+            <h2>Visão Consolidada</h2>
+
+            <table class="kw-table" style="margin-top:20px">
+                <thead>
+                    <tr>
+                        <th>Campanha</th>
+                        <th>Budget/mês</th>
+                        <th>CPC Médio</th>
+                        <th>Cliques Est.</th>
+                        <th>Leads Est.</th>
+                        <th>CPA Est.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Brand</strong></td>
+                        <td>R$ 300</td>
+                        <td>R$ 1,20</td>
+                        <td>250</td>
+                        <td>25-35</td>
+                        <td>R$ 8-12</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Destinations</strong></td>
+                        <td>R$ 900</td>
+                        <td>R$ 1,10</td>
+                        <td>818</td>
+                        <td>40-60</td>
+                        <td>R$ 15-22</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Intent</strong></td>
+                        <td>R$ 600</td>
+                        <td>R$ 1,00</td>
+                        <td>600</td>
+                        <td>35-50</td>
+                        <td>R$ 12-17</td>
+                    </tr>
+                    <tr>
+                        <td><strong>4. Remarketing</strong></td>
+                        <td>R$ 200</td>
+                        <td>R$ 0,25</td>
+                        <td>800</td>
+                        <td>15-25</td>
+                        <td>R$ 8-13</td>
+                    </tr>
+                    <tr style="background:rgba(197,165,114,.08)">
+                        <td><strong>TOTAL</strong></td>
+                        <td><strong>R$ 2.000</strong></td>
+                        <td><strong>R$ 0,81</strong></td>
+                        <td><strong>2.468</strong></td>
+                        <td><strong>115-170</strong></td>
+                        <td><strong>R$ 12-17</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box" style="margin-top:24px">
+                <div class="tip-label">Projeção</div>
+                <p>Com R$ 2.000/mês, estimamos entre <strong>115 e 170 leads</strong> (quizzes completos) por mês. Com uma taxa de conversão de 5-10% de lead para cliente, isso representa <strong>6 a 17 clientes novos por mês</strong> vindos exclusivamente do Google.</p>
+            </div>
+        </div>
+
+    </div><!-- /tab-google -->
+
+</div><!-- /container -->
+
+<script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    // Accordion
+    function toggleAccordion(header) {
+        const body = header.nextElementSibling;
+        const isOpen = header.classList.contains('open');
+        header.classList.toggle('open');
+        body.classList.toggle('open');
+    }
+
+    // Copy text
+    function copyText(btn, text) {
+        navigator.clipboard.writeText(text).then(() => showToast());
+        btn.textContent = 'Copiado!';
+        setTimeout(() => btn.textContent = 'Copiar', 2000);
+    }
+
+    // Copy ad text
+    function copyAdText(btn) {
+        const ad = btn.parentElement;
+        const headlines = ad.querySelectorAll('.headline');
+        const desc = ad.querySelector('.desc');
+        const url = ad.querySelector('.url');
+        let text = '';
+        headlines.forEach((h, i) => text += 'Título ' + (i+1) + ': ' + h.textContent + '\n');
+        text += 'Descrição: ' + desc.textContent + '\n';
+        text += 'URL: ' + url.textContent;
+        navigator.clipboard.writeText(text).then(() => showToast());
+        btn.textContent = 'Copiado!';
+        setTimeout(() => btn.textContent = 'Copiar', 2000);
+    }
+
+    // Toast
+    function showToast() {
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // Fade-up on scroll
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
