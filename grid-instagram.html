@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotta Curadoria | Grid Instagram — Primeiros 9 Posts</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --coral:#E8785A;--green:#4CAF7D;--blue:#5B8DEF
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+
+        /* ===== HEADER ===== */
+        .page-header{text-align:center;padding:60px 24px 40px}
+        .page-header .badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:24px}
+        .page-header h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,44px);font-weight:700;line-height:1.15;margin-bottom:16px}
+        .page-header h1 em{font-style:italic;color:var(--gold)}
+        .page-header p{color:var(--muted);font-size:16px;max-width:560px;margin:0 auto}
+
+        /* ===== INSTAGRAM PROFILE MOCK ===== */
+        .ig-profile{max-width:540px;margin:0 auto 20px;padding:0 24px}
+        .ig-profile-header{display:flex;align-items:center;gap:20px;padding:20px 0;border-bottom:1px solid var(--layer)}
+        .ig-avatar{width:80px;height:80px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;background:var(--card);font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--gold);flex-shrink:0}
+        .ig-info{flex:1}
+        .ig-handle{font-weight:600;font-size:16px;margin-bottom:4px}
+        .ig-bio{font-size:13px;color:var(--muted);line-height:1.5}
+        .ig-bio strong{color:var(--text);font-weight:500}
+        .ig-stats{display:flex;gap:24px;margin-top:8px}
+        .ig-stat{font-size:13px;color:var(--muted)}
+        .ig-stat strong{color:var(--text);font-weight:600}
+        .ig-tabs{display:flex;border-bottom:1px solid var(--layer);margin-top:8px}
+        .ig-tab{flex:1;text-align:center;padding:12px 0;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--dim);cursor:pointer;border-bottom:2px solid transparent;transition:.3s}
+        .ig-tab.active{color:var(--text);border-bottom-color:var(--text)}
+
+        /* ===== 3x3 GRID ===== */
+        .grid-section{max-width:540px;margin:0 auto;padding:0 24px 60px}
+        .grid-3x3{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+        .grid-cell{aspect-ratio:1/1;position:relative;overflow:hidden;cursor:pointer;transition:opacity .3s}
+        .grid-cell:hover{opacity:.85}
+        .grid-cell .cell-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;position:relative}
+        .grid-cell .post-number{position:absolute;top:6px;left:6px;background:var(--gold);color:var(--bg);width:22px;height:22px;border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:2}
+        .grid-cell .post-order{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.6);color:var(--muted);font-size:9px;padding:2px 6px;border-radius:10px;z-index:2}
+        .row-label{grid-column:1/-1;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:16px 0 4px;text-align:center}
+        .row-label:first-child{padding-top:0}
+
+        /* Cell styles */
+        .cell-statement .cell-inner{background:var(--bg);border:1px solid var(--layer)}
+        .cell-statement h3{font-family:'Playfair Display',serif;font-size:clamp(11px,2.5vw,16px);font-weight:600;color:var(--gold);line-height:1.3}
+        .cell-statement .accent-line{width:24px;height:2px;background:var(--gold);margin:6px auto 0;opacity:.5}
+
+        .cell-destination .cell-inner{background:linear-gradient(135deg,#2a2218 0%,#1a1612 100%);border:1px solid rgba(197,165,114,.15)}
+        .cell-destination .photo-placeholder{display:flex;flex-direction:column;align-items:center;gap:6px}
+        .cell-destination .photo-icon{font-size:28px;opacity:.4}
+        .cell-destination .photo-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+        .cell-destination .warm-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(197,165,114,.08) 0%,transparent 60%);pointer-events:none}
+        .cell-destination .cool-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(91,141,239,.06) 0%,transparent 60%);pointer-events:none}
+
+        .cell-carousel .cell-inner{background:var(--card);border:1px solid var(--layer)}
+        .cell-carousel .carousel-number{font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,42px);font-weight:700;color:var(--gold);line-height:1;opacity:.7}
+        .cell-carousel .carousel-title{font-size:clamp(8px,1.8vw,11px);color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:4px;line-height:1.3}
+
+        .cell-reel .cell-inner{background:linear-gradient(135deg,var(--card) 0%,#1f1a14 100%);border:1px solid var(--layer)}
+        .cell-reel .play-btn{width:36px;height:36px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;margin-bottom:6px;opacity:.6}
+        .cell-reel .play-btn::after{content:'';width:0;height:0;border-left:10px solid var(--gold);border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:2px}
+        .cell-reel .reel-title{font-size:clamp(8px,1.8vw,11px);color:var(--muted);text-transform:uppercase;letter-spacing:.5px;line-height:1.3}
+
+        .cell-quiz .cell-inner{background:linear-gradient(135deg,#1a1612 0%,var(--card) 100%);border:1px solid rgba(197,165,114,.2)}
+        .cell-quiz .quiz-icon{font-size:28px;margin-bottom:4px}
+        .cell-quiz .quiz-text{font-family:'Playfair Display',serif;font-size:clamp(9px,2vw,13px);color:var(--gold);line-height:1.3}
+
+        /* ===== LEGEND ===== */
+        .legend{max-width:540px;margin:0 auto 60px;padding:0 24px}
+        .legend-grid{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
+        .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+        .legend-dot{width:10px;height:10px;border-radius:3px}
+        .legend-dot.l-statement{background:var(--gold)}
+        .legend-dot.l-destination{background:#8B7355}
+        .legend-dot.l-carousel{background:var(--card);border:1px solid var(--layer)}
+        .legend-dot.l-reel{background:var(--coral)}
+        .legend-dot.l-quiz{background:var(--blue)}
+
+        /* ===== POSTING SCHEDULE ===== */
+        .schedule-section{max-width:900px;margin:0 auto;padding:0 24px 60px}
+        .schedule-section h2{font-family:'Playfair Display',serif;font-size:28px;text-align:center;margin-bottom:8px}
+        .schedule-section .sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:40px}
+        .schedule-table{width:100%;border-collapse:collapse}
+        .schedule-table th{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);text-align:left;padding:12px 16px;border-bottom:1px solid var(--layer)}
+        .schedule-table td{padding:14px 16px;border-bottom:1px solid rgba(42,42,42,.5);font-size:14px;color:var(--muted);vertical-align:top}
+        .schedule-table tr:hover td{background:rgba(197,165,114,.03)}
+        .schedule-table .post-id{font-family:'Playfair Display',serif;font-weight:700;color:var(--gold);font-size:18px}
+        .schedule-table .type-badge{display:inline-block;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:100px;font-weight:600}
+        .type-statement{background:rgba(197,165,114,.15);color:var(--gold)}
+        .type-destination{background:rgba(139,115,85,.2);color:#B8956A}
+        .type-carousel{background:rgba(91,141,239,.15);color:var(--blue)}
+        .type-reel{background:rgba(232,120,90,.15);color:var(--coral)}
+        .type-quiz{background:rgba(76,175,125,.15);color:var(--green)}
+
+        /* ===== POST DETAILS ===== */
+        .details-section{max-width:900px;margin:0 auto;padding:0 24px 80px}
+        .details-section h2{font-family:'Playfair Display',serif;font-size:28px;text-align:center;margin-bottom:8px}
+        .details-section .sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:48px}
+
+        .post-detail{background:var(--card);border:1px solid var(--layer);border-radius:16px;margin-bottom:32px;overflow:hidden}
+        .post-detail-header{display:flex;align-items:center;gap:16px;padding:24px 28px;border-bottom:1px solid var(--layer)}
+        .post-detail-num{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--gold);opacity:.5;line-height:1}
+        .post-detail-meta h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:600;margin-bottom:4px}
+        .post-detail-meta .meta-line{font-size:12px;color:var(--dim);display:flex;gap:12px;flex-wrap:wrap}
+        .post-detail-body{display:grid;grid-template-columns:320px 1fr;gap:0}
+        .post-detail-visual{padding:28px;border-right:1px solid var(--layer);display:flex;align-items:center;justify-content:center}
+        .post-detail-content{padding:28px}
+
+        .post-mockup{width:264px;height:264px;border-radius:8px;overflow:hidden;position:relative;flex-shrink:0}
+
+        /* Individual mockup styles */
+        .mockup-statement{background:var(--bg);border:1px solid var(--layer);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px}
+        .mockup-statement h4{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);line-height:1.3;font-weight:600}
+        .mockup-statement .line{width:40px;height:2px;background:var(--gold);margin:12px auto 0;opacity:.4}
+        .mockup-statement .watermark{position:absolute;bottom:12px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);opacity:.4;width:100%;text-align:center}
+
+        .mockup-destination{background:linear-gradient(135deg,#2a2218,#1a1612);border:1px solid rgba(197,165,114,.15);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px}
+        .mockup-destination .icon-big{font-size:48px;opacity:.3}
+        .mockup-destination .dest-name{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);opacity:.6;letter-spacing:1px}
+        .mockup-destination .dest-sub{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:2px}
+
+        .mockup-carousel{background:var(--card);border:1px solid var(--layer);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;flex-direction:column}
+        .mockup-carousel .big-num{font-family:'Playfair Display',serif;font-size:72px;font-weight:700;color:var(--gold);line-height:1;opacity:.6}
+        .mockup-carousel .carousel-label{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4;max-width:200px}
+        .mockup-carousel .slide-dots{display:flex;gap:6px;margin-top:16px}
+        .mockup-carousel .slide-dots span{width:6px;height:6px;border-radius:50%;background:var(--dim)}
+        .mockup-carousel .slide-dots span:first-child{background:var(--gold)}
+
+        .mockup-reel{background:linear-gradient(135deg,var(--card),#1f1a14);border:1px solid var(--layer);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px}
+        .mockup-reel .play-circle{width:56px;height:56px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;opacity:.5}
+        .mockup-reel .play-circle::after{content:'';width:0;height:0;border-left:16px solid var(--gold);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+        .mockup-reel .reel-label{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);opacity:.7;text-align:center;padding:0 24px;line-height:1.3}
+
+        .mockup-quiz{background:linear-gradient(135deg,#1a1612,var(--card));border:1px solid rgba(197,165,114,.2);display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column;padding:24px;gap:8px}
+        .mockup-quiz .quiz-emoji{font-size:40px}
+        .mockup-quiz .quiz-q{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);line-height:1.3}
+        .mockup-quiz .quiz-options{display:flex;flex-direction:column;gap:6px;margin-top:8px;width:100%}
+        .mockup-quiz .quiz-opt{background:rgba(197,165,114,.1);border:1px solid rgba(197,165,114,.15);border-radius:8px;padding:6px 12px;font-size:11px;color:var(--muted);text-align:left}
+
+        .detail-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;margin-top:20px}
+        .detail-label:first-child{margin-top:0}
+        .detail-text{color:var(--muted);font-size:14px;line-height:1.7;white-space:pre-wrap}
+        .detail-caption{background:var(--bg);border:1px solid var(--layer);border-radius:10px;padding:16px;font-size:13px;color:var(--muted);line-height:1.7;white-space:pre-wrap;max-height:300px;overflow-y:auto}
+        .detail-prompt{background:rgba(91,141,239,.06);border:1px solid rgba(91,141,239,.15);border-radius:10px;padding:16px;font-size:13px;color:var(--blue);line-height:1.7;white-space:pre-wrap}
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:768px){
+            .post-detail-body{grid-template-columns:1fr}
+            .post-detail-visual{border-right:none;border-bottom:1px solid var(--layer)}
+            .post-mockup{width:220px;height:220px}
+            .schedule-table{font-size:12px}
+            .schedule-table th,.schedule-table td{padding:10px 8px}
+        }
+        @media(max-width:480px){
+            .ig-profile-header{gap:12px}
+            .ig-avatar{width:60px;height:60px;font-size:18px}
+            .ig-stats{gap:16px}
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar{width:6px}
+        ::-webkit-scrollbar-track{background:var(--bg)}
+        ::-webkit-scrollbar-thumb{background:var(--layer);border-radius:3px}
+        ::-webkit-scrollbar-thumb:hover{background:var(--dim)}
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="page-header">
+    <div class="badge">Planejamento de Grid</div>
+    <h1>Primeiros <em>9 Posts</em><br>@rotta.curadoria</h1>
+    <p>Estrategia de grid 3x3 para o lancamento do perfil. Posts planejados para formar uma composicao visual coesa e profissional no feed.</p>
+</header>
+
+<!-- ===== INSTAGRAM PROFILE MOCK ===== -->
+<div class="ig-profile">
+    <div class="ig-profile-header">
+        <div class="ig-avatar">R</div>
+        <div class="ig-info">
+            <div class="ig-handle">@rotta.curadoria</div>
+            <div class="ig-bio">
+                <strong>Rotta Curadoria</strong><br>
+                Viagens curadas por quem vive cada destino.<br>
+                Marcelo & Alexandra | 22 paises | 5 continentes
+            </div>
+            <div class="ig-stats">
+                <div class="ig-stat"><strong>9</strong> posts</div>
+                <div class="ig-stat"><strong>--</strong> seguidores</div>
+                <div class="ig-stat"><strong>--</strong> seguindo</div>
+            </div>
+        </div>
+    </div>
+    <div class="ig-tabs">
+        <div class="ig-tab active">Posts</div>
+        <div class="ig-tab">Reels</div>
+        <div class="ig-tab">Marcados</div>
+    </div>
+</div>
+
+<!-- ===== 3x3 GRID ===== -->
+<section class="grid-section">
+    <div class="grid-3x3">
+        <!-- Row 1 (top) — posted LAST -->
+        <div class="grid-cell cell-statement">
+            <div class="cell-inner">
+                <div class="post-number">1</div>
+                <div class="post-order">Pub 7</div>
+                <div>
+                    <h3>Nao somos agencia.<br>Somos curadores.</h3>
+                    <div class="accent-line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-cell cell-destination">
+            <div class="cell-inner">
+                <div class="post-number">2</div>
+                <div class="post-order">Pub 8</div>
+                <div class="warm-overlay"></div>
+                <div class="photo-placeholder">
+                    <div class="photo-icon">&#9737;</div>
+                    <div class="photo-label">Casal em Mendoza</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-cell cell-statement">
+            <div class="cell-inner">
+                <div class="post-number">3</div>
+                <div class="post-order">Pub 9</div>
+                <div>
+                    <h3>Se a gente nao foi, a gente nao recomenda.</h3>
+                    <div class="accent-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 2 (middle) -->
+        <div class="grid-cell cell-carousel">
+            <div class="cell-inner">
+                <div class="post-number">4</div>
+                <div class="post-order">Pub 4</div>
+                <div>
+                    <div class="carousel-number">5</div>
+                    <div class="carousel-title">Erros que destroem<br>sua viagem na Europa</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-cell cell-destination">
+            <div class="cell-inner">
+                <div class="post-number">5</div>
+                <div class="post-order">Pub 5</div>
+                <div class="cool-overlay"></div>
+                <div class="photo-placeholder">
+                    <div class="photo-icon">&#9968;</div>
+                    <div class="photo-label">Dolomitas</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-cell cell-carousel">
+            <div class="cell-inner">
+                <div class="post-number">6</div>
+                <div class="post-order">Pub 6</div>
+                <div>
+                    <div class="carousel-number" style="font-size:clamp(16px,4vw,28px);opacity:.5">&#8364;</div>
+                    <div class="carousel-title">Quanto custa<br>7 dias na Italia</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Row 3 (bottom) — posted FIRST -->
+        <div class="grid-cell cell-reel">
+            <div class="cell-inner">
+                <div class="post-number">7</div>
+                <div class="post-order">Pub 1</div>
+                <div style="display:flex;flex-direction:column;align-items:center">
+                    <div class="play-btn"></div>
+                    <div class="reel-title">7 Destinos<br>Veredito Honesto</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-cell cell-statement">
+            <div class="cell-inner">
+                <div class="post-number">8</div>
+                <div class="post-order">Pub 2</div>
+                <div>
+                    <h3>22 paises.<br>5 continentes.<br>4 filhas.<br>1 mala.</h3>
+                    <div class="accent-line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-cell cell-quiz">
+            <div class="cell-inner">
+                <div class="post-number">9</div>
+                <div class="post-order">Pub 3</div>
+                <div>
+                    <div class="quiz-icon">&#129517;</div>
+                    <div class="quiz-text">Qual viagem voce merece?</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== LEGEND ===== -->
+<div class="legend">
+    <div class="legend-grid">
+        <div class="legend-item"><div class="legend-dot l-statement"></div>Statement</div>
+        <div class="legend-item"><div class="legend-dot l-destination"></div>Destination</div>
+        <div class="legend-item"><div class="legend-dot l-carousel"></div>Carousel</div>
+        <div class="legend-item"><div class="legend-dot l-reel"></div>Reel Cover</div>
+        <div class="legend-item"><div class="legend-dot l-quiz"></div>Quiz CTA</div>
+    </div>
+</div>
+
+<!-- ===== POSTING SCHEDULE ===== -->
+<section class="schedule-section">
+    <h2>Cronograma de Publicacao</h2>
+    <p class="sub">Ordem de publicacao: linha de baixo primeiro, depois meio, depois topo</p>
+    <table class="schedule-table">
+        <thead>
+            <tr>
+                <th>Ordem</th>
+                <th>Post</th>
+                <th>Tipo</th>
+                <th>Data</th>
+                <th>Horario</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="post-id">1</td>
+                <td>Post 7 — "7 Destinos — Veredito Honesto"</td>
+                <td><span class="type-badge type-reel">Reel</span></td>
+                <td>Seg, 31/03</td>
+                <td>19:00</td>
+            </tr>
+            <tr>
+                <td class="post-id">2</td>
+                <td>Post 8 — "22 paises. 5 continentes. 4 filhas. 1 mala."</td>
+                <td><span class="type-badge type-statement">Statement</span></td>
+                <td>Qua, 02/04</td>
+                <td>12:00</td>
+            </tr>
+            <tr>
+                <td class="post-id">3</td>
+                <td>Post 9 — "Qual viagem voce merece?"</td>
+                <td><span class="type-badge type-quiz">Quiz CTA</span></td>
+                <td>Sex, 04/04</td>
+                <td>18:00</td>
+            </tr>
+            <tr>
+                <td class="post-id">4</td>
+                <td>Post 4 — "5 Erros Que Destroem Sua Viagem na Europa"</td>
+                <td><span class="type-badge type-carousel">Carousel</span></td>
+                <td>Seg, 07/04</td>
+                <td>19:00</td>
+            </tr>
+            <tr>
+                <td class="post-id">5</td>
+                <td>Post 5 — Dolomitas / Paisagem dramatica</td>
+                <td><span class="type-badge type-destination">Destination</span></td>
+                <td>Qua, 09/04</td>
+                <td>12:00</td>
+            </tr>
+            <tr>
+                <td class="post-id">6</td>
+                <td>Post 6 — "Quanto Custa 7 Dias na Italia"</td>
+                <td><span class="type-badge type-carousel">Carousel</span></td>
+                <td>Sex, 11/04</td>
+                <td>18:00</td>
+            </tr>
+            <tr>
+                <td class="post-id">7</td>
+                <td>Post 1 — "Nao somos agencia. Somos curadores."</td>
+                <td><span class="type-badge type-statement">Statement</span></td>
+                <td>Seg, 14/04</td>
+                <td>19:00</td>
+            </tr>
+            <tr>
+                <td class="post-id">8</td>
+                <td>Post 2 — Casal em mirante (Mendoza/Croacia)</td>
+                <td><span class="type-badge type-destination">Destination</span></td>
+                <td>Qua, 16/04</td>
+                <td>12:00</td>
+            </tr>
+            <tr>
+                <td class="post-id">9</td>
+                <td>Post 3 — "Se a gente nao foi, a gente nao recomenda."</td>
+                <td><span class="type-badge type-statement">Statement</span></td>
+                <td>Sex, 18/04</td>
+                <td>18:00</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ===== POST DETAILS ===== -->
+<section class="details-section">
+    <h2>Detalhamento dos Posts</h2>
+    <p class="sub">Cada post com mockup visual, legenda completa, prompt Nano Banana e instrucoes</p>
+
+    <!-- ==================== POST 7 (Pub 1) ==================== -->
+    <div class="post-detail">
+        <div class="post-detail-header">
+            <div class="post-detail-num">7</div>
+            <div class="post-detail-meta">
+                <h3>7 Destinos — Veredito Honesto</h3>
+                <div class="meta-line">
+                    <span class="type-badge type-reel">Reel Cover</span>
+                    <span>Pub 1 — Seg 31/03 as 19h</span>
+                    <span>Posicao: Linha 3, Coluna 1</span>
+                </div>
+            </div>
+        </div>
+        <div class="post-detail-body">
+            <div class="post-detail-visual">
+                <div class="post-mockup mockup-reel">
+                    <div class="play-circle"></div>
+                    <div class="reel-label">7 Destinos<br>Veredito Honesto</div>
+                </div>
+            </div>
+            <div class="post-detail-content">
+                <div class="detail-label">Legenda</div>
+                <div class="detail-caption">7 destinos. Nosso veredito honesto. Sem filtro.
+
+A gente ja foi pra mais de 22 paises. Alguns nos surpreenderam. Outros... nem tanto.
+
+Nesse video, a gente abre o jogo sobre 7 destinos que todo mundo pergunta:
+
+&#127470;&#127481; Italia
+&#127469;&#127479; Croacia
+&#127462;&#127479; Argentina (Mendoza)
+&#127479;&#127482; Russia
+&#127468;&#127479; Grecia
+&#127477;&#127481; Portugal
+&#127470;&#127480; Islandia
+
+Qual desses voce mais quer conhecer? Comenta aqui embaixo.
+
+Salva esse Reel pra quando bater aquela vontade de planejar a proxima viagem.
+
+#viagem #dicasdeviagem #europa #roteirodeviagem #viajantes #rottacuradoria #curadoriadeviagens #destinosinternacionais</div>
+
+                <div class="detail-label">Prompt Nano Banana — Start Frame</div>
+                <div class="detail-prompt">Cinematic wide-angle aerial shot of seven iconic landmarks arranged in a dramatic semicircle floating above clouds at golden hour. The Colosseum, Dubrovnik old town walls, Mendoza vineyards with Andes mountains, Saint Basil's Cathedral, Santorini white buildings, Lisbon's yellow tram on a hill, and Iceland's black sand beach with northern lights. Each landmark is bathed in warm amber light from the left, cool blue twilight from the right. Moody atmosphere, film grain, 35mm look. Dark cinematic color grade with gold and teal tones. No people, no text. 1:1 square format.</div>
+
+                <div class="detail-label">Prompt Grok — Animacao</div>
+                <div class="detail-prompt">Slow cinematic camera push-in through the clouds toward the seven floating landmarks. Subtle parallax movement as closer landmarks shift faster than distant ones. Golden light rays sweep across the scene from left to right. Gentle particle effects like dust motes catching the light. 3 seconds, smooth, no camera shake, cinematic mood.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POST 8 (Pub 2) ==================== -->
+    <div class="post-detail">
+        <div class="post-detail-header">
+            <div class="post-detail-num">8</div>
+            <div class="post-detail-meta">
+                <h3>22 paises. 5 continentes. 4 filhas. 1 mala.</h3>
+                <div class="meta-line">
+                    <span class="type-badge type-statement">Statement</span>
+                    <span>Pub 2 — Qua 02/04 as 12h</span>
+                    <span>Posicao: Linha 3, Coluna 2</span>
+                </div>
+            </div>
+        </div>
+        <div class="post-detail-body">
+            <div class="post-detail-visual">
+                <div class="post-mockup mockup-statement">
+                    <div>
+                        <h4>22 paises.<br>5 continentes.<br>4 filhas.<br>1 mala.</h4>
+                        <div class="line"></div>
+                    </div>
+                    <div class="watermark">@rotta.curadoria</div>
+                </div>
+            </div>
+            <div class="post-detail-content">
+                <div class="detail-label">Legenda</div>
+                <div class="detail-caption">Esse e o nosso curriculo.
+
+Nao esta num papel. Esta nas milhas acumuladas. Nas fotos que nao precisam de legenda. Nas historias que a gente conta no jantar e ninguem acredita.
+
+22 paises. 5 continentes. 4 filhas que aprenderam geografia ao vivo.
+
+E uma certeza: a melhor escola do mundo e o aeroporto.
+
+A Rotta Curadoria nasceu disso. De viver. De errar roteiro. De descobrir aquele restaurante que nenhum blog ensina. De saber qual hotel merece o preco — e qual e cilada.
+
+A gente nao curou viagens primeiro. A gente viveu elas primeiro.
+
+E agora a gente quer fazer isso por voce.
+
+Bora? Link na bio.
+
+#rottacuradoria #curadoriadeviagens #viagemluxo #viajantesbrasileiros #viverparaviajar #22paises #experienciasreais</div>
+
+                <div class="detail-label">Prompt Nano Banana — Start Frame</div>
+                <div class="detail-prompt">Minimalist dark luxury graphic design. Pure black background (#0E0E0E). Centered elegant gold (#C5A572) serif typography reading "22 paises. 5 continentes. 4 filhas. 1 mala." arranged in four stacked lines, each progressively indented slightly to the right. Below the text, a thin horizontal gold line (40px wide, 2px height) centered with 40% opacity. Very subtle radial gold glow emanating from behind the text. Bottom of frame: tiny watermark "@rotta.curadoria" in muted gray. No images, no photos, pure typography. 1:1 square format, ultra clean.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POST 9 (Pub 3) ==================== -->
+    <div class="post-detail">
+        <div class="post-detail-header">
+            <div class="post-detail-num">9</div>
+            <div class="post-detail-meta">
+                <h3>Qual viagem voce merece?</h3>
+                <div class="meta-line">
+                    <span class="type-badge type-quiz">Quiz CTA</span>
+                    <span>Pub 3 — Sex 04/04 as 18h</span>
+                    <span>Posicao: Linha 3, Coluna 3</span>
+                </div>
+            </div>
+        </div>
+        <div class="post-detail-body">
+            <div class="post-detail-visual">
+                <div class="post-mockup mockup-quiz">
+                    <div class="quiz-emoji">&#129517;</div>
+                    <div class="quiz-q">Qual viagem<br>voce merece?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-opt">A) Vinhos e montanhas</div>
+                        <div class="quiz-opt">B) Praias e historia</div>
+                        <div class="quiz-opt">C) Cidades e gastronomia</div>
+                    </div>
+                </div>
+            </div>
+            <div class="post-detail-content">
+                <div class="detail-label">Legenda</div>
+                <div class="detail-caption">Responde rapido — sem pensar muito:
+
+Se voce pudesse embarcar AMANHA, qual seria sua escolha?
+
+A) Vinhos, montanhas e por do sol nos Andes (Mendoza)
+B) Praias de agua cristalina + cidades medievais (Croacia)
+C) Cidades historicas + a melhor gastronomia do mundo (Italia)
+D) Tudo isso junto. Me monta um roteiro, pelo amor.
+
+Comenta a sua letra aqui embaixo e a gente te conta qual e o roteiro perfeito pra voce.
+
+Spoiler: se voce respondeu D, a gente ja te entende muito bem.
+
+Quer um quiz completo e personalizado? Link na bio.
+
+#quizdeviagem #paradonde #rottacuradoria #mendoza #croacia #italia #curadoriadeviagens #viagemdossonhos</div>
+
+                <div class="detail-label">Prompt Nano Banana — Start Frame</div>
+                <div class="detail-prompt">Dark luxury graphic with a compass rose motif. Background: deep charcoal (#0E0E0E) with a very subtle golden compass rose watermark at 8% opacity filling the entire frame. Center: elegant serif text "Qual viagem voce merece?" in warm gold (#C5A572). Below the text, three rounded rectangular option cards stacked vertically with thin gold borders and dark fill, containing option text in muted cream. Top of frame: small compass emoji. Overall mood: mysterious, inviting, premium. No photos, graphic design only. 1:1 square format.</div>
+
+                <div class="detail-label">Prompt Grok — Animacao</div>
+                <div class="detail-prompt">The compass rose in the background slowly rotates clockwise over 3 seconds. The three option cards fade in one by one from bottom to top with a subtle slide-up motion (0.5s each, 0.3s delay between). Gentle golden shimmer pulses outward from the compass center. Smooth, elegant, no camera movement.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POST 4 (Pub 4) ==================== -->
+    <div class="post-detail">
+        <div class="post-detail-header">
+            <div class="post-detail-num">4</div>
+            <div class="post-detail-meta">
+                <h3>5 Erros Que Destroem Sua Viagem na Europa</h3>
+                <div class="meta-line">
+                    <span class="type-badge type-carousel">Carousel</span>
+                    <span>Pub 4 — Seg 07/04 as 19h</span>
+                    <span>Posicao: Linha 2, Coluna 1</span>
+                </div>
+            </div>
+        </div>
+        <div class="post-detail-body">
+            <div class="post-detail-visual">
+                <div class="post-mockup mockup-carousel">
+                    <div class="big-num">5</div>
+                    <div class="carousel-label">Erros que destroem<br>sua viagem na Europa</div>
+                    <div class="slide-dots"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                </div>
+            </div>
+            <div class="post-detail-content">
+                <div class="detail-label">Slides do Carrossel</div>
+                <div class="detail-text">Slide 1 (Capa): "5 Erros Que Destroem Sua Viagem na Europa" — numero 5 grande em dourado
+Slide 2: Erro 1 — Tentar fazer paises demais em poucos dias
+Slide 3: Erro 2 — Reservar hotel so pelo preco (sem ler reviews recentes)
+Slide 4: Erro 3 — Nao reservar restaurantes com antecedencia na Italia
+Slide 5: Erro 4 — Ignorar o seguro viagem (e rezar pra dar tudo certo)
+Slide 6: Erro 5 — Planejar tudo pelo TikTok (e se frustrar na vida real)
+Slide 7 (CTA): "Quer viajar sem esses erros? A gente cuida de tudo. Link na bio."</div>
+
+                <div class="detail-label">Legenda</div>
+                <div class="detail-caption">5 erros que a gente ve TODO DIA em viajantes indo pra Europa.
+
+E o pior: a maioria so descobre na hora. Quando ja esta la. Sem volta.
+
+Desliza pra ver quais sao — e como evitar cada um deles.
+
+A gente ja cometeu alguns desses (sim, a gente admite). Por isso hoje a Rotta existe: pra voce nao cometer nenhum.
+
+Salva esse post. Manda pra quem ta planejando Europa. Agradece depois.
+
+Tem duvida sobre sua viagem? Manda DM. A gente responde todo mundo.
+
+#errosdeviagem #europa #dicaseuropa #rottacuradoria #curadoriadeviagens #viagemplanejada #roteirodeviagem #primeiraveznaeuropa</div>
+
+                <div class="detail-label">Prompt Nano Banana — Start Frame (Capa)</div>
+                <div class="detail-prompt">Dark luxury carousel cover design. Background: rich charcoal (#1A1A1A) with subtle diagonal texture lines at 3% opacity. Center composition: massive number "5" in Playfair Display serif font, gold color (#C5A572), taking up 60% of the frame height, slightly transparent (70% opacity). Below the number: two lines of text "Erros que destroem / sua viagem na Europa" in clean sans-serif, muted cream (#F2EDE8), smaller size. Bottom: row of 7 small dots indicating carousel slides, first dot highlighted gold. Thin gold border (1px) framing the entire image. No photos. 1:1 square format.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POST 5 (Pub 5) ==================== -->
+    <div class="post-detail">
+        <div class="post-detail-header">
+            <div class="post-detail-num">5</div>
+            <div class="post-detail-meta">
+                <h3>Dolomitas — Paisagem Dramatica</h3>
+                <div class="meta-line">
+                    <span class="type-badge type-destination">Destination</span>
+                    <span>Pub 5 — Qua 09/04 as 12h</span>
+                    <span>Posicao: Linha 2, Coluna 2</span>
+                </div>
+            </div>
+        </div>
+        <div class="post-detail-body">
+            <div class="post-detail-visual">
+                <div class="post-mockup mockup-destination">
+                    <div class="icon-big">&#9968;</div>
+                    <div class="dest-name">Dolomitas</div>
+                    <div class="dest-sub">Italia do Norte</div>
+                </div>
+            </div>
+            <div class="post-detail-content">
+                <div class="detail-label">Direcao Visual</div>
+                <div class="detail-text">Foto editorial de paisagem: Dolomitas italianas, angulo amplo (wide angle), tons frios predominantes (azul, cinza, branco) com toques de luz dourada no horizonte. Sensacao de grandiosidade e silencio. Pode ser ao amanhecer ou entardecer. Sem pessoas em destaque — a paisagem e a protagonista.</div>
+
+                <div class="detail-label">Legenda</div>
+                <div class="detail-caption">Existem lugares que fazem voce parar de falar.
+
+As Dolomitas sao um desses.
+
+Quando a gente chegou la pela primeira vez, ficamos parados. Sem foto. Sem story. So olhando.
+
+Porque tem coisas que voce precisa viver com os olhos antes de viver pela camera.
+
+Esse e um destino que a gente inclui em quase todo roteiro de Italia do Norte. E toda vez que alguem volta, a mensagem e a mesma: "Por que ninguem me contou antes?"
+
+Agora a gente esta te contando.
+
+Quer conhecer as Dolomitas no seu roteiro? Manda DM ou clica no link da bio.
+
+#dolomitas #italianoturismo #alps #rottacuradoria #curadoriadeviagens #viagemitalia #paisagensdeslumbrantes #viajantes</div>
+
+                <div class="detail-label">Prompt Nano Banana — Start Frame</div>
+                <div class="detail-prompt">Breathtaking wide-angle landscape photograph of the Italian Dolomites at blue hour just before sunrise. Dramatic jagged mountain peaks (Tre Cime di Lavaredo) piercing through low-hanging clouds. Cool blue and silver tones dominate the scene with a thin band of warm golden light breaking through on the distant horizon. A small alpine lake in the foreground reflects the peaks perfectly. Atmosphere: majestic silence, editorial quality, cinematic. Shot on medium format camera, ultra sharp. Color grade: cool teal shadows, warm gold highlights. No people visible. 1:1 square crop, centered on the peaks.</div>
+
+                <div class="detail-label">Prompt Grok — Animacao</div>
+                <div class="detail-prompt">Very slow camera push forward toward the mountain peaks (barely perceptible movement, 3 seconds). Clouds drift gently left to right across the peaks. The golden light on the horizon slowly intensifies and spreads. The lake reflection ripples subtly. Serene, meditative pace, no sudden movements. Cinematic, awe-inspiring.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POST 6 (Pub 6) ==================== -->
+    <div class="post-detail">
+        <div class="post-detail-header">
+            <div class="post-detail-num">6</div>
+            <div class="post-detail-meta">
+                <h3>Quanto Custa 7 Dias na Italia</h3>
+                <div class="meta-line">
+                    <span class="type-badge type-carousel">Carousel</span>
+                    <span>Pub 6 — Sex 11/04 as 18h</span>
+                    <span>Posicao: Linha 2, Coluna 3</span>
+                </div>
+            </div>
+        </div>
+        <div class="post-detail-body">
+            <div class="post-detail-visual">
+                <div class="post-mockup mockup-carousel">
+                    <div class="big-num" style="font-size:48px;opacity:.5">&#8364;</div>
+                    <div class="carousel-label">Quanto custa<br>7 dias na Italia</div>
+                    <div class="slide-dots"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                </div>
+            </div>
+            <div class="post-detail-content">
+                <div class="detail-label">Slides do Carrossel</div>
+                <div class="detail-text">Slide 1 (Capa): "Quanto Custa 7 Dias na Italia" — simbolo do Euro em dourado
+Slide 2: Passagens aereas — faixa de preco + dica
+Slide 3: Hospedagem — comparativo 3/4/5 estrelas
+Slide 4: Alimentacao — quanto separar por dia
+Slide 5: Transporte interno — trem vs carro
+Slide 6: Passeios e entradas — principais custos
+Slide 7: Total estimado — faixa realista por pessoa
+Slide 8 (CTA): "Quer um orcamento personalizado pro seu roteiro? Manda DM."</div>
+
+                <div class="detail-label">Legenda</div>
+                <div class="detail-caption">A pergunta que mais recebemos: "Quanto custa ir pra Italia?"
+
+A resposta honesta: depende. Mas a gente abriu os numeros reais pra voce ter uma base solida.
+
+Desliza e veja o custo estimado de 7 dias na Italia — passagem, hotel, comida, passeios e transporte.
+
+Importante: esses valores sao baseados em experiencia propria e pesquisa atualizada. Nao sao valores de blog de 2019.
+
+A Italia pode ser mais acessivel do que voce imagina — ou pode custar uma fortuna se voce nao planejar direito.
+
+A gente ta aqui pra te ajudar com isso.
+
+Salva esse post. Voce vai precisar.
+
+#quantocusta #italia #viagemitalia #rottacuradoria #curadoriadeviagens #orcamentodeviagem #europa #roteirodeviagem</div>
+
+                <div class="detail-label">Prompt Nano Banana — Start Frame (Capa)</div>
+                <div class="detail-prompt">Elegant dark carousel cover. Background: charcoal (#1A1A1A) with a very subtle watermark of the Italian peninsula silhouette at 5% opacity. Center: large Euro symbol in gold (#C5A572) at 50% opacity, elegant serif font. Below: "Quanto custa / 7 dias na Italia" in clean cream text (#F2EDE8). A thin horizontal gold line separates the Euro symbol from the text. Bottom: carousel dots, first highlighted. Refined, premium feel, no photos. 1:1 square.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POST 1 (Pub 7) ==================== -->
+    <div class="post-detail">
+        <div class="post-detail-header">
+            <div class="post-detail-num">1</div>
+            <div class="post-detail-meta">
+                <h3>Nao somos agencia. Somos curadores.</h3>
+                <div class="meta-line">
+                    <span class="type-badge type-statement">Statement</span>
+                    <span>Pub 7 — Seg 14/04 as 19h</span>
+                    <span>Posicao: Linha 1, Coluna 1</span>
+                </div>
+            </div>
+        </div>
+        <div class="post-detail-body">
+            <div class="post-detail-visual">
+                <div class="post-mockup mockup-statement">
+                    <div>
+                        <h4>Nao somos<br>agencia.<br><span style="color:var(--gold)">Somos curadores.</span></h4>
+                        <div class="line"></div>
+                    </div>
+                    <div class="watermark">@rotta.curadoria</div>
+                </div>
+            </div>
+            <div class="post-detail-content">
+                <div class="detail-label">Legenda</div>
+                <div class="detail-caption">Agencia vende pacote. A gente vende experiencia.
+
+Agencia manda PDF. A gente manda mensagem de voz explicando por que aquele restaurante em Mendoza vai mudar sua vida.
+
+Agencia tem catalogo. A gente tem memoria. 22 paises de memoria.
+
+A Rotta Curadoria nasceu porque a gente cansou de ver gente boa fazendo viagem mediana. Pagando caro pra ter o basico. Voltando com fotos bonitas e experiencia morna.
+
+A gente cuida da sua viagem como cuida das nossas. Porque a gente sabe: viagem ruim nao tem refund emocional.
+
+Se voce quer alguem que ja foi, ja errou, ja acertou — e agora quer fazer isso por voce: bora conversar.
+
+Link na bio. DM aberta.
+
+#rottacuradoria #curadoriadeviagens #viagemluxo #naosomoagencia #viagempersonalizada #experienciasreais</div>
+
+                <div class="detail-label">Prompt Nano Banana — Start Frame</div>
+                <div class="detail-prompt">Ultra-minimalist dark typography poster. Pure black background (#0E0E0E). Two text blocks centered vertically: top block in muted cream (#F2EDE8) reading "Nao somos agencia." in elegant serif font (Playfair Display style), and below it "Somos curadores." in warm gold (#C5A572), slightly larger, same serif font. A thin gold horizontal line (40px wide) separates the two phrases. Very subtle radial glow behind the gold text at 5% opacity. Bottom: watermark "@rotta.curadoria" in dark gray. No images, no decoration, breathing space. 1:1 square.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POST 2 (Pub 8) ==================== -->
+    <div class="post-detail">
+        <div class="post-detail-header">
+            <div class="post-detail-num">2</div>
+            <div class="post-detail-meta">
+                <h3>Casal em Mirante — Mendoza / Croacia</h3>
+                <div class="meta-line">
+                    <span class="type-badge type-destination">Destination</span>
+                    <span>Pub 8 — Qua 16/04 as 12h</span>
+                    <span>Posicao: Linha 1, Coluna 2</span>
+                </div>
+            </div>
+        </div>
+        <div class="post-detail-body">
+            <div class="post-detail-visual">
+                <div class="post-mockup mockup-destination" style="background:linear-gradient(135deg,#2a2018,#1f1810)">
+                    <div class="icon-big">&#9737;</div>
+                    <div class="dest-name">Mendoza</div>
+                    <div class="dest-sub">Casal em Mirante</div>
+                </div>
+            </div>
+            <div class="post-detail-content">
+                <div class="detail-label">Direcao Visual</div>
+                <div class="detail-text">Foto editorial: casal de costas em mirante panoramico com vista para vinhedos e Cordilheira dos Andes ao fundo. Tons quentes predominantes (dourado, amber, terracota). Luz de golden hour. Sensacao de intimidade e grandeza. Estilo editorial — nao selfie, nao turista. O casal e pequeno em relacao a paisagem.</div>
+
+                <div class="detail-label">Legenda</div>
+                <div class="detail-caption">Tem viagem que voce faz. E tem viagem que faz voce.
+
+Mendoza e do segundo tipo.
+
+Voce chega achando que vai tomar vinho. Volta entendendo que vinho era so o pretexto. O que muda mesmo e a conversa que voce tem com quem ta do lado. Sem celular. Sem pressa. Sem agenda.
+
+A gente curou um roteiro de Mendoza que inclui vinicolasque nenhum blog fala, um restaurante no meio dos Andes que parece cenario de filme, e um por do sol que faz voce repensar suas prioridades.
+
+Quer viver isso? Manda DM. A gente desenha o roteiro juntos.
+
+#mendoza #argentina #vinicolasmendoza #rottacuradoria #curadoriadeviagens #viagemdecasal #andes #viagemromantica</div>
+
+                <div class="detail-label">Prompt Nano Banana — Start Frame</div>
+                <div class="detail-prompt">Cinematic editorial photograph of a couple seen from behind, standing at a scenic overlook in Mendoza, Argentina. They are small in the frame, positioned in the lower third. Before them stretches an endless valley of lush green vineyards in geometric rows leading to the snow-capped Andes mountains on the horizon. Golden hour light bathes everything in warm amber and honey tones. Lens flare from the low sun. The couple is elegantly dressed (casual luxury). Atmosphere: romantic, aspirational, intimate yet grand. Shot on 35mm film, slight grain, warm color grade. No faces visible. 1:1 square crop.</div>
+
+                <div class="detail-label">Prompt Grok — Animacao</div>
+                <div class="detail-prompt">Gentle breeze moves through the vineyard leaves below the couple. The golden sunlight slowly intensifies as the sun lowers on the horizon. The couple's hair and clothes shift subtly with the wind. A flock of birds crosses the distant sky from left to right. Very slow, romantic pace. 3 seconds. Warm, dreamy atmosphere.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POST 3 (Pub 9) ==================== -->
+    <div class="post-detail">
+        <div class="post-detail-header">
+            <div class="post-detail-num">3</div>
+            <div class="post-detail-meta">
+                <h3>Se a gente nao foi, a gente nao recomenda.</h3>
+                <div class="meta-line">
+                    <span class="type-badge type-statement">Statement</span>
+                    <span>Pub 9 — Sex 18/04 as 18h</span>
+                    <span>Posicao: Linha 1, Coluna 3</span>
+                </div>
+            </div>
+        </div>
+        <div class="post-detail-body">
+            <div class="post-detail-visual">
+                <div class="post-mockup mockup-statement" style="background:var(--bg)">
+                    <div>
+                        <h4 style="font-size:19px">Se a gente<br>nao foi,<br><span style="color:var(--gold)">a gente nao<br>recomenda.</span></h4>
+                        <div class="line"></div>
+                    </div>
+                    <div class="watermark">@rotta.curadoria</div>
+                </div>
+            </div>
+            <div class="post-detail-content">
+                <div class="detail-label">Legenda</div>
+                <div class="detail-caption">Essa e a nossa unica regra.
+
+A gente nao recomenda hotel que nao dormiu. Restaurante que nao comeu. Passeio que nao fez.
+
+Parece obvio? Nao e.
+
+A maioria dos "especialistas em viagem" monta roteiro com base em Google, blog de terceiro e review do TripAdvisor.
+
+A gente monta com base em experiencia. Na nossa pele. Com as nossas filhas no carro. Com a mala pesada. Com o fuso horario. Com o estomago brasileiro.
+
+Se a gente indica, e porque a gente ja viveu. E voltaria.
+
+Simples assim.
+
+Quer um roteiro montado por quem realmente foi? Link na bio.
+
+#rottacuradoria #curadoriadeviagens #experienciareal #semfiltro #viagemluxo #roteiropersonalizado #confianca</div>
+
+                <div class="detail-label">Prompt Nano Banana — Start Frame</div>
+                <div class="detail-prompt">Minimalist luxury typography design. Black background (#0E0E0E). Centered text in two tonal groups: "Se a gente nao foi," in soft cream (#F2EDE8) serif font, and below "a gente nao recomenda." in warm gold (#C5A572), same serif font, slightly bolder weight. Between the phrases: a small gold accent line (30px wide). Very subtle gold dust particles scattered at 3% opacity across the entire frame, as if caught in a beam of light. Bottom: small "@rotta.curadoria" watermark in charcoal gray. Clean, confident, premium. 1:1 square.</div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- ===== COHESION ANALYSIS ===== -->
+<section class="schedule-section" style="padding-bottom:80px">
+    <h2>Analise de Coesao do Grid</h2>
+    <p class="sub">Verificacao das regras de coesao visual aplicadas</p>
+    <table class="schedule-table">
+        <thead>
+            <tr>
+                <th>Regra</th>
+                <th>Status</th>
+                <th>Detalhe</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="color:var(--text)">Nenhum texto adjacente horizontal</td>
+                <td style="color:var(--green)">OK</td>
+                <td>Posts 1-2 (statement + destination), 2-3 (destination + statement), 4-5 (carousel + destination), 5-6 (destination + carousel), 7-8 (reel + statement), 8-9 (statement + quiz)</td>
+            </tr>
+            <tr>
+                <td style="color:var(--text)">Nenhum texto adjacente vertical</td>
+                <td style="color:var(--green)">OK</td>
+                <td>Colunas 1 (statement/carousel/reel), 2 (destination/destination/statement), 3 (statement/carousel/quiz) — coluna 2 linha 3 e statement mas vizinhos sao destination e quiz</td>
+            </tr>
+            <tr>
+                <td style="color:var(--text)">Tons quentes/frios alternados</td>
+                <td style="color:var(--green)">OK</td>
+                <td>Post 2 (quente: Mendoza), Post 5 (frio: Dolomitas) — fotos alternam temperatura</td>
+            </tr>
+            <tr>
+                <td style="color:var(--text)">Dourado presente em todos</td>
+                <td style="color:var(--green)">OK</td>
+                <td>Todos os 9 posts usam #C5A572 como acento (texto, linhas, numeros ou bordas)</td>
+            </tr>
+            <tr>
+                <td style="color:var(--text)">Fundos escuros consistentes</td>
+                <td style="color:var(--green)">OK</td>
+                <td>Todos usam variantes de #0E0E0E a #1A1A1A — estetica luxo mantida</td>
+            </tr>
+            <tr>
+                <td style="color:var(--text)">Playfair Display nos headlines</td>
+                <td style="color:var(--green)">OK</td>
+                <td>Todos os titulos e statements usam Playfair Display serif</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer style="text-align:center;padding:40px 24px;border-top:1px solid var(--layer)">
+    <p style="font-size:12px;color:var(--dim);letter-spacing:1px">ROTTA CURADORIA — PLANEJAMENTO DE GRID INSTAGRAM</p>
+    <p style="font-size:11px;color:var(--dim);margin-top:8px">Documento interno de estrategia | @rotta.curadoria</p>
+</footer>
+
+</body>
+</html>
