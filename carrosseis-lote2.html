@@ -1,0 +1,2717 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrosseis Lote 2 - Rotta Curadoria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0E0E0E;
+      --card: #1A1A1A;
+      --gold: #C5A572;
+      --text: #F2EDE8;
+      --text-muted: #A09A93;
+      --card-border: #2A2A2A;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    h1.page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 48px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .carousel-section {
+      margin-bottom: 64px;
+    }
+
+    .carousel-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--text);
+      margin-bottom: 20px;
+      padding-left: 8px;
+      border-left: 3px solid var(--gold);
+      font-weight: 600;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 10px 0 20px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .slide {
+      flex: 0 0 auto;
+      width: min(360px, 85vw);
+      aspect-ratio: 4 / 5;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 32px;
+      height: 32px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .slide::after {
+      content: '';
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-bottom: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .slide-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    .slide-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .slide-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .slide-heading .gold { color: var(--gold); }
+
+    .slide-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 90%;
+    }
+
+    .slide-solution {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--gold);
+      margin-top: 16px;
+      font-weight: 500;
+      padding-top: 14px;
+      border-top: 1px solid rgba(197, 165, 114, 0.2);
+    }
+
+    .slide-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    .slide.cover .slide-heading {
+      font-size: 1.7rem;
+      line-height: 1.25;
+    }
+
+    .slide.cta {
+      background: linear-gradient(135deg, #1A1A1A 0%, #222018 100%);
+    }
+    .slide.cta .slide-heading {
+      font-size: 1.55rem;
+      color: var(--gold);
+      line-height: 1.35;
+    }
+
+    .slide.signature {
+      background: linear-gradient(180deg, #1A1A1A 0%, #151510 100%);
+    }
+    .signature-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .signature-handle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    .signature-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 16px auto;
+      opacity: 0.6;
+    }
+    .signature-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .summary-list {
+      text-align: left;
+      width: 100%;
+      list-style: none;
+      padding: 0;
+    }
+    .summary-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(242, 237, 232, 0.06);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+    .summary-list li span.num {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.85rem;
+      min-width: 18px;
+    }
+
+    .value-range {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 12px 0 6px;
+      line-height: 1.2;
+    }
+    .value-detail {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+    .value-category {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .total-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .total-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .icon-plane { font-size: 2.2rem; margin-bottom: 12px; }
+    .icon-check { font-size: 2.2rem; margin-bottom: 12px; }
+
+    .rotta-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .cover-deco {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 14px auto;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .nav-arrow:hover {
+      background: rgba(197, 165, 114, 0.15);
+      transform: translateY(-50%) scale(1.05);
+    }
+    .nav-arrow.left { left: -8px; }
+    .nav-arrow.right { right: -8px; }
+    .nav-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    .dot-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--card-border);
+      transition: background 0.3s, width 0.3s;
+    }
+    .dot.active {
+      background: var(--gold);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    /* Caption area */
+    .caption-box {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      white-space: pre-line;
+    }
+    .caption-box strong {
+      color: var(--text);
+    }
+    .caption-box .hashtags {
+      color: var(--gold);
+      margin-top: 8px;
+      display: block;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 24px 12px; }
+      .slide { width: 85vw; padding: 32px 24px; }
+      .slide-heading { font-size: 1.3rem; }
+      .slide.cover .slide-heading { font-size: 1.45rem; }
+      .slide-number { font-size: 3.8rem; }
+      .nav-arrow { display: none; }
+      h1.page-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">Carrosseis Instagram - Rotta Curadoria (Lote 2)</h1>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 24: O Que Comer na Itália           -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 24 - O Que Comer na Itália: Guia por Região</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <!-- Slide 1: Cover -->
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">GASTRONOMIA</span>
+          <h3 class="slide-heading">O que comer na <span class="gold">Itália</span>: guia por região</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Cada cidade tem seu prato. Você sabe qual pedir?</p>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Roma — Lácio</h3>
+          <p class="slide-body">Carbonara, cacio e pepe, supplì e carciofi alla giudia. A capital é comfort food no estado puro.</p>
+          <p class="slide-solution">Peça carbonara longe do Coliseu. Os melhores estão no bairro Trastevere.</p>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Nápoles — Campânia</h3>
+          <p class="slide-body">Pizza margherita original, sfogliatella, ragù napoletano e limoncello de Amalfi.</p>
+          <p class="slide-solution">A pizza napolitana é patrimônio da UNESCO. Coma na L'Antica Pizzeria da Michele.</p>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Bolonha — Emília-Romanha</h3>
+          <p class="slide-body">Tortellini in brodo, lasanha bolonhesa, mortadela e parmigiano reggiano legítimo.</p>
+          <p class="slide-solution">Bolonha é a capital gastronômica da Itália. Não saia sem visitar o Mercado Quadrilatero.</p>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Florença — Toscana</h3>
+          <p class="slide-body">Bistecca alla fiorentina, ribollita, pappardelle al cinghiale e o vinho Chianti.</p>
+          <p class="slide-solution">A bistecca precisa ser al sangue. Se pedem "como quer o ponto", não é o lugar certo.</p>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Milão — Lombardia</h3>
+          <p class="slide-body">Risotto alla milanese, ossobuco, cotoletta e panettone artesanal o ano inteiro.</p>
+          <p class="slide-solution">Milão é sofisticada até na comida. Experimente um aperitivo no Navigli ao entardecer.</p>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Sicília</h3>
+          <p class="slide-body">Arancini, cannoli, pasta alla norma e granita com brioche no café da manhã.</p>
+          <p class="slide-solution">A Sicília é a fusão entre Itália e norte da África. Cada mordida é uma surpresa.</p>
+        </div>
+
+        <!-- Slide 8 -->
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Veneza — Vêneto</h3>
+          <p class="slide-body">Sarde in saor, fegato alla veneziana, risi e bisi e o spritz original com Aperol.</p>
+          <p class="slide-solution">Fuja da Piazza San Marco pra comer. Os bacari escondidos são onde os venezianos vão.</p>
+        </div>
+
+        <!-- Slide 9: Resumo -->
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Mapa gastronômico</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Roma — Carbonara e cacio e pepe</li>
+            <li><span class="num">2.</span> Nápoles — Pizza e sfogliatella</li>
+            <li><span class="num">3.</span> Bolonha — Tortellini e lasanha</li>
+            <li><span class="num">4.</span> Florença — Bistecca e Chianti</li>
+            <li><span class="num">5.</span> Milão — Risotto e ossobuco</li>
+            <li><span class="num">6.</span> Sicília — Arancini e cannoli</li>
+            <li><span class="num">7.</span> Veneza — Cicchetti e spritz</li>
+          </ol>
+        </div>
+
+        <!-- Slide 10: CTA + Signature -->
+        <div class="slide cta">
+          <span class="icon-plane">&#127837;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem vai pra Itália</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Você sabia que cada região da Itália tem pratos completamente diferentes?</strong>
+
+Carbonara em Roma, pizza em Nápoles, bistecca em Florença... Se você pedir o prato errado na cidade errada, vai comer uma imitação.
+
+Nesse guia a gente separou o que comer em cada região italiana pra você não errar nada.
+
+Salva esse post e manda pra quem tá planejando a Itália.
+
+<span class="hashtags">#Italia #ViagemItalia #ComidaItaliana #Gastronomia #DicasDeViagem #RottaCuradoria #RoteiroPeloMundo #CulinariaItaliana</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 25: Restaurantes Turísticos vs Locais -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 25 - Restaurantes Turísticos vs Locais: Como Saber</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">GASTRONOMIA</span>
+          <h3 class="slide-heading">Restaurante <span class="gold">armadilha</span> vs restaurante local: como saber?</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">5 sinais que entregam o restaurante turístico</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Sinal</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Cardápio com fotos enormes</h3>
+          <p class="slide-body">Restaurante bom de verdade confia na comida, não precisa de foto plastificada no cardápio pra te convencer.</p>
+          <p class="slide-solution">Se o cardápio parece catálogo de revista, ande mais uma quadra.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Sinal</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Alguém te chamando na porta</h3>
+          <p class="slide-body">Quando o garçom fica na calçada te puxando, o restaurante depende de turista, não de qualidade.</p>
+          <p class="slide-solution">Lugar bom tem fila. Lugar ruim tem alguém te implorando pra entrar.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Sinal</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Cardápio em 8 idiomas</h3>
+          <p class="slide-body">Se o cardápio tem tradução em japonês, coreano, inglês e russo, foi feito pra turista pagar caro.</p>
+          <p class="slide-solution">Procure menus simples, escritos à mão ou só no idioma local. Esse é o sinal de autenticidade.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Sinal</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Fica colado no ponto turístico</h3>
+          <p class="slide-body">Quanto mais perto do monumento, pior a comida e maior o preço. É uma regra quase universal.</p>
+          <p class="slide-solution">Ande 2 a 3 quadras pra dentro. O preço cai pela metade e a comida melhora 10 vezes.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Sinal</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Nenhum local comendo ali</h3>
+          <p class="slide-body">Olhe ao redor. Se só tem turista nas mesas, você está no lugar errado. Locais sabem onde a comida é boa.</p>
+          <p class="slide-solution">Use Google Maps, filtre por avaliações de locais e busque comentários no idioma do país.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica bônus</span>
+          <span class="slide-number">&#128161;</span>
+          <h3 class="slide-heading">O truque do Google Maps</h3>
+          <p class="slide-body">Abra o Maps, busque "restaurante", filtre por 4.5+ estrelas, e leia os comentários mais recentes. Ignore os com fotos perfeitas demais.</p>
+          <p class="slide-solution">Comentários de locais em italiano, francês ou espanhol = sinal verde.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica bônus</span>
+          <span class="slide-number">&#127860;</span>
+          <h3 class="slide-heading">Pergunte ao hotel</h3>
+          <p class="slide-body">Peça ao recepcionista: "Onde VOCÊ come?" — não "o que recomenda pra turista". A diferença na resposta é enorme.</p>
+          <p class="slide-solution">Dica de local é ouro. Anote tudo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Os 5 sinais</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Cardápio com fotos grandes</li>
+            <li><span class="num">2.</span> Garçom te chamando na porta</li>
+            <li><span class="num">3.</span> Menu traduzido em muitos idiomas</li>
+            <li><span class="num">4.</span> Colado no ponto turístico</li>
+            <li><span class="num">5.</span> Só turista nas mesas</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127860;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> pra não cair em armadilha</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Você já comeu num restaurante turístico e pagou o triplo por uma comida meia-boca?</strong>
+
+Acontece com todo mundo. Mas tem sinais claros que entregam o restaurante armadilha antes de você sentar.
+
+Nesse carrossel a gente separou 5 sinais infalíveis pra você nunca mais cair nessa.
+
+Salva e manda pra quem precisa saber disso antes da próxima viagem.
+
+<span class="hashtags">#DicasDeViagem #RestauranteLocal #ComidaDeVerdade #ViagemInternacional #RottaCuradoria #TurismoInteligente</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 26: Vinhos do Mundo                 -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 26 - Vinhos do Mundo: Guia Básico pra Viajante</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">GASTRONOMIA</span>
+          <h3 class="slide-heading">Vinhos do mundo: <span class="gold">guia básico</span> pra viajante</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Onde provar, o que pedir e quanto custa</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Mendoza — Argentina</h3>
+          <p class="slide-body">Capital do Malbec. Vinícolas com vista pra Cordilheira, degustações a partir de R$50 e almoços com harmonização inesquecíveis.</p>
+          <p class="slide-solution">Melhor época: março a maio (colheita). Reserve tours com antecedência.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Toscana — Itália</h3>
+          <p class="slide-body">Chianti, Brunello di Montalcino, Super Toscanos. Paisagens de cinema entre colinas, ciprestes e vinhedos centenários.</p>
+          <p class="slide-solution">Alugue um carro e percorra a Strada del Vino. É a melhor road trip da Europa.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Douro — Portugal</h3>
+          <p class="slide-body">Berço do vinho do Porto. Vinhedos em terraços à beira do Rio Douro, cruzeiros com degustação e quintas históricas.</p>
+          <p class="slide-solution">Faça o cruzeiro de um dia saindo do Porto. Inclui almoço e degustação.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Napa Valley — EUA</h3>
+          <p class="slide-body">Cabernet Sauvignon de classe mundial. Vinícolas sofisticadas, experiências premium e paisagens californianas perfeitas.</p>
+          <p class="slide-solution">Reserve com semanas de antecedência. Muitas vinícolas exigem agendamento.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Bordeaux — França</h3>
+          <p class="slide-body">A referência mundial em vinhos tintos. Châteaux centenários, classificações lendárias e uma cidade patrimônio da UNESCO.</p>
+          <p class="slide-solution">Visite a Cité du Vin, o museu interativo do vinho. Experiência imperdível.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Vale dos Vinhedos — Brasil</h3>
+          <p class="slide-body">Serra Gaúcha com espumantes premiados internacionalmente. Perto, acessível e surpreendente. Não precisa sair do Brasil pra beber bem.</p>
+          <p class="slide-solution">Combine com Gramado e Canela. O roteiro fica perfeito pra um fim de semana prolongado.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Região</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Barossa Valley — Austrália</h3>
+          <p class="slide-body">Shiraz poderoso e encorpado. Vinícolas familiares com décadas de tradição num cenário completamente diferente do europeu.</p>
+          <p class="slide-solution">Fica a 1h de Adelaide. Perfeito pra quem quer algo fora do óbvio.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Mapa dos vinhos</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Mendoza — Malbec argentino</li>
+            <li><span class="num">2.</span> Toscana — Chianti e Brunello</li>
+            <li><span class="num">3.</span> Douro — Vinho do Porto</li>
+            <li><span class="num">4.</span> Napa Valley — Cabernet premium</li>
+            <li><span class="num">5.</span> Bordeaux — Tintos clássicos</li>
+            <li><span class="num">6.</span> Vale dos Vinhedos — Espumantes BR</li>
+            <li><span class="num">7.</span> Barossa Valley — Shiraz australiano</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127863;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem ama vinho</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Qual é a sua região de vinho dos sonhos?</strong>
+
+Da Argentina à Austrália, cada lugar produz vinhos com personalidade completamente diferente. E visitar uma vinícola é uma experiência que vai muito além da taça.
+
+Nesse guia a gente separou 7 regiões vinícolas imperdíveis pra quem quer unir viagem e vinho.
+
+Salva e marca aquele amigo enófilo.
+
+<span class="hashtags">#Vinhos #Enoturismo #ViagemEVinho #Mendoza #Toscana #Douro #NapaValley #RottaCuradoria</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 27: Street Food Pelo Mundo          -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 27 - Street Food Pelo Mundo: Top 10</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">GASTRONOMIA</span>
+          <h3 class="slide-heading">Street food pelo mundo: <span class="gold">Top 10</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">A melhor comida do mundo cabe na mão</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">País</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Tailândia — Pad Thai</h3>
+          <p class="slide-body">Macarrão salteado com camarão, amendoim e limão feito na hora por R$8. Bangkok é a capital mundial da street food.</p>
+          <p class="slide-solution">Vá ao Chinatown de Bangkok à noite. A rua inteira vira um restaurante a céu aberto.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">País</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">México — Tacos al Pastor</h3>
+          <p class="slide-body">Carne de porco marinada, abacaxi, coentro e cebola. Simples, barato e viciante. O original não tem nada a ver com Taco Bell.</p>
+          <p class="slide-solution">Na Cidade do México, procure taquerias com fila de locais. Fila = qualidade.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">País</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Turquia — Döner Kebab</h3>
+          <p class="slide-body">Carne assada no espeto vertical, pão fresco, salada e molho. Istambul tem döner em cada esquina — e cada um é diferente.</p>
+          <p class="slide-solution">Peça "durum" (enrolado no pão fino). É mais prático e igualmente delicioso.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">País</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Japão — Takoyaki</h3>
+          <p class="slide-body">Bolinhas de polvo crocantes por fora, cremosas por dentro. Osaka é a meca. Custa menos de R$15 a porção.</p>
+          <p class="slide-solution">Vá ao bairro Dotonbori em Osaka. Lá a street food é patrimônio cultural.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">País</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Índia — Pani Puri</h3>
+          <p class="slide-body">Bolinhas crocantes recheadas com batata e água temperada. Explosão de sabor na boca. Custa centavos.</p>
+          <p class="slide-solution">Escolha barracas movimentadas — alta rotatividade = ingredientes frescos.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">País</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Vietnã — Bánh Mì</h3>
+          <p class="slide-body">Baguete francesa com recheio vietnamita: patê, carne, pepino, coentro e pimenta. A fusão perfeita por R$5.</p>
+          <p class="slide-solution">Ho Chi Minh City tem os melhores. Procure a barraca Bánh Mì Huỳnh Hoa.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">País</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Colômbia — Arepa</h3>
+          <p class="slide-body">Disco de milho recheado com queijo, carne ou feijão. De Bogotá a Cartagena, a arepa é a alma da Colômbia.</p>
+          <p class="slide-solution">Peça arepa de choclo com queijo. Doce e salgado ao mesmo tempo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Top street foods</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Tailândia — Pad Thai</li>
+            <li><span class="num">2.</span> México — Tacos al Pastor</li>
+            <li><span class="num">3.</span> Turquia — Döner Kebab</li>
+            <li><span class="num">4.</span> Japão — Takoyaki</li>
+            <li><span class="num">5.</span> Índia — Pani Puri</li>
+            <li><span class="num">6.</span> Vietnã — Bánh Mì</li>
+            <li><span class="num">7.</span> Colômbia — Arepa</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127836;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem ama comer viajando</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>A melhor comida do mundo não está nos restaurantes caros. Está na rua.</strong>
+
+De Bangkok a Bogotá, a street food conta a história de um povo melhor do que qualquer museu. E o melhor: custa quase nada.
+
+Nesse carrossel a gente separou os 7 melhores street foods do planeta pra você já saber o que pedir.
+
+Salva e marca quem come tudo quando viaja.
+
+<span class="hashtags">#StreetFood #ComidaDeRua #ViagemGastronômica #DicasDeViagem #RottaCuradoria #CulináriaPeloMundo</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 28: Quanto Custa 1 Semana em 7 Destinos -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 28 - Quanto Custa 1 Semana em 7 Destinos</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">DINHEIRO</span>
+          <h3 class="slide-heading">Quanto custa <span class="gold">1 semana</span> em 7 destinos</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Comparação real com valores em reais (casal)</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-number">&#127463;&#127462;</span>
+          <span class="value-category">Buenos Aires</span>
+          <p class="value-range">R$6.000 - 9.000</p>
+          <p class="value-detail">Aéreo + hotel 4* + alimentação + passeios (casal)</p>
+          <p class="slide-solution">Destino mais acessível da lista. Câmbio favorável pro brasileiro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-number">&#127477;&#127481;</span>
+          <span class="value-category">Lisboa</span>
+          <p class="value-range">R$14.000 - 20.000</p>
+          <p class="value-detail">Aéreo + hotel 4* + alimentação + passeios (casal)</p>
+          <p class="slide-solution">Portugal é a porta de entrada mais barata da Europa.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-number">&#127470;&#127481;</span>
+          <span class="value-category">Roma</span>
+          <p class="value-range">R$15.000 - 24.000</p>
+          <p class="value-detail">Aéreo + hotel 4* + alimentação + passeios (casal)</p>
+          <p class="slide-solution">Reserve museus com antecedência pra economizar em filas e tempo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-number">&#127482;&#127480;</span>
+          <span class="value-category">Nova York</span>
+          <p class="value-range">R$18.000 - 28.000</p>
+          <p class="value-detail">Aéreo + hotel 3-4* + alimentação + passeios (casal)</p>
+          <p class="slide-solution">Hospedagem é o que mais pesa. Considere Brooklyn ou Queens.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-number">&#127467;&#127479;</span>
+          <span class="value-category">Paris</span>
+          <p class="value-range">R$20.000 - 30.000</p>
+          <p class="value-detail">Aéreo + hotel 4* + alimentação + passeios (casal)</p>
+          <p class="slide-solution">Compre o Museum Pass (2 ou 4 dias). Economiza tempo e dinheiro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-number">&#127471;&#127477;</span>
+          <span class="value-category">Tóquio</span>
+          <p class="value-range">R$22.000 - 32.000</p>
+          <p class="value-detail">Aéreo + hotel 4* + alimentação + passeios (casal)</p>
+          <p class="slide-solution">Comida de rua é barata e incrível. Hospedagem e aéreo pesam mais.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-number">&#127464;&#127469;</span>
+          <span class="value-category">Zurique</span>
+          <p class="value-range">R$28.000 - 42.000</p>
+          <p class="value-detail">Aéreo + hotel 4* + alimentação + passeios (casal)</p>
+          <p class="slide-solution">A Suíça é cara, mas existem truques. Spoiler: carrossel 39.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Ranking por custo</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Buenos Aires — R$6-9 mil</li>
+            <li><span class="num">2.</span> Lisboa — R$14-20 mil</li>
+            <li><span class="num">3.</span> Roma — R$15-24 mil</li>
+            <li><span class="num">4.</span> Nova York — R$18-28 mil</li>
+            <li><span class="num">5.</span> Paris — R$20-30 mil</li>
+            <li><span class="num">6.</span> Tóquio — R$22-32 mil</li>
+            <li><span class="num">7.</span> Zurique — R$28-42 mil</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128176;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> pra planejar sem susto</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Quanto custa UMA SEMANA nos destinos mais desejados do mundo?</strong>
+
+A gente comparou 7 destinos com valores reais em reais pra casal. De Buenos Aires (a mais acessível) até Zurique (a mais cara).
+
+Saber o custo real é o primeiro passo pra planejar sem frustrações.
+
+Salva esse comparativo e começa a planejar a sua.
+
+<span class="hashtags">#QuantoCusta #PlanejamentoDeViagem #ViagemInternacional #DicasDeViagem #RottaCuradoria #OrcamentoViagem</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 29: Como Pagar Menos               -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 29 - Como Pagar Menos Em Tudo Na Viagem</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">DINHEIRO</span>
+          <h3 class="slide-heading">Como pagar <span class="gold">menos</span> em tudo na viagem</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">7 truques que economizam milhares de reais</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Viaje na shoulder season</h3>
+          <p class="slide-body">Entre a alta e a baixa temporada, os preços caem até 40% e os lugares ficam mais vazios. Setembro na Europa é o exemplo perfeito.</p>
+          <p class="slide-solution">Europa: abril-maio e setembro-outubro. Caribe: novembro. Ásia: março-abril.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Use alertas de passagens</h3>
+          <p class="slide-body">Apps como Google Flights e Skyscanner avisam quando o preço cai. Monitore por semanas, não compre por impulso.</p>
+          <p class="slide-solution">Ative alertas pra datas flexíveis. A diferença pode ser de R$2.000 por pessoa.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Reserve hotel direto pelo site</h3>
+          <p class="slide-body">Muitos hotéis oferecem o menor preço pelo site próprio. Alguns dão upgrade grátis se você reservar direto.</p>
+          <p class="slide-solution">Pesquise no Booking, mas finalize no site do hotel. Compare sempre.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Cartão de débito internacional</h3>
+          <p class="slide-body">Wise, Nomad e C6 Global cobram spreads muito menores que o cartão de crédito tradicional. A economia é de 5% a 8% em cada compra.</p>
+          <p class="slide-solution">Carregue o cartão quando o câmbio estiver favorável, dias antes da viagem.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Compre city passes</h3>
+          <p class="slide-body">Paris Museum Pass, Roma Pass, New York CityPASS — todos economizam dinheiro E tempo nas filas.</p>
+          <p class="slide-solution">Faça a conta: se for visitar 3+ atrações, o pass já vale a pena.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Coma como local</h3>
+          <p class="slide-body">Almoce no restaurante executivo, jante em bistrôs de bairro. Supermercado pra café da manhã. Economia de até 50% na alimentação.</p>
+          <p class="slide-solution">Fuja do turístico. Ande 2 quadras e o preço muda completamente.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Contrate seguro com cupom</h3>
+          <p class="slide-body">Sites como Seguros Promo oferecem descontos de 15% a 25% com cupons. É obrigatório na Europa e barato se comprar certo.</p>
+          <p class="slide-solution">Compare pelo menos 3 seguradoras. Nunca compre o primeiro que aparecer.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Os 7 truques</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Shoulder season = 40% menos</li>
+            <li><span class="num">2.</span> Alertas de passagem aérea</li>
+            <li><span class="num">3.</span> Reserve direto no hotel</li>
+            <li><span class="num">4.</span> Cartão de débito internacional</li>
+            <li><span class="num">5.</span> City passes pra atrações</li>
+            <li><span class="num">6.</span> Coma como local</li>
+            <li><span class="num">7.</span> Seguro viagem com cupom</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128178;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem quer viajar gastando menos</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Viajar bem não precisa ser caro. Precisa ser inteligente.</strong>
+
+Nesse carrossel a gente reuniu 7 truques que economizam milhares de reais na sua próxima viagem — sem abrir mão de conforto.
+
+Shoulder season, cartão certo, city pass... são detalhes que fazem MUITA diferença.
+
+Salva e compartilha com quem tá planejando a próxima viagem.
+
+<span class="hashtags">#EconomiaNaViagem #DicasDeViagem #ViajarBarato #PlanejamentoDeViagem #RottaCuradoria #TruquesDeViagem</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 30: Seguro Viagem                   -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 30 - Seguro Viagem: Vale a Pena?</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">DINHEIRO</span>
+          <h3 class="slide-heading">Seguro viagem: <span class="gold">vale a pena?</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">O que cobre, quanto custa e quando é obrigatório</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Fato</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Na Europa é obrigatório</h3>
+          <p class="slide-body">O Tratado de Schengen exige cobertura mínima de 30 mil euros pra atendimento médico. Sem seguro, podem negar sua entrada.</p>
+          <p class="slide-solution">Não é opcional. É requisito de imigração.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Fato</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Uma consulta nos EUA custa R$5.000+</h3>
+          <p class="slide-body">Nos Estados Unidos, uma ida à emergência pode custar mais de R$25.000. Uma internação simples passa de R$100.000.</p>
+          <p class="slide-solution">O seguro custa R$15 a R$30 por dia. A conta sem seguro pode destruir suas finanças.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Fato</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Cobre muito mais que saúde</h3>
+          <p class="slide-body">Extravio de mala, atraso de voo, cancelamento de viagem, assistência jurídica, retorno antecipado por emergência familiar.</p>
+          <p class="slide-solution">Leia a apólice com atenção. Os melhores seguros cobrem até celular roubado.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Fato</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Quanto custa na prática</h3>
+          <p class="slide-body">7 dias na Europa: R$150 a R$350 por pessoa. 15 dias nos EUA: R$300 a R$600. Pra família, existem planos com desconto.</p>
+          <p class="slide-solution">Custa menos que um jantar no destino. E pode te salvar de uma conta de 6 dígitos.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Fato</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Cartão de crédito NÃO substitui</h3>
+          <p class="slide-body">Alguns cartões premium oferecem seguro, mas a cobertura costuma ser limitada, com muitas exclusões e burocracia pra acionar.</p>
+          <p class="slide-solution">Confira a apólice do cartão. Na maioria dos casos, vale contratar um seguro dedicado.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Fato</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Caso real: fratura na Suíça</h3>
+          <p class="slide-body">Um brasileiro fraturou o tornozelo esquiando. Conta do hospital: R$85.000. Com seguro: R$0. Sem seguro: dívida por anos.</p>
+          <p class="slide-solution">Histórias assim acontecem todo dia. A pergunta não é SE vale, é QUANDO vai precisar.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Fato</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Como escolher o melhor</h3>
+          <p class="slide-body">Compare no Seguros Promo ou Real Seguro. Priorize: cobertura médica alta, cobertura de bagagem e atendimento 24h em português.</p>
+          <p class="slide-solution">Nunca escolha o mais barato. Escolha o que cobre mais com atendimento 24h.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Por que contratar</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Obrigatório na Europa</li>
+            <li><span class="num">2.</span> Saúde no exterior é caríssima</li>
+            <li><span class="num">3.</span> Cobre mala, voo e cancelamento</li>
+            <li><span class="num">4.</span> Custa R$15-30 por dia</li>
+            <li><span class="num">5.</span> Cartão de crédito não basta</li>
+            <li><span class="num">6.</span> Casos reais provam a necessidade</li>
+            <li><span class="num">7.</span> Compare e priorize cobertura</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128737;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem vai viajar</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Seguro viagem é gasto desnecessário ou investimento essencial?</strong>
+
+Uma consulta nos EUA custa R$5.000. Uma internação na Europa pode passar de R$100.000. E o seguro? R$15 por dia.
+
+Nesse carrossel a gente mostra tudo que o seguro cobre, quanto custa e por que você PRECISA dele.
+
+Salva e manda pra quem acha que seguro é besteira.
+
+<span class="hashtags">#SeguroViagem #ViagemSegura #DicasDeViagem #PlanejamentoDeViagem #RottaCuradoria #ViagemInternacional</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 31: 10 Hacks de Aeroporto           -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 31 - 10 Hacks de Aeroporto Que Pouca Gente Sabe</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">HACKS</span>
+          <h3 class="slide-heading">10 hacks de <span class="gold">aeroporto</span> que pouca gente sabe</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Transforme a espera em parte da experiência</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Hack</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Sala VIP por R$80</h3>
+          <p class="slide-body">Você não precisa de cartão Black. Apps como LoungeKey e Priority Pass vendem acesso avulso. Inclui comida, bebida e Wi-Fi.</p>
+          <p class="slide-solution">Confira se seu cartão de crédito já dá acesso. Muitos dão e você nem sabe.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Hack</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Check-in online 48h antes</h3>
+          <p class="slide-body">Faça check-in pelo app da companhia. Escolha seu assento, pule a fila do balcão e vá direto pro embarque.</p>
+          <p class="slide-solution">Os melhores assentos são liberados nesse momento. Quem chega primeiro, escolhe primeiro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Hack</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Garrafa vazia na mochila</h3>
+          <p class="slide-body">Leve uma garrafa reutilizável vazia. Passe pela segurança e encha nos bebedouros do aeroporto. Economia e sustentabilidade.</p>
+          <p class="slide-solution">Água no aeroporto custa R$15-25. Na viagem toda, isso vira centenas de reais.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Hack</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Tomadas escondidas</h3>
+          <p class="slide-body">As tomadas mais disputadas são as dos portões. Mas existem tomadas nos pilares, embaixo de bancos e perto de telefones públicos.</p>
+          <p class="slide-solution">Leve um adaptador universal e um cabo longo. Você nunca mais fica sem bateria.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Hack</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Wi-Fi grátis estendido</h3>
+          <p class="slide-body">Muitos aeroportos limitam o Wi-Fi a 30 minutos. Truque: abra uma aba anônima, reconecte e ganhe mais 30 minutos.</p>
+          <p class="slide-solution">Ou use o app do aeroporto — alguns dão Wi-Fi ilimitado pra quem baixa.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Hack</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Google Flights pra conexões</h3>
+          <p class="slide-body">Se sua conexão é longa, pesquise se compensa sair do aeroporto e conhecer a cidade. Muitos aeroportos têm guarda-volumes.</p>
+          <p class="slide-solution">Conexão de 6h+ em Istambul, Dubai ou Singapura? Dá tempo de conhecer a cidade.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Hack</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Fast track na segurança</h3>
+          <p class="slide-body">Muitos aeroportos vendem acesso à fila rápida da segurança por R$30-50. Em alta temporada, você pula 1 hora de fila.</p>
+          <p class="slide-solution">Compre online antes de ir. No aeroporto geralmente é mais caro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Os 7 melhores hacks</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Sala VIP acessível por R$80</li>
+            <li><span class="num">2.</span> Check-in online antecipado</li>
+            <li><span class="num">3.</span> Garrafa vazia = economia</li>
+            <li><span class="num">4.</span> Tomadas escondidas no terminal</li>
+            <li><span class="num">5.</span> Wi-Fi grátis estendido</li>
+            <li><span class="num">6.</span> Explore a cidade na conexão</li>
+            <li><span class="num">7.</span> Fast track na segurança</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#9992;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> pra sua próxima viagem</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Aeroporto não precisa ser estressante. Pode ser parte da experiência.</strong>
+
+Sala VIP por R$80, Wi-Fi grátis estendido, tomadas escondidas e fast track na segurança. São detalhes que transformam sua espera.
+
+Nesse carrossel a gente separou os melhores hacks pra você dominar qualquer aeroporto.
+
+Salva e compartilha com quem viaja com frequência.
+
+<span class="hashtags">#HacksDeViagem #Aeroporto #DicasDeAeroporto #ViagemInternacional #RottaCuradoria #ViajantePro</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 32: Como Conseguir Upgrade de Hotel  -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 32 - Como Conseguir Upgrade de Hotel</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">HACKS</span>
+          <h3 class="slide-heading">Como conseguir <span class="gold">upgrade</span> de hotel</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Truques reais que funcionam em qualquer lugar</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Reserve direto pelo hotel</h3>
+          <p class="slide-body">Booking e Expedia não dão upgrade. Quando você reserva pelo site do hotel, eles sabem que você é cliente direto — e priorizam.</p>
+          <p class="slide-solution">Ligue ou mande e-mail direto pro hotel mencionando que reservou pelo site deles.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Mencione uma data especial</h3>
+          <p class="slide-body">Aniversário, lua de mel, bodas. Hotéis adoram surpreender hóspedes em datas especiais. Mas avise com antecedência.</p>
+          <p class="slide-solution">Mande um e-mail 1 semana antes: "Estaremos celebrando nosso aniversário de casamento."</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Faça check-in tarde</h3>
+          <p class="slide-body">Quando você chega no fim da tarde, os quartos básicos já foram distribuídos. O hotel pode te colocar num quarto melhor sem custo.</p>
+          <p class="slide-solution">Check-in depois das 16h aumenta suas chances significativamente.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Entre no programa de fidelidade</h3>
+          <p class="slide-body">Marriott Bonvoy, Hilton Honors, IHG Rewards — são grátis e já dão benefícios desde o nível básico. Upgrade é um deles.</p>
+          <p class="slide-solution">Cadastre-se ANTES de reservar. Mesmo sem status alto, já faz diferença.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Pergunte educadamente</h3>
+          <p class="slide-body">"Vocês teriam algum quarto com vista disponível?" funciona mais do que você imagina. Educação e simpatia abrem portas.</p>
+          <p class="slide-solution">Não exija. Pergunte com um sorriso. O recepcionista decide na hora.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Viaje em baixa temporada</h3>
+          <p class="slide-body">Com o hotel vazio, as chances de upgrade disparam. Quartos melhores estão sobrando e o hotel quer te agradar.</p>
+          <p class="slide-solution">Terça a quinta em cidade corporativa = hotel vazio = upgrade provável.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Deixe uma avaliação positiva</h3>
+          <p class="slide-body">Na sua chegada, mencione que costuma deixar reviews detalhados. Hotéis valorizam hóspedes que geram avaliações positivas.</p>
+          <p class="slide-solution">Depois da estadia, cumpra a promessa. Isso constrói relacionamento pra próximas visitas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Os 7 truques</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Reserve direto pelo hotel</li>
+            <li><span class="num">2.</span> Mencione data especial</li>
+            <li><span class="num">3.</span> Check-in no fim da tarde</li>
+            <li><span class="num">4.</span> Programa de fidelidade grátis</li>
+            <li><span class="num">5.</span> Pergunte com educação</li>
+            <li><span class="num">6.</span> Viaje em baixa temporada</li>
+            <li><span class="num">7.</span> Deixe avaliações positivas</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127976;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem ama hotel bom</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Upgrade de hotel não é sorte. É estratégia.</strong>
+
+Reservar direto, mencionar datas especiais, fazer check-in tarde... são truques simples que aumentam MUITO suas chances de ganhar um quarto melhor.
+
+Nesse carrossel a gente separou 7 truques que funcionam de verdade.
+
+Salva e usa na próxima viagem.
+
+<span class="hashtags">#UpgradeDeHotel #DicasDeHotel #ViagemPremium #HacksDeViagem #RottaCuradoria #HotelDeLuxo</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 33: Jet Lag                          -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 33 - Jet Lag: Como Vencer em 24h</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">HACKS</span>
+          <h3 class="slide-heading">Jet lag: como vencer em <span class="gold">24 horas</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Dicas baseadas em ciência, não em achismo</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Ajuste o relógio no avião</h3>
+          <p class="slide-body">Assim que embarcar, mude o relógio pro horário do destino. Seu cérebro começa a se adaptar antes de pousar.</p>
+          <p class="slide-solution">Durma e coma no horário do destino, não no do Brasil.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Luz solar é o reset</h3>
+          <p class="slide-body">A luz natural regula o relógio biológico. Chegou de manhã? Vá pra rua. Chegou à noite? Evite luz forte e telas.</p>
+          <p class="slide-solution">30 minutos de sol logo cedo = o melhor remédio contra jet lag.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Hidrate-se muito</h3>
+          <p class="slide-body">O avião desidrata seu corpo. Desidratação piora o jet lag. Beba 1 copo de água a cada hora de voo.</p>
+          <p class="slide-solution">Evite álcool e café no avião. Parecem ajudar, mas pioram tudo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Não cochile mais que 20 min</h3>
+          <p class="slide-body">A tentação de dormir ao chegar é enorme. Mas se dormir 3 horas, seu relógio interno desregula de vez.</p>
+          <p class="slide-solution">Power nap de 20 minutos máximo. Coloque alarme.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Melatonina no horário certo</h3>
+          <p class="slide-body">Tome 1-3mg de melatonina 30 minutos antes de dormir no horário do destino. Ajuda seu corpo a entender que é hora de descansar.</p>
+          <p class="slide-solution">Consulte um médico antes. Funciona melhor pra viagens pra leste (Europa, Ásia).</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Exercício leve no primeiro dia</h3>
+          <p class="slide-body">Uma caminhada de 30 minutos ao ar livre ajuda seu corpo a recalibrar. Combina sol + movimento + oxigênio.</p>
+          <p class="slide-solution">Nada de academia pesada. Caminhada leve pelo bairro do hotel é perfeito.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Comece a adaptar 3 dias antes</h3>
+          <p class="slide-body">Durma 1 hora mais cedo (ou mais tarde) por dia nos 3 dias antes da viagem. Seu corpo chega já semi-adaptado.</p>
+          <p class="slide-solution">Funciona especialmente bem pra diferenças de 5+ horas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Protocolo anti-jet lag</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Mude o relógio no avião</li>
+            <li><span class="num">2.</span> Busque luz solar ao chegar</li>
+            <li><span class="num">3.</span> Hidrate-se muito no voo</li>
+            <li><span class="num">4.</span> Power nap de 20 min máximo</li>
+            <li><span class="num">5.</span> Melatonina no horário certo</li>
+            <li><span class="num">6.</span> Exercício leve ao ar livre</li>
+            <li><span class="num">7.</span> Adapte o sono 3 dias antes</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128564;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> pra não perder 1 dia de viagem</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Jet lag pode roubar até 2 dias da sua viagem. Mas não precisa.</strong>
+
+Com as estratégias certas (luz solar, hidratação, melatonina), dá pra vencer o jet lag em menos de 24 horas.
+
+Nesse carrossel a gente montou um protocolo baseado em ciência pra você aproveitar cada minuto do destino.
+
+Salva e compartilha com quem vai cruzar fusos horários.
+
+<span class="hashtags">#JetLag #DicasDeViagem #ViagemInternacional #BemEstar #RottaCuradoria #ViajanteInteligente</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 34: Wi-Fi no Exterior                -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 34 - Wi-Fi no Exterior: Chip, eSIM ou Roaming?</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">HACKS</span>
+          <h3 class="slide-heading">Wi-Fi no exterior: <span class="gold">chip, eSIM</span> ou roaming?</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Comparação com preços reais pra você decidir</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Opção</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Chip físico internacional</h3>
+          <p class="slide-body">Compre no Brasil antes de viajar. Funciona na chegada, sem complicação. Preço: R$150-250 para 15 dias com dados ilimitados.</p>
+          <p class="slide-solution">Prós: simples, funciona em qualquer celular. Contras: precisa trocar o chip e guardar o original.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Opção</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">eSIM (chip virtual)</h3>
+          <p class="slide-body">Instala pelo celular, sem trocar nada. Ativa antes de embarcar. Preço: R$80-180 para 15 dias. Apps: Airalo, Holafly, Nomad.</p>
+          <p class="slide-solution">Prós: mais barato, prático, mantém seu chip BR. Contras: celular precisa ser compatível.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Opção</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Roaming da operadora</h3>
+          <p class="slide-body">Ativar o roaming da sua operadora (Vivo, Claro, Tim). Preço: R$30-50 por dia. Funciona sem fazer nada, mas sai caro.</p>
+          <p class="slide-solution">Prós: zero trabalho. Contras: caro demais pra viagens longas. Bom só pra emergência.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Opção</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Wi-Fi de hotel e cafés</h3>
+          <p class="slide-body">Grátis, mas instável e inseguro. Funciona pra emergência, mas não dá pra depender. Sem GPS, sem Uber, sem Maps na rua.</p>
+          <p class="slide-solution">Use como complemento, nunca como plano principal.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Opção</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Pocket Wi-Fi</h3>
+          <p class="slide-body">Aparelhinho que cria rede Wi-Fi. Conecta até 5 dispositivos. Aluguel: R$25-40 por dia. Bom pra famílias e grupos.</p>
+          <p class="slide-solution">Prós: vários aparelhos ao mesmo tempo. Contras: mais um aparelho pra carregar.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Comparativo</span>
+          <span class="slide-number">&#128202;</span>
+          <h3 class="slide-heading">15 dias na Europa (casal)</h3>
+          <p class="slide-body">eSIM: R$160-360 (2 chips) | Chip físico: R$300-500 | Roaming: R$900-1.500 | Pocket Wi-Fi: R$375-600</p>
+          <p class="slide-solution">Vencedor: eSIM. Mais barato, mais prático, mais moderno.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">&#128161;</span>
+          <h3 class="slide-heading">Confira compatibilidade</h3>
+          <p class="slide-body">Nem todo celular aceita eSIM. iPhones a partir do XS sim. Androids: depende do modelo. Confira antes de comprar.</p>
+          <p class="slide-solution">Vá em Configurações > Celular > Adicionar Plano. Se aparece a opção, seu celular aceita.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Qual escolher</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> eSIM — melhor custo-benefício</li>
+            <li><span class="num">2.</span> Chip físico — mais universal</li>
+            <li><span class="num">3.</span> Pocket Wi-Fi — bom pra grupos</li>
+            <li><span class="num">4.</span> Roaming — só pra emergência</li>
+            <li><span class="num">5.</span> Wi-Fi grátis — complemento</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128241;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem vai viajar</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Chip, eSIM, roaming ou pocket Wi-Fi? Qual a melhor opção pra sua viagem?</strong>
+
+A gente comparou todas as opções com preços reais pra 15 dias na Europa. Spoiler: eSIM ganha de lavada.
+
+Nesse carrossel você descobre qual funciona melhor pro seu caso.
+
+Salva e manda pra quem tá viajando em breve.
+
+<span class="hashtags">#InternetNoExterior #eSIM #DicasDeViagem #ChipInternacional #RottaCuradoria #WiFiViagem</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 35: Nova York em 5 Dias              -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 35 - Nova York em 5 Dias: Roteiro Real</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">DESTINO</span>
+          <h3 class="slide-heading">Nova York em <span class="gold">5 dias</span>: roteiro real</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Dia a dia, sem correria, sem perder nada</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Roteiro</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Dia 1 — Manhattan clássico</h3>
+          <p class="slide-body">Times Square, Broadway, Central Park, Top of the Rock ao entardecer. Jantar no Hell's Kitchen.</p>
+          <p class="slide-solution">Compre ingresso do Top of the Rock pra 17h. O pôr do sol de lá é imbatível.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Roteiro</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Dia 2 — Downtown + Memorial</h3>
+          <p class="slide-body">Estátua da Liberdade pela manhã, Wall Street, 9/11 Memorial, Oculus, Battery Park. Brooklyn Bridge ao entardecer.</p>
+          <p class="slide-solution">Reserve o ferry pra Liberty Island com antecedência. Esgota rápido.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Roteiro</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Dia 3 — Museus + Upper West</h3>
+          <p class="slide-body">MET (Metropolitan Museum of Art) pela manhã. Almoço no Central Park. American Museum of Natural History à tarde.</p>
+          <p class="slide-solution">O MET vale pelo menos 3 horas. Não tente ver tudo — escolha as alas que mais te interessam.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Roteiro</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Dia 4 — Brooklyn + DUMBO</h3>
+          <p class="slide-body">Café da manhã no Brooklyn, DUMBO com vista pro skyline, Williamsburg pra almoço, volta pela ponte de Brooklyn a pé.</p>
+          <p class="slide-solution">DUMBO tem a melhor vista de Manhattan. Vá cedo pra pegar sem multidão.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Roteiro</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Dia 5 — High Line + Chelsea + Compras</h3>
+          <p class="slide-body">High Line Park pela manhã, Chelsea Market pro almoço, SoHo e 5th Avenue pra compras. Jantar de despedida no West Village.</p>
+          <p class="slide-solution">O High Line é um parque suspenso sobre trilhos antigos. Gratuito e imperdível.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">&#128176;</span>
+          <h3 class="slide-heading">Quanto levar</h3>
+          <p class="slide-body">Casal, 5 dias: R$18.000-28.000 total (aéreo + hotel 3-4* + alimentação + passeios + transporte). MetroCard ilimitada 7 dias: US$34.</p>
+          <p class="slide-solution">Compre o CityPASS se for visitar 5+ atrações. Economiza até 40%.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">&#127828;</span>
+          <h3 class="slide-heading">Onde comer bem e barato</h3>
+          <p class="slide-body">Pizza no Joe's, bagel no Russ & Daughters, burger no Shake Shack, ramen no Ippudo. Comida boa em NY não precisa ser cara.</p>
+          <p class="slide-solution">Almoce casual e jante num restaurante legal. Equilibre o orçamento.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">5 dias em NY</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Manhattan + Central Park + Top of the Rock</li>
+            <li><span class="num">2.</span> Liberdade + 9/11 + Brooklyn Bridge</li>
+            <li><span class="num">3.</span> MET + Natural History Museum</li>
+            <li><span class="num">4.</span> Brooklyn + DUMBO + Williamsburg</li>
+            <li><span class="num">5.</span> High Line + Chelsea + Compras</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127961;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem sonha com NY</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Nova York em 5 dias, dia a dia, sem correria e sem perder nada.</strong>
+
+De Manhattan ao Brooklyn, do MET ao High Line, a gente montou o roteiro perfeito pra quem quer viver NY de verdade.
+
+Com dicas de onde comer, quanto levar e o que reservar antes.
+
+Salva esse roteiro e manda pra quem tá planejando NY.
+
+<span class="hashtags">#NovaYork #NYC #RoteiroNY #ViagemPraNovaYork #DicasDeViagem #RottaCuradoria #Manhattan</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 36: Foz do Iguaçu                    -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 36 - Foz do Iguaçu: Lado BR vs Lado AR</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">DESTINO</span>
+          <h3 class="slide-heading">Foz do Iguaçu: <span class="gold">lado BR</span> vs <span class="gold">lado AR</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Qual visitar? Ou os dois? A gente te conta</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Lado</span>
+          <span class="slide-number">&#127463;&#127479;</span>
+          <h3 class="slide-heading">Lado brasileiro: panorâmica</h3>
+          <p class="slide-body">Vista ampla e cinematográfica das cataratas. Uma passarela de 1,2km te leva até a Garganta do Diabo. Você vê o conjunto completo.</p>
+          <p class="slide-solution">Melhor pra fotos de paisagem e pra entender a grandiosidade das quedas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Lado</span>
+          <span class="slide-number">&#127462;&#127479;</span>
+          <h3 class="slide-heading">Lado argentino: imersão</h3>
+          <p class="slide-body">Passarelas sobre as quedas, trilhas dentro da mata, passeios de barco que te colocam dentro da cachoeira. Experiência visceral.</p>
+          <p class="slide-solution">Separe o dia inteiro. São 3-4 horas mínimas pra aproveitar tudo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Comparativo</span>
+          <span class="slide-number">&#128176;</span>
+          <h3 class="slide-heading">Custos comparados</h3>
+          <p class="slide-body">Lado BR: entrada ~R$90. Lado AR: entrada ~R$60 (pesos argentinos, câmbio favorável). Barco Macuco (BR): ~R$250. Gran Aventura (AR): ~R$80.</p>
+          <p class="slide-solution">O lado argentino é mais barato pelo câmbio e oferece mais trilhas inclusas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">&#128205;</span>
+          <h3 class="slide-heading">Como cruzar a fronteira</h3>
+          <p class="slide-body">Leve RG ou passaporte. O ônibus da fronteira custa pouco e faz o trajeto em 30 min. Também pode ir de taxi ou transfer.</p>
+          <p class="slide-solution">Brasileiros não precisam de visto. Só documento com foto e boa vontade.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">&#127775;</span>
+          <h3 class="slide-heading">O que mais fazer em Foz</h3>
+          <p class="slide-body">Itaipu (maior hidrelétrica do mundo), Marco das 3 Fronteiras, Parque das Aves, Duty Free em Ciudad del Este (Paraguai).</p>
+          <p class="slide-solution">3 a 4 dias é o tempo ideal. Dá pra conhecer tudo sem correria.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">&#9728;</span>
+          <h3 class="slide-heading">Melhor época</h3>
+          <p class="slide-body">Agosto a outubro: menos chuva, cataratas com bom volume. Novembro a março: mais volume de água, mas chuvas fortes podem fechar trilhas.</p>
+          <p class="slide-solution">Vá cedo pela manhã pro lado argentino. Menos gente e melhor luz pra fotos.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">BR vs AR</h3>
+          <ol class="summary-list">
+            <li><span class="num">BR</span> Vista panorâmica, fotos incríveis</li>
+            <li><span class="num">AR</span> Imersão total, trilhas e barco</li>
+            <li><span class="num">$</span> Lado AR mais barato pelo câmbio</li>
+            <li><span class="num">&#128205;</span> Cruzar é fácil, só RG</li>
+            <li><span class="num">&#9733;</span> Ideal: visite os dois lados</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127754;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem quer conhecer Foz</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Foz do Iguaçu: lado brasileiro ou argentino? A resposta certa é OS DOIS.</strong>
+
+O lado BR te dá a vista panorâmica perfeita. O lado AR te coloca dentro das cataratas. São experiências completamente diferentes.
+
+Nesse carrossel a gente compara tudo: preços, experiência, como cruzar e o que mais fazer.
+
+Salva e manda pra quem tá planejando Foz.
+
+<span class="hashtags">#FozDoIguacu #CataratasDoIguacu #DestinoNacional #ViagemPeloBrasil #RottaCuradoria #Argentina</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 37: Rússia Desmistificada            -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 37 - Rússia: Desmistificando o Destino</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">DESTINO</span>
+          <h3 class="slide-heading">Rússia: <span class="gold">desmistificando</span> o destino</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">É seguro? Precisa de visto? O que esperar?</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mito vs Realidade</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">É perigoso? Não.</h3>
+          <p class="slide-body">Moscou e São Petersburgo são cidades turísticas com infraestrutura moderna. A segurança nas áreas turísticas é alta.</p>
+          <p class="slide-solution">Use o mesmo bom senso de qualquer grande cidade. Nada diferente de Paris ou NY.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mito vs Realidade</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Precisa de visto?</h3>
+          <p class="slide-body">Brasileiros precisam de visto, mas o processo ficou mais simples com o e-visa. Custa cerca de US$40 e sai em poucos dias.</p>
+          <p class="slide-solution">Solicite pelo site oficial com 30 dias de antecedência. O processo é online.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mito vs Realidade</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Ninguém fala inglês?</h3>
+          <p class="slide-body">Nas áreas turísticas e hotéis, muitos falam inglês. Fora delas, o Google Translate com câmera resolve 90% dos problemas.</p>
+          <p class="slide-solution">Baixe o idioma russo offline no Google Translate. É seu melhor amigo lá.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mito vs Realidade</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">É caro? Surpreendentemente não.</h3>
+          <p class="slide-body">Hotel 4 estrelas: R$250-400/noite. Refeição em restaurante bom: R$50-80. Metrô: R$3. A Rússia é mais barata que a Europa Ocidental.</p>
+          <p class="slide-solution">O metrô de Moscou é uma obra de arte. Estações parecem museus. E custa quase nada.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">O que ver</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Moscou: o essencial</h3>
+          <p class="slide-body">Praça Vermelha, Kremlin, Catedral de São Basílio, Galeria Tretyakov, GUM (shopping histórico) e o metrô artístico.</p>
+          <p class="slide-solution">Reserve 3 dias mínimo pra Moscou. A cidade é imensa e cheia de camadas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">O que ver</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">São Petersburgo: a joia</h3>
+          <p class="slide-body">Hermitage (um dos maiores museus do mundo), Catedral de Santo Isaac, Peterhof, canais e as noites brancas no verão.</p>
+          <p class="slide-solution">Visite de maio a julho pras noites brancas — o sol praticamente não se põe.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Transporte entre cidades</h3>
+          <p class="slide-body">O trem Sapsan liga Moscou a São Petersburgo em 4 horas. Confortável, pontual e com preços a partir de R$120.</p>
+          <p class="slide-solution">O trem noturno também é uma experiência única. Dorme em Moscou, acorda em São Petersburgo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Rússia na prática</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Segura nas áreas turísticas</li>
+            <li><span class="num">2.</span> Visto eletrônico simples</li>
+            <li><span class="num">3.</span> Inglês limitado, mas dá pra virar</li>
+            <li><span class="num">4.</span> Mais barata que Europa Ocidental</li>
+            <li><span class="num">5.</span> Moscou + São Petersburgo = essencial</li>
+            <li><span class="num">6.</span> Trem rápido liga as duas cidades</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127963;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem tem curiosidade sobre a Rússia</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>A Rússia é um dos destinos mais subestimados do mundo.</strong>
+
+É segura? Precisa de visto? É cara? Nesse carrossel a gente responde tudo e mostra por que Moscou e São Petersburgo merecem estar no seu radar.
+
+Um destino que surpreende quem vai de mente aberta.
+
+Salva e manda pra quem gosta de destinos fora do óbvio.
+
+<span class="hashtags">#Russia #Moscou #SaoPetersburgo #DestinosDiferentes #ViagemInternacional #RottaCuradoria</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 38: Buenos Aires 48 Horas            -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 38 - Buenos Aires: 48 Horas Perfeitas</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">DESTINO</span>
+          <h3 class="slide-heading">Buenos Aires: <span class="gold">48 horas</span> perfeitas</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">O roteiro ideal pra um fim de semana na capital argentina</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dia 1 — Manhã</span>
+          <span class="slide-number">&#9728;</span>
+          <h3 class="slide-heading">Recoleta + café portenho</h3>
+          <p class="slide-body">Café da manhã na Recoleta, Cemitério da Recoleta (túmulo da Evita), Floralis Genérica e Museu de Belas Artes (gratuito).</p>
+          <p class="slide-solution">O cemitério é uma cidade em miniatura. Reserve 1 hora pra explorar com calma.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dia 1 — Tarde</span>
+          <span class="slide-number">&#127749;</span>
+          <h3 class="slide-heading">San Telmo + antigüedades</h3>
+          <p class="slide-body">Almoço no Mercado de San Telmo, feira de antigüedades (domingos), tango na rua e livrarias charmosas.</p>
+          <p class="slide-solution">Se for domingo, a feira de San Telmo é imperdível. Vai da Plaza Dorrego até 10 quadras.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dia 1 — Noite</span>
+          <span class="slide-number">&#127769;</span>
+          <h3 class="slide-heading">Show de tango + parrilla</h3>
+          <p class="slide-body">Jantar numa parrilla clássica (Don Julio, La Cabrera ou El Pobre Luis). Depois, show de tango no Café de los Angelitos.</p>
+          <p class="slide-solution">Reserve o jantar com antecedência. As melhores parrillas lotam toda noite.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dia 2 — Manhã</span>
+          <span class="slide-number">&#127752;</span>
+          <h3 class="slide-heading">La Boca + Caminito</h3>
+          <p class="slide-body">Casas coloridas, arte urbana, estádio do Boca Juniors (La Bombonera). Fotos icônicas e muita energia portenha.</p>
+          <p class="slide-solution">Vá pela manhã cedo. A tarde lota de turistas. E não se afaste do circuito turístico.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dia 2 — Tarde</span>
+          <span class="slide-number">&#127795;</span>
+          <h3 class="slide-heading">Palermo + brunch</h3>
+          <p class="slide-body">Palermo Soho pra compras, cafés instagramáveis, street art e brunch tardio. Palermo Hollywood pra bares e restaurantes modernos.</p>
+          <p class="slide-solution">Palermo é o bairro mais cool de BA. Onde os portenhos realmente vivem.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dia 2 — Noite</span>
+          <span class="slide-number">&#127864;</span>
+          <h3 class="slide-heading">Vinho argentino + despedida</h3>
+          <p class="slide-body">Wine bar em Palermo (Pain et Vin ou Aldo's). Prove Malbec, Torrontés e Bonarda. O vinho argentino é barato e espetacular.</p>
+          <p class="slide-solution">Uma garrafa de Malbec excelente custa menos de R$40 em BA. Aproveite.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Budget</span>
+          <span class="slide-number">&#128176;</span>
+          <h3 class="slide-heading">Quanto levar (casal)</h3>
+          <p class="slide-body">Aéreo (saindo de SP): R$1.500-2.500. Hotel 4*: R$300-500/noite. Alimentação: R$200-400/dia. Total 48h: R$3.000-5.500.</p>
+          <p class="slide-solution">O câmbio favorável faz BA ser o melhor custo-benefício internacional pro brasileiro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">48h em BA</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Recoleta + café portenho</li>
+            <li><span class="num">2.</span> San Telmo + feira</li>
+            <li><span class="num">3.</span> Parrilla + show de tango</li>
+            <li><span class="num">4.</span> La Boca + Caminito</li>
+            <li><span class="num">5.</span> Palermo + brunch + compras</li>
+            <li><span class="num">6.</span> Wine bar + Malbec</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#129383;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem quer um fim de semana em BA</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Buenos Aires em 48 horas: o roteiro perfeito pra um fim de semana inesquecível.</strong>
+
+Tango, parrilla, Malbec, Palermo, San Telmo, La Boca... tudo isso cabe em 2 dias. E pelo melhor custo-benefício internacional pro brasileiro.
+
+Salva e manda pra quem tá precisando de uma escapada.
+
+<span class="hashtags">#BuenosAires #Argentina #FimDeSemanaBA #ViagemRápida #RottaCuradoria #Tango #Malbec</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 39: Suíça Sem Falir                  -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 39 - Suíça Sem Falir: É Possível?</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">DESTINO</span>
+          <h3 class="slide-heading">Suíça sem falir: <span class="gold">é possível?</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">7 truques pra conhecer o país mais caro da Europa sem quebrar</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Swiss Travel Pass</h3>
+          <p class="slide-body">Passe ilimitado de trem, ônibus e barco. Inclui entrada gratuita em 500+ museus. A partir de CHF 232 (3 dias).</p>
+          <p class="slide-solution">Se for usar trem 3+ vezes, o passe já se paga. É o melhor investimento na Suíça.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Supermercado é seu amigo</h3>
+          <p class="slide-body">Coop e Migros são supermercados com comida pronta excelente. Sanduíches, saladas e pratos quentes por CHF 8-15 (vs CHF 35-50 em restaurante).</p>
+          <p class="slide-solution">Almoce no supermercado e jante num restaurante. Economia de 50% na alimentação.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Hospede-se em cidades menores</h3>
+          <p class="slide-body">Interlaken, Lauterbrunnen, Thun custam menos que Zurique e Genebra. E a paisagem é infinitamente mais bonita.</p>
+          <p class="slide-solution">Com o Swiss Travel Pass, você se desloca fácil. A localização do hotel importa menos.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Natureza é grátis</h3>
+          <p class="slide-body">Trilhas, lagos, mirantes e paisagens alpinas não custam nada. A Suíça é o país onde as melhores atrações são de graça.</p>
+          <p class="slide-solution">Lago de Brienz, trilha do Oeschinensee, Lauterbrunnen Valley — tudo grátis e espetacular.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Água da torneira é potável</h3>
+          <p class="slide-body">A água da torneira na Suíça é pura e filtrada naturalmente pelos Alpes. Leve uma garrafa e nunca compre água engarrafada.</p>
+          <p class="slide-solution">Fontes públicas estão em toda parte. Até nas montanhas a água é bebível.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Viaje na shoulder season</h3>
+          <p class="slide-body">Setembro-outubro e abril-maio: preços menores, menos turistas e paisagens lindas (outono dourado ou primavera florida).</p>
+          <p class="slide-solution">Evite julho-agosto e dezembro-janeiro. Os preços explodem nessas épocas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Truque</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Compre chocolate no Denner</h3>
+          <p class="slide-body">Esqueça as lojas turísticas de chocolate. Denner e Aldi vendem Lindt e Cailler pela metade do preço. Mesmo chocolate, sem o markup turístico.</p>
+          <p class="slide-solution">Leve uma mala extra só pro chocolate. Sério.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Suíça inteligente</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Swiss Travel Pass = transporte ilimitado</li>
+            <li><span class="num">2.</span> Supermercado pra almoço</li>
+            <li><span class="num">3.</span> Cidades menores = mais baratas</li>
+            <li><span class="num">4.</span> Natureza grátis e espetacular</li>
+            <li><span class="num">5.</span> Água da torneira = economia</li>
+            <li><span class="num">6.</span> Shoulder season = preços menores</li>
+            <li><span class="num">7.</span> Chocolate no Denner/Aldi</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127956;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem sonha com a Suíça</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Suíça é cara? Sim. Impossível? Não.</strong>
+
+Com os truques certos — Swiss Travel Pass, supermercado, cidades menores e shoulder season — dá pra conhecer os Alpes sem destruir seu orçamento.
+
+Nesse carrossel a gente prova que Suíça sem falir é totalmente possível.
+
+Salva e manda pra quem acha que não tem como.
+
+<span class="hashtags">#Suica #ViagemSuica #EuropaBarata #AlpesSuicos #DicasDeViagem #RottaCuradoria #Interlaken</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 40: 7 Viagens Que Mudam Sua Vida     -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 40 - 7 Viagens Que Mudam Sua Vida</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">LIFESTYLE</span>
+          <h3 class="slide-heading">7 viagens que <span class="gold">mudam sua vida</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Experiências transformadoras que vão além do turismo</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiência</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Caminho de Santiago</h3>
+          <p class="slide-body">Caminhar centenas de quilômetros pela Espanha, com a mochila nas costas e os pensamentos organizados. Não é religioso. É sobre você.</p>
+          <p class="slide-solution">Você não precisa fazer os 800km. Existem trechos de 7 a 10 dias pra iniciantes.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiência</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Safari na África</h3>
+          <p class="slide-body">Ver um leão a 10 metros do seu carro muda sua perspectiva sobre o mundo. A natureza no seu estado mais puro e poderoso.</p>
+          <p class="slide-solution">Tanzânia e Quênia são os destinos clássicos. A experiência fica na memória pra sempre.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiência</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Japão: outra dimensão</h3>
+          <p class="slide-body">Um país onde tradição milenar e tecnologia extrema coexistem. Cada refeição, templo e interação ensina algo novo.</p>
+          <p class="slide-solution">Passe pelo menos 10 dias. Tóquio + Kyoto + Osaka é o triângulo essencial.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiência</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Primeira viagem sozinho</h3>
+          <p class="slide-body">Descobrir que você é capaz de se virar em qualquer lugar do mundo. Confiança, independência e histórias que só você viveu.</p>
+          <p class="slide-solution">Comece por um destino que fale português ou espanhol. Lisboa, Buenos Aires ou Santiago.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiência</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Patagônia: silêncio imenso</h3>
+          <p class="slide-body">Geleiras, montanhas, lagos de azul impossível e nenhum som além do vento. A Patagônia te ensina a desacelerar.</p>
+          <p class="slide-solution">El Calafate + El Chaltén (Argentina) ou Torres del Paine (Chile). 5 a 7 dias ideais.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiência</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Voluntariado no exterior</h3>
+          <p class="slide-body">Doar seu tempo em outro país muda completamente como você vê o mundo. Escola na Índia, reserva na Costa Rica, construção no Nepal.</p>
+          <p class="slide-solution">Plataformas como Worldpackers conectam você a projetos reais no mundo inteiro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiência</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Viagem com os pais</h3>
+          <p class="slide-body">Levar seus pais pra um lugar que eles sempre sonharam. O presente mais valioso que existe. Memórias que ninguém tira.</p>
+          <p class="slide-solution">Não espere o momento perfeito. O momento é agora, enquanto dá tempo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">7 viagens transformadoras</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Caminho de Santiago</li>
+            <li><span class="num">2.</span> Safari na África</li>
+            <li><span class="num">3.</span> Japão</li>
+            <li><span class="num">4.</span> Primeira viagem solo</li>
+            <li><span class="num">5.</span> Patagônia</li>
+            <li><span class="num">6.</span> Voluntariado no exterior</li>
+            <li><span class="num">7.</span> Viagem com os pais</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127758;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem precisa viver isso</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Algumas viagens não apenas mudam seu Instagram. Mudam quem você é.</strong>
+
+Do Caminho de Santiago a um safari na África, da Patagônia a uma viagem com seus pais. Cada uma dessas experiências deixa uma marca permanente.
+
+Qual dessas já tá na sua lista?
+
+Salva e compartilha com quem precisa desse empurrão.
+
+<span class="hashtags">#ViagensTransformadoras #ExperienciasDeViagem #ViagemDosSONhos #RottaCuradoria #Lifestyle #ViajarMudaVida</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 41: Viagem Como Presente             -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 41 - Viagem Como Presente: 5 Ideias</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">LIFESTYLE</span>
+          <h3 class="slide-heading">Viagem como <span class="gold">presente</span>: 5 ideias</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">O melhor presente não cabe numa caixa. Cabe numa mala.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Ideia</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Fim de semana surpresa</h3>
+          <p class="slide-body">Monte um envelope com passagens e reserva de hotel. Entregue com a frase: "Faz sua mala, a gente viaja na sexta."</p>
+          <p class="slide-solution">Destinos próximos: Gramado, Campos do Jordão, Monte Verde. A partir de R$1.500 (casal).</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Ideia</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Experiência gastronômica</h3>
+          <p class="slide-body">Reserve um jantar num restaurante especial do destino. Um chef's table, uma degustação de vinhos, um cooking class local.</p>
+          <p class="slide-solution">É o tipo de presente que vira história pra contar. Memória afetiva pura.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Ideia</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Voucher de viagem</h3>
+          <p class="slide-body">Crie um voucher personalizado: "Este voucher vale uma viagem pra [destino] com data a combinar." Deixe a pessoa escolher quando ir.</p>
+          <p class="slide-solution">Imprima bonito ou faça um card digital. A apresentação faz parte do presente.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Ideia</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Presente pros pais</h3>
+          <p class="slide-body">Seus pais sempre sonharam com um destino? Junte os irmãos, façam uma vaquinha e deem a viagem de presente. O retorno emocional é incalculável.</p>
+          <p class="slide-solution">Faça um vídeo de revelação. Filme a reação deles. Vai ser o melhor vídeo da família.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Ideia</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Lua de mel de renovação</h3>
+          <p class="slide-body">Quem disse que lua de mel é só pra recém-casados? 10, 15, 20 anos juntos merecem uma viagem só de vocês dois.</p>
+          <p class="slide-solution">Maldivas, Santorini, Cartagena, Fernando de Noronha. Qualquer lugar é perfeito quando é a dois.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">&#127873;</span>
+          <h3 class="slide-heading">Como embalar a surpresa</h3>
+          <p class="slide-body">Coloque pistas na caixa: um mapa, moedas do destino, uma miniatura de avião, fotos do lugar. A revelação gradual é mágica.</p>
+          <p class="slide-solution">O unboxing da viagem pode ser tão emocionante quanto a viagem em si.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">&#128161;</span>
+          <h3 class="slide-heading">Datas pra presentear</h3>
+          <p class="slide-body">Aniversário, Dia das Mães/Pais, Natal, aniversário de casamento, formatura, aposentadoria. Qualquer data especial vira inesquecível com viagem.</p>
+          <p class="slide-solution">Não espere data. Surpreenda sem motivo. Os melhores presentes são inesperados.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">5 ideias de presente</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Fim de semana surpresa</li>
+            <li><span class="num">2.</span> Experiência gastronômica</li>
+            <li><span class="num">3.</span> Voucher personalizado</li>
+            <li><span class="num">4.</span> Viagem pros pais</li>
+            <li><span class="num">5.</span> Lua de mel de renovação</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127873;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem merece esse presente</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>O melhor presente não cabe numa caixa. Cabe numa mala.</strong>
+
+Viagem como presente é dar memórias, experiências e momentos que ninguém esquece. E não precisa ser caro pra ser inesquecível.
+
+Nesse carrossel a gente separou 5 ideias de como presentear com viagem — de um fim de semana surpresa a uma lua de mel de renovação.
+
+Salva e marca quem você quer presentear.
+
+<span class="hashtags">#PresenteDeViagem #Experiencias #IdeiasDePresente #ViagemRomantica #RottaCuradoria #PresenteEspecial</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 42: Antes e Depois de Viajar         -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 42 - Antes e Depois de Viajar: O Que Muda Em Você</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">LIFESTYLE</span>
+          <h3 class="slide-heading">Antes e depois de <span class="gold">viajar</span>: o que muda em você</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Viajar é o único investimento que te torna mais rico por dentro</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mudança</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Você tolera mais o diferente</h3>
+          <p class="slide-body">Antes: estranha costumes diferentes. Depois: entende que "diferente" não é "errado". Cada cultura tem sua lógica.</p>
+          <p class="slide-solution">A tolerância não se ensina. Se experimenta.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mudança</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Você vira melhor de resolver problemas</h3>
+          <p class="slide-body">Antes: pânico com imprevisto. Depois: voo cancelado? Hotel errado? Você já se virou em situações piores e sabe que dá.</p>
+          <p class="slide-solution">Cada perrengue vira habilidade. Cada problema vira história.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mudança</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Você valoriza mais o simples</h3>
+          <p class="slide-body">Antes: quer sempre o melhor restaurante, o melhor hotel. Depois: uma pizza na calçada de Roma com vinho barato é o paraíso.</p>
+          <p class="slide-solution">Luxo não é conforto. Luxo é liberdade de escolher como viver.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mudança</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Você conversa com qualquer pessoa</h3>
+          <p class="slide-body">Antes: timidez com desconhecidos. Depois: puxa assunto com qualquer um, em qualquer língua, com gestos se precisar.</p>
+          <p class="slide-solution">Viajar é um exercício constante de conexão humana.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mudança</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Você gasta menos com coisas e mais com experiências</h3>
+          <p class="slide-body">Antes: comprava objetos pra ser feliz. Depois: investe em viagens, jantares, momentos. O que fica na memória não tem preço de etiqueta.</p>
+          <p class="slide-solution">Ninguém se lembra do tênis que comprou. Todo mundo se lembra do pôr do sol em Santorini.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mudança</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Você se conhece melhor</h3>
+          <p class="slide-body">Antes: vive no piloto automático. Depois: sabe do que gosta, do que não gosta, o que te faz feliz de verdade e o que é só barulho.</p>
+          <p class="slide-solution">Viajar é o espelho mais honesto que existe.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mudança</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Você volta com mais gratidão</h3>
+          <p class="slide-body">Antes: reclama do cotidiano. Depois: agradece pelo que tem, pelo lugar onde mora, pelas pessoas ao redor. A viagem amplia a perspectiva.</p>
+          <p class="slide-solution">Sair do seu mundo é a melhor forma de enxergar ele com outros olhos.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">O que muda</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Mais tolerância</li>
+            <li><span class="num">2.</span> Mais resiliência</li>
+            <li><span class="num">3.</span> Mais simplicidade</li>
+            <li><span class="num">4.</span> Mais conexão</li>
+            <li><span class="num">5.</span> Mais experiências, menos coisas</li>
+            <li><span class="num">6.</span> Mais autoconhecimento</li>
+            <li><span class="num">7.</span> Mais gratidão</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128150;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem precisa ouvir isso</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>Você não volta o mesmo depois de viajar. E isso é o melhor que pode acontecer.</strong>
+
+Mais tolerante, mais resiliente, mais grato, mais conectado. Viajar muda quem você é por dentro — e esse é o verdadeiro retorno do investimento.
+
+Qual dessas mudanças você já sentiu?
+
+Salva e compartilha com quem precisa viajar.
+
+<span class="hashtags">#ViajarMudaVocê #CrescimentoPessoal #ViagemEVida #Lifestyle #RottaCuradoria #Autoconhecimento</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 43: 10 Frases de Viagem              -->
+  <!-- ============================================ -->
+  <section class="carousel-section">
+    <h2 class="carousel-section-title">Carrossel 43 - 10 Frases de Viagem Que São Verdade</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Pr&oacute;ximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <span class="slide-label">LIFESTYLE</span>
+          <h3 class="slide-heading">10 frases de viagem que <span class="gold">são verdade</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Por trás de cada frase, uma verdade que só quem viaja entende</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Frase</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">"Viajar é a única coisa que compramos que nos torna mais ricos"</h3>
+          <p class="slide-body">Cada viagem deposita memórias, aprendizados e perspectivas novas na sua conta emocional. E esse saldo nunca diminui.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Frase</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">"O mundo é um livro, e quem não viaja lê apenas uma página"</h3>
+          <p class="slide-body">Santo Agostinho sabia: ficar no mesmo lugar é viver na mesma história. Cada destino é um capítulo novo que amplia quem você é.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Frase</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">"Não precisamos de magia pra transformar o mundo. Nós já carregamos todo o poder dentro de nós"</h3>
+          <p class="slide-body">J.K. Rowling. Viajar revela esse poder. Quando você se vira em outro país, descobre que é mais capaz do que imaginava.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Frase</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">"As pessoas não fazem viagens, as viagens fazem as pessoas"</h3>
+          <p class="slide-body">John Steinbeck. Você planeja a viagem, mas é ela que te molda. Cada destino te devolve um pouco diferente — e melhor.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Frase</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">"Investir em viagens é investir em você mesmo"</h3>
+          <p class="slide-body">Nenhum curso, livro ou coach substitui a experiência de viver em outra cultura. A viagem é a educação mais completa que existe.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Frase</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">"A vida começa fora da sua zona de conforto"</h3>
+          <p class="slide-body">Neale Donald Walsch. E nada te tira mais da zona de conforto do que chegar num país onde você não fala o idioma, não conhece ninguém — e precisa se virar.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Frase</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">"Não adie viagens. Não adie viver."</h3>
+          <p class="slide-body">A gente sempre acha que vai ter tempo depois. Mas depois pode não existir. O momento de viajar é sempre agora.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">As 7 verdades</h3>
+          <ol class="summary-list">
+            <li><span class="num">1.</span> Viagem te torna mais rico</li>
+            <li><span class="num">2.</span> Cada destino é um capítulo</li>
+            <li><span class="num">3.</span> Você é mais capaz do que imagina</li>
+            <li><span class="num">4.</span> A viagem te molda</li>
+            <li><span class="num">5.</span> Melhor investimento em si</li>
+            <li><span class="num">6.</span> Fora da zona de conforto</li>
+            <li><span class="num">7.</span> Não adie. Viva agora.</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#129517;</span>
+          <h3 class="slide-heading"><span class="gold">Salve e compartilhe</span> com quem precisa dessa inspiração</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">&#129517; @rotta.curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+<strong>"Não adie viagens. Não adie viver."</strong>
+
+Frases bonitas sobre viagem existem milhares. Mas essas 7 são verdade comprovada por quem já viveu.
+
+Cada uma carrega uma lição que só quem viaja de verdade entende.
+
+Qual dessas frases mais te toca? Comenta aqui embaixo.
+
+Salva e manda pra quem precisa desse lembrete.
+
+<span class="hashtags">#FrasesDeViagem #Inspiração #ViajarÉViver #Lifestyle #RottaCuradoria #Motivação #ViagemDosSONhos</span>
+
+Curado por Marcelo & Alexandra &#129517;
+    </div>
+  </section>
+
+  <script>
+    document.querySelectorAll('.carousel-wrapper').forEach(function(wrapper) {
+      var track = wrapper.querySelector('.carousel-track');
+      var leftBtn = wrapper.querySelector('.nav-arrow.left');
+      var rightBtn = wrapper.querySelector('.nav-arrow.right');
+      var dotsContainer = wrapper.querySelector('.dot-indicators');
+      var slides = track.querySelectorAll('.slide');
+
+      for (var i = 0; i < slides.length; i++) {
+        var dot = document.createElement('span');
+        dot.className = 'dot';
+        if (i === 0) dot.className = 'dot active';
+        dotsContainer.appendChild(dot);
+      }
+
+      var dots = dotsContainer.querySelectorAll('.dot');
+
+      function getSlideWidth() {
+        var slide = slides[0];
+        var style = getComputedStyle(slide);
+        return slide.offsetWidth + parseInt(style.marginRight || 0) + 20;
+      }
+
+      function updateState() {
+        var scrollLeft = track.scrollLeft;
+        var slideWidth = getSlideWidth();
+        var currentIndex = Math.round(scrollLeft / slideWidth);
+
+        if (currentIndex < 0) currentIndex = 0;
+        if (currentIndex >= slides.length) currentIndex = slides.length - 1;
+
+        if (scrollLeft <= 10) {
+          leftBtn.classList.add('hidden');
+        } else {
+          leftBtn.classList.remove('hidden');
+        }
+        if (scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+          rightBtn.classList.add('hidden');
+        } else {
+          rightBtn.classList.remove('hidden');
+        }
+
+        for (var j = 0; j < dots.length; j++) {
+          if (j === currentIndex) {
+            dots[j].className = 'dot active';
+          } else {
+            dots[j].className = 'dot';
+          }
+        }
+      }
+
+      leftBtn.addEventListener('click', function() {
+        track.scrollBy({ left: -getSlideWidth(), behavior: 'smooth' });
+      });
+
+      rightBtn.addEventListener('click', function() {
+        track.scrollBy({ left: getSlideWidth(), behavior: 'smooth' });
+      });
+
+      track.addEventListener('scroll', updateState);
+      updateState();
+    });
+  </script>
+
+</body>
+</html>
