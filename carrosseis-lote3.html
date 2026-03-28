@@ -1,0 +1,3100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrosseis Lote 3 (44-63) - Rotta Curadoria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0E0E0E;
+      --card: #1A1A1A;
+      --gold: #C5A572;
+      --text: #F2EDE8;
+      --text-muted: #A09A93;
+      --card-border: #2A2A2A;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    h1.page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 16px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* Navigation Index */
+    .nav-index {
+      max-width: 800px;
+      margin: 0 auto 48px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 24px 32px;
+    }
+    .nav-index h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    .nav-index-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 6px;
+    }
+    .nav-index a {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 0;
+      display: flex;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .nav-index a:hover { color: var(--gold); }
+    .nav-index a .idx-num {
+      color: var(--gold);
+      font-weight: 700;
+      min-width: 28px;
+    }
+
+    .carousel-section {
+      margin-bottom: 64px;
+    }
+
+    .carousel-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--text);
+      margin-bottom: 20px;
+      padding-left: 8px;
+      border-left: 3px solid var(--gold);
+      font-weight: 600;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 10px 0 20px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .slide {
+      flex: 0 0 auto;
+      width: min(360px, 85vw);
+      aspect-ratio: 4 / 5;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 32px;
+      height: 32px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .slide::after {
+      content: '';
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-bottom: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .slide-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    .slide-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .slide-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+
+    .slide-heading .gold { color: var(--gold); }
+
+    .slide-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 90%;
+    }
+
+    .slide-solution {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--gold);
+      margin-top: 16px;
+      font-weight: 500;
+      padding-top: 14px;
+      border-top: 1px solid rgba(197, 165, 114, 0.2);
+    }
+
+    .slide-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    .slide.cover .slide-heading {
+      font-size: 1.7rem;
+      line-height: 1.25;
+    }
+
+    .slide.cta {
+      background: linear-gradient(135deg, #1A1A1A 0%, #222018 100%);
+    }
+    .slide.cta .slide-heading {
+      font-size: 1.55rem;
+      color: var(--gold);
+      line-height: 1.35;
+    }
+
+    .slide.signature {
+      background: linear-gradient(180deg, #1A1A1A 0%, #151510 100%);
+    }
+    .signature-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .signature-handle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    .signature-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 16px auto;
+      opacity: 0.6;
+    }
+    .signature-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .summary-list {
+      text-align: left;
+      width: 100%;
+      list-style: none;
+      padding: 0;
+    }
+    .summary-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(242, 237, 232, 0.06);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+    .summary-list li span.num {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.85rem;
+      min-width: 18px;
+    }
+
+    .checklist {
+      text-align: left;
+      width: 100%;
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 7px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.45;
+    }
+    .checklist li .checkbox {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      border: 2px solid var(--gold);
+      border-radius: 3px;
+      margin-top: 2px;
+    }
+    .checklist li.gold-item {
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .checklist li.gold-item .checkbox {
+      background: var(--gold);
+    }
+
+    .timeline-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 20px;
+      text-align: left;
+      width: 100%;
+    }
+
+    /* Comparison slides */
+    .compare-row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .compare-col {
+      flex: 1;
+      text-align: center;
+    }
+    .compare-col .col-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .compare-col .col-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .compare-col .col-detail {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Value slides */
+    .value-range {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 12px 0 6px;
+      line-height: 1.2;
+    }
+    .value-detail {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+    .value-category {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    /* Nav arrows */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .nav-arrow:hover {
+      background: rgba(197, 165, 114, 0.15);
+      transform: translateY(-50%) scale(1.05);
+    }
+    .nav-arrow.left { left: -8px; }
+    .nav-arrow.right { right: -8px; }
+    .nav-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    .dot-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--card-border);
+      transition: background 0.3s, width 0.3s;
+    }
+    .dot.active {
+      background: var(--gold);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    .icon-plane { font-size: 2.2rem; margin-bottom: 12px; }
+    .icon-check { font-size: 2.2rem; margin-bottom: 12px; }
+
+    .rotta-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .cover-deco {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 14px auto;
+    }
+
+    .slide-footer {
+      position: absolute;
+      bottom: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
+
+    /* Caption box */
+    .caption-box {
+      max-width: 700px;
+      margin: 16px auto 0;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      position: relative;
+    }
+    .caption-box .caption-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .caption-box .caption-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+    .caption-box .copy-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+      letter-spacing: 0.05em;
+    }
+    .copy-btn:hover {
+      background: rgba(197, 165, 114, 0.15);
+    }
+    .copy-btn.copied {
+      background: var(--gold);
+      color: var(--bg);
+    }
+
+    /* Slide counter */
+    .slide-counter {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      opacity: 0.5;
+      letter-spacing: 0.05em;
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 24px 12px; }
+      .slide { width: 85vw; padding: 32px 24px; }
+      .slide-heading { font-size: 1.3rem; }
+      .slide.cover .slide-heading { font-size: 1.45rem; }
+      .slide-number { font-size: 3.8rem; }
+      .nav-arrow { display: none; }
+      h1.page-title { font-size: 1.5rem; }
+      .nav-index { padding: 16px 20px; }
+      .nav-index-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">Carrosseis Instagram - Rotta Curadoria (Lote 3)</h1>
+
+  <!-- Navigation Index -->
+  <nav class="nav-index">
+    <h2>Indice dos Carrosseis (44-63)</h2>
+    <div class="nav-index-grid">
+      <a href="#c44"><span class="idx-num">44.</span> Melhores Destinos Pra Cada Mes do Ano</a>
+      <a href="#c45"><span class="idx-num">45.</span> Alta vs Baixa Temporada</a>
+      <a href="#c46"><span class="idx-num">46.</span> Copa do Mundo 2026: Guia do Viajante</a>
+      <a href="#c47"><span class="idx-num">47.</span> ETIAS 2026: Tudo Que Voce Precisa Saber</a>
+      <a href="#c48"><span class="idx-num">48.</span> Vinicolas: Mendoza vs Napa vs Toscana</a>
+      <a href="#c49"><span class="idx-num">49.</span> Praias No Brasil Que Parecem Caribe</a>
+      <a href="#c50"><span class="idx-num">50.</span> Road Trips Incriveis No Brasil</a>
+      <a href="#c51"><span class="idx-num">51.</span> Experiencias Radicais Pelo Mundo</a>
+      <a href="#c52"><span class="idx-num">52.</span> Spas e Wellness: 7 Destinos Pra Relaxar</a>
+      <a href="#c53"><span class="idx-num">53.</span> Etiqueta Em 10 Paises</a>
+      <a href="#c54"><span class="idx-num">54.</span> Festivais Pelo Mundo</a>
+      <a href="#c55"><span class="idx-num">55.</span> Museus Que Valem Mais Que Qualquer Parque</a>
+      <a href="#c56"><span class="idx-num">56.</span> Como Escolher Hotel Sem Errar</a>
+      <a href="#c57"><span class="idx-num">57.</span> Aluguel de Carro no Exterior</a>
+      <a href="#c58"><span class="idx-num">58.</span> Malas: Despachar ou Levar de Mao?</a>
+      <a href="#c59"><span class="idx-num">59.</span> Como Tirar Fotos Incriveis de Viagem</a>
+      <a href="#c60"><span class="idx-num">60.</span> Primeira Viagem Internacional</a>
+      <a href="#c61"><span class="idx-num">61.</span> Viagem Executiva: Maximize Seu Tempo</a>
+      <a href="#c62"><span class="idx-num">62.</span> Renovar o Casamento Em Uma Viagem</a>
+      <a href="#c63"><span class="idx-num">63.</span> Organizando a Viagem do Grupo</a>
+    </div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 44: Melhores Destinos Pra Cada Mes  -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c44">
+    <h2 class="carousel-section-title">Carrossel 44 — Melhores Destinos Pra Cada Mês do Ano</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <!-- Slide 1: Cover -->
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">O <span class="gold">melhor destino</span> pra cada mês do ano</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Viaje na época certa e aproveite o dobro</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+          <span class="slide-label">Janeiro &amp; Fevereiro</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Maldivas &amp; Tailândia</h3>
+          <p class="slide-body">Clima perfeito, seco e ensolarado. Alta temporada com praias paradisíacas e águas cristalinas.</p>
+          <p class="slide-solution">Dica: reserve com 4 meses de antecedência pra garantir os melhores resorts.</p>
+          <span class="slide-counter">1/6</span>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+          <span class="slide-label">Março &amp; Abril</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Japão &amp; Portugal</h3>
+          <p class="slide-body">Cerejeiras florindo no Japão. Primavera agradável em Portugal com preços mais acessíveis.</p>
+          <p class="slide-solution">Época perfeita pra quem quer clima ameno e paisagens inesquecíveis.</p>
+          <span class="slide-counter">2/6</span>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+          <span class="slide-label">Maio &amp; Junho</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Grécia &amp; Croácia</h3>
+          <p class="slide-body">Início do verão europeu. Praias lindas sem a lotação de julho e agosto. Preços mais honestos.</p>
+          <p class="slide-solution">Melhor custo-benefício do Mediterrâneo é nessa janela.</p>
+          <span class="slide-counter">3/6</span>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+          <span class="slide-label">Julho &amp; Agosto</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Canadá &amp; Islândia</h3>
+          <p class="slide-body">Verão no hemisfério norte: dias longos, natureza exuberante, trilhas acessíveis.</p>
+          <p class="slide-solution">Fuja do calor da Europa lotada e descubra paisagens que parecem de outro planeta.</p>
+          <span class="slide-counter">4/6</span>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+          <span class="slide-label">Setembro &amp; Outubro</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Itália &amp; Nova York</h3>
+          <p class="slide-body">Outono europeu com cores incríveis. Nova York com clima perfeito e Central Park dourado.</p>
+          <p class="slide-solution">Temporada de vinhos na Toscana e um dos melhores momentos pra Manhattan.</p>
+          <span class="slide-counter">5/6</span>
+        </div>
+
+        <!-- Slide 7 -->
+        <div class="slide">
+          <span class="slide-label">Novembro &amp; Dezembro</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Patagônia &amp; Dubai</h3>
+          <p class="slide-body">Verão na Patagônia com dias de 18 horas de sol. Dubai com clima agradável e festas de fim de ano luxuosas.</p>
+          <p class="slide-solution">Duas experiências completamente opostas, ambas inesquecíveis.</p>
+          <span class="slide-counter">6/6</span>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide cta">
+          <span class="icon-plane">&#128197;</span>
+          <h3 class="slide-heading">Comenta o <span class="gold">MÊS</span> que você quer viajar e a gente te ajuda</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Salve esse calendário e compartilhe com quem tá planejando.</p>
+        </div>
+
+        <!-- Slide 9: Signature -->
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <!-- Caption -->
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Você sabia que existe um destino PERFEITO pra cada mês do ano? 🗓️
+
+A maioria das pessoas erra na época — e paga mais caro, pega chuva ou enfrenta multidão.
+
+A gente montou esse calendário pra você nunca mais errar no timing da viagem:
+
+📍 Jan/Fev → Maldivas & Tailândia
+📍 Mar/Abr → Japão & Portugal
+📍 Mai/Jun → Grécia & Croácia
+📍 Jul/Ago → Canadá & Islândia
+📍 Set/Out → Itália & Nova York
+📍 Nov/Dez → Patagônia & Dubai
+
+Comenta o MÊS que você quer viajar que a gente te ajuda a montar o roteiro perfeito 👇
+
+Salve pra consultar depois e manda pra aquela pessoa que tá planejando ✈️
+
+#viagem #destinos #dicasdeviagem #roteirodeviagem #viajantes #europa #asia #caribe #viageminternacional #planejamentodeviagem
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 45: Alta vs Baixa Temporada         -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c45">
+    <h2 class="carousel-section-title">Carrossel 45 — Alta vs Baixa Temporada: Comparação Real</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <!-- Slide 1: Cover -->
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading"><span class="gold">Alta</span> vs <span class="gold">Baixa</span> Temporada: a diferença real</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Mesmo destino, experiências (e preços) completamente diferentes</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+          <span class="slide-label">Paris</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Paris: Jul vs Nov</h3>
+          <div class="compare-row">
+            <div class="compare-col">
+              <p class="col-title">Alta (Jul)</p>
+              <p class="col-value">R$7.500</p>
+              <p class="col-detail">Aéreo p/ pessoa. Filas de 2h no Louvre. 32°C sem ar.</p>
+            </div>
+            <div class="compare-col">
+              <p class="col-title">Baixa (Nov)</p>
+              <p class="col-value">R$4.200</p>
+              <p class="col-detail">Aéreo p/ pessoa. Louvre vazio. Outono dourado.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+          <span class="slide-label">Cancún</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Cancún: Dez vs Set</h3>
+          <div class="compare-row">
+            <div class="compare-col">
+              <p class="col-title">Alta (Dez)</p>
+              <p class="col-value">R$5.800</p>
+              <p class="col-detail">Resorts lotados. Praias cheias. Preço premium em tudo.</p>
+            </div>
+            <div class="compare-col">
+              <p class="col-title">Baixa (Set)</p>
+              <p class="col-value">R$2.900</p>
+              <p class="col-detail">Resort praticamente privado. Mesmo mar azul. Chuvas rápidas.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+          <span class="slide-label">Roma</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Roma: Ago vs Mar</h3>
+          <div class="compare-row">
+            <div class="compare-col">
+              <p class="col-title">Alta (Ago)</p>
+              <p class="col-value">R$6.200</p>
+              <p class="col-detail">40°C. 3h de fila no Vaticano. Restaurantes turísticos.</p>
+            </div>
+            <div class="compare-col">
+              <p class="col-title">Baixa (Mar)</p>
+              <p class="col-value">R$3.800</p>
+              <p class="col-detail">18°C perfeitos. Vaticano sem fila. Roma pra você.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide">
+          <span class="slide-label">Orlando</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Orlando: Jul vs Fev</h3>
+          <div class="compare-row">
+            <div class="compare-col">
+              <p class="col-title">Alta (Jul)</p>
+              <p class="col-value">R$6.000</p>
+              <p class="col-detail">Filas de 120 min nos parques. Calor de 38°C. Hotéis caros.</p>
+            </div>
+            <div class="compare-col">
+              <p class="col-title">Baixa (Fev)</p>
+              <p class="col-value">R$3.500</p>
+              <p class="col-detail">Filas de 20 min. Clima agradável. Hotéis com desconto.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 6 -->
+        <div class="slide">
+          <span class="slide-label">Resumo</span>
+          <h3 class="slide-heading">A matemática não mente</h3>
+          <p class="slide-body">Em média, viajar na baixa temporada custa 40-60% menos. Menos gente, mesma beleza, mais conforto.</p>
+          <p class="slide-solution">O segredo? Flexibilidade de datas. Quem pode escolher quando ir, economiza e aproveita mais.</p>
+        </div>
+
+        <!-- Slide 7: CTA -->
+        <div class="slide cta">
+          <span class="icon-plane">&#128176;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">TEMPORADA</span> que a gente te ajuda a encontrar a melhor data</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Viajar inteligente é viajar na hora certa.</p>
+        </div>
+
+        <!-- Slide 8: Signature -->
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Mesmo destino. Mesmo mar. Mesmo hotel. Mas o PREÇO? Completamente diferente 💰
+
+A gente comparou alta vs baixa temporada em 4 destinos populares e o resultado impressiona:
+
+🔹 Paris: economia de até 44%
+🔹 Cancún: economia de até 50%
+🔹 Roma: economia de até 39%
+🔹 Orlando: economia de até 42%
+
+E não é só sobre dinheiro — é sobre EXPERIÊNCIA. Menos fila, menos gente, mais conforto.
+
+Comenta TEMPORADA que a gente te ajuda a encontrar a melhor data pro seu destino 👇
+
+Salve e manda pra quem acha que só dá pra viajar em julho 😉
+
+#viagem #altatemporada #baixatemporada #dicasdeviagem #economizarnaviagem #viagembarata #europa #orlando #cancun #paris
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 46: Copa do Mundo 2026               -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c46">
+    <h2 class="carousel-section-title">Carrossel 46 — Copa do Mundo 2026: Guia do Viajante</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading"><span class="gold">Copa 2026</span> Guia completo pra quem vai assistir ao vivo</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">EUA, México e Canadá — tudo que você precisa saber</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Sedes</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">16 cidades-sede em 3 países</h3>
+          <p class="slide-body">EUA: Nova York, Los Angeles, Miami, Dallas, Houston, Atlanta, Seattle, Boston, Filadélfia, Kansas City, San Francisco. México: Cidade do México, Guadalajara, Monterrey. Canadá: Toronto, Vancouver.</p>
+          <p class="slide-solution">Escolha a cidade pela fase do Brasil e monte o roteiro a partir daí.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Ingressos</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Como garantir seu ingresso</h3>
+          <p class="slide-body">Vendas pelo site oficial da FIFA em fases. Primeira fase por sorteio. Depois, por ordem de compra.</p>
+          <p class="slide-solution">Cadastre-se no FIFA Ticket Portal com antecedência e fique atento às datas de cada fase.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Visto</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Documentação necessária</h3>
+          <p class="slide-body">EUA e Canadá: visto obrigatório. México: não precisa de visto pra brasileiros (até 180 dias).</p>
+          <p class="slide-solution">Agende seu visto americano o quanto antes — a demanda vai explodir nos meses antes da Copa.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Hospedagem</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Reserve agora ou pague o triplo</h3>
+          <p class="slide-body">Hotéis nas cidades-sede já estão com preços subindo. Quanto mais perto do evento, mais caro fica.</p>
+          <p class="slide-solution">Dica: fique em cidades vizinhas e use transporte público. Economia de até 60% em hospedagem.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Logística</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Como se deslocar entre jogos</h3>
+          <p class="slide-body">Voos internos nos EUA são frequentes e acessíveis se comprados com antecedência. Trens entre NY-Filadélfia-Boston funcionam bem.</p>
+          <p class="slide-solution">Monte roteiro com no máximo 2-3 cidades pra não passar a Copa dentro de avião.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Orçamento</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Quanto separar?</h3>
+          <p class="slide-body">Estimativa por pessoa (10 dias): passagem R$5-8 mil, hospedagem R$5-10 mil, ingressos R$1-5 mil, alimentação e transporte R$3-5 mil.</p>
+          <p class="slide-solution">Total estimado: R$14.000 a R$28.000 por pessoa. Comece a planejar agora.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#9917;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">COPA</span> que a gente te manda um checklist completo</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">A gente ajuda você a montar o roteiro perfeito pra Copa.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Copa do Mundo 2026 tá chegando e MUITA gente vai viajar sem planejamento ⚽
+
+EUA, México e Canadá vão receber 16 cidades-sede. E quem não se organizar AGORA vai pagar caro — literalmente.
+
+Nesse guia a gente cobriu tudo:
+
+📍 As 16 cidades-sede
+🎟️ Como garantir ingresso
+📄 Visto e documentação
+🏨 Hospedagem (reserve agora!)
+✈️ Logística entre jogos
+💰 Orçamento estimado
+
+Comenta COPA que a gente te manda o checklist completo pra planejar sua viagem 👇
+
+Salve e manda pro amigo que já tá sonhando com o Hexa 🇧🇷
+
+#copa2026 #copadomundo #fifaworldcup #viagem #eua #mexico #canada #viageminternacional #futebol #dicasdeviagem
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 47: ETIAS 2026                      -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c47">
+    <h2 class="carousel-section-title">Carrossel 47 — ETIAS 2026: Tudo Que Você Precisa Saber</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading"><span class="gold">ETIAS 2026</span> o que muda pra viajar pra Europa</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Passo a passo completo — salve antes de viajar</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">O que é</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">O que é o ETIAS?</h3>
+          <p class="slide-body">É uma autorização eletrônica de viagem obrigatória pra brasileiros que vão à Europa (Espaço Schengen). Não é visto — é mais simples e rápido.</p>
+          <p class="slide-solution">Sem o ETIAS, você NÃO embarca. Simples assim.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Quando</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Quando começa a valer?</h3>
+          <p class="slide-body">O sistema ETIAS está previsto para começar a funcionar em 2026. Haverá um período de transição inicial.</p>
+          <p class="slide-solution">Fique atento às datas oficiais no site etias.com e planeje com antecedência.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Como solicitar</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Como fazer o pedido</h3>
+          <p class="slide-body">100% online. Você preenche um formulário com dados pessoais, passaporte e informações da viagem. Leva cerca de 10 minutos.</p>
+          <p class="slide-solution">Tenha seu passaporte válido em mãos e um cartão de crédito/débito pra pagar a taxa.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Custo</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Quanto custa?</h3>
+          <p class="slide-body">A taxa prevista é de 7 euros (aproximadamente R$40). Menores de 18 e maiores de 70 são isentos.</p>
+          <p class="slide-solution">Válido por 3 anos ou até o passaporte expirar — o que vier primeiro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Prazo</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Quanto tempo demora?</h3>
+          <p class="slide-body">A maioria das aprovações sai em minutos. Em alguns casos pode levar até 72 horas. Raramente até 30 dias.</p>
+          <p class="slide-solution">Solicite com pelo menos 1 mês de antecedência da viagem pra ficar tranquilo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Países</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Onde o ETIAS vale?</h3>
+          <p class="slide-body">Todos os 30 países do Espaço Schengen: França, Itália, Espanha, Portugal, Alemanha, Grécia, Holanda e mais 23 países.</p>
+          <p class="slide-solution">Um ETIAS, 30 países. Uma vez aprovado, você circula livremente entre eles.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Atenção</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Erros comuns pra evitar</h3>
+          <p class="slide-body">Solicitar em sites falsos (use apenas o oficial). Passaporte vencido. Preencher dados errados. Esquecer de solicitar antes da viagem.</p>
+          <p class="slide-solution">Só use o site oficial: travel-europe.europa.eu/etias</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127466;&#127482;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">ETIAS</span> que a gente te manda o passo a passo detalhado</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Salve e compartilhe com quem tá planejando ir pra Europa.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Vai pra Europa em 2026? Então você PRECISA saber o que é o ETIAS 🇪🇺
+
+A partir de 2026, brasileiros vão precisar de uma autorização eletrônica pra entrar nos países do Espaço Schengen.
+
+Calma — NÃO é visto. É mais simples. Mas sem ele, você não embarca.
+
+Nesse carrossel a gente explicou tudo:
+
+✅ O que é
+✅ Quando começa
+✅ Como solicitar (10 min)
+✅ Quanto custa (7 euros)
+✅ Prazo de aprovação
+✅ Países incluídos
+✅ Erros pra evitar
+
+Comenta ETIAS que a gente te manda o passo a passo completo 👇
+
+#etias #europa #viagem #viageminternacional #dicasdeviagem #passaporte #schengen #viagemeuropa #planejamentodeviagem
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 48: Vinícolas Comparação             -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c48">
+    <h2 class="carousel-section-title">Carrossel 48 — Vinícolas: Mendoza vs Napa vs Toscana</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Vinícolas: <span class="gold">Mendoza</span> vs <span class="gold">Napa</span> vs <span class="gold">Toscana</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">3 experiências de vinho, 3 continentes, 1 comparação honesta</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mendoza</span>
+          <span class="slide-number">&#127479;&#127462;</span>
+          <h3 class="slide-heading">Mendoza, Argentina</h3>
+          <p class="slide-body">Malbec espetacular. Cordilheira dos Andes como cenário. Degustações acessíveis. Culinária incrível com asado.</p>
+          <p class="slide-solution">Custo médio: R$150-300/dia por pessoa. Melhor época: março a maio.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiência</span>
+          <h3 class="slide-heading">Mendoza: o que esperar</h3>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Degustações a partir de US$10</li>
+            <li><span class="checkbox"></span>Almoço com vista pros Andes</li>
+            <li><span class="checkbox"></span>Bike entre vinícolas</li>
+            <li><span class="checkbox"></span>Voo direto de SP (3h40)</li>
+            <li class="gold-item"><span class="checkbox"></span>Melhor custo-benefício dos 3</li>
+          </ul>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Napa Valley</span>
+          <span class="slide-number">&#127482;&#127480;</span>
+          <h3 class="slide-heading">Napa Valley, EUA</h3>
+          <p class="slide-body">Cabernet Sauvignon de classe mundial. Experiência premium e sofisticada. Restaurantes estrelados Michelin.</p>
+          <p class="slide-solution">Custo médio: R$500-1.000/dia por pessoa. Melhor época: agosto a outubro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiência</span>
+          <h3 class="slide-heading">Napa: o que esperar</h3>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Degustações a partir de US$50</li>
+            <li><span class="checkbox"></span>Passeio de balão sobre os vinhedos</li>
+            <li><span class="checkbox"></span>Napa Valley Wine Train</li>
+            <li><span class="checkbox"></span>Combine com San Francisco</li>
+            <li class="gold-item"><span class="checkbox"></span>Experiência mais luxuosa dos 3</li>
+          </ul>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Toscana</span>
+          <span class="slide-number">&#127470;&#127481;</span>
+          <h3 class="slide-heading">Toscana, Itália</h3>
+          <p class="slide-body">Chianti, Brunello, Super Toscanos. Colinas douradas, vilas medievais, gastronomia autêntica. A paisagem é o vinho.</p>
+          <p class="slide-solution">Custo médio: R$350-700/dia por pessoa. Melhor época: setembro a novembro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiência</span>
+          <h3 class="slide-heading">Toscana: o que esperar</h3>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Degustações a partir de €15</li>
+            <li><span class="checkbox"></span>Aulas de culinária italiana</li>
+            <li><span class="checkbox"></span>Road trip por vilas medievais</li>
+            <li><span class="checkbox"></span>Combine com Roma e Florença</li>
+            <li class="gold-item"><span class="checkbox"></span>Mais romântico e cultural dos 3</li>
+          </ul>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Comparativo</span>
+          <h3 class="slide-heading" style="margin-bottom: 20px;">Resumo rápido</h3>
+          <ol class="summary-list">
+            <li><span class="num">💰</span> Mais acessível: Mendoza</li>
+            <li><span class="num">💎</span> Mais luxuoso: Napa Valley</li>
+            <li><span class="num">❤️</span> Mais romântico: Toscana</li>
+            <li><span class="num">🍷</span> Melhor Malbec: Mendoza</li>
+            <li><span class="num">🍇</span> Melhor Cabernet: Napa</li>
+            <li><span class="num">🏛️</span> Mais cultural: Toscana</li>
+          </ol>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127863;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">VINHO</span> que a gente te ajuda a escolher o destino perfeito</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Cada um tem sua magia. Qual combina mais com você?</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Se você gosta de vinho, precisa conhecer PELO MENOS um desses 3 destinos 🍷
+
+A gente comparou as 3 maiores experiências de vinícolas do mundo:
+
+🇦🇷 Mendoza — Malbec com vista pros Andes
+🇺🇸 Napa Valley — luxo e Cabernet de classe mundial
+🇮🇹 Toscana — romance, cultura e Chianti
+
+Cada um tem sua personalidade. Qual combina mais com você?
+
+💰 Mais acessível → Mendoza
+💎 Mais premium → Napa
+❤️ Mais romântico → Toscana
+
+Comenta VINHO que a gente te ajuda a montar o roteiro perfeito 👇
+
+#vinicola #wine #mendoza #napavalley #toscana #enoturismo #viagem #roteirodeviagem #dicasdeviagem #viagemromantica
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 49: Praias Que Parecem Caribe        -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c49">
+    <h2 class="carousel-section-title">Carrossel 49 — Praias No Brasil Que Parecem Caribe</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">7 praias no Brasil que <span class="gold">parecem Caribe</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Sem passaporte, sem visto, sem dólar</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Alagoas</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Praia de São Miguel dos Milagres</h3>
+          <p class="slide-body">Piscinas naturais com água cristalina e mornas. Areia branca, coqueiros e pouquíssima gente. O Caribe escondido do Nordeste.</p>
+          <p class="slide-solution">Melhor época: outubro a março. Voo até Maceió + 2h de carro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Bahia</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Praia do Espelho</h3>
+          <p class="slide-body">Falésias coloridas, mar verde-esmeralda e areia branquinha. Uma das praias mais bonitas do Brasil, sem exagero.</p>
+          <p class="slide-solution">Melhor época: outubro a fevereiro. Acesso por Trancoso ou Arraial d'Ajuda.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Pernambuco</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Fernando de Noronha — Baía do Sancho</h3>
+          <p class="slide-body">Eleita melhor praia do mundo várias vezes. Água absurdamente azul. Tartarugas e golfinhos como vizinhos.</p>
+          <p class="slide-solution">Melhor época: agosto a novembro. Reserve hospedagem com muita antecedência.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Ceará</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Jericoacoara</h3>
+          <p class="slide-body">Lagoas de água doce cristalina, dunas, pôr do sol na Duna do Pôr do Sol. Vibe rústica e sofisticada ao mesmo tempo.</p>
+          <p class="slide-solution">Melhor época: julho a dezembro. Pousadas boutique incríveis.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Maranhão</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Lençóis Maranhenses</h3>
+          <p class="slide-body">Lagoas azuis entre dunas brancas até o horizonte. Parece outro planeta. Nada no mundo é parecido.</p>
+          <p class="slide-solution">Melhor época: junho a setembro (quando as lagoas estão cheias). Base em Barreirinhas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Rio Grande do Norte</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Praia de Pipa</h3>
+          <p class="slide-body">Falésias, golfinhos, piscinas naturais e vida noturna. Mistura perfeita de natureza e infraestrutura.</p>
+          <p class="slide-solution">Melhor época: setembro a fevereiro. 1h30 de Natal.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Paraíba</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Praia de Coqueirinho</h3>
+          <p class="slide-body">Enseada cercada por falésias com água verde-turquesa. Pouco conhecida e absurdamente bonita.</p>
+          <p class="slide-solution">Melhor época: outubro a março. 30 min de João Pessoa.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127754;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">PRAIA</span> que a gente te ajuda a montar o roteiro</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Pra que Caribe se o Brasil tem tudo isso?</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Quem disse que precisa sair do Brasil pra ver água cristalina? 🏖️
+
+A gente separou 7 praias brasileiras que parecem Caribe — sem passaporte, sem visto, sem dólar:
+
+1️⃣ São Miguel dos Milagres — AL
+2️⃣ Praia do Espelho — BA
+3️⃣ Baía do Sancho — PE (Noronha)
+4️⃣ Jericoacoara — CE
+5️⃣ Lençóis Maranhenses — MA
+6️⃣ Praia de Pipa — RN
+7️⃣ Coqueirinho — PB
+
+Cada uma com a melhor época pra ir e dicas de acesso.
+
+Comenta PRAIA que a gente te ajuda a montar o roteiro perfeito 👇
+
+Salve e manda pra quem precisa conhecer essas praias 🌊
+
+#praias #brasil #praiasdobrasil #nordeste #noronha #jericoacoara #viagem #feriasbrasileiras #dicasdeviagem #litoralnordestino
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 50: Road Trips Brasil                -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c50">
+    <h2 class="carousel-section-title">Carrossel 50 — Road Trips Incríveis No Brasil</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">5 <span class="gold">road trips</span> incríveis no Brasil</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Pega a estrada — a viagem é o destino</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Serra Gaúcha</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Rota da Uva e do Vinho — RS</h3>
+          <p class="slide-body">Bento Gonçalves, Garibaldi e Vale dos Vinhedos. Vinícolas, queijarias, paisagens de tirar o fôlego e comida colonial.</p>
+          <p class="slide-solution">Distância: ~120 km. Duração ideal: 3-4 dias. Melhor época: junho a agosto.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Chapada dos Veadeiros</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Alto Paraíso a São Jorge — GO</h3>
+          <p class="slide-body">Cachoeiras absurdas, trilhas no cerrado, céu estrelado como em nenhum outro lugar. Energia mística.</p>
+          <p class="slide-solution">Distância: ~230 km de Brasília. Duração ideal: 4-5 dias. Melhor época: maio a setembro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Costa Verde</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Rio a Paraty pela Rio-Santos — RJ/SP</h3>
+          <p class="slide-body">Estrada sinuosa entre Mata Atlântica e mar. Praias escondidas, ilhas, cachoeiras e o charme colonial de Paraty.</p>
+          <p class="slide-solution">Distância: ~260 km. Duração ideal: 3-4 dias. Melhor época: abril a outubro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Serra Catarinense</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Urubici a São Joaquim — SC</h3>
+          <p class="slide-body">Paisagens alpinas no Brasil. Cânions, geada, araucárias e a chance de ver neve. Vinícolas de altitude surpreendentes.</p>
+          <p class="slide-solution">Distância: ~90 km entre as cidades. Duração ideal: 3 dias. Melhor época: junho a agosto.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Rota Ecológica</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Maceió a Maragogi pela AL-101 — AL</h3>
+          <p class="slide-body">Estrada beira-mar com as praias mais bonitas do Nordeste. Piscinas naturais em cada parada. Coqueirais infinitos.</p>
+          <p class="slide-solution">Distância: ~130 km. Duração ideal: 3-4 dias. Melhor época: outubro a março.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dicas</span>
+          <h3 class="slide-heading" style="margin-bottom: 16px;">Road trip perfeita</h3>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Revise o carro antes de sair</li>
+            <li><span class="checkbox"></span>Baixe mapas offline</li>
+            <li><span class="checkbox"></span>Reserve hospedagem com antecedência</li>
+            <li><span class="checkbox"></span>Monte uma playlist épica</li>
+            <li class="gold-item"><span class="checkbox"></span>Pare em tudo que parecer bonito</li>
+          </ul>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128663;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">ESTRADA</span> que a gente te manda dicas extras</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">O melhor da viagem tá no caminho.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Às vezes a melhor viagem é pegar a estrada e ir sem pressa 🚗
+
+A gente separou 5 road trips incríveis no Brasil que vão muito além do destino final:
+
+🍷 Rota da Uva e do Vinho — RS
+🌿 Chapada dos Veadeiros — GO
+🏖️ Costa Verde (Rio a Paraty) — RJ/SP
+❄️ Serra Catarinense — SC
+🌴 Rota Ecológica (Maceió a Maragogi) — AL
+
+Cada uma com distância, duração ideal e melhor época.
+
+Comenta ESTRADA que a gente te manda mais dicas de cada rota 👇
+
+Salve e manda pra quem ama uma road trip 🛣️
+
+#roadtrip #brasil #viagem #estrada #viagemnacional #serragaucha #chapadaveadeiros #paraty #dicasdeviagem #aventura
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 51: Experiências Radicais            -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c51">
+    <h2 class="carousel-section-title">Carrossel 51 — Experiências Radicais Pelo Mundo</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">7 experiências <span class="gold">radicais</span> pelo mundo</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Pra quem quer sentir o coração acelerar</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Nova Zelândia</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Bungee jump em Queenstown</h3>
+          <p class="slide-body">A capital mundial da aventura. Salto de 134 metros sobre o rio Nevis. A paisagem é tão absurda quanto a adrenalina.</p>
+          <p class="slide-solution">A partir de NZ$275 (~R$900). Mínimo 13 anos.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Suíça</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Paraquedismo sobre os Alpes</h3>
+          <p class="slide-body">Saltar de 4.000 metros com os Alpes suíços como cenário. 60 segundos de queda livre com vista pra montanhas nevadas.</p>
+          <p class="slide-solution">A partir de CHF 430 (~R$2.800). Em Interlaken.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Argentina</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Trekking no Glaciar Perito Moreno</h3>
+          <p class="slide-body">Caminhar SOBRE um glaciar milenar na Patagônia. Gelo azul, crevasses e o som do gelo se partindo ao vivo.</p>
+          <p class="slide-solution">A partir de US$180 (~R$1.000). El Calafate, Argentina.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Noruega</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Trilha até Trolltunga</h3>
+          <p class="slide-body">27 km de trilha até uma rocha suspensa a 700 metros de altura sobre um lago. A foto mais épica que você vai tirar na vida.</p>
+          <p class="slide-solution">Trilha de 10-12 horas. Gratuita. Nível: exigente. Jun a Set.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dubai</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Skydive sobre a Palm Jumeirah</h3>
+          <p class="slide-body">Queda livre com vista aérea da Palm, Burj Al Arab e o skyline de Dubai. Uma das experiências mais instagramáveis do mundo.</p>
+          <p class="slide-solution">A partir de AED 2.099 (~R$3.200). Reserva obrigatória.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Costa Rica</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Tirolesa sobre a floresta tropical</h3>
+          <p class="slide-body">Zip-line de 750 metros sobre a copa das árvores em Monteverde. Tucanos, macacos e borboletas no caminho.</p>
+          <p class="slide-solution">A partir de US$55 (~R$310). Seguro e acessível pra toda família.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">África do Sul</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Mergulho com tubarões brancos</h3>
+          <p class="slide-body">Cage diving em Gansbaai, perto da Cidade do Cabo. Cara a cara com o maior predador dos oceanos. Gaiola incluída.</p>
+          <p class="slide-solution">A partir de ZAR 2.500 (~R$750). Não precisa de experiência de mergulho.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#9889;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">RADICAL</span> que a gente te ajuda a planejar</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Qual dessas te deu mais vontade (ou mais medo)?</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Viagem não precisa ser só museu e restaurante ⚡
+
+Tem gente que viaja pra SENTIR. E essas 7 experiências vão fazer seu coração acelerar:
+
+🪂 Bungee jump em Queenstown — Nova Zelândia
+🏔️ Paraquedismo sobre os Alpes — Suíça
+🧊 Trekking no Perito Moreno — Argentina
+🪨 Trilha Trolltunga — Noruega
+🌴 Skydive sobre a Palm — Dubai
+🌿 Tirolesa na floresta — Costa Rica
+🦈 Mergulho com tubarões — África do Sul
+
+Comenta RADICAL e diz qual te deu mais vontade (ou mais medo) 👇
+
+Salve pra quando a adrenalina bater 🔥
+
+#aventura #experienciasradicais #viagem #paraquedismo #bungeejump #trekking #dicasdeviagem #viagempelomundo #adrenalina
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 52: Spas e Wellness                  -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c52">
+    <h2 class="carousel-section-title">Carrossel 52 — Spas e Wellness: 7 Destinos Pra Relaxar</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">7 destinos de <span class="gold">spa e wellness</span> pra recarregar</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Porque às vezes a melhor viagem é desacelerar</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Islândia</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Blue Lagoon, Islândia</h3>
+          <p class="slide-body">Águas termais a 38°C em meio a paisagem vulcânica. Máscaras de sílica, sauna, e o bar dentro da piscina.</p>
+          <p class="slide-solution">A partir de €75. Experiência premium com champagne: €350. Reserve com semanas de antecedência.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Bali</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Ubud, Bali</h3>
+          <p class="slide-body">Capital mundial do wellness. Retiros de yoga, massagens balinesas, banhos de flores, meditação em templos milenares.</p>
+          <p class="slide-solution">Tratamentos a partir de US$20. Retiros de 3-7 dias a partir de US$300.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Budapeste</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Termas de Budapeste, Hungria</h3>
+          <p class="slide-body">A cidade dos banhos termais. Széchenyi e Gellért: arquitetura palaciana com águas medicinais. Uma tradição de séculos.</p>
+          <p class="slide-solution">Entrada a partir de €25. Combine com a noite boêmia de Budapeste.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Caldas Novas</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Caldas Novas, Goiás</h3>
+          <p class="slide-body">Maior estância hidrotermal do mundo. Águas naturalmente quentes, resorts all-inclusive e acessível sem passaporte.</p>
+          <p class="slide-solution">Resorts a partir de R$400/noite. 2h de Goiânia. Perfeito pra casais e famílias.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Japão</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Onsen em Hakone, Japão</h3>
+          <p class="slide-body">Banhos termais tradicionais japoneses com vista pro Monte Fuji. Ryokans (pousadas) com refeições kaiseki. Zen puro.</p>
+          <p class="slide-solution">Ryokans a partir de ¥25.000/noite (~R$900). 1h30 de Tóquio.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Tulum</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Tulum, México</h3>
+          <p class="slide-body">Cenotes sagrados, temazcal (sauna maia), yoga na selva e resorts eco-luxo. Espiritualidade e sofisticação.</p>
+          <p class="slide-solution">Tratamentos a partir de US$80. Cenotes a partir de US$15. Combine com praias caribenhas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Suíça</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Therme Vals, Suíça</h3>
+          <p class="slide-body">Spa minimalista em pedra e água termal nos Alpes. Arquitetura de Peter Zumthor. Experiência sensorial única no mundo.</p>
+          <p class="slide-solution">A partir de CHF 65 (~R$420). Hotel com spa a partir de CHF 350/noite.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128518;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">RELAXAR</span> que a gente te ajuda a montar sua viagem de descanso</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Você merece uma viagem onde o objetivo é não fazer nada.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">E se a sua próxima viagem fosse pra DESCANSAR de verdade? 🧖‍♀️
+
+Nem toda viagem precisa de roteiro apertado. Às vezes o melhor plano é não ter plano — só relaxar.
+
+7 destinos de spa e wellness que vão recarregar sua energia:
+
+🇮🇸 Blue Lagoon — Islândia
+🇮🇩 Ubud — Bali
+🇭🇺 Termas de Budapeste — Hungria
+🇧🇷 Caldas Novas — Goiás
+🇯🇵 Onsen em Hakone — Japão
+🇲🇽 Tulum — México
+🇨🇭 Therme Vals — Suíça
+
+Comenta RELAXAR que a gente te ajuda a montar a viagem perfeita de descanso 👇
+
+Salve pra quando o estresse apertar 💆
+
+#wellness #spa #viagem #termas #yoga #bali #islandia #tulum #relax #dicasdeviagem #viagemdedescanso
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 53: Etiqueta Em 10 Países            -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c53">
+    <h2 class="carousel-section-title">Carrossel 53 — Etiqueta Em 10 Países: Não Pague Mico</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Etiqueta em 10 países: <span class="gold">não pague mico</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Costumes que todo viajante precisa conhecer</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Japão</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Japão</h3>
+          <p class="slide-body">Nunca dê gorjeta — é considerado ofensivo. Tire os sapatos antes de entrar em casas e muitos restaurantes. Não fale no celular no trem.</p>
+          <p class="slide-solution">Curvatura leve ao cumprimentar. Silêncio é respeito.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Índia</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Índia</h3>
+          <p class="slide-body">Coma sempre com a mão direita — a esquerda é considerada impura. Tire os sapatos antes de entrar em templos. Evite tocar a cabeça de alguém.</p>
+          <p class="slide-solution">Cumprimento: junte as palmas e diga "Namaste".</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Tailândia</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Tailândia</h3>
+          <p class="slide-body">Nunca toque a cabeça de ninguém (é a parte mais sagrada do corpo). Nunca aponte os pés pra imagens de Buda. Respeite a família real.</p>
+          <p class="slide-solution">O "wai" (mãos juntas no peito) é o cumprimento padrão.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Emirados</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Emirados Árabes</h3>
+          <p class="slide-body">Vista-se modestamente em público (ombros e joelhos cobertos). Não fotografe pessoas sem pedir. Álcool só em locais licenciados.</p>
+          <p class="slide-solution">Demonstrações de afeto em público podem ser multadas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">França</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">França</h3>
+          <p class="slide-body">Sempre cumprimente com "Bonjour" ao entrar em lojas — não fazer isso é considerado grosseiro. Jante devagar — refeições rápidas são mal vistas.</p>
+          <p class="slide-solution">Gorjeta não é obrigatória, mas 5-10% é bem-vindo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Itália</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Itália</h3>
+          <p class="slide-body">Nunca peça cappuccino depois das 11h — só se toma de manhã. Não coloque parmesão em frutos do mar. Comer andando na rua é mal visto em muitas cidades.</p>
+          <p class="slide-solution">Dois beijinhos no cumprimento (começando pela esquerda).</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">China + Turquia</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">China &amp; Turquia</h3>
+          <p class="slide-body">China: nunca finque os pauzinhos no arroz — lembra ritual fúnebre. Aceite chá sempre que oferecerem. Turquia: recusar chá é grosseiro. Tire os sapatos em casas.</p>
+          <p class="slide-solution">Em ambos: hospitalidade é cultura. Aceite com gratidão.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">EUA + Argentina</span>
+          <span class="slide-number">08</span>
+          <h3 class="slide-heading">EUA &amp; Argentina</h3>
+          <p class="slide-body">EUA: gorjeta de 18-20% é obrigatória em restaurantes. Fila é sagrada. Argentina: jante depois das 21h — antes disso os restaurantes estão vazios. Mate é oferta sagrada.</p>
+          <p class="slide-solution">Na Argentina, se te oferecerem mate, aceite. É um gesto de amizade.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127758;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">ETIQUETA</span> que a gente te manda mais dicas do seu destino</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Viajar bem é respeitar a cultura de cada lugar.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Você sabia que dar gorjeta no Japão é OFENSIVO? 🇯🇵
+
+Cada país tem seus costumes — e desconhecer pode te colocar em situações bem constrangedoras.
+
+A gente reuniu regras de etiqueta em 10 países que todo viajante precisa conhecer:
+
+🇯🇵 Japão — sem gorjeta, sem sapatos
+🇮🇳 Índia — sempre a mão direita
+🇹🇭 Tailândia — nunca toque a cabeça
+🇦🇪 Emirados — modéstia obrigatória
+🇫🇷 França — sempre diga Bonjour
+🇮🇹 Itália — sem cappuccino à tarde
+🇨🇳 China — aceite o chá
+🇹🇷 Turquia — recusar chá é grosseiro
+🇺🇸 EUA — gorjeta obrigatória
+🇦🇷 Argentina — aceite o mate
+
+Comenta ETIQUETA e o país que você quer visitar que a gente manda mais dicas 👇
+
+#viagem #etiqueta #cultura #dicasdeviagem #japao #europa #viageminternacional #curiosidades #respeito #viajante
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 54: Festivais Pelo Mundo             -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c54">
+    <h2 class="carousel-section-title">Carrossel 54 — Festivais Pelo Mundo Que Valem a Viagem</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Festivais pelo mundo que <span class="gold">valem a viagem</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Experiências únicas que só acontecem uma vez por ano</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Alemanha</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Oktoberfest — Munique</h3>
+          <p class="slide-body">O maior festival de cerveja do mundo. 6 milhões de visitantes, barracas gigantes, cerveja artesanal e trajes tradicionais.</p>
+          <p class="slide-solution">Setembro-outubro. Dica: reserve mesa com meses de antecedência.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Espanha</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">La Tomatina — Buñol</h3>
+          <p class="slide-body">Guerra de tomates gigantesca. 20.000 pessoas jogando 150 toneladas de tomate. Caos organizado e divertido.</p>
+          <p class="slide-solution">Última quarta de agosto. Ingressos limitados: €12. Esgotam rápido.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Tailândia</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Songkran — Festival da Água</h3>
+          <p class="slide-body">Ano novo tailandês com guerra de água nas ruas. 3 dias de festa, música e comida. O país inteiro celebra.</p>
+          <p class="slide-solution">13-15 de abril. Bangkok e Chiang Mai são os melhores lugares.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Índia</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Holi — Festival das Cores</h3>
+          <p class="slide-body">Pó colorido, água, música e dança. Celebração da primavera e do bem sobre o mal. Visual surreal.</p>
+          <p class="slide-solution">Março. Mathura e Vrindavan são os epicentros. Use roupas brancas descartáveis.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Japão</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Hanami — Cerejeiras em Flor</h3>
+          <p class="slide-body">Piqueniques sob cerejeiras floridas. O Japão inteiro celebra a chegada da primavera. Delicadeza, beleza e sake.</p>
+          <p class="slide-solution">Final de março a abril. Tóquio e Kyoto são os melhores spots.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">EUA</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Mardi Gras — New Orleans</h3>
+          <p class="slide-body">Carnaval americano. Desfiles extravagantes, jazz ao vivo, máscaras e a energia única de NOLA. Bourbon Street em festa.</p>
+          <p class="slide-solution">Fevereiro-março. Reserve hotel com 6 meses de antecedência.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Escócia</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Edinburgh Fringe Festival</h3>
+          <p class="slide-body">O maior festival de artes do mundo. 3.000 shows em 300 espaços por 25 dias. Comédia, teatro, música, circo.</p>
+          <p class="slide-solution">Agosto. Muitos shows gratuitos. A cidade vira um palco a céu aberto.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127881;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">FESTIVAL</span> e diz qual te deu mais vontade</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Viaje por uma experiência, não só por um lugar.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">E se você planejasse sua viagem em torno de um FESTIVAL? 🎉
+
+Essas experiências só acontecem UMA VEZ por ano — e quem vai, nunca esquece:
+
+🍺 Oktoberfest — Munique
+🍅 La Tomatina — Espanha
+💦 Songkran — Tailândia
+🎨 Holi — Índia
+🌸 Hanami — Japão
+🎭 Mardi Gras — New Orleans
+🎪 Fringe Festival — Edimburgo
+
+Cada um com data, local e dicas práticas.
+
+Comenta FESTIVAL e diz qual te deu mais vontade de ir 👇
+
+Salve pra planejar sua próxima viagem por experiência 🌍
+
+#festivais #viagem #oktoberfest #holi #tomatina #songkran #hanami #dicasdeviagem #experiencias #viagempelomundo
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 55: Museus Incríveis                 -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c55">
+    <h2 class="carousel-section-title">Carrossel 55 — Museus Que Valem Mais Que Qualquer Parque</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Museus que valem <span class="gold">mais que qualquer parque</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">7 museus que vão mudar como você viaja</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Paris</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Musée d'Orsay — Paris</h3>
+          <p class="slide-body">Impressionismo no seu melhor: Monet, Renoir, Van Gogh. Instalado numa antiga estação de trem. Mais acessível que o Louvre e igualmente incrível.</p>
+          <p class="slide-solution">€16. Grátis no 1° domingo do mês. Reserve online e pule a fila.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Nova York</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">MET — Nova York</h3>
+          <p class="slide-body">2 milhões de obras, 5.000 anos de arte. Dos egípcios aos contemporâneos. Você precisa de pelo menos 1 dia inteiro.</p>
+          <p class="slide-solution">US$30. Dica: comece pelo Temple of Dendur e depois vá ao rooftop.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Amsterdam</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Rijksmuseum — Amsterdam</h3>
+          <p class="slide-body">A Ronda Noturna de Rembrandt ao vivo. Arte holandesa dos séculos XVI e XVII. O prédio em si já é uma obra de arte.</p>
+          <p class="slide-solution">€22,50. Reserve com antecedência — entrada por horário.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Cidade do México</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Museu Nacional de Antropologia — Cidade do México</h3>
+          <p class="slide-body">A história das civilizações mesoamericanas. Pedra do Sol asteca, artefatos maias, cultura olmeca. Imperdível.</p>
+          <p class="slide-solution">MXN 90 (~R$30). Domingo grátis pra mexicanos. Dedique pelo menos 4 horas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Florença</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Galleria degli Uffizi — Florença</h3>
+          <p class="slide-body">Botticelli, Da Vinci, Rafael, Caravaggio. O berço da Renascença em cada sala. Uma das coleções mais importantes do planeta.</p>
+          <p class="slide-solution">€25. Ingresso com horário marcado é obrigatório. Vá logo cedo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Bilbao</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Guggenheim — Bilbao</h3>
+          <p class="slide-body">O prédio de Frank Gehry é tão impressionante quanto as obras dentro dele. Arte contemporânea num espaço que desafia a gravidade.</p>
+          <p class="slide-solution">€16. Combine com a gastronomia basca (pintxos são obrigatórios).</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">São Paulo</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">MASP — São Paulo</h3>
+          <p class="slide-body">Acervo de dar inveja a museus europeus: Rembrandt, Monet, Picasso, Van Gogh. Os cavaletes de vidro de Lina Bo Bardi são icônicos.</p>
+          <p class="slide-solution">R$60. Terça grátis. Um dos museus mais importantes do hemisfério sul.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127912;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">MUSEU</span> que a gente te ajuda a montar roteiro cultural</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Arte transforma viagem em experiência.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Museu chato? Você tá indo nos museus errados 🖼️
+
+Esses 7 museus vão mudar completamente sua ideia sobre cultura em viagem:
+
+🇫🇷 Musée d'Orsay — Paris
+🇺🇸 MET — Nova York
+🇳🇱 Rijksmuseum — Amsterdam
+🇲🇽 Antropologia — Cidade do México
+🇮🇹 Uffizi — Florença
+🇪🇸 Guggenheim — Bilbao
+🇧🇷 MASP — São Paulo
+
+Com preços, dicas de horário e o que não perder em cada um.
+
+Comenta MUSEU e o destino que você tá planejando que a gente monta um roteiro cultural 👇
+
+#museus #arte #cultura #viagem #paris #novayork #florenca #dicasdeviagem #roteirocultural #viagemcultural
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 56: Como Escolher Hotel              -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c56">
+    <h2 class="carousel-section-title">Carrossel 56 — Como Escolher Hotel Sem Errar</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Como escolher hotel <span class="gold">sem errar</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Estrelas não importam — o que importa é isso aqui</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Localização vale mais que estrelas</h3>
+          <p class="slide-body">Hotel 5 estrelas longe de tudo = taxi caro e tempo perdido. Hotel 3 estrelas no centro = você anda a pé e vive a cidade.</p>
+          <p class="slide-solution">Dica: busque hotéis a no máximo 15 minutos a pé das atrações principais ou do metrô.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Leia as avaliações RECENTES</h3>
+          <p class="slide-body">Hotel que era ótimo em 2022 pode estar decadente em 2026. Filtre por avaliações dos últimos 3 meses. Ignore as de 1 e 5 estrelas.</p>
+          <p class="slide-solution">Foque nas de 3-4 estrelas — são as mais honestas e detalhadas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Verifique o que tá INCLUÍDO</h3>
+          <p class="slide-body">Café da manhã? WiFi? Estacionamento? Taxa de resort? Muitos hotéis cobram extras escondidos que inflam o preço final.</p>
+          <p class="slide-solution">Compare o preço TOTAL, não só a diária. Aquele hotel "barato" pode sair mais caro.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Fotos do site vs realidade</h3>
+          <p class="slide-body">Fotos profissionais mentem. Busque fotos de hóspedes reais no Google Maps, TripAdvisor e nas avaliações.</p>
+          <p class="slide-solution">Se o hotel não tem fotos de hóspedes, desconfie.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Política de cancelamento</h3>
+          <p class="slide-body">Imprevistos acontecem. Sempre prefira tarifas com cancelamento gratuito, mesmo que custem 10-15% a mais.</p>
+          <p class="slide-solution">Reserve cedo com cancelamento grátis. Se achar mais barato depois, cancele e reserve de novo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Hotel vs Airbnb: quando usar cada um</h3>
+          <p class="slide-body">Hotel: estadias curtas, praticidade, check-in 24h. Airbnb: estadias longas (+4 noites), famílias, cozinha, mais espaço.</p>
+          <p class="slide-solution">Viagem a dois curta? Hotel. Família 7 dias? Airbnb pode ser melhor e mais barato.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Reserve direto quando possível</h3>
+          <p class="slide-body">Muitos hotéis oferecem preço igual ou melhor no site próprio, com upgrades, late checkout ou café incluído.</p>
+          <p class="slide-solution">Pesquise no Booking/Trivago, mas finalize no site do hotel. Pergunte sobre "best rate guarantee".</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#127976;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">HOTEL</span> que a gente te ajuda a escolher pro seu destino</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Hospedagem certa transforma a viagem inteira.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Estrelas NÃO definem se um hotel é bom ou ruim 🏨
+
+A gente já se hospedou em hotéis 5 estrelas ruins e 3 estrelas incríveis. O que realmente importa:
+
+1️⃣ Localização > estrelas
+2️⃣ Avaliações RECENTES
+3️⃣ O que tá incluído no preço
+4️⃣ Fotos de hóspedes reais
+5️⃣ Política de cancelamento
+6️⃣ Hotel vs Airbnb
+7️⃣ Reservar direto no site
+
+Comenta HOTEL e o destino que a gente te indica as melhores opções 👇
+
+Salve pra usar na próxima reserva 📌
+
+#hotel #hospedagem #viagem #dicasdeviagem #booking #airbnb #reservadehotel #viageminternacional #planejamento
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 57: Aluguel de Carro no Exterior     -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c57">
+    <h2 class="carousel-section-title">Carrossel 57 — Aluguel de Carro no Exterior: Guia Completo</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Aluguel de carro no exterior: <span class="gold">guia completo</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Documentos, seguro, dicas e pegadinhas</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Documentos</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">O que você precisa levar</h3>
+          <p class="slide-body">CNH brasileira válida + PID (Permissão Internacional pra Dirigir). Passaporte. Cartão de crédito internacional no nome do motorista.</p>
+          <p class="slide-solution">Tire a PID no Detran do seu estado. Custa cerca de R$300 e vale 3 anos.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Seguro</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Seguro: o que pegar e o que recusar</h3>
+          <p class="slide-body">CDW (danos ao veículo): obrigatório. Terceiros: obrigatório. Seguro completo full cover: o mais recomendado. Proteção pessoal: opcional.</p>
+          <p class="slide-solution">Dica: contrate seguro full cover por sites como RentalCover.com — sai mais barato que na locadora.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Reserva</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Onde e quando reservar</h3>
+          <p class="slide-body">Compare preços em RentalCars, DiscoverCars e no site direto da locadora. Reserve com 30-60 dias de antecedência.</p>
+          <p class="slide-solution">Pegar e devolver no aeroporto geralmente é mais prático e às vezes mais barato.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Pegadinhas</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Pegadinhas das locadoras</h3>
+          <p class="slide-body">GPS caro (use o celular). Tanque cheio obrigatório na devolução. Cobranças por devolver sujo. Upgrade "grátis" que vira cobrança.</p>
+          <p class="slide-solution">Fotografe o carro na retirada E na devolução. Devolva com tanque cheio. Recuse upgrades que você não pediu.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Pedágios</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Pedágios e multas</h3>
+          <p class="slide-body">Na Europa, muitos pedágios são eletrônicos. Na Itália, precisa de Telepass. Em Portugal, Via Verde. Multas podem chegar semanas depois.</p>
+          <p class="slide-solution">Pergunte na locadora sobre tag de pedágio. Respeite os limites — radares são impiedosos.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Câmbio</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Manual ou automático?</h3>
+          <p class="slide-body">Na Europa e na América Latina, a maioria é manual. Automático existe mas custa 30-50% mais caro. Nos EUA, tudo é automático.</p>
+          <p class="slide-solution">Se não dirige manual, reserve automático com antecedência — a frota é limitada.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mão de direção</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Países com mão inglesa</h3>
+          <p class="slide-body">Reino Unido, Austrália, Japão, Tailândia: direção do lado direito, mão esquerda. Leva 1-2 dias pra acostumar.</p>
+          <p class="slide-solution">Dica: comece em estradas simples antes de enfrentar cidades grandes. Rotatórias são o maior desafio.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128663;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">CARRO</span> que a gente te ajuda com o destino que você tá planejando</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Alugar carro dá liberdade — desde que você esteja preparado.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Alugar carro no exterior parece complicado — mas com esse guia fica fácil 🚗
+
+A gente já alugou carro em vários países e compilou TUDO que você precisa saber:
+
+📄 Documentos necessários
+🛡️ Que seguro contratar
+💻 Onde e quando reservar
+⚠️ Pegadinhas das locadoras
+🛣️ Pedágios e multas
+⚙️ Manual vs automático
+🇬🇧 Países com mão inglesa
+
+Comenta CARRO e o destino que a gente te dá dicas específicas 👇
+
+Salve pra consultar na próxima viagem 📌
+
+#aluguelcarro #viagem #roadtrip #dicasdeviagem #europa #eua #viageminternacional #rentacar #dicas #planejamento
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 58: Malas                            -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c58">
+    <h2 class="carousel-section-title">Carrossel 58 — Malas: Despachar ou Levar de Mão?</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Malas: <span class="gold">despachar</span> ou levar de <span class="gold">mão</span>?</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Prós, contras e regras por companhia</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Mão</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Só mala de mão: quando vale</h3>
+          <p class="slide-body">Viagens de até 5 dias. Destinos quentes (roupas leves). Conexões apertadas. Quem quer agilidade no desembarque.</p>
+          <p class="slide-solution">Limite padrão: 10kg, 55x35x25cm. Mas cada companhia tem suas regras.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Despachada</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Despachar: quando vale</h3>
+          <p class="slide-body">Viagens longas (+7 dias). Destinos frios (roupas pesadas). Compras no destino. Quando leva líquidos grandes.</p>
+          <p class="slide-solution">Limite padrão: 23kg, 158cm lineares (A+L+C). Taxa: R$150-350 por trecho.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regras</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Regras que pegam muita gente</h3>
+          <p class="slide-body">Líquidos: máx. 100ml cada, em saco transparente. Bateria extra: só na mão, nunca despache. Tesoura: despache. Remédios: leve na mão com receita.</p>
+          <p class="slide-solution">Sempre confira as regras da SUA companhia antes de fazer as malas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Hack</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Técnica do enrolar</h3>
+          <p class="slide-body">Enrole as roupas em vez de dobrar — cabe 30% mais e amassa menos. Use organizadores de malas (cubos) pra separar por tipo.</p>
+          <p class="slide-solution">Dica extra: vá com a roupa mais volumosa no corpo (jaqueta, bota) pra economizar espaço na mala.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Hack</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">O truque da mala vazia</h3>
+          <p class="slide-body">Leve uma mala dobrável dentro da mala principal. Na volta, use ela pras compras e despache as duas. Ou: compre mala lá (Europa tem malas baratas).</p>
+          <p class="slide-solution">Planeje espaço na ida pras compras da volta. Sempre.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Comparativo</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Taxa de bagagem por companhia</h3>
+          <p class="slide-body">Companhias tradicionais (LATAM, Azul): 1 mala inclusa em voos internacionais. Low-cost (Ryanair, EasyJet): tudo pago à parte.</p>
+          <p class="slide-solution">Em low-cost, compre bagagem ONLINE antes — no aeroporto custa até 3x mais.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Checklist</span>
+          <h3 class="slide-heading" style="margin-bottom: 16px;">Sempre na mala de mão</h3>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Documentos e passaporte</li>
+            <li><span class="checkbox"></span>Remédios e receitas</li>
+            <li><span class="checkbox"></span>Carregador e powerbank</li>
+            <li><span class="checkbox"></span>1 troca de roupa completa</li>
+            <li><span class="checkbox"></span>Objetos de valor</li>
+            <li class="gold-item"><span class="checkbox"></span>Fone de ouvido (sobrevivência)</li>
+          </ul>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128188;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">MALA</span> que a gente te manda checklist completo</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Fazer mala é uma arte — e a gente te ensina.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Despachar ou levar de mão? Essa dúvida acaba HOJE 🧳
+
+A gente montou o guia definitivo de malas pra viagem:
+
+✅ Quando só mala de mão resolve
+✅ Quando precisa despachar
+✅ Regras de líquidos e baterias
+✅ Técnica do enrolar (cabe 30% mais!)
+✅ O truque da mala vazia
+✅ Taxas por companhia
+✅ Checklist do que levar na mão
+
+Comenta MALA que a gente te manda o checklist completo 👇
+
+Salve pra usar antes da próxima viagem ✈️
+
+#mala #bagagem #viagem #dicasdeviagem #malademaos #organizacao #aeroporto #viageminternacional #dicas
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 59: Fotos de Viagem                  -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c59">
+    <h2 class="carousel-section-title">Carrossel 59 — Como Tirar Fotos Incríveis de Viagem</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Como tirar fotos <span class="gold">incríveis</span> de viagem</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Com celular, sem curso, sem equipamento caro</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Luz</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Golden hour: seu melhor filtro</h3>
+          <p class="slide-body">1 hora depois do nascer do sol e 1 hora antes do pôr do sol. Luz dourada, sombras suaves, cores vibrantes. Zero edição necessária.</p>
+          <p class="slide-solution">Dica: ative a régua de nível do celular pra manter o horizonte reto.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Composição</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Regra dos terços</h3>
+          <p class="slide-body">Ative a grade 3x3 na câmera. Coloque o ponto de interesse nas intersecções, não no centro. Isso cria fotos mais dinâmicas e profissionais.</p>
+          <p class="slide-solution">Funciona pra paisagem, retrato, comida — tudo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Perspectiva</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Mude o ângulo</h3>
+          <p class="slide-body">Todo mundo tira foto na altura dos olhos. Agache, suba, deite no chão, use reflexos em poças d'água. Ângulos diferentes = fotos únicas.</p>
+          <p class="slide-solution">Reflexos em poças depois da chuva criam fotos cinematográficas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Pessoas</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Pessoas na foto dão escala e emoção</h3>
+          <p class="slide-body">Uma paisagem é bonita. Uma pessoa NAQUELA paisagem conta uma história. Coloque alguém de costas olhando a vista — funciona sempre.</p>
+          <p class="slide-solution">Dica: use o timer de 3 segundos e se coloque na cena.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Detalhes</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Fotografe os detalhes</h3>
+          <p class="slide-body">A textura do pão na padaria francesa. As mãos do artesão no mercado. O azulejo português. Detalhes contam a viagem melhor que panorâmicas.</p>
+          <p class="slide-solution">Use o modo retrato/macro do celular pra desfocar o fundo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Edição</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Edição rápida no celular</h3>
+          <p class="slide-body">Lightroom Mobile (grátis): ajuste exposição, contraste e temperatura. VSCO: filtros sutis. Snapseed: remoção de objetos.</p>
+          <p class="slide-solution">Menos é mais. Suba um pouco o contraste, aqueça a temperatura e pronto. Não exagere nos filtros.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica final</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Tire a foto e GUARDE o celular</h3>
+          <p class="slide-body">A melhor foto de viagem é a que você tirou rápido e depois curtiu o momento. Não passe a viagem atrás de uma tela.</p>
+          <p class="slide-solution">Regra: 1 foto boa > 50 fotos medianas. Qualidade vence quantidade.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128247;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">FOTO</span> que a gente te manda mais dicas</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Suas fotos de viagem nunca mais vão ser as mesmas.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Suas fotos de viagem podem ser MUITO melhores com essas 7 dicas 📸
+
+Não precisa de câmera profissional. Não precisa de curso. Só precisa saber COMO olhar:
+
+1️⃣ Golden hour — o melhor filtro é a luz natural
+2️⃣ Regra dos terços — ative a grade do celular
+3️⃣ Mude o ângulo — saia do óbvio
+4️⃣ Coloque pessoas na cena
+5️⃣ Fotografe os detalhes
+6️⃣ Edição rápida e sutil
+7️⃣ Tire a foto e guarde o celular
+
+Comenta FOTO que a gente te manda mais dicas avançadas 👇
+
+Salve e manda pra quem precisa melhorar as fotos de viagem 📲
+
+#fotodeviagem #fotografia #dicas #celular #viagem #dicasdeviagem #goldenhour #photography #viagemperfeita
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 60: Primeira Viagem Internacional    -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c60">
+    <h2 class="carousel-section-title">Carrossel 60 — Primeira Viagem Internacional: Guia Completo</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Sua <span class="gold">primeira viagem</span> internacional: guia completo</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">De quem nunca saiu do Brasil pra quem quer começar com o pé direito</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Destino</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Comece por destinos "fáceis"</h3>
+          <p class="slide-body">Argentina, Chile e Uruguai: sem visto, sem fuso pesado, perto e acessível. Portugal: língua portuguesa, sem barreiras. Cancún: fácil e vibrante.</p>
+          <p class="slide-solution">Primeira viagem não precisa ser épica — precisa ser prazerosa e tranquila.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Passaporte</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Passaporte: tire agora</h3>
+          <p class="slide-body">Agende no site da Polícia Federal. Leve documentos, pague a taxa (~R$257) e vá na data agendada. Sai em até 6 dias úteis.</p>
+          <p class="slide-solution">Validade: 10 anos. Mesmo que não vá viajar logo, ter passaporte te deixa PRONTO pra qualquer oportunidade.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dinheiro</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Dinheiro no exterior</h3>
+          <p class="slide-body">Abra conta num cartão de débito internacional (Wise, C6 Global, Nomad). Carregue antes de viajar. Leve um pouco em espécie como emergência.</p>
+          <p class="slide-solution">NUNCA dependa só de um método. Tenha cartão + espécie + cartão reserva.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Seguro</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Seguro viagem: não é opcional</h3>
+          <p class="slide-body">Uma consulta médica nos EUA pode custar US$500. Uma internação: US$50.000+. Seguro viagem custa a partir de R$15/dia.</p>
+          <p class="slide-solution">Compare em Seguros Promo ou Real Seguro Viagem. Cobertura mínima recomendada: US$40.000.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Chip</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Internet no exterior</h3>
+          <p class="slide-body">Compre um eSIM antes de viajar (Airalo, Holafly). Funciona em qualquer celular moderno. Você desembarca já conectado.</p>
+          <p class="slide-solution">Esqueça chip físico — eSIM é mais prático, mais barato e sem risco de perder.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Aeroporto</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Seu primeiro aeroporto internacional</h3>
+          <p class="slide-body">Chegue 3h antes. Passe pelo check-in, despacho de mala, imigração, raio-X e embarque. Siga as placas — tudo é sinalizado.</p>
+          <p class="slide-solution">Na imigração do destino: tenha passaporte, passagem de volta e comprovante de hospedagem em mãos. Fique calmo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Apps</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Apps essenciais</h3>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Google Maps (baixe mapas offline)</li>
+            <li><span class="checkbox"></span>Google Tradutor (baixe idioma offline)</li>
+            <li><span class="checkbox"></span>Uber/Cabify (transporte)</li>
+            <li><span class="checkbox"></span>XE Currency (câmbio em tempo real)</li>
+            <li class="gold-item"><span class="checkbox"></span>Câmera do celular (registre tudo!)</li>
+          </ul>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#9992;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">PRIMEIRA</span> que a gente te ajuda a planejar do zero</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Todo grande viajante teve uma primeira vez. A sua começa aqui.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Nunca viajou pra fora do Brasil? Esse guia é PRA VOCÊ ✈️
+
+A primeira viagem internacional pode parecer assustadora — mas com planejamento é mais fácil do que parece:
+
+🌎 Destinos fáceis pra começar
+📕 Como tirar o passaporte
+💳 Dinheiro no exterior
+🛡️ Seguro viagem
+📱 Internet (eSIM)
+🛫 Como funciona o aeroporto
+📲 Apps essenciais
+
+Comenta PRIMEIRA que a gente te ajuda a planejar do zero 👇
+
+Manda pra aquele amigo que SONHA em viajar mas não sabe por onde começar 🌍
+
+#primeiraviagem #viageminternacional #viagem #passaporte #dicasdeviagem #guiadeviagem #iniciante #planejamento
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 61: Viagem Executiva                 -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c61">
+    <h2 class="carousel-section-title">Carrossel 61 — Viagem Executiva: Maximize Seu Tempo</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Viagem executiva: <span class="gold">maximize</span> seu tempo</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Pra quem tem pouco tempo e quer aproveitar cada minuto</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Voo noturno + chegada de manhã</h3>
+          <p class="slide-body">Embarque à noite, durma no avião, chegue de manhã. Você ganha um dia inteiro sem perder produtividade.</p>
+          <p class="slide-solution">Invista em fone com cancelamento de ruído e travesseiro de pescoço. Muda tudo.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Hotel estratégico: perto de tudo</h3>
+          <p class="slide-body">Tempo é o recurso mais escasso. Fique perto das reuniões OU perto das atrações que quer visitar. Nunca economize em localização.</p>
+          <p class="slide-solution">Dica: hotéis business geralmente têm check-in antecipado e late checkout. Use isso.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Estenda o fim de semana</h3>
+          <p class="slide-body">Reunião na sexta? Fique até domingo. Reunião na segunda? Chegue no sábado. Transforme viagem de trabalho em mini férias.</p>
+          <p class="slide-solution">O voo já tá pago pela empresa. O custo extra é só 1-2 noites de hotel.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Acumule milhas de verdade</h3>
+          <p class="slide-body">Concentre voos numa aliança (Star Alliance, Oneworld, SkyTeam). Use cartão que acumula milhas em tudo. Status vem rápido pra quem viaja a trabalho.</p>
+          <p class="slide-solution">Com status Gold/Platinum: sala VIP, upgrade, bagagem extra, prioridade no embarque.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Roteiro cirúrgico: 3 experiências por dia</h3>
+          <p class="slide-body">Com pouco tempo, escolha 3 experiências por dia: 1 cultural, 1 gastronômica, 1 contemplativa. Sem pressa, sem estresse.</p>
+          <p class="slide-solution">Monte o roteiro ANTES. Improviso funciona pra quem tem tempo sobrando.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Sala VIP: o segredo</h3>
+          <p class="slide-body">Acesso via cartão de crédito premium (Amex Platinum, Visa Infinite) ou Priority Pass. Comida, bebida, WiFi e silêncio no aeroporto.</p>
+          <p class="slide-solution">Algumas salas VIP custam a partir de R$120 por visita avulsa. Vale cada centavo em conexões longas.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Regra</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Só mala de mão</h3>
+          <p class="slide-body">Executivo não espera esteira de bagagem. 3-5 dias cabem numa mala de mão com planejamento. Roupas que combinam entre si.</p>
+          <p class="slide-solution">Cápsulas de roupa: 3 calças, 5 camisas, 2 blazers = 30 combinações.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128188;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">EXECUTIVA</span> que a gente te manda dicas personalizadas</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Tempo é luxo. A gente te ajuda a usar o seu da melhor forma.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Pouco tempo pra viajar? Então cada minuto precisa contar 💼
+
+Se você viaja a trabalho (ou tem pouco tempo de férias), essas 7 regras vão mudar seu jogo:
+
+✈️ Voo noturno = dia inteiro ganho
+🏨 Hotel estratégico
+📅 Estenda o fim de semana
+✨ Acumule milhas de verdade
+📋 Roteiro cirúrgico
+🛋️ Sala VIP no aeroporto
+🧳 Só mala de mão
+
+Comenta EXECUTIVA que a gente te manda dicas personalizadas pro seu próximo destino 👇
+
+#viagemexecutiva #business #viagem #milhas #salavip #dicasdeviagem #produtividade #executivo #viagemcorporativa
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 62: Renovar o Casamento              -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c62">
+    <h2 class="carousel-section-title">Carrossel 62 — Renovar o Casamento Em Uma Viagem</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Renovar o <span class="gold">casamento</span> em uma viagem</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">Porque a melhor história de amor tem novas páginas</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Por quê</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Por que viajar a dois transforma</h3>
+          <p class="slide-body">Fora da rotina, vocês se redescobrem. Sem agenda, sem filhos, sem obrigações. Só o casal, um lugar novo e a chance de se reconectar.</p>
+          <p class="slide-solution">Casais que viajam juntos relatam mais satisfação no relacionamento — é ciência.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Destino</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Santorini, Grécia</h3>
+          <p class="slide-body">Pôr do sol em Oia, jantar com vista pro Egeu, casinhas brancas e azuis. O destino mais romântico do Mediterrâneo.</p>
+          <p class="slide-solution">Melhor época: maio-junho ou setembro-outubro. Fora do pico, com preços melhores.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Destino</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Maldivas</h3>
+          <p class="slide-body">Bangalôs sobre a água, privacidade total, café da manhã flutuante. Cada resort é uma ilha exclusiva. Silêncio e luxo.</p>
+          <p class="slide-solution">A partir de US$400/noite em resorts de qualidade. Vale cada centavo pra uma ocasião especial.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Destino</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Toscana, Itália</h3>
+          <p class="slide-body">Alugue uma villa nos vinhedos. Aulas de culinária a dois. Jantares sob as estrelas. Vinho, massa, pôr do sol dourado.</p>
+          <p class="slide-solution">Dica: setembro é a época da vindima. Participem de uma colheita de uvas juntos.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Destino</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Uruguai (Colonia + José Ignacio)</h3>
+          <p class="slide-body">Perto, acessível e surpreendente. Colonia del Sacramento é charme colonial. José Ignacio é o balneário mais sofisticado da América do Sul.</p>
+          <p class="slide-solution">Sem visto, voo curto, câmbio favorável. Perfeito pra um fim de semana prolongado romântico.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Experiências</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Experiências que conectam</h3>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Jantar privativo em lugar especial</li>
+            <li><span class="checkbox"></span>Spa a dois com massagem</li>
+            <li><span class="checkbox"></span>Passeio de barco ao pôr do sol</li>
+            <li><span class="checkbox"></span>Aula de culinária juntos</li>
+            <li class="gold-item"><span class="checkbox"></span>Nenhum celular por 1 dia inteiro</li>
+          </ul>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Dica</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">A viagem começa na surpresa</h3>
+          <p class="slide-body">Surpreenda seu par: planeje tudo sem contar. A revelação do destino no aeroporto é um momento que ele(a) nunca vai esquecer.</p>
+          <p class="slide-solution">Dica: faça uma carta pra entregar no avião contando por que escolheu aquele destino.</p>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#10084;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">CASAL</span> que a gente te ajuda a montar a viagem perfeita a dois</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Porque o melhor investimento num casamento é tempo de qualidade juntos.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Quando foi a última vez que vocês viajaram SÓ os dois? ❤️
+
+A rotina engole o romance. E uma viagem a dois é o melhor jeito de se reconectar.
+
+A gente separou 4 destinos perfeitos pra casais que querem renovar:
+
+🇬🇷 Santorini — pôr do sol inesquecível
+🇲🇻 Maldivas — privacidade e luxo
+🇮🇹 Toscana — vinho e romance
+🇺🇾 Uruguai — charme perto de casa
+
++ experiências que conectam de verdade e uma dica que vai surpreender seu par 😍
+
+Comenta CASAL que a gente te ajuda a montar a viagem perfeita a dois 👇
+
+Marca seu amor aqui nos comentários 💑
+
+#viagemdecasal #romance #viagemromantica #santorini #maldivas #toscana #dicasdeviagem #casamento #luademel
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- CAROUSEL 63: Viagem do Grupo                  -->
+  <!-- ============================================ -->
+  <section class="carousel-section" id="c63">
+    <h2 class="carousel-section-title">Carrossel 63 — Organizando a Viagem do Grupo: Template</h2>
+    <div class="carousel-wrapper">
+      <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+      <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+      <div class="carousel-track">
+
+        <div class="slide cover">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <h3 class="slide-heading">Organizando a <span class="gold">viagem do grupo</span></h3>
+          <div class="cover-deco"></div>
+          <p class="slide-subtitle">O template pra ninguém brigar (e todo mundo curtir)</p>
+          <span class="slide-footer">&#129517; @rotta.curadoria</span>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Passo</span>
+          <span class="slide-number">01</span>
+          <h3 class="slide-heading">Defina o "líder" da viagem</h3>
+          <p class="slide-body">Todo grupo precisa de 1 pessoa que centralize decisões. Não é chefe — é quem organiza reservas, datas e cobra prazos.</p>
+          <p class="slide-solution">Sem líder = 47 mensagens no grupo sem nenhuma decisão tomada.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Passo</span>
+          <span class="slide-number">02</span>
+          <h3 class="slide-heading">Alinhe o orçamento ANTES</h3>
+          <p class="slide-body">Antes de escolher destino, descubra quanto CADA UM pode gastar. Evita constrangimento, frustração e o famoso "achei caro demais".</p>
+          <p class="slide-solution">Use um formulário anônimo no Google Forms. Todo mundo responde honestamente.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Passo</span>
+          <span class="slide-number">03</span>
+          <h3 class="slide-heading">Vote no destino (máx. 3 opções)</h3>
+          <p class="slide-body">O líder pesquisa 3 opções dentro do orçamento e manda pro grupo votar. Prazo: 48 horas. Maioria simples decide.</p>
+          <p class="slide-solution">Nunca abra votação com mais de 3 opções — vira caos.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Passo</span>
+          <span class="slide-number">04</span>
+          <h3 class="slide-heading">Planilha compartilhada: seu melhor amigo</h3>
+          <p class="slide-body">Crie uma planilha no Google Sheets com: gastos compartilhados, divisão de custos, itinerário dia a dia, checklist individual.</p>
+          <p class="slide-solution">Apps úteis: Splitwise (divisão de gastos), Tricount, Google Sheets. Nunca confie na memória.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Passo</span>
+          <span class="slide-number">05</span>
+          <h3 class="slide-heading">Tempo livre é obrigatório</h3>
+          <p class="slide-body">Nem todo mundo quer fazer tudo junto o tempo todo. Reserve pelo menos 1 tarde livre por dia pra cada um fazer o que quiser.</p>
+          <p class="slide-solution">Roteiro rígido demais = estresse. Flexibilidade mantém a amizade intacta.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Passo</span>
+          <span class="slide-number">06</span>
+          <h3 class="slide-heading">Regras claras de gasto</h3>
+          <p class="slide-body">Decidam antes: dividem tudo igualmente ou cada um paga o seu? Gastos de grupo (transporte, hospedagem) vs individuais (compras, drinks).</p>
+          <p class="slide-solution">Regra de ouro: acertem contas TODO DIA à noite. Nunca deixe acumular.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Passo</span>
+          <span class="slide-number">07</span>
+          <h3 class="slide-heading">Prazo final: 2 meses antes</h3>
+          <p class="slide-body">Todas as reservas principais (voo, hotel, experiências) devem estar fechadas 60 dias antes da viagem. Quem não confirmou até lá, fica de fora.</p>
+          <p class="slide-solution">Dica: crie um grupo de WhatsApp SÓ pra viagem. Sem memes, sem off-topic.</p>
+        </div>
+
+        <div class="slide">
+          <span class="slide-label">Checklist</span>
+          <h3 class="slide-heading" style="margin-bottom: 16px;">Template do grupo</h3>
+          <ul class="checklist">
+            <li><span class="checkbox"></span>Líder definido</li>
+            <li><span class="checkbox"></span>Orçamento individual alinhado</li>
+            <li><span class="checkbox"></span>Destino votado e definido</li>
+            <li><span class="checkbox"></span>Planilha compartilhada criada</li>
+            <li><span class="checkbox"></span>Reservas fechadas (60 dias antes)</li>
+            <li><span class="checkbox"></span>Regras de gasto combinadas</li>
+            <li class="gold-item"><span class="checkbox"></span>Grupo de WhatsApp só da viagem</li>
+          </ul>
+        </div>
+
+        <div class="slide cta">
+          <span class="icon-plane">&#128101;</span>
+          <h3 class="slide-heading">Comenta <span class="gold">GRUPO</span> que a gente te manda o template completo</h3>
+          <div class="cover-deco"></div>
+          <p class="slide-body">Viagem de grupo pode ser incrível — se todo mundo combinar antes.</p>
+        </div>
+
+        <div class="slide signature">
+          <span class="rotta-logo-text">Rotta Curadoria</span>
+          <div class="signature-divider"></div>
+          <p class="signature-name">Curado por Marcelo & Alexandra</p>
+          <p class="signature-handle">@rotta.curadoria</p>
+          <div class="signature-divider"></div>
+          <p class="signature-tagline">Viagens com curadoria</p>
+        </div>
+
+      </div>
+      <div class="dot-indicators"></div>
+    </div>
+    <div class="caption-box">
+      <p class="caption-label">Legenda do Post</p>
+      <button class="copy-btn" onclick="copyCaption(this)">Copiar</button>
+      <p class="caption-text">Viagem de grupo: ou é INCRÍVEL ou acaba em briga 😅
+
+A diferença? Organização. E a gente montou o template pra ninguém brigar:
+
+1️⃣ Defina o líder
+2️⃣ Alinhe o orçamento ANTES
+3️⃣ Vote no destino (máx. 3 opções)
+4️⃣ Planilha compartilhada
+5️⃣ Tempo livre obrigatório
+6️⃣ Regras claras de gasto
+7️⃣ Prazo final: 60 dias antes
+
++ checklist template pronto pra usar
+
+Comenta GRUPO que a gente te manda o template completo em PDF 👇
+
+Marca a galera da próxima trip aqui nos comentários 🏷️
+
+#viagemdegrupo #amigos #viagem #dicasdeviagem #planejamento #template #organizacao #viagemcomamigos #trip
+
+Curado por Marcelo & Alexandra 🧭</p>
+    </div>
+  </section>
+
+  <script>
+    // Navigation arrows, dot indicators, and copy functionality
+    document.querySelectorAll('.carousel-wrapper').forEach(function(wrapper) {
+      var track = wrapper.querySelector('.carousel-track');
+      var leftBtn = wrapper.querySelector('.nav-arrow.left');
+      var rightBtn = wrapper.querySelector('.nav-arrow.right');
+      var dotsContainer = wrapper.querySelector('.dot-indicators');
+      var slides = track.querySelectorAll('.slide');
+
+      // Create dot indicators
+      for (var i = 0; i < slides.length; i++) {
+        var dot = document.createElement('span');
+        dot.className = 'dot';
+        if (i === 0) dot.className = 'dot active';
+        dotsContainer.appendChild(dot);
+      }
+
+      var dots = dotsContainer.querySelectorAll('.dot');
+
+      function getSlideWidth() {
+        var slide = slides[0];
+        var style = getComputedStyle(slide);
+        return slide.offsetWidth + parseInt(style.marginRight || 0) + 20;
+      }
+
+      function updateState() {
+        var scrollLeft = track.scrollLeft;
+        var slideWidth = getSlideWidth();
+        var currentIndex = Math.round(scrollLeft / slideWidth);
+
+        if (currentIndex < 0) currentIndex = 0;
+        if (currentIndex >= slides.length) currentIndex = slides.length - 1;
+
+        if (scrollLeft <= 10) {
+          leftBtn.classList.add('hidden');
+        } else {
+          leftBtn.classList.remove('hidden');
+        }
+        if (scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+          rightBtn.classList.add('hidden');
+        } else {
+          rightBtn.classList.remove('hidden');
+        }
+
+        for (var j = 0; j < dots.length; j++) {
+          if (j === currentIndex) {
+            dots[j].className = 'dot active';
+          } else {
+            dots[j].className = 'dot';
+          }
+        }
+      }
+
+      leftBtn.addEventListener('click', function() {
+        track.scrollBy({ left: -getSlideWidth(), behavior: 'smooth' });
+      });
+
+      rightBtn.addEventListener('click', function() {
+        track.scrollBy({ left: getSlideWidth(), behavior: 'smooth' });
+      });
+
+      track.addEventListener('scroll', updateState);
+      updateState();
+    });
+
+    // Copy caption functionality
+    function copyCaption(btn) {
+      var captionText = btn.parentElement.querySelector('.caption-text').innerText;
+      navigator.clipboard.writeText(captionText).then(function() {
+        btn.textContent = 'Copiado!';
+        btn.classList.add('copied');
+        setTimeout(function() {
+          btn.textContent = 'Copiar';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+
+</body>
+</html>
