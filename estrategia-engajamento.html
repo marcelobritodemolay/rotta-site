@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrategia de Engajamento Instagram | Rotta Curadoria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        @media print {
+            body { background: white !important; color: #111 !important; }
+            .no-print { display: none !important; }
+            .section { break-inside: avoid; }
+            .card { border: 1px solid #ccc !important; background: #f9f9f9 !important; }
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0E0E0E;
+            --bg-card: #1A1A1A;
+            --bg-layer: #2A2A2A;
+            --gold: #C5A572;
+            --gold-dim: rgba(197, 165, 114, 0.15);
+            --text: #F2EDE8;
+            --text-muted: #999;
+            --text-dim: #666;
+            --coral: #E8785A;
+            --blue: #5B8DEF;
+            --green: #4CAF7D;
+            --purple: #9B6DEF;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== COVER ===== */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 24px;
+            position: relative;
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center top, rgba(197,165,114,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .cover-badge {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 32px;
+            border: 1px solid rgba(197,165,114,0.3);
+            padding: 8px 20px;
+            border-radius: 100px;
+        }
+
+        .cover h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            max-width: 650px;
+        }
+
+        .cover h1 span { color: var(--gold); }
+
+        .cover .subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 520px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: rgba(14,14,14,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(197,165,114,0.15);
+            z-index: 100;
+            padding: 12px 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 0 24px;
+            max-width: 780px;
+            margin: 0 auto;
+            scrollbar-width: none;
+        }
+
+        .nav-inner::-webkit-scrollbar { display: none; }
+
+        .nav-link {
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 100px;
+            white-space: nowrap;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold);
+            border-color: rgba(197,165,114,0.3);
+            background: var(--gold-dim);
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 80px 0 40px;
+        }
+
+        .section-label {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(26px, 4vw, 36px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 32px;
+            max-width: 600px;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .card:hover {
+            border-color: rgba(197,165,114,0.2);
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .icon-morning { background: rgba(232,120,90,0.15); }
+        .icon-afternoon { background: rgba(91,141,239,0.15); }
+        .icon-evening { background: rgba(156,109,239,0.15); }
+
+        .card p, .card li {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .card ul {
+            list-style: none;
+            margin-top: 8px;
+        }
+
+        .card ul li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 13px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+        }
+
+        /* ===== CHECKLIST ===== */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .checklist li:last-child { border-bottom: none; }
+
+        .checklist li .check-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--text-dim);
+            border-radius: 5px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checklist li.checked .check-box {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .checklist li.checked .check-box::after {
+            content: '\2713';
+            color: #0E0E0E;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .checklist li.checked {
+            color: var(--text-dim);
+            text-decoration: line-through;
+        }
+
+        /* ===== COMMENT TEMPLATES ===== */
+        .template-group {
+            margin-bottom: 24px;
+        }
+
+        .template-group-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(197,165,114,0.2);
+        }
+
+        .template-item {
+            background: var(--bg-layer);
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .template-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .template-text em {
+            color: var(--gold);
+            font-style: normal;
+            font-size: 12px;
+        }
+
+        .copy-btn {
+            background: var(--gold-dim);
+            border: 1px solid rgba(197,165,114,0.3);
+            color: var(--gold);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .copy-btn:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .copy-btn.copied {
+            background: var(--green);
+            border-color: var(--green);
+            color: white;
+        }
+
+        /* ===== CALENDAR ===== */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-top: 16px;
+        }
+
+        .cal-header {
+            font-size: 11px;
+            text-align: center;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 0;
+        }
+
+        .cal-day {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 8px;
+            padding: 8px 6px;
+            min-height: 80px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .cal-day:hover {
+            border-color: rgba(197,165,114,0.3);
+            transform: translateY(-2px);
+        }
+
+        .cal-day .day-num {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+
+        .cal-day .day-type {
+            font-size: 9px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 2px 5px;
+            border-radius: 4px;
+            display: inline-block;
+            line-height: 1.3;
+        }
+
+        .type-poll { background: rgba(91,141,239,0.2); color: var(--blue); }
+        .type-question { background: rgba(232,120,90,0.2); color: var(--coral); }
+        .type-tip { background: rgba(76,175,125,0.2); color: var(--green); }
+        .type-bts { background: rgba(156,109,239,0.2); color: var(--purple); }
+        .type-ugc { background: rgba(197,165,114,0.2); color: var(--gold); }
+        .type-quiz { background: rgba(239,109,156,0.2); color: #EF6D9C; }
+        .type-countdown { background: rgba(239,200,109,0.2); color: #EFC86D; }
+
+        .cal-day .day-desc {
+            font-size: 10px;
+            color: var(--text-dim);
+            margin-top: 3px;
+            line-height: 1.3;
+        }
+
+        /* ===== METRICS ===== */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .metric-input {
+            background: var(--bg-layer);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+        }
+
+        .metric-input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* ===== GROWTH TARGETS ===== */
+        .growth-bar {
+            background: var(--bg-layer);
+            border-radius: 10px;
+            height: 32px;
+            margin: 8px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .growth-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, var(--gold), var(--coral));
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--bg);
+            transition: width 0.6s ease;
+        }
+
+        .growth-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ===== HASHTAG TAGS ===== */
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .tag {
+            background: var(--bg-layer);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 13px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        /* ===== TABS ===== */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .tabs::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            background: var(--bg-layer);
+            border: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-muted);
+            font-size: 13px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--gold-dim);
+            border-color: rgba(197,165,114,0.3);
+            color: var(--gold);
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* ===== DM TEMPLATES ===== */
+        .dm-template {
+            background: var(--bg-layer);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .dm-label {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .dm-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            white-space: pre-line;
+        }
+
+        .dm-text .placeholder {
+            background: rgba(197,165,114,0.2);
+            color: var(--gold);
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* ===== COLLAB LIST ===== */
+        .collab-item {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .collab-item:last-child { border-bottom: none; }
+
+        .collab-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--gold);
+            opacity: 0.4;
+            flex-shrink: 0;
+            width: 36px;
+        }
+
+        .collab-info h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .collab-info p {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        /* ===== PRINT BUTTON ===== */
+        .print-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--gold);
+            color: var(--bg);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 200;
+            box-shadow: 0 4px 20px rgba(197,165,114,0.4);
+            transition: transform 0.2s;
+        }
+
+        .print-btn:hover { transform: scale(1.05); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 640px) {
+            .calendar-grid { grid-template-columns: repeat(4, 1fr); }
+            .cal-header:nth-child(n+5) { display: none; }
+            .metrics-grid { grid-template-columns: 1fr 1fr; }
+            .container { padding: 0 16px; }
+            .card { padding: 20px; }
+        }
+
+        /* ===== DIVIDER ===== */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(197,165,114,0.3), transparent);
+            margin: 40px 0;
+        }
+
+        /* ===== PERSONA TAGS ===== */
+        .persona-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            padding: 3px 10px;
+            border-radius: 100px;
+            background: rgba(197,165,114,0.1);
+            color: var(--gold);
+            margin: 2px;
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: help;
+            border-bottom: 1px dotted var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<section class="cover">
+    <div class="cover-badge">Playbook Interno</div>
+    <h1>Estrategia de <span>Engajamento</span> Instagram</h1>
+    <p class="subtitle">Guia completo para crescer @rotta.curadoria com engajamento autentico, templates prontos e rotina diaria de 40 minutos.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:12px;">
+        <span class="persona-tag">Carolina</span>
+        <span class="persona-tag">Roberto</span>
+        <span class="persona-tag">Silvia & Marcos</span>
+        <span class="persona-tag">Squad</span>
+        <span class="persona-tag">Lucas & Bia</span>
+    </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav no-print">
+    <div class="nav-inner">
+        <a href="#rotina" class="nav-link">Rotina</a>
+        <a href="#perfis" class="nav-link">Perfis-Alvo</a>
+        <a href="#comentarios" class="nav-link">Comentarios</a>
+        <a href="#stories" class="nav-link">Stories 30d</a>
+        <a href="#growth" class="nav-link">Growth</a>
+        <a href="#dms" class="nav-link">DMs</a>
+        <a href="#collabs" class="nav-link">Collabs</a>
+        <a href="#metricas" class="nav-link">Metricas</a>
+    </div>
+</nav>
+
+<!-- ===== 1. ROTINA DIARIA ===== -->
+<section class="section" id="rotina">
+    <div class="container">
+        <div class="section-label">Secao 01</div>
+        <h2 class="section-title">Rotina Diaria de Engajamento</h2>
+        <p class="section-desc">40 minutos por dia divididos em 3 blocos. Consistencia e o que gera resultado. 20 a 30 perfis engajados por dia = ~700/mes de conexoes reais.</p>
+
+        <!-- Morning -->
+        <div class="card">
+            <div class="card-title">
+                <div class="card-icon icon-morning">&#9728;</div>
+                Bloco da Manha (15 min)
+            </div>
+            <ul class="checklist" data-group="morning">
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Responder TODOS os comentarios recebidos durante a noite</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Responder TODAS as DMs pendentes</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Curtir e comentar em 5 posts de seguidores atuais</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Responder stories que mencionem viagem/destinos</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Verificar mentions e reposts</li>
+            </ul>
+        </div>
+
+        <!-- Afternoon -->
+        <div class="card">
+            <div class="card-title">
+                <div class="card-icon icon-afternoon">&#9681;</div>
+                Bloco da Tarde (15 min)
+            </div>
+            <ul class="checklist" data-group="afternoon">
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Encontrar 10 perfis novos para engajar (ver secao Perfis-Alvo)</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Em cada perfil: curtir 3-5 posts ANTES de comentar</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Deixar comentarios significativos (usar templates abaixo)</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Seguir perfis que correspondem as personas-alvo</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Salvar posts inspiradores para referencia de conteudo</li>
+            </ul>
+        </div>
+
+        <!-- Evening -->
+        <div class="card">
+            <div class="card-title">
+                <div class="card-icon icon-evening">&#9790;</div>
+                Bloco da Noite (10 min)
+            </div>
+            <ul class="checklist" data-group="evening">
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Postar stories do dia (enquetes, perguntas, bastidores)</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Engajar com 5-10 respostas de stories</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Verificar e responder DMs finais do dia</li>
+                <li onclick="toggleCheck(this)"><span class="check-box"></span> Revisar Explore e salvar tendencias</li>
+            </ul>
+        </div>
+
+        <div style="text-align:center;margin-top:20px;">
+            <button class="copy-btn" onclick="resetChecklist()" style="font-size:12px;padding:10px 20px;">Resetar Checklist do Dia</button>
+        </div>
+    </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- ===== 2. COMO ENCONTRAR PERFIS ===== -->
+<section class="section" id="perfis">
+    <div class="container">
+        <div class="section-label">Secao 02</div>
+        <h2 class="section-title">Como Encontrar Perfis-Alvo</h2>
+        <p class="section-desc">4 metodos para encontrar pessoas que se encaixam nas nossas personas e tem potencial de virar clientes.</p>
+
+        <!-- Hashtag Hunting -->
+        <div class="card">
+            <div class="card-title">1. Caca-Hashtags</div>
+            <p style="color:var(--text-muted);font-size:14px;margin-bottom:12px;">Busque estas hashtags e engaje com posts recentes (ultimas 24h tem mais chance de resposta):</p>
+            <div class="tag-cloud">
+                <span class="tag" onclick="copyTag(this)">#viagemcasal</span>
+                <span class="tag" onclick="copyTag(this)">#viagemfamilia</span>
+                <span class="tag" onclick="copyTag(this)">#roteirodeviagem</span>
+                <span class="tag" onclick="copyTag(this)">#dicasdeviagem</span>
+                <span class="tag" onclick="copyTag(this)">#europa2026</span>
+                <span class="tag" onclick="copyTag(this)">#orlando2026</span>
+                <span class="tag" onclick="copyTag(this)">#italia2026</span>
+                <span class="tag" onclick="copyTag(this)">#viagemgrupo</span>
+                <span class="tag" onclick="copyTag(this)">#viagemromantica</span>
+                <span class="tag" onclick="copyTag(this)">#travelgram</span>
+                <span class="tag" onclick="copyTag(this)">#brasileirosnoexterior</span>
+                <span class="tag" onclick="copyTag(this)">#malaspronta</span>
+                <span class="tag" onclick="copyTag(this)">#viajarfazbem</span>
+                <span class="tag" onclick="copyTag(this)">#proximodestino</span>
+                <span class="tag" onclick="copyTag(this)">#viageminesquecivel</span>
+            </div>
+            <p style="font-size:12px;color:var(--text-dim);margin-top:8px;">Clique na hashtag para copiar</p>
+        </div>
+
+        <!-- Competitor Followers -->
+        <div class="card">
+            <div class="card-title">2. Seguidores de Contas Similares</div>
+            <ul>
+                <li>Encontre contas de curadoria de viagem, agencias boutique e influenciadores de turismo</li>
+                <li>Va na lista de seguidores dessas contas</li>
+                <li>Priorize perfis com foto propria, bio preenchida e posts recentes</li>
+                <li>Engaje com o conteudo deles ANTES de seguir</li>
+                <li>Nunca mencione a conta de origem — foque em interesse genuino</li>
+            </ul>
+        </div>
+
+        <!-- Location Tags -->
+        <div class="card">
+            <div class="card-title">3. Tags de Localizacao</div>
+            <ul>
+                <li>Aeroportos: Guarulhos, Galeao, Congonhas, Confins</li>
+                <li>Destinos populares: Roma, Paris, Santorini, Cancun, Orlando</li>
+                <li>Hoteis e resorts premium no Brasil</li>
+                <li>Lounges VIP de aeroportos</li>
+                <li>Engaje com quem postou nas ultimas 48h</li>
+            </ul>
+        </div>
+
+        <!-- Explore Page -->
+        <div class="card">
+            <div class="card-title">4. Pagina Explorar</div>
+            <ul>
+                <li>O Instagram personaliza o Explore com base nos seus interesses</li>
+                <li>Interaja com conteudo de viagem para treinar o algoritmo</li>
+                <li>Comente em Reels de viagem com mais de 1.000 views</li>
+                <li>Engaje com carrosseis de dicas de viagem</li>
+                <li>Salve posts que geram muitos comentarios como referencia</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- ===== 3. TEMPLATES DE COMENTARIOS ===== -->
+<section class="section" id="comentarios">
+    <div class="container">
+        <div class="section-label">Secao 03</div>
+        <h2 class="section-title">30 Templates de Comentarios</h2>
+        <p class="section-desc">Comentarios prontos para usar, organizados por contexto. Personalize trocando os trechos em dourado pelo que voce ve na foto.</p>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'tab-viagem')">Fotos de Viagem</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-planejamento')">Planejamento</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-casal')">Casais</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-familia')">Familia</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-grupo')">Grupos</button>
+        </div>
+
+        <!-- TRAVEL PHOTOS -->
+        <div class="tab-content active" id="tab-viagem">
+            <div class="template-group">
+                <div class="template-group-title">Fotos de Viagem (10 templates)</div>
+
+                <div class="template-item">
+                    <div class="template-text">Que lugar incrivel! <em>[nome do destino]</em> tem uma energia unica. Voce chegou a conhecer <em>[ponto turistico proximo]</em>? Vale muito a pena!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Essa foto transmite exatamente a vibe de <em>[destino]</em>! A luz ai e sempre magica. Quanto tempo ficou?</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Ahh <em>[destino]</em>! Um dos lugares que mais amamos curar roteiros. Esse angulo ficou perfeito! Ja experimentou <em>[restaurante ou experiencia local]</em>?</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Foto linda! <em>[destino]</em> nessa epoca do ano fica ainda mais especial. Dica: <em>[dica rapida relevante]</em> — transforma a experiencia!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Adoro ver brasileiros explorando <em>[destino]</em>! Esse lugar tem uma gastronomia absurda. Experimentou algum prato local?</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Que registro lindo! <em>[destino]</em> e daqueles lugares que foto nenhuma faz justica, ne? A sensacao de estar la e outra coisa.</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Essa vista e de tirar o folego! Se voce gostou de <em>[destino]</em>, vai amar <em>[destino similar]</em> — tem uma vibe parecida mas ainda mais intimista.</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Genteee, que foto cinematografica! <em>[destino]</em> parece cenario de filme. Ficou quantos dias? Sempre acho que la a gente quer ficar mais!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Que sonho! Viajou por conta ou teve ajuda com o roteiro? <em>[destino]</em> tem tantos detalhes escondidos que fazem toda a diferenca.</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Amei esse clique! Uma dica para quem vai a <em>[destino]</em>: <em>[dica pratica curta]</em>. Faz a viagem ficar ainda melhor!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- PLANNING POSTS -->
+        <div class="tab-content" id="tab-planejamento">
+            <div class="template-group">
+                <div class="template-group-title">Posts de Planejamento (5 templates)</div>
+
+                <div class="template-item">
+                    <div class="template-text">Planejando <em>[destino]</em>? Uma dica de ouro: reserve <em>[experiencia especifica]</em> com antecedencia — costuma esgotar rapido e vale cada centavo!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Adoro ver gente se organizando pra viajar! Um detalhe que muita gente esquece sobre <em>[destino]</em>: <em>[dica de planejamento]</em>. Pode salvar sua viagem!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Boa! Se esta pensando em <em>[destino]</em>, a melhor epoca e <em>[meses ideais]</em> — clima perfeito e preco mais acessivel. Bora?</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Planilha de viagem? Eu amo! Mas ja pensou em ter alguem que monta tudo sob medida pra voce? Sobra mais tempo pra curtir a expectativa!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Otima escolha de destino! Dica: separe pelo menos <em>[numero]</em> dias pra aproveitar <em>[destino]</em> sem correria. A viagem rende muito mais!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- COUPLE PHOTOS -->
+        <div class="tab-content" id="tab-casal">
+            <div class="template-group">
+                <div class="template-group-title">Fotos de Casal (5 templates)</div>
+
+                <div class="template-item">
+                    <div class="template-text">Que foto linda voces dois! <em>[destino]</em> e perfeito pra casal. Voces chegaram a fazer <em>[experiencia romantica local]</em>? E inesquecivel!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Casal viajante e tudo! Essa combinacao de <em>[destino]</em> com boa companhia nao tem preco. Proximo destino a dois ja esta na mira?</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Ahh que registro especial! Viajar junto fortalece demais a relacao, ne? <em>[destino]</em> tem aquele clima romantico que faz tudo ficar magico.</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Voces arrasaram na escolha! <em>[destino]</em> a dois e um sonho. Dica: <em>[restaurante ou passeio romantico]</em> — perfeito pra um jantar especial!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Essa foto parece capa de revista! Se amaram <em>[destino]</em>, vao pirar em <em>[destino romantico similar]</em> — mesma vibe mas com um toque diferente.</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAMILY PHOTOS -->
+        <div class="tab-content" id="tab-familia">
+            <div class="template-group">
+                <div class="template-group-title">Fotos de Familia (5 templates)</div>
+
+                <div class="template-item">
+                    <div class="template-text">Que familia linda! Viajar com os filhos cria memorias que duram pra sempre. <em>[destino]</em> tem opcoes incriveis pra familia! Curtiram bastante?</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Adoro ver familia viajando junta! Dica pra <em>[destino]</em> com criancas: <em>[atividade family-friendly]</em> — eles vao amar!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Que registro precioso! As criancas parecem ter amado <em>[destino]</em>. Ja estao planejando a proxima aventura em familia?</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Familia unida viaja unida! Adorei ver voces em <em>[destino]</em>. Se precisar de dicas de <em>[destino similar family-friendly]</em>, temos varias guardadas!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Que momento especial! Viajar em familia e o melhor investimento que existe. <em>[destino]</em> nessa epoca deve ter sido perfeito!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- GROUP PHOTOS -->
+        <div class="tab-content" id="tab-grupo">
+            <div class="template-group">
+                <div class="template-group-title">Fotos de Grupo (5 templates)</div>
+
+                <div class="template-item">
+                    <div class="template-text">Squad goals! Viajar com amigos pra <em>[destino]</em> deve ter sido insano! Qual foi o momento mais epico da trip?</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Turma reunida em <em>[destino]</em>! Nao tem nada melhor. Dica: <em>[experiencia em grupo]</em> — e daquelas coisas que o grupo inteiro curte!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Amei a energia dessa galera! Viagem em grupo pra <em>[destino]</em> e garantia de historia boa pra contar. Quantos dias ficaram?</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Que tripzinha! <em>[destino]</em> com a galera toda deve ter sido demais. Ja to com inveja aqui! Proximo destino do grupo ja ta marcado?</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+
+                <div class="template-item">
+                    <div class="template-text">Turma viajante e o melhor tipo de amizade! <em>[destino]</em> foi a escolha perfeita pro grupo. Se quiserem dicas do proximo destino, estamos aqui!</div>
+                    <button class="copy-btn" onclick="copyTemplate(this)">Copiar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- ===== 4. STORIES 30 DIAS ===== -->
+<section class="section" id="stories">
+    <div class="container">
+        <div class="section-label">Secao 04</div>
+        <h2 class="section-title">Calendario de Stories — 30 Dias</h2>
+        <p class="section-desc">Um story por dia, alternando formatos para manter engajamento alto e algoritmo a favor. Clique em cada dia para ver o detalhe.</p>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+            <span class="day-type type-poll" style="padding:4px 10px;border-radius:6px;font-size:11px;">Enquete</span>
+            <span class="day-type type-question" style="padding:4px 10px;border-radius:6px;font-size:11px;">Pergunta</span>
+            <span class="day-type type-tip" style="padding:4px 10px;border-radius:6px;font-size:11px;">Dica</span>
+            <span class="day-type type-bts" style="padding:4px 10px;border-radius:6px;font-size:11px;">Bastidores</span>
+            <span class="day-type type-ugc" style="padding:4px 10px;border-radius:6px;font-size:11px;">UGC/Repost</span>
+            <span class="day-type type-quiz" style="padding:4px 10px;border-radius:6px;font-size:11px;">Quiz</span>
+            <span class="day-type type-countdown" style="padding:4px 10px;border-radius:6px;font-size:11px;">Countdown</span>
+        </div>
+
+        <div class="calendar-grid">
+            <div class="cal-header">Seg</div>
+            <div class="cal-header">Ter</div>
+            <div class="cal-header">Qua</div>
+            <div class="cal-header">Qui</div>
+            <div class="cal-header">Sex</div>
+            <div class="cal-header">Sab</div>
+            <div class="cal-header">Dom</div>
+        </div>
+
+        <!-- Story details as cards below calendar -->
+        <div style="margin-top:32px;">
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 1</span>
+                    <span class="day-type type-poll">Enquete</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Praia ou montanha pra proxima viagem?" — Enquete com 2 opcoes. Imagem dividida: um lado com praia paradisiaca, outro com montanha nevada.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 2</span>
+                    <span class="day-type type-question">Pergunta</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Qual seu destino dos sonhos que voce AINDA nao conheceu?" — Caixinha de perguntas. Responder cada uma com sugestoes personalizadas no dia seguinte.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 3</span>
+                    <span class="day-type type-tip">Dica</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"3 apps que todo viajante precisa ter no celular" — Sequencia de 3 stories, 1 app por story com screenshot e explicacao rapida.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 4</span>
+                    <span class="day-type type-bts">Bastidores</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Por tras da curadoria: como montamos um roteiro personalizado" — Mostrar tela do computador com pesquisa, mapa, anotacoes. Humanizar o processo.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 5</span>
+                    <span class="day-type type-poll">Enquete</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Isso ou Aquilo: Hotel boutique ou Airbnb?" — Enquete visual com fotos dos dois estilos de hospedagem.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 6</span>
+                    <span class="day-type type-ugc">UGC</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">Repostar foto/story de um seguidor viajando. Adicionar comentario: "Olha essa vista que o/a [nome] ta curtindo em [destino]! Quem mais quer estar la?"</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 7</span>
+                    <span class="day-type type-quiz">Quiz</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Adivinhe o destino pela foto!" — Foto cortada ou desfocada de um destino famoso. Resposta no story seguinte.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 8</span>
+                    <span class="day-type type-tip">Dica</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Como fazer mala pra 10 dias em 1 mala de mao" — Dica pratica com checklist visual. Texto sobre imagem de mala organizada.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 9</span>
+                    <span class="day-type type-question">Pergunta</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Voce prefere roteiro detalhado ou viagem espontanea?" — Caixinha de resposta aberta. Gera conversa sobre o servico de curadoria.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 10</span>
+                    <span class="day-type type-countdown">Countdown</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Faltam X dias pro nosso grupo ir pra Italia!" — Sticker de contagem regressiva. Imagem bonita da Italia. Pergunta: "Quem quer vir junto?"</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 11</span>
+                    <span class="day-type type-poll">Enquete</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Jantar: restaurante local autentico ou restaurante famoso turistico?" — Enquete com fotos ilustrativas de cada opcao.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 12</span>
+                    <span class="day-type type-bts">Bastidores</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Dia de pesquisa: descobrimos um hotel escondido na costa amalfitana que voces vao pirar!" — Selfie com tela mostrando o hotel. Gera curiosidade.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 13</span>
+                    <span class="day-type type-tip">Dica</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"O erro #1 que brasileiros cometem ao viajar pra Europa" — Dica sobre gorjeta/cultura local. Formato texto com fundo de foto europeia.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 14</span>
+                    <span class="day-type type-ugc">UGC</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">Repostar depoimento de cliente (print de mensagem com permissao ou video). "Nada melhor que receber esse tipo de feedback!"</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 15</span>
+                    <span class="day-type type-question">Pergunta</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Se voce pudesse viajar com UMA pessoa, quem levaria e pra onde?" — Caixinha de perguntas. Respostas viram conteudo dos proximos dias.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 16</span>
+                    <span class="day-type type-quiz">Quiz</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Verdadeiro ou Falso: Precisa de visto pra entrar na Italia em 2026?" — Quiz com sticker. Educar sobre documentacao.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 17</span>
+                    <span class="day-type type-poll">Enquete</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Viagem solo ou viagem em grupo?" — Enquete dupla: 1) preferencia 2) "Ja viajou em grupo organizado?" Sim/Nao.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 18</span>
+                    <span class="day-type type-bts">Bastidores</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Reuniao de planejamento da viagem de grupo pra Italia" — Video curto ou fotos do processo. Mostra profissionalismo e gera FOMO.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 19</span>
+                    <span class="day-type type-tip">Dica</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Como economizar em passagem aerea: 3 truques que usamos" — Dica pratica. Mencionar ferramenta ou tecnica sem ser generico.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 20</span>
+                    <span class="day-type type-countdown">Countdown</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Novidade chegando na Rotta Curadoria!" — Countdown misterioso para lancamento de produto/roteiro novo. Gera expectativa.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 21</span>
+                    <span class="day-type type-question">Pergunta</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"O que voce mais valoriza numa viagem? A) Gastronomia B) Cultura C) Aventura D) Relaxamento" — Slider de emoji ou caixinha.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 22</span>
+                    <span class="day-type type-ugc">UGC</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">Compilado das melhores respostas do Dia 15. "Olha os destinos dos sonhos de voces!" — Mostra que a comunidade esta ativa.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 23</span>
+                    <span class="day-type type-poll">Enquete</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Mala de mao ou mala despachada?" — Enquete com foto de cada opcao lado a lado. Complementar com dica no story seguinte.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 24</span>
+                    <span class="day-type type-bts">Bastidores</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Um dia na vida de um curador de viagens" — Sequencia de stories mostrando a rotina: pesquisa, contato com hoteis, montagem de itinerario.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 25</span>
+                    <span class="day-type type-quiz">Quiz</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Quanto custa em media uma viagem de 10 dias pra Italia pra casal?" — Quiz com 4 opcoes. Surpreender com a resposta e oferecer consultoria.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 26</span>
+                    <span class="day-type type-tip">Dica</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"5 coisas que voce NAO precisa levar na mala" — Contra-intuitivo, gera engajamento. Formato lista visual.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 27</span>
+                    <span class="day-type type-ugc">UGC</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Destino favorito dos nossos seguidores" — Infografico simples baseado nas respostas do Dia 21. Mostra dados da comunidade.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 28</span>
+                    <span class="day-type type-question">Pergunta</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Sobre qual destino voce quer que a gente fale semana que vem?" — Caixinha aberta. Usa as respostas pra gerar conteudo da proxima semana.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 29</span>
+                    <span class="day-type type-countdown">Countdown</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Vagas limitadas pro proximo grupo!" — Contagem regressiva para fechamento de vagas. Criar urgencia real. Link pro WhatsApp.</p>
+            </div>
+
+            <div class="card" style="margin-bottom:8px;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+                    <span style="font-weight:700;color:var(--gold);font-size:14px;">Dia 30</span>
+                    <span class="day-type type-bts">Bastidores</span>
+                </div>
+                <p style="color:var(--text-muted);font-size:14px;">"Retrospectiva do mes: o que rolou na Rotta" — Compilado de momentos, numeros do mes, agradecimento aos seguidores. Terminar com: "Mes que vem tem mais!"</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- ===== 5. GROWTH HACKING ===== -->
+<section class="section" id="growth">
+    <div class="container">
+        <div class="section-label">Secao 05</div>
+        <h2 class="section-title">Taticas de Crescimento</h2>
+        <p class="section-desc">Estrategias para acelerar o crescimento organico alem do engajamento diario.</p>
+
+        <!-- Collab Posts -->
+        <div class="card">
+            <div class="card-title">1. Posts Colaborativos (Collab)</div>
+            <ul>
+                <li><strong style="color:var(--text)">O que e:</strong> Postar conteudo em parceria com outra conta — o post aparece nos dois perfis</li>
+                <li><strong style="color:var(--text)">Como abordar:</strong> Seguir a conta, engajar por 1-2 semanas, depois enviar DM com proposta de valor</li>
+                <li><strong style="color:var(--text)">Frequencia:</strong> 2 collabs por mes</li>
+                <li><strong style="color:var(--text)">Contas ideais:</strong> Hoteis boutique, restaurantes em destinos, fotografos de viagem, marcas de malas/acessorios</li>
+                <li><strong style="color:var(--text)">Formato:</strong> Carrossel com "5 dicas de [destino]" ou Reel mostrando experiencia conjunta</li>
+            </ul>
+        </div>
+
+        <!-- Giveaway -->
+        <div class="card">
+            <div class="card-title">2. Sorteios Mensais</div>
+            <ul>
+                <li><strong style="color:var(--text)">O que sortear:</strong> Kit viajante (necessaire + adaptador + tag de mala + guia digital Rotta)</li>
+                <li><strong style="color:var(--text)">Investimento:</strong> R$100-200/mes no kit</li>
+                <li><strong style="color:var(--text)">Regras:</strong> Seguir @rotta.curadoria + curtir o post + marcar 2 amigos viajantes nos comentarios</li>
+                <li><strong style="color:var(--text)">Duracao:</strong> 7 dias de campanha</li>
+                <li><strong style="color:var(--text)">Parceria:</strong> Convidar marca de acessorios de viagem para co-patrocinar (dobra o alcance)</li>
+                <li><strong style="color:var(--text)">Anuncio:</strong> Live de 5 min sorteando ao vivo + stories durante a semana</li>
+            </ul>
+        </div>
+
+        <!-- Trending Reels -->
+        <div class="card">
+            <div class="card-title">3. Reels com Audio em Alta</div>
+            <ul>
+                <li><strong style="color:var(--text)">Como encontrar:</strong> Aba Reels > procurar audios com seta pra cima (trending) > verificar se tem menos de 10k usos</li>
+                <li><strong style="color:var(--text)">Adaptar:</strong> Usar o audio trending mas com conteudo de viagem/curadoria</li>
+                <li><strong style="color:var(--text)">Frequencia:</strong> 3-4 Reels por semana</li>
+                <li><strong style="color:var(--text)">Tipos:</strong> Transicoes de look viagem, antes/depois do roteiro, "POV: voce contratou uma curadoria de viagem"</li>
+                <li><strong style="color:var(--text)">Dica:</strong> Postar Reels entre 18h-20h ou 12h-13h para maximo alcance</li>
+            </ul>
+        </div>
+
+        <!-- Carousels -->
+        <div class="card">
+            <div class="card-title">4. Carrosseis Compartilhaveis</div>
+            <ul>
+                <li><strong style="color:var(--text)">Formato ideal:</strong> 7-10 slides com design limpo e informacao densa</li>
+                <li><strong style="color:var(--text)">Temas que geram compartilhamento:</strong></li>
+                <li>"10 destinos baratos pra 2026"</li>
+                <li>"Checklist de mala pra Europa"</li>
+                <li>"Comparativo: Italia em alta vs baixa temporada"</li>
+                <li>"O roteiro perfeito de 7 dias em [destino]"</li>
+                <li><strong style="color:var(--text)">CTA no ultimo slide:</strong> "Salva pra quando for planejar!" ou "Manda pro amigo que precisa ver isso!"</li>
+            </ul>
+        </div>
+
+        <!-- Save-worthy -->
+        <div class="card">
+            <div class="card-title">5. Conteudo Salvavel</div>
+            <ul>
+                <li><strong style="color:var(--text)">Checklists:</strong> "O que levar pra [destino]" — formato lista com checkbox visual</li>
+                <li><strong style="color:var(--text)">Comparacoes:</strong> "Santorini vs Amalfi: qual escolher?" — tabela visual lado a lado</li>
+                <li><strong style="color:var(--text)">Mapas:</strong> Roteiro visual em mapa com os pontos marcados</li>
+                <li><strong style="color:var(--text)">Precos:</strong> "Quanto custa 10 dias na Italia" — breakdown de custos</li>
+                <li><strong style="color:var(--text)">Frases:</strong> "As 5 frases em italiano que voce PRECISA saber" — educacional + pratico</li>
+                <li><strong style="color:var(--text)">Sempre incluir:</strong> "Salva esse post!" no caption</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- ===== 6. ESTRATEGIA DE DM ===== -->
+<section class="section" id="dms">
+    <div class="container">
+        <div class="section-label">Secao 06</div>
+        <h2 class="section-title">Estrategia de DMs</h2>
+        <p class="section-desc">Transformar conversas em conexoes reais e, eventualmente, em clientes. Nunca automatizar — cada mensagem deve ser personalizada.</p>
+
+        <!-- Welcome Message -->
+        <div class="dm-template">
+            <div class="dm-label">Boas-vindas para novos seguidores</div>
+            <div class="dm-text">Oi <span class="placeholder">[nome]</span>! Bem-vindo(a) a Rotta!
+
+Vi que voce curte <span class="placeholder">[viagem/destino que aparece no perfil]</span> — a gente tambem e apaixonado por isso!
+
+Se tiver qualquer duvida sobre destinos ou quiser trocar uma ideia sobre sua proxima viagem, e so chamar aqui. Bora descobrir o mundo juntos!</div>
+            <button class="copy-btn" onclick="copyDM(this)" style="margin-top:12px;">Copiar</button>
+        </div>
+
+        <!-- Transition to WhatsApp -->
+        <div class="dm-template">
+            <div class="dm-label">Transicao para WhatsApp</div>
+            <div class="dm-text">Que legal que voce curtiu a ideia! Pra gente conversar com mais detalhe e montar algo sob medida pra voce, posso te chamar no nosso WhatsApp?
+
+La fica mais facil trocar fotos, documentos e montar tudo direitinho pra sua viagem. O numero e 44 99945-0929 — ou se preferir, me passa o seu que eu te chamo!</div>
+            <button class="copy-btn" onclick="copyDM(this)" style="margin-top:12px;">Copiar</button>
+        </div>
+
+        <!-- How much? -->
+        <div class="dm-template">
+            <div class="dm-label">Resposta para "Quanto custa?"</div>
+            <div class="dm-text">Oi <span class="placeholder">[nome]</span>! Que bom que voce se interessou!
+
+O valor depende de alguns fatores — destino, quantos dias, quantas pessoas, estilo de viagem (mais aventureiro ou mais relax). Cada curadoria e unica!
+
+Pra eu te passar algo certinho, me conta:
+1. Pra onde voce quer ir?
+2. Quantas pessoas?
+3. Tem datas em mente?
+
+Com essas infos eu ja consigo montar uma proposta personalizada pra voce!</div>
+            <button class="copy-btn" onclick="copyDM(this)" style="margin-top:12px;">Copiar</button>
+        </div>
+
+        <!-- Do you do [destination]? -->
+        <div class="dm-template">
+            <div class="dm-label">Resposta para "Voces fazem [destino]?"</div>
+            <div class="dm-text">Oi <span class="placeholder">[nome]</span>! Sim, trabalhamos com <span class="placeholder">[destino]</span>!
+
+Na verdade, a gente monta roteiros pra praticamente qualquer destino — nosso diferencial e justamente personalizar tudo pro seu estilo.
+
+Ja conhece <span class="placeholder">[destino]</span> ou seria a primeira vez? Me conta um pouco do que voce imagina pra essa viagem que eu te ajudo a criar algo incrivel!</div>
+            <button class="copy-btn" onclick="copyDM(this)" style="margin-top:12px;">Copiar</button>
+        </div>
+    </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- ===== 7. COLABORACOES ===== -->
+<section class="section" id="collabs">
+    <div class="container">
+        <div class="section-label">Secao 07</div>
+        <h2 class="section-title">Colaboracoes & Parcerias</h2>
+        <p class="section-desc">10 tipos de contas para colaborar e o template de abordagem.</p>
+
+        <div class="card">
+            <div class="collab-item">
+                <div class="collab-num">01</div>
+                <div class="collab-info">
+                    <h4>Hoteis Boutique</h4>
+                    <p>Troca: Divulgacao mutua. Oferecer review detalhado do hotel em troca de diaria midia/desconto para clientes.</p>
+                </div>
+            </div>
+            <div class="collab-item">
+                <div class="collab-num">02</div>
+                <div class="collab-info">
+                    <h4>Restaurantes em Destinos</h4>
+                    <p>Troca: Post collab mostrando o restaurante + inclusao no roteiro como recomendacao.</p>
+                </div>
+            </div>
+            <div class="collab-item">
+                <div class="collab-num">03</div>
+                <div class="collab-info">
+                    <h4>Marcas de Malas e Acessorios</h4>
+                    <p>Troca: Produto para sorteio/review + co-patrocinio de giveaway mensal.</p>
+                </div>
+            </div>
+            <div class="collab-item">
+                <div class="collab-num">04</div>
+                <div class="collab-info">
+                    <h4>Fotografos de Viagem</h4>
+                    <p>Troca: Conteudo visual de alta qualidade. Carrossel collab "Os 10 melhores angulos de [destino]".</p>
+                </div>
+            </div>
+            <div class="collab-item">
+                <div class="collab-num">05</div>
+                <div class="collab-info">
+                    <h4>Companhias Aereas (micro-influencer)</h4>
+                    <p>Troca: Conteudo de review de classe + marcacao. Meta: programa de parceiros de conteudo.</p>
+                </div>
+            </div>
+            <div class="collab-item">
+                <div class="collab-num">06</div>
+                <div class="collab-info">
+                    <h4>Bloggers de Viagem</h4>
+                    <p>Troca: Guest post cruzado ou Live conjunta sobre dicas de destino. Amplia audiencia para ambos.</p>
+                </div>
+            </div>
+            <div class="collab-item">
+                <div class="collab-num">07</div>
+                <div class="collab-info">
+                    <h4>Casas de Cambio / Fintechs</h4>
+                    <p>Troca: Dica de "como economizar no cambio" em collab + desconto exclusivo para seguidores.</p>
+                </div>
+            </div>
+            <div class="collab-item">
+                <div class="collab-num">08</div>
+                <div class="collab-info">
+                    <h4>Seguradoras de Viagem</h4>
+                    <p>Troca: Conteudo educativo conjunto "Por que seguro viagem e essencial" + cupom exclusivo.</p>
+                </div>
+            </div>
+            <div class="collab-item">
+                <div class="collab-num">09</div>
+                <div class="collab-info">
+                    <h4>Lojas de Roupas para Viagem</h4>
+                    <p>Troca: "Looks pra cada destino" em carrossel collab. Conteudo estilo + viagem.</p>
+                </div>
+            </div>
+            <div class="collab-item">
+                <div class="collab-num">10</div>
+                <div class="collab-info">
+                    <h4>Escolas de Idiomas</h4>
+                    <p>Troca: "5 frases essenciais em [idioma]" em Reel collab. Educativo e salvavel.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- DM Template for Collab -->
+        <div class="dm-template" style="margin-top:20px;">
+            <div class="dm-label">Template de DM para Propor Collab</div>
+            <div class="dm-text">Oi <span class="placeholder">[nome da marca/pessoa]</span>! Tudo bem?
+
+Sou da Rotta Curadoria — a gente cria experiencias de viagem personalizadas e nosso publico e formado por brasileiros que valorizam qualidade e experiencias unicas.
+
+Adoramos o trabalho de voces e achamos que uma parceria faria muito sentido! A ideia seria <span class="placeholder">[descrever a proposta: post collab, live, sorteio conjunto, etc.]</span>.
+
+Da nossa parte, oferecemos <span class="placeholder">[o que voce oferece: divulgacao, inclusao no roteiro, conteudo, etc.]</span>.
+
+Topa trocar uma ideia sobre isso? Pode ser aqui ou no WhatsApp!</div>
+            <button class="copy-btn" onclick="copyDM(this)" style="margin-top:12px;">Copiar</button>
+        </div>
+    </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- ===== 8. METRICAS ===== -->
+<section class="section" id="metricas">
+    <div class="container">
+        <div class="section-label">Secao 08</div>
+        <h2 class="section-title">Metricas & Metas</h2>
+        <p class="section-desc">Acompanhe semanalmente e ajuste a estrategia com base nos numeros. Preencha os campos abaixo para acompanhar.</p>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;margin-bottom:16px;">Tracker Semanal</h3>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Seguidores</div>
+                <input class="metric-input" type="number" placeholder="0" id="m-followers">
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Tx. Engajamento %</div>
+                <input class="metric-input" type="text" placeholder="0.0" id="m-engagement">
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Views de Stories</div>
+                <input class="metric-input" type="number" placeholder="0" id="m-stories">
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">DMs Iniciadas</div>
+                <input class="metric-input" type="number" placeholder="0" id="m-dms">
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Visitas ao Perfil</div>
+                <input class="metric-input" type="number" placeholder="0" id="m-visits">
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Cliques no Site</div>
+                <input class="metric-input" type="number" placeholder="0" id="m-clicks">
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Salvamentos</div>
+                <input class="metric-input" type="number" placeholder="0" id="m-saves">
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Compartilhamentos</div>
+                <input class="metric-input" type="number" placeholder="0" id="m-shares">
+            </div>
+        </div>
+
+        <div style="text-align:center;margin:16px 0;">
+            <button class="copy-btn" onclick="saveMetrics()" style="font-size:12px;padding:10px 20px;margin:4px;">Salvar Dados</button>
+            <button class="copy-btn" onclick="clearMetrics()" style="font-size:12px;padding:10px 20px;margin:4px;">Limpar</button>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:20px;margin:32px 0 16px;">Metas de Crescimento</h3>
+
+        <div class="card">
+            <div style="margin-bottom:20px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                    <span style="font-size:14px;font-weight:600;">Mes 1</span>
+                    <span style="font-size:13px;color:var(--text-muted);">Meta: 500 seguidores</span>
+                </div>
+                <div class="growth-bar">
+                    <div class="growth-fill" style="width:12.5%;">0 → 500</div>
+                </div>
+                <div class="growth-label">
+                    <span>Foco: Engajamento diario + conteudo consistente</span>
+                    <span style="color:var(--gold);">12.5%</span>
+                </div>
+            </div>
+
+            <div style="margin-bottom:20px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                    <span style="font-size:14px;font-weight:600;">Mes 2</span>
+                    <span style="font-size:13px;color:var(--text-muted);">Meta: 1.500 seguidores</span>
+                </div>
+                <div class="growth-bar">
+                    <div class="growth-fill" style="width:37.5%;">500 → 1.500</div>
+                </div>
+                <div class="growth-label">
+                    <span>Foco: Collabs + sorteios + Reels virais</span>
+                    <span style="color:var(--gold);">37.5%</span>
+                </div>
+            </div>
+
+            <div>
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+                    <span style="font-size:14px;font-weight:600;">Mes 3</span>
+                    <span style="font-size:13px;color:var(--text-muted);">Meta: 4.000 seguidores</span>
+                </div>
+                <div class="growth-bar">
+                    <div class="growth-fill" style="width:100%;">1.500 → 4.000</div>
+                </div>
+                <div class="growth-label">
+                    <span>Foco: Autoridade + comunidade + conversao</span>
+                    <span style="color:var(--gold);">100%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top:16px;">
+            <div class="card-title">Formula de Engajamento</div>
+            <div style="background:var(--bg-layer);border-radius:10px;padding:16px;margin-top:8px;text-align:center;">
+                <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);">
+                    Taxa = (Curtidas + Comentarios) / Seguidores x 100
+                </div>
+                <div style="font-size:13px;color:var(--text-dim);margin-top:8px;">
+                    Meta: acima de 3% (excelente para contas em crescimento)
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container" style="padding:60px 24px;text-align:center;">
+    <div class="divider"></div>
+    <p style="color:var(--text-dim);font-size:13px;margin-top:40px;">Rotta Curadoria &mdash; Playbook de Engajamento Instagram</p>
+    <p style="color:var(--text-dim);font-size:12px;">@rotta.curadoria | Documento interno | Atualizado em Marzo 2026</p>
+</div>
+
+<!-- Print Button -->
+<button class="print-btn no-print" onclick="window.print()">Imprimir Checklist</button>
+
+<script>
+// ===== CHECKLIST =====
+function toggleCheck(el) {
+    el.classList.toggle('checked');
+    saveChecklistState();
+}
+
+function saveChecklistState() {
+    const groups = document.querySelectorAll('.checklist');
+    const state = {};
+    groups.forEach(g => {
+        const key = g.dataset.group;
+        if (!key) return;
+        state[key] = [];
+        g.querySelectorAll('li').forEach((li, i) => {
+            state[key].push(li.classList.contains('checked'));
+        });
+    });
+    localStorage.setItem('rotta-checklist', JSON.stringify(state));
+}
+
+function loadChecklistState() {
+    const raw = localStorage.getItem('rotta-checklist');
+    if (!raw) return;
+    const state = JSON.parse(raw);
+    Object.keys(state).forEach(key => {
+        const group = document.querySelector(`.checklist[data-group="${key}"]`);
+        if (!group) return;
+        group.querySelectorAll('li').forEach((li, i) => {
+            if (state[key][i]) li.classList.add('checked');
+        });
+    });
+}
+
+function resetChecklist() {
+    document.querySelectorAll('.checklist li').forEach(li => li.classList.remove('checked'));
+    localStorage.removeItem('rotta-checklist');
+}
+
+// ===== COPY TEMPLATE =====
+function copyTemplate(btn) {
+    const text = btn.previousElementSibling.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = 'Copiar';
+            btn.classList.remove('copied');
+        }, 2000);
+    });
+}
+
+// ===== COPY DM =====
+function copyDM(btn) {
+    const dm = btn.closest('.dm-template');
+    const text = dm.querySelector('.dm-text').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = 'Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+            btn.textContent = 'Copiar';
+            btn.classList.remove('copied');
+        }, 2000);
+    });
+}
+
+// ===== COPY TAG =====
+function copyTag(el) {
+    navigator.clipboard.writeText(el.textContent).then(() => {
+        const orig = el.textContent;
+        el.textContent = 'Copiado!';
+        el.style.borderColor = 'var(--green)';
+        el.style.color = 'var(--green)';
+        setTimeout(() => {
+            el.textContent = orig;
+            el.style.borderColor = '';
+            el.style.color = '';
+        }, 1500);
+    });
+}
+
+// ===== TABS =====
+function switchTab(e, tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    e.target.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+}
+
+// ===== METRICS =====
+function saveMetrics() {
+    const ids = ['m-followers','m-engagement','m-stories','m-dms','m-visits','m-clicks','m-saves','m-shares'];
+    const data = {};
+    ids.forEach(id => { data[id] = document.getElementById(id).value; });
+    const week = new Date().toISOString().split('T')[0];
+    const all = JSON.parse(localStorage.getItem('rotta-metrics') || '{}');
+    all[week] = data;
+    localStorage.setItem('rotta-metrics', JSON.stringify(all));
+    alert('Dados salvos para a semana de ' + week + '!');
+}
+
+function clearMetrics() {
+    const ids = ['m-followers','m-engagement','m-stories','m-dms','m-visits','m-clicks','m-saves','m-shares'];
+    ids.forEach(id => { document.getElementById(id).value = ''; });
+}
+
+// ===== NAV HIGHLIGHT =====
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(l => {
+        l.classList.remove('active');
+        if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    });
+});
+
+// Init
+loadChecklistState();
+</script>
+
+</body>
+</html>
