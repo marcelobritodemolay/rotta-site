@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotta Curadoria — 5 Newsletter Templates + Brevo Setup</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0E0E0E;
+    color: #F2EDE8;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .header {
+    text-align: center;
+    padding: 60px 20px 40px;
+    border-bottom: 1px solid #222;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: #C5A572;
+    margin-bottom: 8px;
+  }
+  .header p {
+    color: #888;
+    font-size: 0.95rem;
+  }
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    padding: 0 20px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    background: #0E0E0E;
+    z-index: 100;
+    border-bottom: 1px solid #222;
+    padding-bottom: 0;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: #888;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 14px 18px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .tab-btn:hover { color: #F2EDE8; }
+  .tab-btn.active {
+    color: #C5A572;
+    border-bottom-color: #C5A572;
+  }
+  .tab-content {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+  .tab-content.active { display: block; }
+  .persona-header {
+    margin-bottom: 40px;
+    padding: 30px;
+    background: #1A1A1A;
+    border-radius: 12px;
+    border-left: 3px solid #C5A572;
+  }
+  .persona-header h2 {
+    font-family: 'Playfair Display', serif;
+    color: #C5A572;
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+  }
+  .persona-header .subtitle {
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  .persona-header .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: #777;
+  }
+  .persona-header .meta span {
+    background: #222;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+  .email-card {
+    background: #1A1A1A;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+  .email-card-header {
+    background: #151515;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #222;
+  }
+  .email-card-title {
+    font-family: 'Playfair Display', serif;
+    color: #C5A572;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .email-badge {
+    font-size: 0.75rem;
+    color: #999;
+    background: #222;
+    padding: 3px 10px;
+    border-radius: 12px;
+  }
+  .email-body { padding: 24px; }
+  .field-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #C5A572;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .field-value {
+    margin-bottom: 20px;
+    color: #ddd;
+    font-size: 0.92rem;
+  }
+  .subject-line {
+    background: #111;
+    padding: 10px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+    border-left: 2px solid #C5A572;
+  }
+  .subject-line .label {
+    color: #C5A572;
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin-right: 8px;
+  }
+  .code-container {
+    position: relative;
+    margin-top: 16px;
+    margin-bottom: 24px;
+  }
+  .code-box {
+    background: #111;
+    border-radius: 8px;
+    padding: 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    color: #aaa;
+    overflow-x: auto;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    border: 1px solid #222;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #C5A572;
+    color: #0E0E0E;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    z-index: 10;
+  }
+  .copy-btn:hover { background: #d4b67f; transform: scale(1.05); }
+  .copy-btn.copied { background: #4CAF50; color: #fff; }
+  .instruction-step {
+    background: #1A1A1A;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border-left: 3px solid #C5A572;
+  }
+  .instruction-step h3 {
+    font-family: 'Playfair Display', serif;
+    color: #C5A572;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+  .instruction-step p, .instruction-step li {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+  .instruction-step ul, .instruction-step ol {
+    padding-left: 20px;
+    margin-top: 8px;
+  }
+  .instruction-step li { margin-bottom: 6px; }
+  .instruction-step code {
+    background: #222;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #C5A572;
+  }
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  .checklist li {
+    padding: 8px 0;
+    padding-left: 28px;
+    position: relative;
+  }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 12px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #C5A572;
+    border-radius: 4px;
+  }
+  .table-ref {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 0.85rem;
+  }
+  .table-ref th {
+    text-align: left;
+    padding: 10px 14px;
+    background: #222;
+    color: #C5A572;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .table-ref td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #222;
+    color: #ccc;
+  }
+  .alert-box {
+    background: rgba(197, 165, 114, 0.1);
+    border: 1px solid #C5A572;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.88rem;
+    color: #ddd;
+  }
+  .alert-box strong { color: #C5A572; }
+  @media (max-width: 768px) {
+    .header h1 { font-size: 1.6rem; }
+    .tabs { gap: 0; }
+    .tab-btn { padding: 10px 10px; font-size: 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Rotta Curadoria</h1>
+  <p>5 Newsletter Templates Semanais + Setup Brevo</p>
+  <p style="color:#666; font-size:0.8rem; margin-top:8px;">Envio: Domingos 19h | Segmentado por persona do quiz</p>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('carolina')">Exploradora</button>
+  <button class="tab-btn" onclick="showTab('roberto')">Executivo</button>
+  <button class="tab-btn" onclick="showTab('silvia')">Casal Reconect.</button>
+  <button class="tab-btn" onclick="showTab('squad')">Squad</button>
+  <button class="tab-btn" onclick="showTab('lucas')">Avent. Rom.</button>
+  <button class="tab-btn" onclick="showTab('brevo')">Setup Brevo</button>
+</div>
+
+<!-- ==================== TAB 1: CAROLINA ==================== -->
+<div id="tab-carolina" class="tab-content active">
+  <div class="persona-header">
+    <h2>Newsletter: Exploradora Aspiracional</h2>
+    <p class="subtitle">Para quem quer descobrir o mundo de forma inteligente e acessivel</p>
+    <div class="meta">
+      <span>Lista Brevo: Quiz Carolina #3</span>
+      <span>Envio: Domingos 19h</span>
+      <span>Tom: Empoderador e pratico</span>
+    </div>
+  </div>
+
+  <div class="email-card">
+    <div class="email-card-header">
+      <span class="email-card-title">Template Semanal</span>
+      <span class="email-badge">A/B Test Ativo</span>
+    </div>
+    <div class="email-body">
+      <div class="field-label">Linhas de Assunto (A/B Test)</div>
+      <div class="subject-line"><span class="label">A:</span> &#9992;&#65039; 3 destinos perfeitos pra sua proxima aventura</div>
+      <div class="subject-line"><span class="label">B:</span> Essa viagem e a sua cara &#10024;</div>
+
+      <div class="field-label" style="margin-top:24px;">Preview no Inbox</div>
+      <div class="field-value">Descubra destinos incriveis sem pesar no bolso</div>
+
+      <div class="field-label">Codigo HTML Completo</div>
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode('code-carolina')">Copiar HTML</button>
+        <div class="code-box" id="code-carolina">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+  &lt;title&gt;Rotta Curadoria — Newsletter Semanal&lt;/title&gt;
+  &lt;!--[if mso]&gt;
+  &lt;style type="text/css"&gt;
+    table {border-collapse: collapse;}
+  &lt;/style&gt;
+  &lt;![endif]--&gt;
+  &lt;style type="text/css"&gt;
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+    body { margin: 0; padding: 0; width: 100% !important; background-color: #e8e3dd; }
+    .email-container { max-width: 600px; margin: 0 auto; }
+    .gold-line { border: none; height: 1px; background-color: #C5A572; margin: 0; }
+    .section-title { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; color: #C5A572; margin: 0 0 12px 0; font-weight: 700; }
+    .body-text { font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #1A1A1A; line-height: 1.7; margin: 0 0 16px 0; }
+    .small-text { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #777; line-height: 1.6; margin: 0; }
+    .cta-button { background-color: #C5A572; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 32px; border-radius: 6px; display: inline-block; letter-spacing: 0.5px; }
+    .img-placeholder { background-color: #ddd5cc; width: 100%; height: 220px; text-align: center; line-height: 220px; font-family: Arial, sans-serif; font-size: 13px; color: #999; }
+    @media screen and (max-width: 600px) {
+      .email-container { width: 100% !important; }
+      .stack-column { display: block !important; width: 100% !important; }
+      .section-title { font-size: 20px !important; }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body style="margin:0; padding:0; background-color:#e8e3dd;"&gt;
+  &lt;center&gt;
+    &lt;div style="display:none;max-height:0;overflow:hidden;mso-hide:all;"&gt;
+      Descubra destinos incriveis sem pesar no bolso
+    &lt;/div&gt;
+
+    &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#e8e3dd;"&gt;
+      &lt;tr&gt;
+        &lt;td align="center" style="padding: 20px 10px;"&gt;
+          &lt;table class="email-container" role="presentation" cellpadding="0" cellspacing="0" width="600" style="background-color:#F2EDE8; border-radius:8px; overflow:hidden;"&gt;
+
+            &lt;!-- HEADER --&gt;
+            &lt;tr&gt;
+              &lt;td style="background-color:#0E0E0E; padding:32px 40px; text-align:center;"&gt;
+                &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:28px; color:#C5A572; margin:0; font-weight:700; letter-spacing:1px;"&gt;Rotta Curadoria&lt;/p&gt;
+                &lt;p style="font-family:Arial,Helvetica,sans-serif; font-size:11px; color:#888; margin:6px 0 0 0; letter-spacing:2px; text-transform:uppercase;"&gt;Sua dose semanal de inspiracao&lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- DESTINO DA SEMANA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:32px 40px 24px;"&gt;
+                &lt;p class="section-title"&gt;Destino da Semana&lt;/p&gt;
+                &lt;!-- SUBSTITUIR: Imagem do destino (600x220) --&gt;
+                &lt;div class="img-placeholder" style="border-radius:8px; margin-bottom:16px;"&gt;[Imagem do destino — 600x220px]&lt;/div&gt;
+                &lt;p class="body-text" style="font-family:Georgia,'Times New Roman',serif; font-size:20px; color:#1A1A1A; font-weight:700; margin-bottom:8px;"&gt;
+                  {{destino_nome}}
+                &lt;/p&gt;
+                &lt;p class="body-text"&gt;
+                  {{destino_descricao}} — Um destino perfeito pra quem quer viver experiencias autenticas sem comprometer o orcamento. Paisagens de tirar o folego, gastronomia local incrivel e aquele gostinho de "preciso voltar".
+                &lt;/p&gt;
+                &lt;p class="body-text" style="font-weight:600; color:#C5A572;"&gt;
+                  A partir de R$ {{preco}} por pessoa | {{duracao}} dias
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- DICA DE ECONOMIA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:24px 40px;"&gt;
+                &lt;p class="section-title" style="font-size:18px;"&gt;Dica de Economia&lt;/p&gt;
+                &lt;p class="body-text"&gt;
+                  {{dica_economia}} — Sabia que reservando com antecedencia de {{meses}} meses voce pode economizar ate {{percentual}}% na passagem aerea? A gente sempre fala: planejamento e o melhor amigo da viagem dos sonhos.
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- CONTEUDO DA SEMANA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:24px 40px;"&gt;
+                &lt;p class="section-title" style="font-size:18px;"&gt;Da Semana no @rotta.curadoria&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%"&gt;
+                  &lt;tr&gt;
+                    &lt;td class="stack-column" width="48%" style="vertical-align:top; padding-right:12px;"&gt;
+                      &lt;div class="img-placeholder" style="height:140px; line-height:140px; border-radius:6px; margin-bottom:10px;"&gt;[Thumb carrossel]&lt;/div&gt;
+                      &lt;p class="small-text" style="color:#1A1A1A; font-weight:600; margin-bottom:4px;"&gt;Carrossel&lt;/p&gt;
+                      &lt;p class="small-text"&gt;{{carrossel_titulo}}&lt;/p&gt;
+                      &lt;a href="{{carrossel_link}}" style="font-family:Arial,sans-serif; font-size:13px; color:#C5A572; font-weight:600; text-decoration:none;"&gt;Ver no Instagram&lt;/a&gt;
+                    &lt;/td&gt;
+                    &lt;td class="stack-column" width="48%" style="vertical-align:top; padding-left:12px;"&gt;
+                      &lt;div class="img-placeholder" style="height:140px; line-height:140px; border-radius:6px; margin-bottom:10px;"&gt;[Thumb reel]&lt;/div&gt;
+                      &lt;p class="small-text" style="color:#1A1A1A; font-weight:600; margin-bottom:4px;"&gt;Reel&lt;/p&gt;
+                      &lt;p class="small-text"&gt;{{reel_titulo}}&lt;/p&gt;
+                      &lt;a href="{{reel_link}}" style="font-family:Arial,sans-serif; font-size:13px; color:#C5A572; font-weight:600; text-decoration:none;"&gt;Assistir agora&lt;/a&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- CTA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:32px 40px; text-align:center;"&gt;
+                &lt;p class="body-text" style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#1A1A1A; margin-bottom:8px;"&gt;Quer descobrir o destino ideal pra voce?&lt;/p&gt;
+                &lt;p class="body-text" style="margin-bottom:20px;"&gt;Faca nosso quiz e receba uma curadoria personalizada.&lt;/p&gt;
+                &lt;a href="https://www.rottacuradoria.com/quiz" class="cta-button" style="color:#ffffff;"&gt;FAZER O QUIZ&lt;/a&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;!-- FOOTER --&gt;
+            &lt;tr&gt;
+              &lt;td style="background-color:#0E0E0E; padding:32px 40px; text-align:center;"&gt;
+                &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#C5A572; margin:0 0 12px 0;"&gt;Rotta Curadoria&lt;/p&gt;
+                &lt;p class="small-text" style="color:#888; margin-bottom:16px;"&gt;Viagens com curadoria. Experiencias com alma.&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin-bottom:16px;"&gt;
+                  &lt;tr&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://instagram.com/rotta.curadoria" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;Instagram&lt;/a&gt;&lt;/td&gt;
+                    &lt;td style="color:#444;"&gt;|&lt;/td&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://wa.me/5511968152123?text=Oi!%20Vim%20pela%20newsletter" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;WhatsApp&lt;/a&gt;&lt;/td&gt;
+                    &lt;td style="color:#444;"&gt;|&lt;/td&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://www.rottacuradoria.com" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;Site&lt;/a&gt;&lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+                &lt;p class="small-text" style="color:#555; font-size:11px; margin-bottom:8px;"&gt;
+                  Voce recebeu este email porque participou do nosso quiz de viagem.&lt;br&gt;
+                  Se nao quiser mais receber, tudo bem:
+                &lt;/p&gt;
+                &lt;a href="{{ unsubscribe }}" style="font-family:Arial,sans-serif; font-size:11px; color:#C5A572; text-decoration:underline;"&gt;Cancelar inscricao&lt;/a&gt;
+                &lt;p class="small-text" style="color:#444; font-size:10px; margin-top:16px;"&gt;
+                  Rotta Curadoria | @rotta.curadoria&lt;br&gt;
+                  Este email foi enviado por {{ organization.name }}
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+          &lt;/table&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB 2: ROBERTO ==================== -->
+<div id="tab-roberto" class="tab-content">
+  <div class="persona-header">
+    <h2>Newsletter: Executivo Exigente</h2>
+    <p class="subtitle">Para quem valoriza tempo, qualidade e experiencias premium</p>
+    <div class="meta">
+      <span>Lista Brevo: Quiz Roberto #4</span>
+      <span>Envio: Domingos 19h</span>
+      <span>Tom: Conciso e premium</span>
+    </div>
+  </div>
+
+  <div class="email-card">
+    <div class="email-card-header">
+      <span class="email-card-title">Template Semanal</span>
+      <span class="email-badge">A/B Test Ativo</span>
+    </div>
+    <div class="email-body">
+      <div class="field-label">Linhas de Assunto (A/B Test)</div>
+      <div class="subject-line"><span class="label">A:</span> &#127976; Curadoria premium da semana</div>
+      <div class="subject-line"><span class="label">B:</span> Experiencia que vale seu tempo &#10024;</div>
+
+      <div class="field-label" style="margin-top:24px;">Preview no Inbox</div>
+      <div class="field-value">O melhor da semana, direto ao ponto</div>
+
+      <div class="field-label">Codigo HTML Completo</div>
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode('code-roberto')">Copiar HTML</button>
+        <div class="code-box" id="code-roberto">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+  &lt;title&gt;Rotta Curadoria — Curadoria Premium&lt;/title&gt;
+  &lt;!--[if mso]&gt;
+  &lt;style type="text/css"&gt;
+    table {border-collapse: collapse;}
+  &lt;/style&gt;
+  &lt;![endif]--&gt;
+  &lt;style type="text/css"&gt;
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+    body { margin: 0; padding: 0; width: 100% !important; background-color: #e8e3dd; }
+    .email-container { max-width: 600px; margin: 0 auto; }
+    .gold-line { border: none; height: 1px; background-color: #C5A572; margin: 0; }
+    .section-title { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; color: #C5A572; margin: 0 0 12px 0; font-weight: 700; }
+    .body-text { font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #1A1A1A; line-height: 1.7; margin: 0 0 16px 0; }
+    .small-text { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #777; line-height: 1.6; margin: 0; }
+    .cta-button { background-color: #C5A572; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 32px; border-radius: 6px; display: inline-block; letter-spacing: 0.5px; }
+    .img-placeholder { background-color: #ddd5cc; width: 100%; height: 220px; text-align: center; line-height: 220px; font-family: Arial, sans-serif; font-size: 13px; color: #999; }
+    @media screen and (max-width: 600px) {
+      .email-container { width: 100% !important; }
+      .stack-column { display: block !important; width: 100% !important; }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body style="margin:0; padding:0; background-color:#e8e3dd;"&gt;
+  &lt;center&gt;
+    &lt;div style="display:none;max-height:0;overflow:hidden;mso-hide:all;"&gt;
+      O melhor da semana, direto ao ponto
+    &lt;/div&gt;
+
+    &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#e8e3dd;"&gt;
+      &lt;tr&gt;
+        &lt;td align="center" style="padding: 20px 10px;"&gt;
+          &lt;table class="email-container" role="presentation" cellpadding="0" cellspacing="0" width="600" style="background-color:#F2EDE8; border-radius:8px; overflow:hidden;"&gt;
+
+            &lt;!-- HEADER --&gt;
+            &lt;tr&gt;
+              &lt;td style="background-color:#0E0E0E; padding:32px 40px; text-align:center;"&gt;
+                &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:28px; color:#C5A572; margin:0; font-weight:700; letter-spacing:1px;"&gt;Rotta Curadoria&lt;/p&gt;
+                &lt;p style="font-family:Arial,Helvetica,sans-serif; font-size:11px; color:#888; margin:6px 0 0 0; letter-spacing:2px; text-transform:uppercase;"&gt;Curadoria Premium Semanal&lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- EXPERIENCIA PREMIUM DA SEMANA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:32px 40px 24px;"&gt;
+                &lt;p class="section-title"&gt;Experiencia Premium da Semana&lt;/p&gt;
+                &lt;div class="img-placeholder" style="border-radius:8px; margin-bottom:16px;"&gt;[Imagem experiencia premium — 600x220px]&lt;/div&gt;
+                &lt;p class="body-text" style="font-family:Georgia,'Times New Roman',serif; font-size:20px; color:#1A1A1A; font-weight:700; margin-bottom:8px;"&gt;
+                  {{experiencia_nome}}
+                &lt;/p&gt;
+                &lt;p class="body-text"&gt;
+                  {{experiencia_descricao}} — Selecionamos a dedo pra quem nao abre mao de qualidade. Servico impecavel, localizacao privilegiada e aquele nivel de atencao que faz a diferenca.
+                &lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" style="margin-bottom:16px;"&gt;
+                  &lt;tr&gt;
+                    &lt;td style="background:#0E0E0E; padding:8px 16px; border-radius:4px;"&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:12px; color:#C5A572; margin:0; font-weight:600;"&gt;{{categoria}}&lt;/p&gt;
+                    &lt;/td&gt;
+                    &lt;td width="8"&gt;&lt;/td&gt;
+                    &lt;td style="background:#0E0E0E; padding:8px 16px; border-radius:4px;"&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:12px; color:#C5A572; margin:0; font-weight:600;"&gt;{{duracao}} dias&lt;/p&gt;
+                    &lt;/td&gt;
+                    &lt;td width="8"&gt;&lt;/td&gt;
+                    &lt;td style="background:#0E0E0E; padding:8px 16px; border-radius:4px;"&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:12px; color:#C5A572; margin:0; font-weight:600;"&gt;A partir de R$ {{preco}}&lt;/p&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- DICA EXPRESS --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:24px 40px;"&gt;
+                &lt;p class="section-title" style="font-size:18px;"&gt;Dica Express&lt;/p&gt;
+                &lt;p class="body-text" style="font-weight:600; border-left:3px solid #C5A572; padding-left:16px;"&gt;
+                  {{dica_express}} — Direto ao ponto, como voce gosta.
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- ROTEIRO SUGERIDO --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:24px 40px;"&gt;
+                &lt;p class="section-title" style="font-size:18px;"&gt;Roteiro Sugerido&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom:16px;"&gt;
+                  &lt;tr&gt;
+                    &lt;td style="background:#0E0E0E; padding:14px 20px; border-radius:6px;"&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:12px; color:#C5A572; margin:0 0 4px 0; font-weight:600; text-transform:uppercase; letter-spacing:1px;"&gt;Dia 1-2&lt;/p&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:14px; color:#F2EDE8; margin:0;"&gt;{{roteiro_dia1}}&lt;/p&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                  &lt;tr&gt;&lt;td height="8"&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td style="background:#0E0E0E; padding:14px 20px; border-radius:6px;"&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:12px; color:#C5A572; margin:0 0 4px 0; font-weight:600; text-transform:uppercase; letter-spacing:1px;"&gt;Dia 3-5&lt;/p&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:14px; color:#F2EDE8; margin:0;"&gt;{{roteiro_dia2}}&lt;/p&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                  &lt;tr&gt;&lt;td height="8"&gt;&lt;/td&gt;&lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td style="background:#0E0E0E; padding:14px 20px; border-radius:6px;"&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:12px; color:#C5A572; margin:0 0 4px 0; font-weight:600; text-transform:uppercase; letter-spacing:1px;"&gt;Dia 5-7&lt;/p&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:14px; color:#F2EDE8; margin:0;"&gt;{{roteiro_dia3}}&lt;/p&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- CTA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:32px 40px; text-align:center;"&gt;
+                &lt;p class="body-text" style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#1A1A1A; margin-bottom:8px;"&gt;Quer uma curadoria completa?&lt;/p&gt;
+                &lt;p class="body-text" style="margin-bottom:20px;"&gt;A gente monta o roteiro. Voce so aproveita.&lt;/p&gt;
+                &lt;a href="https://wa.me/5511968152123?text=Oi!%20Quero%20uma%20curadoria%20premium" class="cta-button" style="color:#ffffff;"&gt;SOLICITAR CURADORIA&lt;/a&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;!-- FOOTER --&gt;
+            &lt;tr&gt;
+              &lt;td style="background-color:#0E0E0E; padding:32px 40px; text-align:center;"&gt;
+                &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#C5A572; margin:0 0 12px 0;"&gt;Rotta Curadoria&lt;/p&gt;
+                &lt;p class="small-text" style="color:#888; margin-bottom:16px;"&gt;Viagens com curadoria. Experiencias com alma.&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin-bottom:16px;"&gt;
+                  &lt;tr&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://instagram.com/rotta.curadoria" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;Instagram&lt;/a&gt;&lt;/td&gt;
+                    &lt;td style="color:#444;"&gt;|&lt;/td&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://wa.me/5511968152123?text=Oi!%20Vim%20pela%20newsletter" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;WhatsApp&lt;/a&gt;&lt;/td&gt;
+                    &lt;td style="color:#444;"&gt;|&lt;/td&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://www.rottacuradoria.com" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;Site&lt;/a&gt;&lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+                &lt;p class="small-text" style="color:#555; font-size:11px; margin-bottom:8px;"&gt;
+                  Voce recebeu este email porque participou do nosso quiz de viagem.&lt;br&gt;
+                  Se nao quiser mais receber, tudo bem:
+                &lt;/p&gt;
+                &lt;a href="{{ unsubscribe }}" style="font-family:Arial,sans-serif; font-size:11px; color:#C5A572; text-decoration:underline;"&gt;Cancelar inscricao&lt;/a&gt;
+                &lt;p class="small-text" style="color:#444; font-size:10px; margin-top:16px;"&gt;
+                  Rotta Curadoria | @rotta.curadoria&lt;br&gt;
+                  Este email foi enviado por {{ organization.name }}
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+          &lt;/table&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB 3: SILVIA & MARCOS ==================== -->
+<div id="tab-silvia" class="tab-content">
+  <div class="persona-header">
+    <h2>Newsletter: Casal Reconectando</h2>
+    <p class="subtitle">Para casais que querem criar memorias juntos e reavivar a conexao</p>
+    <div class="meta">
+      <span>Lista Brevo: Quiz Silvia Marcos #5</span>
+      <span>Envio: Domingos 19h</span>
+      <span>Tom: Romantico e acolhedor</span>
+    </div>
+  </div>
+
+  <div class="email-card">
+    <div class="email-card-header">
+      <span class="email-card-title">Template Semanal</span>
+      <span class="email-badge">A/B Test Ativo</span>
+    </div>
+    <div class="email-body">
+      <div class="field-label">Linhas de Assunto (A/B Test)</div>
+      <div class="subject-line"><span class="label">A:</span> &#128149; Uma escapada pra voces dois</div>
+      <div class="subject-line"><span class="label">B:</span> O destino perfeito pra reconectar &#10024;</div>
+
+      <div class="field-label" style="margin-top:24px;">Preview no Inbox</div>
+      <div class="field-value">Destinos romanticos que criam memorias inesqueciveis</div>
+
+      <div class="field-label">Codigo HTML Completo</div>
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode('code-silvia')">Copiar HTML</button>
+        <div class="code-box" id="code-silvia">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+  &lt;title&gt;Rotta Curadoria — Escapada Romantica&lt;/title&gt;
+  &lt;!--[if mso]&gt;
+  &lt;style type="text/css"&gt;
+    table {border-collapse: collapse;}
+  &lt;/style&gt;
+  &lt;![endif]--&gt;
+  &lt;style type="text/css"&gt;
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+    body { margin: 0; padding: 0; width: 100% !important; background-color: #e8e3dd; }
+    .email-container { max-width: 600px; margin: 0 auto; }
+    .gold-line { border: none; height: 1px; background-color: #C5A572; margin: 0; }
+    .section-title { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; color: #C5A572; margin: 0 0 12px 0; font-weight: 700; }
+    .body-text { font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #1A1A1A; line-height: 1.7; margin: 0 0 16px 0; }
+    .small-text { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #777; line-height: 1.6; margin: 0; }
+    .cta-button { background-color: #C5A572; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 32px; border-radius: 6px; display: inline-block; letter-spacing: 0.5px; }
+    .img-placeholder { background-color: #ddd5cc; width: 100%; height: 220px; text-align: center; line-height: 220px; font-family: Arial, sans-serif; font-size: 13px; color: #999; }
+    @media screen and (max-width: 600px) {
+      .email-container { width: 100% !important; }
+      .stack-column { display: block !important; width: 100% !important; }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body style="margin:0; padding:0; background-color:#e8e3dd;"&gt;
+  &lt;center&gt;
+    &lt;div style="display:none;max-height:0;overflow:hidden;mso-hide:all;"&gt;
+      Destinos romanticos que criam memorias inesqueciveis
+    &lt;/div&gt;
+
+    &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#e8e3dd;"&gt;
+      &lt;tr&gt;
+        &lt;td align="center" style="padding: 20px 10px;"&gt;
+          &lt;table class="email-container" role="presentation" cellpadding="0" cellspacing="0" width="600" style="background-color:#F2EDE8; border-radius:8px; overflow:hidden;"&gt;
+
+            &lt;!-- HEADER --&gt;
+            &lt;tr&gt;
+              &lt;td style="background-color:#0E0E0E; padding:32px 40px; text-align:center;"&gt;
+                &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:28px; color:#C5A572; margin:0; font-weight:700; letter-spacing:1px;"&gt;Rotta Curadoria&lt;/p&gt;
+                &lt;p style="font-family:Arial,Helvetica,sans-serif; font-size:11px; color:#888; margin:6px 0 0 0; letter-spacing:2px; text-transform:uppercase;"&gt;Escapadas a dois&lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- DESTINO ROMANTICO DA SEMANA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:32px 40px 24px;"&gt;
+                &lt;p class="section-title"&gt;Destino Romantico da Semana&lt;/p&gt;
+                &lt;div class="img-placeholder" style="border-radius:8px; margin-bottom:16px;"&gt;[Imagem romantica do destino — 600x220px]&lt;/div&gt;
+                &lt;p class="body-text" style="font-family:Georgia,'Times New Roman',serif; font-size:20px; color:#1A1A1A; font-weight:700; margin-bottom:8px;"&gt;
+                  {{destino_romantico}}
+                &lt;/p&gt;
+                &lt;p class="body-text"&gt;
+                  {{destino_descricao}} — Imagina passear de maos dadas por ruas charmosas, jantar a luz de velas com vista pro mar e criar aquelas memorias que voces vao contar por anos. Esse destino foi feito pra isso.
+                &lt;/p&gt;
+                &lt;p class="body-text" style="font-weight:600; color:#C5A572;"&gt;
+                  A partir de R$ {{preco}} por casal | {{duracao}} dias
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- RESTAURANTE PARA DOIS --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:24px 40px;"&gt;
+                &lt;p class="section-title" style="font-size:18px;"&gt;Restaurante Para Dois&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%"&gt;
+                  &lt;tr&gt;
+                    &lt;td class="stack-column" width="40%" style="vertical-align:top;"&gt;
+                      &lt;div class="img-placeholder" style="height:160px; line-height:160px; border-radius:6px;"&gt;[Foto restaurante]&lt;/div&gt;
+                    &lt;/td&gt;
+                    &lt;td width="16"&gt;&lt;/td&gt;
+                    &lt;td class="stack-column" width="56%" style="vertical-align:top;"&gt;
+                      &lt;p class="body-text" style="font-weight:700; margin-bottom:4px;"&gt;{{restaurante_nome}}&lt;/p&gt;
+                      &lt;p class="body-text" style="font-size:14px;"&gt;{{restaurante_descricao}} — Ambiente intimista, menu degustacao e aquela vibe que faz qualquer noite virar especial.&lt;/p&gt;
+                      &lt;p class="small-text" style="color:#C5A572; font-weight:600;"&gt;{{restaurante_local}}&lt;/p&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- HISTORIA DE CASAL --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:24px 40px;"&gt;
+                &lt;p class="section-title" style="font-size:18px;"&gt;Historia de Quem Ja Viveu&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%"&gt;
+                  &lt;tr&gt;
+                    &lt;td style="background:#0E0E0E; padding:24px; border-radius:8px; border-left:3px solid #C5A572;"&gt;
+                      &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:16px; color:#F2EDE8; font-style:italic; line-height:1.7; margin:0 0 12px 0;"&gt;
+                        "{{depoimento_casal}}"
+                      &lt;/p&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:13px; color:#C5A572; margin:0; font-weight:600;"&gt;
+                        — {{nome_casal}}, viajaram para {{destino_depoimento}}
+                      &lt;/p&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- CTA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:32px 40px; text-align:center;"&gt;
+                &lt;p class="body-text" style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#1A1A1A; margin-bottom:8px;"&gt;Prontos pra proxima escapada?&lt;/p&gt;
+                &lt;p class="body-text" style="margin-bottom:20px;"&gt;A gente cuida de tudo. Voces so precisam escolher a data.&lt;/p&gt;
+                &lt;a href="https://wa.me/5511968152123?text=Oi!%20Queremos%20uma%20escapada%20romantica" class="cta-button" style="color:#ffffff;"&gt;PLANEJAR ESCAPADA&lt;/a&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;!-- FOOTER --&gt;
+            &lt;tr&gt;
+              &lt;td style="background-color:#0E0E0E; padding:32px 40px; text-align:center;"&gt;
+                &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#C5A572; margin:0 0 12px 0;"&gt;Rotta Curadoria&lt;/p&gt;
+                &lt;p class="small-text" style="color:#888; margin-bottom:16px;"&gt;Viagens com curadoria. Experiencias com alma.&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin-bottom:16px;"&gt;
+                  &lt;tr&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://instagram.com/rotta.curadoria" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;Instagram&lt;/a&gt;&lt;/td&gt;
+                    &lt;td style="color:#444;"&gt;|&lt;/td&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://wa.me/5511968152123?text=Oi!%20Vim%20pela%20newsletter" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;WhatsApp&lt;/a&gt;&lt;/td&gt;
+                    &lt;td style="color:#444;"&gt;|&lt;/td&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://www.rottacuradoria.com" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;Site&lt;/a&gt;&lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+                &lt;p class="small-text" style="color:#555; font-size:11px; margin-bottom:8px;"&gt;
+                  Voce recebeu este email porque participou do nosso quiz de viagem.&lt;br&gt;
+                  Se nao quiser mais receber, tudo bem:
+                &lt;/p&gt;
+                &lt;a href="{{ unsubscribe }}" style="font-family:Arial,sans-serif; font-size:11px; color:#C5A572; text-decoration:underline;"&gt;Cancelar inscricao&lt;/a&gt;
+                &lt;p class="small-text" style="color:#444; font-size:10px; margin-top:16px;"&gt;
+                  Rotta Curadoria | @rotta.curadoria&lt;br&gt;
+                  Este email foi enviado por {{ organization.name }}
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+          &lt;/table&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB 4: SQUAD ==================== -->
+<div id="tab-squad" class="tab-content">
+  <div class="persona-header">
+    <h2>Newsletter: Aventureiros em Grupo</h2>
+    <p class="subtitle">Para quem quer juntar a galera e fazer aquela viagem acontecer</p>
+    <div class="meta">
+      <span>Lista Brevo: Quiz Squad #6</span>
+      <span>Envio: Domingos 19h</span>
+      <span>Tom: Divertido e energetico</span>
+    </div>
+  </div>
+
+  <div class="email-card">
+    <div class="email-card-header">
+      <span class="email-card-title">Template Semanal</span>
+      <span class="email-badge">A/B Test Ativo</span>
+    </div>
+    <div class="email-body">
+      <div class="field-label">Linhas de Assunto (A/B Test)</div>
+      <div class="subject-line"><span class="label">A:</span> &#127890; A viagem do grupo vai sair do papel</div>
+      <div class="subject-line"><span class="label">B:</span> 5 amigos, 1 destino, 0 estresse &#9996;&#65039;</div>
+
+      <div class="field-label" style="margin-top:24px;">Preview no Inbox</div>
+      <div class="field-value">Bora? Destinos perfeitos pra galera toda</div>
+
+      <div class="field-label">Codigo HTML Completo</div>
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode('code-squad')">Copiar HTML</button>
+        <div class="code-box" id="code-squad">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+  &lt;title&gt;Rotta Curadoria — Viagem em Grupo&lt;/title&gt;
+  &lt;!--[if mso]&gt;
+  &lt;style type="text/css"&gt;
+    table {border-collapse: collapse;}
+  &lt;/style&gt;
+  &lt;![endif]--&gt;
+  &lt;style type="text/css"&gt;
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+    body { margin: 0; padding: 0; width: 100% !important; background-color: #e8e3dd; }
+    .email-container { max-width: 600px; margin: 0 auto; }
+    .gold-line { border: none; height: 1px; background-color: #C5A572; margin: 0; }
+    .section-title { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; color: #C5A572; margin: 0 0 12px 0; font-weight: 700; }
+    .body-text { font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #1A1A1A; line-height: 1.7; margin: 0 0 16px 0; }
+    .small-text { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #777; line-height: 1.6; margin: 0; }
+    .cta-button { background-color: #C5A572; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 32px; border-radius: 6px; display: inline-block; letter-spacing: 0.5px; }
+    .img-placeholder { background-color: #ddd5cc; width: 100%; height: 220px; text-align: center; line-height: 220px; font-family: Arial, sans-serif; font-size: 13px; color: #999; }
+    @media screen and (max-width: 600px) {
+      .email-container { width: 100% !important; }
+      .stack-column { display: block !important; width: 100% !important; }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body style="margin:0; padding:0; background-color:#e8e3dd;"&gt;
+  &lt;center&gt;
+    &lt;div style="display:none;max-height:0;overflow:hidden;mso-hide:all;"&gt;
+      Bora? Destinos perfeitos pra galera toda
+    &lt;/div&gt;
+
+    &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#e8e3dd;"&gt;
+      &lt;tr&gt;
+        &lt;td align="center" style="padding: 20px 10px;"&gt;
+          &lt;table class="email-container" role="presentation" cellpadding="0" cellspacing="0" width="600" style="background-color:#F2EDE8; border-radius:8px; overflow:hidden;"&gt;
+
+            &lt;!-- HEADER --&gt;
+            &lt;tr&gt;
+              &lt;td style="background-color:#0E0E0E; padding:32px 40px; text-align:center;"&gt;
+                &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:28px; color:#C5A572; margin:0; font-weight:700; letter-spacing:1px;"&gt;Rotta Curadoria&lt;/p&gt;
+                &lt;p style="font-family:Arial,Helvetica,sans-serif; font-size:11px; color:#888; margin:6px 0 0 0; letter-spacing:2px; text-transform:uppercase;"&gt;Viagens em grupo sem complicacao&lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- DESTINO DO GRUPO --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:32px 40px 24px;"&gt;
+                &lt;p class="section-title"&gt;Destino do Grupo da Semana&lt;/p&gt;
+                &lt;div class="img-placeholder" style="border-radius:8px; margin-bottom:16px;"&gt;[Imagem do destino em grupo — 600x220px]&lt;/div&gt;
+                &lt;p class="body-text" style="font-family:Georgia,'Times New Roman',serif; font-size:20px; color:#1A1A1A; font-weight:700; margin-bottom:8px;"&gt;
+                  {{destino_grupo}}
+                &lt;/p&gt;
+                &lt;p class="body-text"&gt;
+                  {{destino_descricao}} — Aquele lugar que todo mundo vai curtir: quem gosta de agito, quem prefere relaxar e quem so quer umas fotos incriveis pro feed. Tem pra todos os gostos.
+                &lt;/p&gt;
+                &lt;p class="body-text" style="font-weight:600; color:#C5A572;"&gt;
+                  A partir de R$ {{preco}} por pessoa | {{duracao}} dias | Ideal pra {{num_pessoas}} pessoas
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- DICA DE ORGANIZACAO --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:24px 40px;"&gt;
+                &lt;p class="section-title" style="font-size:18px;"&gt;Dica de Organizacao&lt;/p&gt;
+                &lt;p class="body-text"&gt;
+                  {{dica_organizacao}} — Viagem em grupo nao precisa ser caos. Com um pouco de organizacao, todo mundo se diverte sem aquele estresse de "quem paga o que".
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- COMPARACAO DE PRECOS --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:24px 40px;"&gt;
+                &lt;p class="section-title" style="font-size:18px;"&gt;Comparativo: Quanto Custa?&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse; margin-top:8px;"&gt;
+                  &lt;tr&gt;
+                    &lt;th style="text-align:left; padding:12px 14px; background:#0E0E0E; color:#C5A572; font-family:Arial,sans-serif; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:1px; border-radius:6px 0 0 0;"&gt;Item&lt;/th&gt;
+                    &lt;th style="text-align:center; padding:12px 14px; background:#0E0E0E; color:#C5A572; font-family:Arial,sans-serif; font-size:12px; font-weight:600;"&gt;4 pessoas&lt;/th&gt;
+                    &lt;th style="text-align:center; padding:12px 14px; background:#0E0E0E; color:#C5A572; font-family:Arial,sans-serif; font-size:12px; font-weight:600; border-radius:0 6px 0 0;"&gt;6 pessoas&lt;/th&gt;
+                  &lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td style="padding:10px 14px; border-bottom:1px solid #ddd5cc; font-family:Arial,sans-serif; font-size:14px; color:#1A1A1A;"&gt;Hospedagem/noite&lt;/td&gt;
+                    &lt;td style="padding:10px 14px; border-bottom:1px solid #ddd5cc; text-align:center; font-family:Arial,sans-serif; font-size:14px; color:#1A1A1A;"&gt;R$ {{hosp_4}}&lt;/td&gt;
+                    &lt;td style="padding:10px 14px; border-bottom:1px solid #ddd5cc; text-align:center; font-family:Arial,sans-serif; font-size:14px; color:#1A1A1A;"&gt;R$ {{hosp_6}}&lt;/td&gt;
+                  &lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td style="padding:10px 14px; border-bottom:1px solid #ddd5cc; font-family:Arial,sans-serif; font-size:14px; color:#1A1A1A;"&gt;Passeios/pessoa&lt;/td&gt;
+                    &lt;td style="padding:10px 14px; border-bottom:1px solid #ddd5cc; text-align:center; font-family:Arial,sans-serif; font-size:14px; color:#1A1A1A;"&gt;R$ {{passeio_4}}&lt;/td&gt;
+                    &lt;td style="padding:10px 14px; border-bottom:1px solid #ddd5cc; text-align:center; font-family:Arial,sans-serif; font-size:14px; color:#1A1A1A;"&gt;R$ {{passeio_6}}&lt;/td&gt;
+                  &lt;/tr&gt;
+                  &lt;tr style="background:#f5f0ea;"&gt;
+                    &lt;td style="padding:10px 14px; font-family:Arial,sans-serif; font-size:14px; color:#1A1A1A; font-weight:700; border-radius:0 0 0 6px;"&gt;Total/pessoa&lt;/td&gt;
+                    &lt;td style="padding:10px 14px; text-align:center; font-family:Arial,sans-serif; font-size:14px; color:#C5A572; font-weight:700;"&gt;R$ {{total_4}}&lt;/td&gt;
+                    &lt;td style="padding:10px 14px; text-align:center; font-family:Arial,sans-serif; font-size:14px; color:#C5A572; font-weight:700; border-radius:0 0 6px 0;"&gt;R$ {{total_6}}&lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+                &lt;p class="small-text" style="margin-top:8px; font-style:italic;"&gt;Quanto mais gente, mais barato fica pra cada um!&lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- CTA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:32px 40px; text-align:center;"&gt;
+                &lt;p class="body-text" style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#1A1A1A; margin-bottom:8px;"&gt;Bora tirar essa viagem do papel?&lt;/p&gt;
+                &lt;p class="body-text" style="margin-bottom:20px;"&gt;Manda pro grupo e fala com a gente. A Rotta organiza tudo.&lt;/p&gt;
+                &lt;a href="https://wa.me/5511968152123?text=Oi!%20Queremos%20organizar%20uma%20viagem%20em%20grupo" class="cta-button" style="color:#ffffff;"&gt;MONTAR VIAGEM DO GRUPO&lt;/a&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;!-- FOOTER --&gt;
+            &lt;tr&gt;
+              &lt;td style="background-color:#0E0E0E; padding:32px 40px; text-align:center;"&gt;
+                &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#C5A572; margin:0 0 12px 0;"&gt;Rotta Curadoria&lt;/p&gt;
+                &lt;p class="small-text" style="color:#888; margin-bottom:16px;"&gt;Viagens com curadoria. Experiencias com alma.&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin-bottom:16px;"&gt;
+                  &lt;tr&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://instagram.com/rotta.curadoria" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;Instagram&lt;/a&gt;&lt;/td&gt;
+                    &lt;td style="color:#444;"&gt;|&lt;/td&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://wa.me/5511968152123?text=Oi!%20Vim%20pela%20newsletter" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;WhatsApp&lt;/a&gt;&lt;/td&gt;
+                    &lt;td style="color:#444;"&gt;|&lt;/td&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://www.rottacuradoria.com" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;Site&lt;/a&gt;&lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+                &lt;p class="small-text" style="color:#555; font-size:11px; margin-bottom:8px;"&gt;
+                  Voce recebeu este email porque participou do nosso quiz de viagem.&lt;br&gt;
+                  Se nao quiser mais receber, tudo bem:
+                &lt;/p&gt;
+                &lt;a href="{{ unsubscribe }}" style="font-family:Arial,sans-serif; font-size:11px; color:#C5A572; text-decoration:underline;"&gt;Cancelar inscricao&lt;/a&gt;
+                &lt;p class="small-text" style="color:#444; font-size:10px; margin-top:16px;"&gt;
+                  Rotta Curadoria | @rotta.curadoria&lt;br&gt;
+                  Este email foi enviado por {{ organization.name }}
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+          &lt;/table&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB 5: LUCAS & BIA ==================== -->
+<div id="tab-lucas" class="tab-content">
+  <div class="persona-header">
+    <h2>Newsletter: Aventureiros Romanticos</h2>
+    <p class="subtitle">Para casais que combinam adrenalina com romance</p>
+    <div class="meta">
+      <span>Lista Brevo: Quiz Lucas Bia #7</span>
+      <span>Envio: Domingos 19h</span>
+      <span>Tom: Aventureiro e romantico</span>
+    </div>
+  </div>
+
+  <div class="email-card">
+    <div class="email-card-header">
+      <span class="email-card-title">Template Semanal</span>
+      <span class="email-badge">A/B Test Ativo</span>
+    </div>
+    <div class="email-body">
+      <div class="field-label">Linhas de Assunto (A/B Test)</div>
+      <div class="subject-line"><span class="label">A:</span> &#127748; Aventura + romance: o combo perfeito</div>
+      <div class="subject-line"><span class="label">B:</span> Proximo destino: voces dois + adrenalina &#128293;</div>
+
+      <div class="field-label" style="margin-top:24px;">Preview no Inbox</div>
+      <div class="field-value">Experiencias radicais pra viver a dois</div>
+
+      <div class="field-label">Codigo HTML Completo</div>
+      <div class="code-container">
+        <button class="copy-btn" onclick="copyCode('code-lucas')">Copiar HTML</button>
+        <div class="code-box" id="code-lucas">&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+  &lt;title&gt;Rotta Curadoria — Aventura + Romance&lt;/title&gt;
+  &lt;!--[if mso]&gt;
+  &lt;style type="text/css"&gt;
+    table {border-collapse: collapse;}
+  &lt;/style&gt;
+  &lt;![endif]--&gt;
+  &lt;style type="text/css"&gt;
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+    body { margin: 0; padding: 0; width: 100% !important; background-color: #e8e3dd; }
+    .email-container { max-width: 600px; margin: 0 auto; }
+    .gold-line { border: none; height: 1px; background-color: #C5A572; margin: 0; }
+    .section-title { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; color: #C5A572; margin: 0 0 12px 0; font-weight: 700; }
+    .body-text { font-family: Arial, Helvetica, sans-serif; font-size: 15px; color: #1A1A1A; line-height: 1.7; margin: 0 0 16px 0; }
+    .small-text { font-family: Arial, Helvetica, sans-serif; font-size: 13px; color: #777; line-height: 1.6; margin: 0; }
+    .cta-button { background-color: #C5A572; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 32px; border-radius: 6px; display: inline-block; letter-spacing: 0.5px; }
+    .img-placeholder { background-color: #ddd5cc; width: 100%; height: 220px; text-align: center; line-height: 220px; font-family: Arial, sans-serif; font-size: 13px; color: #999; }
+    @media screen and (max-width: 600px) {
+      .email-container { width: 100% !important; }
+      .stack-column { display: block !important; width: 100% !important; }
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body style="margin:0; padding:0; background-color:#e8e3dd;"&gt;
+  &lt;center&gt;
+    &lt;div style="display:none;max-height:0;overflow:hidden;mso-hide:all;"&gt;
+      Experiencias radicais pra viver a dois
+    &lt;/div&gt;
+
+    &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color:#e8e3dd;"&gt;
+      &lt;tr&gt;
+        &lt;td align="center" style="padding: 20px 10px;"&gt;
+          &lt;table class="email-container" role="presentation" cellpadding="0" cellspacing="0" width="600" style="background-color:#F2EDE8; border-radius:8px; overflow:hidden;"&gt;
+
+            &lt;!-- HEADER --&gt;
+            &lt;tr&gt;
+              &lt;td style="background-color:#0E0E0E; padding:32px 40px; text-align:center;"&gt;
+                &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:28px; color:#C5A572; margin:0; font-weight:700; letter-spacing:1px;"&gt;Rotta Curadoria&lt;/p&gt;
+                &lt;p style="font-family:Arial,Helvetica,sans-serif; font-size:11px; color:#888; margin:6px 0 0 0; letter-spacing:2px; text-transform:uppercase;"&gt;Aventura + Romance&lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- AVENTURA DA SEMANA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:32px 40px 24px;"&gt;
+                &lt;p class="section-title"&gt;Aventura da Semana&lt;/p&gt;
+                &lt;div class="img-placeholder" style="border-radius:8px; margin-bottom:16px;"&gt;[Imagem aventura/natureza — 600x220px]&lt;/div&gt;
+                &lt;p class="body-text" style="font-family:Georgia,'Times New Roman',serif; font-size:20px; color:#1A1A1A; font-weight:700; margin-bottom:8px;"&gt;
+                  {{aventura_destino}}
+                &lt;/p&gt;
+                &lt;p class="body-text"&gt;
+                  {{aventura_descricao}} — Trilhas com vistas que parecem cena de filme, aquele friozinho na barriga de experimentar algo novo juntos e no fim do dia, um por do sol so de voces. Esse destino mistura aventura e romance como ninguem.
+                &lt;/p&gt;
+                &lt;p class="body-text" style="font-weight:600; color:#C5A572;"&gt;
+                  A partir de R$ {{preco}} por casal | {{duracao}} dias
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- EXPERIENCIA RADICAL --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:24px 40px;"&gt;
+                &lt;p class="section-title" style="font-size:18px;"&gt;Experiencia Radical&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" width="100%"&gt;
+                  &lt;tr&gt;
+                    &lt;td style="background:#0E0E0E; padding:20px 24px; border-radius:8px;"&gt;
+                      &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#C5A572; margin:0 0 8px 0; font-weight:700;"&gt;{{experiencia_nome}}&lt;/p&gt;
+                      &lt;p style="font-family:Arial,sans-serif; font-size:14px; color:#F2EDE8; line-height:1.7; margin:0 0 12px 0;"&gt;
+                        {{experiencia_descricao}} — Pra quem acha que viagem a dois nao pode ter adrenalina. Prepare-se pra gritar, rir e criar uma das melhores memorias da vida.
+                      &lt;/p&gt;
+                      &lt;table role="presentation" cellpadding="0" cellspacing="0"&gt;
+                        &lt;tr&gt;
+                          &lt;td style="background:#C5A572; padding:4px 12px; border-radius:4px;"&gt;
+                            &lt;p style="font-family:Arial,sans-serif; font-size:11px; color:#0E0E0E; margin:0; font-weight:600;"&gt;{{nivel_dificuldade}}&lt;/p&gt;
+                          &lt;/td&gt;
+                          &lt;td width="8"&gt;&lt;/td&gt;
+                          &lt;td style="background:#333; padding:4px 12px; border-radius:4px;"&gt;
+                            &lt;p style="font-family:Arial,sans-serif; font-size:11px; color:#F2EDE8; margin:0;"&gt;{{duracao_experiencia}}&lt;/p&gt;
+                          &lt;/td&gt;
+                          &lt;td width="8"&gt;&lt;/td&gt;
+                          &lt;td style="background:#333; padding:4px 12px; border-radius:4px;"&gt;
+                            &lt;p style="font-family:Arial,sans-serif; font-size:11px; color:#F2EDE8; margin:0;"&gt;R$ {{preco_experiencia}}/casal&lt;/p&gt;
+                          &lt;/td&gt;
+                        &lt;/tr&gt;
+                      &lt;/table&gt;
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- ROTEIRO SURPRESA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:24px 40px;"&gt;
+                &lt;p class="section-title" style="font-size:18px;"&gt;Roteiro Surpresa&lt;/p&gt;
+                &lt;p class="body-text"&gt;
+                  E se a gente montasse um roteiro surpresa pra voces? Voce nos conta as datas, o orcamento e o nivel de aventura que querem — a gente faz o resto. Voces so descobrem o destino 48h antes de embarcar.
+                &lt;/p&gt;
+                &lt;p class="body-text" style="font-size:13px; color:#777; font-style:italic;"&gt;
+                  Ja fizemos isso pra {{num_casais}} casais. Todos amaram.
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;&lt;td style="padding:0 40px;"&gt;&lt;hr class="gold-line"&gt;&lt;/td&gt;&lt;/tr&gt;
+
+            &lt;!-- CTA --&gt;
+            &lt;tr&gt;
+              &lt;td style="padding:32px 40px; text-align:center;"&gt;
+                &lt;p class="body-text" style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#1A1A1A; margin-bottom:8px;"&gt;Prontos pra proxima aventura a dois?&lt;/p&gt;
+                &lt;p class="body-text" style="margin-bottom:20px;"&gt;Conte pra gente o que voces curtem e a gente monta o roteiro perfeito.&lt;/p&gt;
+                &lt;a href="https://wa.me/5511968152123?text=Oi!%20Queremos%20um%20roteiro%20de%20aventura%20a%20dois" class="cta-button" style="color:#ffffff;"&gt;MONTAR ROTEIRO EXPRESS&lt;/a&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+            &lt;!-- FOOTER --&gt;
+            &lt;tr&gt;
+              &lt;td style="background-color:#0E0E0E; padding:32px 40px; text-align:center;"&gt;
+                &lt;p style="font-family:Georgia,'Times New Roman',serif; font-size:18px; color:#C5A572; margin:0 0 12px 0;"&gt;Rotta Curadoria&lt;/p&gt;
+                &lt;p class="small-text" style="color:#888; margin-bottom:16px;"&gt;Viagens com curadoria. Experiencias com alma.&lt;/p&gt;
+                &lt;table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin-bottom:16px;"&gt;
+                  &lt;tr&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://instagram.com/rotta.curadoria" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;Instagram&lt;/a&gt;&lt;/td&gt;
+                    &lt;td style="color:#444;"&gt;|&lt;/td&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://wa.me/5511968152123?text=Oi!%20Vim%20pela%20newsletter" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;WhatsApp&lt;/a&gt;&lt;/td&gt;
+                    &lt;td style="color:#444;"&gt;|&lt;/td&gt;
+                    &lt;td style="padding:0 8px;"&gt;&lt;a href="https://www.rottacuradoria.com" style="color:#C5A572; font-family:Arial,sans-serif; font-size:13px; text-decoration:none;"&gt;Site&lt;/a&gt;&lt;/td&gt;
+                  &lt;/tr&gt;
+                &lt;/table&gt;
+                &lt;p class="small-text" style="color:#555; font-size:11px; margin-bottom:8px;"&gt;
+                  Voce recebeu este email porque participou do nosso quiz de viagem.&lt;br&gt;
+                  Se nao quiser mais receber, tudo bem:
+                &lt;/p&gt;
+                &lt;a href="{{ unsubscribe }}" style="font-family:Arial,sans-serif; font-size:11px; color:#C5A572; text-decoration:underline;"&gt;Cancelar inscricao&lt;/a&gt;
+                &lt;p class="small-text" style="color:#444; font-size:10px; margin-top:16px;"&gt;
+                  Rotta Curadoria | @rotta.curadoria&lt;br&gt;
+                  Este email foi enviado por {{ organization.name }}
+                &lt;/p&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+
+          &lt;/table&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== TAB 6: BREVO SETUP ==================== -->
+<div id="tab-brevo" class="tab-content">
+  <div class="persona-header">
+    <h2>Setup Brevo — Passo a Passo</h2>
+    <p class="subtitle">Guia completo para configurar as 5 newsletters semanais no Brevo</p>
+    <div class="meta">
+      <span>5 Campanhas</span>
+      <span>Envio: Domingos 19h BRT</span>
+      <span>A/B Test em todas</span>
+    </div>
+  </div>
+
+  <div class="instruction-step">
+    <h3>Passo 1 — Verificar Listas de Contatos</h3>
+    <p>Antes de criar as campanhas, confirme que as listas do quiz estao criadas no Brevo:</p>
+    <table class="table-ref">
+      <tr>
+        <th>Newsletter</th>
+        <th>Lista Brevo</th>
+        <th>ID</th>
+      </tr>
+      <tr>
+        <td>Exploradora Aspiracional</td>
+        <td>Quiz Carolina</td>
+        <td>#3</td>
+      </tr>
+      <tr>
+        <td>Executivo Exigente</td>
+        <td>Quiz Roberto</td>
+        <td>#4</td>
+      </tr>
+      <tr>
+        <td>Casal Reconectando</td>
+        <td>Quiz Silvia Marcos</td>
+        <td>#5</td>
+      </tr>
+      <tr>
+        <td>Aventureiros em Grupo</td>
+        <td>Quiz Squad</td>
+        <td>#6</td>
+      </tr>
+      <tr>
+        <td>Aventureiros Romanticos</td>
+        <td>Quiz Lucas Bia</td>
+        <td>#7</td>
+      </tr>
+    </table>
+    <p style="margin-top:12px;">Caminho: <code>Contacts &gt; Lists</code> — verifique se todas as 5 listas existem.</p>
+  </div>
+
+  <div class="instruction-step">
+    <h3>Passo 2 — Criar a Primeira Campanha</h3>
+    <p>Vamos criar a campanha da Exploradora como exemplo. Repita o processo para as outras 4.</p>
+    <ol>
+      <li>Acesse <code>Campaigns &gt; Create a campaign &gt; Email</code></li>
+      <li>Nome da campanha: <code>Newsletter Semanal — Exploradora [DATA]</code></li>
+      <li>Em "From": use o email verificado do remetente (ex: <code>oi@rottacuradoria.com</code>)</li>
+      <li>Nome do remetente: <code>Rotta Curadoria</code></li>
+      <li>Reply-to: mesmo email do remetente</li>
+    </ol>
+  </div>
+
+  <div class="instruction-step">
+    <h3>Passo 3 — Configurar A/B Test</h3>
+    <p>O Brevo permite testar 2 linhas de assunto automaticamente:</p>
+    <ol>
+      <li>Na etapa de setup, ative <code>A/B Test</code></li>
+      <li>Insira a <strong>Linha A</strong> e a <strong>Linha B</strong> (veja cada template acima)</li>
+      <li>Configuracao recomendada:
+        <ul>
+          <li><strong>Tamanho do teste:</strong> 20% da lista (10% recebe A, 10% recebe B)</li>
+          <li><strong>Criterio vencedor:</strong> Open Rate (taxa de abertura)</li>
+          <li><strong>Tempo de teste:</strong> 2 horas</li>
+          <li><strong>Apos o teste:</strong> enviar a versao vencedora pros 80% restantes</li>
+        </ul>
+      </li>
+    </ol>
+    <div class="alert-box">
+      <strong>Dica:</strong> Se a lista tiver menos de 100 contatos, desative o A/B test e alterne manualmente entre as linhas A e B a cada semana. O teste so faz sentido estatisticamente com volume.
+    </div>
+  </div>
+
+  <div class="instruction-step">
+    <h3>Passo 4 — Selecionar a Lista de Envio</h3>
+    <ol>
+      <li>Na etapa <code>Recipients</code>, clique em <code>Select a list</code></li>
+      <li>Escolha a lista correspondente (ex: <code>Quiz Carolina #3</code>)</li>
+      <li>NAO marque "Send to all contacts" — envie apenas para a lista especifica</li>
+      <li>Se quiser excluir quem ja comprou, crie uma lista de exclusao <code>Clientes Ativos</code></li>
+    </ol>
+  </div>
+
+  <div class="instruction-step">
+    <h3>Passo 5 — Inserir o Template HTML</h3>
+    <ol>
+      <li>Na etapa <code>Design</code>, escolha <code>Paste your code</code> (colar codigo)</li>
+      <li>Copie o HTML completo do template correspondente (use os botoes "Copiar HTML" acima)</li>
+      <li>Cole no editor de codigo do Brevo</li>
+      <li>Clique em <code>Preview</code> para verificar como ficara no desktop e mobile</li>
+      <li>Substitua todas as variaveis <code>{{exemplo}}</code> pelo conteudo real da semana</li>
+    </ol>
+    <div class="alert-box">
+      <strong>Variaveis do Brevo:</strong> O template ja usa <code>{{ unsubscribe }}</code> e <code>{{ organization.name }}</code> — essas sao variaveis nativas do Brevo e serao preenchidas automaticamente. NAO altere essas.
+    </div>
+  </div>
+
+  <div class="instruction-step">
+    <h3>Passo 6 — Agendar Envio</h3>
+    <ol>
+      <li>Na etapa <code>Schedule</code>, selecione <code>Schedule for later</code></li>
+      <li>Escolha: <strong>Domingo</strong>, <strong>19:00</strong>, fuso <strong>BRT (America/Sao_Paulo)</strong></li>
+      <li>Revise tudo e clique em <code>Schedule</code></li>
+    </ol>
+    <div class="alert-box">
+      <strong>Importante:</strong> O Brevo NAO tem envio recorrente nativo em campanhas. Voce precisara criar uma nova campanha toda semana (ou duplicar a anterior). Para automatizar, veja o Passo 7.
+    </div>
+  </div>
+
+  <div class="instruction-step">
+    <h3>Passo 7 — Alternativa: Automacao para Recorrencia</h3>
+    <p>Se quiser automatizar o envio semanal sem criar campanha toda semana:</p>
+    <ol>
+      <li>Acesse <code>Automation &gt; Create a workflow</code></li>
+      <li>Trigger: <code>Contact is in list</code> — selecione a lista correspondente</li>
+      <li>Adicione uma condicao de tempo: <code>Wait until &gt; Day of week: Sunday, Time: 19:00 BRT</code></li>
+      <li>Acao: <code>Send email</code> — insira o template</li>
+      <li>Adicione um <code>Wait</code> de 7 dias apos o envio</li>
+      <li>Use um <code>Loop</code> para voltar ao inicio (assim o contato recebe toda semana)</li>
+    </ol>
+    <div class="alert-box">
+      <strong>Recomendacao:</strong> Para as primeiras 4-6 semanas, use Campanhas manuais. Isso permite ajustar o conteudo e testar o que funciona. Depois que tiver um ritmo, migre para Automacao.
+    </div>
+  </div>
+
+  <div class="instruction-step">
+    <h3>Passo 8 — Checklist Semanal (todo sabado)</h3>
+    <p>Execute este checklist para preparar as 5 newsletters de domingo:</p>
+    <ul class="checklist">
+      <li>Escolher destino/experiencia da semana para cada persona</li>
+      <li>Escrever copy personalizada (substituir variaveis {{}})</li>
+      <li>Selecionar/produzir imagens (600x220px para hero, 260x140px para thumbs)</li>
+      <li>Subir imagens no Brevo (Media Library) e copiar URLs</li>
+      <li>Substituir placeholders de imagem pelos URLs reais</li>
+      <li>Inserir links do Instagram (carrossel/reel da semana)</li>
+      <li>Duplicar campanha anterior de cada persona</li>
+      <li>Atualizar conteudo + linhas de assunto</li>
+      <li>Testar preview desktop + mobile</li>
+      <li>Enviar email teste para si mesmo</li>
+      <li>Agendar para domingo 19h BRT</li>
+    </ul>
+  </div>
+
+  <div class="instruction-step">
+    <h3>Passo 9 — Metricas para Acompanhar</h3>
+    <table class="table-ref">
+      <tr>
+        <th>Metrica</th>
+        <th>Meta</th>
+        <th>Onde ver</th>
+      </tr>
+      <tr>
+        <td>Taxa de Abertura (Open Rate)</td>
+        <td>Acima de 25%</td>
+        <td>Campaigns &gt; Statistics</td>
+      </tr>
+      <tr>
+        <td>Taxa de Clique (Click Rate)</td>
+        <td>Acima de 3%</td>
+        <td>Campaigns &gt; Statistics</td>
+      </tr>
+      <tr>
+        <td>Taxa de Descadastro</td>
+        <td>Abaixo de 0.5%</td>
+        <td>Campaigns &gt; Statistics</td>
+      </tr>
+      <tr>
+        <td>Conversao WhatsApp</td>
+        <td>Acompanhar manualmente</td>
+        <td>UTM nos links + WhatsApp</td>
+      </tr>
+    </table>
+    <div class="alert-box">
+      <strong>UTMs recomendados nos links:</strong> Adicione <code>?utm_source=brevo&amp;utm_medium=email&amp;utm_campaign=newsletter-[persona]-[data]</code> nos links do CTA para rastrear no Google Analytics.
+    </div>
+  </div>
+
+  <div class="instruction-step">
+    <h3>Passo 10 — Dicas de Deliverability</h3>
+    <ul>
+      <li><strong>Autenticacao:</strong> Configure SPF, DKIM e DMARC no dominio rottacuradoria.com (Brevo orienta em Settings &gt; Senders)</li>
+      <li><strong>Remetente:</strong> Use sempre o mesmo endereco de email para construir reputacao</li>
+      <li><strong>Background claro:</strong> Os templates ja usam fundo #F2EDE8 (creme claro) — isso melhora a entrega e evita filtros de spam</li>
+      <li><strong>Proporcao texto/imagem:</strong> Mantenha pelo menos 60% texto e 40% imagem</li>
+      <li><strong>Link de descadastro:</strong> Sempre visivel no footer (ja incluso nos templates)</li>
+      <li><strong>Aquecimento:</strong> Se o dominio e novo, comece enviando para listas menores e aumente gradualmente</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+function showTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(function(el) { el.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(el) { el.classList.remove('active'); });
+  document.getElementById('tab-' + tabId).classList.add('active');
+  var tabs = ['carolina','roberto','silvia','squad','lucas','brevo'];
+  var idx = tabs.indexOf(tabId);
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function copyCode(elementId) {
+  var codeEl = document.getElementById(elementId);
+  var text = codeEl.textContent || codeEl.innerText;
+  navigator.clipboard.writeText(text).then(function() {
+    var btn = codeEl.parentElement.querySelector('.copy-btn');
+    btn.textContent = 'Copiado!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'Copiar HTML';
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(function() {
+    var range = document.createRange();
+    range.selectNodeContents(codeEl);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    document.execCommand('copy');
+    sel.removeAllRanges();
+    var btn = codeEl.parentElement.querySelector('.copy-btn');
+    btn.textContent = 'Copiado!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'Copiar HTML';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>
