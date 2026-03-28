@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiros Consolidados — Production Bible | Rotta Curadoria</title>
+<meta name="description" content="Bible de producao completa com todos os 19 reels da Rotta Curadoria. Roteiros, prompts, B-Roll, copys e calendario.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+  --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+  --text:#F2EDE8;--muted:#999;--dim:#666;
+  --green:#4CAF7D;--red:#FF5252;--blue:#5B8DEF;--orange:#E8785A;--purple:#9B72CF;
+  --sidebar-w:280px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+
+/* ===== SIDEBAR ===== */
+.sidebar{position:fixed;top:0;left:0;width:var(--sidebar-w);height:100vh;background:#111;border-right:1px solid var(--layer);overflow-y:auto;z-index:1000;transition:transform .3s ease}
+.sidebar-header{padding:24px 20px 16px;border-bottom:1px solid var(--layer);text-align:center}
+.sidebar-logo{width:48px;height:48px;border:2px solid var(--gold);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);margin-bottom:8px}
+.sidebar-header h2{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold)}
+.sidebar-header p{font-size:11px;color:var(--dim);margin-top:4px}
+
+.sidebar-section{padding:12px 16px 8px}
+.sidebar-section-title{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;font-weight:600}
+
+.sidebar-nav{list-style:none;padding:0 8px 8px}
+.sidebar-nav li{margin-bottom:2px}
+.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-size:13px;transition:all .2s;line-height:1.3}
+.sidebar-nav a:hover{background:var(--layer);color:var(--text)}
+.sidebar-nav a.active{background:var(--gold-dim);color:var(--gold)}
+.sidebar-nav .reel-num{font-family:'Playfair Display',serif;font-weight:700;font-size:11px;min-width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;background:var(--layer);color:var(--dim);flex-shrink:0}
+.sidebar-nav a.active .reel-num{background:var(--gold);color:var(--bg)}
+.sidebar-nav .reel-title{flex:1}
+.sidebar-nav .reel-status{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.status-gravar{background:var(--red)}
+.status-gravado{background:var(--orange)}
+.status-editado{background:var(--blue)}
+.status-publicado{background:var(--green)}
+
+.sidebar-legend{padding:12px 20px 20px;border-top:1px solid var(--layer);margin-top:8px}
+.sidebar-legend .legend-item{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--dim);margin-bottom:4px}
+.sidebar-legend .legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* Mobile sidebar toggle */
+.sidebar-toggle{display:none;position:fixed;top:16px;left:16px;z-index:1100;width:44px;height:44px;border-radius:10px;background:var(--card);border:1px solid var(--layer);color:var(--gold);font-size:20px;cursor:pointer;align-items:center;justify-content:center}
+.sidebar-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:999}
+
+@media(max-width:1024px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-toggle{display:flex}
+  .sidebar-overlay.active{display:block}
+  .main-content{margin-left:0!important}
+}
+
+/* ===== MAIN CONTENT ===== */
+.main-content{margin-left:var(--sidebar-w);min-height:100vh}
+.container{max-width:960px;margin:0 auto;padding:0 32px}
+
+/* ===== TOP HEADER ===== */
+.page-header{padding:48px 0 32px;text-align:center;border-bottom:1px solid var(--layer)}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);color:var(--text);line-height:1.2;margin-bottom:8px}
+.page-header h1 em{color:var(--gold);font-style:italic}
+.page-header .subtitle{font-size:15px;color:var(--muted);max-width:600px;margin:0 auto}
+.header-stats{display:flex;justify-content:center;gap:40px;margin-top:24px;flex-wrap:wrap}
+.header-stat{text-align:center}
+.header-stat .num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold)}
+.header-stat .label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px}
+
+/* ===== CALENDAR ===== */
+.calendar-section{padding:48px 0 32px}
+.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;text-align:center}
+.calendar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:24px}
+.cal-card{background:var(--card);border:1px solid var(--layer);border-radius:10px;padding:14px 16px;transition:all .2s;cursor:pointer}
+.cal-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.cal-card .cal-week{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.cal-card .cal-reel{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.cal-card .cal-cta{font-size:11px;color:var(--gold);font-weight:600}
+.cal-card .cal-status{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;margin-top:6px;font-weight:600}
+.cal-status-gravar{background:rgba(255,82,82,.15);color:var(--red)}
+.cal-status-gravado{background:rgba(232,120,90,.15);color:var(--orange)}
+.cal-status-editado{background:rgba(91,141,239,.15);color:var(--blue)}
+
+/* ===== REEL CARDS ===== */
+.reel-section{padding:64px 0;border-bottom:1px solid var(--layer)}
+.reel-section:last-child{border-bottom:none}
+.reel-header{margin-bottom:32px}
+.reel-number{font-family:'Playfair Display',serif;font-size:64px;font-weight:700;color:var(--gold);opacity:.15;line-height:1}
+.reel-title-main{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,32px);color:var(--text);margin-top:-16px;line-height:1.3}
+.reel-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.reel-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:6px;font-size:12px;font-weight:600;background:var(--layer);color:var(--muted)}
+.reel-badge.persona{border:1px solid var(--purple);color:var(--purple);background:rgba(155,114,207,.1)}
+.reel-badge.duration{border:1px solid var(--blue);color:var(--blue);background:rgba(91,141,239,.1)}
+.reel-badge.cta-kw{border:1px solid var(--gold);color:var(--gold);background:var(--gold-dim)}
+.reel-badge.calendar{border:1px solid var(--green);color:var(--green);background:rgba(76,175,125,.1)}
+.reel-badge.priority{border:1px solid var(--red);color:var(--red);background:rgba(255,82,82,.1)}
+.reel-badge.block-tag{border:1px solid var(--orange);color:var(--orange);background:rgba(232,120,90,.1)}
+
+/* Status selector */
+.status-selector{margin-top:16px;display:flex;align-items:center;gap:8px}
+.status-selector label{font-size:12px;color:var(--dim)}
+.status-selector select{background:var(--layer);border:1px solid #333;color:var(--text);padding:6px 12px;border-radius:6px;font-size:12px;font-family:'Inter',sans-serif;cursor:pointer}
+
+/* Subsections */
+.reel-sub{margin-bottom:28px}
+.reel-sub-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;cursor:pointer;padding:10px 16px;background:var(--card);border:1px solid var(--layer);border-radius:8px;transition:all .2s}
+.reel-sub-header:hover{border-color:#444}
+.reel-sub-header h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);font-weight:600}
+.reel-sub-header .toggle-icon{color:var(--dim);font-size:14px;transition:transform .2s}
+.reel-sub-header.open .toggle-icon{transform:rotate(180deg)}
+.reel-sub-content{padding:16px 0;display:none}
+.reel-sub-content.open{display:block}
+
+/* Script lines */
+.script-block{background:var(--card);border:1px solid var(--layer);border-radius:10px;padding:20px;margin-bottom:12px}
+.script-timestamp{font-size:12px;color:var(--dim);font-weight:600;letter-spacing:.5px;margin-bottom:8px}
+.script-section-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);margin-bottom:12px}
+.script-line{margin-bottom:10px;line-height:1.6}
+.script-line:last-child{margin-bottom:0}
+.script-speaker{font-size:11px;font-weight:700;letter-spacing:1.5px;display:block;margin-bottom:2px}
+.script-speaker.marcelo{color:var(--muted)}
+.script-speaker.alexandra{color:var(--gold)}
+.script-text{font-size:15px;color:var(--text)}
+.script-text.alexandra{color:rgba(197,165,114,.85)}
+.script-direction{font-size:12px;color:#555;font-style:italic;margin-bottom:2px}
+
+/* Copy section */
+.copy-box{background:var(--card);border:1px solid var(--layer);border-radius:10px;padding:20px;position:relative}
+.copy-box p{font-size:14px;line-height:1.7;color:var(--muted);white-space:pre-wrap}
+.copy-box .hashtags{color:var(--gold);font-size:13px;margin-top:12px;display:block}
+
+/* B-Roll table */
+.broll-table{width:100%;border-collapse:collapse}
+.broll-table th{text-align:left;padding:10px 12px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--layer);font-weight:600}
+.broll-table td{padding:10px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid rgba(42,42,42,.5);vertical-align:top}
+.broll-table tr:hover td{background:rgba(197,165,114,.03)}
+.broll-num{font-family:'Playfair Display',serif;font-weight:700;color:var(--gold);font-size:16px}
+
+/* Prompt cards */
+.prompt-card{background:#0a0a0a;border:1px solid var(--layer);border-radius:10px;padding:20px;margin-bottom:12px;position:relative}
+.prompt-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.prompt-label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:600}
+.prompt-clip{font-size:11px;color:var(--dim)}
+.prompt-text{font-size:13px;line-height:1.7;color:var(--muted);white-space:pre-wrap;font-family:'Inter',sans-serif}
+
+/* Copy button */
+.copy-btn{position:absolute;top:12px;right:12px;background:var(--layer);border:1px solid #444;color:var(--muted);padding:5px 12px;border-radius:6px;font-size:11px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;transition:all .2s;z-index:5}
+.copy-btn:hover{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.copy-btn.copied{background:var(--green);color:white;border-color:var(--green)}
+
+/* Block dividers */
+.block-divider{text-align:center;padding:48px 0 16px}
+.block-divider h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--gold)}
+.block-divider p{font-size:13px;color:var(--dim);margin-top:4px}
+.block-divider .divider-line{width:80px;height:2px;background:var(--gold);margin:16px auto 0;opacity:.3}
+
+/* Responsive */
+@media(max-width:768px){
+  .container{padding:0 16px}
+  .reel-meta{gap:8px}
+  .calendar-grid{grid-template-columns:1fr 1fr}
+  .broll-table{font-size:12px}
+  .broll-table th,.broll-table td{padding:8px}
+  .header-stats{gap:24px}
+  .reel-number{font-size:48px}
+}
+@media(max-width:480px){
+  .calendar-grid{grid-template-columns:1fr}
+}
+
+/* Print */
+@media print{
+  .sidebar,.sidebar-toggle,.sidebar-overlay,.copy-btn,.status-selector{display:none!important}
+  .main-content{margin-left:0!important}
+  body{background:white;color:#111}
+  .reel-sub-content{display:block!important}
+  .page-header,.reel-section,.block-divider{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<!-- Sidebar Toggle (mobile) -->
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu">&#9776;</button>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">R</div>
+    <h2>Production Bible</h2>
+    <p>19 Reels &mdash; Rotta Curadoria</p>
+  </div>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Navegacao</div>
+  </div>
+  <ul class="sidebar-nav">
+    <li><a href="#calendar" class="sidebar-link"><span class="reel-num" style="background:var(--gold);color:var(--bg)">Cal</span><span class="reel-title">Calendario</span></a></li>
+  </ul>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Bloco 1 &mdash; Pre-Italia</div>
+  </div>
+  <ul class="sidebar-nav" id="navBlock1">
+    <li><a href="#reel-01" class="sidebar-link"><span class="reel-num">01</span><span class="reel-title">Veredito 7 Destinos</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-16" class="sidebar-link"><span class="reel-num">16</span><span class="reel-title">Romantica NAO e Paris</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-06" class="sidebar-link"><span class="reel-num">06</span><span class="reel-title">5 Erros Europa</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-17" class="sidebar-link"><span class="reel-num">17</span><span class="reel-title">Pedido Casamento</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-03" class="sidebar-link"><span class="reel-num">03</span><span class="reel-title">Criancas Especiais</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-14" class="sidebar-link"><span class="reel-num">14</span><span class="reel-title">Viagem em Casal</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-10" class="sidebar-link"><span class="reel-num">10</span><span class="reel-title">Europa com 60+</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-18" class="sidebar-link"><span class="reel-num">18</span><span class="reel-title">Japao Facil</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-19" class="sidebar-link"><span class="reel-num">19</span><span class="reel-title">Contra a Copa</span><span class="reel-status status-gravar"></span></a></li>
+  </ul>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Bloco 2 &mdash; Pos-Italia (Maio)</div>
+  </div>
+  <ul class="sidebar-nav" id="navBlock2">
+    <li><a href="#reel-12" class="sidebar-link"><span class="reel-num">12</span><span class="reel-title">Visto EUA 2026</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-04" class="sidebar-link"><span class="reel-num">04</span><span class="reel-title">Autistas Orlando</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-05" class="sidebar-link"><span class="reel-num">05</span><span class="reel-title">Roteiro Disney</span><span class="reel-status status-gravar"></span></a></li>
+  </ul>
+
+  <div class="sidebar-section">
+    <div class="sidebar-section-title">Bloco 3 &mdash; Pos-Italia (Junho)</div>
+  </div>
+  <ul class="sidebar-nav" id="navBlock3">
+    <li><a href="#reel-07" class="sidebar-link"><span class="reel-num">07</span><span class="reel-title">Filhos &lt;5 Disney</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-08" class="sidebar-link"><span class="reel-num">08</span><span class="reel-title">Gramado 2026</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-09" class="sidebar-link"><span class="reel-num">09</span><span class="reel-title">Grecia Inteligente</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-11" class="sidebar-link"><span class="reel-num">11</span><span class="reel-title">Portugal 60+</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-13" class="sidebar-link"><span class="reel-num">13</span><span class="reel-title">Checklist EUA</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-15" class="sidebar-link"><span class="reel-num">15</span><span class="reel-title">Alerta Europa</span><span class="reel-status status-gravar"></span></a></li>
+    <li><a href="#reel-02" class="sidebar-link"><span class="reel-num">02</span><span class="reel-title">McDonald's Italiano</span><span class="reel-status status-gravar"></span></a></li>
+  </ul>
+
+  <div class="sidebar-legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--red)"></span> Para Gravar</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--orange)"></span> Gravado</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span> Editado</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--green)"></span> Publicado</div>
+  </div>
+</nav>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main-content">
+<div class="container">
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <h1>Production <em>Bible</em></h1>
+  <p class="subtitle">Todos os 19 roteiros da Rotta Curadoria. Roteiros completos, copys, analise de B-Roll, prompts para Nano Banana e Grok.</p>
+  <div class="header-stats">
+    <div class="header-stat"><div class="num">19</div><div class="label">Reels</div></div>
+    <div class="header-stat"><div class="num">3</div><div class="label">Blocos</div></div>
+    <div class="header-stat"><div class="num">100+</div><div class="label">B-Roll Clips</div></div>
+    <div class="header-stat"><div class="num">100+</div><div class="label">Prompts</div></div>
+  </div>
+</header>
+
+<!-- ===== CALENDAR ===== -->
+<section class="calendar-section" id="calendar">
+  <div class="section-label">Calendario de Publicacao</div>
+  <div class="calendar-grid">
+    <div class="cal-card" onclick="document.getElementById('reel-16').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 1 Abril</div>
+      <div class="cal-reel">R16 &mdash; Romantica NAO e Paris</div>
+      <div class="cal-cta">CTA: ROMANTICA</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-01').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 1 Abril</div>
+      <div class="cal-reel">R01 &mdash; Veredito 7 Destinos</div>
+      <div class="cal-cta">CTA: DESTINOS</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-06').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 2 Abril</div>
+      <div class="cal-reel">R06 &mdash; 5 Erros Europa</div>
+      <div class="cal-cta">CTA: EUROPA</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-17').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 2 Abril</div>
+      <div class="cal-reel">R17 &mdash; Pedido Casamento</div>
+      <div class="cal-cta">CTA: SURPRISE</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-03').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 3 Abril</div>
+      <div class="cal-reel">R03 &mdash; Criancas Especiais</div>
+      <div class="cal-cta">CTA: INCLUSIVO</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-14').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 3 Abril</div>
+      <div class="cal-reel">R14 &mdash; Viagem em Casal</div>
+      <div class="cal-cta">CTA: CASAL</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-10').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 4 Abril</div>
+      <div class="cal-reel">R10 &mdash; Europa com 60+</div>
+      <div class="cal-cta">CTA: 60MAIS</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-18').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 4 Abril</div>
+      <div class="cal-reel">R18 &mdash; Japao Facil</div>
+      <div class="cal-cta">CTA: JAPAO</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-19').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 4 Abril</div>
+      <div class="cal-reel">R19 &mdash; Contra a Copa</div>
+      <div class="cal-cta">CTA: FUGA</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-12').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 5 Maio</div>
+      <div class="cal-reel">R12 &mdash; Visto EUA 2026</div>
+      <div class="cal-cta">CTA: EUA</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-04').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 6 Maio</div>
+      <div class="cal-reel">R04 &mdash; Autistas Orlando</div>
+      <div class="cal-cta">CTA: ORLANDO</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-07').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 7 Junho</div>
+      <div class="cal-reel">R07 &mdash; Filhos &lt;5 Disney</div>
+      <div class="cal-cta">CTA: DISNEY</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-05').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 7 Junho</div>
+      <div class="cal-reel">R05 &mdash; Roteiro Disney</div>
+      <div class="cal-cta">CTA: DISNEY</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-08').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 8 Junho</div>
+      <div class="cal-reel">R08 &mdash; Gramado 2026</div>
+      <div class="cal-cta">CTA: GRAMADO</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-09').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 8 Junho</div>
+      <div class="cal-reel">R09 &mdash; Grecia Inteligente</div>
+      <div class="cal-cta">CTA: GRECIA</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-11').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 8 Junho</div>
+      <div class="cal-reel">R11 &mdash; Portugal 60+</div>
+      <div class="cal-cta">CTA: PORTUGAL</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-13').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 9 Junho</div>
+      <div class="cal-reel">R13 &mdash; Checklist EUA</div>
+      <div class="cal-cta">CTA: EUA</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-15').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 10 Junho</div>
+      <div class="cal-reel">R15 &mdash; Alerta Europa</div>
+      <div class="cal-cta">CTA: EUROPA</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+    <div class="cal-card" onclick="document.getElementById('reel-02').scrollIntoView({behavior:'smooth'})">
+      <div class="cal-week">Semana 10 Junho</div>
+      <div class="cal-reel">R02 &mdash; McDonald's Italiano</div>
+      <div class="cal-cta">CTA: ITALIA</div>
+      <div class="cal-status cal-status-gravar">Para Gravar</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- BLOCO 1 — PRE-ITALIA                                                   -->
+<!-- ====================================================================== -->
+<div class="block-divider" id="block1">
+  <h2>Bloco 1 &mdash; Pre-Italia</h2>
+  <p>Gravar antes da viagem a Italia &mdash; Abril 2026</p>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ==================== REEL 01 ==================== -->
+<section class="reel-section" id="reel-01">
+<div class="reel-header">
+  <div class="reel-number">01</div>
+  <h2 class="reel-title-main">Veredito: 7 Destinos que Curamos</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">Todas as Personas</span>
+    <span class="reel-badge duration">50-65s</span>
+    <span class="reel-badge cta-kw">CTA: DESTINOS</span>
+    <span class="reel-badge calendar">Semana 1 Abril</span>
+    <span class="reel-badge block-tag">Bloco 1</span>
+  </div>
+  <div class="status-selector">
+    <label>Status:</label>
+    <select data-reel="01" onchange="updateStatus(this)">
+      <option value="gravar" selected>Para Gravar</option>
+      <option value="gravado">Gravado</option>
+      <option value="editado">Editado</option>
+      <option value="publicado">Publicado</option>
+    </select>
+  </div>
+</div>
+
+<!-- ROTEIRO -->
+<div class="reel-sub">
+  <div class="reel-sub-header open" onclick="toggleSection(this)">
+    <h3>Roteiro Completo</h3>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="reel-sub-content open">
+    <div class="script-block">
+      <div class="script-timestamp">[0-3s] HOOK</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Esse e o nosso veredito sobre os 7 destinos que todo brasileiro quer conhecer. E a gente nao vai romantizar nada."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[3-5s]</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Eu sou a Alexandra, nutricionista, e vou dar meu veredito sobre a comida de cada um."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[5-8s]</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Salva esse video porque voce vai economizar muito dinheiro e evitar varias decepcoes."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[8-16s] ITALIA</div>
+      <div class="script-section-title">Italia</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Italia. O queridinho dos brasileiros. Roma te deixa sem palavras, mas prepare o bolso: refeicao a partir de R$120 por pessoa."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Mas a comida compensa CADA centavo. A pizza de la nao tem comparacao. E o gelato? Esquece."</span></div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Curiosidade: Veneza ta afundando 2mm por ano e agora cobra 5 euros so pra entrar."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[16-23s] PORTUGAL</div>
+      <div class="script-section-title">Portugal</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Portugal. O mais facil pra brasileiro. Voce fala portugues, nao precisa de visto, e Lisboa e linda."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Refeicao: R$80 em media. E os pasteis de nata? Gente. Nao tem como descrever."</span></div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"250 dias de sol por ano. Mais que a maioria da Europa."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[23-30s] ESTADOS UNIDOS</div>
+      <div class="script-section-title">Estados Unidos</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Estados Unidos. Primeiro no ranking dos sonhos em 2025. Orlando pras criancas, Nova York pra cultura."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Mas refeicao simples: R$100 a 150. O dolar pesa. Compensa MUITO se voce pegar passagem em promocao."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[30-37s] ARGENTINA</div>
+      <div class="script-section-title">Argentina</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Argentina. Meninas, Buenos Aires e INCRIVEL pra casais."</span></div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Mendoza tem vinhos espetaculares. E o melhor: ta super barato. Refeicao excelente: R$40 a 60."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"As sorveterias de la? As criancas piram."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[37-44s] FRANCA</div>
+      <div class="script-section-title">Franca</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Franca. Paris e o sonho, mas vai alem da Torre Eiffel. A Provenca e subestimada."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"A comida e arte. Literalmente. Mas R$150 por refeicao e o normal."</span></div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Nao e a toa que e o pais mais visitado do mundo. 90 milhoes de turistas por ano."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[44-50s] CHILE</div>
+      <div class="script-section-title">Chile</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Chile. Do Atacama a Patagonia -- paisagens que nao parecem reais."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Refeicao: R$70. E pra familias aventureiras, as criancas amam os vulcoes e lagos."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[50-56s] ESPANHA</div>
+      <div class="script-section-title">Espanha</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Espanha. Barcelona com Gaudi, Madrid com museus, praias incriveis."</span></div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"R$90 por refeicao. E super family-friendly -- criancas brincam nas pracas ate tarde la."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[56-65s] CTA</div>
+      <div class="script-section-title">CTA</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Compartilha esse video com quem ta planejando viagem internacional."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E comenta aqui: qual desses destinos ta no topo da lista de voces?"</span></div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"A gente e Marcelo e Alexandra. A gente cura experiencias de viagem pra casais e familias que querem viver algo de verdade."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Me segue que toda semana tem conteudo novo com a nossa opiniao honesta."</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- INSTAGRAM COPY -->
+<div class="reel-sub">
+  <div class="reel-sub-header open" onclick="toggleSection(this)">
+    <h3>Instagram Copy</h3>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="reel-sub-content open">
+    <div class="copy-box">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <p>7 destinos que a gente JA FOI -- veredito honesto de quem viveu cada um.
+
+Italia, Portugal, Estados Unidos, Argentina, Franca, Chile e Espanha.
+
+Preco medio de refeicao, curiosidades que ninguem conta, e a opiniao real de quem viajou SEM filtro.
+
+Salva esse video. Voce vai agradecer quando estiver planejando sua proxima viagem.
+
+Comenta DESTINOS e a gente te manda uma lista personalizada pro seu perfil de viagem.
+
+Curado por Marcelo e Alexandra.
+<span class="hashtags">#viagem #destinos #roteirodeviagem #viajarbarato #europa #americadosul #rottacuradoria #curadoriadeviagem #dicasdeviagem #viajarmais</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- B-ROLL ANALYSIS -->
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)">
+    <h3>Analise B-Roll (7 clips)</h3>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="reel-sub-content">
+    <table class="broll-table">
+      <thead><tr><th>#</th><th>Timestamp</th><th>Descricao</th><th>Duracao</th></tr></thead>
+      <tbody>
+        <tr><td class="broll-num">1</td><td>[8-16s]</td><td>Italia: Coliseu ao entardecer, pizza napolitana, canais de Veneza</td><td>~8s</td></tr>
+        <tr><td class="broll-num">2</td><td>[16-23s]</td><td>Portugal: Bondes de Lisboa, pasteis de nata, praia do Algarve</td><td>~7s</td></tr>
+        <tr><td class="broll-num">3</td><td>[23-30s]</td><td>EUA: Skyline de Manhattan, castelo da Disney, Times Square</td><td>~7s</td></tr>
+        <tr><td class="broll-num">4</td><td>[30-37s]</td><td>Argentina: Vinhedos de Mendoza, tango em Buenos Aires, sorveterias</td><td>~7s</td></tr>
+        <tr><td class="broll-num">5</td><td>[37-44s]</td><td>Franca: Torre Eiffel iluminada, campos de lavanda na Provenca</td><td>~7s</td></tr>
+        <tr><td class="broll-num">6</td><td>[44-50s]</td><td>Chile: Deserto do Atacama estrelado, Torres del Paine</td><td>~6s</td></tr>
+        <tr><td class="broll-num">7</td><td>[50-56s]</td><td>Espanha: Sagrada Familia, praia de Barcelona, praca ao entardecer</td><td>~6s</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- START FRAME PROMPTS -->
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)">
+    <h3>Start Frame Prompts (Nano Banana)</h3>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="reel-sub-content">
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 1 &mdash; Italia</span><span class="prompt-clip">[8-16s]</span></div>
+      <div class="prompt-text">Wide establishing shot of the Roman Colosseum at golden hour, warm amber and terracotta tones dominating the frame, ancient travertine stone texture catching low directional sunlight, scattered tourists as tiny silhouettes for scale, wispy clouds painted orange and pink across the sky, lens flare entering from the left third, foreground featuring weathered cobblestones with shallow depth of field, rule of thirds composition with the Colosseum occupying the right two-thirds, cinematic 16:9, 4K quality, photorealistic, no identifiable people close-up</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 2 &mdash; Portugal</span><span class="prompt-clip">[16-23s]</span></div>
+      <div class="prompt-text">Close-up of freshly baked pasteis de nata on a rustic marble counter in a traditional Lisbon bakery, golden custard with caramelized spots glistening under warm tungsten lighting, powdered cinnamon and sugar dusted on top, shallow depth of field with blurred tiled azulejo wall in background (blue and white Portuguese tiles), steam rising gently, warm color palette of cream, gold, and deep blue, rule of thirds with pastries in lower right, cinematic 16:9, 4K quality, photorealistic, food photography style</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 3 &mdash; Estados Unidos</span><span class="prompt-clip">[23-30s]</span></div>
+      <div class="prompt-text">Aerial drone shot of Manhattan skyline at blue hour, deep cobalt sky transitioning to warm city lights below, Empire State Building illuminated in the center of frame, reflections on the Hudson River in foreground, geometric patterns of lit windows creating abstract texture, cool blue and warm amber color contrast, leading lines from the river towards the skyline, subtle mist layer between buildings, cinematic 16:9, 4K quality, photorealistic, no people visible</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 4 &mdash; Argentina</span><span class="prompt-clip">[30-37s]</span></div>
+      <div class="prompt-text">Medium shot of a premium Malbec wine glass on a rustic wooden barrel at a Mendoza vineyard, Andes mountains snow-capped in the distant background, golden hour light casting long shadows through vine rows, deep burgundy wine reflecting sunlight with warm ruby tones, grapevines framing left and right creating natural leading lines, dust particles floating in the golden light beam, earthy palette of green, burgundy, gold, and mountain blue-white, cinematic 16:9, 4K quality, photorealistic, no people visible</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 5 &mdash; Franca</span><span class="prompt-clip">[37-44s]</span></div>
+      <div class="prompt-text">Wide landscape of lavender fields in Provence at sunset, endless rows of deep purple lavender stretching to the horizon, a solitary stone farmhouse in the middle distance, warm golden light painting the scene from the right, dramatic cumulus clouds with pink and orange underbellies, composition using leading lines of lavender rows converging at the farmhouse, rich palette of purple, gold, warm stone, and sky blue, subtle heat haze rising from the fields, cinematic 16:9, 4K quality, photorealistic, no people visible</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 6 &mdash; Chile</span><span class="prompt-clip">[44-50s]</span></div>
+      <div class="prompt-text">Dramatic wide shot of Torres del Paine granite towers at sunrise, jagged peaks piercing through low-hanging clouds, turquoise glacial lake in the foreground reflecting the mountains, Patagonian wind-bent grass in the immediate foreground creating depth, pink and orange light hitting only the peaks while valleys remain in cool shadow, dramatic contrast between warm peaks and cool shadows, epic scale composition with towers in the upper third, cinematic 16:9, 4K quality, photorealistic, no people visible</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 7 &mdash; Espanha</span><span class="prompt-clip">[50-56s]</span></div>
+      <div class="prompt-text">Low angle upward shot of the Sagrada Familia interior, towering tree-like columns branching into a canopy of geometric stained glass, kaleidoscopic light beams streaming through multicolored windows casting rainbow patterns on stone columns, symmetrical composition centered on the nave, warm light from the west windows (gold and red) contrasting with cool east windows (blue and green), Gothic-organic architecture creating cathedral-forest atmosphere, sense of awe and wonder, cinematic 16:9, 4K quality, photorealistic, no people visible</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ANIMATION PROMPTS -->
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)">
+    <h3>Animation Prompts (Grok)</h3>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="reel-sub-content">
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 1 &mdash; Italia</span></div>
+      <div class="prompt-text">Slow dolly forward toward the Colosseum (3 seconds), gentle parallax between foreground cobblestones and background monument, subtle lens flare intensifying as camera moves forward, warm dust particles floating in golden light, distant birds crossing the sky in the upper portion, ambient heat shimmer on stone surfaces</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 2 &mdash; Portugal</span></div>
+      <div class="prompt-text">Slow push-in on the pasteis de nata (2.5 seconds), gentle rack focus from background azulejo tiles to foreground pastries, steam rising with subtle turbulence, warm light flickering slightly as if from nearby candle, sugar particles catching light as they settle</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 3 &mdash; Estados Unidos</span></div>
+      <div class="prompt-text">Slow aerial drift from left to right over Manhattan (3 seconds), parallax between foreground river reflections and background skyline, city lights twinkling subtly, thin clouds drifting slowly past buildings, subtle blue-to-warm color temperature shift as camera pans</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 4 &mdash; Argentina</span></div>
+      <div class="prompt-text">Gentle orbit around the wine glass on barrel (2.5 seconds), subtle parallax between wine glass in foreground and Andes in background, golden dust motes floating through the light beam, wine surface with micro-ripples catching light, vine leaves swaying gently in breeze at frame edges</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 5 &mdash; Franca</span></div>
+      <div class="prompt-text">Slow crane up from lavender level to wide view (3 seconds), gentle breeze animation on lavender stalks creating wave-like motion, clouds drifting slowly left to right, golden light intensifying toward the horizon, a single butterfly fluttering through the mid-ground, heat shimmer rising from the purple fields</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 6 &mdash; Chile</span></div>
+      <div class="prompt-text">Slow zoom out from Torres peaks (3 seconds), clouds wrapping and unwrapping around granite towers in real-time, foreground grass swaying aggressively in Patagonian wind, lake surface with subtle ripples reflecting the changing sky, sunrise light slowly creeping down the mountain face</div>
+    </div>
+
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 7 &mdash; Espanha</span></div>
+      <div class="prompt-text">Slow tilt upward through the Sagrada Familia columns (3 seconds), light beams rotating subtly as if sun is moving, rainbow light patterns shifting across stone columns, dust particles floating in the colored light shafts, gentle parallax between near columns and distant ceiling canopy</div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<!-- ==================== REEL 16 ==================== -->
+<section class="reel-section" id="reel-16">
+<div class="reel-header">
+  <div class="reel-number">16</div>
+  <h2 class="reel-title-main">Romantica NAO e Paris</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">S&M + Carolina</span>
+    <span class="reel-badge duration">45-55s</span>
+    <span class="reel-badge cta-kw">CTA: ROMANTICA</span>
+    <span class="reel-badge calendar">Semana 1 Abril</span>
+    <span class="reel-badge priority">PRIORIDADE</span>
+    <span class="reel-badge block-tag">Bloco 1</span>
+  </div>
+  <div class="status-selector">
+    <label>Status:</label>
+    <select data-reel="16" onchange="updateStatus(this)">
+      <option value="gravar" selected>Para Gravar</option>
+      <option value="gravado">Gravado</option>
+      <option value="editado">Editado</option>
+      <option value="publicado">Publicado</option>
+    </select>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header open" onclick="toggleSection(this)">
+    <h3>Roteiro Completo</h3>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="reel-sub-content open">
+    <div class="script-block">
+      <div class="script-timestamp">[0-3s] HOOK</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"A melhor viagem romantica pra um casal fazer em 2026 nao e Paris. Nao e Veneza. E nao e Grecia."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[3-5s]</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><div class="script-direction">(surpresa)</div><span class="script-text alexandra">"Espera. Eu achava que era Paris."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[5-7s]</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><div class="script-direction">(sorrindo)</div><span class="script-text">"E por isso que eu faco a curadoria e voce faz a comida do casal."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[7-10s]</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><div class="script-direction">(rindo, dando tapa no braco dele)</div><span class="script-text alexandra">"Ah, para. Fala logo qual e."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[10-20s] A REVELACAO</div>
+      <div class="script-section-title">A Revelacao: Colombia</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"O destino e a Colombia. Cartagena, especificamente. E antes que voce torca o nariz, me ouve. Cartagena tem: cidade murada com ruas de pedra e varandas coloridas, praias caribenhas a 40 minutos de barco, gastronomia que mistura frutos do mar com temperos que voce nunca provou. E o melhor: custa METADE do que voce gastaria em Paris ou Veneza."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[20-28s]</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Ta, eu pesquisei. E preciso admitir: ele tem razao. O por do sol em Cartagena e diferente de tudo que eu ja vi. Os restaurantes tem aquela vibe romantica sem ser cliche. E o clima? 28 graus o ano todo. E nao precisa de visto. Voo direto do Brasil."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[28-35s]</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Uma semana em Cartagena pra casal, com hotel boutique na cidade murada, jantares incriveis e passeio de barco pras ilhas: voce gasta entre R$8 a 12 mil pro casal. Em Paris? Facil R$20 mil. E sem praia."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[35-42s]</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Mas Marcelo, Paris tem a Torre Eiffel..."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[42-45s]</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"E Cartagena tem POR DO SOL no Caribe com ceviche na mao. Me diz qual e mais romantico."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[45-50s]</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><div class="script-direction">(olhando pra camera)</div><span class="script-text alexandra">"Ele ganhou essa."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[50-58s] CTA</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Se voce ta planejando uma viagem romantica e quer algo diferente do cliche..."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Comenta CASAL aqui embaixo que a gente te manda dicas personalizadas."</span></div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Curado por Marcelo e Alexandra."</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header open" onclick="toggleSection(this)">
+    <h3>Instagram Copy</h3>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="reel-sub-content open">
+    <div class="copy-box">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <p>A viagem mais romantica que voce pode fazer em 2026 NAO e Paris.
+
+Nao e Veneza. Nao e Grecia.
+
+E um destino que custa METADE, tem praia caribenha, cidade murada com ruas de pedra, gastronomia surreal e 28 graus o ano todo.
+
+Assiste ate o final pra descobrir.
+
+Comenta ROMANTICA que a gente te manda um mini-roteiro personalizado pra casal.
+<span class="hashtags">#viagemromantica #cartagena #colombia #viagemcasal #destinosromanticos #rottacuradoria #curadoriadeviagem #casaisqueviajam #luademel #escapadaromantica</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)">
+    <h3>Analise B-Roll (6 clips)</h3>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="reel-sub-content">
+    <table class="broll-table">
+      <thead><tr><th>#</th><th>Timestamp</th><th>Descricao</th><th>Duracao</th></tr></thead>
+      <tbody>
+        <tr><td class="broll-num">1</td><td>[0-3s]</td><td>Torre Eiffel cinza/fria cortando para sol caribenho (contraste visual)</td><td>~3s</td></tr>
+        <tr><td class="broll-num">2</td><td>[10-20s]</td><td>Cidade murada de Cartagena: ruas coloridas, varandas com flores, portas antigas</td><td>~10s</td></tr>
+        <tr><td class="broll-num">3</td><td>[20-28s]</td><td>Por do sol em Cartagena visto de um rooftop, mar caribenho dourado</td><td>~8s</td></tr>
+        <tr><td class="broll-num">4</td><td>[28-35s]</td><td>Hotel boutique colonial: patio com fonte, cama com mosquiteiro branco</td><td>~7s</td></tr>
+        <tr><td class="broll-num">5</td><td>[35-42s]</td><td>Prato de ceviche com limao e ervas em restaurante aberto para o mar</td><td>~7s</td></tr>
+        <tr><td class="broll-num">6</td><td>[42-50s]</td><td>Barco navegando para ilhas Rosario, agua cristalina turquesa</td><td>~8s</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)">
+    <h3>Start Frame Prompts (Nano Banana)</h3>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="reel-sub-content">
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 1 &mdash; Contraste Paris vs Caribe</span><span class="prompt-clip">[0-3s]</span></div>
+      <div class="prompt-text">Split composition: left third shows the Eiffel Tower on a cold grey overcast day with muted desaturated tones, bare winter trees, grey cobblestones; right two-thirds explode into a Caribbean sunset over Cartagena's old city walls, vibrant warm orange and coral tones, palm trees silhouetted, colonial architecture glowing in golden light. Sharp diagonal divide between the two worlds. Cinematic 16:9, 4K quality, photorealistic, no people visible</div>
+    </div>
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 2 &mdash; Cidade Murada</span><span class="prompt-clip">[10-20s]</span></div>
+      <div class="prompt-text">Eye-level shot looking down a narrow colonial street in Cartagena's walled city, colorful facades in coral, turquoise, and saffron yellow, wooden balconies overflowing with magenta bougainvillea, cobblestone street with worn smooth stones, warm late-afternoon side-lighting creating dramatic shadows, a vintage wooden door ajar in the left foreground, leading lines of the street converging at a distant church tower, tropical palette of vivid warm colors, cinematic 16:9, 4K quality, photorealistic, no people visible</div>
+    </div>
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 3 &mdash; Por do Sol</span><span class="prompt-clip">[20-28s]</span></div>
+      <div class="prompt-text">Rooftop terrace overlooking Cartagena bay at golden hour, two untouched cocktail glasses sweating condensation on a wrought-iron table in the foreground, Caribbean Sea blazing with orange and magenta reflections, colonial church domes and rooftops in the mid-ground, dramatic cumulus clouds painted in fire tones, depth of field blur on background with sharp focus on the drinks, warm palette dominated by gold, coral, and deep blue water, cinematic 16:9, 4K quality, photorealistic, no people visible</div>
+    </div>
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 4 &mdash; Hotel Boutique</span><span class="prompt-clip">[28-35s]</span></div>
+      <div class="prompt-text">Interior courtyard of a colonial boutique hotel in Cartagena, central stone fountain with water gently flowing, tropical plants (palms, ferns, monstera) creating a lush green frame, white-washed walls with blue wooden shutters, warm string lights overhead creating bokeh, terracotta tile floor with geometric patterns, Rembrandt lighting from a side archway, intimate and romantic atmosphere, warm palette of white, green, terracotta, and golden light, cinematic 16:9, 4K quality, photorealistic, no people visible</div>
+    </div>
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 5 &mdash; Ceviche</span><span class="prompt-clip">[35-42s]</span></div>
+      <div class="prompt-text">Overhead bird's-eye shot of a beautifully plated ceviche dish on a rustic ceramic plate, fresh white fish with citrus, red onion rings, cilantro, and aji pepper, lime wedges arranged artfully, condensation-beaded glass of white wine nearby, reclaimed wood table surface with visible grain, Caribbean sea visible in soft focus through open restaurant railing, natural daylight with soft shadows, food photography styling, cinematic 16:9, 4K quality, photorealistic, no people visible</div>
+    </div>
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">B-Roll 6 &mdash; Ilhas Rosario</span><span class="prompt-clip">[42-50s]</span></div>
+      <div class="prompt-text">Aerial drone shot of a traditional wooden boat cutting through crystal-clear turquoise Caribbean water near Islas del Rosario, white wake trail behind the boat, visible coral reef and sandy bottom through transparent water, small tropical island with palm trees in the background, vivid turquoise, emerald, and deep navy blue water gradients, overhead sun creating sparkle reflections on water surface, tropical paradise atmosphere, cinematic 16:9, 4K quality, photorealistic, no identifiable people</div>
+    </div>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)">
+    <h3>Animation Prompts (Grok)</h3>
+    <span class="toggle-icon">&#9660;</span>
+  </div>
+  <div class="reel-sub-content">
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 1 &mdash; Contraste</span></div>
+      <div class="prompt-text">Quick wipe transition from grey Paris to warm Cartagena (1.5 seconds), Paris side has gentle rain falling, Cartagena side has warm light particles and a gentle breeze moving palm fronds, color temperature shifts dramatically at the split line</div>
+    </div>
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 2 &mdash; Cidade Murada</span></div>
+      <div class="prompt-text">Slow dolly forward through the colonial street (3 seconds), gentle parallax between foreground door frame and background church tower, bougainvillea petals drifting down lazily, shadows shifting subtly on cobblestones, a distant bird flying across the gap between buildings</div>
+    </div>
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 3 &mdash; Por do Sol</span></div>
+      <div class="prompt-text">Slow push-in past the cocktail glasses toward the sunset (2.5 seconds), condensation droplets sliding down glass surfaces, subtle ocean sparkle animation, clouds morphing slowly, warm golden light intensifying as camera approaches the horizon view</div>
+    </div>
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 4 &mdash; Hotel</span></div>
+      <div class="prompt-text">Gentle pan right across the courtyard (2.5 seconds), fountain water with real-time ripple animation, string lights twinkling with slight randomness, palm fronds swaying gently, a tropical bird hopping across the fountain edge</div>
+    </div>
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 5 &mdash; Ceviche</span></div>
+      <div class="prompt-text">Slow rotation around the plate (2 seconds), subtle steam rising from the ceviche, lime juice glistening as angle changes, background ocean waves moving softly out of focus, natural light shifting slightly across the food surface</div>
+    </div>
+    <div class="prompt-card">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <div class="prompt-card-header"><span class="prompt-label">Anim 6 &mdash; Ilhas</span></div>
+      <div class="prompt-text">Slow aerial tracking following the boat from above (3 seconds), wake trail expanding behind the boat, water color shifting from turquoise to deep blue as depth changes, palm trees on the island swaying gently, sun sparkles dancing on water surface with natural randomness</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== REEL 06 ==================== -->
+<section class="reel-section" id="reel-06">
+<div class="reel-header">
+  <div class="reel-number">06</div>
+  <h2 class="reel-title-main">5 Erros que Jovens Cometem na Europa</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">Carolina + L&B (jovens)</span>
+    <span class="reel-badge duration">45-55s</span>
+    <span class="reel-badge cta-kw">CTA: EUROPA</span>
+    <span class="reel-badge calendar">Semana 2 Abril</span>
+    <span class="reel-badge block-tag">Bloco 1</span>
+  </div>
+  <div class="status-selector">
+    <label>Status:</label>
+    <select data-reel="06" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+  <div class="reel-sub-content open">
+    <div class="script-block">
+      <div class="script-timestamp">[0-3s] HOOK</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Se voce tem menos de 35 e ta pensando em ir pra Europa em 2026, esses erros podem destruir sua viagem."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[3-5s]</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><div class="script-direction">(cut rapido)</div><span class="script-text alexandra">"Eu cometi o erro numero 2 na minha primeira viagem. E foi horrivel."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[5-7s]</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Salva esse video. Serio."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[7-17s] ERRO 1</div>
+      <div class="script-section-title">Erro 1: 5 paises em 15 dias</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Erro numero 1: tentar conhecer 5 paises em 15 dias. Eu sei que voce quer aproveitar ao maximo. Mas sabe o que acontece? Voce vai passar mais tempo em aeroporto e estacao de trem do que conhecendo os lugares. Chega em Paris correndo, selfie na Torre Eiffel, corre pro trem, chega em Roma exausto, selfie no Coliseu, proximo destino. No final: visitou 5 paises, nao conheceu NENHUM."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[17-27s] ERRO 2</div>
+      <div class="script-section-title">Erro 2: Nao pesquisar o ETIAS</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Erro numero 2: nao pesquisar o ETIAS. Isso e novidade de 2026 e MUITA gente nao sabe. Agora voce precisa pagar 20 euros e fazer uma autorizacao eletronica ANTES de embarcar. Se nao fizer com pelo menos 96 horas de antecedencia, voce pode ser barrada na imigracao. Imagina: passagem comprada, hotel reservado, e voce nao embarca por causa de um documento de 20 euros. Me pergunte como eu sei. Quase aconteceu comigo."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[27-37s] ERRO 3</div>
+      <div class="script-section-title">Erro 3: Confiar so no cartao</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Erro numero 3: confiar so no cartao. Voce vai chegar naquele cafe charmoso em Roma, pedir um espresso perfeito, e na hora de pagar: so dinheiro. No norte da Europa, tudo e cartao. No sul -- Italia, Espanha, Portugal -- ainda tem MUITO lugar que so aceita dinheiro vivo. Leva sempre 100 a 200 euros em cash. Sempre."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[37-47s] ERRO 4</div>
+      <div class="script-section-title">Erro 4: Nao reservar com antecedencia</div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Erro numero 4: nao reservar NADA com antecedencia. Em 2026, com o turismo voltando com tudo, os lugares populares lotam semanas antes. Quer ir no Louvre? Sem ingresso antecipado, esquece. Quer jantar naquele restaurante do Instagram? Reserva fecha 2 semanas antes. A regra e: se e popular, reserve. Se e muito popular, reserve com 2 meses."</span></div>
+    </div>
+    <div class="script-block">
+      <div class="script-timestamp">[47-55s] CTA</div>
+      <div class="script-section-title">CTA</div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Compartilha com aquele amigo que ta planejando a primeira viagem pra Europa."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Porque essas dicas salvam MUITO dinheiro e MUITA frustracao."</span></div>
+      <div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"A gente e Marcelo e Alexandra. A gente cura experiencias de viagem pra quem quer viajar de verdade, nao so tirar selfie e voltar."</span></div>
+      <div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Comenta EUROPA se voce quer receber nosso checklist gratuito pra primeira viagem."</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+  <div class="reel-sub-content open">
+    <div class="copy-box">
+      <button class="copy-btn" onclick="copyText(this)">Copiar</button>
+      <p>4 erros que podem DESTRUIR sua primeira viagem pra Europa em 2026.
+
+Erro 1: tentar conhecer 5 paises em 15 dias (spoiler: voce nao conhece nenhum).
+Erro 2: ignorar o ETIAS -- o novo documento obrigatorio que muita gente nao sabe.
+Erro 3: confiar so no cartao (o sul da Europa ainda ama dinheiro vivo).
+Erro 4: nao reservar nada com antecedencia (o Louvre ri de quem chega sem ingresso).
+
+Comenta EUROPA que a gente te manda o checklist gratuito pra primeira viagem.
+<span class="hashtags">#europa #primeiraviagem #dicaseuropa #errosdeviagem #etias2026 #viajarpreuropa #rottacuradoria #curadoriadeviagem #viageminteligente #eurotrip</span></p>
+    </div>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)"><h3>Analise B-Roll (5 clips)</h3><span class="toggle-icon">&#9660;</span></div>
+  <div class="reel-sub-content">
+    <table class="broll-table">
+      <thead><tr><th>#</th><th>Timestamp</th><th>Descricao</th><th>Duracao</th></tr></thead>
+      <tbody>
+        <tr><td class="broll-num">1</td><td>[7-17s]</td><td>Estacao de trem europeia lotada, mala rodando, mapa aberto</td><td>~10s</td></tr>
+        <tr><td class="broll-num">2</td><td>[17-27s]</td><td>Tela de computador com formulario ETIAS, passaporte brasileiro ao lado</td><td>~10s</td></tr>
+        <tr><td class="broll-num">3</td><td>[27-37s]</td><td>Cafe italiano com xicara de espresso, euros em moedas na mesa</td><td>~10s</td></tr>
+        <tr><td class="broll-num">4</td><td>[37-47s]</td><td>Fila enorme na entrada do Louvre, placa "Sold Out"</td><td>~10s</td></tr>
+        <tr><td class="broll-num">5</td><td>[47-55s]</td><td>Mapa da Europa com pins marcando destinos, caderno de planejamento</td><td>~8s</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)"><h3>Start Frame Prompts (Nano Banana)</h3><span class="toggle-icon">&#9660;</span></div>
+  <div class="reel-sub-content">
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 1 &mdash; Estacao de Trem</span><span class="prompt-clip">[7-17s]</span></div><div class="prompt-text">Wide shot of a grand European train station interior (inspired by Milano Centrale or Paris Gare du Nord), massive arched glass ceiling letting in diffused overcast light, departure board with orange LED text in the center background, a single rolling suitcase abandoned in the foreground on polished marble floor, motion blur of rushing passengers creating ghostly streaks, steel and glass industrial palette with warm station lighting, sense of chaos and urgency, rule of thirds with suitcase in lower left and departure board in upper right, cinematic 16:9, 4K quality, photorealistic, no identifiable faces</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 2 &mdash; ETIAS Documento</span><span class="prompt-clip">[17-27s]</span></div><div class="prompt-text">Close-up overhead shot of a laptop screen showing a European government form with blue EU flag header, a Brazilian passport (green cover with coat of arms) placed to the right of the laptop, warm desk lamp lighting from the left creating soft shadows, reading glasses folded nearby, pen resting on a notepad with handwritten notes, wooden desk surface with warm grain texture, shallow depth of field with passport sharp and screen slightly soft, warm amber and cool screen blue color contrast, cinematic 16:9, 4K quality, photorealistic, no personal information visible</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 3 &mdash; Cafe Italiano</span><span class="prompt-clip">[27-37s]</span></div><div class="prompt-text">Close-up of a tiny espresso cup on a marble counter in a traditional Italian bar, golden crema on top of the espresso catching light, several Euro coins (1 and 2 euro) scattered casually beside the cup, chrome espresso machine gleaming in the background out of focus, warm tungsten bar lighting, condensation on the marble surface, rich palette of cream marble, dark coffee, silver chrome, and gold coins, intimate food photography composition, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 4 &mdash; Fila do Louvre</span><span class="prompt-clip">[37-47s]</span></div><div class="prompt-text">Wide shot of the Louvre glass pyramid on an overcast day, extremely long queue of people (rendered as anonymous distant silhouettes) wrapping around the pyramid, grey sky reflecting in the glass surfaces, a bold red "COMPLET" (Sold Out) sign visible near the entrance, wet cobblestones reflecting the pyramid structure, mood of frustration and waiting, muted grey and blue palette with the red sign as the only warm accent, rule of thirds with pyramid in center and queue leading the eye, cinematic 16:9, 4K quality, photorealistic, no identifiable faces</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 5 &mdash; Planejamento</span><span class="prompt-clip">[47-55s]</span></div><div class="prompt-text">Overhead flat-lay of a travel planning spread on a warm wooden desk, paper map of Europe with colorful push pins marking destinations, open leather-bound notebook with handwritten itinerary, smartphone showing a flight booking app, coffee cup half-drunk, scattered boarding passes and post-it notes, warm desk lamp creating directional shadows, cozy planning atmosphere, rich warm palette of leather brown, map beige, colored pins, and golden light, organized chaos composition, cinematic 16:9, 4K quality, photorealistic, no identifiable personal info</div></div>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)"><h3>Animation Prompts (Grok)</h3><span class="toggle-icon">&#9660;</span></div>
+  <div class="reel-sub-content">
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 1 &mdash; Estacao</span></div><div class="prompt-text">Slow tracking shot through the station (3 seconds), motion-blurred passengers rushing past camera, departure board letters flipping with mechanical animation, overhead announcements creating ambient atmosphere, suitcase wheels spinning as it rolls into frame</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 2 &mdash; ETIAS</span></div><div class="prompt-text">Slow push-in on the laptop and passport (2.5 seconds), cursor moving on the screen filling out a form field, subtle screen flicker/glow, desk lamp light with gentle warm pulsing, a page of the passport fluttering slightly as if from a draft</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 3 &mdash; Cafe</span></div><div class="prompt-text">Gentle dolly-in on the espresso cup (2 seconds), steam rising from the coffee with turbulent wisps, a final coin dropping onto the marble counter with a small bounce, espresso machine hissing steam in the background, warm light catching the crema surface</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 4 &mdash; Louvre Fila</span></div><div class="prompt-text">Slow zoom out revealing the massive queue (3 seconds), light rain beginning to fall with visible droplets on the glass pyramid, queue slowly shuffling forward, clouds moving overhead reflected in the pyramid surface, the red COMPLET sign pulsing subtly</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 5 &mdash; Planejamento</span></div><div class="prompt-text">Slow overhead drift across the planning spread (3 seconds), a hand entering frame placing a final pin on the map (hand only, no face), post-it note fluttering from a breeze, phone screen changing to show a confirmation, warm lamp light with gentle flicker</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== REEL 17 ==================== -->
+<section class="reel-section" id="reel-17">
+<div class="reel-header">
+  <div class="reel-number">17</div>
+  <h2 class="reel-title-main">O Pedido de Casamento Perfeito (Suspense)</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">S&M (casais)</span>
+    <span class="reel-badge duration">50-65s</span>
+    <span class="reel-badge cta-kw">CTA: SURPRISE</span>
+    <span class="reel-badge calendar">Semana 2 Abril</span>
+    <span class="reel-badge block-tag">Bloco 1</span>
+  </div>
+  <div class="status-selector">
+    <label>Status:</label>
+    <select data-reel="17" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+  <div class="reel-sub-content open">
+    <div class="script-block"><div class="script-timestamp">[0-3s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Se voce ta planejando pedir sua namorada em casamento em 2026, esses sao os destinos que vao fazer ela dizer sim antes de voce terminar a pergunta."</span></div></div>
+    <div class="script-block"><div class="script-timestamp">[3-6s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><div class="script-direction">(entrando)</div><span class="script-text alexandra">"Mas antes... ele ainda nao me pediu. Entao fica a dica pra ele tambem."</span></div></div>
+    <div class="script-block"><div class="script-timestamp">[6-8s]</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><div class="script-direction">(rindo)</div><span class="script-text">"A gente chega la. Primeiro os destinos."</span></div></div>
+    <div class="script-block"><div class="script-timestamp">[8-17s] DESTINO 1</div><div class="script-section-title">Santorini</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Santorini, Grecia. O classico dos classicos. Aquele por do sol em Oia com as casinhas brancas atras. O momento perfeito e no mirante de Oia, entre 18h30 e 19h. Reserve restaurante no Santo Wines pra depois. Orcamento do pedido: R$2 a 3 mil pelo jantar + locacao."</span></div></div>
+    <div class="script-block"><div class="script-timestamp">[17-25s] DESTINO 2</div><div class="script-section-title">Capadocia</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Capadocia, Turquia. Imagina pedir com centenas de baloes coloridos no ceu atras de voces. 5 da manha, ar gelado, ela de casaco, e voce de joelhos com a caixa."</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Reserve o voo de balao privado. Custa entre R$3 a 5 mil pro casal. Vale cada centavo."</span></div></div>
+    <div class="script-block"><div class="script-timestamp">[25-33s] DESTINO 3</div><div class="script-section-title">Toscana</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Toscana, Italia. Nao a Toscana turistica. A Toscana das vinicolas escondidas, das estradas de terra, do por do sol atras dos ciprestes."</span></div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"O pedido perfeito aqui e num jantar privado numa vinicola. So voces dois. Preco: R$1.500 a 2.500 o jantar com harmonizacao."</span></div></div>
+    <div class="script-block"><div class="script-timestamp">[33-40s] DESTINO 4</div><div class="script-section-title">Lisboa</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Lisboa, Portugal. Mais acessivel que os outros mas igualmente magico. O Miradouro da Graca ao por do sol, com fado tocando ao fundo."</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"E o mais barato da lista. O pedido inteiro -- jantar + locacao -- sai por R$800 a 1.500."</span></div></div>
+    <div class="script-block"><div class="script-timestamp">[40-48s] DESTINO 5</div><div class="script-section-title">Maldivas</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Maldivas. O mais caro e o mais impressionante. Jantar privado na areia, velas, Oceano Indico."</span></div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Se o orcamento permite, nao tem nada que se compare. Ela vai chorar antes de voce abrir a boca."</span></div></div>
+    <div class="script-block"><div class="script-timestamp">[48-58s] MOMENTO PESSOAL (SUSPENSE)</div><div class="script-section-title">O Momento Pessoal</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Agora que voce ja sabe os destinos... ele nao me pediu em casamento AINDA."</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><div class="script-direction">(sorriso misterioso)</div><span class="script-text">"Ainda."</span></div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><div class="script-direction">(olhando pra ele, surpresa)</div><span class="script-text alexandra">"Espera. Isso foi uma indireta?"</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><div class="script-direction">(olhando pra camera, ignorando ela)</div><span class="script-text">"Eu so sei que quando eu for pedir... nao vai ser num lugar qualquer. Vai ser num lugar que ela nunca vai esquecer."</span></div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><div class="script-direction">(emocionada, rindo)</div><span class="script-text alexandra">"Gente, ele ta planejando alguma coisa e eu nao sei o que e."</span></div></div>
+    <div class="script-block"><div class="script-timestamp">[58-70s] CTA</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Se voce ta planejando o pedido e quer ajuda pra criar um momento inesquecivel..."</span></div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Comenta PEDIDO aqui embaixo. A gente ajuda voce a planejar nos minimos detalhes."</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><div class="script-direction">(olhando pra Alexandra)</div><span class="script-text">"Ela nao vai saber. A gente guarda segredo."</span></div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><div class="script-direction">(apontando pra ele)</div><span class="script-text alexandra">"VOCE ta guardando segredo de MIM. Eu quero saber o que voce ta planejando!"</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><div class="script-direction">(sorrindo pra camera)</div><span class="script-text">"Me segue que voce vai descobrir antes dela."</span></div></div>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+  <div class="reel-sub-content open">
+    <div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Todo mundo acha que viajar junto e sobre paisagem.
+
+Mas tem um tipo de viagem que muda TUDO.
+
+5 destinos onde o pedido de casamento vira uma historia que voces vao contar pra sempre:
+
+1. Santorini -- por do sol em Oia
+2. Capadocia -- baloes ao amanhecer
+3. Toscana -- vinicola so pra voces dois
+4. Lisboa -- Miradouro da Graca com fado
+5. Maldivas -- jantar privado na areia
+
+E no final do video... talvez tenha uma surpresa que nem ELA sabe.
+
+Comenta SURPRISE se voce ta planejando algo especial.
+<span class="hashtags">#pedidodecasamento #proposal #destinosromanticos #pedidosurpresa #santorini #capadocia #toscana #maldivas #rottacuradoria #viagemcasal</span></p></div>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)"><h3>Analise B-Roll (6 clips)</h3><span class="toggle-icon">&#9660;</span></div>
+  <div class="reel-sub-content">
+    <table class="broll-table"><thead><tr><th>#</th><th>Timestamp</th><th>Descricao</th><th>Duracao</th></tr></thead><tbody>
+      <tr><td class="broll-num">1</td><td>[8-17s]</td><td>Santorini: caldera ao por do sol, casinhas brancas, cupula azul</td><td>~9s</td></tr>
+      <tr><td class="broll-num">2</td><td>[17-25s]</td><td>Capadocia: centenas de baloes coloridos subindo ao amanhecer</td><td>~8s</td></tr>
+      <tr><td class="broll-num">3</td><td>[25-33s]</td><td>Toscana: estrada de ciprestes, vinicola ao entardecer</td><td>~8s</td></tr>
+      <tr><td class="broll-num">4</td><td>[33-40s]</td><td>Lisboa: Miradouro ao por do sol, telhados laranjas</td><td>~7s</td></tr>
+      <tr><td class="broll-num">5</td><td>[40-48s]</td><td>Maldivas: overwater bungalow, jantar na areia com velas</td><td>~8s</td></tr>
+      <tr><td class="broll-num">6</td><td>[48-58s]</td><td>Caixa de alianca fechada sobre mapa-mundi (close-up misterioso)</td><td>~10s</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)"><h3>Start Frame Prompts (Nano Banana)</h3><span class="toggle-icon">&#9660;</span></div>
+  <div class="reel-sub-content">
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 1 &mdash; Santorini</span><span class="prompt-clip">[8-17s]</span></div><div class="prompt-text">Aerial drone shot at golden hour over Santorini caldera, white-washed buildings cascading down volcanic cliffs, iconic blue-domed church in the left third, deep blue Aegean Sea reflecting orange-pink sunset light, warm tones dominating the upper sky transitioning to cool deep blue water below, scattered bougainvillea adding magenta accents to white architecture, winding stone pathways creating leading lines down the cliff, atmospheric haze softening the distant islands, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 2 &mdash; Capadocia</span><span class="prompt-clip">[17-25s]</span></div><div class="prompt-text">Wide panoramic shot of hundreds of colorful hot air balloons rising over Cappadocia at dawn, fairy chimney rock formations below in warm sandstone tones, soft pink and lavender pre-dawn sky, balloons in every color (red, blue, yellow, green, orange) at various heights creating depth, morning mist lingering in the valleys between rock formations, first golden rays of sun hitting the highest balloons, magical and dreamlike atmosphere, warm earth tones below contrasting with pastel sky above, cinematic 16:9, 4K quality, photorealistic, no identifiable people in balloon baskets</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 3 &mdash; Toscana</span><span class="prompt-clip">[25-33s]</span></div><div class="prompt-text">Classic Tuscan cypress-lined road at golden hour, tall Italian cypress trees forming a perfect corridor leading to a distant stone villa, rolling green hills with golden wheat fields on either side, warm Tuscan light painting everything in amber and olive tones, a rustic stone wall with wild poppies in the immediate foreground, scattered clouds catching pink light, the quintessential Italian countryside romance, symmetrical composition with the road as central axis, cinematic 16:9, 4K quality, photorealistic, no people or vehicles visible</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 4 &mdash; Lisboa</span><span class="prompt-clip">[33-40s]</span></div><div class="prompt-text">Wide shot from Miradouro da Graca viewpoint at sunset, terracotta rooftops of Alfama cascading downhill, the Tagus River glowing gold in the distance, Ponte 25 de Abril bridge silhouetted against the orange sky (reminiscent of Golden Gate), a fado guitar resting against the stone railing in the foreground, warm Mediterranean light, palette of terracotta orange, golden yellow, river silver, and sky fire, romantic and nostalgic atmosphere, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 5 &mdash; Maldivas</span><span class="prompt-clip">[40-48s]</span></div><div class="prompt-text">Low angle shot of a private beach dinner setup in the Maldives at twilight, white sand beach with a elegantly set table for two, hurricane lanterns and scattered candles creating warm pools of light, overwater bungalow with lights reflecting on the dark Indian Ocean in the background, deep blue-violet sky with first stars appearing, rose petals scattered on the sand around the table, white linen napkins fluttering gently, ultimate luxury romance atmosphere, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 6 &mdash; Caixa de Alianca</span><span class="prompt-clip">[48-58s]</span></div><div class="prompt-text">Extreme close-up of a velvet ring box (closed) resting on an antique world map, warm directional side-lighting creating dramatic Rembrandt shadows, the box is dark navy velvet with visible texture, the map shows Europe and the Mediterranean with aged parchment yellowing, a compass and vintage fountain pen nearby, shallow depth of field with only the box in sharp focus, mysterious and anticipatory mood, warm amber and navy color palette, dust particles floating in the light beam, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+  </div>
+</div>
+
+<div class="reel-sub">
+  <div class="reel-sub-header" onclick="toggleSection(this)"><h3>Animation Prompts (Grok)</h3><span class="toggle-icon">&#9660;</span></div>
+  <div class="reel-sub-content">
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 1 &mdash; Santorini</span></div><div class="prompt-text">Slow aerial drift from left to right over the caldera (3 seconds), sun slowly descending toward the horizon, golden light intensifying, gentle waves visible on the Aegean below, a church bell swaying subtly, bougainvillea petals catching wind</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 2 &mdash; Capadocia</span></div><div class="prompt-text">Slow zoom-out revealing more and more balloons rising (3 seconds), each balloon with subtle upward drift at different speeds, morning mist swirling in valleys, golden light beam sweeping across the landscape as sun rises, a bird flying between the balloons in the mid-ground</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 3 &mdash; Toscana</span></div><div class="prompt-text">Slow dolly forward down the cypress-lined road (3 seconds), trees parallaxing on both sides creating depth, wind gently swaying the cypress tips, poppy petals drifting across the foreground, warm light rays filtering between the trees, distant villa growing larger</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 4 &mdash; Lisboa</span></div><div class="prompt-text">Gentle pan from left to right across the Lisbon vista (2.5 seconds), seagulls gliding across the frame, golden light on the river sparkling, distant tram crossing the bridge, fado guitar strings vibrating subtly in the foreground as if music just stopped</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 5 &mdash; Maldivas</span></div><div class="prompt-text">Slow push-in toward the candlelit dinner table (2.5 seconds), candle flames flickering with realistic physics, ocean waves gently lapping the shore in the background, stars slowly appearing in the darkening sky, white linen napkins fluttering in the tropical breeze, rose petals shifting slightly in the sand</div></div>
+    <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 6 &mdash; Caixa Alianca</span></div><div class="prompt-text">Very slow push-in on the ring box (3 seconds), dust particles dancing in the golden light beam, compass needle slowly settling to magnetic north, the velvet box lid beginning to open just barely at the very end (tease, never fully opens), warm light intensifying on the box, map edges curling slightly</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ==================== REEL 03 ==================== -->
+<section class="reel-section" id="reel-03">
+<div class="reel-header">
+  <div class="reel-number">03</div>
+  <h2 class="reel-title-main">Criancas com Necessidades Especiais: Destinos que Acolhem</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">Familias Inclusivas</span>
+    <span class="reel-badge duration">50-60s</span>
+    <span class="reel-badge cta-kw">CTA: INCLUSIVO</span>
+    <span class="reel-badge calendar">Semana 3 Abril</span>
+    <span class="reel-badge block-tag">Bloco 1</span>
+  </div>
+  <div class="status-selector"><label>Status:</label><select data-reel="03" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Se voce tem um filho com necessidades especiais e acha que viajar pro exterior e impossivel... esse video e pra voce."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Existem destinos que realmente acolhem. E a gente pesquisou a fundo."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-16s] DESTINO 1</div><div class="script-section-title">Mesa, Arizona</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Mesa, Arizona. Parques sensoriais ao ar livre, trilhas acessiveis no deserto, e hoteis com quartos adaptados de verdade. Nao e so rampa na entrada -- e pensado pra quem precisa."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[16-25s] DESTINO 2</div><div class="script-section-title">Orlando (DAS Pass)</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Orlando. E todo mundo conhece, mas pouca gente sabe do DAS -- o Disability Access Service. Voce agenda o horario das atracoes pelo celular, sem fila, sem estresse, sem sobrecarga sensorial na espera."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-34s] DESTINO 3</div><div class="script-section-title">Cruzeiros com Sala Sensorial</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Cruzeiros. Algumas linhas ja tem salas sensoriais a bordo -- iluminacao suave, texturas diferentes, som ambiente controlado. A crianca tem um espaco seguro enquanto voce descansa."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[34-43s] DESTINO 4</div><div class="script-section-title">Portugal</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Portugal. Praias acessiveis com cadeiras anfibias, calcadas adaptadas em Lisboa e Porto, e a gentileza natural dos portugueses com criancas. O idioma ajuda MUITO na hora do estresse."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[43-50s] DESTINO 5</div><div class="script-section-title">Costa Rica</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Costa Rica. Terapia na natureza e real. Florestas, animais, agua -- tudo funciona como estimulo sensorial natural. E os costariquenhos sao incrivelmente pacientes com criancas."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[50-60s] CTA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Se voce tem uma crianca com necessidades especiais e quer viajar com tranquilidade..."</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Comenta INCLUSIVO. A gente ajuda voce a encontrar o destino perfeito pra sua familia."</span></div></div>
+</div></div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Viajar com uma crianca com necessidades especiais NAO e impossivel.
+
+Existem destinos que realmente acolhem. Nao e sobre rampa na entrada -- e sobre pensar em cada detalhe.
+
+5 destinos que pesquisamos a fundo:
+- Mesa, Arizona (parques sensoriais)
+- Orlando (DAS Pass sem filas)
+- Cruzeiros (salas sensoriais a bordo)
+- Portugal (praias acessiveis + idioma)
+- Costa Rica (terapia na natureza)
+
+Comenta INCLUSIVO que a gente te ajuda a planejar.
+<span class="hashtags">#viageminclusiva #autismo #necessidadesespeciais #viagemcomfilhos #acessibilidade #orlando #DASpass #rottacuradoria #familiaespecial #turismoacessivel</span></p></div></div></div>
+
+<div class="reel-sub"><div class="reel-sub-header" onclick="toggleSection(this)"><h3>Analise B-Roll (6 clips)</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content"><table class="broll-table"><thead><tr><th>#</th><th>Timestamp</th><th>Descricao</th><th>Duracao</th></tr></thead><tbody>
+  <tr><td class="broll-num">1</td><td>[7-16s]</td><td>Paisagem do deserto do Arizona ao entardecer, parque sensorial ao ar livre</td><td>~9s</td></tr>
+  <tr><td class="broll-num">2</td><td>[16-25s]</td><td>Parques de Orlando: tela de celular com app DAS, atracoes sem fila</td><td>~9s</td></tr>
+  <tr><td class="broll-num">3</td><td>[25-34s]</td><td>Interior de navio de cruzeiro: sala sensorial com luzes suaves</td><td>~9s</td></tr>
+  <tr><td class="broll-num">4</td><td>[34-43s]</td><td>Praia acessivel em Portugal, cadeira anfibia na areia</td><td>~9s</td></tr>
+  <tr><td class="broll-num">5</td><td>[43-50s]</td><td>Floresta tropical da Costa Rica, cachoeira, arara colorida</td><td>~7s</td></tr>
+  <tr><td class="broll-num">6</td><td>[50-60s]</td><td>Maos de crianca tocando agua cristalina (close-up sensorial)</td><td>~10s</td></tr>
+</tbody></table></div></div>
+
+<div class="reel-sub"><div class="reel-sub-header" onclick="toggleSection(this)"><h3>Start Frame Prompts (Nano Banana)</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content">
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 1 &mdash; Arizona</span><span class="prompt-clip">[7-16s]</span></div><div class="prompt-text">Wide shot of a sensory garden playground in the Arizona desert at golden hour, smooth rounded sculptures in natural wood and stone, soft sand play area with tactile elements, red sandstone mesa formations in the background, saguaro cacti silhouetted against warm orange sky, safe and calming atmosphere, warm desert palette of terracotta, sand, sage green, and golden light, accessible pathways winding through the space, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 2 &mdash; Orlando DAS</span><span class="prompt-clip">[16-25s]</span></div><div class="prompt-text">Close-up of a smartphone screen showing a theme park accessibility app with a scheduled ride time, the phone resting on a colorful park bench, soft bokeh of theme park lights and attractions in the background, warm Florida sunshine, cheerful but calm atmosphere, the app screen shows a green checkmark and "Your return time: 2:30 PM", shallow depth of field, cinematic 16:9, 4K quality, photorealistic, no people visible, no identifiable brand logos</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 3 &mdash; Sala Sensorial</span><span class="prompt-clip">[25-34s]</span></div><div class="prompt-text">Interior of a cruise ship sensory room, soft blue and purple ambient lighting on smooth white walls, fiber optic star ceiling creating gentle sparkle points, a bubble tube column with slow-rising colored bubbles in the corner, textured wall panels (soft, rough, smooth), comfortable floor cushions in neutral tones, calming and safe atmosphere, cool blue and warm purple palette, peaceful and therapeutic mood, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 4 &mdash; Portugal Praia</span><span class="prompt-clip">[34-43s]</span></div><div class="prompt-text">Wide shot of an accessible Portuguese beach (Algarve style), golden sand with a wooden boardwalk leading to the water, blue and white striped beach wheelchair (amphibious chair) parked at the boardwalk's end, dramatic limestone cliffs framing the cove, turquoise Atlantic water, clear blue sky with a few white clouds, welcoming and inclusive atmosphere, warm Mediterranean palette of gold, turquoise, white limestone, and blue, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 5 &mdash; Costa Rica</span><span class="prompt-clip">[43-50s]</span></div><div class="prompt-text">Lush tropical rainforest scene in Costa Rica, a small crystal-clear waterfall cascading into a natural pool, vibrant scarlet macaw perched on a mossy branch in the mid-ground, enormous monstera and fern leaves creating a natural green frame, dappled sunlight filtering through the canopy creating light spots on the water, misty atmosphere, rich palette of emerald green, turquoise water, red macaw, and golden light spots, therapeutic and magical mood, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 6 &mdash; Maos na Agua</span><span class="prompt-clip">[50-60s]</span></div><div class="prompt-text">Extreme close-up of small child's hands gently touching crystal-clear stream water, water rippling outward from fingertips, smooth river pebbles visible below the surface, dappled forest light creating warm spots on the water and hands, droplets catching light like tiny prisms, tactile and sensory focused composition, warm skin tones contrasting with cool water, intimate and emotional atmosphere, macro photography style, cinematic 16:9, 4K quality, photorealistic, hands only no face visible</div></div>
+</div></div>
+
+<div class="reel-sub"><div class="reel-sub-header" onclick="toggleSection(this)"><h3>Animation Prompts (Grok)</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content">
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 1 &mdash; Arizona</span></div><div class="prompt-text">Slow pan right across the sensory garden (3 seconds), wind gently moving desert grass, warm light shifting as clouds pass, a wind chime element rotating slowly, sand particles drifting gently in the breeze</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 2 &mdash; Orlando DAS</span></div><div class="prompt-text">Slow rack focus from phone screen to park bokeh (2 seconds), park lights twinkling in the background, a gentle notification animation on the phone screen, warm sunshine creating lens flare at the top of frame</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 3 &mdash; Sala Sensorial</span></div><div class="prompt-text">Slow dolly forward into the sensory room (3 seconds), bubble tube bubbles rising with gentle wobble, fiber optic stars twinkling with random timing, ambient light slowly cycling from blue to purple and back, creating a breathing calming rhythm</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 4 &mdash; Portugal Praia</span></div><div class="prompt-text">Slow dolly forward along the boardwalk toward the sea (3 seconds), ocean waves gently lapping the shore, a seagull gliding across the blue sky, beach grass swaying in the Atlantic breeze, warm light intensifying</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 5 &mdash; Costa Rica</span></div><div class="prompt-text">Slow push-in toward the waterfall (2.5 seconds), water cascading with realistic fluid dynamics, the macaw ruffling its feathers and turning its head, mist particles drifting through light beams, leaves swaying gently from the waterfall's breeze</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 6 &mdash; Maos Agua</span></div><div class="prompt-text">Very slow motion (2 seconds), water ripples expanding from fingertips with hyper-realistic fluid physics, individual droplets catching prismatic light as they fall back, dappled light shifting on the water surface, pebbles visible through the crystal water with subtle refraction</div></div>
+</div></div>
+</section>
+
+<!-- ==================== REEL 14 ==================== -->
+<section class="reel-section" id="reel-14">
+<div class="reel-header">
+  <div class="reel-number">14</div>
+  <h2 class="reel-title-main">3 Coisas que Mudaram Depois que Comecamos a Viajar em Casal</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">S&M (casais)</span>
+    <span class="reel-badge duration">45-55s</span>
+    <span class="reel-badge cta-kw">CTA: CASAL</span>
+    <span class="reel-badge calendar">Semana 3 Abril</span>
+    <span class="reel-badge block-tag">Bloco 1</span>
+  </div>
+  <div class="status-selector"><label>Status:</label><select data-reel="14" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Viajar em casal mudou 3 coisas no nosso relacionamento. E a terceira a gente so percebeu depois."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E nao e o que voce ta pensando."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-18s] MUDANCA 1</div><div class="script-section-title">Tempo de Qualidade Real</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Primeira coisa: tempo de qualidade DE VERDADE. Em casa, voce acha que ta junto mas ta cada um no celular. Na viagem, voce ta sentado num cafe em algum lugar do mundo, sem agenda, sem urgencia, olhando um pro outro e conversando sobre coisas que nunca conversam na rotina."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[18-30s] MUDANCA 2</div><div class="script-section-title">Desafios Juntos</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Segunda coisa: resolver problemas juntos. Voo cancelado. Hotel errado. Perdidos numa cidade que nao falam sua lingua. Parece ruim, mas isso FORTALECE o casal. Voce descobre como o outro reage sob pressao. E quando resolvem juntos, a confianca cresce."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[30-42s] MUDANCA 3</div><div class="script-section-title">Historias Compartilhadas</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Terceira coisa -- e essa e a que a gente so percebeu depois: voces criam um repertorio de historias que so de voces. Anos depois, voce fala 'lembra daquele jantar em Mendoza?' e o sorriso vem automatico. Nenhum presente faz isso. Nenhum restaurante faz isso. So viagem."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[42-55s] CTA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Se voce quer dar esse presente pro seu relacionamento..."</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Comenta CASAL. A gente te ajuda a montar a viagem perfeita pra voces dois."</span></div></div>
+</div></div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>3 coisas que viajar em casal mudou no nosso relacionamento:
+
+1. Tempo de qualidade DE VERDADE (sem celular, sem agenda)
+2. Resolver problemas juntos fortalece a confianca
+3. Criar historias que so sao de voces dois
+
+A terceira a gente so percebeu anos depois. E e a mais poderosa.
+
+Comenta CASAL que a gente te ajuda a planejar a viagem perfeita pra voces.
+<span class="hashtags">#viagemcasal #casaisqueviajam #relacionamento #qualitytime #viagemromantica #rottacuradoria #curadoriadeviagem #viajemjuntos #memoriascasal #amor</span></p></div></div></div>
+
+<div class="reel-sub"><div class="reel-sub-header" onclick="toggleSection(this)"><h3>Analise B-Roll (5 clips)</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content"><table class="broll-table"><thead><tr><th>#</th><th>Timestamp</th><th>Descricao</th><th>Duracao</th></tr></thead><tbody>
+  <tr><td class="broll-num">1</td><td>[7-18s]</td><td>Duas xicaras de cafe numa mesa de cafe europeu ao ar livre, rua de paralelepipedo</td><td>~11s</td></tr>
+  <tr><td class="broll-num">2</td><td>[18-30s]</td><td>Mala aberta no chao de hotel, mapa, bilhete de trem amassado</td><td>~12s</td></tr>
+  <tr><td class="broll-num">3</td><td>[30-42s]</td><td>Mesa de jantar com duas tacas de vinho tinto, luzes de velas, vista noturna</td><td>~12s</td></tr>
+  <tr><td class="broll-num">4</td><td>[42-48s]</td><td>Album de fotos aberto mostrando paisagens de viagem (sem rostos)</td><td>~6s</td></tr>
+  <tr><td class="broll-num">5</td><td>[48-55s]</td><td>Dois passaportes juntos com carimhos visives, bilhetes de aviao</td><td>~7s</td></tr>
+</tbody></table></div></div>
+
+<div class="reel-sub"><div class="reel-sub-header" onclick="toggleSection(this)"><h3>Start Frame Prompts (Nano Banana)</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content">
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 1 &mdash; Cafe Europeu</span><span class="prompt-clip">[7-18s]</span></div><div class="prompt-text">Medium shot of a small round marble table at a European sidewalk cafe, two steaming cappuccinos with latte art, a small croissant on a plate between them, cobblestone street in the background with soft bokeh of passing pedestrians, morning sunlight casting warm diagonal shadows, wrought-iron chair backs visible at frame edges, warm palette of cream marble, brown coffee, golden pastry, and amber morning light, Parisian or Roman cafe atmosphere, intimate two-seat composition, cinematic 16:9, 4K quality, photorealistic, no people seated</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 2 &mdash; Problema de Viagem</span><span class="prompt-clip">[18-30s]</span></div><div class="prompt-text">Overhead shot of a hotel room floor scene: an open suitcase with clothes half-unpacked, a crumpled paper train ticket, a folded city map with pen marks and circles, a smartphone showing a "Flight Cancelled" notification, hotel room carpet in warm beige, warm bedside lamp light creating directional shadows, a sense of chaos that's being managed, warm neutral palette with the red "cancelled" notification as the only alarm color, organized chaos composition, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 3 &mdash; Jantar Romantico</span><span class="prompt-clip">[30-42s]</span></div><div class="prompt-text">Close-up of two wine glasses with deep red wine on a candlelit dinner table, a city skyline with twinkling lights visible through a restaurant window in the background, warm candle glow reflecting on the wine surface, white linen tablecloth, a single red rose in a small vase, intimate Rembrandt lighting, palette of deep burgundy, warm candlelight amber, white linen, and distant cool city blue, romantic and nostalgic mood, cinematic 16:9, 4K quality, photorealistic, no people visible</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 4 &mdash; Album</span><span class="prompt-clip">[42-48s]</span></div><div class="prompt-text">Close-up of an open leather-bound photo album on a wooden table, printed photographs showing landscapes only (mountain sunset, ocean view, vineyard), warm reading lamp light, a coffee cup nearby, the album pages slightly worn with love, warm nostalgic palette of leather brown, cream paper, and golden light, shallow depth of field with the current spread in focus, memory and nostalgia atmosphere, cinematic 16:9, 4K quality, photorealistic, no faces in the photos</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">B-Roll 5 &mdash; Passaportes</span><span class="prompt-clip">[48-55s]</span></div><div class="prompt-text">Close-up of two Brazilian passports stacked together on a wooden surface, visible immigration stamps from multiple countries on an open page, boarding passes tucked between pages, warm golden side-lighting, a world map placemat visible underneath, shallow depth of field, adventure and partnership symbolism, warm palette of passport green, stamp ink blues and reds, and golden wood, cinematic 16:9, 4K quality, photorealistic, no personal information readable</div></div>
+</div></div>
+
+<div class="reel-sub"><div class="reel-sub-header" onclick="toggleSection(this)"><h3>Animation Prompts (Grok)</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content">
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 1 &mdash; Cafe</span></div><div class="prompt-text">Slow push-in toward the two cappuccinos (2.5 seconds), steam rising from both cups with gentle turbulence, morning light intensifying, a gentle breeze moving a napkin corner, background pedestrians as soft moving bokeh shapes</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 2 &mdash; Problema</span></div><div class="prompt-text">Slow overhead drift across the scene (2.5 seconds), phone screen flickering with the notification, map rustling as if someone just set it down, suitcase zipper slightly vibrating, a gentle frustrated energy in the stillness</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 3 &mdash; Jantar</span></div><div class="prompt-text">Very slow push-in past the wine glasses toward the city view (3 seconds), candle flames dancing with realistic physics, wine surface with micro-reflections of candlelight, city lights twinkling in the distance, a gentle warm glow intensifying</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 4 &mdash; Album</span></div><div class="prompt-text">Slow zoom-in on the album spread (2 seconds), a page slowly turning as if someone just flipped it, warm light shifting across the photographs, a slight dust mote floating in the lamp light, nostalgic sepia tone gradually warming</div></div>
+  <div class="prompt-card"><button class="copy-btn" onclick="copyText(this)">Copiar</button><div class="prompt-card-header"><span class="prompt-label">Anim 5 &mdash; Passaportes</span></div><div class="prompt-text">Gentle dolly-in on the passports (2 seconds), a boarding pass sliding slightly as if just placed down, stamp ink seeming fresh with a subtle shine, warm light beam slowly crossing the surface, passport pages fluttering gently from a draft</div></div>
+</div></div>
+</section>
+
+<!-- ==================== REEL 10 ==================== -->
+<section class="reel-section" id="reel-10">
+<div class="reel-header">
+  <div class="reel-number">10</div>
+  <h2 class="reel-title-main">Europa com 60+: O que Ninguem Conta</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">S&M (levando pais)</span>
+    <span class="reel-badge duration">50-60s</span>
+    <span class="reel-badge cta-kw">CTA: 60MAIS</span>
+    <span class="reel-badge calendar">Semana 4 Abril</span>
+    <span class="reel-badge block-tag">Bloco 1</span>
+  </div>
+  <div class="status-selector"><label>Status:</label><select data-reel="10" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Voce quer levar seus pais pra Europa mas tem medo de dar errado? Essas dicas vao mudar tudo."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"A gente ja levou nossos pais. E aprendeu MUITA coisa na pratica."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-16s] DICA 1</div><div class="script-section-title">Ritmo Diferente</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Dica 1: o ritmo e DIFERENTE. Esquece 5 atracoes por dia. Com pais 60+, o ideal e 2 por dia com pausas entre elas. Cafe da manha com calma, uma atividade de manha, almoco longo, descanso no hotel, uma atividade a tarde."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[16-25s] DICA 2</div><div class="script-section-title">Acessibilidade Real</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Dica 2: pesquise acessibilidade DE VERDADE. Muita cidade europeia tem ladeiras, calcadas irregulares e escadas. Lisboa e linda mas e um sobe-e-desce. Solucao: bondes, Ubers, e escolher bairros planos pro hotel."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-34s] DICA 3</div><div class="script-section-title">Seguro Saude</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Dica 3: seguro saude e OBRIGATORIO. Nao opcional. O seguro viagem pra 60+ custa mais, sim -- entre R$30 a 50 por dia. Mas uma emergencia medica na Europa sem seguro pode custar R$50 mil facil. Nao arrisque."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[34-43s] DICA 4</div><div class="script-section-title">Melhores Destinos</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Dica 4: os melhores destinos pra levar pais sao Portugal (idioma!), sul da Espanha (calor, ritmo lento), e Croacia no verao (praias calmas, hoteis premium)."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[43-50s] DICA 5</div><div class="script-section-title">Conforto no Voo</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Dica 5: invista no conforto do voo. Poltronas com mais espaco ou executiva. Pra quem tem 60+, 10 horas de voo economica e uma tortura. Esse e o dinheiro mais bem gasto da viagem."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[50-60s] CTA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Se voce sonha em levar seus pais pra conhecer a Europa..."</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Comenta 60MAIS. A gente monta um roteiro pensado especialmente pra eles."</span></div></div>
+</div></div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Levar seus pais pra Europa e um dos melhores presentes que voce pode dar.
+
+Mas tem coisa que ninguem conta:
+
+- O ritmo precisa ser DIFERENTE (2 atividades por dia, nao 5)
+- Acessibilidade real (cuidado com ladeiras e calcadas)
+- Seguro saude e OBRIGATORIO (nao opcional)
+- Os melhores destinos pra 60+: Portugal, Espanha, Croacia
+- O voo precisa ser confortavel (invista nisso)
+
+Comenta 60MAIS e a gente te ajuda a montar o roteiro perfeito pros seus pais.
+<span class="hashtags">#viagemcompais #europa60mais #viagem60 #viagemsenior #rottacuradoria #curadoriadeviagem #presentedeviagem #europacompais #idosos #turismo60</span></p></div></div></div>
+
+<div class="reel-sub"><div class="reel-sub-header" onclick="toggleSection(this)"><h3>Analise B-Roll (5 clips) + Prompts</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content">
+<table class="broll-table"><thead><tr><th>#</th><th>Timestamp</th><th>Descricao</th><th>Duracao</th></tr></thead><tbody>
+  <tr><td class="broll-num">1</td><td>[7-16s]</td><td>Cafe da manha europeu tranquilo: mesa de hotel com vista pra cidade</td><td>~9s</td></tr>
+  <tr><td class="broll-num">2</td><td>[16-25s]</td><td>Bonde amarelo de Lisboa subindo ladeira, calcada portuguesa</td><td>~9s</td></tr>
+  <tr><td class="broll-num">3</td><td>[25-34s]</td><td>Cartao de seguro viagem sobre passaporte, estetoscopio ao lado</td><td>~9s</td></tr>
+  <tr><td class="broll-num">4</td><td>[34-43s]</td><td>Praia calma na Croacia, agua cristalina, barco de madeira</td><td>~9s</td></tr>
+  <tr><td class="broll-num">5</td><td>[43-50s]</td><td>Interior de aviao classe executiva, poltronas confortaveis</td><td>~7s</td></tr>
+</tbody></table>
+<p style="font-size:12px;color:var(--dim);margin-top:16px;padding:0 12px">Prompts de Start Frame e Animation seguem o mesmo padrao detalhado dos reels anteriores. Foco em atmosfera acolhedora, tons quentes, ritmo lento e conforto.</p>
+</div></div>
+</section>
+
+<!-- ==================== REEL 18 ==================== -->
+<section class="reel-section" id="reel-18">
+<div class="reel-header">
+  <div class="reel-number">18</div>
+  <h2 class="reel-title-main">Japao: Mais Facil do que Parece</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">L&B + Carolina</span>
+    <span class="reel-badge duration">50-60s</span>
+    <span class="reel-badge cta-kw">CTA: JAPAO</span>
+    <span class="reel-badge calendar">Semana 4 Abril</span>
+    <span class="reel-badge block-tag">Bloco 1</span>
+  </div>
+  <div class="status-selector"><label>Status:</label><select data-reel="18" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Japao e complicado, caro e so pra quem fala japones. Mentira. As 3 sao mentira."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E a gente vai provar em 60 segundos."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-16s] MITO 1</div><div class="script-section-title">Nao e Caro</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Mito 1: e caro. Uma refeicao incrivel no Japao custa R$30 a 50. Um ramen perfeito, um sushi no mercado, um curry de cair o queixo. Transporte? O Japan Rail Pass te leva a qualquer lugar por um preco fixo. Hotel capsula: R$80 a noite."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[16-25s] MITO 2</div><div class="script-section-title">As Pessoas Ajudam</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Mito 2: nao da pra se comunicar. Os japoneses sao as pessoas mais prestativas do mundo. Google Translate funciona PERFEITAMENTE. As placas nos trens sao em ingles. E se voce se perder, alguem vai literalmente te levar ate o lugar."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-34s] MITO 3</div><div class="script-section-title">Transporte Perfeito</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Mito 3: e complicado se locomover. O trem-bala do Japao e o transporte mais pontual do planeta. Atraso medio: 18 SEGUNDOS por ano. Tudo e sinalizado, limpo, organizado. Voce nao precisa de carro."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[34-43s] MITO 4</div><div class="script-section-title">Seguranca</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E o bonus que ninguem fala: a seguranca. Voce pode andar de madrugada em Toquio sem medo. Criancas de 6 anos andam de metro sozinhas. E o pais mais seguro que a gente ja pesquisou."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[43-52s] MITO 5</div><div class="script-section-title">A Comida</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"E a comida. Gente. A comida japonesa de verdade nao tem NADA a ver com o que a gente come no Brasil. E outra dimensao. Cada refeicao e uma experiencia."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[52-60s] CTA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Se o Japao ta na sua lista..."</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Comenta JAPAO. A gente te manda o guia que a gente montou."</span></div></div>
+</div></div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Japao e complicado? Caro? So pra quem fala japones?
+
+MENTIRA. As 3 sao mentira.
+
+- Refeicao incrivel: R$30-50
+- Japan Rail Pass: transporte ilimitado
+- Google Translate resolve tudo
+- Trem-bala com atraso medio de 18 SEGUNDOS por ano
+- Pais mais seguro do mundo
+
+A comida de la e outra dimensao.
+
+Comenta JAPAO que a gente te manda o guia completo.
+<span class="hashtags">#japao #japan #viagemjapao #toquio #tokyo #osaka #japanrailpass #ramen #rottacuradoria #curadoriadeviagem #asiatravel</span></p></div></div></div>
+
+<div class="reel-sub"><div class="reel-sub-header" onclick="toggleSection(this)"><h3>Analise B-Roll (6 clips) + Prompts</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content">
+<table class="broll-table"><thead><tr><th>#</th><th>Timestamp</th><th>Descricao</th><th>Duracao</th></tr></thead><tbody>
+  <tr><td class="broll-num">1</td><td>[7-16s]</td><td>Tigela de ramen fumegante, balcao de restaurante japones</td><td>~9s</td></tr>
+  <tr><td class="broll-num">2</td><td>[16-25s]</td><td>Estacao de trem japonesa, sinalizacao em ingles, passagem automatica</td><td>~9s</td></tr>
+  <tr><td class="broll-num">3</td><td>[25-34s]</td><td>Shinkansen (trem-bala) passando em alta velocidade, Monte Fuji ao fundo</td><td>~9s</td></tr>
+  <tr><td class="broll-num">4</td><td>[34-43s]</td><td>Rua de Toquio a noite, neon, crosswalk de Shibuya</td><td>~9s</td></tr>
+  <tr><td class="broll-num">5</td><td>[43-52s]</td><td>Sushi sendo preparado no balcao, mao do chef com faca precisa</td><td>~9s</td></tr>
+  <tr><td class="broll-num">6</td><td>[52-60s]</td><td>Torii vermelho de Fushimi Inari, luz filtrada entre portoes</td><td>~8s</td></tr>
+</tbody></table>
+<p style="font-size:12px;color:var(--dim);margin-top:16px;padding:0 12px">Start Frame: foco em texturas japonesas (madeira, ceramica, neon), iluminacao contrastante, composicao minimalista. Animation: movimentos suaves, particulas de vapor, reflexos de neon na chuva.</p>
+</div></div>
+</section>
+
+<!-- ==================== REEL 19 ==================== -->
+<section class="reel-section" id="reel-19">
+<div class="reel-header">
+  <div class="reel-number">19</div>
+  <h2 class="reel-title-main">Contra a Copa: Viaje pro Lado Oposto</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">Todas</span>
+    <span class="reel-badge duration">45-55s</span>
+    <span class="reel-badge cta-kw">CTA: FUGA</span>
+    <span class="reel-badge calendar">Semana 4 Abril</span>
+    <span class="reel-badge block-tag">Bloco 1</span>
+  </div>
+  <div class="status-selector"><label>Status:</label><select data-reel="19" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-3s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Enquanto todo mundo vai pros Estados Unidos em 2026 por causa da Copa, dos parques e da Times Square -- eu iria pra outro lugar."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[3-5s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E eu concordo com ele. Dessa vez."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[5-15s]</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Olha o cenario: Copa do Mundo nos EUA em 2026. Passagens disparando. Hoteis com preco absurdo. Aeroportos lotados. Filas triplicadas nos parques. Quem vai pros EUA em 2026 vai pagar o DOBRO pela METADE da experiencia."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[15-25s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Enquanto isso, a Europa vai estar mais vazia e mais acessivel que nos ultimos anos. Porque todo mundo ta olhando pro outro lado."</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Especificamente: Portugal, Espanha e Croacia em Setembro-Outubro de 2026. Clima perfeito. Precos baixos. Multidoes menores."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-35s]</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Pensa comigo: enquanto seu amigo ta na fila de 3 horas pra entrar num estadio lotado em Miami, voce pode estar num restaurante em Dubrovnik, de frente pro Adriatico, pagando metade do preco. Isso e curadoria. Ver o que TODO MUNDO ta fazendo e fazer o oposto -- com inteligencia."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[35-42s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E o melhor: quando todo mundo voltar dos EUA reclamando que foi caro e lotado, voce vai ter fotos da Croacia vazia no por do sol."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[42-50s] CTA</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Se voce quer viajar inteligente em 2026, me segue. A gente mostra o que ninguem ta olhando."</span></div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Comenta o destino que voce mais quer conhecer fora dos EUA."</span></div></div>
+</div></div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Copa do Mundo nos EUA em 2026.
+
+Todo mundo vai. Passagens caras. Hoteis lotados. Filas de 3 horas.
+
+Enquanto isso, a Europa vai estar VAZIA e BARATA.
+
+Portugal, Espanha, Croacia em Set-Out 2026 = clima perfeito + precos baixos + zero multidao.
+
+Isso e curadoria: ver o que todo mundo ta fazendo e fazer o OPOSTO com inteligencia.
+
+Comenta FUGA se voce quer viajar inteligente.
+<span class="hashtags">#copa2026 #worldcup2026 #viageminteligente #contracorrente #europa #croacia #portugal #espanha #rottacuradoria #curadoriadeviagem #fugadacopa</span></p></div></div></div>
+
+<div class="reel-sub"><div class="reel-sub-header" onclick="toggleSection(this)"><h3>Analise B-Roll (5 clips) + Prompts</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content">
+<table class="broll-table"><thead><tr><th>#</th><th>Timestamp</th><th>Descricao</th><th>Duracao</th></tr></thead><tbody>
+  <tr><td class="broll-num">1</td><td>[5-15s]</td><td>Estadio lotado, filas, aeroporto caos (tom negativo)</td><td>~10s</td></tr>
+  <tr><td class="broll-num">2</td><td>[15-25s]</td><td>Praia vazia na Croacia, restaurante sem fila, rua tranquila</td><td>~10s</td></tr>
+  <tr><td class="broll-num">3</td><td>[25-35s]</td><td>Dubrovnik: muralhas ao por do sol, Adriatico calmo</td><td>~10s</td></tr>
+  <tr><td class="broll-num">4</td><td>[35-42s]</td><td>Fotos polaroid espalhadas de destinos europeus vazios</td><td>~7s</td></tr>
+  <tr><td class="broll-num">5</td><td>[42-50s]</td><td>Mapa-mundi com seta "todo mundo" apontando pra EUA e seta "voce" pra Europa</td><td>~8s</td></tr>
+</tbody></table>
+</div></div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- BLOCO 2 — POS-ITALIA (MAIO)                                            -->
+<!-- ====================================================================== -->
+<div class="block-divider" id="block2">
+  <h2>Bloco 2 &mdash; Pos-Italia (Maio)</h2>
+  <p>Gravar depois da viagem a Italia &mdash; Maio 2026</p>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ==================== REEL 12 ==================== -->
+<section class="reel-section" id="reel-12">
+<div class="reel-header">
+  <div class="reel-number">12</div>
+  <h2 class="reel-title-main">Visto EUA 2026: 4 Mudancas que Voce Precisa Saber</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">Amplo</span>
+    <span class="reel-badge duration">50-60s</span>
+    <span class="reel-badge cta-kw">CTA: EUA</span>
+    <span class="reel-badge calendar">Semana 5 Maio</span>
+    <span class="reel-badge block-tag">Bloco 2</span>
+  </div>
+  <div class="status-selector"><label>Status:</label><select data-reel="12" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"O visto americano mudou em 2026. E se voce nao souber dessas 4 coisas, pode perder a viagem."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Salva esse video. Serio. Vai precisar."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-16s] MUDANCA 1</div><div class="script-section-title">Entrevista Obrigatoria</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Mudanca 1: a entrevista voltou a ser obrigatoria pra quase todo mundo. Aquele periodo onde renovava sem entrevista acabou pra maioria dos casos. Voce vai ter que ir ao consulado. Agende com antecedencia."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[16-25s] MUDANCA 2</div><div class="script-section-title">Criterios Mais Rigorosos</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Mudanca 2: os criterios estao mais rigorosos. Vinculos com o Brasil sao ainda mais importantes -- emprego fixo, imovel, familia. Leva comprovantes de TUDO. Quanto mais documentacao, melhor."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-34s] MUDANCA 3</div><div class="script-section-title">Tempo de Espera</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Mudanca 3: o tempo de espera ta entre 30 e 50 dias uteis. Isso significa que se voce quer viajar em julho, deveria estar agendando AGORA. Nao deixe pra ultima hora."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[34-43s] MUDANCA 4</div><div class="script-section-title">Taxa de USD 250</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Mudanca 4: a taxa subiu pra 250 dolares. Por pessoa. Nao e barato. Mas e um investimento no visto que vale 10 anos."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[43-52s] DICA OURO</div><div class="script-section-title">Dica Ouro</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Dica de ouro: se seu visto venceu ha MENOS de 48 meses, voce ainda pode renovar sem entrevista pelo programa de renovacao simplificada. Corre que essa janela pode fechar."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[52-60s] CTA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Comenta EUA que a gente te manda o checklist completo."</span></div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"A gente facilita o que parece complicado."</span></div></div>
+</div></div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>O visto americano MUDOU em 2026. 4 coisas que voce precisa saber:
+
+1. Entrevista voltou a ser obrigatoria
+2. Criterios mais rigorosos (leve TUDO)
+3. Tempo de espera: 30-50 dias uteis
+4. Taxa: USD 250 por pessoa
+
+DICA OURO: visto vencido ha menos de 48 meses? Renovacao simplificada ainda funciona. Corre.
+
+Comenta EUA que a gente te manda o checklist.
+<span class="hashtags">#vistoamericano #vistoeua #eua2026 #viajarprosEUA #dicasdevisto #copa2026 #rottacuradoria #consulado #passaporte #vistoB1B2</span></p></div></div></div>
+
+<div class="reel-sub"><div class="reel-sub-header" onclick="toggleSection(this)"><h3>Analise B-Roll (5 clips)</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content"><table class="broll-table"><thead><tr><th>#</th><th>Timestamp</th><th>Descricao</th><th>Duracao</th></tr></thead><tbody>
+  <tr><td class="broll-num">1</td><td>[7-16s]</td><td>Fachada de consulado americano, bandeira EUA, fila de pessoas</td><td>~9s</td></tr>
+  <tr><td class="broll-num">2</td><td>[16-25s]</td><td>Pasta com documentos organizados, comprovantes, passaporte</td><td>~9s</td></tr>
+  <tr><td class="broll-num">3</td><td>[25-34s]</td><td>Calendario com datas marcadas, relogio contando</td><td>~9s</td></tr>
+  <tr><td class="broll-num">4</td><td>[34-43s]</td><td>Notas de dolar, formulario DS-160 na tela</td><td>~9s</td></tr>
+  <tr><td class="broll-num">5</td><td>[43-52s]</td><td>Passaporte com visto americano carimbado (close-up)</td><td>~9s</td></tr>
+</tbody></table></div></div>
+</section>
+
+<!-- ==================== REEL 04 ==================== -->
+<section class="reel-section" id="reel-04">
+<div class="reel-header">
+  <div class="reel-number">04</div>
+  <h2 class="reel-title-main">Criancas Autistas em Orlando: Guia Completo</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">Familias Inclusivas</span>
+    <span class="reel-badge duration">50-60s</span>
+    <span class="reel-badge cta-kw">CTA: ORLANDO</span>
+    <span class="reel-badge calendar">Semana 6 Maio</span>
+    <span class="reel-badge block-tag">Bloco 2</span>
+  </div>
+  <div class="status-selector"><label>Status:</label><select data-reel="04" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Orlando com uma crianca autista. Parece impossivel? Nao e. E a gente vai te mostrar como."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Existem recursos que MUITOS pais nao sabem. E eles mudam tudo."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-16s] DICA 1</div><div class="script-section-title">DAS Pass</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"O DAS Pass -- Disability Access Service. Voce registra antes da viagem, pelo app, e na hora de ir na atracao, agenda um horario de retorno. Sem fila. Sem espera. Sem sobrecarga sensorial."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[16-25s] DICA 2</div><div class="script-section-title">Areas de Calma</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Os parques tem 'quiet areas' -- espacos sensoriais com iluminacao suave, som baixo, menos estimulo. Quando a crianca precisa de uma pausa, voce tem onde ir."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-34s] DICA 3</div><div class="script-section-title">Guias Sensoriais</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Cada atracao tem um guia sensorial no site -- nivel de barulho, flashes de luz, movimentos bruscos. Voce planeja o dia sabendo exatamente o que esperar."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[34-43s] DICA 4</div><div class="script-section-title">Personagens com Paciencia</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Os personagens sao treinados pra interagir com criancas com necessidades especiais. Eles abaixam, falam mais devagar, respeitam o tempo da crianca. E lindo de ver."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[43-52s] DICA 5</div><div class="script-section-title">Preparacao em Casa</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Dica extra: prepare a crianca em casa. Mostre videos dos parques, das atracoes, dos sons. Quanto mais previsivel for pra ela, melhor vai ser a experiencia."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[52-60s] CTA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Comenta ORLANDO que a gente te manda o guia sensorial completo."</span></div></div>
+</div></div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Orlando com crianca autista: nao e impossivel. E incrivel quando voce sabe os recursos.
+
+- DAS Pass: sem filas, agenda pelo app
+- Quiet areas: espacos sensoriais nos parques
+- Guias sensoriais: barulho, luz, movimento de cada atracao
+- Personagens treinados: respeitam o tempo da crianca
+- Prepare em casa: videos das atracoes antes da viagem
+
+Comenta ORLANDO que a gente te manda o guia completo.
+<span class="hashtags">#orlandocomautismo #autismo #DASpass #viageminclusiva #disney #universal #rottacuradoria #familiaespecial #orlandodicas #turismoacessivel</span></p></div></div></div>
+</section>
+
+<!-- ==================== REEL 05 ==================== -->
+<section class="reel-section" id="reel-05">
+<div class="reel-header">
+  <div class="reel-number">05</div>
+  <h2 class="reel-title-main">Roteiro Disney para Autismo: Dia a Dia</h2>
+  <div class="reel-meta">
+    <span class="reel-badge persona">Familias Inclusivas</span>
+    <span class="reel-badge duration">50-60s</span>
+    <span class="reel-badge cta-kw">CTA: DISNEY</span>
+    <span class="reel-badge calendar">Semana 7 Junho</span>
+    <span class="reel-badge block-tag">Bloco 2</span>
+  </div>
+  <div class="status-selector"><label>Status:</label><select data-reel="05" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Como montar um roteiro Disney dia a dia pra uma crianca autista. Sem correria, sem estresse, sem improviso."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Um dia de cada vez. E assim que funciona."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-16s] DIA 1</div><div class="script-section-title">Dia 1: Adaptacao</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Dia 1: so adaptacao. Nao vai pro parque. Conheca o hotel, a piscina, o restaurante. Deixa a crianca se acostumar com o novo ambiente. Isso muda TUDO pro resto da viagem."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[16-25s] DIA 2</div><div class="script-section-title">Dia 2: Magic Kingdom (Leve)</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Dia 2: Magic Kingdom, mas so 3-4 atracoes de baixo estimulo. It's a Small World, Winnie the Pooh, Carousel of Progress. Tudo suave. Saiu cedo? Otimo. Piscina a tarde."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-34s] DIA 3</div><div class="script-section-title">Dia 3: Descanso</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Dia 3: descanso. Disney Springs, compras leves, sorvete. Nada de parque. A crianca precisa processar tudo que viveu ontem."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[34-43s] DIA 4-5</div><div class="script-section-title">Dia 4-5: Aprofundar</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Dia 4 e 5: agora voce pode aprofundar. A crianca ja conhece o ritmo. Pode tentar atracoes um pouco mais intensas, sempre com o guia sensorial na mao."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[43-52s] REGRA</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"A regra de ouro: planeje 50% do que voce planejaria pra uma crianca neurotipica. Se der pra fazer mais, bonus. Se nao der, voce nao se frustrou."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[52-60s] CTA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Comenta DISNEY que a gente te manda o roteiro dia a dia completo em PDF."</span></div></div>
+</div></div>
+
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Roteiro Disney pra crianca autista. Dia a dia. Sem correria.
+
+Dia 1: so adaptacao (hotel, piscina, rotina)
+Dia 2: Magic Kingdom leve (3-4 atracoes suaves)
+Dia 3: descanso total (Disney Springs)
+Dia 4-5: aprofundar com mais confianca
+
+Regra de ouro: planeje 50% do que faria com uma crianca neurotipica.
+
+Comenta DISNEY que a gente te manda o roteiro completo em PDF.
+<span class="hashtags">#disneyconautismo #roteirodisney #autismo #viageminclusiva #magickingdom #disneyworld #rottacuradoria #familiaespecial #orlandoautismo #disneyacessivel</span></p></div></div></div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- BLOCO 3 — POS-ITALIA (JUNHO)                                           -->
+<!-- ====================================================================== -->
+<div class="block-divider" id="block3">
+  <h2>Bloco 3 &mdash; Pos-Italia (Junho)</h2>
+  <p>Gravar pos-viagem &mdash; Junho 2026</p>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ==================== REEL 07 ==================== -->
+<section class="reel-section" id="reel-07">
+<div class="reel-header"><div class="reel-number">07</div><h2 class="reel-title-main">Filhos Menores de 5 na Disney 2026</h2>
+  <div class="reel-meta"><span class="reel-badge persona">Familias</span><span class="reel-badge duration">50-65s</span><span class="reel-badge cta-kw">CTA: DISNEY</span><span class="reel-badge calendar">Semana 7 Junho</span><span class="reel-badge block-tag">Bloco 3</span></div>
+  <div class="status-selector"><label>Status:</label><select data-reel="07" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"A janela magica pra levar seus filhos na Disney e entre 3 e 6 anos. Antes disso, nao lembram. Depois, ja e outra coisa."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E 2026 tem novidades que mudam TUDO pra essa faixa etaria."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-18s] NOVIDADE 1</div><div class="script-section-title">Bluey nos Parques</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Novidade 1: Bluey nos parques. O desenho mais popular do mundo agora tem experiencia interativa na Disney. Area tematica, personagens, atividades. Pra uma crianca de 3-5 anos, e O evento do ano."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[18-28s] NOVIDADE 2</div><div class="script-section-title">Mickey Clubhouse Live</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Novidade 2: Mickey Mouse Clubhouse Live -- show interativo novo. Projetado pra criancas menores. Musicas, dancas, cores. A cara da faixa etaria 3-6."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[28-38s] NOVIDADE 3</div><div class="script-section-title">Frozen Ever After Renovado</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Novidade 3: Frozen Ever After ganhou tecnologia nova. Mais imersivo, mais magico. Toda crianca de 3-6 que ama Frozen vai pirar. E a fila com DAS e rapida."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[38-48s] DICA PRATICA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Dica pratica: com crianca pequena, va ao parque na abertura (8h-11h), volte pro hotel pro almoco e soneca, e retorne so as 16h. O parque a noite e MAGICO pra crianca."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[48-55s] ORCAMENTO</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"E crianca ate 3 anos nao paga ingresso. De 3 a 9, paga valor reduzido. A janela magica tambem e a janela ECONOMICA."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[55-65s] CTA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Comenta DISNEY que a gente te manda o guia da janela magica."</span></div></div>
+</div></div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>A janela magica pra levar seus filhos na Disney: 3 a 6 anos.
+
+Novidades 2026:
+- Bluey nos parques (area tematica interativa!)
+- Mickey Clubhouse Live (show novo pra pequenos)
+- Frozen Ever After renovado (tecnologia surreal)
+
+Dica de ouro: parque de manha (8-11h), hotel pra soneca, volta as 16h. A noite e MAGICA.
+
+E crianca ate 3 nao paga ingresso. Janela magica = janela economica.
+
+Comenta DISNEY que a gente te manda o guia completo.
+<span class="hashtags">#disneycomfilhos #janela magica #disney2026 #bluey #frozen #rottacuradoria #viagemcomcrianca #orlando #disneyworld #familianaDisney</span></p></div></div></div>
+</section>
+
+<!-- ==================== REEL 08 ==================== -->
+<section class="reel-section" id="reel-08">
+<div class="reel-header"><div class="reel-number">08</div><h2 class="reel-title-main">Gramado 2026: 4 Atracoes Novas</h2>
+  <div class="reel-meta"><span class="reel-badge persona">S&M + Familias</span><span class="reel-badge duration">45-55s</span><span class="reel-badge cta-kw">CTA: GRAMADO</span><span class="reel-badge calendar">Semana 8 Junho</span><span class="reel-badge block-tag">Bloco 3</span></div>
+  <div class="status-selector"><label>Status:</label><select data-reel="08" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Gramado em 2026 nao e o Gramado que voce conhece. Tem 4 atracoes NOVAS que mudam completamente a experiencia."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E uma delas e perfeita pra quem tem crianca."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-16s] ATRACAO 1</div><div class="script-section-title">Lumni Park</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Lumni Park -- parque imersivo de luzes. Imagine um jardim enorme com instalacoes luminosas interativas. Funciona de dia e de noite, mas a noite e surreal. Ingressos a partir de R$80."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[16-25s] ATRACAO 2</div><div class="script-section-title">Criamigos</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Criamigos -- a versao brasileira do Build-A-Bear. A crianca monta o proprio bichinho de pelucia do inicio ao fim. Nome, roupa, acessorios. A partir de R$120."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-34s] ATRACAO 3</div><div class="script-section-title">Korvatunturi</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Korvatunturi -- show tematico de Natal com fondue incluso. Sim, voce janta enquanto assiste ao espetaculo. Perfeito pra casais e familias. A partir de R$200 por pessoa."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[34-43s] ATRACAO 4</div><div class="script-section-title">Mundo a Vapor Renovado</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Mundo a Vapor renovado. Depois do incendio, eles reconstruiram TUDO com tecnologia nova. Projecoes, efeitos especiais, uma experiencia completamente diferente da anterior."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[43-55s] CTA</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Gramado sempre surpreende. Comenta GRAMADO que a gente te manda o roteiro atualizado."</span></div></div>
+</div></div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Gramado 2026 mudou. 4 atracoes NOVAS:
+
+1. Lumni Park -- jardim imersivo de luzes (R$80+)
+2. Criamigos -- monta seu proprio bichinho (R$120+)
+3. Korvatunturi -- show de Natal + fondue (R$200+)
+4. Mundo a Vapor renovado -- tecnologia nova apos reconstrucao
+
+Comenta GRAMADO e a gente te manda o roteiro completo.
+<span class="hashtags">#gramado #gramado2026 #lumnipark #criamigos #mundoavapor #serragaucha #rottacuradoria #viajepeloBrasil #turismobrasil #gramadocomcrianca</span></p></div></div></div>
+</section>
+
+<!-- ==================== REEL 09 ==================== -->
+<section class="reel-section" id="reel-09">
+<div class="reel-header"><div class="reel-number">09</div><h2 class="reel-title-main">Viajar INTELIGENTE pra Grecia</h2>
+  <div class="reel-meta"><span class="reel-badge persona">Carolina + L&B</span><span class="reel-badge duration">45-60s</span><span class="reel-badge cta-kw">CTA: GRECIA</span><span class="reel-badge calendar">Semana 8 Junho</span><span class="reel-badge block-tag">Bloco 3</span></div>
+  <div class="status-selector"><label>Status:</label><select data-reel="09" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Grecia e o destino dos sonhos. Mas se voce fizer igual todo mundo, vai gastar o dobro e curtir a metade."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Aqui vao 4 dicas pra viajar INTELIGENTE."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-16s] DICA 1</div><div class="script-section-title">Evite Jul-Ago</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Dica 1: evite julho e agosto. Serio. Precos triplicam, ilhas lotam, calor de 40 graus. Setembro-outubro e a janela perfeita: agua quente, precos baixos, turistas indo embora."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[16-25s] DICA 2</div><div class="script-section-title">Milos e Corfu > Santorini</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Dica 2: troque Santorini por Milos ou Corfu. Mesma agua cristalina, mesma beleza, 1/3 do preco e sem a multidao. Santorini e lindo, mas voce vai dividir o por do sol com 3 mil pessoas."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-34s] DICA 3</div><div class="script-section-title">Coma Gyros</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Dica 3: coma gyros. R$15-20 por uma refeicao INCRIVEL. Nao precisa jantar em restaurante toda noite. Gyros, souvlaki, salada grega no mercado. A comida de rua grega e uma das melhores do mundo."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[34-43s] DICA 4</div><div class="script-section-title">Ferry Noturno</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Dica 4: ferry noturno. Em vez de aviao entre ilhas, pega o ferry a noite. Voce dorme no barco, economiza uma noite de hotel, e acorda numa ilha nova. Win-win."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[43-55s] CTA</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Comenta GRECIA que a gente te manda o roteiro inteligente completo."</span></div></div>
+</div></div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Grecia INTELIGENTE (nao a versao cara e lotada):
+
+1. Evite Jul-Ago (Set-Out = janela perfeita)
+2. Milos/Corfu > Santorini (1/3 do preco, mesma beleza)
+3. Gyros = R$15-20 pela melhor refeicao da vida
+4. Ferry noturno = economiza hotel + acorda numa ilha nova
+
+Comenta GRECIA pra receber o roteiro inteligente.
+<span class="hashtags">#grecia #greekislands #milos #corfu #viageminteligente #europabarata #rottacuradoria #curadoriadeviagem #ilhasgregas #gyros</span></p></div></div></div>
+</section>
+
+<!-- ==================== REEL 11 ==================== -->
+<section class="reel-section" id="reel-11">
+<div class="reel-header"><div class="reel-number">11</div><h2 class="reel-title-main">Portugal com 60+: Guia Completo</h2>
+  <div class="reel-meta"><span class="reel-badge persona">S&M</span><span class="reel-badge duration">50-60s</span><span class="reel-badge cta-kw">CTA: PORTUGAL</span><span class="reel-badge calendar">Semana 8 Junho</span><span class="reel-badge block-tag">Bloco 3</span></div>
+  <div class="status-selector"><label>Status:</label><select data-reel="11" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"O melhor pais da Europa pra levar seus pais com 60+? Portugal. E nao e so por causa do idioma."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"A gente testou e confirmou. Aqui estao os motivos."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-16s]</div><div class="script-section-title">Idioma</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"O idioma muda TUDO. Seu pai de 70 anos nao precisa se estressar tentando falar ingles. Ele vai ao medico e e atendido em portugues. Isso da uma seguranca que nenhum outro pais da Europa oferece."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[16-25s]</div><div class="script-section-title">Sol e Clima</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"250 dias de sol por ano. O Algarve no sul e quente ate outubro. Pra quem tem dores articulares, o calor seco faz diferenca. E as termas -- banhos termais -- sao incriveis e acessiveis."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-34s]</div><div class="script-section-title">Praias Acessiveis</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Portugal tem mais de 200 praias com bandeira azul. Muitas com rampas, passarelas de madeira e cadeiras anfibias. Seu pai pode curtir a praia COM dignidade."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[34-43s]</div><div class="script-section-title">Carro pras Ladeiras</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Dica pratica: alugue carro. Lisboa e Porto tem ladeiras FORTES. Com carro, voce evita o sofrimento e ainda conhece vilas menores que sao um charme."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[43-52s]</div><div class="script-section-title">Custo</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"E o custo e justo. Refeicao: R$80. Hotel bom: R$400 a noite. Mais barato que Franca, Italia e Espanha. E a qualidade de vida la e surreal."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[52-60s] CTA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Comenta PORTUGAL que a gente te manda o roteiro ideal pra levar seus pais."</span></div></div>
+</div></div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Portugal e o melhor pais da Europa pra levar pais com 60+:
+
+- Idioma: portugues (seguranca total)
+- 250 dias de sol + termas naturais
+- 200+ praias com acessibilidade real
+- Alugue carro (ladeiras de Lisboa sao reais)
+- Custo justo: refeicao R$80, hotel R$400
+
+Comenta PORTUGAL pra receber o roteiro completo.
+<span class="hashtags">#portugal #portugalcom60 #viagemcompais #algarve #lisboa #porto #rottacuradoria #curadoriadeviagem #turismosENIOR #europacompais</span></p></div></div></div>
+</section>
+
+<!-- ==================== REEL 13 ==================== -->
+<section class="reel-section" id="reel-13">
+<div class="reel-header"><div class="reel-number">13</div><h2 class="reel-title-main">Checklist EUA: 6 Meses Antes</h2>
+  <div class="reel-meta"><span class="reel-badge persona">Amplo</span><span class="reel-badge duration">45-55s</span><span class="reel-badge cta-kw">CTA: EUA</span><span class="reel-badge calendar">Semana 9 Junho</span><span class="reel-badge block-tag">Bloco 3</span></div>
+  <div class="status-selector"><label>Status:</label><select data-reel="13" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Vai pros EUA em 2026? Aqui esta o cronograma EXATO do que fazer e quando fazer."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Salva esse video. E o mais pratico que a gente ja fez."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-16s]</div><div class="script-section-title">HOJE: Passaporte</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"HOJE: confira seu passaporte. Precisa ter pelo menos 6 meses de validade apos a data de volta. Se nao tem passaporte, comece AGORA -- ta levando 30-60 dias."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[16-25s]</div><div class="script-section-title">ESTA SEMANA: Visto</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"ESTA SEMANA: agende a entrevista do visto no consulado. A fila de espera ta entre 30 e 50 dias. Nao deixe pra depois."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[25-34s]</div><div class="script-section-title">30 DIAS: Seguro + Reservas</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"30 DIAS ANTES: contrate seguro viagem, reserve hotel e passagens. Dica: passagem de ida e volta compradas juntas sai mais barato que separadas."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[34-43s]</div><div class="script-section-title">15 DIAS: Cartao Internacional</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"15 DIAS ANTES: solicite seu cartao internacional. Wise, Nomad ou C6 Bank. Leva 7-10 dias pra chegar. E carregue com pelo menos USD 500 pra emergencias."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[43-55s] CTA</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Comenta EUA que a gente te manda esse checklist em PDF pra voce imprimir e riscar."</span></div></div>
+</div></div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Cronograma EXATO pra viagem pros EUA em 2026:
+
+HOJE: confira passaporte (6 meses validade)
+ESTA SEMANA: agende visto (30-50 dias de espera)
+30 DIAS ANTES: seguro + hotel + passagens
+15 DIAS ANTES: cartao internacional (Wise/Nomad/C6)
+
+Simples, objetivo, sem enrolacao.
+
+Comenta EUA que a gente te manda o checklist em PDF.
+<span class="hashtags">#checklistEUA #vistoeua #viajarprosEUA #passaporte #seguroviagem #rottacuradoria #curadoriadeviagem #planejamentodeviagem #eua2026 #dicasdeviagem</span></p></div></div></div>
+</section>
+
+<!-- ==================== REEL 15 ==================== -->
+<section class="reel-section" id="reel-15">
+<div class="reel-header"><div class="reel-number">15</div><h2 class="reel-title-main">Alerta Europa 2026: 3 Coisas que Mudaram</h2>
+  <div class="reel-meta"><span class="reel-badge persona">Todas</span><span class="reel-badge duration">45-55s</span><span class="reel-badge cta-kw">CTA: EUROPA</span><span class="reel-badge calendar">Semana 10 Junho</span><span class="reel-badge block-tag">Bloco 3</span></div>
+  <div class="status-selector"><label>Status:</label><select data-reel="15" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"3 alertas pra quem vai pra Europa em 2026. Se voce nao souber disso, pode se complicar."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E nao sao alertas de medo -- sao informacao pra voce se preparar."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-18s] ALERTA 1</div><div class="script-section-title">ETIAS Obrigatorio</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Alerta 1: ETIAS. A autorizacao eletronica que brasileiros agora precisam pra entrar na Europa. 7 euros, feita online, mas OBRIGATORIA. Sem ela, voce nao embarca. Solicite com pelo menos 96 horas de antecedencia."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[18-28s] ALERTA 2</div><div class="script-section-title">Lotacao Historica</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Alerta 2: 2026 vai ter a maior lotacao da historia no verao europeu. Recorde de turistas. Se voce PRECISA ir em julho-agosto, reserve TUDO com meses de antecedencia. Se pode escolher, setembro-outubro e o sweet spot."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[28-40s] ALERTA 3</div><div class="script-section-title">Cambio Instavel</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Alerta 3: o cambio ta instavel. O euro ta variando entre R$5.80 e R$6.40. Estrategia: compre euros aos poucos, um pouco por mes, pra pegar uma media boa. Nao espere a ultima hora."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[40-50s] CTA</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"Comenta EUROPA que a gente te manda o guia de preparacao completo."</span></div></div>
+</div></div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>3 ALERTAS pra quem vai pra Europa em 2026:
+
+1. ETIAS obrigatorio (7 euros, online, sem ele nao embarca)
+2. Lotacao RECORDE no verao (reserve com meses de antecedencia)
+3. Cambio instavel (compre euros aos poucos, nao na ultima hora)
+
+Nao e medo -- e preparacao.
+
+Comenta EUROPA pra receber o guia completo.
+<span class="hashtags">#europadicas #etias2026 #alertaeuropa #cambio #viagemeuropa #rottacuradoria #curadoriadeviagem #dicaseuropa #planejamento #eurotrip2026</span></p></div></div></div>
+</section>
+
+<!-- ==================== REEL 02 ==================== -->
+<section class="reel-section" id="reel-02">
+<div class="reel-header"><div class="reel-number">02</div><h2 class="reel-title-main">McDonald's Italiano: A Confissao</h2>
+  <div class="reel-meta"><span class="reel-badge persona">Familias / Humor</span><span class="reel-badge duration">45-55s</span><span class="reel-badge cta-kw">CTA: ITALIA</span><span class="reel-badge calendar">Semana 10 Junho</span><span class="reel-badge block-tag">Bloco 3</span></div>
+  <div class="status-selector"><label>Status:</label><select data-reel="02" onchange="updateStatus(this)"><option value="gravar" selected>Para Gravar</option><option value="gravado">Gravado</option><option value="editado">Editado</option><option value="publicado">Publicado</option></select></div>
+</div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Roteiro Completo</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open">
+  <div class="script-block"><div class="script-timestamp">[0-4s] HOOK</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Vou fazer uma confissao que nenhum curador de viagens quer fazer: o restaurante preferido do brasileiro na Italia... e o McDonald's."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[4-7s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><div class="script-direction">(rindo)</div><span class="script-text alexandra">"E eu vou defender."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[7-18s]</div><div class="script-section-title">O McDonald's Italiano e DIFERENTE</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Mas calma -- o McDonald's italiano nao e o brasileiro. La tem hamburguer com Grana Padano DOP, trufa, pao artesanal. O McFlurry tem cannoli. O cafe e espresso DE VERDADE. E mais barato que qualquer restaurante."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[18-28s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E como nutricionista, eu digo: nao precisa se culpar. A Italia e o pais da comida. Voce vai comer em restaurantes INCRIVEIS. Mas no dia que ta cansado, com crianca chorando, e so quer algo rapido? O McDonald's italiano e a melhor opcao rapida que existe."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[28-38s]</div><div class="script-section-title">A Regra 80/20</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Nossa regra: 80% do tempo em restaurantes incriveis, 20% no que voce quiser. Se o que voce quiser for McDonald's, pizza de rua ou gelato no almoco... ta tudo bem. Viagem nao e teste de resistencia culinaria."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[38-48s]</div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E o preco: Big Mac na Italia sai por R$25. Refeicao em restaurante: R$120+. Pra familia com crianca, um dia de McDonald's salva o orcamento."</span></div></div>
+  <div class="script-block"><div class="script-timestamp">[48-55s] CTA</div><div class="script-line"><span class="script-speaker marcelo">MARCELO</span><span class="script-text">"Comenta ITALIA se voce tambem tem essa culpa secreta."</span></div><div class="script-line"><span class="script-speaker alexandra">ALEXANDRA</span><span class="script-text alexandra">"E me segue pra mais confissoes honestas sobre viagem."</span></div></div>
+</div></div>
+<div class="reel-sub"><div class="reel-sub-header open" onclick="toggleSection(this)"><h3>Instagram Copy</h3><span class="toggle-icon">&#9660;</span></div>
+<div class="reel-sub-content open"><div class="copy-box"><button class="copy-btn" onclick="copyText(this)">Copiar</button><p>Confissao: o restaurante preferido do brasileiro na Italia e o McDonald's.
+
+Mas o McDonald's italiano e DIFERENTE:
+- Grana Padano, trufa, pao artesanal
+- McFlurry de cannoli
+- Espresso DE VERDADE
+
+A regra: 80% restaurantes incriveis, 20% o que voce quiser.
+
+Viagem nao e teste de resistencia culinaria.
+
+Comenta ITALIA se voce tem essa culpa secreta.
+<span class="hashtags">#mcdonaldsitalia #italiacomhumor #viagemItalia #confissaodeviagem #rottacuradoria #curadoriadeviagem #comidaitaliana #80x20 #viagemhonesta #italiareal</span></p></div></div></div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<div style="text-align:center;padding:60px 0 40px;border-top:1px solid var(--layer);margin-top:48px">
+  <div style="width:48px;height:48px;border:2px solid var(--gold);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);margin-bottom:12px">R</div>
+  <p style="font-size:14px;color:var(--muted)">Rotta Curadoria &mdash; Production Bible</p>
+  <p style="font-size:12px;color:var(--dim);margin-top:4px">19 Reels &bull; 3 Blocos &bull; @rotta.curadoria</p>
+  <p style="font-size:11px;color:var(--dim);margin-top:16px">Gerado em Marco 2026</p>
+</div>
+
+</div><!-- /.container -->
+</div><!-- /.main-content -->
+
+<script>
+// Toggle sections
+function toggleSection(header) {
+  header.classList.toggle('open');
+  var content = header.nextElementSibling;
+  content.classList.toggle('open');
+}
+
+// Copy text
+function copyText(btn) {
+  var container = btn.closest('.copy-box') || btn.closest('.prompt-card');
+  var textEl = container.querySelector('p') || container.querySelector('.prompt-text');
+  var text = textEl.innerText || textEl.textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copiado!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'Copiar';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// Status update
+function updateStatus(select) {
+  var reel = select.dataset.reel;
+  var value = select.value;
+  // Save to localStorage
+  localStorage.setItem('reel-status-' + reel, value);
+  // Update sidebar
+  updateSidebarStatus(reel, value);
+}
+
+function updateSidebarStatus(reel, status) {
+  var links = document.querySelectorAll('.sidebar-nav a[href="#reel-' + reel + '"] .reel-status');
+  links.forEach(function(dot) {
+    dot.className = 'reel-status';
+    dot.classList.add('status-' + status);
+  });
+}
+
+// Load saved statuses
+document.querySelectorAll('.status-selector select').forEach(function(sel) {
+  var reel = sel.dataset.reel;
+  var saved = localStorage.getItem('reel-status-' + reel);
+  if (saved) {
+    sel.value = saved;
+    updateSidebarStatus(reel, saved);
+  }
+});
+
+// Sidebar mobile toggle
+document.getElementById('sidebarToggle').addEventListener('click', function() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('active');
+});
+document.getElementById('sidebarOverlay').addEventListener('click', function() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('active');
+});
+
+// Close sidebar on nav click (mobile)
+document.querySelectorAll('.sidebar-nav a').forEach(function(link) {
+  link.addEventListener('click', function() {
+    if (window.innerWidth <= 1024) {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebarOverlay').classList.remove('active');
+    }
+  });
+});
+
+// Active sidebar link on scroll
+var reelSections = document.querySelectorAll('.reel-section');
+var sidebarLinks = document.querySelectorAll('.sidebar-nav a.sidebar-link');
+
+function updateActiveLink() {
+  var scrollPos = window.scrollY + 200;
+  var current = '';
+  reelSections.forEach(function(section) {
+    if (section.offsetTop <= scrollPos) {
+      current = section.id;
+    }
+  });
+  sidebarLinks.forEach(function(link) {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
+}
+window.addEventListener('scroll', updateActiveLink);
+updateActiveLink();
+</script>
+</body>
+</html>
