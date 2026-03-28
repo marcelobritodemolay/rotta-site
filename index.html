@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rotta Curadoria | Viagens Curadas pra Casais e Famílias</title>
-    <meta name="description" content="Curadoria de viagens premium por Marcelo & Alexandra. Roteiros personalizados pra casais e famílias que querem viver experiências de verdade.">
+    <title>Rotta Curadoria | Viagens Curadas por Quem Vive Cada Destino</title>
+    <meta name="description" content="Curadoria de viagens premium por Marcelo & Alexandra. Roteiros personalizados pra quem quer mais do que um destino — quer uma memória que dure pra sempre.">
     <meta property="og:title" content="Rotta Curadoria | Viagens Curadas">
     <meta property="og:description" content="E se alguém fizesse tudo isso por você — e você só precisasse viver? Viagens curadas por Marcelo & Alexandra.">
     <meta property="og:type" content="website">
@@ -34,7 +34,7 @@
         .divider{width:60px;height:1px;background:var(--gold);margin:0 auto;opacity:.3}
 
         /* ===== HERO ===== */
-        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 24px;position:relative}
+        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative}
         .hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
         .hero-badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:32px}
         .hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5.5vw,56px);font-weight:700;line-height:1.12;margin-bottom:24px;max-width:700px;margin-left:auto;margin-right:auto}
@@ -154,16 +154,67 @@
         .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
         .float-wa:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(37,211,102,.4)}
 
+        /* ===== NAV ===== */
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;background:rgba(14,14,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(42,42,42,.5)}
+        .nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+        .nav-brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;text-decoration:none}
+        .nav-links{display:flex;gap:24px;align-items:center}
+        .nav-links a{color:var(--muted);text-decoration:none;font-size:13px;letter-spacing:.5px;transition:color .3s}
+        .nav-links a:hover{color:var(--gold)}
+        .nav-links a.active{color:var(--gold);font-weight:500}
+
+        /* Hamburger */
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;z-index:200}
+        .hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s}
+        .hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .hamburger.open span:nth-child(2){opacity:0}
+        .hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+        .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;bottom:0;background:rgba(14,14,14,.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px}
+        .mobile-menu.open{display:flex}
+        .mobile-menu a{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);text-decoration:none;transition:color .3s}
+        .mobile-menu a:hover{color:var(--gold)}
+
+        /* Contact Form */
+        .contact-form{padding:100px 0;background:var(--card);border-top:1px solid var(--layer)}
+
         /* ===== RESPONSIVE ===== */
         @media(max-width:768px){
             .about-grid{grid-template-columns:1fr;gap:40px}
             .steps{grid-template-columns:1fr;max-width:400px}
             .hero-stats{gap:20px}
             .pain-grid{grid-template-columns:1fr}
+            .nav-links{display:none}
+            .hamburger{display:flex}
         }
     </style>
 </head>
 <body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/index.html" class="nav-brand">Rotta Curadoria</a>
+        <div class="nav-links">
+            <a href="/index.html" class="active">Home</a>
+            <a href="/index.html#produtos">Produtos</a>
+            <a href="/blog.html">Blog</a>
+            <a href="/sobre.html">Sobre</a>
+            <a href="/quiz.html">Quiz</a>
+            <a href="#contato">Contato</a>
+        </div>
+        <div class="hamburger" onclick="this.classList.toggle('open');document.querySelector('.mobile-menu').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+<div class="mobile-menu">
+    <a href="/index.html" onclick="closeMobileMenu()">Home</a>
+    <a href="/index.html#produtos" onclick="closeMobileMenu()">Produtos</a>
+    <a href="/blog.html" onclick="closeMobileMenu()">Blog</a>
+    <a href="/sobre.html" onclick="closeMobileMenu()">Sobre</a>
+    <a href="/quiz.html" onclick="closeMobileMenu()">Quiz</a>
+    <a href="#contato" onclick="closeMobileMenu()">Contato</a>
+</div>
 
 <!-- FLOATING WHATSAPP -->
 <a href="https://wa.me/5511968152123?text=Oi!%20Vi%20o%20site%20da%20Rotta%20e%20quero%20saber%20mais" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
@@ -173,7 +224,7 @@
     <div>
         <div class="hero-badge fade-up">Curadoria de Viagens Premium</div>
         <h1 class="fade-up stagger-1">E se alguém fizesse tudo isso por você —<br><em>e você só precisasse viver?</em></h1>
-        <p class="subtitle fade-up stagger-2">Roteiros personalizados pra casais e famílias que querem mais do que um destino — querem uma memória que dure pra sempre.</p>
+        <p class="subtitle fade-up stagger-2">Roteiros personalizados pra quem quer mais do que um destino — quer uma memória que dure pra sempre.</p>
         <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20curadoria%20de%20viagem" class="hero-cta fade-up stagger-3">Fale com a gente</a>
         <div class="hero-stats fade-up stagger-4">
             <div class="hero-stat"><div class="num">22</div><div class="label">Países</div></div>
@@ -282,234 +333,38 @@
 <section class="products" id="produtos">
     <div class="container">
         <p class="section-label fade-up" style="text-align:center">Nossos serviços</p>
-        <h2 class="fade-up">Escolha o nível de curadoria<br>que faz sentido pra você</h2>
-        <p class="products-sub fade-up">De gratuito a VIP. 13 produtos em 5 níveis. Cada nível constrói confiança pro próximo.</p>
+        <h2 class="fade-up">Escolha a experiência<br>que faz sentido pra você</h2>
+        <p class="products-sub fade-up">Cada produto foi pensado pra um momento diferente da sua vida.</p>
 
-        <!-- VISUAL LADDER -->
-        <div style="max-width:700px;margin:0 auto 60px;padding:0" class="fade-up">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-                <span style="width:80px;text-align:right;font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);flex-shrink:0">L0 Grátis</span>
-                <div style="flex:1;height:36px;background:rgba(76,175,125,.1);border:1px solid rgba(76,175,125,.25);border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:12px;color:#4CAF7D">3 produtos — Lead magnets</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-                <span style="width:80px;text-align:right;font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);flex-shrink:0">L1 Low</span>
-                <div style="flex:1;height:36px;background:rgba(232,201,74,.08);border:1px solid rgba(232,201,74,.25);border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:12px;color:#E8C94A;max-width:80%">3 produtos — R$37-197</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-                <span style="width:80px;text-align:right;font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);flex-shrink:0">L2 Mid</span>
-                <div style="flex:1;height:36px;background:var(--gold-dim);border:1px solid rgba(197,165,114,.25);border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:12px;color:var(--gold);max-width:60%">3 produtos — R$497-1.997</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
-                <span style="width:80px;text-align:right;font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);flex-shrink:0">L3 High</span>
-                <div style="flex:1;height:36px;background:rgba(232,120,90,.08);border:1px solid rgba(232,120,90,.25);border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:12px;color:#E8785A;max-width:40%">2 produtos — R$3k-6k</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px">
-                <span style="width:80px;text-align:right;font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);flex-shrink:0">L4 Ultra</span>
-                <div style="flex:1;height:36px;background:rgba(91,141,239,.08);border:1px solid rgba(91,141,239,.25);border-radius:6px;display:flex;align-items:center;padding:0 12px;font-size:12px;color:#5B8DEF;max-width:28%">2 produtos — R$8k+</div>
-            </div>
-        </div>
-
-        <!-- L0 — GRATUITO -->
-        <div style="margin-bottom:48px">
-            <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#4CAF7D;margin-bottom:16px" class="fade-up">L0 — Gratuito</p>
-            <div class="product-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-                <div class="product-card fade-up stagger-1">
-                    <div class="product-badge">Lead magnet</div>
-                    <h3>Quiz de Viajante</h3>
-                    <div class="product-price">R$0</div>
-                    <ul class="product-list">
-                        <li>7 perguntas rápidas</li>
-                        <li>Resultado personalizado</li>
-                        <li>3 destinos recomendados</li>
-                    </ul>
-                    <a href="/quiz.html" class="product-cta secondary">Fazer o quiz</a>
-                </div>
-                <a href="/guia.html" style="text-decoration:none;color:var(--text)" class="product-card fade-up stagger-2">
-                    <div class="product-badge">Lead magnet</div>
-                    <h3>Guia 7 Destinos</h3>
-                    <div class="product-price">R$0</div>
-                    <ul class="product-list">
-                        <li>7 destinos curados</li>
-                        <li>Orçamento real de cada</li>
-                        <li>Dicas gastronômicas</li>
-                    </ul>
-                    <span class="product-cta secondary">Baixar guia</span>
-                </a>
-                <div class="product-card fade-up stagger-3">
-                    <div class="product-badge">Lead magnet</div>
-                    <h3>Kit Organizadora</h3>
-                    <div class="product-price">R$0</div>
-                    <ul class="product-list">
-                        <li>Checklist completo</li>
-                        <li>Versão PDF pra impressão</li>
-                        <li>Nada fica pra trás</li>
-                    </ul>
-                    <a href="#" class="product-cta secondary">Em breve</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- L1 — LOW TICKET -->
-        <div style="margin-bottom:48px">
-            <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#E8C94A;margin-bottom:16px" class="fade-up">L1 — Low Ticket · R$37-197</p>
-            <div class="product-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-                <div class="product-card fade-up stagger-1">
-                    <div class="product-badge">Roteiros prontos</div>
-                    <h3>Roteiro PDF Premium</h3>
-                    <div class="product-price">R$67 <small>a R$147</small></div>
-                    <p style="font-size:12px;color:var(--dim);margin-top:-12px;margin-bottom:8px">ou 12x de R$5 a R$12</p>
-                    <ul class="product-list">
-                        <li>Roteiro completo dia a dia</li>
-                        <li>Restaurantes testados</li>
-                        <li>Mapas e dicas locais</li>
-                        <li>Garantia de 15 dias</li>
-                    </ul>
-                    <a href="https://wa.me/5511968152123?text=Quero%20saber%20mais%20sobre%20os%20roteiros%20prontos" class="product-cta outline">Conhecer roteiros</a>
-                </div>
-                <div class="product-card fade-up stagger-2">
-                    <div class="product-badge">Educativo</div>
-                    <h3>Workshop Viagem</h3>
-                    <div class="product-price">R$97 <small>a R$197</small></div>
-                    <p style="font-size:12px;color:var(--dim);margin-top:-12px;margin-bottom:8px">ou 12x de R$8 a R$16</p>
-                    <ul class="product-list">
-                        <li>Aula ao vivo de 2 horas</li>
-                        <li>Material de apoio em PDF</li>
-                        <li>Grupo VIP por 30 dias</li>
-                    </ul>
-                    <a href="https://wa.me/5511968152123?text=Quero%20saber%20sobre%20o%20Workshop%20de%20Viagem" class="product-cta outline">Saber mais</a>
-                </div>
-                <a href="/produto-rotta-surprise.html" style="text-decoration:none;color:var(--text)" class="product-card fade-up stagger-3">
-                    <div class="product-badge">Surpresa</div>
-                    <h3>Rotta Surprise Mini</h3>
-                    <div class="product-price">R$97</div>
-                    <p style="font-size:12px;color:var(--dim);margin-top:-12px;margin-bottom:8px">pagamento único</p>
-                    <ul class="product-list">
-                        <li>Experiência local surpresa</li>
-                        <li>1 dia/noite na sua região</li>
-                        <li>Envelope digital</li>
-                    </ul>
-                    <span class="product-cta outline">Conhecer &#x2192;</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- L2 — MID TICKET -->
-        <div style="margin-bottom:48px">
-            <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:16px" class="fade-up">L2 — Mid Ticket · R$497-1.997</p>
-            <div class="product-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-                <a href="/produto-roteiro-express.html" style="text-decoration:none;color:var(--text)" class="product-card featured fade-up stagger-1">
-                    <div class="product-badge">Personalizado</div>
-                    <h3>Roteiro Express</h3>
-                    <div class="product-price">R$497 <small>a R$797</small></div>
-                    <p style="font-size:12px;color:var(--dim);margin-top:-12px;margin-bottom:8px">ou 12x de R$41 a R$66</p>
-                    <ul class="product-list">
-                        <li>Roteiro 100% personalizado</li>
-                        <li>2 calls de alinhamento</li>
-                        <li>Entrega em 7 dias úteis</li>
-                        <li>1 revisão inclusa</li>
-                        <li>Suporte por WhatsApp</li>
-                    </ul>
-                    <span class="product-cta primary">Conhecer &#x2192;</span>
-                </a>
-                <a href="/produto-escapada-romantica.html" style="text-decoration:none;color:var(--text)" class="product-card fade-up stagger-2">
-                    <div class="product-badge">Romântico</div>
-                    <h3>Escapada Romântica</h3>
-                    <div class="product-price">R$1.497 <small>a R$1.997</small></div>
-                    <p style="font-size:12px;color:var(--dim);margin-top:-12px;margin-bottom:8px">ou 12x de R$124 a R$166</p>
-                    <ul class="product-list">
-                        <li>Roteiro de 3-5 dias a dois</li>
-                        <li>Reservas incluídas</li>
-                        <li>Experiências românticas</li>
-                        <li>Suporte na viagem</li>
-                    </ul>
-                    <span class="product-cta outline">Conhecer &#x2192;</span>
-                </a>
-                <a href="/produto-rotta-crew.html" style="text-decoration:none;color:var(--text)" class="product-card fade-up stagger-3">
-                    <div class="product-badge">Grupo</div>
-                    <h3>Rotta Crew</h3>
-                    <div class="product-price">R$797 <small>/pessoa</small></div>
-                    <p style="font-size:12px;color:var(--dim);margin-top:-12px;margin-bottom:8px">ou 12x de R$66/pessoa</p>
-                    <ul class="product-list">
-                        <li>Roteiro coletivo</li>
-                        <li>Divisão de custos</li>
-                        <li>Coordenação completa</li>
-                        <li>4-8 pessoas</li>
-                    </ul>
-                    <span class="product-cta outline">Conhecer &#x2192;</span>
-                </a>
-            </div>
-        </div>
-
-        <!-- L3 — HIGH TICKET -->
-        <div style="margin-bottom:48px">
-            <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--coral);margin-bottom:16px" class="fade-up">L3 — High Ticket · R$2.997-5.997</p>
-            <div class="product-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-                <div class="product-card fade-up stagger-1">
-                    <div class="product-badge">Premium</div>
-                    <h3>Curadoria Completa</h3>
-                    <div class="product-price">R$3.997 <small>a R$5.997</small></div>
-                    <p style="font-size:12px;color:var(--dim);margin-top:-12px;margin-bottom:8px">ou 12x de R$333 a R$499</p>
-                    <ul class="product-list">
-                        <li>Do zero ao embarque</li>
-                        <li>Todas as reservas incluídas</li>
-                        <li>Suporte 24h durante a viagem</li>
-                        <li>Álbum digital pós-viagem</li>
-                        <li>Imersão de 2h inicial</li>
-                    </ul>
-                    <a href="https://wa.me/5511968152123?text=Quero%20saber%20sobre%20a%20Curadoria%20Completa" class="product-cta primary">Quero saber mais</a>
-                </div>
-                <div class="product-card fade-up stagger-2">
-                    <div class="product-badge">Grupo internacional</div>
-                    <h3>Crew International</h3>
-                    <div class="product-price">R$2.997 <small>a R$4.997/pessoa</small></div>
-                    <p style="font-size:12px;color:var(--dim);margin-top:-12px;margin-bottom:8px">ou 12x de R$249 a R$416/pessoa</p>
-                    <ul class="product-list">
-                        <li>Curadoria completa pra grupo</li>
-                        <li>Logística internacional</li>
-                        <li>Passagens + reservas + guia</li>
-                        <li>Coordenação total</li>
-                    </ul>
-                    <a href="https://wa.me/5511968152123?text=Quero%20saber%20sobre%20o%20Crew%20International" class="product-cta outline">Quero saber mais</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- L4 — ULTRA PREMIUM -->
-        <div style="margin-bottom:0">
-            <p style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:16px" class="fade-up">L4 — Ultra Premium · R$8.000+</p>
-            <div style="max-width:800px;margin:0 auto;background:linear-gradient(135deg,var(--card) 0%,#1F1A14 100%);border:1px solid rgba(197,165,114,.3);border-radius:16px;padding:48px 40px;position:relative;overflow:hidden" class="fade-up">
-                <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)"></div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
-                    <div>
-                        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Membership</div>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px">Travel Club Anual</h3>
-                        <p style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);font-weight:700;margin-bottom:12px">R$8.000 <span style="font-size:14px;color:var(--dim);font-weight:400">a R$12.000/ano</span></p>
-                        <ul style="list-style:none;margin-bottom:16px">
-                            <li style="font-size:13px;color:var(--muted);padding:6px 0;display:flex;gap:8px"><span style="color:var(--gold);font-weight:600">></span>4 viagens curadas por ano</li>
-                            <li style="font-size:13px;color:var(--muted);padding:6px 0;display:flex;gap:8px"><span style="color:var(--gold);font-weight:600">></span>Comunidade VIP exclusiva</li>
-                            <li style="font-size:13px;color:var(--muted);padding:6px 0;display:flex;gap:8px"><span style="color:var(--gold);font-weight:600">></span>Máximo 30 membros</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Sob medida</div>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:22px;margin-bottom:8px">Viagem Bespoke</h3>
-                        <p style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);font-weight:700;margin-bottom:12px">R$15.000<span style="font-size:14px;color:var(--dim);font-weight:400">+</span></p>
-                        <ul style="list-style:none;margin-bottom:16px">
-                            <li style="font-size:13px;color:var(--muted);padding:6px 0;display:flex;gap:8px"><span style="color:var(--gold);font-weight:600">></span>Concierge pessoal dedicado</li>
-                            <li style="font-size:13px;color:var(--muted);padding:6px 0;display:flex;gap:8px"><span style="color:var(--gold);font-weight:600">></span>Curadoria ilimitada</li>
-                            <li style="font-size:13px;color:var(--muted);padding:6px 0;display:flex;gap:8px"><span style="color:var(--gold);font-weight:600">></span>Experiências exclusivas</li>
-                        </ul>
-                    </div>
-                </div>
-                <div style="background:var(--bg);border-radius:12px;padding:24px;border-left:3px solid var(--gold);margin-top:16px">
-                    <p style="font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-size:16px;margin-bottom:8px">"A mesma precisão que trago pros meus procedimentos médicos, trago pra cada detalhe da sua viagem."</p>
-                    <p style="color:var(--dim);font-size:13px">— Dr. Marcelo Brito</p>
-                </div>
-                <div style="text-align:center;margin-top:24px">
-                    <p style="color:var(--muted);font-size:14px;margin-bottom:16px">Vagas limitadas — atendemos poucos clientes por mês pra manter a qualidade.</p>
-                    <a href="https://wa.me/5511968152123?text=Quero%20saber%20sobre%20a%20curadoria%20VIP%20da%20Rotta" style="display:inline-block;background:var(--gold);color:var(--bg);padding:14px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;transition:all .3s">Quero saber mais sobre a VIP</a>
-                </div>
-            </div>
+        <div class="product-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+            <a href="/produto-roteiro-express.html" style="text-decoration:none;color:var(--text)" class="product-card featured fade-up stagger-1">
+                <div class="product-badge">Personalizado</div>
+                <h3>Roteiro Express</h3>
+                <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:16px">Seu roteiro 100% personalizado em 7 dias. Pra quem quer viajar do seu jeito, sem estresse.</p>
+                <div class="product-price">A partir de R$497</div>
+                <span class="product-cta primary" style="margin-top:16px">Saiba mais &#x2192;</span>
+            </a>
+            <a href="/produto-escapada-romantica.html" style="text-decoration:none;color:var(--text)" class="product-card fade-up stagger-2">
+                <div class="product-badge">Romântico</div>
+                <h3>Escapada Romântica</h3>
+                <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:16px">Uma viagem a dois com tudo planejado — roteiro, reservas e experiências pra reconectar.</p>
+                <div class="product-price">A partir de R$1.497</div>
+                <span class="product-cta outline" style="margin-top:16px">Saiba mais &#x2192;</span>
+            </a>
+            <a href="/produto-rotta-crew.html" style="text-decoration:none;color:var(--text)" class="product-card fade-up stagger-3">
+                <div class="product-badge">Grupo</div>
+                <h3>Rotta Crew</h3>
+                <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:16px">A viagem do grupo que finalmente vai sair do papel. Roteiro, divisão de custos e coordenação.</p>
+                <div class="product-price">A partir de R$797<small>/pessoa</small></div>
+                <span class="product-cta outline" style="margin-top:16px">Saiba mais &#x2192;</span>
+            </a>
+            <a href="/produto-rotta-surprise.html" style="text-decoration:none;color:var(--text)" class="product-card fade-up stagger-4">
+                <div class="product-badge">Surpresa</div>
+                <h3>Rotta Surprise</h3>
+                <p style="color:var(--muted);font-size:14px;line-height:1.6;margin-bottom:16px">Surpreenda quem você ama com uma experiência planejada 100% em segredo.</p>
+                <div class="product-price">A partir de R$97</div>
+                <span class="product-cta outline" style="margin-top:16px">Saiba mais &#x2192;</span>
+            </a>
         </div>
     </div>
 </section>
@@ -660,6 +515,37 @@
     </div>
 </section>
 
+<!-- ===== FORMULÁRIO DE CONTATO ===== -->
+<section class="contact-form" id="contato">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Fale com a gente</p>
+        <h2 style="font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:16px" class="fade-up">Conta pra gente o que você <em style="color:var(--gold)">sonha</em></h2>
+        <p style="text-align:center;color:var(--muted);margin-bottom:48px;font-size:15px;max-width:500px;margin-left:auto;margin-right:auto" class="fade-up">Preencha o formulário e a gente te responde pelo WhatsApp com sugestões personalizadas.</p>
+        <form id="contactForm" class="fade-up" style="max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:16px">
+            <div>
+                <label for="cf-nome" style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px">Nome</label>
+                <input type="text" id="cf-nome" required placeholder="Seu nome" style="width:100%;padding:14px 16px;background:var(--card);border:1px solid var(--layer);border-radius:8px;color:var(--text);font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border-color .3s" onfocus="this.style.borderColor='#C5A572'" onblur="this.style.borderColor='#2A2A2A'">
+            </div>
+            <div>
+                <label for="cf-email" style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px">E-mail</label>
+                <input type="email" id="cf-email" required placeholder="seu@email.com" style="width:100%;padding:14px 16px;background:var(--card);border:1px solid var(--layer);border-radius:8px;color:var(--text);font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border-color .3s" onfocus="this.style.borderColor='#C5A572'" onblur="this.style.borderColor='#2A2A2A'">
+            </div>
+            <div>
+                <label for="cf-interesse" style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px">O que você procura?</label>
+                <select id="cf-interesse" required style="width:100%;padding:14px 16px;background:var(--card);border:1px solid var(--layer);border-radius:8px;color:var(--text);font-size:15px;font-family:'Inter',sans-serif;outline:none;transition:border-color .3s;appearance:none;-webkit-appearance:none;background-image:url('data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2212%22%20height%3D%228%22%20viewBox%3D%220%200%2012%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1%201L6%206L11%201%22%20stroke%3D%22%23999%22%20stroke-width%3D%222%22/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 16px center" onfocus="this.style.borderColor='#C5A572'" onblur="this.style.borderColor='#2A2A2A'">
+                    <option value="" disabled selected style="color:var(--dim)">Selecione uma opção</option>
+                    <option value="Roteiro personalizado">Roteiro personalizado</option>
+                    <option value="Viagem em casal">Viagem em casal</option>
+                    <option value="Viagem em grupo">Viagem em grupo</option>
+                    <option value="Surpresa para alguém">Surpresa para alguém</option>
+                    <option value="Outro">Outro</option>
+                </select>
+            </div>
+            <button type="submit" style="background:var(--gold);color:var(--bg);border:none;padding:16px 36px;border-radius:8px;font-weight:600;font-size:16px;font-family:'Inter',sans-serif;cursor:pointer;transition:all .3s;margin-top:8px" onmouseover="this.style.background='#D4B87F';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#C5A572';this.style.transform='translateY(0)'">Enviar pelo WhatsApp</button>
+        </form>
+    </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer>
     <div class="container">
@@ -674,7 +560,7 @@
     </div>
 </footer>
 
-<!-- SCROLL ANIMATION -->
+<!-- SCROLL ANIMATION + FORM + MOBILE MENU -->
 <script>
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -685,6 +571,23 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Mobile menu
+function closeMobileMenu() {
+    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.mobile-menu').classList.remove('open');
+}
+
+// Contact form -> WhatsApp
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nome = document.getElementById('cf-nome').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const interesse = document.getElementById('cf-interesse').value;
+    const msg = `Oi! Vim pelo site da Rotta.\n\nNome: ${nome}\nE-mail: ${email}\nInteresse: ${interesse}`;
+    const encoded = encodeURIComponent(msg);
+    window.open(`https://wa.me/5511968152123?text=${encoded}`, '_blank');
+});
 </script>
 
 </body>
