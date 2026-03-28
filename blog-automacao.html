@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Automacao & Estrategia | Rotta Curadoria</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --coral:#E8785A;--green:#4CAF7D;--blue:#5B8DEF;
+            --yellow:#E8C94A;--red:#E85A5A;--purple:#9B72CF
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:1200px;margin:0 auto;padding:0 24px}
+        a{text-decoration:none;color:inherit}
+        .internal-banner{background:var(--coral);color:#fff;text-align:center;padding:10px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+        .nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(14,14,14,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--layer);padding:0 24px}
+        .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:60px}
+        .nav-brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:2px;text-transform:uppercase}
+        .nav-links{display:flex;gap:24px}
+        .nav-links a{font-size:13px;color:var(--muted);transition:color .3s}
+        .nav-links a:hover,.nav-links a.active{color:var(--gold)}
+        .strat-hero{padding:100px 24px 60px;text-align:center;position:relative}
+        .strat-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .strat-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.2;margin-bottom:16px}
+        .strat-hero h1 em{font-style:italic;color:var(--gold)}
+        .strat-hero p{color:var(--muted);font-size:16px;max-width:600px;margin:0 auto 32px}
+        .hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
+        .hero-stat{text-align:center}
+        .hero-stat .num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--gold)}
+        .hero-stat .label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+        .section{padding:60px 24px}
+        .section h2{font-family:'Playfair Display',serif;font-size:28px;font-weight:600;margin-bottom:8px}
+        .section h2 em{color:var(--gold);font-style:italic}
+        .section>p{color:var(--muted);font-size:15px;max-width:700px;margin-bottom:32px}
+        .tabs{display:flex;gap:0;border-bottom:1px solid var(--layer);margin-bottom:32px;flex-wrap:wrap;position:sticky;top:60px;background:var(--bg);z-index:50;padding:12px 24px 0}
+        .tab{padding:12px 24px;font-size:13px;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .3s;white-space:nowrap;font-weight:500}
+        .tab:hover{color:var(--text)}
+        .tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+        .tab-content{display:none}
+        .tab-content.active{display:block}
+        .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:32px}
+        .card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px;transition:all .3s}
+        .card:hover{border-color:var(--gold);transform:translateY(-2px)}
+        .card h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px;font-weight:600}
+        .card p{font-size:14px;color:var(--muted);line-height:1.6}
+        .card-tag{display:inline-block;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:100px;font-weight:600;margin-bottom:12px}
+        .tag-roteiro{background:rgba(91,141,239,.15);color:var(--blue)}
+        .tag-guia{background:rgba(76,175,125,.15);color:var(--green)}
+        .tag-dica{background:rgba(232,201,74,.15);color:var(--yellow)}
+        .tag-experiencia{background:rgba(155,114,207,.15);color:var(--purple)}
+        .kw-table-wrap{overflow-x:auto;margin-bottom:32px;border:1px solid var(--layer);border-radius:12px}
+        .kw-table{width:100%;border-collapse:collapse;font-size:13px}
+        .kw-table thead{background:var(--card);position:sticky;top:0}
+        .kw-table th{text-align:left;padding:12px 16px;color:var(--gold);font-weight:600;font-size:11px;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid var(--layer)}
+        .kw-table td{padding:10px 16px;border-bottom:1px solid rgba(42,42,42,.5);vertical-align:top}
+        .kw-table tr:hover{background:rgba(197,165,114,.03)}
+        .kw-table .vol{color:var(--green);font-weight:600}
+        .kw-table .comp-low{color:var(--green)}
+        .kw-table .comp-med{color:var(--yellow)}
+        .kw-table .comp-high{color:var(--coral)}
+        .priority-high{background:rgba(232,120,90,.12);color:var(--coral);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
+        .priority-med{background:rgba(232,201,74,.12);color:var(--yellow);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
+        .priority-low{background:rgba(76,175,125,.12);color:var(--green);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
+        .filter-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
+        .filter-bar label{font-size:12px;color:var(--muted);margin-right:8px}
+        .filter-btn{font-size:12px;padding:6px 14px;border-radius:100px;border:1px solid var(--layer);background:transparent;color:var(--muted);cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif}
+        .filter-btn:hover,.filter-btn.active{border-color:var(--gold);color:var(--gold);background:var(--gold-dim)}
+        .search-input{background:var(--card);border:1px solid var(--layer);border-radius:8px;padding:8px 16px;color:var(--text);font-size:13px;font-family:'Inter',sans-serif;width:200px;outline:none;transition:border-color .3s}
+        .search-input:focus{border-color:var(--gold)}
+        .cal-month h3{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:4px;color:var(--gold)}
+        .cal-month .month-sub{font-size:13px;color:var(--dim);margin-bottom:16px}
+        .cal-week{margin-bottom:16px}
+        .cal-week-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;padding-left:4px}
+        .cal-entries{display:flex;flex-direction:column;gap:6px}
+        .cal-entry{display:grid;grid-template-columns:90px 1fr 120px 100px 80px 80px;align-items:center;gap:12px;background:var(--card);border:1px solid var(--layer);border-radius:8px;padding:12px 16px;font-size:13px;transition:all .3s;cursor:pointer}
+        .cal-entry:hover{border-color:var(--gold)}
+        .cal-entry .date{color:var(--dim);font-size:12px;font-weight:500}
+        .cal-entry .title{font-weight:500;color:var(--text)}
+        .cal-entry .keyword{color:var(--muted);font-size:12px}
+        .cal-entry .pillar{font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:4px;text-align:center;font-weight:600}
+        .cal-entry .words{color:var(--dim);font-size:12px;text-align:center}
+        .cal-entry .status{font-size:11px;text-align:center}
+        .status-pending{color:var(--dim)}
+        .status-done{color:var(--green)}
+        .template-block{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:32px;margin-bottom:24px;position:relative}
+        .template-block h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:16px;color:var(--gold)}
+        .template-code{background:var(--bg);border:1px solid var(--layer);border-radius:8px;padding:20px;font-family:'Courier New',monospace;font-size:13px;line-height:1.8;color:var(--muted);overflow-x:auto;white-space:pre-wrap;position:relative}
+        .copy-btn{position:absolute;top:12px;right:12px;background:var(--gold);color:var(--bg);border:none;padding:6px 14px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:all .3s;font-family:'Inter',sans-serif;letter-spacing:.5px}
+        .copy-btn:hover{background:#D4B87F}
+        .copy-btn.copied{background:var(--green)}
+        .pipeline{display:flex;gap:0;margin-bottom:32px;overflow-x:auto;padding-bottom:8px}
+        .pipe-step{flex:1;min-width:180px;background:var(--card);border:1px solid var(--layer);padding:20px;text-align:center;position:relative}
+        .pipe-step:first-child{border-radius:12px 0 0 12px}
+        .pipe-step:last-child{border-radius:0 12px 12px 0}
+        .pipe-step::after{content:'>';position:absolute;right:-8px;top:50%;transform:translateY(-50%);color:var(--gold);font-size:18px;z-index:2}
+        .pipe-step:last-child::after{display:none}
+        .pipe-step .step-num{font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);font-weight:700;margin-bottom:4px}
+        .pipe-step h4{font-size:14px;font-weight:600;margin-bottom:8px}
+        .pipe-step p{font-size:12px;color:var(--muted);line-height:1.5}
+        .sources-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+        .source-item{background:var(--card);border:1px solid var(--layer);border-radius:8px;padding:14px 18px;font-size:13px;display:flex;align-items:center;gap:10px;transition:border-color .3s}
+        .source-item:hover{border-color:var(--gold)}
+        .source-num{color:var(--gold);font-weight:700;font-size:16px;min-width:24px}
+        .source-info .source-name{font-weight:500;margin-bottom:2px}
+        .source-info .source-desc{font-size:11px;color:var(--dim)}
+        .link-map{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+        .link-node{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px}
+        .link-node h4{font-size:14px;font-weight:600;margin-bottom:10px;color:var(--gold)}
+        .link-node ul{list-style:none;padding:0}
+        .link-node li{font-size:13px;color:var(--muted);padding:4px 0;border-bottom:1px solid rgba(42,42,42,.3)}
+        .link-node li:last-child{border-bottom:none}
+        .link-arrow{color:var(--gold);margin-right:8px}
+        .metrics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+        .metric-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px;text-align:center}
+        .metric-card h4{font-size:14px;font-weight:600;margin-bottom:4px}
+        .metric-card p{font-size:12px;color:var(--muted)}
+        .metric-card .metric-target{font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);font-weight:700;margin-top:8px}
+        .metric-card .metric-sub{font-size:11px;color:var(--dim);margin-top:4px}
+        .checklist{list-style:none;padding:0}
+        .checklist li{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid rgba(42,42,42,.3);font-size:14px;color:var(--muted)}
+        .checklist li:last-child{border-bottom:none}
+        .check-box{width:18px;height:18px;border:1.5px solid var(--layer);border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;font-size:11px;color:transparent}
+        .check-box.checked{background:var(--gold);border-color:var(--gold);color:var(--bg)}
+        .progress-wrap{margin-bottom:32px}
+        .progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+        .progress-header span{font-size:13px;color:var(--muted)}
+        .progress-header .progress-pct{color:var(--gold);font-weight:600}
+        .progress-bar{height:6px;background:var(--layer);border-radius:3px;overflow:hidden}
+        .progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#D4B87F);border-radius:3px;transition:width .5s ease}
+        @media(max-width:768px){
+            .cal-entry{grid-template-columns:1fr;gap:4px;padding:14px}
+            .cal-entry .date{font-size:11px;color:var(--gold)}
+            .cal-entry .keyword,.cal-entry .words{display:none}
+            .pipeline{flex-direction:column}
+            .pipe-step{border-radius:8px !important}
+            .pipe-step::after{display:none}
+            .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
+            .kw-table{font-size:12px}
+            .kw-table th,.kw-table td{padding:8px 10px}
+        }
+        footer{padding:40px 24px;text-align:center;border-top:1px solid var(--layer);margin-top:40px}
+        footer .brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+        footer .tagline{font-size:11px;color:var(--dim)}
+    </style>
+</head>
+<body>
+
+<div class="internal-banner">Documento Interno — Estrategia de Blog</div>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">Rotta Curadoria</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="blog.html">Blog</a>
+            <a href="catalogo-produtos.html">Produtos</a>
+            <a href="blog-automacao.html" class="active">Automacao</a>
+        </div>
+    </div>
+</nav>
+
+<section class="strat-hero">
+    <h1>Estrategia de <em>Blog &amp; SEO</em></h1>
+    <p>Calendario de conteudo, mapa de keywords, templates e automacao para escalar o Diario de Bordo da Rotta Curadoria.</p>
+    <div class="hero-stats">
+        <div class="hero-stat"><div class="num">45</div><div class="label">Artigos em 90 dias</div></div>
+        <div class="hero-stat"><div class="num">60</div><div class="label">Keywords mapeadas</div></div>
+        <div class="hero-stat"><div class="num">4</div><div class="label">Pilares de conteudo</div></div>
+        <div class="hero-stat"><div class="num">3</div><div class="label">Artigos publicados</div></div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="progress-wrap">
+            <div class="progress-header">
+                <span>Progresso geral do blog</span>
+                <span class="progress-pct">3 / 45 artigos publicados (7%)</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:7%"></div></div>
+        </div>
+    </div>
+</section>
+
+<div class="tabs" id="mainTabs">
+    <div class="tab active" data-tab="pilares">Pilares de Conteudo</div>
+    <div class="tab" data-tab="keywords">Mapa de Keywords</div>
+    <div class="tab" data-tab="calendario">Calendario 90 Dias</div>
+    <div class="tab" data-tab="template">Template de Artigo</div>
+    <div class="tab" data-tab="automacao">Automacao</div>
+    <div class="tab" data-tab="linking">Links Internos</div>
+    <div class="tab" data-tab="metricas">Metricas</div>
+    <div class="tab" data-tab="checklist">SEO Checklist</div>
+</div>
+
+<!-- TAB: PILARES -->
+<div class="tab-content active" id="tab-pilares">
+<section class="section">
+    <div class="container">
+        <div class="section-label">Pilares de conteudo</div>
+        <h2>Os 4 pilares do <em>Diario de Bordo</em></h2>
+        <p>Cada artigo do blog se encaixa em um destes pilares. A proporcao ideal e 30% roteiros, 25% guias, 25% dicas e 20% experiencias.</p>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-tag tag-roteiro">Pilar 1</div>
+                <h3>Roteiros Praticos</h3>
+                <p>Itinerarios dia a dia com orcamentos reais, tempos de deslocamento, onde comer, onde ficar. O leitor sai com o roteiro pronto pra usar.</p>
+                <p style="margin-top:16px;font-size:12px;color:var(--dim)"><strong style="color:var(--blue)">Formato:</strong> Long-form (2.000-3.000 palavras) | <strong style="color:var(--blue)">Freq:</strong> ~14 artigos em 90 dias | <strong style="color:var(--blue)">CTA:</strong> Roteiro Express ou Curadoria Completa | <strong style="color:var(--blue)">Ex:</strong> "Roteiro Mendoza 5 dias pra casais"</p>
+            </div>
+            <div class="card">
+                <div class="card-tag tag-guia">Pilar 2</div>
+                <h3>Guias de Destino</h3>
+                <p>Tudo sobre um destino num so post: melhor epoca, quanto custa, o que fazer, onde ficar, dicas locais. Conteudo evergreen que rankeia por anos.</p>
+                <p style="margin-top:16px;font-size:12px;color:var(--dim)"><strong style="color:var(--green)">Formato:</strong> Long-form (2.500-4.000 palavras) | <strong style="color:var(--green)">Freq:</strong> ~11 artigos em 90 dias | <strong style="color:var(--green)">CTA:</strong> Quiz ou Curadoria Completa | <strong style="color:var(--green)">Ex:</strong> "Quanto custa viajar pra Italia em 2026"</p>
+            </div>
+            <div class="card">
+                <div class="card-tag tag-dica">Pilar 3</div>
+                <h3>Dicas de Viagem</h3>
+                <p>Posts praticos e rapidos: como fazer mala, apps essenciais, hacks de aeroporto, como economizar, documentacao. Alto volume de busca.</p>
+                <p style="margin-top:16px;font-size:12px;color:var(--dim)"><strong style="color:var(--yellow)">Formato:</strong> Standard (800-1.500 palavras) | <strong style="color:var(--yellow)">Freq:</strong> ~11 artigos em 90 dias | <strong style="color:var(--yellow)">CTA:</strong> Quiz ou Roteiro PDF | <strong style="color:var(--yellow)">Ex:</strong> "10 apps que todo viajante precisa"</p>
+            </div>
+            <div class="card">
+                <div class="card-tag tag-experiencia">Pilar 4</div>
+                <h3>Experiencias Pessoais</h3>
+                <p>Historias reais de Marcelo &amp; Alexandra: o jantar inesquecivel, a vinicola que mudou tudo, a viagem com as filhas. Gera conexao emocional e autoridade.</p>
+                <p style="margin-top:16px;font-size:12px;color:var(--dim)"><strong style="color:var(--purple)">Formato:</strong> Standard (1.000-2.000 palavras) | <strong style="color:var(--purple)">Freq:</strong> ~9 artigos em 90 dias | <strong style="color:var(--purple)">CTA:</strong> Escapada Romantica ou Travel Club | <strong style="color:var(--purple)">Ex:</strong> "O dia que nos perdemos na Croacia"</p>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- TAB: KEYWORDS -->
+<div class="tab-content" id="tab-keywords">
+<section class="section">
+    <div class="container">
+        <div class="section-label">Estrategia SEO</div>
+        <h2>Mapa de <em>60 Keywords</em></h2>
+        <p>Keywords organizadas por volume estimado, competicao, artigo alvo e prioridade. Use os filtros pra encontrar rapidamente.</p>
+        <div class="filter-bar">
+            <label>Filtrar:</label>
+            <button class="filter-btn active" onclick="filterKeywords('all',this)">Todas</button>
+            <button class="filter-btn" onclick="filterKeywords('high',this)">Alta Prioridade</button>
+            <button class="filter-btn" onclick="filterKeywords('med',this)">Media</button>
+            <button class="filter-btn" onclick="filterKeywords('low',this)">Baixa</button>
+            <button class="filter-btn" onclick="filterKeywords('roteiro',this)">Roteiros</button>
+            <button class="filter-btn" onclick="filterKeywords('guia',this)">Guias</button>
+            <button class="filter-btn" onclick="filterKeywords('dica',this)">Dicas</button>
+            <button class="filter-btn" onclick="filterKeywords('experiencia',this)">Experiencias</button>
+            <input type="text" class="search-input" placeholder="Buscar keyword..." oninput="searchKeywords(this.value)">
+        </div>
+        <div class="kw-table-wrap">
+            <table class="kw-table" id="kwTable">
+                <thead>
+                    <tr><th>#</th><th>Keyword</th><th>Volume Est.</th><th>Competicao</th><th>Pilar</th><th>Artigo Alvo</th><th>Prioridade</th></tr>
+                </thead>
+                <tbody id="kwBody"></tbody>
+            </table>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- TAB: CALENDARIO -->
+<div class="tab-content" id="tab-calendario">
+<section class="section">
+    <div class="container">
+        <div class="section-label">Calendario editorial</div>
+        <h2>90 dias de <em>conteudo planejado</em></h2>
+        <p>1 artigo a cada 2 dias. 45 artigos em 90 dias. Comeca em 01/04/2026 e vai ate 30/06/2026.</p>
+        <div class="filter-bar" style="margin-bottom:24px">
+            <label>Filtrar por pilar:</label>
+            <button class="filter-btn active" onclick="filterCalendar('all',this)">Todos</button>
+            <button class="filter-btn" onclick="filterCalendar('roteiro',this)">Roteiros</button>
+            <button class="filter-btn" onclick="filterCalendar('guia',this)">Guias</button>
+            <button class="filter-btn" onclick="filterCalendar('dica',this)">Dicas</button>
+            <button class="filter-btn" onclick="filterCalendar('experiencia',this)">Experiencias</button>
+        </div>
+        <div id="calendarContainer"></div>
+    </div>
+</section>
+</div>
+
+<!-- TAB: TEMPLATE -->
+<div class="tab-content" id="tab-template">
+<section class="section">
+    <div class="container">
+        <div class="section-label">Template padrao</div>
+        <h2>Estrutura de <em>cada artigo</em></h2>
+        <p>Use este template como base para todos os artigos do blog. Adapte conforme o pilar e tamanho do post.</p>
+
+        <div class="template-block">
+            <h3>Estrutura HTML do Artigo</h3>
+            <button class="copy-btn" onclick="copyTemplate(this,'htmlTemplate')">Copiar</button>
+            <pre class="template-code" id="htmlTemplate">&lt;!-- HEAD --&gt;
+&lt;title&gt;[KEYWORD PRINCIPAL] + [MODIFICADOR] | Rotta Curadoria&lt;/title&gt;
+&lt;meta name="description" content="[DESCRICAO 150-160 CHARS COM KEYWORD]"&gt;
+&lt;link rel="canonical" href="https://rottacuradoria.com.br/blog-[SLUG]"&gt;
+
+&lt;!-- OG TAGS --&gt;
+&lt;meta property="og:title" content="[TITULO DO ARTIGO]"&gt;
+&lt;meta property="og:description" content="[DESCRICAO CURTA]"&gt;
+&lt;meta property="og:type" content="article"&gt;
+&lt;meta property="og:url" content="https://rottacuradoria.com.br/blog-[SLUG]"&gt;
+&lt;meta property="article:published_time" content="[YYYY-MM-DD]"&gt;
+&lt;meta property="article:author" content="Marcelo &amp; Alexandra"&gt;
+
+&lt;!-- SCHEMA.ORG --&gt;
+&lt;script type="application/ld+json"&gt;
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "[TITULO]",
+    "description": "[DESCRICAO]",
+    "author": {
+        "@type": "Organization",
+        "name": "Rotta Curadoria",
+        "url": "https://rottacuradoria.com.br"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Rotta Curadoria",
+        "url": "https://rottacuradoria.com.br"
+    },
+    "datePublished": "[YYYY-MM-DD]",
+    "dateModified": "[YYYY-MM-DD]",
+    "mainEntityOfPage": "https://rottacuradoria.com.br/blog-[SLUG]",
+    "image": "https://rottacuradoria.com.br/img/[SLUG]-cover.jpg"
+}
+&lt;/script&gt;</pre>
+        </div>
+
+        <div class="template-block">
+            <h3>Estrutura do Conteudo</h3>
+            <button class="copy-btn" onclick="copyTemplate(this,'contentTemplate')">Copiar</button>
+            <pre class="template-code" id="contentTemplate">== ESTRUTURA PADRAO DE ARTIGO ==
+
+H1: [Keyword principal + modificador emocional]
+    Exemplo: "O que fazer em Mendoza em 5 dias: roteiro completo pra casais"
+
+INTRO (150-200 palavras):
+    - Hook emocional (pergunta ou cenario)
+    - O que o leitor vai aprender
+    - Tempo estimado de leitura
+    - Selo "Por Marcelo &amp; Alexandra"
+
+SUMARIO / INDICE:
+    - Links ancoras pra cada H2
+    - Facilita navegacao e gera featured snippets
+
+H2: [Secao principal 1 — com keyword secundaria]
+    H3: [Subsecao com long-tail keyword]
+    H3: [Subsecao pratica]
+
+    &gt;&gt;&gt; CTA MEIO DO ARTIGO &lt;&lt;&lt;
+    "Quer um roteiro personalizado? Faca nosso quiz de 2 minutos"
+    [Link pro quiz.html]
+
+H2: [Secao principal 2]
+    H3: [Subsecao]
+    H3: [Subsecao]
+
+    &gt;&gt;&gt; LINK INTERNO &lt;&lt;&lt;
+    "Leia tambem: [titulo de artigo relacionado]"
+
+H2: [Secao principal 3]
+    - Incluir dados concretos (precos, datas, distancias)
+    - Citar experiencia pessoal de Marcelo &amp; Alexandra
+
+H2: Perguntas Frequentes (FAQ)
+    - 5 a 8 perguntas com respostas curtas
+    - Usar Schema FAQPage pra featured snippets
+    - Cada resposta: 40-60 palavras
+
+    &lt;script type="application/ld+json"&gt;
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "[PERGUNTA]",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "[RESPOSTA]"
+                }
+            }
+        ]
+    }
+    &lt;/script&gt;
+
+H2: Conclusao
+    - Resumo em 3 bullets
+    - Frase emocional final
+
+    &gt;&gt;&gt; CTA FINAL &lt;&lt;&lt;
+    "Pronto pra transformar esse sonho em realidade?
+    Fale com a gente no WhatsApp — sem compromisso."
+    [Botao WhatsApp: wa.me/5511968152123]
+
+== REGRAS GERAIS ==
+- Minimo 3 links internos por artigo
+- Minimo 1 link pra produto (Roteiro Express, Escapada, etc.)
+- Minimo 1 link pro quiz
+- Imagens com alt text contendo keyword
+- URL amigavel: blog-[destino]-[tema].html
+- Paragrafos curtos (max 3-4 linhas)
+- Listas e bullets sempre que possivel
+- Negrito nas frases mais importantes
+- Tom: conversa entre amigos viajantes</pre>
+        </div>
+
+        <div class="template-block">
+            <h3>Convencao de Nomes dos Arquivos</h3>
+            <button class="copy-btn" onclick="copyTemplate(this,'namingTemplate')">Copiar</button>
+            <pre class="template-code" id="namingTemplate">== PADRAO DE NOMES ==
+
+Roteiros:    blog-[destino]-[X]-dias.html
+             blog-mendoza-5-dias.html
+             blog-roma-florenca-7-dias.html
+
+Guias:       blog-quanto-custa-[destino].html
+             blog-guia-completo-[destino].html
+             blog-melhor-epoca-[destino].html
+
+Dicas:       blog-[tema]-viagem.html
+             blog-apps-essenciais-viagem.html
+             blog-mala-europa-inverno.html
+
+Experiencias: blog-[historia]-[destino].html
+              blog-dia-inesquecivel-toscana.html
+              blog-pedido-casamento-paris.html
+
+== URL CANONICA ==
+https://rottacuradoria.com.br/blog-[slug]</pre>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- TAB: AUTOMACAO -->
+<div class="tab-content" id="tab-automacao">
+<section class="section">
+    <div class="container">
+        <div class="section-label">Pipeline de producao</div>
+        <h2>Automacao <em>semi-assistida</em></h2>
+        <p>6 etapas pra produzir 1 artigo a cada 2 dias de forma sustentavel. Tempo total estimado: 45 a 90 minutos por artigo.</p>
+
+        <div class="pipeline">
+            <div class="pipe-step"><div class="step-num">1</div><h4>Pesquisa</h4><p>Identificar topicos trending em blogs internacionais. 15 min.</p></div>
+            <div class="pipe-step"><div class="step-num">2</div><h4>Brief</h4><p>IA gera outline com H2/H3, keywords e estrutura. 5 min.</p></div>
+            <div class="pipe-step"><div class="step-num">3</div><h4>Rascunho</h4><p>IA escreve draft seguindo o template padrao. 10 min.</p></div>
+            <div class="pipe-step"><div class="step-num">4</div><h4>Revisao</h4><p>Marcelo/Alexandra adicionam toque pessoal e historias reais. 15 min.</p></div>
+            <div class="pipe-step"><div class="step-num">5</div><h4>SEO Check</h4><p>Rodar checklist SEO, verificar links, meta tags, Schema. 5 min.</p></div>
+            <div class="pipe-step"><div class="step-num">6</div><h4>Publicacao</h4><p>Publicar, compartilhar Stories, agendar email e Pinterest. 10 min.</p></div>
+        </div>
+
+        <h3 style="font-family:'Playfair Display',serif;font-size:22px;margin:40px 0 20px;color:var(--gold)">Detalhamento por Etapa</h3>
+
+        <div class="template-block">
+            <h3>Etapa 1 — Pesquisa de Topicos</h3>
+            <p style="font-size:14px;color:var(--muted);margin-bottom:16px">Consultar blogs internacionais de referencia pra identificar temas em alta, angulos diferentes e dados atualizados. Verificar o que esta rankeando no Google BR.</p>
+            <h4 style="font-size:14px;color:var(--gold);margin-bottom:12px">20 Fontes de Referencia:</h4>
+            <div class="sources-grid">
+                <div class="source-item"><span class="source-num">01</span><div class="source-info"><div class="source-name">Nomadic Matt</div><div class="source-desc">Orcamentos reais, roteiros budget a premium</div></div></div>
+                <div class="source-item"><span class="source-num">02</span><div class="source-info"><div class="source-name">The Blonde Abroad</div><div class="source-desc">Viagens femininas, fotos, experiencias</div></div></div>
+                <div class="source-item"><span class="source-num">03</span><div class="source-info"><div class="source-name">Lonely Planet</div><div class="source-desc">Guias de destino, tendencias, dados</div></div></div>
+                <div class="source-item"><span class="source-num">04</span><div class="source-info"><div class="source-name">The Points Guy</div><div class="source-desc">Milhas, classes executivas, hacks</div></div></div>
+                <div class="source-item"><span class="source-num">05</span><div class="source-info"><div class="source-name">Hand Luggage Only</div><div class="source-desc">Destinos europeus, fotos, dicas praticas</div></div></div>
+                <div class="source-item"><span class="source-num">06</span><div class="source-info"><div class="source-name">Adventurous Kate</div><div class="source-desc">Solo travel, seguranca, destinos alternativos</div></div></div>
+                <div class="source-item"><span class="source-num">07</span><div class="source-info"><div class="source-name">Rick Steves</div><div class="source-desc">Europa profunda, cultura local, dicas de insider</div></div></div>
+                <div class="source-item"><span class="source-num">08</span><div class="source-info"><div class="source-name">Mochileiros.com</div><div class="source-desc">Referencia BR, orcamentos em real</div></div></div>
+                <div class="source-item"><span class="source-num">09</span><div class="source-info"><div class="source-name">360meridianos</div><div class="source-desc">Roteiros detalhados, referencia BR</div></div></div>
+                <div class="source-item"><span class="source-num">10</span><div class="source-info"><div class="source-name">Viaje na Viagem</div><div class="source-desc">Dicas praticas, hoteis, referencia BR</div></div></div>
+                <div class="source-item"><span class="source-num">11</span><div class="source-info"><div class="source-name">Conde Nast Traveler</div><div class="source-desc">Viagens premium, hoteis de luxo, listas</div></div></div>
+                <div class="source-item"><span class="source-num">12</span><div class="source-info"><div class="source-name">Travel + Leisure</div><div class="source-desc">Tendencias, melhores destinos, premium</div></div></div>
+                <div class="source-item"><span class="source-num">13</span><div class="source-info"><div class="source-name">AFAR Magazine</div><div class="source-desc">Viagens experienciais, cultura, off-beat</div></div></div>
+                <div class="source-item"><span class="source-num">14</span><div class="source-info"><div class="source-name">Expert Vagabond</div><div class="source-desc">Aventura, dicas praticas, fotografia</div></div></div>
+                <div class="source-item"><span class="source-num">15</span><div class="source-info"><div class="source-name">Fodors Travel</div><div class="source-desc">Guias detalhados, dicas locais</div></div></div>
+                <div class="source-item"><span class="source-num">16</span><div class="source-info"><div class="source-name">Mapping Megan</div><div class="source-desc">Casais viajantes, dicas de casal</div></div></div>
+                <div class="source-item"><span class="source-num">17</span><div class="source-info"><div class="source-name">Y Travel Blog</div><div class="source-desc">Viagens em familia, experiencias</div></div></div>
+                <div class="source-item"><span class="source-num">18</span><div class="source-info"><div class="source-name">Wanderlust Magazine</div><div class="source-desc">Destinos incomuns, cultura, aventura</div></div></div>
+                <div class="source-item"><span class="source-num">19</span><div class="source-info"><div class="source-name">Culture Trip</div><div class="source-desc">Cultura local, gastronomia, experiencias</div></div></div>
+                <div class="source-item"><span class="source-num">20</span><div class="source-info"><div class="source-name">Skyscanner Blog</div><div class="source-desc">Dados de precos, tendencias de busca</div></div></div>
+            </div>
+        </div>
+
+        <div class="template-block">
+            <h3>Etapa 2 — Brief com IA</h3>
+            <button class="copy-btn" onclick="copyTemplate(this,'briefPrompt')">Copiar Prompt</button>
+            <pre class="template-code" id="briefPrompt">== PROMPT PARA GERAR BRIEF DO ARTIGO ==
+
+Voce e o editor de conteudo do blog "Diario de Bordo" da Rotta Curadoria,
+um negocio de curadoria de viagens premium de Marcelo &amp; Alexandra.
+
+Crie um brief completo para o artigo:
+TITULO: [inserir titulo]
+KEYWORD PRINCIPAL: [inserir keyword]
+PILAR: [Roteiro / Guia / Dica / Experiencia]
+TAMANHO: [800 / 1500 / 2500 palavras]
+
+O brief deve conter:
+1. Outline com H1, H2s e H3s (incluir keywords secundarias)
+2. 3 keywords secundarias a incluir
+3. 5 perguntas pro FAQ
+4. 3 links internos sugeridos (outros artigos e produtos)
+5. Sugestao de CTA meio e CTA final
+6. Tom: conversa entre amigos viajantes, acessivel, premium
+7. Angulo unico: o que diferencia este artigo de outros sobre o tema
+
+REGRAS:
+- Sem jargao tecnico de turismo
+- Incluir dados concretos (precos em R$, distancias, tempos)
+- Mencionar experiencia pessoal de Marcelo &amp; Alexandra quando possivel
+- Manter tom premium mas acessivel</pre>
+        </div>
+
+        <div class="template-block">
+            <h3>Etapa 3 — Rascunho com IA</h3>
+            <button class="copy-btn" onclick="copyTemplate(this,'draftPrompt')">Copiar Prompt</button>
+            <pre class="template-code" id="draftPrompt">== PROMPT PARA GERAR RASCUNHO ==
+
+Com base neste brief, escreva o artigo completo:
+[COLAR BRIEF AQUI]
+
+REGRAS DE ESCRITA:
+- Tom: casal de amigos contando sobre a viagem num jantar
+- Paragrafos curtos (max 3-4 linhas)
+- Usar listas e bullets sempre que possivel
+- Negrito nas frases mais importantes
+- Incluir dicas pessoais marcadas com "Dica do Marcelo:" ou "Dica da Alexandra:"
+- Precos sempre em R$ (valores de 2026)
+- Incluir tempo estimado de leitura no inicio
+- Incluir FAQPage Schema no final
+- Gerar meta description (150-160 caracteres)
+- Gerar og:title e og:description
+- Nomear o arquivo como: blog-[slug].html
+
+FORMATO DE ENTREGA:
+Entregar o HTML completo do artigo, seguindo o template padrao
+do blog (mesma estrutura dos artigos existentes em rottacuradoria.com.br),
+incluindo: head com SEO, Schema.org, OG tags, nav, conteudo, CTAs e footer.</pre>
+        </div>
+
+        <div class="template-block">
+            <h3>Etapa 4 — Revisao Humana</h3>
+            <p style="font-size:14px;color:var(--muted);line-height:1.7">
+                <strong style="color:var(--text)">O que Marcelo &amp; Alexandra devem revisar:</strong><br><br>
+                1. <strong>Precisao:</strong> Os precos, datas e informacoes estao corretos?<br>
+                2. <strong>Toque pessoal:</strong> Adicionar pelo menos 1 historia real ou opiniao pessoal<br>
+                3. <strong>Tom:</strong> Parece conversa entre amigos ou texto robotico?<br>
+                4. <strong>CTAs:</strong> Os links pros produtos fazem sentido no contexto?<br>
+                5. <strong>Titulo:</strong> Voce clicaria nesse titulo?<br>
+                6. <strong>FAQ:</strong> As perguntas sao reais (coisas que seguidores perguntam)?<br><br>
+                <strong style="color:var(--gold)">Tempo estimado: 15 minutos por artigo</strong>
+            </p>
+        </div>
+
+        <div class="template-block">
+            <h3>Etapa 5 &amp; 6 — SEO Check + Publicacao</h3>
+            <p style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:16px">
+                Ver a aba "SEO Checklist" para a lista completa de verificacao antes de publicar.
+            </p>
+            <h4 style="font-size:14px;color:var(--gold);margin-bottom:12px">Distribuicao pos-publicacao:</h4>
+            <p style="font-size:14px;color:var(--muted);line-height:2">
+                <span style="color:var(--gold)">1.</span> <strong>Instagram Stories:</strong> 3 stories com swipe-up pro artigo (usar template Canva)<br>
+                <span style="color:var(--gold)">2.</span> <strong>Email Newsletter (Brevo):</strong> Enviar pra lista com teaser do artigo + link<br>
+                <span style="color:var(--gold)">3.</span> <strong>Pinterest:</strong> Criar pin vertical (1000x1500px) com titulo + link<br>
+                <span style="color:var(--gold)">4.</span> <strong>Instagram Feed:</strong> Se for artigo long-form, transformar em carrossel resumo<br>
+                <span style="color:var(--gold)">5.</span> <strong>ManyChat:</strong> Adicionar keyword do destino pra entregar link do artigo automaticamente
+            </p>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- TAB: LINKING -->
+<div class="tab-content" id="tab-linking">
+<section class="section">
+    <div class="container">
+        <div class="section-label">Estrategia de links</div>
+        <h2>Mapa de <em>links internos</em></h2>
+        <p>Como cada tipo de artigo deve se conectar com produtos, outros artigos e paginas de conversao.</p>
+        <div class="link-map">
+            <div class="link-node">
+                <h4>Roteiros Praticos</h4>
+                <ul>
+                    <li><span class="link-arrow">-&gt;</span> produto-roteiro-express.html</li>
+                    <li><span class="link-arrow">-&gt;</span> produto-curadoria-completa.html</li>
+                    <li><span class="link-arrow">-&gt;</span> quiz.html (CTA meio do artigo)</li>
+                    <li><span class="link-arrow">-&gt;</span> Guia do mesmo destino</li>
+                    <li><span class="link-arrow">-&gt;</span> Experiencia pessoal do mesmo destino</li>
+                    <li><span class="link-arrow">-&gt;</span> Jornada do destino (jornada-*.html)</li>
+                </ul>
+            </div>
+            <div class="link-node">
+                <h4>Guias de Destino</h4>
+                <ul>
+                    <li><span class="link-arrow">-&gt;</span> produto-curadoria-completa.html</li>
+                    <li><span class="link-arrow">-&gt;</span> produto-roteiro-pdf.html</li>
+                    <li><span class="link-arrow">-&gt;</span> quiz.html</li>
+                    <li><span class="link-arrow">-&gt;</span> Roteiro pratico do mesmo destino</li>
+                    <li><span class="link-arrow">-&gt;</span> Blog "quanto custa" do destino</li>
+                    <li><span class="link-arrow">-&gt;</span> Artigos de dicas relacionadas</li>
+                </ul>
+            </div>
+            <div class="link-node">
+                <h4>Dicas de Viagem</h4>
+                <ul>
+                    <li><span class="link-arrow">-&gt;</span> produto-roteiro-pdf.html</li>
+                    <li><span class="link-arrow">-&gt;</span> quiz.html</li>
+                    <li><span class="link-arrow">-&gt;</span> Guias de destinos mencionados</li>
+                    <li><span class="link-arrow">-&gt;</span> Outros artigos de dicas (cluster)</li>
+                    <li><span class="link-arrow">-&gt;</span> blog.html (hub do blog)</li>
+                </ul>
+            </div>
+            <div class="link-node">
+                <h4>Experiencias Pessoais</h4>
+                <ul>
+                    <li><span class="link-arrow">-&gt;</span> produto-escapada-romantica.html</li>
+                    <li><span class="link-arrow">-&gt;</span> produto-travel-club.html</li>
+                    <li><span class="link-arrow">-&gt;</span> sobre.html</li>
+                    <li><span class="link-arrow">-&gt;</span> Roteiro do destino mencionado</li>
+                    <li><span class="link-arrow">-&gt;</span> Guia do destino mencionado</li>
+                    <li><span class="link-arrow">-&gt;</span> WhatsApp CTA</li>
+                </ul>
+            </div>
+            <div class="link-node">
+                <h4>Paginas de Produto</h4>
+                <ul>
+                    <li><span class="link-arrow">-&gt;</span> Artigos relacionados ao tipo de viagem</li>
+                    <li><span class="link-arrow">-&gt;</span> Depoimentos / experiencias</li>
+                    <li><span class="link-arrow">-&gt;</span> quiz.html</li>
+                    <li><span class="link-arrow">-&gt;</span> WhatsApp</li>
+                </ul>
+            </div>
+            <div class="link-node">
+                <h4>Pagina do Quiz</h4>
+                <ul>
+                    <li><span class="link-arrow">-&gt;</span> Resultado: produto recomendado</li>
+                    <li><span class="link-arrow">-&gt;</span> Blog posts do destino recomendado</li>
+                    <li><span class="link-arrow">-&gt;</span> WhatsApp com contexto</li>
+                    <li><span class="link-arrow">-&gt;</span> Jornada do destino</li>
+                </ul>
+            </div>
+        </div>
+        <div class="template-block" style="margin-top:32px">
+            <h3>Regras de Linkagem</h3>
+            <p style="font-size:14px;color:var(--muted);line-height:2">
+                <strong style="color:var(--text)">Minimo 3 links internos</strong> por artigo (outros artigos + produtos)<br>
+                <strong style="color:var(--text)">Minimo 1 link pra produto</strong> relevante ao tema do artigo<br>
+                <strong style="color:var(--text)">Minimo 1 CTA pro quiz</strong> no meio ou final do artigo<br>
+                <strong style="color:var(--text)">Anchor text natural</strong> — nunca "clique aqui", sempre descritivo<br>
+                <strong style="color:var(--text)">Artigos novos devem linkar pra artigos antigos</strong> e vice-versa (atualizar antigos)<br>
+                <strong style="color:var(--text)">Cluster por destino:</strong> todos os artigos de um mesmo destino devem se interligar
+            </p>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- TAB: METRICAS -->
+<div class="tab-content" id="tab-metricas">
+<section class="section">
+    <div class="container">
+        <div class="section-label">Performance</div>
+        <h2>O que <em>acompanhar</em></h2>
+        <p>Metricas essenciais pra medir o sucesso do blog. Revisar semanalmente.</p>
+        <div class="metrics-grid">
+            <div class="metric-card"><h4>Trafego Organico</h4><p>Sessoes vindas do Google por artigo</p><div class="metric-target">500/mes</div><div class="metric-sub">Meta por artigo apos 90 dias</div></div>
+            <div class="metric-card"><h4>Tempo na Pagina</h4><p>Quanto tempo o leitor fica no artigo</p><div class="metric-target">&gt;3 min</div><div class="metric-sub">Media ideal por artigo</div></div>
+            <div class="metric-card"><h4>Bounce Rate</h4><p>% que sai sem interagir</p><div class="metric-target">&lt;60%</div><div class="metric-sub">Meta maxima aceitavel</div></div>
+            <div class="metric-card"><h4>Conversao Quiz</h4><p>% de leitores que clicam no quiz</p><div class="metric-target">5%</div><div class="metric-sub">Meta de conversao CTA</div></div>
+            <div class="metric-card"><h4>Conversao WhatsApp</h4><p>% que clica no botao WhatsApp</p><div class="metric-target">2%</div><div class="metric-sub">Meta de conversao CTA final</div></div>
+            <div class="metric-card"><h4>Keywords Top 10</h4><p>Quantas keywords na primeira pagina</p><div class="metric-target">15</div><div class="metric-sub">Meta apos 90 dias</div></div>
+            <div class="metric-card"><h4>Artigos Publicados</h4><p>Total de artigos no blog</p><div class="metric-target">48</div><div class="metric-sub">3 existentes + 45 novos</div></div>
+            <div class="metric-card"><h4>Pages/Session</h4><p>Quantas paginas o leitor visita</p><div class="metric-target">&gt;2.0</div><div class="metric-sub">Indica boa linkagem interna</div></div>
+        </div>
+        <div class="template-block" style="margin-top:32px">
+            <h3>Ferramentas de Acompanhamento</h3>
+            <p style="font-size:14px;color:var(--muted);line-height:2">
+                <strong style="color:var(--gold)">Google Analytics 4</strong> — Trafego, tempo na pagina, bounce rate, conversoes<br>
+                <strong style="color:var(--gold)">Google Search Console</strong> — Keywords rankeando, impressoes, CTR, posicao media<br>
+                <strong style="color:var(--gold)">Ubersuggest (gratis)</strong> — Pesquisa de keywords, volume de busca, competicao<br>
+                <strong style="color:var(--gold)">Google Sheets</strong> — Planilha de tracking semanal com dados de cada artigo
+            </p>
+        </div>
+    </div>
+</section>
+</div>
+
+<!-- TAB: CHECKLIST -->
+<div class="tab-content" id="tab-checklist">
+<section class="section">
+    <div class="container">
+        <div class="section-label">Antes de publicar</div>
+        <h2>SEO <em>Checklist</em></h2>
+        <p>Verificar todos os itens antes de colocar o artigo no ar. Clique pra marcar como feito.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:24px">
+            <div class="template-block">
+                <h3>On-Page SEO</h3>
+                <ul class="checklist">
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Keyword principal no H1</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Keyword principal na URL (slug)</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Keyword nos primeiros 100 caracteres do texto</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Keyword na meta description</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Keyword no og:title</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Keywords secundarias nos H2s</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Meta description entre 150-160 caracteres</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Title tag com menos de 60 caracteres</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>URL amigavel (sem acentos, sem underscores)</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Canonical tag apontando pra URL correta</li>
+                </ul>
+            </div>
+            <div class="template-block">
+                <h3>Conteudo</h3>
+                <ul class="checklist">
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Hierarquia H1 &gt; H2 &gt; H3 correta</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Apenas 1 H1 por pagina</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Paragrafos curtos (max 4 linhas)</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Listas/bullets quando possivel</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Negrito nas frases-chave</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Sumario/indice com links ancoras</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Secao FAQ com 5-8 perguntas</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Tempo estimado de leitura no inicio</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Toque pessoal de Marcelo ou Alexandra</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Dados concretos (precos, datas, distancias)</li>
+                </ul>
+            </div>
+            <div class="template-block">
+                <h3>Tecnico</h3>
+                <ul class="checklist">
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Schema.org Article JSON-LD</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Schema.org FAQPage JSON-LD</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Open Graph tags completas</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Tag lang="pt-BR" no HTML</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Viewport meta tag</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Imagens com alt text descritivo</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Pagina responsiva (testar mobile)</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Velocidade de carregamento ok</li>
+                </ul>
+            </div>
+            <div class="template-block">
+                <h3>Links &amp; CTAs</h3>
+                <ul class="checklist">
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Minimo 3 links internos</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Minimo 1 link pra produto</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Minimo 1 CTA pro quiz</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>CTA no meio do artigo</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>CTA no final do artigo</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Botao WhatsApp funcionando</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Todos os links internos funcionando</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Link "Leia tambem" pra artigo relacionado</li>
+                </ul>
+            </div>
+            <div class="template-block">
+                <h3>Distribuicao</h3>
+                <ul class="checklist">
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>3 Stories do Instagram agendados</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Email newsletter agendado (Brevo)</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Pin do Pinterest criado (1000x1500px)</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Keyword adicionada no ManyChat</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Artigo adicionado na pagina blog.html</li>
+                    <li><span class="check-box" onclick="toggleCheck(this)"></span>Sitemap atualizado (se aplicavel)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+<footer>
+    <div class="brand">Rotta Curadoria</div>
+    <div class="tagline">Documento interno — Estrategia de Blog &amp; Automacao</div>
+</footer>
+
+<script>
+// ========================================
+// KEYWORD DATA (60 keywords)
+// ========================================
+var keywords = [
+    {kw:"quanto custa viajar pra italia",vol:"8.100",comp:"med",pilar:"guia",artigo:"blog-quanto-custa-italia.html",priority:"high"},
+    {kw:"roteiro mendoza 5 dias",vol:"3.600",comp:"low",pilar:"roteiro",artigo:"blog-mendoza-5-dias.html",priority:"high"},
+    {kw:"o que fazer na croacia",vol:"5.400",comp:"med",pilar:"guia",artigo:"blog-croacia-casais.html",priority:"high"},
+    {kw:"quanto custa viajar pra croacia",vol:"2.900",comp:"low",pilar:"guia",artigo:"blog-quanto-custa-croacia.html",priority:"high"},
+    {kw:"roteiro italia 14 dias",vol:"4.800",comp:"med",pilar:"roteiro",artigo:"blog-roteiro-italia-14-dias.html",priority:"high"},
+    {kw:"roteiro croacia 7 dias",vol:"2.400",comp:"low",pilar:"roteiro",artigo:"blog-roteiro-croacia-7-dias.html",priority:"high"},
+    {kw:"melhor epoca pra ir pra italia",vol:"6.600",comp:"med",pilar:"guia",artigo:"blog-melhor-epoca-italia.html",priority:"high"},
+    {kw:"viagem romantica europa",vol:"3.200",comp:"med",pilar:"roteiro",artigo:"blog-viagem-romantica-europa.html",priority:"high"},
+    {kw:"quanto custa viajar pra argentina",vol:"9.900",comp:"high",pilar:"guia",artigo:"blog-quanto-custa-argentina.html",priority:"high"},
+    {kw:"o que fazer em mendoza",vol:"6.600",comp:"med",pilar:"guia",artigo:"blog-guia-completo-mendoza.html",priority:"high"},
+    {kw:"roteiro russia 10 dias",vol:"1.900",comp:"low",pilar:"roteiro",artigo:"blog-roteiro-russia-10-dias.html",priority:"high"},
+    {kw:"quanto custa viajar pros eua",vol:"12.100",comp:"high",pilar:"guia",artigo:"blog-quanto-custa-eua.html",priority:"high"},
+    {kw:"roteiro espanha 10 dias",vol:"3.600",comp:"med",pilar:"roteiro",artigo:"blog-roteiro-espanha-10-dias.html",priority:"high"},
+    {kw:"o que fazer em barcelona",vol:"14.800",comp:"high",pilar:"guia",artigo:"blog-guia-barcelona.html",priority:"high"},
+    {kw:"viagem em casal destinos",vol:"2.400",comp:"low",pilar:"guia",artigo:"blog-melhores-destinos-casais.html",priority:"high"},
+    {kw:"dicas de viagem europa",vol:"4.400",comp:"med",pilar:"dica",artigo:"blog-dicas-viagem-europa.html",priority:"med"},
+    {kw:"o que levar na mala pra europa",vol:"5.400",comp:"med",pilar:"dica",artigo:"blog-mala-europa.html",priority:"med"},
+    {kw:"apps de viagem essenciais",vol:"2.900",comp:"low",pilar:"dica",artigo:"blog-apps-viagem.html",priority:"med"},
+    {kw:"seguro viagem europa vale a pena",vol:"3.600",comp:"med",pilar:"dica",artigo:"blog-seguro-viagem-europa.html",priority:"med"},
+    {kw:"como planejar viagem internacional",vol:"3.200",comp:"med",pilar:"dica",artigo:"blog-planejar-viagem-internacional.html",priority:"med"},
+    {kw:"melhor epoca viajar croacia",vol:"1.600",comp:"low",pilar:"guia",artigo:"blog-melhor-epoca-croacia.html",priority:"med"},
+    {kw:"dicas mendoza argentina",vol:"2.400",comp:"low",pilar:"dica",artigo:"blog-dicas-mendoza.html",priority:"med"},
+    {kw:"vinicolas mendoza melhores",vol:"1.900",comp:"low",pilar:"guia",artigo:"blog-melhores-vinicolas-mendoza.html",priority:"med"},
+    {kw:"como economizar na europa",vol:"2.900",comp:"med",pilar:"dica",artigo:"blog-economizar-europa.html",priority:"med"},
+    {kw:"documentos viagem europa",vol:"3.200",comp:"low",pilar:"dica",artigo:"blog-documentos-europa.html",priority:"med"},
+    {kw:"melhor epoca viajar espanha",vol:"2.900",comp:"low",pilar:"guia",artigo:"blog-melhor-epoca-espanha.html",priority:"med"},
+    {kw:"roteiro toscana 5 dias",vol:"2.400",comp:"low",pilar:"roteiro",artigo:"blog-roteiro-toscana-5-dias.html",priority:"med"},
+    {kw:"o que fazer em dubrovnik",vol:"3.600",comp:"med",pilar:"guia",artigo:"blog-guia-dubrovnik.html",priority:"med"},
+    {kw:"viagem russia dicas",vol:"1.300",comp:"low",pilar:"dica",artigo:"blog-dicas-russia.html",priority:"med"},
+    {kw:"costa amalfitana roteiro",vol:"3.200",comp:"med",pilar:"roteiro",artigo:"blog-costa-amalfitana.html",priority:"med"},
+    {kw:"onde ficar em roma",vol:"5.400",comp:"high",pilar:"guia",artigo:"blog-onde-ficar-roma.html",priority:"med"},
+    {kw:"chip internet europa",vol:"4.400",comp:"med",pilar:"dica",artigo:"blog-chip-internet-europa.html",priority:"med"},
+    {kw:"roteiro buenos aires 4 dias",vol:"3.600",comp:"med",pilar:"roteiro",artigo:"blog-roteiro-buenos-aires-4-dias.html",priority:"med"},
+    {kw:"quanto custa viajar pra espanha",vol:"3.600",comp:"med",pilar:"guia",artigo:"blog-quanto-custa-espanha.html",priority:"med"},
+    {kw:"dolomitas italia como chegar",vol:"1.300",comp:"low",pilar:"guia",artigo:"blog-guia-dolomitas.html",priority:"med"},
+    {kw:"lago garda italia o que fazer",vol:"1.600",comp:"low",pilar:"guia",artigo:"blog-guia-lago-garda.html",priority:"low"},
+    {kw:"split croacia vale a pena",vol:"1.300",comp:"low",pilar:"guia",artigo:"blog-split-croacia.html",priority:"low"},
+    {kw:"hvar croacia como chegar",vol:"880",comp:"low",pilar:"guia",artigo:"blog-hvar-croacia.html",priority:"low"},
+    {kw:"plitvice croacia dicas",vol:"1.300",comp:"low",pilar:"guia",artigo:"blog-plitvice-croacia.html",priority:"low"},
+    {kw:"moscou sao petersburgo roteiro",vol:"1.300",comp:"low",pilar:"roteiro",artigo:"blog-moscou-sao-petersburgo.html",priority:"low"},
+    {kw:"copa do mundo 2026 como ir",vol:"1.900",comp:"med",pilar:"guia",artigo:"blog-copa-2026-eua.html",priority:"low"},
+    {kw:"viagem romantica argentina",vol:"720",comp:"low",pilar:"experiencia",artigo:"blog-romantica-argentina.html",priority:"low"},
+    {kw:"viagem com filhos europa",vol:"1.600",comp:"low",pilar:"dica",artigo:"blog-viagem-filhos-europa.html",priority:"low"},
+    {kw:"primeira viagem internacional dicas",vol:"2.400",comp:"low",pilar:"dica",artigo:"blog-primeira-viagem-internacional.html",priority:"low"},
+    {kw:"melhores restaurantes mendoza",vol:"1.300",comp:"low",pilar:"guia",artigo:"blog-restaurantes-mendoza.html",priority:"low"},
+    {kw:"pedido de casamento viagem",vol:"720",comp:"low",pilar:"experiencia",artigo:"blog-pedido-casamento-viagem.html",priority:"low"},
+    {kw:"lua de mel europa roteiro",vol:"1.900",comp:"med",pilar:"roteiro",artigo:"blog-lua-de-mel-europa.html",priority:"low"},
+    {kw:"viagem de aniversario de casamento",vol:"880",comp:"low",pilar:"experiencia",artigo:"blog-aniversario-casamento-viagem.html",priority:"low"},
+    {kw:"como fazer mala viagem longa",vol:"1.600",comp:"low",pilar:"dica",artigo:"blog-mala-viagem-longa.html",priority:"low"},
+    {kw:"transiberiana rota",vol:"720",comp:"low",pilar:"roteiro",artigo:"blog-transiberiana.html",priority:"low"},
+    {kw:"cinque terre roteiro 2 dias",vol:"1.300",comp:"low",pilar:"roteiro",artigo:"blog-cinque-terre-2-dias.html",priority:"low"},
+    {kw:"nova york roteiro 5 dias",vol:"5.400",comp:"high",pilar:"roteiro",artigo:"blog-nova-york-5-dias.html",priority:"low"},
+    {kw:"miami orlando roteiro",vol:"4.400",comp:"high",pilar:"roteiro",artigo:"blog-miami-orlando.html",priority:"low"},
+    {kw:"o que fazer em madrid",vol:"8.100",comp:"high",pilar:"guia",artigo:"blog-guia-madrid.html",priority:"low"},
+    {kw:"granada espanha roteiro",vol:"1.600",comp:"low",pilar:"roteiro",artigo:"blog-granada-espanha.html",priority:"low"},
+    {kw:"vinhos mendoza quais provar",vol:"590",comp:"low",pilar:"experiencia",artigo:"blog-vinhos-mendoza.html",priority:"low"},
+    {kw:"jantar romantico roma",vol:"880",comp:"low",pilar:"experiencia",artigo:"blog-jantar-romantico-roma.html",priority:"low"},
+    {kw:"trem na europa como funciona",vol:"2.900",comp:"med",pilar:"dica",artigo:"blog-trem-europa.html",priority:"low"},
+    {kw:"passaporte europeu como tirar",vol:"2.400",comp:"med",pilar:"dica",artigo:"blog-passaporte-europeu.html",priority:"low"},
+    {kw:"custo de vida europa viajante",vol:"1.300",comp:"low",pilar:"dica",artigo:"blog-custo-vida-europa.html",priority:"low"}
+];
+
+// ========================================
+// CALENDAR DATA (45 articles)
+// ========================================
+var calendarData = [
+    {date:"01/04",title:"Quanto custa viajar pra Croacia em 2026",kw:"quanto custa viajar pra croacia",pilar:"guia",words:"2500",links:"blog-croacia-casais.html, quiz.html"},
+    {date:"03/04",title:"10 apps que todo viajante precisa no celular",kw:"apps de viagem essenciais",pilar:"dica",words:"800",links:"blog-dicas-viagem-europa.html"},
+    {date:"05/04",title:"Roteiro Italia 14 dias: de Roma as Dolomitas",kw:"roteiro italia 14 dias",pilar:"roteiro",words:"3000",links:"blog-quanto-custa-italia.html, jornada-italia.html"},
+    {date:"07/04",title:"Melhor epoca pra ir pra Italia (mes a mes)",kw:"melhor epoca pra ir pra italia",pilar:"guia",words:"2000",links:"blog-quanto-custa-italia.html"},
+    {date:"09/04",title:"Como planejar sua primeira viagem internacional",kw:"como planejar viagem internacional",pilar:"dica",words:"1500",links:"quiz.html, blog-documentos-europa.html"},
+    {date:"11/04",title:"O dia que nos perdemos em Dubrovnik e encontramos o melhor por do sol",kw:"o que fazer em dubrovnik",pilar:"experiencia",words:"1200",links:"blog-croacia-casais.html, blog-roteiro-croacia-7-dias.html"},
+    {date:"13/04",title:"Roteiro Croacia 7 dias: Dubrovnik, Split, Hvar e Plitvice",kw:"roteiro croacia 7 dias",pilar:"roteiro",words:"2500",links:"blog-croacia-casais.html, jornada-croacia.html"},
+    {date:"15/04",title:"Documentos pra viajar pra Europa: guia atualizado 2026",kw:"documentos viagem europa",pilar:"dica",words:"1500",links:"blog-seguro-viagem-europa.html"},
+    {date:"17/04",title:"Quanto custa viajar pra Argentina: orcamento completo",kw:"quanto custa viajar pra argentina",pilar:"guia",words:"2500",links:"blog-mendoza-5-dias.html, jornada-mendoza.html"},
+    {date:"19/04",title:"Viagem romantica na Europa: 7 destinos que a gente testou",kw:"viagem romantica europa",pilar:"roteiro",words:"2000",links:"produto-escapada-romantica.html, quiz.html"},
+    {date:"21/04",title:"O que levar na mala pra Europa (sem exagero)",kw:"o que levar na mala pra europa",pilar:"dica",words:"1200",links:"blog-dicas-viagem-europa.html"},
+    {date:"23/04",title:"Guia completo de Mendoza: vinicolas, Andes e gastronomia",kw:"o que fazer em mendoza",pilar:"guia",words:"2500",links:"blog-mendoza-5-dias.html, blog-melhores-vinicolas-mendoza.html"},
+    {date:"25/04",title:"A vinicola em Mendoza que mudou nosso paladar pra sempre",kw:"vinicolas mendoza melhores",pilar:"experiencia",words:"1000",links:"blog-mendoza-5-dias.html, blog-guia-completo-mendoza.html"},
+    {date:"27/04",title:"Seguro viagem Europa: vale a pena? Qual contratar?",kw:"seguro viagem europa vale a pena",pilar:"dica",words:"1500",links:"blog-documentos-europa.html, blog-dicas-viagem-europa.html"},
+    {date:"29/04",title:"Roteiro Espanha 10 dias: Barcelona, Madrid e Granada",kw:"roteiro espanha 10 dias",pilar:"roteiro",words:"2500",links:"blog-guia-barcelona.html, blog-guia-madrid.html"},
+    {date:"01/05",title:"Melhor epoca pra viajar pra Croacia",kw:"melhor epoca viajar croacia",pilar:"guia",words:"1500",links:"blog-croacia-casais.html, blog-roteiro-croacia-7-dias.html"},
+    {date:"03/05",title:"Roteiro Toscana 5 dias: vinicolas, vilas medievais e boa comida",kw:"roteiro toscana 5 dias",pilar:"roteiro",words:"2500",links:"blog-roteiro-italia-14-dias.html, jornada-italia.html"},
+    {date:"05/05",title:"Como economizar na Europa sem perder qualidade",kw:"como economizar na europa",pilar:"dica",words:"1200",links:"blog-quanto-custa-italia.html, blog-chip-internet-europa.html"},
+    {date:"07/05",title:"Guia Barcelona: tudo que voce precisa saber antes de ir",kw:"o que fazer em barcelona",pilar:"guia",words:"3000",links:"blog-roteiro-espanha-10-dias.html"},
+    {date:"09/05",title:"As melhores vinicolas de Mendoza (testamos 15)",kw:"vinicolas mendoza melhores",pilar:"guia",words:"2000",links:"blog-mendoza-5-dias.html, blog-vinhos-mendoza.html"},
+    {date:"11/05",title:"Chip de internet na Europa: qual comprar em 2026",kw:"chip internet europa",pilar:"dica",words:"800",links:"blog-apps-viagem.html, blog-dicas-viagem-europa.html"},
+    {date:"13/05",title:"Roteiro Russia 10 dias: Moscou, Sao Petersburgo e alem",kw:"roteiro russia 10 dias",pilar:"roteiro",words:"2500",links:"jornada-russia.html"},
+    {date:"15/05",title:"Dicas de Mendoza: o que ninguem te conta",kw:"dicas mendoza argentina",pilar:"dica",words:"1200",links:"blog-mendoza-5-dias.html, blog-guia-completo-mendoza.html"},
+    {date:"17/05",title:"O jantar em Roma que a gente lembra ate hoje",kw:"jantar romantico roma",pilar:"experiencia",words:"1000",links:"blog-roteiro-italia-14-dias.html, blog-onde-ficar-roma.html"},
+    {date:"19/05",title:"Quanto custa viajar pros EUA em 2026",kw:"quanto custa viajar pros eua",pilar:"guia",words:"2500",links:"blog-copa-2026-eua.html"},
+    {date:"21/05",title:"Melhores destinos pra casais que querem algo diferente",kw:"viagem em casal destinos",pilar:"guia",words:"2000",links:"produto-escapada-romantica.html, quiz.html"},
+    {date:"23/05",title:"Dicas de viagem pra Europa: 20 coisas que a gente aprendeu na pratica",kw:"dicas de viagem europa",pilar:"dica",words:"1500",links:"blog-mala-europa.html, blog-economizar-europa.html"},
+    {date:"25/05",title:"Costa Amalfitana: roteiro de 4 dias pela costa mais bonita do mundo",kw:"costa amalfitana roteiro",pilar:"roteiro",words:"2500",links:"blog-roteiro-italia-14-dias.html, blog-quanto-custa-italia.html"},
+    {date:"27/05",title:"Onde ficar em Roma: melhores bairros e dicas de hospedagem",kw:"onde ficar em roma",pilar:"guia",words:"2000",links:"blog-roteiro-italia-14-dias.html, blog-jantar-romantico-roma.html"},
+    {date:"29/05",title:"A viagem que salvou nosso casamento (e nao foi pra Paris)",kw:"viagem romantica argentina",pilar:"experiencia",words:"1500",links:"produto-escapada-romantica.html, blog-mendoza-5-dias.html"},
+    {date:"31/05",title:"Melhor epoca pra viajar pra Espanha (mes a mes)",kw:"melhor epoca viajar espanha",pilar:"guia",words:"1500",links:"blog-roteiro-espanha-10-dias.html, blog-guia-barcelona.html"},
+    {date:"02/06",title:"Roteiro Buenos Aires 4 dias: bairros, tango e carne",kw:"roteiro buenos aires 4 dias",pilar:"roteiro",words:"2000",links:"blog-quanto-custa-argentina.html"},
+    {date:"04/06",title:"Guia das Dolomitas: como chegar, onde ficar, o que fazer",kw:"dolomitas italia como chegar",pilar:"guia",words:"2500",links:"blog-roteiro-italia-14-dias.html, blog-guia-lago-garda.html"},
+    {date:"06/06",title:"Viagem com filhos pra Europa: o que a gente aprendeu com 4 meninas",kw:"viagem com filhos europa",pilar:"experiencia",words:"1500",links:"blog-dicas-viagem-europa.html, blog-mala-europa.html"},
+    {date:"08/06",title:"Split, Croacia: vale a pena incluir no roteiro?",kw:"split croacia vale a pena",pilar:"guia",words:"1200",links:"blog-roteiro-croacia-7-dias.html, blog-hvar-croacia.html"},
+    {date:"10/06",title:"Como funciona o trem na Europa (guia pra iniciantes)",kw:"trem na europa como funciona",pilar:"dica",words:"1500",links:"blog-dicas-viagem-europa.html, blog-economizar-europa.html"},
+    {date:"12/06",title:"Lago Garda: o segredo mais bonito do norte da Italia",kw:"lago garda italia o que fazer",pilar:"guia",words:"1500",links:"blog-guia-dolomitas.html, blog-roteiro-italia-14-dias.html"},
+    {date:"14/06",title:"Pedido de casamento em viagem: como planejar o momento perfeito",kw:"pedido de casamento viagem",pilar:"experiencia",words:"1200",links:"produto-rotta-surprise.html"},
+    {date:"16/06",title:"Quanto custa viajar pra Espanha em 2026",kw:"quanto custa viajar pra espanha",pilar:"guia",words:"2000",links:"blog-roteiro-espanha-10-dias.html"},
+    {date:"18/06",title:"Copa do Mundo 2026: como ir pros jogos nos EUA",kw:"copa do mundo 2026 como ir",pilar:"guia",words:"2500",links:"blog-quanto-custa-eua.html"},
+    {date:"20/06",title:"Lagos Plitvice na Croacia: tudo que voce precisa saber",kw:"plitvice croacia dicas",pilar:"guia",words:"1500",links:"blog-roteiro-croacia-7-dias.html"},
+    {date:"22/06",title:"Os melhores restaurantes de Mendoza (testamos 20+)",kw:"melhores restaurantes mendoza",pilar:"guia",words:"1500",links:"blog-guia-completo-mendoza.html, blog-vinhos-mendoza.html"},
+    {date:"24/06",title:"Lua de mel na Europa: roteiro de 15 dias pra casais",kw:"lua de mel europa roteiro",pilar:"roteiro",words:"3000",links:"produto-escapada-romantica.html, quiz.html"},
+    {date:"26/06",title:"Dicas pra viajar pra Russia em 2026",kw:"viagem russia dicas",pilar:"dica",words:"1200",links:"blog-roteiro-russia-10-dias.html, jornada-russia.html"},
+    {date:"28/06",title:"Como a gente transforma uma viagem em memoria (nosso metodo)",kw:"viagem de aniversario de casamento",pilar:"experiencia",words:"1500",links:"produto-curadoria-completa.html, sobre.html"}
+];
+
+// ========================================
+// RENDER KEYWORD TABLE (safe DOM methods)
+// ========================================
+function renderKeywords(data){
+    var tbody = document.getElementById('kwBody');
+    while(tbody.firstChild) tbody.removeChild(tbody.firstChild);
+
+    for(var i = 0; i < data.length; i++){
+        var k = data[i];
+        var compClass = k.comp === 'low' ? 'comp-low' : k.comp === 'med' ? 'comp-med' : 'comp-high';
+        var compLabel = k.comp === 'low' ? 'Baixa' : k.comp === 'med' ? 'Media' : 'Alta';
+        var prioClass = k.priority === 'high' ? 'priority-high' : k.priority === 'med' ? 'priority-med' : 'priority-low';
+        var prioLabel = k.priority === 'high' ? 'ALTA' : k.priority === 'med' ? 'MEDIA' : 'BAIXA';
+        var pilarClass = k.pilar === 'roteiro' ? 'tag-roteiro' : k.pilar === 'guia' ? 'tag-guia' : k.pilar === 'dica' ? 'tag-dica' : 'tag-experiencia';
+        var pilarLabel = k.pilar.charAt(0).toUpperCase() + k.pilar.slice(1);
+
+        var tr = document.createElement('tr');
+        tr.dataset.priority = k.priority;
+        tr.dataset.pilar = k.pilar;
+        tr.dataset.kw = k.kw.toLowerCase();
+
+        var td1 = document.createElement('td');
+        td1.style.color = 'var(--dim)';
+        td1.textContent = String(i + 1);
+        tr.appendChild(td1);
+
+        var td2 = document.createElement('td');
+        var strong2 = document.createElement('strong');
+        strong2.textContent = k.kw;
+        td2.appendChild(strong2);
+        tr.appendChild(td2);
+
+        var td3 = document.createElement('td');
+        td3.className = 'vol';
+        td3.textContent = k.vol;
+        tr.appendChild(td3);
+
+        var td4 = document.createElement('td');
+        td4.className = compClass;
+        td4.textContent = compLabel;
+        tr.appendChild(td4);
+
+        var td5 = document.createElement('td');
+        var span5 = document.createElement('span');
+        span5.className = 'card-tag ' + pilarClass;
+        span5.style.margin = '0';
+        span5.textContent = pilarLabel;
+        td5.appendChild(span5);
+        tr.appendChild(td5);
+
+        var td6 = document.createElement('td');
+        td6.style.fontSize = '12px';
+        td6.style.color = 'var(--dim)';
+        td6.textContent = k.artigo;
+        tr.appendChild(td6);
+
+        var td7 = document.createElement('td');
+        var span7 = document.createElement('span');
+        span7.className = prioClass;
+        span7.textContent = prioLabel;
+        td7.appendChild(span7);
+        tr.appendChild(td7);
+
+        tbody.appendChild(tr);
+    }
+}
+
+function filterKeywords(filter, btn){
+    var btns = document.querySelectorAll('#tab-keywords .filter-btn');
+    for(var b = 0; b < btns.length; b++) btns[b].classList.remove('active');
+    btn.classList.add('active');
+    var rows = document.querySelectorAll('#kwBody tr');
+    for(var r = 0; r < rows.length; r++){
+        if(filter === 'all'){ rows[r].style.display = ''; continue; }
+        var matchP = rows[r].dataset.priority === filter;
+        var matchPi = rows[r].dataset.pilar === filter;
+        rows[r].style.display = (matchP || matchPi) ? '' : 'none';
+    }
+}
+
+function searchKeywords(val){
+    var search = val.toLowerCase();
+    var rows = document.querySelectorAll('#kwBody tr');
+    for(var r = 0; r < rows.length; r++){
+        rows[r].style.display = rows[r].dataset.kw.indexOf(search) !== -1 ? '' : 'none';
+    }
+}
+
+// ========================================
+// RENDER CALENDAR (safe DOM methods)
+// ========================================
+function renderCalendar(data){
+    var container = document.getElementById('calendarContainer');
+    while(container.firstChild) container.removeChild(container.firstChild);
+
+    var months = {
+        '04': {name:'Abril 2026', sub:'Semanas 1 a 8 — Foco em Croacia, Italia e fundamentos'},
+        '05': {name:'Maio 2026', sub:'Semanas 9 a 16 — Foco em Espanha, Russia, EUA e experiencias'},
+        '06': {name:'Junho 2026', sub:'Semanas 17 a 23 — Foco em long-tail, experiencias e destinos especificos'}
+    };
+
+    var currentMonth = '';
+    var weekNum = 1;
+    var entryInWeek = 0;
+    var currentMonthDiv = null;
+    var currentEntriesDiv = null;
+
+    for(var i = 0; i < data.length; i++){
+        var entry = data[i];
+        var month = entry.date.split('/')[1];
+
+        if(month !== currentMonth){
+            currentMonth = month;
+            currentMonthDiv = document.createElement('div');
+            currentMonthDiv.className = 'cal-month';
+            var mh3 = document.createElement('h3');
+            mh3.textContent = months[month].name;
+            currentMonthDiv.appendChild(mh3);
+            var msub = document.createElement('p');
+            msub.className = 'month-sub';
+            msub.textContent = months[month].sub;
+            currentMonthDiv.appendChild(msub);
+            container.appendChild(currentMonthDiv);
+            entryInWeek = 0;
+        }
+
+        if(entryInWeek % 2 === 0){
+            var weekDiv = document.createElement('div');
+            weekDiv.className = 'cal-week';
+            var wLabel = document.createElement('div');
+            wLabel.className = 'cal-week-label';
+            wLabel.textContent = 'Semana ' + weekNum;
+            weekDiv.appendChild(wLabel);
+            currentEntriesDiv = document.createElement('div');
+            currentEntriesDiv.className = 'cal-entries';
+            weekDiv.appendChild(currentEntriesDiv);
+            currentMonthDiv.appendChild(weekDiv);
+            weekNum++;
+        }
+        entryInWeek++;
+
+        var pilarClass = entry.pilar === 'roteiro' ? 'tag-roteiro' : entry.pilar === 'guia' ? 'tag-guia' : entry.pilar === 'dica' ? 'tag-dica' : 'tag-experiencia';
+        var pilarLabel = entry.pilar.charAt(0).toUpperCase() + entry.pilar.slice(1);
+
+        var entryDiv = document.createElement('div');
+        entryDiv.className = 'cal-entry';
+        entryDiv.dataset.pilar = entry.pilar;
+
+        var dateSpan = document.createElement('span');
+        dateSpan.className = 'date';
+        dateSpan.textContent = entry.date + '/2026';
+        entryDiv.appendChild(dateSpan);
+
+        var titleSpan = document.createElement('span');
+        titleSpan.className = 'title';
+        titleSpan.textContent = entry.title;
+        entryDiv.appendChild(titleSpan);
+
+        var kwSpan = document.createElement('span');
+        kwSpan.className = 'keyword';
+        kwSpan.textContent = entry.kw;
+        entryDiv.appendChild(kwSpan);
+
+        var pillarSpan = document.createElement('span');
+        pillarSpan.className = 'pillar card-tag ' + pilarClass;
+        pillarSpan.style.margin = '0';
+        pillarSpan.textContent = pilarLabel;
+        entryDiv.appendChild(pillarSpan);
+
+        var wordsSpan = document.createElement('span');
+        wordsSpan.className = 'words';
+        wordsSpan.textContent = entry.words + 'w';
+        entryDiv.appendChild(wordsSpan);
+
+        var statusSpan = document.createElement('span');
+        statusSpan.className = 'status status-pending';
+        statusSpan.textContent = 'Pendente';
+        entryDiv.appendChild(statusSpan);
+
+        currentEntriesDiv.appendChild(entryDiv);
+    }
+}
+
+function filterCalendar(filter, btn){
+    var btns = document.querySelectorAll('#tab-calendario .filter-btn');
+    for(var b = 0; b < btns.length; b++) btns[b].classList.remove('active');
+    btn.classList.add('active');
+    var entries = document.querySelectorAll('.cal-entry');
+    for(var e = 0; e < entries.length; e++){
+        entries[e].style.display = (filter === 'all' || entries[e].dataset.pilar === filter) ? '' : 'none';
+    }
+}
+
+// ========================================
+// TABS
+// ========================================
+var tabButtons = document.querySelectorAll('.tab');
+for(var t = 0; t < tabButtons.length; t++){
+    tabButtons[t].addEventListener('click', function(){
+        var allTabs = document.querySelectorAll('.tab');
+        var allContents = document.querySelectorAll('.tab-content');
+        for(var a = 0; a < allTabs.length; a++) allTabs[a].classList.remove('active');
+        for(var c = 0; c < allContents.length; c++) allContents[c].classList.remove('active');
+        this.classList.add('active');
+        document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+    });
+}
+
+// ========================================
+// COPY BUTTON
+// ========================================
+function copyTemplate(btn, id){
+    var text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(function(){
+        btn.textContent = 'Copiado!';
+        btn.classList.add('copied');
+        setTimeout(function(){
+            btn.textContent = 'Copiar';
+            btn.classList.remove('copied');
+        }, 2000);
+    });
+}
+
+// ========================================
+// CHECKLIST
+// ========================================
+function toggleCheck(el){
+    el.classList.toggle('checked');
+    el.textContent = el.classList.contains('checked') ? '\u2713' : '';
+}
+
+// ========================================
+// INIT
+// ========================================
+renderKeywords(keywords);
+renderCalendar(calendarData);
+</script>
+
+</body>
+</html>
