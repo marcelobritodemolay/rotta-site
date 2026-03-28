@@ -1,0 +1,3388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrosseis Completos - Rotta Curadoria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0E0E0E;
+      --card: #1A1A1A;
+      --gold: #C5A572;
+      --text: #F2EDE8;
+      --text-muted: #A09A93;
+      --muted: #999;
+      --coral: #E8785A;
+      --card-border: #2A2A2A;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ===== SIDEBAR NAV ===== */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 100vh;
+      background: #111;
+      border-right: 1px solid var(--card-border);
+      overflow-y: auto;
+      padding: 24px 16px;
+      z-index: 100;
+    }
+    .sidebar h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--gold);
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+    .sidebar-category {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 18px;
+      margin-bottom: 8px;
+      padding-left: 8px;
+    }
+    .sidebar a {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 6px 8px;
+      border-radius: 6px;
+      line-height: 1.4;
+      transition: background 0.2s, color 0.2s;
+    }
+    .sidebar a:hover {
+      background: rgba(197, 165, 114, 0.1);
+      color: var(--gold);
+    }
+    .sidebar a .num {
+      color: var(--gold);
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      margin-left: 300px;
+      padding: 40px 20px;
+      flex: 1;
+      max-width: 100%;
+    }
+
+    h1.page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 48px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .carousel-section {
+      margin-bottom: 64px;
+    }
+
+    .carousel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .carousel-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--text);
+      padding-left: 8px;
+      border-left: 3px solid var(--gold);
+      font-weight: 600;
+    }
+
+    .btn-copiar {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(197, 165, 114, 0.15);
+      color: var(--gold);
+      border: 1px solid rgba(197, 165, 114, 0.3);
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-copiar:hover {
+      background: rgba(197, 165, 114, 0.25);
+    }
+    .btn-copiar.copied {
+      background: rgba(114, 197, 130, 0.2);
+      color: #72C582;
+      border-color: rgba(114, 197, 130, 0.3);
+    }
+
+    .caption-box {
+      display: none;
+      background: #151515;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    .caption-box.visible {
+      display: block;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 10px 0 20px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .slide {
+      flex: 0 0 auto;
+      width: min(360px, 85vw);
+      aspect-ratio: 4 / 5;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--card-border);
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 32px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      width: 32px;
+      height: 32px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .slide::after {
+      content: '';
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-bottom: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .slide-counter {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+    }
+
+    .slide-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 12px;
+      opacity: 0.9;
+    }
+
+    .slide-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .slide-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .slide-heading .gold { color: var(--gold); }
+    .slide-heading .coral { color: var(--coral); }
+
+    .slide-body {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 90%;
+    }
+
+    .slide-solution {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      color: var(--gold);
+      margin-top: 16px;
+      font-weight: 500;
+      padding-top: 14px;
+      border-top: 1px solid rgba(197, 165, 114, 0.2);
+    }
+
+    .slide-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    .slide.cover .slide-heading {
+      font-size: 1.7rem;
+      line-height: 1.25;
+    }
+
+    .slide.cta {
+      background: linear-gradient(135deg, #1A1A1A 0%, #222018 100%);
+    }
+    .slide.cta .slide-heading {
+      font-size: 1.55rem;
+      color: var(--gold);
+      line-height: 1.35;
+    }
+
+    .slide.signature {
+      background: linear-gradient(180deg, #1A1A1A 0%, #151510 100%);
+    }
+    .signature-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .signature-handle {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      margin-top: 8px;
+      font-weight: 500;
+    }
+    .signature-divider {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 16px auto;
+      opacity: 0.6;
+    }
+    .signature-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .summary-list {
+      text-align: left;
+      width: 100%;
+      list-style: none;
+      padding: 0;
+    }
+    .summary-list li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(242, 237, 232, 0.06);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+    .summary-list li span.num {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.85rem;
+      min-width: 18px;
+    }
+
+    .value-range {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin: 12px 0 6px;
+      line-height: 1.2;
+    }
+    .value-detail {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+    .value-category {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .total-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .total-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .total-installment {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(197, 165, 114, 0.2);
+    }
+
+    .checklist {
+      text-align: left;
+      width: 100%;
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding: 7px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      line-height: 1.45;
+    }
+    .checklist li .checkbox {
+      width: 16px;
+      height: 16px;
+      min-width: 16px;
+      border: 2px solid var(--gold);
+      border-radius: 3px;
+      margin-top: 2px;
+    }
+    .checklist li.gold-item {
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .checklist li.gold-item .checkbox {
+      background: var(--gold);
+    }
+
+    .timeline-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 20px;
+      text-align: left;
+      width: 100%;
+    }
+
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .nav-arrow:hover {
+      background: rgba(197, 165, 114, 0.15);
+      transform: translateY(-50%) scale(1.05);
+    }
+    .nav-arrow.left { left: -8px; }
+    .nav-arrow.right { right: -8px; }
+    .nav-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    .dot-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--card-border);
+      transition: background 0.3s, width 0.3s;
+    }
+    .dot.active {
+      background: var(--gold);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    .icon-plane { font-size: 2.2rem; margin-bottom: 12px; }
+    .icon-check { font-size: 2.2rem; margin-bottom: 12px; }
+    .slide-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+    .rotta-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .cover-deco {
+      width: 48px;
+      height: 2px;
+      background: var(--gold);
+      margin: 14px auto;
+    }
+
+    .slide-footer {
+      position: absolute;
+      bottom: 18px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
+
+    /* Tip box for content slides */
+    .tip-box {
+      background: rgba(197, 165, 114, 0.08);
+      border: 1px solid rgba(197, 165, 114, 0.15);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: 14px;
+      width: 100%;
+    }
+    .tip-box p {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      color: var(--gold);
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    /* Comparison table for carousel 23 */
+    .compare-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(242, 237, 232, 0.06);
+      width: 100%;
+    }
+    .compare-row .dest {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .compare-row .price {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main-content { margin-left: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .main-content { padding: 24px 12px; }
+      .slide { width: 85vw; padding: 32px 24px; }
+      .slide-heading { font-size: 1.3rem; }
+      .slide.cover .slide-heading { font-size: 1.45rem; }
+      .slide-number { font-size: 3.8rem; }
+      .nav-arrow { display: none; }
+      h1.page-title { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== SIDEBAR NAVIGATION ===== -->
+  <nav class="sidebar">
+    <h2>Rotta Curadoria</h2>
+
+    <div class="sidebar-category">Originais</div>
+    <a href="#c1"><span class="num">01</span> 5 Erros que Destroem sua Viagem</a>
+    <a href="#c2"><span class="num">02</span> Quanto Custa 7 Dias na Italia</a>
+    <a href="#c3"><span class="num">03</span> Checklist Viagem Internacional</a>
+
+    <div class="sidebar-category">Planejamento & Dicas</div>
+    <a href="#c4"><span class="num">04</span> Planejar Viagem em 7 Passos</a>
+    <a href="#c5"><span class="num">05</span> Documentos Pra Viajar</a>
+    <a href="#c6"><span class="num">06</span> Economizar no Cambio</a>
+    <a href="#c7"><span class="num">07</span> O Que Levar na Mala</a>
+    <a href="#c8"><span class="num">08</span> 5 Apps Que Salvam</a>
+
+    <div class="sidebar-category">Guias de Destino</div>
+    <a href="#c9"><span class="num">09</span> Mendoza em 5 Dias</a>
+    <a href="#c10"><span class="num">10</span> Orlando Alem dos Parques</a>
+    <a href="#c11"><span class="num">11</span> Croacia: O Segredo do Adriatico</a>
+    <a href="#c12"><span class="num">12</span> Gramado: 10 Experiencias</a>
+    <a href="#c13"><span class="num">13</span> Portugal: 7 Razoes Pra Ir</a>
+
+    <div class="sidebar-category">Viagem a Dois</div>
+    <a href="#c14"><span class="num">14</span> 5 Destinos Romanticos</a>
+    <a href="#c15"><span class="num">15</span> Viajar em Casal Sem Brigar</a>
+    <a href="#c16"><span class="num">16</span> Escapadas de Fim de Semana</a>
+
+    <div class="sidebar-category">Viagem em Familia</div>
+    <a href="#c17"><span class="num">17</span> Viajar Com Criancas</a>
+    <a href="#c18"><span class="num">18</span> Disney Pela Primeira Vez</a>
+    <a href="#c19"><span class="num">19</span> Destinos No Brasil Pra Familia</a>
+
+    <div class="sidebar-category">Viagem em Grupo</div>
+    <a href="#c20"><span class="num">20</span> Viagem em Grupo Sem Estresse</a>
+    <a href="#c21"><span class="num">21</span> 5 Destinos Pra Grupos</a>
+
+    <div class="sidebar-category">Viagem Inteligente</div>
+    <a href="#c22"><span class="num">22</span> Mitos Sobre Viagem</a>
+    <a href="#c23"><span class="num">23</span> Quanto Custa 10 Destinos</a>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="main-content">
+    <h1 class="page-title">Carrosseis Instagram - Rotta Curadoria</h1>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 1: 5 Erros Europa                  -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c1">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 1 - 5 Erros que Destroem sua Viagem pra Europa</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap1')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap1">Voce esta cometendo PELO MENOS um desses erros na hora de planejar sua viagem pra Europa. 😬
+
+Preparamos esse guia com os 5 erros mais comuns que a gente ve todo dia — e como evitar cada um deles.
+
+Comenta EUROPA que a gente te manda o guia completo no DM. ✈️
+
+Salva pra consultar antes da sua proxima viagem.
+
+#ViagemParaEuropa #DicasDeViagem #ErrosDeViagem #EuropaTrip #RottaCuradoria #PlanejamentoDeViagem #ViajemComCuradoria
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <h3 class="slide-heading">5 ERROS que <span class="gold">destroem</span> sua viagem pra Europa</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">O numero 4 custa caro e quase ninguem percebe</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <span class="slide-label">Erro</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Querer conhecer 5 paises em 10 dias</h3>
+            <p class="slide-body">Voce nao viaja, voce corre. Passa mais tempo no aeroporto do que curtindo.</p>
+            <p class="slide-solution">Escolha 2 a 3 cidades e viva cada uma de verdade. Qualidade vence quantidade.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <span class="slide-label">Erro</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Nao saber o que e ETIAS</h3>
+            <p class="slide-body">A partir de 2026, brasileiros precisam de autorizacao eletronica pra entrar na Europa.</p>
+            <p class="slide-solution">Solicite o ETIAS com antecedencia pelo site oficial. E rapido, online e obrigatorio.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <span class="slide-label">Erro</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Contar so com cartao de credito</h3>
+            <p class="slide-body">Taxas absurdas de IOF e cambio. Voce perde dinheiro em cada compra sem perceber.</p>
+            <p class="slide-solution">Use cartao de debito internacional (Wise, Nomad) e leve dinheiro em especie como reserva.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <span class="slide-label">Erro</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Nao reservar experiencias com antecedencia</h3>
+            <p class="slide-body">Museus lotados, ingressos esgotados, filas de 3 horas. Voce perde o melhor da viagem.</p>
+            <p class="slide-solution">Reserve ingressos e tours com 30 a 60 dias de antecedencia. Os melhores horarios acabam primeiro.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <span class="slide-label">Erro</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Comer nos restaurantes dos pontos turisticos</h3>
+            <p class="slide-body">Preco alto, comida generica e experiencia zero. Voce paga caro pelo endereco, nao pela comida.</p>
+            <p class="slide-solution">Ande 2 quadras pra dentro. Procure onde os locais comem. Use Google Maps e veja avaliacoes reais.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">Os 5 erros</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Querer conhecer tudo de uma vez</li>
+              <li><span class="num">2.</span> Ignorar o ETIAS</li>
+              <li><span class="num">3.</span> Depender so do cartao de credito</li>
+              <li><span class="num">4.</span> Nao reservar experiencias antes</li>
+              <li><span class="num">5.</span> Comer em armadilhas turisticas</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="icon-plane">&#9992;</span>
+            <h3 class="slide-heading">Comenta <span class="gold">EUROPA</span> que a gente te manda o guia completo</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">A gente cuida de cada detalhe pra voce so aproveitar.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 2: Quanto custa Italia             -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c2">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 2 - Quanto Custa 7 Dias na Italia</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap2')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap2">Quanto custa DE VERDADE viajar pra Italia em 2026? 🇮🇹
+
+A gente detalhou tudo: passagem, hospedagem, alimentacao, transporte, passeios e seguro. Pra casal, 7 dias, com conforto.
+
+Salva e manda pro casal que ta planejando a Italia! 💛
+
+#Italia2026 #QuantoCustaViajar #ViagemItalia #DicasDeViagem #RottaCuradoria #PlanejamentoDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <h3 class="slide-heading">ITALIA 2026 quanto custa <span class="gold">DE VERDADE?</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">7 dias, casal, com tudo detalhado</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/10</span>
+            <span class="slide-number">&#9992;</span>
+            <span class="value-category">Passagem Aerea</span>
+            <p class="value-range">R$4.000 - 6.500</p>
+            <p class="value-detail">por pessoa, ida e volta</p>
+            <p class="slide-solution">Casal: R$8.000 - 13.000</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/10</span>
+            <span class="slide-number">&#127968;</span>
+            <span class="value-category">Hospedagem</span>
+            <p class="value-range">R$600 - 1.200</p>
+            <p class="value-detail">por noite, hotel 4 estrelas ou Airbnb premium</p>
+            <p class="slide-solution">7 noites: R$4.200 - 8.400</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/10</span>
+            <span class="slide-number">&#127837;</span>
+            <span class="value-category">Alimentacao</span>
+            <p class="value-range">R$150 - 350</p>
+            <p class="value-detail">por dia, casal (cafe, almoco e jantar)</p>
+            <p class="slide-solution">7 dias: R$1.050 - 2.450</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/10</span>
+            <span class="slide-number">&#128646;</span>
+            <span class="value-category">Transporte Interno</span>
+            <p class="value-range">R$800 - 1.500</p>
+            <p class="value-detail">total (trens, metro, taxi, transfers)</p>
+            <p class="slide-solution">Dica: o trem italiano e eficiente e lindo</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/10</span>
+            <span class="slide-number">&#127963;</span>
+            <span class="value-category">Passeios e Experiencias</span>
+            <p class="value-range">R$500 - 1.200</p>
+            <p class="value-detail">total casal (museus, tours, degustacoes)</p>
+            <p class="slide-solution">Reserve com antecedencia pra pegar os melhores precos</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/10</span>
+            <span class="slide-number">&#128737;</span>
+            <span class="value-category">Seguro Viagem</span>
+            <p class="value-range">R$250 - 500</p>
+            <p class="value-detail">por pessoa, obrigatorio pra Europa</p>
+            <p class="slide-solution">Casal: R$500 - 1.000</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">8/10</span>
+            <span class="total-label">Total estimado casal</span>
+            <p class="total-value">R$15.050 - 27.550</p>
+            <p class="value-detail">7 dias na Italia, com conforto e boas experiencias</p>
+            <p class="total-installment">Em 12x: a partir de R$628/pessoa/mes</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">9/10</span>
+            <span class="icon-plane">&#128172;</span>
+            <h3 class="slide-heading"><span class="gold">Salva</span> e manda pro casal que ta planejando a Italia</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Porque viajar bem e questao de planejamento, nao de sorte.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">10/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 3: Checklist Viagem Internacional  -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c3">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 3 - Checklist Viagem Internacional</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap3')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap3">O checklist COMPLETO pra voce nao esquecer nada antes de viajar. ✅
+
+De 6 meses antes ate o dia da viagem, cada passo que voce precisa dar pra viajar tranquilo.
+
+Comenta CHECKLIST que a gente manda a versao completa no seu DM. 📋
+
+Salva e compartilha com quem ta planejando viajar!
+
+#ChecklistViagem #ViagemInternacional #DicasDeViagem #PlanejamentoDeViagem #RottaCuradoria #OrganizacaoDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <h3 class="slide-heading"><span class="gold">CHECKLIST</span> tudo que voce precisa ANTES de viajar</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Salva esse carrossel e nao esquece nada</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <p class="timeline-label">6 MESES ANTES</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Definir destino e datas da viagem</li>
+              <li><span class="checkbox"></span>Verificar validade do passaporte (minimo 6 meses)</li>
+              <li><span class="checkbox"></span>Comecar a pesquisar passagens aereas</li>
+              <li><span class="checkbox"></span>Criar uma reserva financeira mensal para a viagem</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <p class="timeline-label">3 MESES ANTES</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Comprar passagens aereas</li>
+              <li><span class="checkbox"></span>Reservar hospedagem</li>
+              <li><span class="checkbox"></span>Solicitar ETIAS (se for pra Europa)</li>
+              <li><span class="checkbox"></span>Pesquisar e reservar experiencias e ingressos</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <p class="timeline-label">1 MES ANTES</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Contratar seguro viagem</li>
+              <li><span class="checkbox"></span>Abrir conta em cartao de debito internacional</li>
+              <li><span class="checkbox"></span>Avisar o banco sobre a viagem internacional</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <p class="timeline-label">15 DIAS ANTES</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Fazer check-in online quando disponivel</li>
+              <li><span class="checkbox"></span>Comprar euros/dolares ou carregar cartao internacional</li>
+              <li><span class="checkbox"></span>Organizar documentos digitais e fisicos</li>
+              <li><span class="checkbox"></span>Baixar mapas offline e apps uteis</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <p class="timeline-label">1 SEMANA ANTES</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Fazer as malas com antecedencia</li>
+              <li><span class="checkbox"></span>Separar roupas por dia (facilita muito)</li>
+              <li><span class="checkbox"></span>Conferir clima do destino e ajustar mala</li>
+              <li><span class="checkbox"></span>Deixar copia dos documentos com alguem de confianca</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <p class="timeline-label">DIA DA VIAGEM</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Chegar no aeroporto com 3h de antecedencia</li>
+              <li><span class="checkbox"></span>Conferir passaporte, cartao de embarque e documentos</li>
+              <li><span class="checkbox"></span>Carregar celular e powerbank 100%</li>
+              <li class="gold-item"><span class="checkbox"></span>Relaxar. Voce planejou tudo.</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="icon-check">&#9989;</span>
+            <h3 class="slide-heading">Comenta <span class="gold">CHECKLIST</span> que a gente manda no seu DM</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">A versao completa com ainda mais detalhes pra voce nao esquecer nada.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 4: Planejar Viagem em 7 Passos     -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c4">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 4 - Como Planejar Uma Viagem Internacional em 7 Passos</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap4')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap4">Voce quer viajar pra fora, mas nao sabe por onde comecar? 🌍
+
+A gente montou o passo a passo COMPLETO pra voce sair do zero e chegar no embarque com tudo resolvido.
+
+Comenta PLANEJAR que a gente te ajuda a dar o primeiro passo. ✈️
+
+Salva esse carrossel e compartilha com quem ta precisando desse empurrao!
+
+#PlanejamentoDeViagem #ViagemInternacional #ComoPlanejarViagem #DicasDeViagem #RottaCuradoria #PrimeiraViagemInternacional
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🌍</span>
+            <h3 class="slide-heading">Como planejar uma viagem internacional em <span class="gold">7 passos</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Do sonho ao embarque, sem complicacao</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/10</span>
+            <span class="slide-label">Passo</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Escolha o destino certo pra voce</h3>
+            <p class="slide-body">Considere clima, orcamento, visto e o que voce quer viver. Nem todo destino combina com todo momento.</p>
+            <p class="slide-solution">Pergunte: o que eu quero SENTIR nessa viagem? Isso define tudo.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/10</span>
+            <span class="slide-label">Passo</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Defina as datas e a duracao</h3>
+            <p class="slide-body">Alta temporada e mais caro. Meia temporada tem o melhor custo-beneficio com clima bom e menos turista.</p>
+            <p class="slide-solution">Dica: viaje entre marco-maio ou setembro-novembro pra Europa.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/10</span>
+            <span class="slide-label">Passo</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Monte o orcamento real</h3>
+            <p class="slide-body">Passagem, hospedagem, alimentacao, passeios, seguro, transporte e uma reserva de emergencia.</p>
+            <p class="slide-solution">Regra de ouro: some tudo e adicione 15% de margem. Surpresas acontecem.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/10</span>
+            <span class="slide-label">Passo</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Resolva a documentacao</h3>
+            <p class="slide-body">Passaporte valido (minimo 6 meses), visto se necessario, ETIAS pra Europa, seguro viagem obrigatorio.</p>
+            <p class="slide-solution">Faca isso PRIMEIRO. Sem documento, nao tem viagem.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/10</span>
+            <span class="slide-label">Passo</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Compre passagem e reserve hospedagem</h3>
+            <p class="slide-body">Use alertas de preco. Compare opcoes. Hoteis perto de transporte publico economizam tempo e dinheiro.</p>
+            <p class="slide-solution">3 a 4 meses antes e o ponto ideal pra comprar passagem.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/10</span>
+            <span class="slide-label">Passo</span>
+            <span class="slide-number">06</span>
+            <h3 class="slide-heading">Monte o roteiro dia a dia</h3>
+            <p class="slide-body">Nao tente fazer tudo. Selecione 2-3 atividades por dia e deixe espaco pra descobertas espontaneas.</p>
+            <p class="slide-solution">Roteiro bom tem folga. Roteiro ruim parece maratona.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">8/10</span>
+            <span class="slide-label">Passo</span>
+            <span class="slide-number">07</span>
+            <h3 class="slide-heading">Prepare o financeiro</h3>
+            <p class="slide-body">Cartao internacional, moeda local, avisar o banco. Tenha pelo menos 2 formas de pagamento diferentes.</p>
+            <p class="slide-solution">Wise + cartao de credito internacional + dinheiro em especie = combo perfeito.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">9/10</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">Os 7 passos</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Escolha o destino certo</li>
+              <li><span class="num">2.</span> Defina datas e duracao</li>
+              <li><span class="num">3.</span> Monte o orcamento real</li>
+              <li><span class="num">4.</span> Resolva a documentacao</li>
+              <li><span class="num">5.</span> Compre passagem e hospedagem</li>
+              <li><span class="num">6.</span> Monte o roteiro dia a dia</li>
+              <li><span class="num">7.</span> Prepare o financeiro</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">10/10</span>
+            <span class="icon-plane">&#9992;</span>
+            <h3 class="slide-heading">Comenta <span class="gold">PLANEJAR</span> que a gente te ajuda a dar o primeiro passo</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva pra quando precisar e compartilha com quem vai viajar.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 5: Documentos Pra Viajar           -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c5">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 5 - Documentos Que Voce Precisa Pra Viajar</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap5')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap5">Voce sabe TUDO que precisa pra viajar pro exterior em 2026? 📄
+
+Passaporte, visto, ETIAS, seguro viagem, carteira de vacinacao... a gente reuniu TUDO num so lugar.
+
+Comenta DOCUMENTOS que a gente te manda o checklist completo. ✅
+
+#DocumentosDeViagem #ViagemInternacional #ETIAS #PassaporteViajar #SeguroViagem #RottaCuradoria #DicasDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">📄</span>
+            <h3 class="slide-heading">Documentos que voce <span class="gold">PRECISA</span> pra viajar</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Nao embarque sem conferir essa lista</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <span class="slide-label">Documento</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Passaporte valido</h3>
+            <p class="slide-body">Precisa ter pelo menos 6 meses de validade a partir da data da viagem. Sem isso, voce nao embarca.</p>
+            <p class="slide-solution">Renovacao leva de 6 a 15 dias uteis. Nao deixe pra ultima hora.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <span class="slide-label">Documento</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Visto (quando necessario)</h3>
+            <p class="slide-body">EUA, Canada, Australia e Japao exigem visto. Europa e varios paises da America do Sul nao exigem.</p>
+            <p class="slide-solution">Visto americano: agende com no minimo 3 meses de antecedencia. A demanda esta alta.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <span class="slide-label">Documento</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">ETIAS (Europa a partir de 2026)</h3>
+            <p class="slide-body">Autorizacao eletronica obrigatoria pra brasileiros viajarem pra Europa. Custa 7 euros e vale 3 anos.</p>
+            <p class="slide-solution">Solicite pelo site oficial com pelo menos 30 dias de antecedencia. E rapido e 100% online.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <span class="slide-label">Documento</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Seguro viagem</h3>
+            <p class="slide-body">Obrigatorio pra Europa (cobertura minima de 30 mil euros). Altamente recomendado pra qualquer destino.</p>
+            <p class="slide-solution">Custa a partir de R$10/dia e cobre desde mala extraviada ate emergencia medica.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <span class="slide-label">Documento</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Carteira de vacinacao internacional</h3>
+            <p class="slide-body">Alguns paises exigem vacina de febre amarela. A carteira e emitida pela Anvisa, gratuita.</p>
+            <p class="slide-solution">Emita pelo app da Anvisa ou em postos autorizados. Leve versao digital e impressa.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">Seus documentos</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Passaporte valido (6+ meses)</li>
+              <li><span class="num">2.</span> Visto (se o destino exigir)</li>
+              <li><span class="num">3.</span> ETIAS (Europa 2026+)</li>
+              <li><span class="num">4.</span> Seguro viagem</li>
+              <li><span class="num">5.</span> Carteira de vacinacao</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="icon-check">&#9989;</span>
+            <h3 class="slide-heading">Comenta <span class="gold">DOCUMENTOS</span> que a gente te manda o checklist completo</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva pra quando precisar e compartilha com quem vai viajar.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 6: Economizar no Cambio            -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c6">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 6 - Como Economizar no Cambio</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap6')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap6">Voce esta PERDENDO dinheiro toda vez que viaja pro exterior. 💸
+
+IOF, spread, taxa do cartao... a gente mostra como economizar de verdade no cambio e parar de jogar dinheiro fora.
+
+Comenta CAMBIO e receba mais dicas no DM. 💰
+
+#CambioViagem #EconomizarViagem #DicasDeCambio #Wise #CartaoInternacional #RottaCuradoria #DicasDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">💰</span>
+            <h3 class="slide-heading">Como <span class="gold">economizar</span> no cambio</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Pare de perder dinheiro sem perceber</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Nunca compre tudo de uma vez</h3>
+            <p class="slide-body">O cambio oscila todo dia. Comprar tudo num dia so e apostar. Se a cotacao subir depois, otimo. Se cair, voce perdeu.</p>
+            <p class="slide-solution">Compre em 3 a 4 vezes ao longo de 2-3 meses. Isso dilui o risco.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Use cartao de debito internacional</h3>
+            <p class="slide-body">Wise, Nomad e C6 Global cobram IOF de 1,1% (debito) contra 4,38% do credito convencional.</p>
+            <p class="slide-solution">Diferenca real: em R$5.000 de gasto, voce economiza mais de R$160 so no IOF.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Fuja das casas de cambio de aeroporto</h3>
+            <p class="slide-body">Spread (diferenca entre compra e venda) pode passar de 8% no aeroporto. Online fica em torno de 2-3%.</p>
+            <p class="slide-solution">Compre online e retire na cidade, ou use app de cambio com cotacao comercial.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Sempre pague em moeda local</h3>
+            <p class="slide-body">Na maquininha, vao perguntar se voce quer pagar em real. NUNCA aceite. A conversao deles e pessima.</p>
+            <p class="slide-solution">Escolha SEMPRE pagar na moeda local do pais. O seu banco converte melhor.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Leve dinheiro em especie como reserva</h3>
+            <p class="slide-body">Nem todo lugar aceita cartao. Feiras, mercados locais e gorjetas precisam de dinheiro vivo.</p>
+            <p class="slide-solution">Leve o equivalente a 2-3 dias de gastos em especie. O resto no cartao internacional.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">06</span>
+            <h3 class="slide-heading">Acompanhe a cotacao com alertas</h3>
+            <p class="slide-body">Apps como Wise e Remessa Online enviam alertas quando a cotacao esta favoravel.</p>
+            <p class="slide-solution">Configure um alerta no valor que voce considera bom e compre quando avisar.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">8/10</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">6 dicas de cambio</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Nao compre tudo de uma vez</li>
+              <li><span class="num">2.</span> Use cartao de debito internacional</li>
+              <li><span class="num">3.</span> Fuja do cambio no aeroporto</li>
+              <li><span class="num">4.</span> Pague em moeda local</li>
+              <li><span class="num">5.</span> Leve especie como reserva</li>
+              <li><span class="num">6.</span> Use alertas de cotacao</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">9/10</span>
+            <span class="slide-icon">💸</span>
+            <h3 class="slide-heading">Comenta <span class="gold">CAMBIO</span> e receba mais dicas no DM</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva pra quando precisar e compartilha com quem vai viajar.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">10/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 7: O Que Levar na Mala             -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c7">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 7 - O Que Levar na Mala: Checklist Visual</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap7')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap7">Voce sempre esquece alguma coisa na mala? 🧳
+
+Montamos o checklist visual DEFINITIVO pra voce nunca mais esquecer nada. Dividido por categoria pra facilitar.
+
+Comenta MALA que a gente te manda o checklist em PDF. 📋
+
+#ChecklistMala #OQueLevarNaMala #DicasDeViagem #MalaDeViagem #RottaCuradoria #OrganizacaoDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🧳</span>
+            <h3 class="slide-heading">O que levar na mala: <span class="gold">checklist visual</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Nunca mais esqueca nada</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <p class="timeline-label">📋 DOCUMENTOS</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Passaporte (validade 6+ meses)</li>
+              <li><span class="checkbox"></span>Copia digital dos documentos (Google Drive)</li>
+              <li><span class="checkbox"></span>Seguro viagem impresso e digital</li>
+              <li><span class="checkbox"></span>Reservas de hotel e passagem</li>
+              <li><span class="checkbox"></span>Cartao de vacinacao</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <p class="timeline-label">💳 FINANCEIRO</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Cartao de debito internacional (Wise/Nomad)</li>
+              <li><span class="checkbox"></span>Cartao de credito internacional</li>
+              <li><span class="checkbox"></span>Dinheiro em especie (moeda local)</li>
+              <li><span class="checkbox"></span>Doleta/carteira com protecao RFID</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <p class="timeline-label">🔌 TECNOLOGIA</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Celular + carregador</li>
+              <li><span class="checkbox"></span>Powerbank carregado</li>
+              <li><span class="checkbox"></span>Adaptador de tomada universal</li>
+              <li><span class="checkbox"></span>Fone de ouvido</li>
+              <li><span class="checkbox"></span>Chip internacional ou eSIM</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <p class="timeline-label">👔 ROUPAS (REGRA 5-3-2)</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>5 camisetas/blusas versateis</li>
+              <li><span class="checkbox"></span>3 calcas/saias combinaveis</li>
+              <li><span class="checkbox"></span>2 calcados (confortavel + casual chique)</li>
+              <li><span class="checkbox"></span>1 jaqueta/casaco adaptavel</li>
+              <li class="gold-item"><span class="checkbox"></span>Roupas intimas pra todos os dias + 2 extras</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <p class="timeline-label">🧴 HIGIENE & SAUDE</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Necessaire com itens basicos</li>
+              <li><span class="checkbox"></span>Remedios de uso pessoal</li>
+              <li><span class="checkbox"></span>Protetor solar e hidratante</li>
+              <li><span class="checkbox"></span>Escova e pasta de dente</li>
+              <li><span class="checkbox"></span>Remedio pra dor de cabeca e estomago</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <p class="timeline-label">✈️ MAO DE BAGAGEM</p>
+            <ul class="checklist">
+              <li><span class="checkbox"></span>Documentos e cartoes</li>
+              <li><span class="checkbox"></span>Troca de roupa (caso mala atrase)</li>
+              <li><span class="checkbox"></span>Snacks e garrafa de agua vazia</li>
+              <li><span class="checkbox"></span>Travesseiro de pescoco</li>
+              <li class="gold-item"><span class="checkbox"></span>Tudo que voce NAO pode perder</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="slide-icon">📋</span>
+            <h3 class="slide-heading">Comenta <span class="gold">MALA</span> que a gente te manda o checklist em PDF</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva pra quando precisar e compartilha com quem vai viajar.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 8: 5 Apps Que Salvam               -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c8">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 8 - 5 Apps Que Salvam Qualquer Viagem</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap8')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap8">Esses 5 apps SALVAM qualquer viagem. Serio. 📱
+
+Do mapa offline ao tradutor em tempo real, cada um resolve um problema real que voce vai enfrentar la fora.
+
+Comenta APPS que a gente te manda a lista completa com links. 🔗
+
+#AppsDeViagem #DicasDeViagem #GoogleMaps #Wise #GoogleTranslate #RottaCuradoria #TecnologiaDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">📱</span>
+            <h3 class="slide-heading">5 apps que <span class="gold">salvam</span> qualquer viagem</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Baixe ANTES de embarcar</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <span class="slide-label">App</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Google Maps Offline</h3>
+            <p class="slide-body">Baixe o mapa da regiao antes de viajar. Funciona sem internet, com rotas, restaurantes e transporte publico.</p>
+            <p class="slide-solution">Dica: baixe a area inteira da cidade. Ocupa pouco espaco e salva muito.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <span class="slide-label">App</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Google Translate</h3>
+            <p class="slide-body">Traduz texto, voz e ate imagem (camera). Baixe o idioma offline e use sem internet em qualquer lugar.</p>
+            <p class="slide-solution">Funcao camera: aponte pro cardapio e veja a traducao na tela. Magia.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <span class="slide-label">App</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Wise</h3>
+            <p class="slide-body">Cartao de debito internacional com a melhor cotacao do mercado. IOF de 1,1% e spread minimo.</p>
+            <p class="slide-solution">Carregue antes da viagem e use como cartao principal no exterior.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <span class="slide-label">App</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Airalo (eSIM)</h3>
+            <p class="slide-body">Compre um chip virtual antes de viajar. Chega no destino ja com internet funcionando, sem precisar comprar chip local.</p>
+            <p class="slide-solution">Planos a partir de US$5. Muito mais pratico que chip fisico.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <span class="slide-label">App</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">TripIt</h3>
+            <p class="slide-body">Organiza toda a viagem num so lugar. Voos, hoteis, reservas, itinerario. Basta encaminhar os emails de confirmacao.</p>
+            <p class="slide-solution">Voce tem tudo offline, organizado por dia e horario. Sem desespero.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">Os 5 apps</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Google Maps Offline - navegacao</li>
+              <li><span class="num">2.</span> Google Translate - idioma</li>
+              <li><span class="num">3.</span> Wise - financeiro</li>
+              <li><span class="num">4.</span> Airalo - internet</li>
+              <li><span class="num">5.</span> TripIt - organizacao</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="slide-icon">🔗</span>
+            <h3 class="slide-heading">Comenta <span class="gold">APPS</span> que a gente te manda a lista com links</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva pra quando precisar e compartilha com quem vai viajar.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 9: Mendoza em 5 Dias               -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c9">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 9 - Mendoza em 5 Dias: Roteiro Real</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap9')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap9">Mendoza e o destino perfeito pra quem quer vinho, montanha e boa comida sem sair da America do Sul. 🍷🏔️
+
+Montamos um roteiro REAL de 5 dias com tudo: o que fazer, onde comer e quanto custa.
+
+Comenta MENDOZA que a gente te manda o roteiro completo. 🇦🇷
+
+#Mendoza #RoteiroMendoza #ViagemArgentina #VinhosArgentinos #RottaCuradoria #DicasDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🍷</span>
+            <h3 class="slide-heading">Mendoza em 5 dias: <span class="gold">roteiro real</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Vinho, montanha e boa comida</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <p class="timeline-label">DIA 1 — CHEGADA</p>
+            <h3 class="slide-heading">Centro historico e ambientacao</h3>
+            <p class="slide-body">Chegue, se acomode e explore a pe: Plaza Independencia, Avenida Aristides Villanueva (a rua dos bares e restaurantes).</p>
+            <p class="slide-solution">Jantar: La Marchigiana — massas caseiras incriveis.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <p class="timeline-label">DIA 2 — VINICOLAS</p>
+            <h3 class="slide-heading">Rota do vinho em Maipu</h3>
+            <p class="slide-body">Alugue bicicleta e visite 3-4 vinicolas: Trapiche, Familia Zuccardi, Lopez. Degustacao + almoco harmonizado.</p>
+            <p class="slide-solution">Custo medio: R$150/pessoa com degustacoes e almoco.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <p class="timeline-label">DIA 3 — MONTANHA</p>
+            <h3 class="slide-heading">Alta Montanha e Ponte del Inca</h3>
+            <p class="slide-body">Tour guiado pela Cordilheira dos Andes. Villavicencio, Uspallata, Ponte del Inca e vista do Aconcagua.</p>
+            <p class="slide-solution">Custo do tour: R$200-350/pessoa. Saida cedo, volta ao anoitecer.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <p class="timeline-label">DIA 4 — VALLE DE UCO</p>
+            <h3 class="slide-heading">As vinicolas mais bonitas</h3>
+            <p class="slide-body">Salentein, Andeluna, The Vines. Paisagem cinematografica. Almoco com vista pras montanhas.</p>
+            <p class="slide-solution">Reserve com antecedencia. Essas vinicolas lotam rapido.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <p class="timeline-label">DIA 5 — RELAX</p>
+            <h3 class="slide-heading">Termas de Cacheuta ou compras</h3>
+            <p class="slide-body">Termas naturais nos Andes ou compras de vinhos e souvenirs. Jantar de despedida num restaurante com parrilla.</p>
+            <p class="slide-solution">Leve vinhos na mala! Ate 2L por pessoa e isento de taxa.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="total-label">Orcamento estimado casal - 5 dias</span>
+            <p class="total-value">R$4.500 - 7.500</p>
+            <p class="value-detail">Passagem + hospedagem + alimentacao + passeios</p>
+            <p class="total-installment">Sem visto. Sem ETIAS. Facil e acessivel.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="icon-plane">🇦🇷</span>
+            <h3 class="slide-heading">Comenta <span class="gold">MENDOZA</span> que a gente te manda o roteiro completo</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva pra quando precisar e compartilha com quem ama vinho.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 10: Orlando Alem dos Parques        -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c10">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 10 - Orlando Alem dos Parques</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap10')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap10">Orlando nao e so Disney e Universal. 🎢
+
+Tem restaurantes incriveis, outlets, experiencias unicas e bairros que quase ninguem conhece. A gente mostra o que fazer ALEM dos parques.
+
+Comenta ORLANDO pra receber mais dicas. 🇺🇸
+
+#Orlando #OrlandoAlemDosParques #ViagemEUA #DicasOrlando #RottaCuradoria #DicasDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🌴</span>
+            <h3 class="slide-heading">Orlando <span class="gold">alem</span> dos parques</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">O que ninguem te conta sobre a cidade</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <span class="slide-label">Experiencia</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Icon Park e The Wheel</h3>
+            <p class="slide-body">Roda-gigante com vista panoramica, aquario Sea Life, Madame Tussauds. Tudo num so lugar, sem filas enormes.</p>
+            <p class="slide-solution">Perfeito pra um dia de descanso dos parques grandes.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <span class="slide-label">Experiencia</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Winter Park</h3>
+            <p class="slide-body">Bairro charmoso a 20 min do centro. Lojas boutique, galerias de arte, passeio de barco pelos canais e brunch incrivel.</p>
+            <p class="slide-solution">Va no sabado de manha pro Farmers Market. Experiencia local autentica.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <span class="slide-label">Experiencia</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Outlets que valem a pena</h3>
+            <p class="slide-body">Orlando Premium Outlets (Vineland) e o melhor. Nike, Adidas, Coach, Kate Spade com 40-70% de desconto.</p>
+            <p class="slide-solution">Va logo que abrir. Menos gente, mais pechincha. Leve mala extra.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <span class="slide-label">Experiencia</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Restaurantes fora do circuito turistico</h3>
+            <p class="slide-body">Slate, Kadence, The Ravenous Pig. Gastronomia de nivel em Orlando existe — so nao esta na International Drive.</p>
+            <p class="slide-solution">Reserve pelo OpenTable. Os melhores lotam rapido.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <span class="slide-label">Experiencia</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Natureza: Blue Spring e Wekiwa</h3>
+            <p class="slide-body">Parques naturais a 40 min de Orlando. Aguas cristalinas, caiaque, peixes-boi no inverno. Um outro mundo.</p>
+            <p class="slide-solution">Chegue cedo (antes das 9h). Nos fins de semana o estacionamento lota.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">Alem dos parques</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Icon Park e The Wheel</li>
+              <li><span class="num">2.</span> Winter Park (bairro charmoso)</li>
+              <li><span class="num">3.</span> Outlets Premium</li>
+              <li><span class="num">4.</span> Restaurantes escondidos</li>
+              <li><span class="num">5.</span> Parques naturais</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="icon-plane">🇺🇸</span>
+            <h3 class="slide-heading">Comenta <span class="gold">ORLANDO</span> pra receber mais dicas</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e compartilha com quem vai pra Orlando.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 11: Croacia                         -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c11">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 11 - Croacia: O Segredo do Adriatico</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap11')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap11">A Croacia e o segredo mais bem guardado da Europa. 🇭🇷
+
+Mar azul turquesa, cidades medievais, comida incrivel e MUITO mais barato que Italia ou Grecia.
+
+Comenta CROACIA que a gente te conta tudo. 🌊
+
+#Croacia #ViagemCroacia #Dubrovnik #MarAdriático #RottaCuradoria #EuropaBarata #DestinosEuropa
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🏛️</span>
+            <h3 class="slide-heading">Croacia: o <span class="gold">segredo</span> do Adriatico</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Por que esse destino vai explodir em 2026</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <span class="slide-label">Motivo</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Dubrovnik: a perola do Adriatico</h3>
+            <p class="slide-body">Muralhas medievais, mar cristalino, cenario de Game of Thrones. Uma das cidades mais bonitas do mundo.</p>
+            <p class="slide-solution">Melhor epoca: maio-junho ou setembro. Menos turista, clima perfeito.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <span class="slide-label">Motivo</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Plitvice: as cachoeiras impossiveis</h3>
+            <p class="slide-body">16 lagos interligados por cachoeiras numa floresta. A cor da agua parece filtro, mas e real.</p>
+            <p class="slide-solution">Reserve online e va cedo. E Patrimonio da UNESCO e lota rapido.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <span class="slide-label">Motivo</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Split: historia viva</h3>
+            <p class="slide-body">O Palacio de Diocleciano tem 1.700 anos e a cidade cresceu dentro dele. Bares, lojas e restaurantes dentro de ruinas romanas.</p>
+            <p class="slide-solution">Base perfeita pra explorar as ilhas croatas: Hvar, Brac, Vis.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <span class="slide-label">Motivo</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Custo-beneficio imbativel</h3>
+            <p class="slide-body">Jantar completo com vinho: R$80-120 por pessoa. Hospedagem boa: R$300-500/noite casal. Quase metade da Italia.</p>
+            <p class="slide-solution">A comida e incrivel: frutos do mar frescos, trufas, azeite local.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <span class="slide-label">Motivo</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Ilhas paradisiacas de ferry</h3>
+            <p class="slide-body">Hvar (festas e lavanda), Korcula (vinho e historia), Vis (praias desertas). Todas acessiveis de ferry a partir de Split.</p>
+            <p class="slide-solution">Faca island hopping: 2-3 ilhas em 4-5 dias. Experiencia unica.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">Por que Croacia</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Dubrovnik — a perola medieval</li>
+              <li><span class="num">2.</span> Plitvice — natureza surreal</li>
+              <li><span class="num">3.</span> Split — historia + vida noturna</li>
+              <li><span class="num">4.</span> Custo-beneficio excelente</li>
+              <li><span class="num">5.</span> Ilhas paradisiacas</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="slide-icon">🌊</span>
+            <h3 class="slide-heading">Comenta <span class="gold">CROACIA</span> que a gente te conta tudo</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e compartilha com quem precisa conhecer esse destino.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 12: Gramado 10 Experiencias         -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c12">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 12 - Gramado: 10 Experiencias Imperdiveis</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap12')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap12">Gramado e MUITO mais do que chocolate e fondue. 🍫
+
+Montamos as 10 experiencias que voce PRECISA viver quando for pra la. Tem coisa que quase ninguem conhece.
+
+Comenta GRAMADO pra receber o roteiro completo. 🌲
+
+#Gramado #SerraGaucha #DicasGramado #ViagemBrasil #RottaCuradoria #TurismoRS #OQueFazerGramado
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🌲</span>
+            <h3 class="slide-heading">Gramado: <span class="gold">10 experiencias</span> imperdiveis</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Muito alem do chocolate</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/10</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Lago Negro ao entardecer</h3>
+            <p class="slide-body">Passeio de pedalinho no lago cercado de hortensias. Ao entardecer, a luz entre as arvores e magica.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/10</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Rota das vinicolas em Bento Goncalves</h3>
+            <p class="slide-body">A 1h30 de Gramado. Vale dos Vinhedos, caves historicas, degustacao com colonia italiana autentica.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/10</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Cafe Colonial autentico</h3>
+            <p class="slide-body">Bela Vista Cafe Colonial: mais de 80 itens artesanais. Cucas, geleias, queijos, pães. Reserve com antecedencia.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/10</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Canela: Cascata do Caracol</h3>
+            <p class="slide-body">131 metros de queda livre. Suba de bondinho ou desca a escadaria de 927 degraus. A vista compensa cada passo.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/10</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Le Jardin Parque de Lavanda</h3>
+            <p class="slide-body">Campos de lavanda com vista pra serra. Fotos incriveis, oleos essenciais e uma experiencia sensorial unica.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/10</span>
+            <span class="slide-number">06</span>
+            <h3 class="slide-heading">Experiencia gastro na Rua Coberta</h3>
+            <p class="slide-body">Fondues, massas artesanais e vinho quente. A noite, musica ao vivo e aquela sensacao de Europa no Brasil.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">8/10</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 16px; font-size: 1.2rem;">+4 experiencias</h3>
+            <ol class="summary-list">
+              <li><span class="num">7.</span> Snowland — neve o ano todo</li>
+              <li><span class="num">8.</span> Mini Mundo — maquetes em miniatura</li>
+              <li><span class="num">9.</span> Alambique Flor do Mato — cachaca artesanal</li>
+              <li><span class="num">10.</span> Passeio de Maria-Fumaca ate Bento</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">9/10</span>
+            <span class="slide-icon">🍫</span>
+            <h3 class="slide-heading">Comenta <span class="gold">GRAMADO</span> pra receber o roteiro completo</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e compartilha com quem ama a Serra Gaucha.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">10/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 13: Portugal 7 Razoes               -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c13">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 13 - Portugal: 7 Razoes Pra Ir em 2026</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap13')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap13">Se voce nunca foi pra Europa, Portugal e o destino PERFEITO pra comecar. 🇵🇹
+
+Idioma, comida, hospitalidade, preco justo e beleza de tirar o folego. A gente te da 7 razoes pra ir em 2026.
+
+Comenta PORTUGAL que a gente te manda o roteiro. ✈️
+
+#Portugal #ViagemPortugal #Lisboa #Porto #Europa2026 #RottaCuradoria #PrimeiraViagemEuropa
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🇵🇹</span>
+            <h3 class="slide-heading">Portugal: <span class="gold">7 razoes</span> pra ir em 2026</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">A primeira viagem perfeita pra Europa</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/10</span>
+            <span class="slide-label">Razao</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Voce fala o idioma</h3>
+            <p class="slide-body">Sem barreira de comunicacao. Cardapio, placa, conversa com locais — tudo em portugues. Isso muda TUDO na experiencia.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/10</span>
+            <span class="slide-label">Razao</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Gastronomia de outro nivel</h3>
+            <p class="slide-body">Pastel de nata, bacalhau em mil versoes, vinho do Porto, queijos artesanais. Comer bem em Portugal e acessivel.</p>
+            <p class="slide-solution">Jantar completo com vinho: R$100-180 por pessoa.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/10</span>
+            <span class="slide-label">Razao</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Um dos paises mais seguros do mundo</h3>
+            <p class="slide-body">Portugal esta consistentemente no top 10 de paises mais seguros. Andar a noite pelas ruas e tranquilo.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/10</span>
+            <span class="slide-label">Razao</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Custo-beneficio excelente</h3>
+            <p class="slide-body">Mais barato que Franca, Italia e Espanha. Hospedagem, transporte e alimentacao custam 30-40% menos.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/10</span>
+            <span class="slide-label">Razao</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Paisagens diversas num pais pequeno</h3>
+            <p class="slide-body">Praias do Algarve, vinhedos do Douro, falesias de Sintra, ruas coloridas de Lisboa. Tudo a menos de 3h de carro.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/10</span>
+            <span class="slide-label">Razao</span>
+            <span class="slide-number">06</span>
+            <h3 class="slide-heading">Porto + Lisboa = combo perfeito</h3>
+            <p class="slide-body">3 dias em Lisboa, 3 dias no Porto, 1 dia em Sintra. Roteiro classico, completo e que funciona de verdade.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">8/10</span>
+            <span class="slide-label">Razao</span>
+            <span class="slide-number">07</span>
+            <h3 class="slide-heading">Porta de entrada pra Europa</h3>
+            <p class="slide-body">De Lisboa voce voa pra qualquer capital europeia em 2-3h. Combine Portugal com Espanha, Franca ou Marrocos.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">9/10</span>
+            <span class="icon-plane">✈️</span>
+            <h3 class="slide-heading">Comenta <span class="gold">PORTUGAL</span> que a gente te manda o roteiro</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e compartilha com quem sonha em conhecer a Europa.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">10/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 14: 5 Destinos Romanticos           -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c14">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 14 - 5 Destinos Romanticos Que Nao Sao Paris</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap14')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap14">Destino romantico nao precisa ser Paris. 💛
+
+Tem lugares no mundo que sao MUITO mais especiais (e menos lotados) pra uma viagem a dois. A gente separou 5.
+
+Marca quem voce levaria e comenta ROMANTICO pra mais dicas. 💕
+
+#DestinosRomanticos #ViagemACasal #ViagemRomantica #LuaDeMel #RottaCuradoria #DicasDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">💛</span>
+            <h3 class="slide-heading">5 destinos <span class="gold">romanticos</span> que nao sao Paris</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Marca quem voce levaria</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <span class="slide-label">Destino</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Santorini, Grecia</h3>
+            <p class="slide-body">Por do sol em Oia, jantar com vista pro mar Egeu, casinhas brancas com detalhes azuis. O cartao-postal do romance.</p>
+            <p class="slide-solution">Melhor epoca: maio-junho ou setembro-outubro. Menos turista e precos melhores.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <span class="slide-label">Destino</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Bruges, Belgica</h3>
+            <p class="slide-body">A Veneza do Norte. Canais, pontes medievais, chocolate artesanal e cerveja monge. Intimista e apaixonante.</p>
+            <p class="slide-solution">Perfeito pra 2-3 dias. Combine com Amsterdam ou Bruxelas.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <span class="slide-label">Destino</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Mendoza, Argentina</h3>
+            <p class="slide-body">Vinicolas com vista pra Cordilheira, jantares harmonizados, spa e montanha. Romance com vinho e sem visto.</p>
+            <p class="slide-solution">Custo-beneficio incrivel. A partir de R$4.500/casal com tudo.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <span class="slide-label">Destino</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Cartagena, Colombia</h3>
+            <p class="slide-body">Cidade murada, cores vibrantes, praias caribenhas e noites de salsa. Um destino sensorial e apaixonante.</p>
+            <p class="slide-solution">Sem visto. Voo direto de SP. 3-4 dias sao ideais.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <span class="slide-label">Destino</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Cinque Terre, Italia</h3>
+            <p class="slide-body">5 vilas coloridas penduradas nas falesias. Trilhas a beira-mar, gelato artesanal e pesto fresco. Cinema na vida real.</p>
+            <p class="slide-solution">Fique em Manarola ou Riomaggiore. As menores e mais romanticas.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">5 destinos romanticos</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Santorini — por do sol inesquecivel</li>
+              <li><span class="num">2.</span> Bruges — charme medieval</li>
+              <li><span class="num">3.</span> Mendoza — vinho e montanha</li>
+              <li><span class="num">4.</span> Cartagena — cores e ritmo</li>
+              <li><span class="num">5.</span> Cinque Terre — vilas dos sonhos</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="slide-icon">💕</span>
+            <h3 class="slide-heading">Comenta <span class="gold">ROMANTICO</span> pra receber mais dicas</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e marca quem voce levaria pra um desses destinos.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 15: Viajar em Casal Sem Brigar      -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c15">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 15 - Como Viajar em Casal Sem Brigar</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap15')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap15">Viajar em casal e maravilhoso... quando ninguem briga. 😅
+
+A gente separou as dicas que FUNCIONAM pra voces curtirem a viagem juntos sem estresse.
+
+Marca seu amor aqui e comenta CASAL. 💛
+
+#ViagemACasal #DicasDeViagem #ViajarJuntos #RelacionamentoSaudavel #RottaCuradoria #CasalViajante
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">💑</span>
+            <h3 class="slide-heading">Como viajar em casal <span class="gold">sem brigar</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Testado e aprovado por nos</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Planejem juntos desde o inicio</h3>
+            <p class="slide-body">Nao decida tudo sozinho. Cada um escolhe 2-3 atividades que quer muito fazer. Isso evita frustracao.</p>
+            <p class="slide-solution">Faca uma lista cada um e compare. As coincidencias viram prioridade.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Alinhem o orcamento antes</h3>
+            <p class="slide-body">Dinheiro e a principal causa de estresse. Definam quanto cada um pode gastar e respeitem o limite.</p>
+            <p class="slide-solution">Dica: criem um fundo comum pra gastos compartilhados (hospedagem, comida, passeios).</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Respeitem o tempo de cada um</h3>
+            <p class="slide-body">Um quer museu, o outro quer praia. Tudo bem se separar por algumas horas. Nao precisa fazer tudo grudado.</p>
+            <p class="slide-solution">O reencontro depois e ainda melhor. Voces tem coisas novas pra contar.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Nao lotem a agenda</h3>
+            <p class="slide-body">Roteiro apertado = cansaco = briga. Deixem pelo menos 1 periodo livre por dia pra descansar ou improvisar.</p>
+            <p class="slide-solution">As melhores memorias vem dos momentos nao planejados.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Comuniquem antes de explodir</h3>
+            <p class="slide-body">Cansou? Fala. Com fome? Fala. Nao quer ir naquele lugar? Fala. Guardar frustracao so piora.</p>
+            <p class="slide-solution">Combinem um codigo: "preciso de um cafe" = preciso de uma pausa.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">5 regras de ouro</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Planejem juntos</li>
+              <li><span class="num">2.</span> Alinhem o orcamento</li>
+              <li><span class="num">3.</span> Respeitem o tempo individual</li>
+              <li><span class="num">4.</span> Nao lotem a agenda</li>
+              <li><span class="num">5.</span> Comuniquem antes de explodir</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="slide-icon">💛</span>
+            <h3 class="slide-heading">Marca seu amor e comenta <span class="gold">CASAL</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva pra proxima viagem a dois.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 16: Escapadas de Fim de Semana      -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c16">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 16 - Escapadas de Fim de Semana: 5 Ideias</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap16')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap16">Nao precisa esperar as ferias pra viajar. 🗓️
+
+5 escapadas de fim de semana que voce consegue fazer a partir das principais cidades do Brasil. 2-3 dias, sem complicacao.
+
+Comenta ESCAPAR que a gente te manda mais opcoes. ✨
+
+#EscapadaDeFimDeSemana #ViagemCurta #FinalDeSemana #DestinosPertoDeMim #RottaCuradoria #Bateevolta
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🗓️</span>
+            <h3 class="slide-heading">Escapadas de fim de semana: <span class="gold">5 ideias</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Nao precisa esperar as ferias</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <span class="slide-label">Escapada</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Monte Verde - MG</h3>
+            <p class="slide-body">A 4h de SP. Friozinho, fondue, trilhas e pousadas charmosas. Perfeito pra desconectar do caos da cidade.</p>
+            <p class="slide-solution">Custo estimado: R$800-1.500/casal (2 noites com alimentacao).</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <span class="slide-label">Escapada</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Ilha Grande - RJ</h3>
+            <p class="slide-body">Praias paradisiacas sem carro. Lopes Mendes, Lagoa Azul, trilhas na mata. Um reset completo.</p>
+            <p class="slide-solution">Custo estimado: R$1.000-2.000/casal (2 noites com passeios de barco).</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <span class="slide-label">Escapada</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Campos do Jordao - SP</h3>
+            <p class="slide-body">Arquitetura europeia, cervejarias artesanais, Palacio Boa Vista e o Horto Florestal. Charme o ano todo.</p>
+            <p class="slide-solution">Custo estimado: R$900-1.800/casal (2 noites com gastronomia).</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <span class="slide-label">Escapada</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Morretes + Ilha do Mel - PR</h3>
+            <p class="slide-body">Trem pela Serra do Mar + barreado em Morretes + travessia de barco pra Ilha do Mel. Combo perfeito.</p>
+            <p class="slide-solution">Custo estimado: R$800-1.400/casal (2 noites com transporte).</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <span class="slide-label">Escapada</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Paraty - RJ</h3>
+            <p class="slide-body">Centro historico pe na areia, praias selvagens, cachacarias e passeios de barco. Historia e natureza juntas.</p>
+            <p class="slide-solution">Custo estimado: R$1.000-1.800/casal (2 noites com passeios).</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">5 escapadas</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Monte Verde — frio e aconchego</li>
+              <li><span class="num">2.</span> Ilha Grande — praias sem carro</li>
+              <li><span class="num">3.</span> Campos do Jordao — charme serrano</li>
+              <li><span class="num">4.</span> Morretes + Ilha do Mel — aventura</li>
+              <li><span class="num">5.</span> Paraty — historia e mar</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="slide-icon">✨</span>
+            <h3 class="slide-heading">Comenta <span class="gold">ESCAPAR</span> que a gente te manda mais opcoes</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva pra quando precisar e compartilha com quem merece uma pausa.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 17: Viajar Com Criancas             -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c17">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 17 - Viajar Com Criancas: Guia de Sobrevivencia</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap17')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap17">Viajar com criancas parece impossivel? Nao e. 👶✈️
+
+A gente reuniu as dicas que realmente funcionam pra voce viajar em familia sem enlouquecer.
+
+Comenta CRIANCAS que a gente te manda o guia completo. 🧸
+
+#ViajarComCriancas #ViagemEmFamilia #DicasDeMae #DicasDePai #TurismoFamiliar #RottaCuradoria
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">👶</span>
+            <h3 class="slide-heading">Viajar com criancas: <span class="gold">guia de sobrevivencia</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Sem pânico, com planejamento</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Escolha destinos kid-friendly</h3>
+            <p class="slide-body">Praias, resorts, parques. Evite destinos com muita caminhada ou programacao noturna se as criancas sao pequenas.</p>
+            <p class="slide-solution">Orlando, Cancun, Porto de Galinhas e Gramado sao otimas opcoes.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Leve snacks e entretenimento</h3>
+            <p class="slide-body">Biscoitos, frutas secas, suco de caixinha. Tablet carregado, livrinhos, massinha. Salva no aviao e no restaurante.</p>
+            <p class="slide-solution">Kit de sobrevivencia: mochila so com itens da crianca pra ter a mao.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Respeite o ritmo deles</h3>
+            <p class="slide-body">Crianca cansada = birra garantida. Nao tente fazer 5 atracoess por dia. 2 atividades + descanso = equilibrio.</p>
+            <p class="slide-solution">Horario da soneca e sagrado. Planeje as atividades em torno dele.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Documentacao especial pra menores</h3>
+            <p class="slide-body">Autorizacao de viagem se um dos pais nao vai. Certidao de nascimento. Passaporte do menor com validade.</p>
+            <p class="slide-solution">Confira no site da Policia Federal as regras atualizadas pra viagem de menores.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Hospedagem com cozinha</h3>
+            <p class="slide-body">Apartamento ou suite com cozinha: esquenta mamadeira, prepara lanche, lava roupa. Muito mais pratico que hotel.</p>
+            <p class="slide-solution">Airbnb e apart-hoteis sao ideais pra familias com criancas pequenas.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">06</span>
+            <h3 class="slide-heading">Seguro viagem com cobertura pediatrica</h3>
+            <p class="slide-body">Crianca doente no exterior sem seguro e pesadelo. Contrate um plano que cubra pediatria e emergencia.</p>
+            <p class="slide-solution">Confira se o seguro cobre consulta ambulatorial alem de emergencia.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">8/10</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">Guia resumido</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Destinos kid-friendly</li>
+              <li><span class="num">2.</span> Snacks e entretenimento</li>
+              <li><span class="num">3.</span> Respeite o ritmo deles</li>
+              <li><span class="num">4.</span> Documentacao de menores</li>
+              <li><span class="num">5.</span> Hospedagem com cozinha</li>
+              <li><span class="num">6.</span> Seguro com cobertura pediatrica</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">9/10</span>
+            <span class="slide-icon">🧸</span>
+            <h3 class="slide-heading">Comenta <span class="gold">CRIANCAS</span> que a gente te manda o guia completo</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e compartilha com pais que estao planejando viajar.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">10/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 18: Disney Pela Primeira Vez        -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c18">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 18 - Disney Pela Primeira Vez: O Que Saber</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap18')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap18">Primeira vez na Disney? Esse carrossel e OBRIGATORIO. 🏰
+
+Dicas que vao fazer voce aproveitar MUITO mais, gastar menos e evitar os erros mais comuns.
+
+Comenta DISNEY que a gente te manda o guia completo. ✨
+
+#Disney #DisneyPrimeiraVez #DicasDisney #OrlandoDisney #MagicKingdom #RottaCuradoria #ViagemDisney
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🏰</span>
+            <h3 class="slide-heading">Disney pela primeira vez: <span class="gold">o que saber</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Dicas essenciais pra primeira viagem</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Baixe o app My Disney Experience</h3>
+            <p class="slide-body">Mapa, filas em tempo real, agendamento de Lightning Lane, pedido de comida. TUDO esta no app.</p>
+            <p class="slide-solution">Configure antes de ir. Vincule ingressos e reservas ao app.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Chegue na abertura dos portoes</h3>
+            <p class="slide-body">As primeiras 2 horas tem fila MUITO menor. Voce faz em 2h o que faria em 5h depois do almoco.</p>
+            <p class="slide-solution">Comece pelas atracoes mais populares: Seven Dwarfs Mine Train, Space Mountain, etc.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Nao tente fazer tudo em 1 dia</h3>
+            <p class="slide-body">Sao 4 parques Disney + 2 Universal. Dedique pelo menos 1 dia inteiro a cada parque. Sem correria.</p>
+            <p class="slide-solution">Magic Kingdom merece 1.5 dia se for sua primeira vez.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Leve garrafa de agua e snacks</h3>
+            <p class="slide-body">Comida no parque e cara (US$15-25 por refeicao). Leve agua congelada e snacks na mochila pra economizar.</p>
+            <p class="slide-solution">Dica: os bebedouros dos parques dao agua filtrada de graca. Use sua garrafa.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Lightning Lane: vale a pena?</h3>
+            <p class="slide-body">Paga pra furar fila. Em alta temporada, VALE MUITO. Na baixa, da pra viver sem.</p>
+            <p class="slide-solution">Priorize nos parques mais lotados (Magic Kingdom e Hollywood Studios).</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/10</span>
+            <span class="slide-label">Dica</span>
+            <span class="slide-number">06</span>
+            <h3 class="slide-heading">Melhor epoca pra ir</h3>
+            <p class="slide-body">Janeiro (apos dia 10), fevereiro, maio e setembro sao os meses com menos gente e precos menores.</p>
+            <p class="slide-solution">Evite: semana de Acao de Gracas, Natal, ferias americanas de julho.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">8/10</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">6 dicas essenciais</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> App My Disney Experience</li>
+              <li><span class="num">2.</span> Chegue na abertura</li>
+              <li><span class="num">3.</span> 1 parque por dia</li>
+              <li><span class="num">4.</span> Leve agua e snacks</li>
+              <li><span class="num">5.</span> Lightning Lane estrategico</li>
+              <li><span class="num">6.</span> Escolha a epoca certa</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">9/10</span>
+            <span class="slide-icon">✨</span>
+            <h3 class="slide-heading">Comenta <span class="gold">DISNEY</span> que a gente te manda o guia completo</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e compartilha com quem vai pra Disney pela primeira vez.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">10/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 19: Destinos Brasil Pra Familia     -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c19">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 19 - Destinos No Brasil Perfeitos Pra Familia</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap19')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap19">O Brasil tem destinos INCRIVEIS pra viajar em familia. 🇧🇷
+
+A gente separou 7 que combinam diversao pras criancas com descanso pros pais. Sem passaporte, sem complicacao.
+
+Comenta FAMILIA pra receber mais dicas. 👨‍👩‍👧‍👦
+
+#DestinosBrasil #ViagemEmFamilia #TurismoBrasil #FeriasFamilia #RottaCuradoria #DicasDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🇧🇷</span>
+            <h3 class="slide-heading">Destinos no Brasil <span class="gold">perfeitos</span> pra familia</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">7 opcoes sem passaporte</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/10</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Gramado e Canela - RS</h3>
+            <p class="slide-body">Mini Mundo, Snowland, Cascata do Caracol, chocolate. Criancas amam e adultos descansam.</p>
+            <p class="slide-solution">Melhor epoca: junho-agosto (frio) ou dezembro (Natal Luz).</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/10</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Porto de Galinhas - PE</h3>
+            <p class="slide-body">Piscinas naturais com peixinhos coloridos. As criancas ficam horas na agua. Praia calma e segura.</p>
+            <p class="slide-solution">Jangada ate as piscinas naturais: R$30-40/pessoa. Imperdivel.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/10</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Bonito - MS</h3>
+            <p class="slide-body">Flutuacao em rios cristalinos, grutas, cachoeiras. Natureza pura. Criancas a partir de 5 anos aproveitam muito.</p>
+            <p class="slide-solution">Reserve os passeios online com antecedencia. Os melhores esgotam.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/10</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Foz do Iguacu - PR</h3>
+            <p class="slide-body">Cataratas (uma das 7 maravilhas), Parque das Aves, Itaipu. Educativo e emocionante pra toda a familia.</p>
+            <p class="slide-solution">3-4 dias sao ideais. Combine com o lado argentino.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/10</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Arraial d'Ajuda - BA</h3>
+            <p class="slide-body">Praias com falesias coloridas, parque aquatico Eco Parque, vila charmosa. Relaxante e divertido.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/10</span>
+            <span class="slide-number">06</span>
+            <h3 class="slide-heading">Caldas Novas - GO</h3>
+            <p class="slide-body">Aguas termais naturais, parques aquaticos (Hot Park, diRoma). Resort com tudo incluso. So diversao.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">8/10</span>
+            <span class="slide-number">07</span>
+            <h3 class="slide-heading">Beto Carrero World - SC</h3>
+            <p class="slide-body">O maior parque tematico da America Latina. Montanhas-russas, zoo, shows ao vivo. 1-2 dias inteiros.</p>
+            <p class="slide-solution">Combine com Balneario Camboriu pra praia + parque.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">9/10</span>
+            <span class="slide-icon">👨‍👩‍👧‍👦</span>
+            <h3 class="slide-heading">Comenta <span class="gold">FAMILIA</span> pra receber mais dicas</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e compartilha com familias que estao planejando ferias.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">10/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 20: Viagem em Grupo Sem Estresse    -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c20">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 20 - Como Organizar Viagem em Grupo Sem Estresse</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap20')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap20">Viagem em grupo e maravilhoso... ate alguem sumir com o dinheiro do Uber. 😂
+
+A gente separou as regras que FUNCIONAM pra viajar com amigos ou familia sem ninguem sair brigado.
+
+Comenta GRUPO que a gente te manda o checklist de organizacao. 🤝
+
+#ViagemEmGrupo #ViajarComAmigos #DicasDeViagem #OrganizacaoDeViagem #RottaCuradoria #GrupoDeAmigos
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🤝</span>
+            <h3 class="slide-heading">Como organizar viagem em grupo <span class="gold">sem estresse</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Regras que salvam amizades</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <span class="slide-label">Regra</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Eleja um organizador (ou dois)</h3>
+            <p class="slide-body">Grupo grande sem lider = caos. Alguem precisa centralizar decisoes, reservas e prazos.</p>
+            <p class="slide-solution">O organizador decide logistica. O grupo vota nas experiencias. Equilibrio.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <span class="slide-label">Regra</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Alinhem o orcamento ANTES</h3>
+            <p class="slide-body">Nem todo mundo tem o mesmo padrao de gasto. Definam faixas: hospedagem, alimentacao, passeios.</p>
+            <p class="slide-solution">Use Splitwise ou planilha compartilhada. Transparencia evita problema.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <span class="slide-label">Regra</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Facam votacao pras atividades</h3>
+            <p class="slide-body">Crie uma lista de opcoes e deixe cada um votar nas 3 favoritas. As mais votadas entram no roteiro.</p>
+            <p class="slide-solution">Google Forms funciona perfeito pra isso. 5 minutos e esta resolvido.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <span class="slide-label">Regra</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Deixem tempo livre obrigatorio</h3>
+            <p class="slide-body">Nem todo mundo quer fazer as mesmas coisas o tempo todo. Bloqueie periodos livres no roteiro.</p>
+            <p class="slide-solution">Manha juntos, tarde livre, jantar juntos. Formula que funciona.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <span class="slide-label">Regra</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Combinem regras de quarto</h3>
+            <p class="slide-body">Quem ronca? Quem dorme tarde? Quem acorda cedo? Dividam quartos por compatibilidade, nao por economia.</p>
+            <p class="slide-solution">Investir R$50 a mais no quarto certo evita 5 dias de estresse.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">5 regras do grupo</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Eleja um organizador</li>
+              <li><span class="num">2.</span> Alinhe orcamento</li>
+              <li><span class="num">3.</span> Vote nas atividades</li>
+              <li><span class="num">4.</span> Tempo livre obrigatorio</li>
+              <li><span class="num">5.</span> Regras de quarto</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="slide-icon">🙌</span>
+            <h3 class="slide-heading">Comenta <span class="gold">GRUPO</span> que a gente te manda o checklist</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e manda no grupo do WhatsApp da viagem.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 21: 5 Destinos Pra Grupos           -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c21">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 21 - 5 Destinos Perfeitos Pra Grupos de Amigos</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap21')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap21">Viagem com amigos e o tipo de memoria que dura pra sempre. 🎉
+
+A gente separou 5 destinos PERFEITOS pra grupos: aventura, festas, natureza e muita historia pra contar.
+
+Manda pro grupo e comenta AMIGOS. 👊
+
+#ViagemComAmigos #GrupoDeAmigos #DestinosGrupo #DespedidaDeSolteiro #RottaCuradoria #ViagemDeAmigos
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🎉</span>
+            <h3 class="slide-heading">5 destinos perfeitos pra <span class="gold">grupos de amigos</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Manda pro grupo do WhatsApp</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/9</span>
+            <span class="slide-label">Destino</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">Jericoacoara - CE</h3>
+            <p class="slide-body">Duna do por do sol, lagoas cristalinas, festa a noite, kitesurf. Energia unica e preco acessivel pra grupo.</p>
+            <p class="slide-solution">Aluguem uma casa: sai mais barato e mais divertido que hotel.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/9</span>
+            <span class="slide-label">Destino</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">Buenos Aires - Argentina</h3>
+            <p class="slide-body">Gastronomia de primeiro mundo, vida noturna ate o amanhecer, futebol, tango e shopping. Sem visto.</p>
+            <p class="slide-solution">Custo-beneficio incrivel pro grupo. Churrasco argentino divide facil.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/9</span>
+            <span class="slide-label">Destino</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">Chapada dos Veadeiros - GO</h3>
+            <p class="slide-body">Trilhas, cachoeiras, ceu estrelado e fogueira. Pra turma que curte natureza e aventura. Desconexao total.</p>
+            <p class="slide-solution">Fiquem em Alto Paraiso. Melhor base com restaurantes e pousadas.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/9</span>
+            <span class="slide-label">Destino</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">Cancun - Mexico</h3>
+            <p class="slide-body">All-inclusive com open bar, praias caribenhas, cenotes, ruinas maias. Diversao garantida pra qualquer perfil de grupo.</p>
+            <p class="slide-solution">All-inclusive divide por pessoa: a partir de R$400/dia com tudo incluso.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/9</span>
+            <span class="slide-label">Destino</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">Lisboa - Portugal</h3>
+            <p class="slide-body">Bar crawl pelo Bairro Alto, pasteis de Belem, mirantes, dia de praia em Cascais. Grupo grande se diverte muito.</p>
+            <p class="slide-solution">Hostel boutique ou Airbnb grande: economiza e mantem o grupo junto.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/9</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">5 destinos pra galera</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Jericoacoara — praia e festa</li>
+              <li><span class="num">2.</span> Buenos Aires — gastronomia e noite</li>
+              <li><span class="num">3.</span> Chapada — natureza e aventura</li>
+              <li><span class="num">4.</span> Cancun — all-inclusive caribenho</li>
+              <li><span class="num">5.</span> Lisboa — charme europeu</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">8/9</span>
+            <span class="slide-icon">👊</span>
+            <h3 class="slide-heading">Manda pro grupo e comenta <span class="gold">AMIGOS</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e marca a galera que precisa ver isso.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">9/9</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 22: Mitos Sobre Viagem              -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c22">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 22 - Mitos Sobre Viagem Que Voce Ainda Acredita</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap22')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap22">Quantos desses mitos voce ainda acredita? 🤔
+
+Viajar e caro, perigoso, complicado... sera? A gente derruba 6 mitos que impedem as pessoas de realizar o sonho de viajar.
+
+Comenta MITOS que a gente te mostra como comecar. 💡
+
+#MitosDeViagem #ViajarEPossivel #DicasDeViagem #VerdadeSobreViajar #RottaCuradoria #PrimeiraViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">🤔</span>
+            <h3 class="slide-heading">Mitos sobre viagem que voce <span class="coral">ainda acredita</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Quantos desses voce ja repetiu?</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/10</span>
+            <span class="slide-label">Mito</span>
+            <span class="slide-number">01</span>
+            <h3 class="slide-heading">"Viajar e so pra quem tem dinheiro"</h3>
+            <p class="slide-body">Mito. Mendoza custa menos que um celular novo. Buenos Aires e mais barato que muita praia brasileira.</p>
+            <p class="slide-solution">Verdade: viajar e questao de planejamento, nao de renda alta.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/10</span>
+            <span class="slide-label">Mito</span>
+            <span class="slide-number">02</span>
+            <h3 class="slide-heading">"Preciso falar ingles fluente"</h3>
+            <p class="slide-body">Mito. Google Translate, linguagem corporal e boa vontade resolvem 90% das situacoes. Ninguem espera fluencia de turista.</p>
+            <p class="slide-solution">Verdade: aprenda 20 frases basicas e o app resolve o resto.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/10</span>
+            <span class="slide-label">Mito</span>
+            <span class="slide-number">03</span>
+            <h3 class="slide-heading">"E muito perigoso viajar sozinha"</h3>
+            <p class="slide-body">Mito. Milhoes de mulheres viajam sozinhas pelo mundo todo. Com precaucoes basicas (as mesmas do Brasil), e seguro.</p>
+            <p class="slide-solution">Verdade: pesquise o destino, compartilhe localizacao e confie no seu instinto.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/10</span>
+            <span class="slide-label">Mito</span>
+            <span class="slide-number">04</span>
+            <h3 class="slide-heading">"Tem que juntar tudo antes"</h3>
+            <p class="slide-body">Mito. Passagens parcelam em 10x. Hospedagem parcela. Voce pode comecar a planejar com R$0 na conta.</p>
+            <p class="slide-solution">Verdade: comece planejando, o dinheiro acompanha. Nao espere "o momento certo".</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/10</span>
+            <span class="slide-label">Mito</span>
+            <span class="slide-number">05</span>
+            <h3 class="slide-heading">"Organizar viagem e muito complicado"</h3>
+            <p class="slide-body">Mito. Booking, Google Flights, Airbnb, Wise. Com 4 apps voce organiza uma viagem inteira do celular.</p>
+            <p class="slide-solution">Verdade: ou voce aprende em 2h, ou contrata quem faz por voce (oi, Rotta!).</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/10</span>
+            <span class="slide-label">Mito</span>
+            <span class="slide-number">06</span>
+            <h3 class="slide-heading">"Ferias curtas nao valem a pena"</h3>
+            <p class="slide-body">Mito. Um fim de semana em Monte Verde, 4 dias em Buenos Aires, 3 dias em Foz. Viagens curtas sao transformadoras.</p>
+            <p class="slide-solution">Verdade: nao precisa de 15 dias. 3 dias bem planejados ja mudam sua energia.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">8/10</span>
+            <span class="slide-label">Resumo</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">6 mitos derrubados</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> "Viajar e caro" — falso</li>
+              <li><span class="num">2.</span> "Preciso de ingles" — falso</li>
+              <li><span class="num">3.</span> "E perigoso" — falso</li>
+              <li><span class="num">4.</span> "Preciso juntar tudo" — falso</li>
+              <li><span class="num">5.</span> "E complicado" — falso</li>
+              <li><span class="num">6.</span> "Ferias curtas nao valem" — falso</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">9/10</span>
+            <span class="slide-icon">💡</span>
+            <h3 class="slide-heading">Comenta <span class="gold">MITOS</span> que a gente te mostra como comecar</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva e compartilha com quem ainda acha que viajar e impossivel.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">10/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CAROUSEL 23: Quanto Custa 10 Destinos        -->
+    <!-- ============================================ -->
+    <section class="carousel-section" id="c23">
+      <div class="carousel-header">
+        <h2 class="carousel-section-title">Carrossel 23 - Quanto Custa Viajar Pra 10 Destinos</h2>
+        <button class="btn-copiar" onclick="copiarLegenda(this, 'cap23')">Copiar legenda</button>
+      </div>
+      <div class="caption-box" id="cap23">Quanto custa viajar pra 10 destinos diferentes? A gente fez as contas pra voce. 💰
+
+Valores reais de 2026, casal, 7 dias, com conforto. Do mais barato ao mais caro.
+
+Salva, compara e comenta QUANTO pra receber o detalhamento completo. 📊
+
+#QuantoCustaViajar #ComparacaoDeDestinos #DicasDeViagem #OrcamentoViagem #RottaCuradoria #PlanejamentoDeViagem
+
+Curado por Marcelo & Alexandra 🧭</div>
+      <div class="carousel-wrapper">
+        <button class="nav-arrow left hidden" aria-label="Slide anterior">&#8249;</button>
+        <button class="nav-arrow right" aria-label="Proximo slide">&#8250;</button>
+        <div class="carousel-track">
+          <div class="slide cover">
+            <span class="slide-counter">1/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <span class="slide-icon">📊</span>
+            <h3 class="slide-heading">Quanto custa viajar pra <span class="gold">10 destinos</span></h3>
+            <div class="cover-deco"></div>
+            <p class="slide-subtitle">Comparacao real — casal, 7 dias, 2026</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">2/10</span>
+            <span class="slide-label">Mais acessiveis</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px; font-size: 1.2rem;">Destinos <span class="gold">$$</span></h3>
+            <div class="compare-row">
+              <span class="dest">🇦🇷 Buenos Aires</span>
+              <span class="price">R$4.000 - 7.000</span>
+            </div>
+            <div class="compare-row">
+              <span class="dest">🇦🇷 Mendoza</span>
+              <span class="price">R$4.500 - 7.500</span>
+            </div>
+            <div class="compare-row">
+              <span class="dest">🇧🇷 Gramado</span>
+              <span class="price">R$3.500 - 6.000</span>
+            </div>
+            <p class="value-detail" style="margin-top: 12px;">Total por casal, com tudo incluso</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">3/10</span>
+            <span class="slide-label">Intermediarios</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px; font-size: 1.2rem;">Destinos <span class="gold">$$$</span></h3>
+            <div class="compare-row">
+              <span class="dest">🇨🇴 Cartagena</span>
+              <span class="price">R$6.000 - 10.000</span>
+            </div>
+            <div class="compare-row">
+              <span class="dest">🇲🇽 Cancun</span>
+              <span class="price">R$8.000 - 14.000</span>
+            </div>
+            <div class="compare-row">
+              <span class="dest">🇵🇹 Portugal</span>
+              <span class="price">R$12.000 - 20.000</span>
+            </div>
+            <p class="value-detail" style="margin-top: 12px;">Total por casal, com tudo incluso</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">4/10</span>
+            <span class="slide-label">Premium</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px; font-size: 1.2rem;">Destinos <span class="gold">$$$$</span></h3>
+            <div class="compare-row">
+              <span class="dest">🇮🇹 Italia</span>
+              <span class="price">R$15.000 - 27.000</span>
+            </div>
+            <div class="compare-row">
+              <span class="dest">🇬🇷 Grecia</span>
+              <span class="price">R$16.000 - 28.000</span>
+            </div>
+            <div class="compare-row">
+              <span class="dest">🇺🇸 Orlando</span>
+              <span class="price">R$18.000 - 30.000</span>
+            </div>
+            <div class="compare-row">
+              <span class="dest">🇭🇷 Croacia</span>
+              <span class="price">R$13.000 - 22.000</span>
+            </div>
+            <p class="value-detail" style="margin-top: 12px;">Total por casal, com tudo incluso</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">5/10</span>
+            <span class="slide-label">O que esta incluso</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">Cada valor considera</h3>
+            <ul class="checklist">
+              <li class="gold-item"><span class="checkbox"></span>Passagens aereas (ida e volta)</li>
+              <li class="gold-item"><span class="checkbox"></span>Hospedagem 7 noites</li>
+              <li class="gold-item"><span class="checkbox"></span>Alimentacao completa</li>
+              <li class="gold-item"><span class="checkbox"></span>Transporte interno</li>
+              <li class="gold-item"><span class="checkbox"></span>Passeios e experiencias</li>
+              <li class="gold-item"><span class="checkbox"></span>Seguro viagem</li>
+            </ul>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">6/10</span>
+            <span class="slide-icon">💡</span>
+            <h3 class="slide-heading">Como interpretar os valores</h3>
+            <p class="slide-body">O valor MENOR e viajando na meia temporada, com antecedencia e sendo estrategico. O MAIOR e alta temporada, mais conforto.</p>
+            <p class="slide-solution">A diferenca entre os dois? Planejamento. So isso.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">7/10</span>
+            <span class="slide-icon">📈</span>
+            <h3 class="slide-heading">Parcelamento muda tudo</h3>
+            <p class="slide-body">Buenos Aires em 12x: R$330/mes por pessoa. Italia em 12x: R$625/mes por pessoa. E o preco de uma academia premium.</p>
+            <p class="slide-solution">Nao olhe o valor total. Olhe o quanto cabe no seu mes.</p>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide">
+            <span class="slide-counter">8/10</span>
+            <span class="slide-label">Ranking</span>
+            <h3 class="slide-heading" style="margin-bottom: 20px;">Do mais barato ao mais caro</h3>
+            <ol class="summary-list">
+              <li><span class="num">1.</span> Gramado — R$3.500+</li>
+              <li><span class="num">2.</span> Buenos Aires — R$4.000+</li>
+              <li><span class="num">3.</span> Mendoza — R$4.500+</li>
+              <li><span class="num">4.</span> Cartagena — R$6.000+</li>
+              <li><span class="num">5.</span> Cancun — R$8.000+</li>
+              <li><span class="num">6.</span> Portugal — R$12.000+</li>
+              <li><span class="num">7.</span> Croacia — R$13.000+</li>
+              <li><span class="num">8.</span> Italia — R$15.000+</li>
+              <li><span class="num">9.</span> Grecia — R$16.000+</li>
+              <li><span class="num">10.</span> Orlando — R$18.000+</li>
+            </ol>
+            <span class="slide-footer">🧭 @rotta.curadoria</span>
+          </div>
+          <div class="slide cta">
+            <span class="slide-counter">9/10</span>
+            <span class="slide-icon">📊</span>
+            <h3 class="slide-heading">Comenta <span class="gold">QUANTO</span> pra receber o detalhamento completo</h3>
+            <div class="cover-deco"></div>
+            <p class="slide-body">Salva, compara e compartilha com quem esta planejando viajar.</p>
+            <p class="signature-handle" style="margin-top:16px">@rotta.curadoria</p>
+          </div>
+          <div class="slide signature">
+            <span class="slide-counter">10/10</span>
+            <span class="rotta-logo-text">Rotta Curadoria</span>
+            <div class="signature-divider"></div>
+            <p class="signature-name">Curado por Marcelo & Alexandra</p>
+            <p class="signature-handle">@rotta.curadoria</p>
+            <div class="signature-divider"></div>
+            <p class="signature-tagline">Viagens com curadoria</p>
+          </div>
+        </div>
+        <div class="dot-indicators"></div>
+      </div>
+    </section>
+
+  </div><!-- /main-content -->
+
+  <script>
+    // Copy caption functionality
+    function copiarLegenda(btn, capId) {
+      var captionBox = document.getElementById(capId);
+      captionBox.classList.toggle('visible');
+
+      if (captionBox.classList.contains('visible')) {
+        var text = captionBox.textContent;
+        navigator.clipboard.writeText(text).then(function() {
+          btn.textContent = 'Copiado!';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.textContent = 'Copiar legenda';
+            btn.classList.remove('copied');
+          }, 2000);
+        }).catch(function() {
+          // Fallback for older browsers
+          var range = document.createRange();
+          range.selectNode(captionBox);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+          document.execCommand('copy');
+          window.getSelection().removeAllRanges();
+          btn.textContent = 'Copiado!';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.textContent = 'Copiar legenda';
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      }
+    }
+
+    // Carousel navigation
+    document.querySelectorAll('.carousel-wrapper').forEach(function(wrapper) {
+      var track = wrapper.querySelector('.carousel-track');
+      var leftBtn = wrapper.querySelector('.nav-arrow.left');
+      var rightBtn = wrapper.querySelector('.nav-arrow.right');
+      var dotsContainer = wrapper.querySelector('.dot-indicators');
+      var slides = track.querySelectorAll('.slide');
+
+      for (var i = 0; i < slides.length; i++) {
+        var dot = document.createElement('span');
+        dot.className = 'dot';
+        if (i === 0) dot.className = 'dot active';
+        dotsContainer.appendChild(dot);
+      }
+
+      var dots = dotsContainer.querySelectorAll('.dot');
+
+      function getSlideWidth() {
+        var slide = slides[0];
+        return slide.offsetWidth + 20;
+      }
+
+      function updateState() {
+        var scrollLeft = track.scrollLeft;
+        var slideWidth = getSlideWidth();
+        var currentIndex = Math.round(scrollLeft / slideWidth);
+
+        if (currentIndex < 0) currentIndex = 0;
+        if (currentIndex >= slides.length) currentIndex = slides.length - 1;
+
+        if (scrollLeft <= 10) {
+          leftBtn.classList.add('hidden');
+        } else {
+          leftBtn.classList.remove('hidden');
+        }
+        if (scrollLeft + track.clientWidth >= track.scrollWidth - 10) {
+          rightBtn.classList.add('hidden');
+        } else {
+          rightBtn.classList.remove('hidden');
+        }
+
+        for (var j = 0; j < dots.length; j++) {
+          dots[j].className = (j === currentIndex) ? 'dot active' : 'dot';
+        }
+      }
+
+      leftBtn.addEventListener('click', function() {
+        track.scrollBy({ left: -getSlideWidth(), behavior: 'smooth' });
+      });
+
+      rightBtn.addEventListener('click', function() {
+        track.scrollBy({ left: getSlideWidth(), behavior: 'smooth' });
+      });
+
+      track.addEventListener('scroll', updateState);
+      updateState();
+    });
+
+    // Smooth scroll for sidebar links
+    document.querySelectorAll('.sidebar a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
