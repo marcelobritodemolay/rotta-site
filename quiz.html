@@ -481,6 +481,9 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
       }
     }
 
+    // Save persona to localStorage for homepage personalization
+    try { localStorage.setItem('rotta_persona', winner); } catch(e) {}
+
     var r = results[winner];
     document.getElementById("resultTitle").textContent = r.title;
     document.getElementById("resultDesc").textContent = r.desc;
