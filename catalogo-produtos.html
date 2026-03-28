@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Produtos | Rotta Curadoria — INTERNO</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --coral:#E8785A;--green:#4CAF7D;--blue:#5B8DEF;
+            --yellow:#E8C94A;--red:#E85A5A
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:1080px;margin:0 auto;padding:0 24px}
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .divider{width:60px;height:1px;background:var(--gold);margin:0 auto;opacity:.3}
+
+        /* Internal Banner */
+        .internal-banner{background:var(--coral);color:#fff;text-align:center;padding:10px;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+
+        /* Nav */
+        nav{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto}
+        nav .logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+        nav .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:24px;transition:color .3s}
+        nav .nav-links a:hover{color:var(--gold)}
+
+        /* Hero */
+        .catalog-hero{padding:80px 24px 60px;text-align:center}
+        .catalog-hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);margin-bottom:16px;line-height:1.2}
+        .catalog-hero h1 em{font-style:italic;color:var(--gold)}
+        .catalog-hero p{color:var(--muted);font-size:16px;max-width:600px;margin:0 auto}
+
+        /* Product Ladder Visual */
+        .ladder{max-width:900px;margin:0 auto 60px;padding:0 24px}
+        .ladder-row{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+        .ladder-level{width:100px;flex-shrink:0;text-align:right;font-family:'Playfair Display',serif;font-size:14px;color:var(--gold)}
+        .ladder-bar{flex:1;height:48px;border-radius:8px;display:flex;align-items:center;padding:0 16px;font-size:13px;font-weight:500;position:relative;transition:all .3s}
+        .ladder-bar:hover{transform:translateX(4px)}
+        .l0-bar{background:rgba(76,175,125,.15);border:1px solid rgba(76,175,125,.3);color:var(--green)}
+        .l1-bar{background:rgba(232,201,74,.12);border:1px solid rgba(232,201,74,.3);color:var(--yellow);width:80%}
+        .l2-bar{background:rgba(197,165,114,.12);border:1px solid rgba(197,165,114,.3);color:var(--gold);width:60%}
+        .l3-bar{background:rgba(232,120,90,.12);border:1px solid rgba(232,120,90,.3);color:var(--coral);width:40%}
+        .l4-bar{background:rgba(91,141,239,.12);border:1px solid rgba(91,141,239,.3);color:var(--blue);width:30%}
+        .ladder-price{margin-left:auto;font-size:12px;opacity:.7}
+        .ladder-count{position:absolute;right:-40px;font-size:11px;color:var(--dim)}
+
+        /* Level Section */
+        .level-section{padding:60px 0;border-top:1px solid var(--layer)}
+        .level-section:nth-child(even){background:var(--card)}
+        .level-header{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+        .level-badge{padding:6px 16px;border-radius:100px;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+        .level-badge.l0{background:rgba(76,175,125,.15);color:var(--green);border:1px solid rgba(76,175,125,.3)}
+        .level-badge.l1{background:rgba(232,201,74,.12);color:var(--yellow);border:1px solid rgba(232,201,74,.3)}
+        .level-badge.l2{background:rgba(197,165,114,.12);color:var(--gold);border:1px solid rgba(197,165,114,.3)}
+        .level-badge.l3{background:rgba(232,120,90,.12);color:var(--coral);border:1px solid rgba(232,120,90,.3)}
+        .level-badge.l4{background:rgba(91,141,239,.12);color:var(--blue);border:1px solid rgba(91,141,239,.3)}
+        .level-header h2{font-family:'Playfair Display',serif;font-size:28px}
+        .level-header .level-price-range{margin-left:auto;font-size:14px;color:var(--dim)}
+
+        /* Product Card */
+        .catalog-grid{display:grid;grid-template-columns:1fr;gap:20px}
+        .catalog-card{background:var(--bg);border:1px solid var(--layer);border-radius:12px;padding:28px 24px;border-left:4px solid var(--gold);position:relative;transition:all .3s}
+        .catalog-card:hover{border-left-color:#D4B87F;box-shadow:0 4px 24px rgba(0,0,0,.3)}
+        .catalog-card .card-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+        .card-number{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--gold);opacity:.3;line-height:1;flex-shrink:0;width:40px}
+        .card-title-block{flex:1;min-width:200px}
+        .card-title-block h3{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px}
+        .card-title-block .card-price{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);font-weight:600}
+
+        /* Status Indicator */
+        .status{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:500;padding:4px 12px;border-radius:100px;flex-shrink:0}
+        .status-green{background:rgba(76,175,125,.15);color:var(--green);border:1px solid rgba(76,175,125,.3)}
+        .status-yellow{background:rgba(232,201,74,.12);color:var(--yellow);border:1px solid rgba(232,201,74,.3)}
+        .status-red{background:rgba(232,90,90,.12);color:var(--red);border:1px solid rgba(232,90,90,.3)}
+        .status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+        .status-green .status-dot{background:var(--green)}
+        .status-yellow .status-dot{background:var(--yellow)}
+        .status-red .status-dot{background:var(--red)}
+
+        /* Card Details */
+        .card-details{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+        .detail-block{background:var(--card);border-radius:8px;padding:16px;border:1px solid var(--layer)}
+        .detail-block .detail-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);margin-bottom:6px}
+        .detail-block p{font-size:13px;color:var(--muted);line-height:1.6}
+
+        /* Footer */
+        footer{padding:48px 0;text-align:center;border-top:1px solid var(--layer)}
+        footer .brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+        footer .tagline{font-size:12px;color:var(--dim);margin-bottom:16px}
+        footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
+
+        @media(max-width:768px){
+            .ladder-row{flex-direction:column;align-items:stretch;gap:4px}
+            .ladder-level{width:auto;text-align:left}
+            .ladder-bar{width:100%!important}
+            .ladder-count{display:none}
+            .catalog-card .card-header{flex-direction:column}
+            .card-details{grid-template-columns:1fr}
+            .level-header{flex-direction:column;align-items:flex-start;gap:8px}
+            .level-header .level-price-range{margin-left:0}
+        }
+    </style>
+</head>
+<body>
+
+<div class="internal-banner">Documento interno — Apenas para Marcelo & Alexandra</div>
+
+<nav>
+    <a href="/index.html" class="logo">Rotta Curadoria</a>
+    <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="#l0">L0</a>
+        <a href="#l1">L1</a>
+        <a href="#l2">L2</a>
+        <a href="#l3">L3</a>
+        <a href="#l4">L4</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="catalog-hero">
+    <p class="section-label fade-up">Ecossistema de Produtos</p>
+    <h1 class="fade-up">Catálogo Completo<br><em>Rotta Curadoria</em></h1>
+    <p class="fade-up">13 produtos em 5 níveis. Do gratuito ao ultra premium. Cada nível constrói confiança pro próximo.</p>
+</section>
+
+<!-- VISUAL LADDER -->
+<div class="ladder fade-up">
+    <div class="ladder-row">
+        <div class="ladder-level">L0 Grátis</div>
+        <div class="ladder-bar l0-bar" style="width:100%">3 produtos — Lead magnets<span class="ladder-price">R$0</span></div>
+    </div>
+    <div class="ladder-row">
+        <div class="ladder-level">L1 Low</div>
+        <div class="ladder-bar l1-bar">3 produtos — Entrada<span class="ladder-price">R$37-197</span></div>
+    </div>
+    <div class="ladder-row">
+        <div class="ladder-level">L2 Mid</div>
+        <div class="ladder-bar l2-bar">3 produtos — Core<span class="ladder-price">R$497-1.997</span></div>
+    </div>
+    <div class="ladder-row">
+        <div class="ladder-level">L3 High</div>
+        <div class="ladder-bar l3-bar">2 produtos — Premium<span class="ladder-price">R$2.997-7.997</span></div>
+    </div>
+    <div class="ladder-row">
+        <div class="ladder-level">L4 Ultra</div>
+        <div class="ladder-bar l4-bar">2 produtos — VIP<span class="ladder-price">R$8.000-15.000+</span></div>
+    </div>
+</div>
+
+<div class="divider" style="margin-bottom:0"></div>
+
+<!-- ===== L0 — GRATUITO ===== -->
+<section class="level-section" id="l0" style="background:var(--card)">
+    <div class="container">
+        <div class="level-header fade-up">
+            <span class="level-badge l0">L0</span>
+            <h2>Gratuito</h2>
+            <span class="level-price-range">R$0 — Lead Magnets</span>
+        </div>
+
+        <div class="catalog-grid">
+            <!-- 1 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">01</div>
+                    <div class="card-title-block">
+                        <h3>Quiz de Perfil de Viajante</h3>
+                        <div class="card-price">R$0</div>
+                    </div>
+                    <div class="status status-green"><span class="status-dot"></span>Pronto para vender</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>Descubra seu perfil de viajante em 2 minutos.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>7 perguntas + resultado personalizado + 3 destinos recomendados para o seu perfil.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>HTML interativo no site. Resultado imediato na tela + captura de email.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Todos os visitantes do site e seguidores do Instagram.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>0% — Lead magnet. Objetivo: capturar leads e iniciar relacionamento.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Automático. Visitante acessa o quiz, responde, recebe resultado + CTA para próximo nível.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">02</div>
+                    <div class="card-title-block">
+                        <h3>Guia 7 Destinos Imperdíveis</h3>
+                        <div class="card-price">R$0</div>
+                    </div>
+                    <div class="status status-green"><span class="status-dot"></span>Pronto para vender</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>7 destinos curados com dicas exclusivas de quem realmente foi.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Guia digital interativo com orçamento real, dicas gastronômicas e roteiro resumido para cada destino.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>HTML no site + PDF para download. Entrega por email após captura do lead.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Todos que fizeram o quiz ou acessaram o site.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>0% — Lead magnet. Objetivo: nutrir lead e construir autoridade.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Automático via email. Sequência de nutrição pós-download leva ao L1.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">03</div>
+                    <div class="card-title-block">
+                        <h3>Kit Organizadora de Viagem</h3>
+                        <div class="card-price">R$0</div>
+                    </div>
+                    <div class="status status-green"><span class="status-dot"></span>Pronto para vender</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>Checklist completo para não esquecer nada na sua próxima viagem.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Checklist interativo + versão PDF para impressão. Cobre desde documentos até itens de mala.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>Carrossel no site + PDF para download direto.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Todos os visitantes. Especialmente útil para quem já tem viagem marcada.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>0% — Lead magnet. Objetivo: mostrar organização e profissionalismo.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Download direto no site. Sem necessidade de email (opcional).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== L1 — LOW TICKET ===== -->
+<section class="level-section" id="l1">
+    <div class="container">
+        <div class="level-header fade-up">
+            <span class="level-badge l1">L1</span>
+            <h2>Low Ticket</h2>
+            <span class="level-price-range">R$37-197</span>
+        </div>
+
+        <div class="catalog-grid">
+            <!-- 4 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">04</div>
+                    <div class="card-title-block">
+                        <h3>Roteiro PDF Premium</h3>
+                        <div class="card-price">R$67 — R$147</div>
+                    </div>
+                    <div class="status status-yellow"><span class="status-dot"></span>Precisa criar</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>Roteiro dia a dia completo de um destino específico, pronto para usar.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>PDF de 15-20 páginas com mapas, restaurantes testados, horários, dicas locais e orçamento real.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>PDF entregue por email imediatamente após pagamento. Plataforma de checkout automática.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Carolina (casal jovem), Lucas & Bia (aventureiros). Quem quer viajar sozinho mas com roteiro de qualidade.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>95% — Produto 100% digital. Custo quase zero após criação.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Pagamento via checkout -> entrega automática por email. Sem interação manual.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">05</div>
+                    <div class="card-title-block">
+                        <h3>Workshop "Planeje Sua Viagem"</h3>
+                        <div class="card-price">R$97 — R$197</div>
+                    </div>
+                    <div class="status status-yellow"><span class="status-dot"></span>Precisa criar</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>Aprenda a montar seu próprio roteiro profissional em 2 horas.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Aula ao vivo online (2h) + material de apoio em PDF + acesso a grupo VIP por 30 dias.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>Zoom ao vivo + PDF de apoio + grupo WhatsApp VIP. Aula mensal recorrente.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Carolina (DIY), Squad (querem aprender). Pessoas que gostam de planejar mas precisam de método.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>90% — Custo apenas do tempo + plataforma Zoom.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Inscrição via checkout -> confirmação -> aula ao vivo mensal. Gravação disponível por 7 dias.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">06</div>
+                    <div class="card-title-block">
+                        <h3>Rotta Surprise Mini</h3>
+                        <div class="card-price">R$97</div>
+                    </div>
+                    <div class="status status-yellow"><span class="status-dot"></span>Precisa criar</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>Surpreenda seu amor com uma experiência local inesquecível.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Roteiro surpresa de 1 dia/noite na sua cidade ou região. Envelope digital com revelação programada.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>Envelope digital com revelação programada. Roteiro detalhado + sugestões de presentes complementares.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Lucas & Bia (românticos aventureiros). Perfeito para aniversários, Dia dos Namorados, datas especiais.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>85% — Custo baixo de pesquisa local + design do envelope digital.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Briefing por WhatsApp (15min) -> pesquisa -> entrega em 5 dias úteis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== L2 — MID TICKET ===== -->
+<section class="level-section" id="l2" style="background:var(--card)">
+    <div class="container">
+        <div class="level-header fade-up">
+            <span class="level-badge l2">L2</span>
+            <h2>Mid Ticket</h2>
+            <span class="level-price-range">R$497-1.997</span>
+        </div>
+
+        <div class="catalog-grid">
+            <!-- 7 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">07</div>
+                    <div class="card-title-block">
+                        <h3>Roteiro Express</h3>
+                        <div class="card-price">R$497 — R$797</div>
+                    </div>
+                    <div class="status status-red"><span class="status-dot"></span>Futuro</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>Seu roteiro personalizado em 7 dias, sem você mexer um dedo.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Roteiro completo + sugestões de hospedagem + restaurantes + experiências, tudo personalizado para o seu perfil.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>Documento digital completo + 2 calls de alinhamento (briefing + revisão). Entrega em 7 dias úteis.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Carolina (quer personalização mas sem gastar muito), Roberto (valoriza praticidade). Casais e famílias.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>80% — Custo de tempo de pesquisa + calls.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>WhatsApp -> briefing (call 30min) -> pesquisa -> entrega em 7 dias -> 1 revisão inclusa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">08</div>
+                    <div class="card-title-block">
+                        <h3>Escapada Romântica</h3>
+                        <div class="card-price">R$1.497 — R$1.997</div>
+                    </div>
+                    <div class="status status-red"><span class="status-dot"></span>Futuro</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>Uma escapada a dois que reconecta de verdade.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Roteiro de 3-5 dias + reservas feitas + experiências românticas curadas especialmente para o casal.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>Roteiro completo + reservas confirmadas (hotel, restaurantes, experiências) + suporte WhatsApp durante a viagem.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Silvia & Marcos (casal maduro querendo reconectar). Aniversários de casamento, lua de mel, datas especiais.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>70% — Inclui custo de tempo para reservas + comissões de parceiros.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>WhatsApp -> briefing aprofundado -> curadoria -> reservas -> envio do pacote -> suporte na viagem.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">09</div>
+                    <div class="card-title-block">
+                        <h3>Rotta Crew</h3>
+                        <div class="card-price">R$797/pessoa</div>
+                    </div>
+                    <div class="status status-red"><span class="status-dot"></span>Futuro</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>A viagem do grupo que finalmente vai sair do grupo de WhatsApp.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Roteiro para grupo de 4-8 pessoas + divisão de custos organizada + coordenação completa.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>Roteiro coletivo + planilha de custos divididos + coordenação ativa via grupo WhatsApp.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>O Squad — grupo de amigos que quer viajar junto mas nunca consegue organizar.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>75% — Escala via grupo (4-8 pessoas pagando). Custo de coordenação é o principal.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Briefing coletivo (call com todos) -> proposta -> aprovação do grupo -> execução -> coordenação.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== L3 — HIGH TICKET ===== -->
+<section class="level-section" id="l3">
+    <div class="container">
+        <div class="level-header fade-up">
+            <span class="level-badge l3">L3</span>
+            <h2>High Ticket</h2>
+            <span class="level-price-range">R$2.997-7.997</span>
+        </div>
+
+        <div class="catalog-grid">
+            <!-- 10 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">10</div>
+                    <div class="card-title-block">
+                        <h3>Curadoria Completa</h3>
+                        <div class="card-price">R$3.997 — R$5.997</div>
+                    </div>
+                    <div class="status status-red"><span class="status-dot"></span>Futuro</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>Sua viagem dos sonhos, do zero ao embarque, com tudo reservado.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Roteiro personalizado + todas as reservas (hotel, restaurante, experiências) + suporte 24h durante a viagem + álbum digital pós-viagem.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>Imersão inicial (2h) + pesquisa (2 semanas) + todas as reservas + acompanhamento ativo durante a viagem.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Roberto (executivo sem tempo), Silvia & Marcos (querem experiência premium sem preocupação).</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>70% — Alto valor mas também alto investimento de tempo e coordenação.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Call de qualificação -> imersão presencial/online (2h) -> pesquisa (2 semanas) -> reservas -> suporte ativo 24h.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">11</div>
+                    <div class="card-title-block">
+                        <h3>Crew International</h3>
+                        <div class="card-price">R$2.997 — R$4.997/pessoa</div>
+                    </div>
+                    <div class="status status-red"><span class="status-dot"></span>Futuro</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>Aventura internacional para o grupo, com zero estresse.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Curadoria completa para grupo internacional + passagens + reservas + guia local quando disponível.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>Coordenação total para grupo internacional. Mesma estrutura da Curadoria Completa mas multiplicada pelo grupo.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>O Squad (versão premium). Grupos de amigos com poder aquisitivo para viagem internacional.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>65% — Complexidade alta mas valor por pessoa também alto.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Igual Curadoria Completa mas com briefing coletivo + coordenação de grupo + logística internacional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== L4 — ULTRA PREMIUM ===== -->
+<section class="level-section" id="l4" style="background:var(--card)">
+    <div class="container">
+        <div class="level-header fade-up">
+            <span class="level-badge l4">L4</span>
+            <h2>Ultra Premium</h2>
+            <span class="level-price-range">R$8.000-15.000+</span>
+        </div>
+
+        <div class="catalog-grid">
+            <!-- 12 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">12</div>
+                    <div class="card-title-block">
+                        <h3>Travel Club Anual</h3>
+                        <div class="card-price">R$8.000 — R$12.000/ano</div>
+                    </div>
+                    <div class="status status-red"><span class="status-dot"></span>Futuro</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>4 viagens curadas por ano, tudo incluso, comunidade exclusiva.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Membership anual com 4 experiências de viagem + comunidade VIP + eventos exclusivos + prioridade em lançamentos.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>Assinatura anual, máximo 30 membros. Curadoria trimestral + acesso a comunidade + benefícios exclusivos.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Roberto (executivo que viaja frequentemente e quer tudo resolvido). Casais com renda alta.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>75% — Receita recorrente previsível. Alto LTV.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Candidatura via formulário -> entrevista de qualificação -> aceite -> membership ativa. Máximo 30 membros.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13 -->
+            <div class="catalog-card fade-up">
+                <div class="card-header">
+                    <div class="card-number">13</div>
+                    <div class="card-title-block">
+                        <h3>Viagem Bespoke</h3>
+                        <div class="card-price">R$15.000+</div>
+                    </div>
+                    <div class="status status-red"><span class="status-dot"></span>Futuro</div>
+                </div>
+                <div class="card-details">
+                    <div class="detail-block">
+                        <div class="detail-label">Promessa</div>
+                        <p>A viagem da sua vida, 100% sob medida, sem limites.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Oferta</div>
+                        <p>Concierge pessoal + curadoria ilimitada + experiências exclusivas + acompanhamento presencial opcional.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Estrutura de Entrega</div>
+                        <p>Projeto único com dedicação total. Sem limites de revisões, sem limites de tempo de pesquisa.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Público-alvo</div>
+                        <p>Roberto (ultra premium). Clientes com alto poder aquisitivo que querem a experiência definitiva.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Margem Estimada</div>
+                        <p>60% — Dedicação exclusiva por projeto. Alto valor absoluto mesmo com margem menor.</p>
+                    </div>
+                    <div class="detail-block">
+                        <div class="detail-label">Processo de Venda</div>
+                        <p>Reunião presencial -> projeto sob medida -> execução total com concierge dedicado. 1-2 projetos por trimestre.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p class="brand">Rotta Curadoria</p>
+        <p class="tagline">Curado por Marcelo & Alexandra</p>
+        <p class="legal">Documento interno — uso exclusivo de Marcelo & Alexandra.<br>&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

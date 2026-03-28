@@ -127,9 +127,9 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
   <div class="screen active" id="introScreen">
     <div class="intro">
       <h1>Descubra seu<br><span>Perfil de Viagem</span></h1>
-      <p>7 perguntas rapidas para revelar o tipo de viajante que voce e &mdash; e a experiencia perfeita para voce.</p>
+      <p>7 perguntas rápidas para revelar o tipo de viajante que você é &mdash; e a experiência perfeita para você.</p>
       <button class="btn-start" onclick="startQuiz()">
-        Comecar
+        Começar
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
@@ -156,6 +156,7 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
         <div class="lead-field">
           <label for="leadWhatsApp">WhatsApp</label>
           <input type="tel" id="leadWhatsApp" placeholder="(00) 00000-0000" autocomplete="tel" required>
+          <p style="font-size:11px;color:#777;margin-top:6px">Ao informar seu WhatsApp, você autoriza contato pela Rotta Curadoria.</p>
         </div>
         <div class="lead-field">
           <label for="leadEmail">Email</label>
@@ -205,20 +206,20 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
 
   var questions = [
     {
-      q: "Qual e a primeira coisa que voce faz quando chega num destino novo?",
+      q: "Qual é a primeira coisa que você faz quando chega num destino novo?",
       a: [
-        {letter:"A", text:"Procuro o melhor restaurante da regiao"},
+        {letter:"A", text:"Procuro o melhor restaurante da região"},
         {letter:"B", text:"Saio explorando as ruas sem roteiro"},
         {letter:"C", text:"Vou direto pro hotel descansar e planejar"},
-        {letter:"D", text:"Procuro uma experiencia unica (mergulho, trilha, aula de culinaria)"}
+        {letter:"D", text:"Procuro uma experiência única (mergulho, trilha, aula de culinária)"}
       ]
     },
     {
-      q: "Como voce prefere viajar?",
+      q: "Como você prefere viajar?",
       a: [
-        {letter:"A", text:"So nos dois \u2014 sem filhos, sem amigos"},
-        {letter:"B", text:"Em familia \u2014 quanto mais gente, melhor"},
-        {letter:"C", text:"Com amigos \u2014 a energia do grupo e tudo"},
+        {letter:"A", text:"Só nós dois \u2014 sem filhos, sem amigos"},
+        {letter:"B", text:"Em família \u2014 quanto mais gente, melhor"},
+        {letter:"C", text:"Com amigos \u2014 a energia do grupo é tudo"},
         {letter:"D", text:"Sozinho(a) primeiro, depois com companhia"}
       ]
     },
@@ -226,44 +227,44 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
       q: "O que mais te frustra numa viagem?",
       a: [
         {letter:"A", text:"Lugar lotado de turistas"},
-        {letter:"B", text:"Nao ter tempo de aproveitar com calma"},
-        {letter:"C", text:"Comida ruim ou sem opcoes boas"},
+        {letter:"B", text:"Não ter tempo de aproveitar com calma"},
+        {letter:"C", text:"Comida ruim ou sem opções boas"},
         {letter:"D", text:"Ter que organizar tudo sozinho(a)"}
       ]
     },
     {
-      q: "Quando voce pensa em \u2018viagem dos sonhos\u2019, o que vem primeiro?",
+      q: "Quando você pensa em \u2018viagem dos sonhos\u2019, o que vem primeiro?",
       a: [
-        {letter:"A", text:"Uma praia deserta com agua cristalina"},
-        {letter:"B", text:"Uma cidade historica cheia de cultura"},
-        {letter:"C", text:"Uma aventura na natureza (montanhas, safari, vulcoes)"},
-        {letter:"D", text:"Um hotel incrivel com spa e gastronomia"}
+        {letter:"A", text:"Uma praia deserta com água cristalina"},
+        {letter:"B", text:"Uma cidade histórica cheia de cultura"},
+        {letter:"C", text:"Uma aventura na natureza (montanhas, safari, vulcões)"},
+        {letter:"D", text:"Um hotel incrível com spa e gastronomia"}
       ]
     },
     {
-      q: "Qual frase mais combina com voce?",
+      q: "Qual frase mais combina com você?",
       a: [
-        {letter:"A", text:"\u201CEu mereco essa viagem\u201D"},
-        {letter:"B", text:"\u201CQuero algo que ninguem fez\u201D"},
-        {letter:"C", text:"\u201CPrecisamos de um tempo so nosso\u201D"},
+        {letter:"A", text:"\u201CEu mereço essa viagem\u201D"},
+        {letter:"B", text:"\u201CQuero algo que ninguém fez\u201D"},
+        {letter:"C", text:"\u201CPrecisamos de um tempo só nosso\u201D"},
         {letter:"D", text:"\u201CBora! Chama a galera!\u201D"}
       ]
     },
     {
-      q: "Quanto voce costuma planejar antes de viajar?",
+      q: "Quanto você costuma planejar antes de viajar?",
       a: [
-        {letter:"A", text:"Planejo TUDO nos minimos detalhes"},
-        {letter:"B", text:"Planejo o basico e improviso o resto"},
-        {letter:"C", text:"Quero que alguem planeje pra mim"},
-        {letter:"D", text:"Nao planejo \u2014 vou e vejo o que rola"}
+        {letter:"A", text:"Planejo TUDO nos mínimos detalhes"},
+        {letter:"B", text:"Planejo o básico e improviso o resto"},
+        {letter:"C", text:"Quero que alguém planeje pra mim"},
+        {letter:"D", text:"Não planejo \u2014 vou e vejo o que rola"}
       ]
     },
     {
-      q: "O que voce mais valoriza numa experiencia de viagem?",
+      q: "O que você mais valoriza numa experiência de viagem?",
       a: [
         {letter:"A", text:"Gastronomia e cultura local"},
         {letter:"B", text:"Aventura e adrenalina"},
-        {letter:"C", text:"Romance e conexao com meu par"},
+        {letter:"C", text:"Romance e conexão com meu par"},
         {letter:"D", text:"Descanso e conforto total"}
       ]
     }
@@ -301,28 +302,28 @@ h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600}
 
   var results = {
     carolina: {
-      title: "Voce e a Exploradora Aspiracional",
-      desc: "Voce merece essa viagem e sabe disso. Busca experiencias que combinem cultura, gastronomia e aquele toque de \u201Ceu mereco\u201D. Destinos como Italia, Portugal e Croacia foram feitos pra voce.",
+      title: "Você é a Exploradora Aspiracional",
+      desc: "Você merece essa viagem e sabe disso. Busca experiências que combinem cultura, gastronomia e aquele toque de \u201Ceu mereço\u201D. Destinos como Itália, Portugal e Croácia foram feitos pra você.",
       cta: "https://wa.me/5511968152123?text=Oi!%20Fiz%20o%20quiz%20e%20sou%20Exploradora%20Aspiracional.%20Quero%20saber%20mais!"
     },
     roberto: {
-      title: "Voce e o Colecionador de Experiencias",
-      desc: "Viagem de turista? Nunca. Voce quer o que ninguem fez, o restaurante que nao esta no Google, a trilha que so os locais conhecem.",
+      title: "Você é o Colecionador de Experiências",
+      desc: "Viagem de turista? Nunca. Você quer o que ninguém fez, o restaurante que não está no Google, a trilha que só os locais conhecem.",
       cta: "https://wa.me/5511968152123?text=Oi!%20Fiz%20o%20quiz%20e%20sou%20Colecionador%20de%20Experi%C3%AAncias.%20Quero%20saber%20mais!"
     },
     silvia: {
-      title: "Voces sao o Casal Reconectando",
-      desc: "A rotina engoliu voces e a viagem e o reset que precisam. Querem conforto, gastronomia e tempo de qualidade so dos dois.",
+      title: "Vocês são o Casal Reconectando",
+      desc: "A rotina engoliu vocês e a viagem é o reset que precisam. Querem conforto, gastronomia e tempo de qualidade só dos dois.",
       cta: "https://wa.me/5511968152123?text=Oi!%20Fizemos%20o%20quiz%20e%20somos%20o%20Casal%20Reconectando.%20Queremos%20saber%20mais!"
     },
     squad: {
-      title: "Voce e do Squad Aventureiro",
-      desc: "Viagem boa e viagem com a galera! Voce quer risada, aventura e memorias em grupo.",
+      title: "Você é do Squad Aventureiro",
+      desc: "Viagem boa é viagem com a galera! Você quer risada, aventura e memórias em grupo.",
       cta: "https://wa.me/5511968152123?text=Oi!%20Fiz%20o%20quiz%20e%20sou%20do%20Squad%20Aventureiro.%20Quero%20saber%20mais!"
     },
     lucas: {
-      title: "Voces sao o Casal que Celebra",
-      desc: "A vida ta passando e voces querem marcar os momentos juntos. Romance, fotos lindas e experiencias que ficam pra sempre.",
+      title: "Vocês são o Casal que Celebra",
+      desc: "A vida tá passando e vocês querem marcar os momentos juntos. Romance, fotos lindas e experiências que ficam pra sempre.",
       cta: "https://wa.me/5511968152123?text=Oi!%20Fizemos%20o%20quiz%20e%20somos%20o%20Casal%20que%20Celebra.%20Queremos%20saber%20mais!"
     }
   };

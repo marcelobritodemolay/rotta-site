@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 Destinos Imperdíveis para 2026 — Rotta Curadoria (PDF)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0E0E0E;
+            --bg-card: #1A1A1A;
+            --bg-layer: #2A2A2A;
+            --gold: #C5A572;
+            --gold-dim: rgba(197, 165, 114, 0.15);
+            --text: #F2EDE8;
+            --text-muted: #999;
+            --text-dim: #666;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        /* ===== DOWNLOAD BUTTON (screen only) ===== */
+        .download-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(14,14,14,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--bg-layer);
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .download-bar span {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .download-btn {
+            background: var(--gold);
+            color: #0E0E0E;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .download-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* ===== PAGE STRUCTURE ===== */
+        .page {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .page-cover {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* ===== COVER PAGE ===== */
+        .cover-badge {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid rgba(197,165,114,0.3);
+            padding: 8px 20px;
+            border-radius: 100px;
+            display: inline-block;
+            margin-bottom: 40px;
+        }
+
+        .cover-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 48px;
+        }
+
+        .cover-logo span {
+            display: block;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 6px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .cover-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 44px;
+            font-weight: 700;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            max-width: 520px;
+        }
+
+        .cover-title em {
+            color: var(--gold);
+            font-style: normal;
+        }
+
+        .cover-subtitle {
+            font-size: 17px;
+            color: var(--text-muted);
+            max-width: 420px;
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        .cover-authors {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-dim);
+        }
+
+        .cover-authors .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1.5px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .cover-authors strong {
+            color: var(--text);
+        }
+
+        .cover-year {
+            margin-top: 60px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        /* ===== DESTINATION PAGES ===== */
+        .dest-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: rgba(197,165,114,0.12);
+            line-height: 1;
+            margin-bottom: -14px;
+        }
+
+        .dest-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+
+        .dest-region {
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .dest-tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--gold);
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-layer);
+            border-radius: 10px;
+            padding: 14px 12px;
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+
+        .info-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        /* Por que ir */
+        .section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .por-que-ir {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+
+        /* Highlights */
+        .highlights-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .highlights-list li {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            line-height: 1.55;
+            color: var(--text-muted);
+        }
+
+        .highlights-list li strong {
+            color: var(--text);
+        }
+
+        .hl-num {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 12px;
+            flex-shrink: 0;
+            width: 18px;
+        }
+
+        /* Dica local box */
+        .dica-local {
+            border: 1.5px solid var(--gold);
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin-bottom: 20px;
+            background: var(--gold-dim);
+        }
+
+        .dica-local-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+
+        .dica-local p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Budget mini */
+        .budget-mini {
+            background: var(--bg-card);
+            border: 1px solid var(--bg-layer);
+            border-radius: 10px;
+            padding: 14px 18px;
+        }
+
+        .budget-mini-header {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .budget-mini-total {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .budget-mini-detail {
+            font-size: 11px;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        /* ===== CTA PAGE ===== */
+        .cta-page {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin: 0 auto 40px;
+        }
+
+        .cta-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            max-width: 460px;
+        }
+
+        .cta-sub {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 400px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .cta-item {
+            margin-bottom: 18px;
+        }
+
+        .cta-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .cta-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .cta-value a {
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 2px;
+        }
+
+        .cta-quiz-btn {
+            display: inline-block;
+            background: var(--gold);
+            color: #0E0E0E;
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            text-decoration: none;
+            margin-top: 32px;
+            transition: opacity 0.2s;
+        }
+
+        .cta-quiz-btn:hover {
+            opacity: 0.85;
+        }
+
+        .cta-footer {
+            margin-top: 60px;
+            font-size: 11px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .cta-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 6px;
+        }
+
+        /* ===== DIVIDERS ===== */
+        .page-divider {
+            width: 40px;
+            height: 1.5px;
+            background: var(--gold);
+            margin: 20px 0;
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 20mm 18mm;
+            }
+
+            body {
+                background: white !important;
+                color: #1a1a1a !important;
+                font-size: 11pt;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .download-bar {
+                display: none !important;
+            }
+
+            .page {
+                min-height: auto;
+                padding: 0;
+                page-break-after: always;
+                page-break-inside: avoid;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+            }
+
+            .page-cover {
+                padding-top: 80px;
+            }
+
+            /* Colors for print */
+            .cover-title,
+            .dest-name,
+            .section-heading,
+            .cta-heading {
+                color: #1a1a1a !important;
+            }
+
+            .cover-title em,
+            .cover-logo,
+            .dest-region,
+            .dest-tagline,
+            .cover-badge,
+            .info-value,
+            .dica-local-header,
+            .budget-mini-header,
+            .cta-label,
+            .hl-num,
+            .cta-brand {
+                color: #C5A572 !important;
+            }
+
+            .por-que-ir,
+            .highlights-list li,
+            .dica-local p,
+            .cover-subtitle,
+            .cover-authors,
+            .cta-sub,
+            .budget-mini-detail {
+                color: #444 !important;
+            }
+
+            .highlights-list li strong,
+            .cta-value,
+            .cta-value a,
+            .budget-mini-total {
+                color: #1a1a1a !important;
+            }
+
+            .cover-year,
+            .info-label,
+            .cta-footer {
+                color: #888 !important;
+            }
+
+            /* Backgrounds for print */
+            .info-card {
+                background: #f8f6f3 !important;
+                border-color: #e8e4df !important;
+            }
+
+            .dica-local {
+                background: rgba(197,165,114,0.08) !important;
+                border-color: #C5A572 !important;
+            }
+
+            .budget-mini {
+                background: #f8f6f3 !important;
+                border-color: #e8e4df !important;
+            }
+
+            .cover-badge {
+                border-color: #C5A572 !important;
+            }
+
+            .cover-authors .avatar {
+                background: #f8f6f3 !important;
+                border-color: #C5A572 !important;
+                color: #C5A572 !important;
+            }
+
+            .dest-number {
+                color: rgba(197,165,114,0.15) !important;
+            }
+
+            .page-divider,
+            .cta-divider {
+                background: #C5A572 !important;
+            }
+
+            .cta-quiz-btn {
+                background: #C5A572 !important;
+                color: #fff !important;
+            }
+
+            a {
+                color: #1a1a1a !important;
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .page {
+                padding: 80px 20px 40px;
+            }
+
+            .cover-title {
+                font-size: 32px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dest-name {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== DOWNLOAD BAR (screen only) ===== -->
+<div class="download-bar">
+    <span>Salvar como PDF:</span>
+    <button class="download-btn" onclick="window.print()">Download PDF</button>
+</div>
+
+<!-- ===== PAGE 1: COVER ===== -->
+<div class="page page-cover">
+    <div class="cover-logo">
+        Rotta Curadoria
+        <span>Viagens com curadoria</span>
+    </div>
+
+    <div class="cover-badge">Guia exclusivo 2026</div>
+
+    <h1 class="cover-title">
+        <em>7</em> Destinos Imperdíveis<br>para 2026
+    </h1>
+
+    <p class="cover-subtitle">
+        Os melhores destinos do mundo selecionados e detalhados por quem viaja de verdade. Orçamentos reais, dicas locais e roteiros que funcionam.
+    </p>
+
+    <div class="cover-authors">
+        <div class="avatar">M</div>
+        <div>Curado por <strong>Marcelo & Alexandra</strong></div>
+    </div>
+
+    <p class="cover-year">rottacuradoria.com.br</p>
+</div>
+
+<!-- ===== PAGE 2: PORTUGAL ===== -->
+<div class="page">
+    <div class="dest-number">01</div>
+    <h2 class="dest-name">Portugal</h2>
+    <p class="dest-region">Europa Ocidental</p>
+    <p class="dest-tagline">"O destino mais fácil pra quem nunca foi pra Europa"</p>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="info-label">Melhor época</div>
+            <div class="info-value">Abr–Jun / Set–Out</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Quanto tempo</div>
+            <div class="info-value">7 a 10 dias</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Orçamento (casal)</div>
+            <div class="info-value">R$17.000</div>
+        </div>
+    </div>
+
+    <h3 class="section-heading">Por que ir</h3>
+    <p class="por-que-ir">
+        Zero barreira de idioma. Comida incrível. 250 dias de sol por ano. E o mais acessível da Europa ocidental. Se você nunca viajou pra fora e quer começar com segurança, Portugal é a escolha mais inteligente que existe.
+    </p>
+
+    <div class="page-divider"></div>
+
+    <ul class="highlights-list">
+        <li><span class="hl-num">1.</span><span><strong>Lisboa e Porto são cidades que se exploram a pé.</strong> Bairros históricos compactos e lindos, sem precisar de carro</span></li>
+        <li><span class="hl-num">2.</span><span><strong>O Algarve tem praias que competem com o Caribe</strong> — falésias douradas, água cristalina, sem multidão</span></li>
+        <li><span class="hl-num">3.</span><span><strong>Vinhos de classe mundial por R$30 a garrafa.</strong> Em Bordeaux você pagaria R$150 pelo mesmo nível</span></li>
+        <li><span class="hl-num">4.</span><span><strong>O povo português é genuinamente acolhedor com brasileiros.</strong> Você se sente em casa</span></li>
+        <li><span class="hl-num">5.</span><span><strong>35 estâncias termais</strong> — perfeito pra casais que querem relaxar ou famílias com avós</span></li>
+    </ul>
+
+    <div class="dica-local">
+        <div class="dica-local-header">Dica local — Marcelo & Alexandra</div>
+        <p>Os pastéis de nata da Manteigaria em Lisboa são melhores que os de Belém (e sem fila de 40 minutos). Não saia de Portugal sem provar um francesinha no Porto — é uma experiência culinária que não existe em nenhum outro lugar do mundo.</p>
+    </div>
+
+    <div class="budget-mini">
+        <div class="budget-mini-header">Orçamento estimado (por casal, 7 dias)</div>
+        <div class="budget-mini-total">R$17.000</div>
+        <p class="budget-mini-detail">Passagens R$7.000 + Hospedagem R$5.600 + Alimentação R$2.800 + Transporte R$1.400 + Seguro R$200</p>
+    </div>
+</div>
+
+<!-- ===== PAGE 3: ARGENTINA ===== -->
+<div class="page">
+    <div class="dest-number">02</div>
+    <h2 class="dest-name">Argentina</h2>
+    <p class="dest-region">América do Sul</p>
+    <p class="dest-tagline">"O paraíso dos vinhos aos pés dos Andes"</p>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="info-label">Melhor época</div>
+            <div class="info-value">Mar–Mai / Set–Nov</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Quanto tempo</div>
+            <div class="info-value">5 a 7 dias</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Orçamento (casal)</div>
+            <div class="info-value">R$8.740</div>
+        </div>
+    </div>
+
+    <h3 class="section-heading">Por que ir</h3>
+    <p class="por-que-ir">
+        Mendoza é onde o vinho argentino nasce — aos pés dos Andes, com o Aconcágua como pano de fundo. Vinícolas premiadas internacionalmente, almoços ao ar livre entre parreiras, e o melhor asado do mundo. Com o peso argentino desvalorizado, experiências que custariam uma fortuna na Europa saem por uma fração do preço.
+    </p>
+
+    <div class="page-divider"></div>
+
+    <ul class="highlights-list">
+        <li><span class="hl-num">1.</span><span><strong>Vinícolas de Mendoza: classe mundial por R$30 a degustação.</strong> Zuccardi, Salentein e Bodega Catena Zapata</span></li>
+        <li><span class="hl-num">2.</span><span><strong>Aconcágua: a montanha mais alta das Américas</strong> como pano de fundo. Trekking, cavalgada nos Andes</span></li>
+        <li><span class="hl-num">3.</span><span><strong>Asado argentino é experiência religiosa.</strong> Carne grelhada por horas na parrilla, acompanhada de Malbec</span></li>
+        <li><span class="hl-num">4.</span><span><strong>Ruta del Vino de bicicleta:</strong> pedalar entre vinícolas, o passeio mais romântico da América do Sul</span></li>
+        <li><span class="hl-num">5.</span><span><strong>Bodega Catena Zapata:</strong> a catedral do Malbec. Arquitetura inspirada nas pirâmides maias</span></li>
+    </ul>
+
+    <div class="dica-local">
+        <div class="dica-local-header">Dica local — Marcelo & Alexandra</div>
+        <p>O 1884 Restaurante de Francis Mallmann é imperdível. As empanadas mendocinas (fritas, com carne cortada a faca) custam R$5 cada e são viciantes. Pra almoço, reserve na vinícola Zuccardi — menu harmonizado com vinhos da casa que é uma aula de gastronomia.</p>
+    </div>
+
+    <div class="budget-mini">
+        <div class="budget-mini-header">Orçamento estimado (por casal, 7 dias)</div>
+        <div class="budget-mini-total">R$8.740</div>
+        <p class="budget-mini-detail">Passagens R$3.600 + Hospedagem R$2.800 + Alimentação R$1.400 + Transporte R$800 + Seguro R$140</p>
+    </div>
+</div>
+
+<!-- ===== PAGE 4: ITÁLIA ===== -->
+<div class="page">
+    <div class="dest-number">03</div>
+    <h2 class="dest-name">Itália</h2>
+    <p class="dest-region">Europa — Mediterrâneo</p>
+    <p class="dest-tagline">"O destino que justifica cada centavo pelo que você sente"</p>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="info-label">Melhor época</div>
+            <div class="info-value">Mai–Jun / Set</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Quanto tempo</div>
+            <div class="info-value">10 a 14 dias</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Orçamento (casal)</div>
+            <div class="info-value">R$20.800</div>
+        </div>
+    </div>
+
+    <h3 class="section-heading">Por que ir</h3>
+    <p class="por-que-ir">
+        Cada cidade é um universo diferente. Roma te deixa sem palavras. Florença te faz chorar de beleza. As Dolomitas parecem outro planeta. O Lago di Garda é o segredo mais bem guardado do norte. E a comida muda sua vida. Não é exagero.
+    </p>
+
+    <div class="page-divider"></div>
+
+    <ul class="highlights-list">
+        <li><span class="hl-num">1.</span><span><strong>Roma é um museu a céu aberto</strong> — Coliseu, Vaticano, Fontana di Trevi. Cada esquina tem 2.000 anos de história</span></li>
+        <li><span class="hl-num">2.</span><span><strong>A Toscana é o cenário mais romântico da Terra.</strong> Estradas entre ciprestes, vinícolas escondidas, pôr do sol irreal</span></li>
+        <li><span class="hl-num">3.</span><span><strong>Dolomitas: outro planeta dentro da Itália.</strong> Tre Cime, Val di Funes, Lago di Braies — Patrimônio UNESCO</span></li>
+        <li><span class="hl-num">4.</span><span><strong>Lago di Garda: o segredo do norte.</strong> Sirmione, Limone, Malcesine — vilarejos com lago turquesa</span></li>
+        <li><span class="hl-num">5.</span><span><strong>A comida italiana NÃO é a comida "italiana" do Brasil.</strong> A diferença é tão grande que você vai questionar tudo</span></li>
+    </ul>
+
+    <div class="dica-local">
+        <div class="dica-local-header">Dica local — Marcelo & Alexandra</div>
+        <p>A pizza em Nápoles custa R$20 e é a melhor que você vai comer na vida. Regra de ouro: fuja de restaurantes com cardápio em 10 idiomas e foto da comida na porta. Ande 3 quarteirões pra longe de qualquer ponto turístico. A Itália real está lá.</p>
+    </div>
+
+    <div class="budget-mini">
+        <div class="budget-mini-header">Orçamento estimado (por casal, 7 dias)</div>
+        <div class="budget-mini-total">R$20.800</div>
+        <p class="budget-mini-detail">Passagens R$8.000 + Hospedagem R$6.400 + Alimentação R$4.200 + Transporte R$2.000 + Seguro R$200</p>
+    </div>
+</div>
+
+<!-- ===== PAGE 5: CROÁCIA ===== -->
+<div class="page">
+    <div class="dest-number">04</div>
+    <h2 class="dest-name">Croácia</h2>
+    <p class="dest-region">Europa — Adriático</p>
+    <p class="dest-tagline">"O Mediterrâneo secreto da Europa"</p>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="info-label">Melhor época</div>
+            <div class="info-value">Mai–Jun / Set</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Quanto tempo</div>
+            <div class="info-value">7 a 10 dias</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Orçamento (casal)</div>
+            <div class="info-value">R$9.400</div>
+        </div>
+    </div>
+
+    <h3 class="section-heading">Por que ir</h3>
+    <p class="por-que-ir">
+        A Croácia é o segredo mais bem guardado do Mediterrâneo. Águas tão cristalinas quanto as da Grécia, cidades medievais preservadas, gastronomia que mistura influências italianas e eslavas, e preços que ainda não explodiram. De Dubrovnik a Hvar, cada parada é um cartão postal.
+    </p>
+
+    <div class="page-divider"></div>
+
+    <ul class="highlights-list">
+        <li><span class="hl-num">1.</span><span><strong>Split: o Palácio de Diocleciano é a cidade.</strong> Um palácio romano de 1.700 anos que virou centro urbano — único no mundo</span></li>
+        <li><span class="hl-num">2.</span><span><strong>Hvar: a ilha mais ensolarada da Europa.</strong> Praias de água turquesa, lavanda, vida noturna sofisticada</span></li>
+        <li><span class="hl-num">3.</span><span><strong>Dubrovnik: muralhas medievais e Game of Thrones.</strong> Caminhar pelas muralhas com o Adriático ao fundo</span></li>
+        <li><span class="hl-num">4.</span><span><strong>Lagos Plitvice: 16 lagos em cascata.</strong> Passarelas sobre águas verde-esmeralda. Patrimônio UNESCO</span></li>
+        <li><span class="hl-num">5.</span><span><strong>Ston: muralhas e ostras.</strong> A segunda maior muralha do mundo e ostras frescas por R$3 cada</span></li>
+    </ul>
+
+    <div class="dica-local">
+        <div class="dica-local-header">Dica local — Marcelo & Alexandra</div>
+        <p>A Peka é o prato que você precisa provar: carne ou polvo cozidos lentamente sob campânula de ferro. As trufas da Ístria rivalam com as italianas por metade do preço. E o vinho Plavac Mali é a surpresa: encorpado, frutado, R$25 a garrafa.</p>
+    </div>
+
+    <div class="budget-mini">
+        <div class="budget-mini-header">Orçamento estimado (casal, 7 dias)</div>
+        <div class="budget-mini-total">R$9.400</div>
+        <p class="budget-mini-detail">Passagens R$4.000 + Hospedagem R$2.800 + Alimentação R$1.600 + Transporte R$800 + Seguro R$200</p>
+    </div>
+</div>
+
+<!-- ===== PAGE 6: RÚSSIA ===== -->
+<div class="page">
+    <div class="dest-number">05</div>
+    <h2 class="dest-name">Rússia</h2>
+    <p class="dest-region">Europa / Ásia</p>
+    <p class="dest-tagline">"O gigante que surpreende em cada esquina"</p>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="info-label">Melhor época</div>
+            <div class="info-value">Mai–Set</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Quanto tempo</div>
+            <div class="info-value">7 a 10 dias</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Orçamento (casal)</div>
+            <div class="info-value">R$7.700</div>
+        </div>
+    </div>
+
+    <h3 class="section-heading">Por que ir</h3>
+    <p class="por-que-ir">
+        A Rússia é um país que desafia expectativas. Moscou é grandiosa, imponente e surpreendentemente moderna. São Petersburgo é a cidade mais elegante que você vai conhecer. Uma cultura riquíssima, arquitetura que tira o fôlego e uma gastronomia reconfortante que ninguém espera. O e-visa simplificou a entrada, e o câmbio favorável torna tudo acessível.
+    </p>
+
+    <div class="page-divider"></div>
+
+    <ul class="highlights-list">
+        <li><span class="hl-num">1.</span><span><strong>Moscou: Praça Vermelha, Kremlin e o metrô mais bonito do mundo.</strong> Estações que parecem museus</span></li>
+        <li><span class="hl-num">2.</span><span><strong>São Petersburgo: o Hermitage, canais e noites brancas.</strong> No verão, o sol não se põe</span></li>
+        <li><span class="hl-num">3.</span><span><strong>Kazan: a fusão Europa-Ásia.</strong> Mesquita e Kremlin lado a lado — uma cidade que todos amam</span></li>
+        <li><span class="hl-num">4.</span><span><strong>Transiberiana (trecho):</strong> um trecho noturno Moscou-Kazan já é aventura inesquecível</span></li>
+        <li><span class="hl-num">5.</span><span><strong>Gastronomia russa surpreende:</strong> borscht, blini, pelmeni e vodka artesanal — sabores intensos</span></li>
+    </ul>
+
+    <div class="dica-local">
+        <div class="dica-local-header">Dica local — Marcelo & Alexandra</div>
+        <p>O borscht com smetana é comfort food no mais alto nível. Os blini com caviar vermelho são acessíveis — R$30 uma porção generosa. Os cafés de São Petersburgo são uma surpresa: ambiente europeu, bolos incríveis e chá servido no samovar.</p>
+    </div>
+
+    <div class="budget-mini">
+        <div class="budget-mini-header">Orçamento estimado (casal, 7 dias)</div>
+        <div class="budget-mini-total">R$7.700</div>
+        <p class="budget-mini-detail">Passagens R$3.600 + Hospedagem R$1.800 + Alimentação R$1.000 + Transporte R$500 + e-Visa R$800</p>
+    </div>
+</div>
+
+<!-- ===== PAGE 7: ESTADOS UNIDOS ===== -->
+<div class="page">
+    <div class="dest-number">06</div>
+    <h2 class="dest-name">Estados Unidos — Costa Leste</h2>
+    <p class="dest-region">América do Norte</p>
+    <p class="dest-tagline">"História, cultura e a energia que só Nova York tem"</p>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="info-label">Melhor época</div>
+            <div class="info-value">Set–Out</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Quanto tempo</div>
+            <div class="info-value">10 a 14 dias</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Orçamento (casal)</div>
+            <div class="info-value">R$11.720</div>
+        </div>
+    </div>
+
+    <h3 class="section-heading">Por que ir</h3>
+    <p class="por-que-ir">
+        A Costa Leste americana é onde a história dos EUA nasceu e onde a energia nunca para. Nova York surpreende sempre. Washington DC impressiona com monumentos e museus gratuitos. Boston encanta com charme universitário e frutos do mar. E Salem adiciona um toque de mistério. A road trip entre as quatro é uma das melhores do mundo.
+    </p>
+
+    <div class="page-divider"></div>
+
+    <ul class="highlights-list">
+        <li><span class="hl-num">1.</span><span><strong>Nova York: Manhattan, Central Park, Broadway.</strong> Times Square, MoMA, Met — energia que não existe em outro lugar</span></li>
+        <li><span class="hl-num">2.</span><span><strong>Washington DC: Smithsonian grátis.</strong> Lincoln Memorial, Capitólio e 20+ museus sem pagar nada</span></li>
+        <li><span class="hl-num">3.</span><span><strong>Salem: história, bruxas e charme.</strong> Museus fascinantes, arquitetura colonial e clima de mistério</span></li>
+        <li><span class="hl-num">4.</span><span><strong>Boston: Freedom Trail, Harvard e lobster roll.</strong> Trilha histórica de 4 km e frutos do mar no pier</span></li>
+        <li><span class="hl-num">5.</span><span><strong>Road trip pela I-95:</strong> paisagens que mudam a cada hora, outlets no caminho, liberdade de parar onde quiser</span></li>
+    </ul>
+
+    <div class="dica-local">
+        <div class="dica-local-header">Dica local — Marcelo & Alexandra</div>
+        <p>A NYC pizza é um ritual: fatia dobrada, em pé, na rua. Joe's Pizza no Village é a referência. O lobster roll em Boston (Neptune Oyster) é manteiga pura com lagosta fresca. E os food halls (Chelsea Market em NYC, Time Out Market em Boston) reúnem o melhor da gastronomia local.</p>
+    </div>
+
+    <div class="budget-mini">
+        <div class="budget-mini-header">Orçamento estimado (casal, 7 dias)</div>
+        <div class="budget-mini-total">R$11.720</div>
+        <p class="budget-mini-detail">Passagens R$4.800 + Hospedagem R$3.500 + Alimentação R$2.000 + Transporte R$1.200 + Seguro R$220</p>
+    </div>
+</div>
+
+<!-- ===== PAGE 8: ESPANHA ===== -->
+<div class="page">
+    <div class="dest-number">07</div>
+    <h2 class="dest-name">Espanha — Sevilla na Semana Santa</h2>
+    <p class="dest-region">Europa — Península Ibérica</p>
+    <p class="dest-tagline">"A experiência mais intensa da Europa"</p>
+
+    <div class="info-grid">
+        <div class="info-card">
+            <div class="info-label">Melhor época</div>
+            <div class="info-value">Semana Santa / Abr</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Quanto tempo</div>
+            <div class="info-value">7 a 10 dias</div>
+        </div>
+        <div class="info-card">
+            <div class="info-label">Orçamento (casal)</div>
+            <div class="info-value">R$8.400</div>
+        </div>
+    </div>
+
+    <h3 class="section-heading">Por que ir</h3>
+    <p class="por-que-ir">
+        Sevilla durante a Semana Santa é uma das experiências mais poderosas que a Europa oferece. Procissões centenárias que tomam as ruas, emoção coletiva, flamenco ecoando pelos becos, e uma gastronomia que transforma cada refeição em celebração. Não é turismo. É imersão total.
+    </p>
+
+    <div class="page-divider"></div>
+
+    <ul class="highlights-list">
+        <li><span class="hl-num">1.</span><span><strong>Semana Santa: procissões que arrepiam.</strong> 60+ irmandades, imagens sacras centenárias, saetas cantadas dos balcões</span></li>
+        <li><span class="hl-num">2.</span><span><strong>Real Alcázar: o palácio que inspirou Game of Thrones.</strong> Arquitetura mourisca deslumbrante, jardins de conto de fadas</span></li>
+        <li><span class="hl-num">3.</span><span><strong>Plaza de España: a praça mais fotogênica da Europa.</strong> Cerâmicas, canais, arquitetura renascentista</span></li>
+        <li><span class="hl-num">4.</span><span><strong>Bairro de Triana: o berço do flamenco.</strong> Tablados, cerâmica artesanal, bares autênticos</span></li>
+        <li><span class="hl-num">5.</span><span><strong>Tapas trail noturno:</strong> pular de bar em bar, porções perfeitas. Uma noite custa R$60 e rende memórias infinitas</span></li>
+    </ul>
+
+    <div class="dica-local">
+        <div class="dica-local-header">Dica local — Marcelo & Alexandra</div>
+        <p>Jamón ibérico cortado à mão é o melhor presunto do mundo. O gazpacho andaluz gelado é perfeito pro calor. Os churros con chocolate no café da manhã são obrigatórios. E pra fechar a noite, um vinho Fino de Jerez gelado com azeitonas. Simples, barato e inesquecível.</p>
+    </div>
+
+    <div class="budget-mini">
+        <div class="budget-mini-header">Orçamento estimado (casal, 7 dias)</div>
+        <div class="budget-mini-total">R$8.400</div>
+        <p class="budget-mini-detail">Passagens R$3.800 + Hospedagem R$2.600 + Alimentação R$1.400 + Transporte R$400 + Seguro R$200</p>
+    </div>
+</div>
+
+<!-- ===== PAGE 9: CTA ===== -->
+<div class="page cta-page">
+    <div class="cta-divider"></div>
+
+    <p class="cta-brand">Rotta Curadoria</p>
+
+    <h2 class="cta-heading">Gostou? A gente cuida de tudo pra você.</h2>
+
+    <p class="cta-sub">
+        Esse guia é o começo. Se você quer um roteiro personalizado — com restaurantes, hotéis, passeios e orçamento feito sob medida pro seu perfil — a gente faz isso pra você.
+    </p>
+
+    <div class="cta-item">
+        <div class="cta-label">Descubra seu destino ideal</div>
+        <div class="cta-value"><a href="https://rottacuradoria.com.br/quiz">Fazer o Quiz de Viagem</a></div>
+    </div>
+
+    <div class="cta-item">
+        <div class="cta-label">WhatsApp</div>
+        <div class="cta-value"><a href="https://wa.me/5511968152123">11 96815-2123</a></div>
+    </div>
+
+    <div class="cta-item">
+        <div class="cta-label">Instagram</div>
+        <div class="cta-value"><a href="https://instagram.com/rotta.curadoria">@rotta.curadoria</a></div>
+    </div>
+
+    <div class="cta-item">
+        <div class="cta-label">Site</div>
+        <div class="cta-value"><a href="https://rottacuradoria.com.br">rottacuradoria.com.br</a></div>
+    </div>
+
+    <a href="https://wa.me/5511968152123?text=Oi!%20Baixei%20o%20guia%20dos%207%20destinos%20e%20quero%20saber%20mais%20sobre%20roteiro%20personalizado" class="cta-quiz-btn">
+        Fale com a gente no WhatsApp
+    </a>
+
+    <div class="cta-footer">
+        <p>Curado por Marcelo & Alexandra</p>
+        <p>Preços são estimativas para 2026 e podem variar.</p>
+        <p>Não somos agência de viagem. Somos curadores de experiências.</p>
+    </div>
+</div>
+
+</body>
+</html>

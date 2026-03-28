@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auditoria de Conversao | Rotta Curadoria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+    --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+    --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+    --text:#F2EDE8;--muted:#999;--dim:#666;
+    --red:#E85A5A;--green:#4CAF7D;--yellow:#E8C94A;--blue:#5B8DEF;--coral:#E8785A
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+.container{max-width:1080px;margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{font-family:'Playfair Display',serif}
+a{color:var(--gold);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Cover */
+.cover{min-height:80vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 24px;position:relative}
+.cover::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+.cover-badge{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:32px}
+.cover h1{font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.15;margin-bottom:20px;max-width:800px}
+.cover h1 em{font-style:italic;color:var(--gold)}
+.cover .subtitle{font-size:18px;color:var(--muted);max-width:600px;margin-bottom:40px;line-height:1.6}
+.cover-meta{font-size:13px;color:var(--dim)}
+
+/* TOC */
+.toc{padding:60px 0;background:var(--card);border-top:1px solid var(--layer);border-bottom:1px solid var(--layer)}
+.toc h2{font-size:28px;text-align:center;margin-bottom:32px}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;max-width:900px;margin:0 auto}
+.toc-item{background:var(--bg);border:1px solid var(--layer);border-radius:10px;padding:16px;text-align:center;transition:all .3s;cursor:pointer;text-decoration:none;color:var(--text)}
+.toc-item:hover{border-color:var(--gold);transform:translateY(-2px);text-decoration:none}
+.toc-item .toc-emoji{font-size:24px;margin-bottom:8px}
+.toc-item .toc-name{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:4px}
+.toc-item .toc-score{font-size:24px;font-weight:700;color:var(--gold)}
+
+/* Section */
+.section{padding:80px 0}
+.section:nth-child(even){background:var(--card)}
+.section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.section h2{font-size:clamp(24px,4vw,36px);margin-bottom:32px;line-height:1.3}
+.section h2 span{color:var(--gold)}
+.section h3{font-size:22px;margin-bottom:16px;color:var(--gold)}
+.section h4{font-size:17px;margin-bottom:12px;color:var(--text)}
+
+/* Score bar */
+.score-bar{display:flex;align-items:center;gap:16px;margin-bottom:32px;padding:20px 24px;background:var(--bg);border:1px solid var(--layer);border-radius:12px}
+.score-number{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;line-height:1;flex-shrink:0}
+.score-low{color:var(--red)}
+.score-mid{color:var(--yellow)}
+.score-high{color:var(--green)}
+.score-details{flex:1}
+.score-details .score-name{font-family:'Playfair Display',serif;font-size:20px;margin-bottom:4px}
+.score-details .score-frase{font-style:italic;color:var(--muted);font-size:14px}
+.score-meter{height:8px;background:var(--layer);border-radius:4px;overflow:hidden;margin-top:8px}
+.score-fill{height:100%;border-radius:4px;transition:width .6s}
+
+/* Eval grid */
+.eval-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:32px}
+.eval-card{background:var(--bg);border:1px solid var(--layer);border-radius:12px;padding:20px 24px;border-left:4px solid var(--gold)}
+.eval-card.bad{border-left-color:var(--red)}
+.eval-card.ok{border-left-color:var(--yellow)}
+.eval-card.good{border-left-color:var(--green)}
+.eval-card h4{font-size:15px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.eval-card p{color:var(--muted);font-size:14px;line-height:1.6}
+.eval-card .verdict{font-weight:600;color:var(--text);font-size:13px;margin-top:8px;display:inline-block;padding:4px 12px;border-radius:100px;background:var(--card)}
+
+/* Issue cards */
+.issue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:32px}
+.issue-card{background:var(--bg);border:1px solid var(--layer);border-radius:12px;padding:24px;position:relative}
+.issue-card.critical{border-left:4px solid var(--red)}
+.issue-card.quick{border-left:4px solid var(--green)}
+.issue-card.structural{border-left:4px solid var(--blue)}
+.issue-card .issue-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:8px}
+.issue-tag.critical-tag{color:var(--red)}
+.issue-tag.quick-tag{color:var(--green)}
+.issue-tag.structural-tag{color:var(--blue)}
+.issue-card h4{font-size:16px;margin-bottom:8px}
+.issue-card p{font-size:13px;color:var(--muted);line-height:1.6}
+.issue-card .fix{margin-top:12px;font-size:13px;color:var(--gold);font-weight:500}
+
+/* Divider */
+.divider{width:60px;height:1px;background:var(--gold);margin:0 auto 32px;opacity:.3}
+
+/* Persona header */
+.persona-header{display:flex;align-items:center;gap:20px;margin-bottom:32px;padding:24px;background:var(--bg);border:1px solid var(--layer);border-radius:16px}
+.persona-avatar{width:64px;height:64px;border-radius:50%;background:var(--gold-dim);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.persona-info h3{font-size:24px;margin-bottom:4px;color:var(--text)}
+.persona-info p{font-size:14px;color:var(--muted)}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(14,14,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--layer);padding:0 24px}
+.nav-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-brand{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;text-decoration:none}
+.nav-links{display:flex;gap:20px;align-items:center;overflow-x:auto}
+.nav-links a{font-size:12px;color:var(--muted);transition:color .3s;white-space:nowrap;text-decoration:none}
+.nav-links a:hover{color:var(--gold)}
+
+/* Responsive */
+@media(max-width:768px){
+    .score-bar{flex-direction:column;text-align:center}
+    .persona-header{flex-direction:column;text-align:center}
+    .issue-grid{grid-template-columns:1fr}
+    .toc-grid{grid-template-columns:repeat(2,1fr)}
+    .nav-links{gap:12px}
+}
+@media(max-width:480px){
+    .toc-grid{grid-template-columns:1fr}
+    .nav-links a{font-size:11px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-brand">Auditoria Rotta</a>
+        <div class="nav-links">
+            <a href="#carolina">Carolina</a>
+            <a href="#roberto">Roberto</a>
+            <a href="#silvia">Silvia&Marcos</a>
+            <a href="#squad">Squad</a>
+            <a href="#lucas">Lucas&Bia</a>
+            <a href="#criticos">Problemas</a>
+            <a href="#rapidas">Quick Wins</a>
+        </div>
+    </div>
+</nav>
+
+<!-- COVER -->
+<section class="cover" style="padding-top:120px">
+    <div class="cover-badge">Auditoria UX de Conversao</div>
+    <h1>Analise Brutal de <em>Conversao</em> por Persona</h1>
+    <p class="subtitle">Cada pagina do site da Rotta Curadoria analisada sob a perspectiva das 5 personas mapeadas. Onde o site converte, onde perde, e o que corrigir.</p>
+    <p class="cover-meta">28 de Marco de 2026 &mdash; Rotta Curadoria &mdash; Documento Interno</p>
+</section>
+
+<!-- SCORE OVERVIEW -->
+<section class="toc">
+    <div class="container">
+        <h2>Score de Conversao por <span style="color:var(--gold)">Persona</span></h2>
+        <div class="toc-grid">
+            <a href="#carolina" class="toc-item">
+                <div class="toc-emoji">&#x1F30D;</div>
+                <div class="toc-name">Carolina</div>
+                <div style="font-size:12px;color:var(--muted);margin-bottom:8px">28a, Exploradora</div>
+                <div class="toc-score">5/10</div>
+            </a>
+            <a href="#roberto" class="toc-item">
+                <div class="toc-emoji">&#x1F3AF;</div>
+                <div class="toc-name">Roberto</div>
+                <div style="font-size:12px;color:var(--muted);margin-bottom:8px">48a, Executivo</div>
+                <div class="toc-score">4/10</div>
+            </a>
+            <a href="#silvia" class="toc-item">
+                <div class="toc-emoji">&#x1F491;</div>
+                <div class="toc-name">Silvia & Marcos</div>
+                <div style="font-size:12px;color:var(--muted);margin-bottom:8px">50a, Casal Reconectando</div>
+                <div class="toc-score">6/10</div>
+            </a>
+            <a href="#squad" class="toc-item">
+                <div class="toc-emoji">&#x1F465;</div>
+                <div class="toc-name">Squad</div>
+                <div style="font-size:12px;color:var(--muted);margin-bottom:8px">30a, Grupo de Amigos</div>
+                <div class="toc-score">5/10</div>
+            </a>
+            <a href="#lucas" class="toc-item">
+                <div class="toc-emoji">&#x1F48D;</div>
+                <div class="toc-name">Lucas & Bia</div>
+                <div style="font-size:12px;color:var(--muted);margin-bottom:8px">30a, Casal que Celebra</div>
+                <div class="toc-score">6/10</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- CAROLINA -->
+<!-- ============================================ -->
+<section class="section" id="carolina">
+    <div class="container">
+        <div class="persona-header">
+            <div class="persona-avatar">&#x1F30D;</div>
+            <div class="persona-info">
+                <h3>Carolina &mdash; A Exploradora Aspiracional</h3>
+                <p>28-40 anos &bull; R$8-15k/mes &bull; Solteira ou recem-namorando &bull; Instagram como habitat natural</p>
+            </div>
+        </div>
+
+        <div class="score-bar">
+            <div class="score-number score-mid">5<span style="font-size:20px;color:var(--dim)">/10</span></div>
+            <div class="score-details">
+                <div class="score-name">Score de Conversao</div>
+                <div class="score-frase">"Eu mereco essa viagem. So preciso de alguem que me diga que vale a pena."</div>
+                <div class="score-meter"><div class="score-fill" style="width:50%;background:var(--yellow)"></div></div>
+            </div>
+        </div>
+
+        <div class="eval-grid">
+            <div class="eval-card ok">
+                <h4>1. Primeira Impressao (0-3s)</h4>
+                <p>A hero "E se alguem fizesse tudo isso por voce" e atraente, mas generica demais pra Carolina. Ela busca DESTINOS visuais (Santorini, Toscana, Lisboa) e encontra... texto sobre texto em fundo preto. Zero imagens. Zero video. A hero nao tem uma unica foto de viagem. Carolina, que vive de visual no Instagram, sente que o site e "bonito mas vazio".</p>
+                <span class="verdict">Nota: 4/10 &mdash; Sem imagem, sem conexao emocional imediata</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>2. Identificacao (3-10s)</h4>
+                <p>O site fala "casais e familias" no subtitulo da hero. Carolina e solteira. Primeira barreira: "isso nao e pra mim". Nao ha mencao a viagem solo, viagem com amigas, ou viagem aspiracional individual. O Roteiro Express poderia ser perfeito pra ela, mas ela nao chega la porque a homepage a afasta.</p>
+                <span class="verdict">Nota: 3/10 &mdash; Sente-se excluida desde o primeiro scroll</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>3. Confianca</h4>
+                <p>Pontos positivos: "22 paises", "15+ anos viajando", a historia do casal e genuina. Pontos negativos: ZERO fotos reais (placeholders dizendo "em breve"), zero depoimentos de clientes reais, zero portfolio de roteiros entregues. O numero "99% satisfacao" na pagina Sobre diz "(projecao baseada em feedback)" &mdash; isso e RED FLAG pra qualquer visitante atento. Carolina pesquisa. Carolina ve isso.</p>
+                <span class="verdict">Nota: 4/10 &mdash; Credenciais boas, mas prova social inexistente</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>4. Objecoes</h4>
+                <p><strong>"Posso fazer sozinha"</strong> &mdash; Carolina planeja, pesquisa, salva posts. O site nao demonstra PORQUE a curadoria e melhor que ela fazer sozinha. Falta uma comparacao "DIY vs Rotta" com tempo gasto, riscos, erros comuns. <strong>"Por que nao uma agencia?"</strong> &mdash; O site diz "nao somos agencia" mas nao explica a diferenca de forma convincente pra quem nunca usou curadoria. <strong>"R$497 so pelo roteiro?"</strong> &mdash; Sem depoimento, sem exemplo de entrega, sem "antes/depois", o preco parece alto pra quem acha que um blog gratuito resolve.</p>
+                <span class="verdict">Nota: 3/10 &mdash; Objecoes nao sao tratadas no funil</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>5. Friccao</h4>
+                <p>Ponto de saida #1: Hero &mdash; "casais e familias" a faz sair. Ponto de saida #2: Secao de produtos na home &mdash; mostra 13 produtos em 5 niveis. Overload total. Carolina quer SIMPLICIDADE, nao uma escada de valor de 5 andares. Ponto de saida #3: Todas as CTAs vao pro WhatsApp &mdash; para Carolina, que tem 28 anos e prefere resolver online, ter que CONVERSAR com alguem antes de comprar e fricao. Ela quer clicar, pagar, receber.</p>
+                <span class="verdict">Nota: 5/10 &mdash; Funil tem 3 pontos de saida graves</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>6. CTA Clarity</h4>
+                <p>Na homepage tem "Fale com a gente" (vago), nas paginas de produto tem "Solicitar orcamento" (mais claro). O quiz termina com "Quero minha viagem" que vai pro WhatsApp &mdash; bom CTA. Problema: nao existe botao de compra direta. Tudo passa por WhatsApp. Pra Carolina, que compra tudo online, isso e como pedir pra ela ligar pro SAC de 2005.</p>
+                <span class="verdict">Nota: 5/10 &mdash; CTAs existem mas o canal e errado pra essa persona</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>7. Prova Social</h4>
+                <p>ZERO depoimentos reais. ZERO screenshots de mensagens. ZERO numeros de clientes atendidos (so "4 jornadas curadas" na pagina Sobre &mdash; que soa como "fizemos 4 roteiros"). ZERO fotos de clientes viajando. ZERO video embarcado. O blog tem 3 artigos mas nenhum tem conteudo real (os links apontam pra paginas que provavelmente nao existem). Carolina precisa ver "mulher de 30 anos, renda parecida com a minha, que usou a Rotta e amou". Nao encontra.</p>
+                <span class="verdict">Nota: 1/10 &mdash; Destruidor de conversao. Prova social e ZERO</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>8. Preco</h4>
+                <p>Precos sao transparentes &mdash; bom. Parcelamento em 12x esta visivel &mdash; bom. Mas falta: (1) contexto de valor ("R$497 = menos que um par de oculos que voce compra todo ano"), (2) comparacao com alternativas ("agencia cobra R$2.000+"), (3) tabela comparativa entre os produtos. O Rotta Surprise Mini a R$97 poderia ser a porta de entrada perfeita pra Carolina, mas esta perdido entre 13 produtos.</p>
+                <span class="verdict">Nota: 6/10 &mdash; Transparente, mas sem ancoragem de valor</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>9. Mobile</h4>
+                <p>O CSS e responsivo. As grids colapsam corretamente. Mas no mobile: (1) a nav da pagina Sobre esconde todos os links exceto WhatsApp em telas <480px, (2) a escada de produtos na home fica confusa em coluna unica, (3) o quiz funciona bem no mobile &mdash; e a melhor pagina do site em termos de UX mobile. Font sizes adequados, touch targets ok.</p>
+                <span class="verdict">Nota: 7/10 &mdash; Funcional, mas a home precisa de otimizacao</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- ROBERTO -->
+<!-- ============================================ -->
+<section class="section" id="roberto" style="background:var(--card)">
+    <div class="container">
+        <div class="persona-header" style="background:var(--card);border-color:var(--layer)">
+            <div class="persona-avatar">&#x1F3AF;</div>
+            <div class="persona-info">
+                <h3>Roberto &mdash; O Colecionador de Experiencias</h3>
+                <p>35-55 anos &bull; R$15-40k/mes &bull; Empresario/Executivo &bull; Exigente, quer exclusividade</p>
+            </div>
+        </div>
+
+        <div class="score-bar" style="background:var(--card)">
+            <div class="score-number score-low">4<span style="font-size:20px;color:var(--dim)">/10</span></div>
+            <div class="score-details">
+                <div class="score-name">Score de Conversao</div>
+                <div class="score-frase">"Nao quero viagem de turista. Quero algo que ninguem fez."</div>
+                <div class="score-meter"><div class="score-fill" style="width:40%;background:var(--red)"></div></div>
+            </div>
+        </div>
+
+        <div class="eval-grid">
+            <div class="eval-card bad">
+                <h4>1. Primeira Impressao (0-3s)</h4>
+                <p>Roberto abre o site e ve: fundo preto elegante (ok), tipografia serif (ok), mas NENHUMA foto real. Pra um homem que gasta R$400k num carro e espera que cada real investido comunique qualidade, ver placeholders com "foto vem de la" grita AMADORISMO. Ele fecha em 5 segundos. Roberto esta acostumado a sites como Four Seasons, Aman Resorts. O gap e brutal.</p>
+                <span class="verdict">Nota: 2/10 &mdash; Placeholders destroem a percepcao premium</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>2. Identificacao (3-10s)</h4>
+                <p>"Casais e familias" &mdash; ele se encaixa. Mas o tom geral do site e muito "acessivel" pra Roberto. Ele quer exclusividade, nao "curadoria pra todo mundo". Falta uma oferta claramente HIGH-END no primeiro scroll. O produto mais caro visivel na home (Escapada Romantica R$1.997) esta abaixo do ticket que Roberto pagaria sem piscar. Ele nao ve opcao de R$8-15k que o faria levar a serio.</p>
+                <span class="verdict">Nota: 4/10 &mdash; Se encaixa, mas nao se sente especial</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>3. Confianca</h4>
+                <p>Roberto desconfia de TUDO. Ele ja foi enganado em negocios. Ele precisa de: (1) prova que Marcelo e Alexandra realmente viajaram pra esses 22 paises &mdash; fotos REAIS, nao placeholders, (2) depoimentos de outros empresarios/executivos que usaram o servico, (3) portfolio de roteiros premium ja entregues, (4) alguma credencial alem de "medico e nutricionista" &mdash; que na perspectiva dele, nao sao credenciais de viagem. O site da ZERO disso.</p>
+                <span class="verdict">Nota: 2/10 &mdash; Sem prova, sem confianca. Roberto vai embora</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>4. Objecoes</h4>
+                <p><strong>"Por que nao contrato um concierge profissional?"</strong> &mdash; objecao nao tratada. <strong>"Medico e nutricionista fazendo curadoria de viagem?"</strong> &mdash; o site nao responde por que isso e uma VANTAGEM. O FAQ da home e basico demais: "Voces sao agencia?" e "Os precos incluem voo?". Roberto quer saber: "Qual o nivel de exclusividade?", "Voces tem acesso a experiencias privadas?", "Quem mais ja usou?". Nada disso e respondido.</p>
+                <span class="verdict">Nota: 2/10 &mdash; Objecoes premium ignoradas completamente</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>5. Friccao</h4>
+                <p>Roberto decide rapido quando confia. O problema: ele nao vai mandar WhatsApp como primeiro contato. Ele quer um formulario discreto, um email, ou um agendamento de call. Mandar "Oi! Vi o site da Rotta e quero saber mais" no WhatsApp e CONSTRANGEDOR pra um CEO. Alem disso, a escada de 13 produtos confunde. Ele quer: "me diga o que e melhor pra mim" &mdash; nao "escolha entre 5 niveis".</p>
+                <span class="verdict">Nota: 3/10 &mdash; WhatsApp como unico canal e barreira fatal</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>6. CTA Clarity</h4>
+                <p>"Fale com a gente" e fraco demais pra Roberto. Ele responde a CTAs como "Agendar consultoria de viagem", "Solicitar proposta personalizada", "Conversar com um curador". O texto generico nao comunica que do outro lado ha alguem preparado pra atende-lo no nivel que ele espera.</p>
+                <span class="verdict">Nota: 3/10 &mdash; CTAs nao falam a linguagem do executivo</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>7. Prova Social</h4>
+                <p>Mesmo problema de Carolina, mas PIOR. Roberto precisa de prova social de PARES &mdash; outros empresarios, executivos, profissionais de alto nivel. Um depoimento de "casal jovem que amou" nao move Roberto. Ele precisa ouvir: "O Marcelo planejou minha Toscana e foi melhor que qualquer concierge que ja usei." Isso nao existe no site.</p>
+                <span class="verdict">Nota: 0/10 &mdash; Total ausencia de prova pra essa persona</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>8. Preco</h4>
+                <p>O preco mais alto visivel na home e R$1.997 (Escapada Romantica). Roberto pensa: "isso e o que eu gasto num jantar." Ironicamente, os produtos L3 e L4 (R$3k-15k+) que seriam perfeitos pra ele estao listados na escada visual mas NAO tem pagina dedicada. Nao tem como ele clicar e saber mais. O site literalmente esconde o produto que Roberto compraria.</p>
+                <span class="verdict">Nota: 3/10 &mdash; Produto premium existe mas esta inacessivel</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>9. Mobile</h4>
+                <p>Roberto acessa no celular mas tambem no desktop (LinkedIn, email). A experiencia desktop e funcional mas "magra" &mdash; o layout max-width 1080px com muito espaco vazio parece um template, nao um site premium. Falta sofisticacao visual que Roberto espera de qualquer marca que cobre mais de R$1.000.</p>
+                <span class="verdict">Nota: 5/10 &mdash; Funcional, mas nao transmite premium</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SILVIA & MARCOS -->
+<!-- ============================================ -->
+<section class="section" id="silvia">
+    <div class="container">
+        <div class="persona-header">
+            <div class="persona-avatar">&#x1F491;</div>
+            <div class="persona-info">
+                <h3>Silvia & Marcos &mdash; O Casal Reconectando</h3>
+                <p>40-60 anos &bull; R$12-25k/mes familiar &bull; Casados 15-30 anos &bull; Filhos crescidos &bull; Ela pesquisa, ele valida</p>
+            </div>
+        </div>
+
+        <div class="score-bar">
+            <div class="score-number score-mid">6<span style="font-size:20px;color:var(--dim)">/10</span></div>
+            <div class="score-details">
+                <div class="score-name">Score de Conversao</div>
+                <div class="score-frase">"Precisamos de uma viagem so nossa. Sem filhos, sem rotina."</div>
+                <div class="score-meter"><div class="score-fill" style="width:60%;background:var(--yellow)"></div></div>
+            </div>
+        </div>
+
+        <div class="eval-grid">
+            <div class="eval-card good">
+                <h4>1. Primeira Impressao (0-3s)</h4>
+                <p>"E se alguem fizesse tudo isso por voce &mdash; e voce so precisasse viver?" &mdash; FUNCIONA pra Silvia. Ela quer exatamente isso: alguem que resolva. A frase ressoa com a necessidade nao expressa #1 dela. O subtitulo "casais e familias" tambem a inclui. A hero e a que melhor funciona pra essa persona.</p>
+                <span class="verdict">Nota: 7/10 &mdash; Headline acerta na dor principal</span>
+            </div>
+            <div class="eval-card good">
+                <h4>2. Identificacao (3-10s)</h4>
+                <p>A secao de problemas tem exatamente o que Silvia sente: "A gente viaja esse ano (pelo terceiro ano)", "marcos da vida sem celebracao", "precisa de uma viagem so nossa". A frase "Ha quanto tempo voces estao juntos?" e um GATILHO perfeito. Silvia se ve representada no texto. Marcos? Menos &mdash; falta conteudo racional (precos comparativos, logistica) que ele precisa pra validar.</p>
+                <span class="verdict">Nota: 7/10 &mdash; Silvia se identifica. Marcos precisa de mais dados</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>3. Confianca</h4>
+                <p>A historia de "casal com 4 filhas que viaja junto" gera identificacao forte com Silvia &mdash; "eles sao como a gente". Mas quando Marcos olha, quer ver RESULTADOS: quanto custou, como foi, fotos reais. Sem fotos do casal Marcelo & Alexandra viajando (so placeholders), Marcos desconfia. "Se eles viajaram tanto, cade as fotos?"</p>
+                <span class="verdict">Nota: 5/10 &mdash; Silvia confia na historia, Marcos precisa de prova</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>4. Objecoes</h4>
+                <p><strong>"E os filhos?"</strong> &mdash; O site nao aborda a culpa de Silvia em viajar sem os filhos. Um paragrafo tipo "os filhos ficam bem. Voces merecem esse tempo" faria diferenca. <strong>"O momento financeiro"</strong> &mdash; Marcos pensa nisso. O parcelamento 12x esta visivel, mas falta uma ancora tipo "custa menos que um final de semana em resort com a familia toda". <strong>"Sera que vai valer?"</strong> &mdash; Sem depoimento de casal 40-60 que usou, nao ha como saber.</p>
+                <span class="verdict">Nota: 5/10 &mdash; Objecoes parcialmente tratadas</span>
+            </div>
+            <div class="eval-card good">
+                <h4>5. Friccao</h4>
+                <p>Silvia usa WhatsApp naturalmente &mdash; o CTA WhatsApp funciona pra ela. O fluxo Silvia encontra > manda pro Marcos > ele analisa e EXATAMENTE como o site funciona: Silvia le, gosta, manda o link pro Marcos. Problema: quando Marcos abre, a pagina nao tem conteudo suficiente pra convence-lo (faltam numeros, comparacoes, garantias). A Escapada Romantica e o produto certo, e o fluxo ate la e razoavel (home > produto > WhatsApp).</p>
+                <span class="verdict">Nota: 6/10 &mdash; Funciona pra Silvia, incompleto pra Marcos</span>
+            </div>
+            <div class="eval-card good">
+                <h4>6. CTA Clarity</h4>
+                <p>Na pagina da Escapada Romantica, "Solicitar orcamento" e claro. "Prontos pra reconectar de verdade?" e um CTA emocional que funciona com Silvia. O quiz tambem e um bom caminho: resultado "Casal Reconectando" com CTA pro WhatsApp e um funil natural.</p>
+                <span class="verdict">Nota: 7/10 &mdash; CTAs claros e emocionalmente alinhados</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>7. Prova Social</h4>
+                <p>Silvia precisa ver: casal de 50 anos, casados ha 20, que fizeram a Escapada e "se apaixonaram de novo". Esse depoimento NAO existe. Ela precisa de permissao social &mdash; "outros casais como nos ja fizeram e deu certo". O site nao da essa permissao. A citacao "Ha quanto tempo voces estao juntos?" e boa, mas vem de Marcelo & Alexandra, nao de um cliente real.</p>
+                <span class="verdict">Nota: 2/10 &mdash; Falta a prova que da permissao</span>
+            </div>
+            <div class="eval-card good">
+                <h4>8. Preco</h4>
+                <p>R$1.497 a R$1.997 pela Escapada Romantica e um ticket que Silvia & Marcos conseguem absorver (R$12-25k de renda). O parcelamento 12x de R$124-166 esta visivel e acessivel. A explicacao no FAQ de que "custos da viagem sao a parte" e importante e esta clara. Pra Marcos, que pensa em ROI, falta uma conta tipo "uma escapada de 3 dias custa menos que 3 meses de terapia de casal".</p>
+                <span class="verdict">Nota: 7/10 &mdash; Preco acessivel e bem comunicado</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>9. Mobile</h4>
+                <p>Silvia acessa 100% pelo celular. A pagina da Escapada Romantica funciona bem em mobile &mdash; os steps ficam em coluna, os includes empilham, o CTA final e grande o suficiente pro polegar. O quiz tambem e excelente em mobile. Unico problema: a nav das paginas de produto desaparece completamente em mobile (<768px), deixando o usuario sem navegacao.</p>
+                <span class="verdict">Nota: 7/10 &mdash; Boa experiencia mobile geral</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- SQUAD -->
+<!-- ============================================ -->
+<section class="section" id="squad" style="background:var(--card)">
+    <div class="container">
+        <div class="persona-header" style="background:var(--card)">
+            <div class="persona-avatar">&#x1F465;</div>
+            <div class="persona-info">
+                <h3>Squad &mdash; Familia Escolhida</h3>
+                <p>25-40 anos &bull; R$5-15k/mes individual &bull; Grupo de 4-8 amigos &bull; Fernanda organiza e ninguem ajuda</p>
+            </div>
+        </div>
+
+        <div class="score-bar" style="background:var(--card)">
+            <div class="score-number score-mid">5<span style="font-size:20px;color:var(--dim)">/10</span></div>
+            <div class="score-details">
+                <div class="score-name">Score de Conversao</div>
+                <div class="score-frase">"A gente fala em viajar junto faz 2 anos. Ninguem organiza. Ninguem vai."</div>
+                <div class="score-meter"><div class="score-fill" style="width:50%;background:var(--yellow)"></div></div>
+            </div>
+        </div>
+
+        <div class="eval-grid">
+            <div class="eval-card bad">
+                <h4>1. Primeira Impressao (0-3s)</h4>
+                <p>A hero fala "casais e familias". O Squad nao e nenhum dos dois. Fernanda, que chegou pelo Instagram ou por busca, nao se ve na hero. Nao ha NENHUMA imagem ou mencao a viagem em grupo no primeiro scroll. O Rotta Crew, que e perfeito pra ela, esta escondido dentro da escada de 13 produtos, no nivel L2. Ela provavelmente nunca chega la.</p>
+                <span class="verdict">Nota: 2/10 &mdash; Invisivel pro Squad no primeiro contato</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>2. Identificacao (3-10s)</h4>
+                <p>Se Fernanda scrollar ate a secao de problemas, "a gente viaja esse ano (pelo terceiro ano)" ressoa. Mas a dor do Squad e especifica: coordenar agendas, alinhar orcamentos, ninguem organiza. Isso NAO aparece na home. A pagina do Rotta Crew tem a headline perfeita ("A viagem do grupo que finalmente vai sair do grupo de WhatsApp") mas Fernanda precisa ACHAR essa pagina primeiro.</p>
+                <span class="verdict">Nota: 5/10 &mdash; Identificacao existe, mas no lugar errado</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>3. Confianca</h4>
+                <p>Fernanda pensa: "eles entendem de viagem de grupo?". O site mostra experiencia de viagem de CASAL e FAMILIA, nao de grupo de amigos. Falta: (1) um depoimento de grupo que usou o servico, (2) mencao a experiencia em coordenar grupos, (3) fotos de viagem em grupo. A "planilha de custos divididos" na pagina Crew e um diferencial forte &mdash; mas so se ela chegar la.</p>
+                <span class="verdict">Nota: 4/10 &mdash; Nao demonstra competencia especifica pra grupos</span>
+            </div>
+            <div class="eval-card good">
+                <h4>4. Objecoes</h4>
+                <p>A pagina do Rotta Crew trata BEM as objecoes do Squad: "E se alguem desistir?" (FAQ), "Como divide o custo?" (tabela de precos por grupo), "Funciona pra internacional?" (sim, com ressalvas). O problema e que essas respostas estao numa pagina que o Squad tem dificuldade de encontrar. A objecao #1 do grupo &mdash; "ninguem organiza" &mdash; e perfeitamente respondida pelo conceito do produto.</p>
+                <span class="verdict">Nota: 7/10 &mdash; Objecoes bem tratadas NA PAGINA DO PRODUTO</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>5. Friccao</h4>
+                <p>Ponto de saida #1: Hero (nao se identifica). Ponto de saida #2: Escada de produtos (overload). Ponto favoravel: se Fernanda chega no Rotta Crew e manda o link pro grupo do WhatsApp, o CTA "Falar sobre viagem em grupo" e natural. O preco por pessoa (R$797, 12x de R$66) e facil de comunicar no grupo. Mas DEPENDE de Fernanda achar o produto.</p>
+                <span class="verdict">Nota: 5/10 &mdash; Funil funciona SE encontrar o produto</span>
+            </div>
+            <div class="eval-card good">
+                <h4>6. CTA Clarity</h4>
+                <p>Na pagina Crew: "Falar sobre viagem em grupo" e perfeito. "Prontos pra finalmente tirar a viagem do grupo do papel?" e emocionalmente certeiro. O CTA do Crew e o melhor de todo o site pro publico-alvo dele. O texto sugerido de WhatsApp ("Oi! Quero saber sobre o Rotta Crew pra grupo") e especifico e bom.</p>
+                <span class="verdict">Nota: 8/10 &mdash; Quando chega, converte bem</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>7. Prova Social</h4>
+                <p>Zero. Nem generico, nem especifico. Fernanda precisa mostrar pro grupo que "outros grupos ja fizeram e deu certo". Sem isso, ela esta pedindo pro grupo confiar numa marca que NINGUEM do grupo conhece. Isso e pedir demais. Um unico video de depoimento de grupo mudaria tudo.</p>
+                <span class="verdict">Nota: 0/10 &mdash; Impossivel convencer o grupo sem prova</span>
+            </div>
+            <div class="eval-card good">
+                <h4>8. Preco</h4>
+                <p>R$797/pessoa e R$66/mes por pessoa e EXCELENTE pra essa persona. A tabela de "como funciona o preco" com grupo de 4, 6 e 8 pessoas e brilhante &mdash; faz a matematica pelo grupo. Fernanda pode mandar essa secao no WhatsApp do grupo e todo mundo entende. E o melhor comunicador de preco de todo o site.</p>
+                <span class="verdict">Nota: 9/10 &mdash; Preco bem comunicado e acessivel</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>9. Mobile</h4>
+                <p>Fernanda vai mandar o link no grupo de WhatsApp &mdash; 100% mobile. A pagina Crew funciona bem em mobile. Os steps colapsam, a tabela de preco e legivel. O floating WhatsApp e acessivel. Problema: a nav desaparece em mobile, entao se o membro do grupo quer ver outros produtos, nao tem como navegar.</p>
+                <span class="verdict">Nota: 7/10 &mdash; Funcional pra compartilhamento mobile</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- LUCAS & BIA -->
+<!-- ============================================ -->
+<section class="section" id="lucas">
+    <div class="container">
+        <div class="persona-header">
+            <div class="persona-avatar">&#x1F48D;</div>
+            <div class="persona-info">
+                <h3>Lucas & Bia &mdash; O Casal que Celebra</h3>
+                <p>25-38 anos &bull; R$8-20k/mes familiar &bull; 2-8 anos juntos &bull; Marcos nao celebrados &bull; Bia puxa, Lucas valida</p>
+            </div>
+        </div>
+
+        <div class="score-bar">
+            <div class="score-number score-mid">6<span style="font-size:20px;color:var(--dim)">/10</span></div>
+            <div class="score-details">
+                <div class="score-name">Score de Conversao</div>
+                <div class="score-frase">"A gente merece marcar esse momento. Nao pode ser so um jantar."</div>
+                <div class="score-meter"><div class="score-fill" style="width:60%;background:var(--yellow)"></div></div>
+            </div>
+        </div>
+
+        <div class="eval-grid">
+            <div class="eval-card ok">
+                <h4>1. Primeira Impressao (0-3s)</h4>
+                <p>"E se alguem fizesse tudo isso por voce" funciona razoavelmente. "Casais" os inclui. Mas o site e muito ESCURO e "serio" pra um casal de 30 anos que celebra com leveza. O tema dark + gold + serif transmite "luxo sombrio" quando Lucas & Bia querem "romance acessivel". Faltam cores quentes, fotos de casais felizes, leveza visual.</p>
+                <span class="verdict">Nota: 5/10 &mdash; Inclui mas nao emociona</span>
+            </div>
+            <div class="eval-card good">
+                <h4>2. Identificacao (3-10s)</h4>
+                <p>"Marcos da vida sem celebracao. Aniversario de casamento, primeiro ano juntos &mdash; tudo comemorado com jantar e cinema." &mdash; isso e LUCAS E BIA literalmente. A secao de problemas acerta em cheio. O Rotta Surprise e feito sob medida pra eles &mdash; e a pagina do produto tem a proposta perfeita. A jornada Surprise Mini (R$97) > Surprise Full (R$997) e natural.</p>
+                <span class="verdict">Nota: 8/10 &mdash; Forte identificacao nas dores</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>3. Confianca</h4>
+                <p>A historia de Marcelo & Alexandra como casal gera conexao emocional com Bia. Mas Lucas, que precisa COMPRAR a surpresa, quer ver: "outros caras ja fizeram isso e a namorada amou". Sem depoimento masculino de "como surpreendi minha namorada com a Rotta", Lucas nao tem modelo. O Surprise Full promete "kit surpresa com carta e revelacao" mas nao mostra FOTO do kit. Promessa sem prova.</p>
+                <span class="verdict">Nota: 4/10 &mdash; Promessas emocionais sem evidencias</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>4. Objecoes</h4>
+                <p><strong>"R$997 por uma surpresa?"</strong> &mdash; Sem ver exemplos de entregas anteriores, parece caro. Falta: "o que R$997 inclui exatamente vs o que voce teria que fazer sozinho". <strong>"E se ela nao puder na data?"</strong> &mdash; tratado no FAQ, bom. <strong>"Como garantir segredo?"</strong> &mdash; tratado no FAQ, bom. O Rotta Surprise tem o melhor FAQ do site.</p>
+                <span class="verdict">Nota: 6/10 &mdash; FAQ bem feito, falta contextualizacao de valor</span>
+            </div>
+            <div class="eval-card good">
+                <h4>5. Friccao</h4>
+                <p>O funil e claro: Surprise Mini (R$97) e porta de entrada PERFEITA. Lucas pode testar com R$97 antes de investir R$997. Esse "trial" reduz risco percebido enormemente. O fluxo WhatsApp funciona aqui porque Lucas QUER conversar em segredo (sem Bia ver). O briefing secreto por WhatsApp e natural pra esse caso.</p>
+                <span class="verdict">Nota: 7/10 &mdash; Pouca friccao no funil Surprise</span>
+            </div>
+            <div class="eval-card good">
+                <h4>6. CTA Clarity</h4>
+                <p>"Quero surpreender" e emocionalmente poderoso e claro. O tier comparison (Mini vs Full) com CTAs diferenciados funciona bem. "Pronto pra ser inesquecivel?" no CTA final e forte. Os CTAs do Rotta Surprise sao os melhores do site inteiro.</p>
+                <span class="verdict">Nota: 8/10 &mdash; CTAs emocionais e claros</span>
+            </div>
+            <div class="eval-card bad">
+                <h4>7. Prova Social</h4>
+                <p>Bia precisa ver: "uma amiga postou a surpresa que o namorado fez e foi incrivel". Lucas precisa ver: "um cara como eu fez isso e a reacao da namorada valeu cada centavo". ZERO desses depoimentos existem. O Rotta Surprise e o produto com MAIOR potencial de prova social organica (a pessoa surpreendida vai postar!) mas nenhuma prova inicial existe.</p>
+                <span class="verdict">Nota: 1/10 &mdash; Produto com maior potencial, zero prova</span>
+            </div>
+            <div class="eval-card good">
+                <h4>8. Preco</h4>
+                <p>R$97 (Mini) e brilhante como porta de entrada. "Pagamento unico" sem parcelamento e simples. R$997 (Full) com 12x de R$83 e acessivel pro ticket dessa persona. A comparacao lado a lado (Mini vs Full) com features listadas ajuda na decisao. Falta: um tier intermediario? Talvez. Mas 2 opcoes e melhor que 5 pra clareza de decisao.</p>
+                <span class="verdict">Nota: 8/10 &mdash; Pricing strategy bem pensada</span>
+            </div>
+            <div class="eval-card ok">
+                <h4>9. Mobile</h4>
+                <p>Lucas vai pesquisar no celular, provavelmente escondido de Bia. A pagina Surprise funciona bem em mobile. Os tiers empilham. O badge "MAIS POPULAR" no Full se destaca. Unico problema: o botao flutuante de WhatsApp pode atrapalhar se Bia estiver perto e ver a notificacao pop. Mas isso e mais sobre o processo que sobre o site.</p>
+                <span class="verdict">Nota: 7/10 &mdash; Boa experiencia mobile para compra discreta</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- PROBLEMAS CRITICOS -->
+<!-- ============================================ -->
+<section class="section" id="criticos" style="background:var(--card)">
+    <div class="container">
+        <p class="section-label" style="text-align:center;color:var(--red)">ALERTA VERMELHO</p>
+        <h2 style="text-align:center">Problemas <span style="color:var(--red)">Criticos</span></h2>
+        <p style="text-align:center;color:var(--muted);max-width:600px;margin:0 auto 48px;font-size:15px">Problemas que estao MATANDO vendas agora. Cada um deles, sozinho, e motivo suficiente pra um visitante fechar o site.</p>
+
+        <div class="issue-grid">
+            <div class="issue-card critical">
+                <div class="issue-tag critical-tag">CRITICO #1</div>
+                <h4>Zero Fotos Reais em Todo o Site</h4>
+                <p>Nao existe UMA UNICA foto real de viagem, de Marcelo & Alexandra, de um destino, de um roteiro entregue, de um cliente. Todas as imagens sao placeholders com textos como "foto vem de la" e "em breve". Isso e INACEITAVEL pra um servico de curadoria de viagem. E como um restaurante sem fotos da comida. A confianca despenca a zero.</p>
+                <div class="fix">FIX: Use fotos pessoais de viagens passadas HOJE. Nao espere a Italia em Maio. 22 paises visitados = centenas de fotos disponiveis. Coloque pelo menos 10 fotos reais nas paginas-chave (hero, sobre, produtos).</div>
+            </div>
+
+            <div class="issue-card critical">
+                <div class="issue-tag critical-tag">CRITICO #2</div>
+                <h4>Zero Depoimentos e Prova Social</h4>
+                <p>Nenhuma pagina tem UM UNICO depoimento real. Nenhum numero de clientes atendidos. Nenhum screenshot de conversa. O "99% satisfacao" na pagina Sobre diz "projecao baseada em feedback" &mdash; que e basicamente admitir que nao tem dado real. Isso MATA a conversao de TODAS as 5 personas.</p>
+                <div class="fix">FIX: Consiga 3-5 depoimentos de pessoas que ja receberam roteiros (mesmo amigos/familia que pediram "monta um roteiro pra gente"). Use prints de WhatsApp (com permissao). Coloque na home ACIMA do fold dos produtos.</div>
+            </div>
+
+            <div class="issue-card critical">
+                <div class="issue-tag critical-tag">CRITICO #3</div>
+                <h4>Hero Exclui 3 das 5 Personas</h4>
+                <p>"Casais e familias" na hero exclui: Carolina (solteira), Squad (grupo de amigos), e parcialmente Lucas (casal jovem que nao se identifica como "familia"). 60% do publico-alvo se sente no lugar errado nos primeiros 3 segundos.</p>
+                <div class="fix">FIX: Troque "casais e familias" por "quem quer viver experiencias de verdade" ou "viajantes que merecem mais do que um roteiro generico". Inclusivo sem perder premium.</div>
+            </div>
+
+            <div class="issue-card critical">
+                <div class="issue-tag critical-tag">CRITICO #4</div>
+                <h4>Sem Video Embarcado em Nenhum Lugar</h4>
+                <p>Um site de viagens em 2026 sem NENHUM video. Nenhum Reel embarcado, nenhum YouTube embed, nenhum video de apresentacao. 80% do publico consome video como formato principal. O Instagram da Rotta produz carrosseis e conteudo &mdash; mas nenhum aparece no site.</p>
+                <div class="fix">FIX: Embede 1 video de apresentacao na hero (Marcelo e Alexandra se apresentando, 60s). Embede Reels do Instagram nas paginas de produto. Use o carrossel "5 Erros" como conteudo inline no blog.</div>
+            </div>
+
+            <div class="issue-card critical">
+                <div class="issue-tag critical-tag">CRITICO #5</div>
+                <h4>WhatsApp Como Unico Canal de Conversao</h4>
+                <p>Todo CTA vai pro WhatsApp. Isso funciona pra Silvia e Lucas, mas e BARREIRA pra Carolina (quer comprar online sem conversar) e pra Roberto (WhatsApp e informal demais pro nivel de exigencia dele). Nao existe formulario de contato, agendamento de call, checkout direto, nem email.</p>
+                <div class="fix">FIX: Adicione (1) formulario de contato com campos basicos, (2) opcao de agendar call (Calendly embed), (3) pra produtos <R$200, opcao de compra direta (Stripe/PagSeguro). WhatsApp continua como opcao, mas nao a unica.</div>
+            </div>
+
+            <div class="issue-card critical">
+                <div class="issue-tag critical-tag">CRITICO #6</div>
+                <h4>Tema Dark Pode Afastar Publico Feminino</h4>
+                <p>O publico de viagem e predominantemente feminino (todas as personas confirmam: Silvia pesquisa, Bia puxa, Carolina decide, Fernanda organiza). O tema dark + gold e esteticamente bonito mas remete a "masculino premium" (whisky, relogio, carro). Sites de viagem referencia (Virtuoso, Scott Dunn) usam tons claros, fotos vibrantes, cores quentes. O dark theme pode estar criando uma dissonancia inconsciente com 80% da audiencia.</p>
+                <div class="fix">FIX: Nao precisa trocar tudo. Adicione: (1) fotos vibrantes de destinos que quebrem a monotonia escura, (2) secoes com background mais claro (#1E1E1E ou gradientes sutis) nas paginas de produto, (3) considere uma variacao "light" para as paginas de produto romantico.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- OPORTUNIDADES RAPIDAS -->
+<!-- ============================================ -->
+<section class="section" id="rapidas">
+    <div class="container">
+        <p class="section-label" style="text-align:center;color:var(--green)">QUICK WINS</p>
+        <h2 style="text-align:center">Oportunidades <span style="color:var(--green)">Rapidas</span></h2>
+        <p style="text-align:center;color:var(--muted);max-width:600px;margin:0 auto 48px;font-size:15px">Mudancas que podem ser implementadas em horas e que terao impacto imediato na conversao.</p>
+
+        <div class="issue-grid">
+            <div class="issue-card quick">
+                <div class="issue-tag quick-tag">QUICK WIN #1</div>
+                <h4>Trocar Placeholders por Fotos Reais</h4>
+                <p>Marcelo e Alexandra ja visitaram 22 paises. Certamente ha centenas de fotos de viagem no celular. Substitua TODOS os placeholders por fotos reais hoje. Prioridade: hero da home, secao "Quem somos", pagina Sobre.</p>
+                <div class="fix">Tempo: 2-3 horas &bull; Impacto: ALTO</div>
+            </div>
+
+            <div class="issue-card quick">
+                <div class="issue-tag quick-tag">QUICK WIN #2</div>
+                <h4>Adicionar 3 Depoimentos na Home</h4>
+                <p>Peca a 3 pessoas que ja receberam roteiros/dicas (amigos, familiares) um depoimento por WhatsApp. Tire screenshot, peça permissao, e coloque na home entre a secao "Como Funciona" e "Produtos".</p>
+                <div class="fix">Tempo: 1-2 horas &bull; Impacto: ALTO</div>
+            </div>
+
+            <div class="issue-card quick">
+                <div class="issue-tag quick-tag">QUICK WIN #3</div>
+                <h4>Trocar Subtitulo da Hero</h4>
+                <p>De "casais e familias" para algo inclusivo: "Roteiros personalizados pra quem quer mais do que um destino &mdash; quer uma memoria que dure pra sempre." Remove a exclusao de Carolina e Squad sem perder apelo.</p>
+                <div class="fix">Tempo: 5 minutos &bull; Impacto: MEDIO-ALTO</div>
+            </div>
+
+            <div class="issue-card quick">
+                <div class="issue-tag quick-tag">QUICK WIN #4</div>
+                <h4>Simplificar a Escada de Produtos na Home</h4>
+                <p>Remova a escada L0-L4 da home publica. Mostre apenas os 4 produtos principais com pagina (Roteiro Express, Escapada Romantica, Rotta Crew, Rotta Surprise) como cards visuais simples. A escada de 13 produtos e otima pro documento interno, pessima pro visitante.</p>
+                <div class="fix">Tempo: 1-2 horas &bull; Impacto: ALTO</div>
+            </div>
+
+            <div class="issue-card quick">
+                <div class="issue-tag quick-tag">QUICK WIN #5</div>
+                <h4>Adicionar Formulario de Contato</h4>
+                <p>Adicione um formulario simples (nome, email, "o que voce procura?") como alternativa ao WhatsApp. Pode ser um Google Form embarcado ou um Typeform. Roberto e Carolina vao preferir isso.</p>
+                <div class="fix">Tempo: 30 minutos &bull; Impacto: MEDIO</div>
+            </div>
+
+            <div class="issue-card quick">
+                <div class="issue-tag quick-tag">QUICK WIN #6</div>
+                <h4>Tirar "99% Satisfacao (projecao)" da Pagina Sobre</h4>
+                <p>Esse numero sem base real PREJUDICA mais do que ajuda. Visitantes atentos (como Roberto) leem o parentese e perdem confianca. Troque por "Todos os nossos clientes voltam querendo mais" ou simplesmente remova ate ter dado real.</p>
+                <div class="fix">Tempo: 2 minutos &bull; Impacto: MEDIO</div>
+            </div>
+
+            <div class="issue-card quick">
+                <div class="issue-tag quick-tag">QUICK WIN #7</div>
+                <h4>Adicionar Nav Hamburguer em Mobile</h4>
+                <p>Em telas <768px, as paginas de produto perdem TODA a navegacao (nav-links { display: none }). O usuario fica preso na pagina sem poder ir pra home, quiz ou outros produtos. Adicione um menu hamburguer simples.</p>
+                <div class="fix">Tempo: 1-2 horas &bull; Impacto: MEDIO</div>
+            </div>
+
+            <div class="issue-card quick">
+                <div class="issue-tag quick-tag">QUICK WIN #8</div>
+                <h4>Linkar os Artigos do Blog</h4>
+                <p>O blog lista 3 artigos (Mendoza, Italia custos, Croacia) mas os links provavelmente apontam pra paginas que nao existem. Isso e um dead end. Ou crie as paginas ou remova os links quebrados.</p>
+                <div class="fix">Tempo: 2-4 horas (criar) ou 10 min (remover) &bull; Impacto: MEDIO</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- MELHORIAS ESTRUTURAIS -->
+<!-- ============================================ -->
+<section class="section" style="background:var(--card)">
+    <div class="container">
+        <p class="section-label" style="text-align:center;color:var(--blue)">LONGO PRAZO</p>
+        <h2 style="text-align:center">Melhorias <span style="color:var(--blue)">Estruturais</span></h2>
+        <p style="text-align:center;color:var(--muted);max-width:600px;margin:0 auto 48px;font-size:15px">Mudancas maiores que exigem mais tempo mas transformam a taxa de conversao do site.</p>
+
+        <div class="issue-grid">
+            <div class="issue-card structural">
+                <div class="issue-tag structural-tag">ESTRUTURAL #1</div>
+                <h4>Criar Paginas de Produto L3 e L4</h4>
+                <p>Os produtos premium (Curadoria Completa R$2.997-5.997, Curadoria VIP R$8k+) estao listados na escada da home mas NAO tem pagina dedicada. Roberto, que pagaria R$15k sem piscar, nao tem onde clicar. Crie landing pages premium com linguagem de concierge, nao de "curadoria acessivel".</p>
+                <div class="fix">Tempo: 1-2 semanas &bull; Impacto: ALTO para ticket medio</div>
+            </div>
+
+            <div class="issue-card structural">
+                <div class="issue-tag structural-tag">ESTRUTURAL #2</div>
+                <h4>Sistema de Portfolio / Galeria de Roteiros</h4>
+                <p>Crie uma pagina mostrando roteiros ja entregues (anonimizados se necessario): "Roteiro Italia 10 dias &mdash; Casal 50a" com preview visual do que o cliente recebeu. Isso e a prova mais poderosa de que o servico funciona. Cada persona quer ver um exemplo semelhante ao seu perfil.</p>
+                <div class="fix">Tempo: 2-3 semanas &bull; Impacto: ALTO</div>
+            </div>
+
+            <div class="issue-card structural">
+                <div class="issue-tag structural-tag">ESTRUTURAL #3</div>
+                <h4>Comparador de Produtos</h4>
+                <p>Uma tabela comparativa simples: "Roteiro Express vs Escapada Romantica vs Rotta Crew" com colunas mostrando o que inclui, preco, pra quem e ideal. Atualmente o visitante precisa abrir 4 paginas e comparar mentalmente. Reduz friccao de decisao pra TODAS as personas.</p>
+                <div class="fix">Tempo: 4-6 horas &bull; Impacto: ALTO</div>
+            </div>
+
+            <div class="issue-card structural">
+                <div class="issue-tag structural-tag">ESTRUTURAL #4</div>
+                <h4>Conteudo Real no Blog</h4>
+                <p>O blog tem 3 cards sem paginas reais. Quando os artigos existirem de verdade (com conteudo SEO, fotos reais, links internos pros produtos), o blog vira maquina de trafego organico. "Quanto custa viajar pra Italia em 2026" e uma busca real que leva pro Roteiro Express. Priorize esse artigo.</p>
+                <div class="fix">Tempo: 1-2 semanas &bull; Impacto: ALTO (SEO de longo prazo)</div>
+            </div>
+
+            <div class="issue-card structural">
+                <div class="issue-tag structural-tag">ESTRUTURAL #5</div>
+                <h4>Checkout Direto pra Produtos < R$200</h4>
+                <p>Rotta Surprise Mini (R$97), Roteiro PDF Premium (R$67-147): esses produtos nao precisam de conversa. Implemente checkout com Stripe, Hotmart ou PagSeguro. Reduce friccao pra compra impulsiva. Carolina e Lucas comprariam o Mini sem pensar se pudessem clicar e pagar.</p>
+                <div class="fix">Tempo: 1-2 semanas &bull; Impacto: ALTO para volume de vendas</div>
+            </div>
+
+            <div class="issue-card structural">
+                <div class="issue-tag structural-tag">ESTRUTURAL #6</div>
+                <h4>Segmentar Home por Persona</h4>
+                <p>Apos o quiz, o visitante sabe seu perfil. Use isso: redirecione "Exploradora Aspiracional" pra pagina do Roteiro Express, "Casal Reconectando" pra Escapada Romantica, "Squad Aventureiro" pro Rotta Crew. A home generica tenta falar com todos e acaba nao falando com ninguem.</p>
+                <div class="fix">Tempo: 2-3 semanas &bull; Impacto: TRANSFORMACIONAL</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================ -->
+<!-- RESUMO EXECUTIVO -->
+<!-- ============================================ -->
+<section class="section">
+    <div class="container">
+        <div class="divider"></div>
+        <h2 style="text-align:center;margin-bottom:48px">Resumo <span style="color:var(--gold)">Executivo</span></h2>
+
+        <div style="max-width:700px;margin:0 auto">
+            <div style="background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:32px;margin-bottom:24px">
+                <h3 style="font-size:20px;margin-bottom:16px;color:var(--text)">O que o site faz BEM</h3>
+                <ul style="list-style:none">
+                    <li style="padding:8px 0;border-bottom:1px solid var(--layer);font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--green);font-weight:600;flex-shrink:0">+</span> Design system consistente (cores, tipografia, espacamento)</li>
+                    <li style="padding:8px 0;border-bottom:1px solid var(--layer);font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--green);font-weight:600;flex-shrink:0">+</span> Quiz de Perfil de Viajante e excelente (melhor pagina do site)</li>
+                    <li style="padding:8px 0;border-bottom:1px solid var(--layer);font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--green);font-weight:600;flex-shrink:0">+</span> Copy emocional acerta na dor das personas (especialmente Silvia e Lucas)</li>
+                    <li style="padding:8px 0;border-bottom:1px solid var(--layer);font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--green);font-weight:600;flex-shrink:0">+</span> Precos transparentes com parcelamento visivel</li>
+                    <li style="padding:8px 0;border-bottom:1px solid var(--layer);font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--green);font-weight:600;flex-shrink:0">+</span> Pagina Rotta Crew tem o melhor comunicador de preco do site</li>
+                    <li style="padding:8px 0;border-bottom:1px solid var(--layer);font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--green);font-weight:600;flex-shrink:0">+</span> Rotta Surprise tem a melhor estrategia de tier (Mini vs Full)</li>
+                    <li style="padding:8px 0;font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--green);font-weight:600;flex-shrink:0">+</span> Cross-sell entre paginas de produto e bem feito</li>
+                </ul>
+            </div>
+
+            <div style="background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:32px;margin-bottom:24px">
+                <h3 style="font-size:20px;margin-bottom:16px;color:var(--text)">O que PRECISA mudar ANTES de investir em trafego</h3>
+                <ul style="list-style:none">
+                    <li style="padding:8px 0;border-bottom:1px solid var(--layer);font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--red);font-weight:600;flex-shrink:0">!</span> <strong style="color:var(--text)">Fotos reais</strong> &mdash; Sem foto, nao existe conversao. Prioridade #1 absoluta</li>
+                    <li style="padding:8px 0;border-bottom:1px solid var(--layer);font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--red);font-weight:600;flex-shrink:0">!</span> <strong style="color:var(--text)">Depoimentos</strong> &mdash; Nem que sejam de amigos. Prova social minima antes de qualquer anuncio</li>
+                    <li style="padding:8px 0;border-bottom:1px solid var(--layer);font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--red);font-weight:600;flex-shrink:0">!</span> <strong style="color:var(--text)">Hero inclusiva</strong> &mdash; Trocar "casais e familias" por mensagem universal</li>
+                    <li style="padding:8px 0;border-bottom:1px solid var(--layer);font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--red);font-weight:600;flex-shrink:0">!</span> <strong style="color:var(--text)">Simplificar produtos na home</strong> &mdash; 4 cards, nao 13 niveis</li>
+                    <li style="padding:8px 0;font-size:14px;color:var(--muted);display:flex;gap:8px"><span style="color:var(--red);font-weight:600;flex-shrink:0">!</span> <strong style="color:var(--text)">Alternativa ao WhatsApp</strong> &mdash; Formulario + agendamento de call</li>
+                </ul>
+            </div>
+
+            <div style="background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:32px;border-left:4px solid var(--gold)">
+                <h3 style="font-size:20px;margin-bottom:16px;color:var(--gold)">Veredicto Final</h3>
+                <p style="color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:16px">O site da Rotta Curadoria tem uma <strong style="color:var(--text)">base estrutural solida</strong>: design system coerente, copy emocional bem escrita, produtos bem pensados, precos transparentes, e um quiz que e referencia. A arquitetura de informacao e logica e os funis de cross-sell fazem sentido.</p>
+                <p style="color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:16px">Porem, o site sofre de um problema <strong style="color:var(--text)">critico e singular: falta de prova</strong>. Sem fotos reais, sem depoimentos, sem video, sem portfolio &mdash; o site e uma promessa vazia vestida de elegancia. E como um restaurante com cardapio lindo e cozinha fechada.</p>
+                <p style="color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:16px"><strong style="color:var(--text)">Score geral do site: 5.2/10</strong> &mdash; com potencial pra 8/10 se os 5 problemas criticos forem resolvidos.</p>
+                <p style="color:var(--gold);font-family:'Playfair Display',serif;font-style:italic;font-size:17px">Nao invistam R$1 em trafego pago ate ter fotos reais e pelo menos 3 depoimentos no site.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:48px 0;text-align:center;border-top:1px solid var(--layer)">
+    <div class="container">
+        <p style="font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px">Rotta Curadoria</p>
+        <p style="font-size:12px;color:var(--dim);margin-bottom:16px">Auditoria de Conversao por Persona &mdash; Documento Interno</p>
+        <p style="font-size:11px;color:var(--dim);line-height:1.6">Gerado em 28 de Marco de 2026<br>Baseado nas 5 personas mapeadas e nas 11 paginas do site</p>
+    </div>
+</footer>
+
+</body>
+</html>

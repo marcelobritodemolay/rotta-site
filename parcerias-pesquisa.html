@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotta Curadoria | Pesquisa de Parcerias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --coral:#E8785A;--green:#4CAF7D;--blue:#5B8DEF
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:1080px;margin:0 auto;padding:0 24px}
+
+        /* Header */
+        .page-header{padding:60px 0 40px;text-align:center;border-bottom:1px solid var(--layer)}
+        .page-header .badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:24px}
+        .page-header h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5vw,48px);font-weight:700;line-height:1.15;margin-bottom:16px}
+        .page-header h1 em{font-style:italic;color:var(--gold)}
+        .page-header .subtitle{font-size:16px;color:var(--muted);max-width:600px;margin:0 auto}
+        .page-header .date{font-size:13px;color:var(--dim);margin-top:16px}
+
+        /* Navigation */
+        .nav-toc{position:sticky;top:0;z-index:100;background:rgba(14,14,14,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--layer);padding:12px 0}
+        .nav-toc .container{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+        .nav-toc a{flex-shrink:0;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:8px 16px;border-radius:100px;border:1px solid transparent;transition:all .3s;white-space:nowrap}
+        .nav-toc a:hover,.nav-toc a.active{color:var(--gold);border-color:rgba(197,165,114,.3);background:var(--gold-dim)}
+
+        /* Sections */
+        .section{padding:80px 0;border-bottom:1px solid var(--layer)}
+        .section:last-child{border-bottom:none}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .section h2{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,36px);margin-bottom:12px;line-height:1.3}
+        .section h2 span{color:var(--gold)}
+        .section .section-intro{color:var(--muted);font-size:15px;max-width:700px;margin-bottom:40px;line-height:1.7}
+        .section h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--text);margin:40px 0 20px;padding-top:20px;border-top:1px solid var(--layer)}
+        .section h3:first-of-type{border-top:none;margin-top:0;padding-top:0}
+
+        /* Cards Grid */
+        .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;margin-bottom:32px}
+        .card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px;position:relative;overflow:hidden;transition:border-color .3s}
+        .card:hover{border-color:rgba(197,165,114,.3)}
+        .card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--gold);opacity:.5}
+        .card .card-category{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+        .card h4{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px;color:var(--text)}
+        .card .card-location{font-size:13px;color:var(--dim);margin-bottom:12px}
+        .card .card-location i{color:var(--gold)}
+        .card p{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+        .card .card-detail{font-size:13px;color:var(--muted)}
+        .card .card-detail strong{color:var(--text)}
+        .card .card-tag{display:inline-block;font-size:11px;padding:4px 10px;border-radius:100px;background:var(--gold-dim);color:var(--gold);margin-top:12px;margin-right:4px}
+        .card .card-url{display:block;margin-top:12px;font-size:13px;color:var(--gold);text-decoration:none;word-break:break-all}
+        .card .card-url:hover{text-decoration:underline}
+
+        /* Card variants */
+        .card.card-green::before{background:var(--green)}
+        .card.card-blue::before{background:var(--blue)}
+        .card.card-coral::before{background:var(--coral)}
+
+        /* Info boxes */
+        .info-box{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px 28px;margin:24px 0}
+        .info-box.gold{border-color:rgba(197,165,114,.3);background:linear-gradient(135deg,var(--card),rgba(197,165,114,.05))}
+        .info-box.green{border-color:rgba(76,175,125,.3);background:linear-gradient(135deg,var(--card),rgba(76,175,125,.05))}
+        .info-box.blue{border-color:rgba(91,141,239,.3);background:linear-gradient(135deg,var(--card),rgba(91,141,239,.05))}
+        .info-box h4{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:12px}
+        .info-box p,.info-box li{font-size:14px;color:var(--muted);line-height:1.7}
+        .info-box ul{padding-left:20px;margin-top:8px}
+        .info-box li{margin-bottom:6px}
+        .info-box li strong{color:var(--text)}
+
+        /* Tables */
+        .table-wrap{overflow-x:auto;margin:24px 0;border-radius:12px;border:1px solid var(--layer)}
+        table{width:100%;border-collapse:collapse;background:var(--card)}
+        thead{background:var(--layer)}
+        th{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);padding:14px 16px;text-align:left;white-space:nowrap}
+        td{padding:12px 16px;font-size:14px;color:var(--muted);border-top:1px solid var(--layer)}
+        td strong{color:var(--text)}
+        tr:hover td{background:rgba(197,165,114,.03)}
+
+        /* Lists */
+        .styled-list{list-style:none;padding:0;margin:16px 0}
+        .styled-list li{padding:12px 0 12px 24px;border-bottom:1px solid var(--layer);position:relative;font-size:14px;color:var(--muted);line-height:1.6}
+        .styled-list li::before{content:'';position:absolute;left:0;top:18px;width:8px;height:8px;border-radius:50%;background:var(--gold);opacity:.6}
+        .styled-list li strong{color:var(--text)}
+
+        /* Email template */
+        .email-template{background:var(--card);border:1px solid rgba(197,165,114,.3);border-radius:16px;padding:32px;margin:32px 0;position:relative}
+        .email-template::before{content:'EMAIL TEMPLATE';position:absolute;top:-10px;left:24px;font-size:10px;letter-spacing:2px;color:var(--gold);background:var(--card);padding:2px 12px;border:1px solid rgba(197,165,114,.3);border-radius:100px}
+        .email-template .email-field{margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--layer)}
+        .email-template .email-field:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+        .email-template .field-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+        .email-template .field-value{font-size:14px;color:var(--text);line-height:1.7;white-space:pre-wrap}
+        .email-template .field-value .placeholder{color:var(--coral);font-style:italic}
+
+        /* Checklist */
+        .checklist{list-style:none;padding:0;margin:16px 0}
+        .checklist li{padding:10px 0 10px 32px;position:relative;font-size:14px;color:var(--muted);border-bottom:1px solid rgba(42,42,42,.5)}
+        .checklist li::before{content:'';position:absolute;left:0;top:14px;width:16px;height:16px;border:2px solid var(--gold);border-radius:4px;opacity:.5}
+        .checklist li strong{color:var(--text)}
+
+        /* Priority badge */
+        .priority{display:inline-block;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-left:8px}
+        .priority.high{background:rgba(232,120,90,.15);color:var(--coral)}
+        .priority.medium{background:rgba(197,165,114,.15);color:var(--gold)}
+        .priority.low{background:rgba(76,175,125,.15);color:var(--green)}
+
+        /* Responsive */
+        @media(max-width:768px){
+            .cards-grid{grid-template-columns:1fr}
+            .section{padding:60px 0}
+            .email-template{padding:20px}
+            .nav-toc a{font-size:11px;padding:6px 12px}
+        }
+
+        /* Print */
+        @media print{
+            body{background:#fff;color:#222}
+            .nav-toc{display:none}
+            .card,.info-box,.email-template{break-inside:avoid}
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="page-header">
+    <div class="container">
+        <div class="badge">Documento Interno</div>
+        <h1>Pesquisa de <em>Parcerias</em></h1>
+        <p class="subtitle">Mapeamento completo de oportunidades de parceria para a Rotta Curadoria -- hoteis, programas de afiliados, modelos de comissao e templates de abordagem.</p>
+        <p class="date">Atualizado em 28 de marco de 2026</p>
+    </div>
+</header>
+
+<!-- NAVIGATION -->
+<nav class="nav-toc">
+    <div class="container">
+        <a href="#hoteis-pr">Hoteis Parana</a>
+        <a href="#modelos">Modelos de Parceria</a>
+        <a href="#cadeias-br">Cadeias BR</a>
+        <a href="#internacionais">Internacionais</a>
+        <a href="#afiliados">Afiliados</a>
+        <a href="#template">Template Email</a>
+        <a href="#plano">Plano de Acao</a>
+    </div>
+</nav>
+
+<!-- ================================================ -->
+<!-- SECAO 1: HOTEIS BOUTIQUE PARANA -->
+<!-- ================================================ -->
+<section class="section" id="hoteis-pr">
+    <div class="container">
+        <div class="section-label">Secao 01</div>
+        <h2>Hoteis Boutique & Premium no <span>Parana</span></h2>
+        <p class="section-intro">Mapeamento de propriedades premium no estado do Parana, organizadas por regiao. Cada propriedade e um potencial parceiro para hospedagem cortesia, comissao por indicacao ou conteudo colaborativo.</p>
+
+        <!-- MARINGA -->
+        <h3>Regiao de Maringa (85km de Campo Mourao)</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Hotel 4 Estrelas</div>
+                <h4>Hotel Deville Maringa</h4>
+                <p class="card-location">Maringa, PR</p>
+                <p>Tradicional hotel de alto padrao em Maringa, com infraestrutura completa para eventos e hospedagem executiva. Piscina, restaurante, academia.</p>
+                <span class="card-tag">Executivo</span>
+                <span class="card-tag">Eventos</span>
+                <a class="card-url" href="https://www.deville.com.br" target="_blank">deville.com.br</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Hotel Boutique</div>
+                <h4>Laje de Pedra Hotel</h4>
+                <p class="card-location">Maringa, PR</p>
+                <p>Opcao premium na cidade com foco em conforto e atendimento personalizado. Boa opcao para casais em escapada de fim de semana.</p>
+                <span class="card-tag">Casais</span>
+                <span class="card-tag">Fim de Semana</span>
+            </div>
+            <div class="card">
+                <div class="card-category">Hotel 4 Estrelas</div>
+                <h4>Bristol Maringa Flat Hotel</h4>
+                <p class="card-location">Maringa, PR</p>
+                <p>Rede Bristol com padrao consistente. Apartamentos amplos, ideal para familias. Localizacao central.</p>
+                <span class="card-tag">Familias</span>
+                <span class="card-tag">Flat</span>
+            </div>
+        </div>
+
+        <!-- LONDRINA -->
+        <h3>Regiao de Londrina (250km de Campo Mourao)</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Hotel 4 Estrelas</div>
+                <h4>Hotel Deville Londrina</h4>
+                <p class="card-location">Londrina, PR</p>
+                <p>Referencia em hospedagem premium em Londrina. Restaurante renomado, spa, piscina e area de eventos. Ideal para conteudo sobre gastronomia local.</p>
+                <span class="card-tag">Gastronomia</span>
+                <span class="card-tag">Spa</span>
+                <a class="card-url" href="https://www.deville.com.br" target="_blank">deville.com.br</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Hotel Boutique</div>
+                <h4>Radisson Londrina</h4>
+                <p class="card-location">Londrina, PR</p>
+                <p>Padrao internacional em Londrina. Boa opcao para conteudo comparativo nacional vs. internacional. Programa Radisson Rewards para parceiros.</p>
+                <span class="card-tag">Rede Internacional</span>
+                <span class="card-tag">Rewards</span>
+            </div>
+            <div class="card">
+                <div class="card-category">Pousada Premium</div>
+                <h4>Pousadas da Rota do Cafe</h4>
+                <p class="card-location">Norte do Parana</p>
+                <p>Roteiro turistico consolidado com fazendas historicas e hospedagem rural premium. Experiencia de turismo de cafe e gastronomia local. Ideal para conteudo sobre viagens curtas.</p>
+                <span class="card-tag">Turismo Rural</span>
+                <span class="card-tag">Cafe</span>
+                <span class="card-tag">Experiencia</span>
+            </div>
+        </div>
+
+        <!-- FOZ DO IGUACU -->
+        <h3>Foz do Iguacu (~500km, mas dentro do PR)</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Resort 5 Estrelas</div>
+                <h4>Belmond Hotel das Cataratas</h4>
+                <p class="card-location">Foz do Iguacu, PR</p>
+                <p>O unico hotel DENTRO do Parque Nacional do Iguacu. Rede Belmond (LVMH). Experiencia absolutamente unica -- acordar com vista para as Cataratas. Parceria de alto valor para conteudo.</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$2.500-5.000/noite</p>
+                <span class="card-tag">Luxo Absoluto</span>
+                <span class="card-tag">Belmond</span>
+                <span class="card-tag">Prioridade Alta</span>
+                <a class="card-url" href="https://www.belmond.com/hotel-das-cataratas-iguassu-falls" target="_blank">belmond.com</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Resort Premium</div>
+                <h4>Wish Foz do Iguacu by GJP</h4>
+                <p class="card-location">Foz do Iguacu, PR</p>
+                <p>Resort completo com parque aquatico, spa, restaurantes e infraestrutura para familias. Rede GJP tem programa proprio de parceiros.</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$800-1.500/noite</p>
+                <span class="card-tag">Resort</span>
+                <span class="card-tag">Familias</span>
+                <span class="card-tag">GJP</span>
+                <a class="card-url" href="https://www.wishhoteis.com.br" target="_blank">wishhoteis.com.br</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Hotel 5 Estrelas</div>
+                <h4>Viale Cataratas Hotel & Eventos</h4>
+                <p class="card-location">Foz do Iguacu, PR</p>
+                <p>Hotel premium com infraestrutura completa, proximo das Cataratas. Restaurante com gastronomia regional e internacional.</p>
+                <span class="card-tag">Premium</span>
+                <span class="card-tag">Gastronomia</span>
+            </div>
+            <div class="card">
+                <div class="card-category">Hotel Boutique</div>
+                <h4>Recanto Park Hotel</h4>
+                <p class="card-location">Foz do Iguacu, PR</p>
+                <p>Hotel boutique com atendimento personalizado. Piscina, spa e proximidade com as Cataratas e Itaipu.</p>
+                <span class="card-tag">Boutique</span>
+                <span class="card-tag">Casais</span>
+            </div>
+            <div class="card">
+                <div class="card-category">Resort Termal</div>
+                <h4>Mabu Thermas Grand Resort</h4>
+                <p class="card-location">Foz do Iguacu, PR</p>
+                <p>Resort com piscinas termais, parque aquatico, spa completo. Perfeito para familias. Rede Mabu tem historico de trabalhar com influenciadores.</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$600-1.200/noite</p>
+                <span class="card-tag">Termas</span>
+                <span class="card-tag">Familias</span>
+                <a class="card-url" href="https://www.mabu.com.br" target="_blank">mabu.com.br</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Resort Premium</div>
+                <h4>Vivaz Cataratas Hotel Resort</h4>
+                <p class="card-location">Foz do Iguacu, PR</p>
+                <p>Resort com conceito all-inclusive opcional. Area de lazer completa, ideal para familias que buscam comodidade total.</p>
+                <span class="card-tag">All-Inclusive</span>
+                <span class="card-tag">Resort</span>
+            </div>
+        </div>
+
+        <!-- CAMPOS GERAIS -->
+        <h3>Campos Gerais & Serra Paranaense</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Pousada Premium</div>
+                <h4>Canyon Guartelá & Pousadas Regionais</h4>
+                <p class="card-location">Tibagi / Castro, PR</p>
+                <p>Regiao do Canyon Guartelá (segundo maior canyon do mundo). Pousadas rurais premium com experiencias de ecoturismo, cavalgada e gastronomia tropeira.</p>
+                <span class="card-tag">Ecoturismo</span>
+                <span class="card-tag">Natureza</span>
+                <span class="card-tag">Aventura</span>
+            </div>
+            <div class="card">
+                <div class="card-category">Hotel Premium</div>
+                <h4>Hotel & Resort Vila Inglesinha</h4>
+                <p class="card-location">Campos Gerais, PR</p>
+                <p>Opcao charme na regiao dos Campos Gerais. Experiencia rural premium com contato com a natureza e gastronomia local.</p>
+                <span class="card-tag">Rural</span>
+                <span class="card-tag">Charme</span>
+            </div>
+            <div class="card">
+                <div class="card-category">Hotel Fazenda</div>
+                <h4>Pousada Fazenda Capao Grande</h4>
+                <p class="card-location">Castro, PR</p>
+                <p>Experiencia de hotel fazenda premium na regiao historica de Castro. Gastronomia holandesa e tropeira. Ideal para casais e familias.</p>
+                <span class="card-tag">Fazenda</span>
+                <span class="card-tag">Gastronomia</span>
+            </div>
+        </div>
+
+        <!-- VINHO & GASTRONOMIA -->
+        <h3>Enoturismo & Gastronomia no Parana</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Rota do Vinho</div>
+                <h4>Vinicolas de Sao Jose dos Pinhais / Campo Largo</h4>
+                <p class="card-location">Regiao Metropolitana de Curitiba</p>
+                <p>Polo vinicola paranaense em crescimento. Vinicolas como Familia Fardo, Araucaria e outras oferecem degustacao e experiencias. Potencial para roteiros de enoturismo.</p>
+                <span class="card-tag">Vinho</span>
+                <span class="card-tag">Experiencia</span>
+            </div>
+            <div class="card">
+                <div class="card-category">Gastronomia</div>
+                <h4>Rota dos Restaurantes de Morretes</h4>
+                <p class="card-location">Morretes, PR</p>
+                <p>Destino gastronomico famoso pelo barreado. Trem Serra do Mar Curitiba-Morretes e experiencia unica. Pousadas charme e restaurantes tipicos.</p>
+                <span class="card-tag">Barreado</span>
+                <span class="card-tag">Trem</span>
+                <span class="card-tag">Experiencia</span>
+            </div>
+            <div class="card">
+                <div class="card-category">Ilha Premium</div>
+                <h4>Pousadas de Ilha do Mel</h4>
+                <p class="card-location">Paranagua, PR</p>
+                <p>Destino paradisiaco no litoral paranaense. Pousadas charme sem carros na ilha. Experiencia romantica e de desconexao. Ideal para conteudo de casais.</p>
+                <span class="card-tag">Praia</span>
+                <span class="card-tag">Romantico</span>
+                <span class="card-tag">Desconexao</span>
+            </div>
+        </div>
+
+        <!-- CURITIBA -->
+        <h3>Curitiba & Regiao</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Hotel Boutique</div>
+                <h4>Nomaa Hotel</h4>
+                <p class="card-location">Curitiba, PR</p>
+                <p>Hotel boutique de luxo no bairro Batel. Design contemporaneo, gastronomia autoral, spa. Um dos melhores hoteis do sul do Brasil. Ideal para conteudo aspiracional.</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$800-1.800/noite</p>
+                <span class="card-tag">Luxo</span>
+                <span class="card-tag">Design</span>
+                <span class="card-tag">Prioridade Alta</span>
+                <a class="card-url" href="https://www.nomaahotel.com" target="_blank">nomaahotel.com</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Hotel Premium</div>
+                <h4>Bourbon Curitiba Convention</h4>
+                <p class="card-location">Curitiba, PR</p>
+                <p>Rede Bourbon e paranaense (Cascavel). Hotel premium em Curitiba com spa, gastronomia e infraestrutura completa. A rede tem programa de parceiros.</p>
+                <span class="card-tag">Rede PR</span>
+                <span class="card-tag">Spa</span>
+                <a class="card-url" href="https://www.bourbon.com.br" target="_blank">bourbon.com.br</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Hotel Boutique</div>
+                <h4>Hotel & Spa Full Jazz</h4>
+                <p class="card-location">Curitiba, PR</p>
+                <p>Conceito unico de hotel tematico com jazz ao vivo, spa premium e gastronomia refinada. Experiencia diferenciada para conteudo.</p>
+                <span class="card-tag">Tematico</span>
+                <span class="card-tag">Spa</span>
+                <span class="card-tag">Musica</span>
+            </div>
+        </div>
+
+        <div class="info-box gold">
+            <h4>Dica Estrategica: Comece pelo Parana</h4>
+            <p>Iniciar parcerias por hoteis do proprio estado tem vantagens claras:</p>
+            <ul>
+                <li><strong>Proximidade geografica</strong> -- facilita visitas presenciais e reunioes</li>
+                <li><strong>Narrativa "nosso estado"</strong> -- gera identificacao com a audiencia local</li>
+                <li><strong>Menor barreira</strong> -- hoteis regionais sao mais acessiveis que grandes redes</li>
+                <li><strong>Conteudo facil</strong> -- escapadas de fim de semana sao otimo conteudo recorrente</li>
+                <li><strong>Redes paranaenses (Bourbon, Deville, Mabu)</strong> tendem a valorizar influenciadores locais</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECAO 2: MODELOS DE PARCERIA -->
+<!-- ================================================ -->
+<section class="section" id="modelos">
+    <div class="container">
+        <div class="section-label">Secao 02</div>
+        <h2>Modelos de <span>Parceria</span> para Curadores de Viagem</h2>
+        <p class="section-intro">Como curadores e influenciadores de viagem estruturam suas parcerias com diferentes tipos de fornecedores. Cada modelo pode ser combinado para maximizar receita e valor entregue.</p>
+
+        <!-- HOTEIS -->
+        <h3>Parcerias com Hoteis & Resorts</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Modelo</th>
+                        <th>Como Funciona</th>
+                        <th>Comissao Tipica</th>
+                        <th>Requisitos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hospedagem Cortesia (Press Trip)</strong></td>
+                        <td>Hotel oferece estadia gratuita em troca de conteudo (posts, stories, reels, review)</td>
+                        <td>Sem comissao monetaria -- troca por conteudo</td>
+                        <td>Minimo 5-10k seguidores engajados; media kit profissional</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Comissao por Indicacao</strong></td>
+                        <td>Curador indica hospedes e recebe % sobre reservas confirmadas</td>
+                        <td>10-20% da diaria (media 15%)</td>
+                        <td>Link ou codigo de rastreamento; contrato formal</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tarifa Exclusiva</strong></td>
+                        <td>Hotel oferece tarifa especial para clientes do curador (markup embutido)</td>
+                        <td>Markup de 10-25% sobre a tarifa negociada</td>
+                        <td>Volume minimo de reservas; confiabilidade</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Embaixador de Marca</strong></td>
+                        <td>Contrato anual com hotel/rede incluindo estadias, conteudo e mencoes</td>
+                        <td>Fee mensal + estadias + comissao (pacote)</td>
+                        <td>Minimo 20-50k seguidores; alinhamento de marca</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FAM Trip (Familiarizacao)</strong></td>
+                        <td>Hotel ou destino convida curador para conhecer a propriedade sem obrigacao imediata de conteudo</td>
+                        <td>Sem comissao -- investimento em relacionamento</td>
+                        <td>Perfil profissional; atuacao no segmento de viagem</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Revenue Share</strong></td>
+                        <td>Curador vende pacotes com hotel e divide a receita</td>
+                        <td>20-30% da receita total do pacote</td>
+                        <td>CNPJ ativo; capacidade de faturar e organizar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- CIAS AEREAS -->
+        <h3>Programas de Cias Aereas no Brasil</h3>
+        <div class="cards-grid">
+            <div class="card card-blue">
+                <div class="card-category">LATAM Airlines</div>
+                <h4>LATAM Affiliate / LATAM Pass</h4>
+                <p>A LATAM oferece programa de afiliados via plataformas como Awin e CJ Affiliate. Comissao por venda de passagens gerada atraves de links rastreados.</p>
+                <p class="card-detail"><strong>Comissao:</strong> 1-3% sobre vendas de passagens</p>
+                <p class="card-detail"><strong>Como acessar:</strong> Cadastro via Awin (awin.com) buscando "LATAM"</p>
+                <span class="card-tag">Afiliado</span>
+                <span class="card-tag">Link Rastreado</span>
+            </div>
+            <div class="card card-blue">
+                <div class="card-category">GOL Linhas Aereas</div>
+                <h4>GOL Smiles Afiliados</h4>
+                <p>Programa Smiles tem parcerias com influenciadores e afiliados. Possibilidade de milhas como compensacao ou comissao sobre vendas.</p>
+                <p class="card-detail"><strong>Comissao:</strong> 1-2% sobre vendas ou milhas</p>
+                <p class="card-detail"><strong>Como acessar:</strong> Contato direto com time de marketing Smiles</p>
+                <span class="card-tag">Milhas</span>
+                <span class="card-tag">Afiliado</span>
+            </div>
+            <div class="card card-blue">
+                <div class="card-category">Azul Linhas Aereas</div>
+                <h4>Azul TudoAzul</h4>
+                <p>Programa TudoAzul trabalha com influenciadores e tem parcerias pontuais para conteudo. Possibilidade de passagens cortesia para reviews.</p>
+                <p class="card-detail"><strong>Comissao:</strong> Negociavel (geralmente milhas ou passagens)</p>
+                <p class="card-detail"><strong>Como acessar:</strong> Contato com assessoria de imprensa Azul</p>
+                <span class="card-tag">Milhas</span>
+                <span class="card-tag">Conteudo</span>
+            </div>
+        </div>
+
+        <div class="info-box blue">
+            <h4>Nota sobre Cias Aereas</h4>
+            <p>Comissoes de cias aereas sao tipicamente baixas (1-3%). O valor real esta em <strong>passagens cortesia para producao de conteudo</strong> e no <strong>posicionamento de autoridade</strong> ao ser parceiro oficial de uma companhia aerea. Foque em construir relacionamento com assessorias de imprensa das cias antes de pedir afiliacao formal.</p>
+        </div>
+
+        <!-- SECRETARIAS DE TURISMO -->
+        <h3>Secretarias & Orgaos de Turismo</h3>
+        <div class="info-box green">
+            <h4>Como Conseguir FAM Trips de Orgaos de Turismo</h4>
+            <ul>
+                <li><strong>Secretaria de Turismo do Parana (Viaje Parana):</strong> Tem programa ativo de press trips para influenciadores. Contato via site viajeparana.pr.gov.br ou Instagram @viajeparana</li>
+                <li><strong>EMBRATUR:</strong> Orgao federal de turismo que organiza FAM trips internacionais. Cadastro como midia/influenciador via embratur.com.br</li>
+                <li><strong>Convention & Visitors Bureau:</strong> Cada cidade grande tem seu CVB. Foz do Iguacu (Visit Iguassu), Curitiba (CCVB) sao os mais ativos no PR</li>
+                <li><strong>ENIT (Italia), Turespana, Visit Croatia:</strong> Orgaos de turismo de destinos internacionais que a Rotta cobre. Cadastro como midia em seus sites</li>
+                <li><strong>Dica:</strong> Ter CNPJ de agencia/curadoria de viagens e um media kit profissional aumenta drasticamente suas chances</li>
+            </ul>
+        </div>
+
+        <!-- EXPERIENCIAS -->
+        <h3>Provedores de Experiencias</h3>
+        <div class="cards-grid">
+            <div class="card card-green">
+                <div class="card-category">Tours & Atividades</div>
+                <h4>GetYourGuide / Civitatis / Viator</h4>
+                <p>Grandes plataformas de tours e experiencias que possuem programas de afiliados robustos. Comissao sobre cada atividade vendida via link.</p>
+                <p class="card-detail"><strong>Comissao GetYourGuide:</strong> 8% sobre vendas</p>
+                <p class="card-detail"><strong>Comissao Civitatis:</strong> 5-10% sobre vendas</p>
+                <p class="card-detail"><strong>Comissao Viator:</strong> 8% sobre vendas</p>
+                <span class="card-tag">Alta Comissao</span>
+                <span class="card-tag">Facil Adesao</span>
+            </div>
+            <div class="card card-green">
+                <div class="card-category">Restaurantes & Gastronomia</div>
+                <h4>Parcerias Diretas</h4>
+                <p>Restaurantes premium geralmente trabalham com permutas (jantar cortesia em troca de conteudo) ou com comissao por reservas indicadas (5-15%).</p>
+                <p class="card-detail"><strong>Modelo preferido:</strong> Permuta + comissao para grupos</p>
+                <span class="card-tag">Permuta</span>
+                <span class="card-tag">Gastronomia</span>
+            </div>
+            <div class="card card-green">
+                <div class="card-category">Vinicolas</div>
+                <h4>Enoturismo & Vinicolas</h4>
+                <p>Vinicolas trabalham com press trips, degustacoes cortesia e comissao sobre vendas de vinhos para seguidores (10-15%). Otimo para conteudo de lifestyle.</p>
+                <span class="card-tag">Degustacao</span>
+                <span class="card-tag">Lifestyle</span>
+            </div>
+        </div>
+
+        <!-- SEGURO VIAGEM -->
+        <h3>Seguro Viagem</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Afiliado</div>
+                <h4>Seguros Promo</h4>
+                <p>Maior comparador de seguro viagem do Brasil. Programa de afiliados robusto e muito utilizado por blogs e influenciadores de viagem.</p>
+                <p class="card-detail"><strong>Comissao:</strong> 18-25% sobre cada venda</p>
+                <p class="card-detail"><strong>Cookie:</strong> 60 dias</p>
+                <span class="card-tag">Comissao Alta</span>
+                <span class="card-tag">Recorrente</span>
+                <a class="card-url" href="https://www.segurospromo.com.br/parceiros" target="_blank">segurospromo.com.br/parceiros</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Afiliado</div>
+                <h4>Real Seguro Viagem</h4>
+                <p>Comparador com programa de afiliados competitivo. Boa opcao como alternativa ao Seguros Promo.</p>
+                <p class="card-detail"><strong>Comissao:</strong> 15-20% sobre cada venda</p>
+                <span class="card-tag">Comparador</span>
+            </div>
+            <div class="card">
+                <div class="card-category">Afiliado</div>
+                <h4>Assist Card / Travel Ace</h4>
+                <p>Seguradoras diretas que trabalham com comissao para parceiros indicadores. Negociacao direta com representantes comerciais.</p>
+                <p class="card-detail"><strong>Comissao:</strong> 20-30% (negociavel)</p>
+                <span class="card-tag">Direto</span>
+                <span class="card-tag">Negociavel</span>
+            </div>
+        </div>
+
+        <!-- ALUGUEL DE CARRO -->
+        <h3>Aluguel de Carro</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Afiliado</div>
+                <h4>RentCars</h4>
+                <p>Maior comparador de aluguel de carro do Brasil. Programa de afiliados com comissao atrativa e dashboard de acompanhamento.</p>
+                <p class="card-detail"><strong>Comissao:</strong> 5-8% sobre cada reserva</p>
+                <span class="card-tag">Comparador BR</span>
+                <a class="card-url" href="https://www.rentcars.com/afiliados" target="_blank">rentcars.com/afiliados</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Afiliado</div>
+                <h4>Discover Cars / Rentalcars</h4>
+                <p>Plataformas internacionais com programas de afiliados via redes como CJ e Awin. Boas opcoes para destinos internacionais.</p>
+                <p class="card-detail"><strong>Comissao:</strong> 4-6% sobre cada reserva</p>
+                <span class="card-tag">Internacional</span>
+            </div>
+        </div>
+
+        <!-- CHIP INTERNACIONAL -->
+        <h3>Chip de Internet Internacional</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Afiliado</div>
+                <h4>America Chip / Airalo / Holafly</h4>
+                <p>Empresas de eSIM e chip internacional com programas de afiliados ativos. Produto de ticket baixo mas alta conversao -- todo viajante precisa.</p>
+                <p class="card-detail"><strong>Comissao America Chip:</strong> 10-15%</p>
+                <p class="card-detail"><strong>Comissao Airalo:</strong> 10% (programa via Impact)</p>
+                <p class="card-detail"><strong>Comissao Holafly:</strong> 12-18%</p>
+                <span class="card-tag">Alta Conversao</span>
+                <span class="card-tag">Recorrente</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECAO 3: CADEIAS BRASILEIRAS -->
+<!-- ================================================ -->
+<section class="section" id="cadeias-br">
+    <div class="container">
+        <div class="section-label">Secao 03</div>
+        <h2>Hoteis Premium <span>Brasileiros</span> com Potencial de Parceria</h2>
+        <p class="section-intro">Propriedades e redes de luxo brasileiras que trabalham com curadores, influenciadores e parceiros de conteudo. Priorizadas por relevancia para o publico da Rotta.</p>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Ultra Luxo</div>
+                <h4>Fasano</h4>
+                <p>Grupo Fasano -- icone do luxo brasileiro. Hoteis em SP, RJ, Salvador, Boa Vista, Trancoso, Punta del Este. Trabalha com press trips seletivas e embaixadores de marca.</p>
+                <p class="card-detail"><strong>Abordagem:</strong> Assessoria de imprensa (InPress Porter Novelli ou similar). Enviar media kit + proposta de conteudo</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$2.000-8.000/noite</p>
+                <span class="card-tag">Fasano</span>
+                <span class="card-tag">Prioridade Media</span>
+                <a class="card-url" href="https://www.fasano.com.br" target="_blank">fasano.com.br</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Boutique Exclusivo</div>
+                <h4>UXUA Casa Hotel & Spa</h4>
+                <p>Trancoso, Bahia. Hotel boutique de luxo com design unico feito com artesanato local. Referencia mundial em hospitalidade. Trabalha com press trips curadas.</p>
+                <p class="card-detail"><strong>Abordagem:</strong> Email direto para press@uxua.com</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$3.000-10.000/noite</p>
+                <span class="card-tag">Design</span>
+                <span class="card-tag">Trancoso</span>
+                <a class="card-url" href="https://www.uxua.com" target="_blank">uxua.com</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Beach Resort</div>
+                <h4>Kenoa Exclusive Beach Spa & Resort</h4>
+                <p>Barra de Sao Miguel, Alagoas. Resort de luxo pe na areia com spa premiado. Trabalha com influenciadores selecionados para conteudo de lifestyle.</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$2.500-6.000/noite</p>
+                <span class="card-tag">Praia</span>
+                <span class="card-tag">Spa</span>
+                <a class="card-url" href="https://www.kenoaresort.com" target="_blank">kenoaresort.com</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Exclusivo</div>
+                <h4>Ponta dos Ganchos</h4>
+                <p>Governador Celso Ramos, SC. Um dos hoteis mais exclusivos da America do Sul. Bangalos privativos, praia privada. Trabalha com press trips muito seletivas.</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$3.500-12.000/noite</p>
+                <span class="card-tag">Exclusivo</span>
+                <span class="card-tag">Sul BR</span>
+                <a class="card-url" href="https://www.pontadosganchos.com.br" target="_blank">pontadosganchos.com.br</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Montanha & Spa</div>
+                <h4>Botanique Hotel & Spa</h4>
+                <p>Campos do Jordao, SP. Hotel de montanha com spa premiado, gastronomia autoral e vilas privativas. Membro Relais & Chateaux.</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$2.000-7.000/noite</p>
+                <p class="card-detail"><strong>Vantagem:</strong> Como membro Relais & Chateaux, tem programa estruturado de parceiros</p>
+                <span class="card-tag">Relais & Chateaux</span>
+                <span class="card-tag">Montanha</span>
+                <a class="card-url" href="https://www.botaniquehotel.com.br" target="_blank">botaniquehotel.com.br</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Praia Premium</div>
+                <h4>Nau Royal Hotel & Spa</h4>
+                <p>Camburi, SP. Hotel boutique pe na areia com spa, gastronomia e atmosfera romantica. Ideal para casais -- perfil perfeito para audiencia da Rotta.</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$1.500-4.000/noite</p>
+                <span class="card-tag">Romantico</span>
+                <span class="card-tag">Litoral SP</span>
+            </div>
+            <div class="card">
+                <div class="card-category">Eco-Luxo</div>
+                <h4>Txai Resorts</h4>
+                <p>Itacare, Bahia. Resort eco-luxo com bangalos na mata atlantica e praia. Conceito sustentavel premium. Também tem unidade em Arraial d'Ajuda.</p>
+                <p class="card-detail"><strong>Diaria media:</strong> R$2.000-5.000/noite</p>
+                <span class="card-tag">Eco-Luxo</span>
+                <span class="card-tag">Bahia</span>
+                <a class="card-url" href="https://www.txairesorts.com" target="_blank">txairesorts.com</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Relais & Chateaux Brasil</div>
+                <h4>Propriedades Relais & Chateaux no Brasil</h4>
+                <p>Rede internacional de hoteis de charme. No Brasil: Botanique (Campos do Jordao), Hotel & Spa do Vinho (Bento Goncalves, RS), Saint Andrews (Gramado), e outros.</p>
+                <p class="card-detail"><strong>Vantagem:</strong> A rede tem estrutura propria para press trips e parcerias. Contato centralizado via relaischateaux.com</p>
+                <span class="card-tag">Rede de Charme</span>
+                <span class="card-tag">Press Trip Estruturada</span>
+                <a class="card-url" href="https://www.relaischateaux.com/br" target="_blank">relaischateaux.com/br</a>
+            </div>
+        </div>
+
+        <div class="info-box gold">
+            <h4>Estrategia de Abordagem para Hoteis Premium Brasileiros</h4>
+            <ul>
+                <li><strong>Hoteis independentes (UXUA, Kenoa, Ponta dos Ganchos):</strong> contato DIRETO com gerente geral ou departamento de marketing. Email personalizado funciona melhor</li>
+                <li><strong>Redes (Fasano, Bourbon):</strong> contato via assessoria de imprensa ou departamento de parcerias corporativas</li>
+                <li><strong>Relais & Chateaux:</strong> contato centralizado via sede + contato direto com cada propriedade em paralelo</li>
+                <li><strong>Timing:</strong> Melhor epoca para propor parcerias e na baixa temporada (marco-junho), quando hoteis estao mais abertos a negociar visibilidade</li>
+                <li><strong>Media kit e obrigatorio:</strong> Nenhum hotel premium vai responder sem ver numeros de audiencia, perfil demografico e exemplos de conteudo anterior</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECAO 4: PROGRAMAS INTERNACIONAIS -->
+<!-- ================================================ -->
+<section class="section" id="internacionais">
+    <div class="container">
+        <div class="section-label">Secao 04</div>
+        <h2>Programas de Parceria <span>Internacionais</span></h2>
+        <p class="section-intro">Redes internacionais com programas estruturados para consultores, curadores e afiliados de viagem. Do mais acessivel (afiliados online) ao mais exclusivo (Virtuoso).</p>
+
+        <h3>Redes de Consultores de Luxo</h3>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-category">Elite Network</div>
+                <h4>Virtuoso</h4>
+                <p>A mais prestigiada rede de consultores de viagem de luxo do mundo. Acesso a tarifas exclusivas, upgrades garantidos e amenidades VIP em +1.400 parceiros globais.</p>
+                <p class="card-detail"><strong>Requisitos:</strong> Precisa ser uma agencia de viagem estabelecida. Volume minimo anual de vendas de luxo (geralmente US$1M+). Convite de membro existente ou aprovacao pelo conselho</p>
+                <p class="card-detail"><strong>Taxa anual:</strong> ~US$15.000-25.000</p>
+                <p class="card-detail"><strong>Beneficios:</strong> Amenidades VIP, upgrades, creditos de hotel, acesso a eventos exclusivos, treinamento</p>
+                <span class="card-tag">Longo Prazo</span>
+                <span class="card-tag">Meta 3-5 Anos</span>
+                <a class="card-url" href="https://www.virtuoso.com" target="_blank">virtuoso.com</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Travel Network</div>
+                <h4>Signature Travel Network</h4>
+                <p>Rede cooperativa de agencias de viagem independentes. Mais acessivel que Virtuoso, com beneficios similares em escala menor.</p>
+                <p class="card-detail"><strong>Requisitos:</strong> Agencia de viagem estabelecida; volume de vendas consistente</p>
+                <p class="card-detail"><strong>Beneficios:</strong> Tarifas preferenciais, amenidades em hoteis parceiros, treinamento</p>
+                <span class="card-tag">Mais Acessivel</span>
+                <a class="card-url" href="https://www.signaturetravelnetwork.com" target="_blank">signaturetravelnetwork.com</a>
+            </div>
+            <div class="card">
+                <div class="card-category">Hotel Network</div>
+                <h4>Preferred Hotels & Resorts</h4>
+                <p>Rede de +650 hoteis independentes de luxo no mundo. Tem programa "iPrefer" para parceiros e consultores com beneficios e comissoes.</p>
+                <p class="card-detail"><strong>Requisitos:</strong> Cadastro como parceiro de vendas; volume variavel</p>
+                <p class="card-detail"><strong>Beneficios:</strong> Comissao sobre reservas, acesso a tarifas exclusivas, FAM trips</p>
+                <a class="card-url" href="https://www.preferredhotels.com" target="_blank">preferredhotels.com</a>
+            </div>
+        </div>
+
+        <h3>Programas de Cadeias Hoteleiras</h3>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Programa</th>
+                        <th>Rede</th>
+                        <th>Beneficios para Parceiros</th>
+                        <th>Como Aderir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Marriott STARS</strong></td>
+                        <td>Marriott (Ritz-Carlton, St. Regis, W, Edition, JW)</td>
+                        <td>Cafe da manha gratis, upgrade na chegada, late checkout, credito de US$100+ por estadia, welcome amenity</td>
+                        <td>Via rede de afiliacao (Virtuoso, Signature, etc.) -- nao aceita individuais diretamente</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Marriott Luminous</strong></td>
+                        <td>Marriott (marcas select-service e acima)</td>
+                        <td>Similar ao STARS para marcas premium (nao ultra-luxo)</td>
+                        <td>Mesmo caminho do STARS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hilton Impresario</strong></td>
+                        <td>Hilton (Waldorf Astoria, Conrad, LXR)</td>
+                        <td>Cafe da manha, upgrade, late checkout, credito de US$100, welcome amenity</td>
+                        <td>Via redes de parceiros (Virtuoso, Signature, Internova)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hyatt Privé</strong></td>
+                        <td>Hyatt (Park Hyatt, Andaz, Alila, Thompson)</td>
+                        <td>Cafe da manha, upgrade, credito de hotel, late checkout</td>
+                        <td>Via redes de parceiros ou agencias aprovadas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Four Seasons Preferred Partner</strong></td>
+                        <td>Four Seasons</td>
+                        <td>Upgrade, cafe da manha, credito US$100, early check-in/late checkout</td>
+                        <td>Agencias aprovadas; processo seletivo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Accor Travel Advisor</strong></td>
+                        <td>Accor (Sofitel, Fairmont, Raffles, SO/)</td>
+                        <td>Comissao sobre reservas, tarifas especiais, FAM trips</td>
+                        <td>Cadastro em all.accor.com para agencias</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IHG Agent Program</strong></td>
+                        <td>IHG (InterContinental, Kimpton, Six Senses)</td>
+                        <td>Comissao 10% sobre reservas, tarifas de agente, programa de recompensas</td>
+                        <td>Cadastro em ihg.com/travelagents -- aceita agentes individuais</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-box gold">
+            <h4>Caminho Recomendado para a Rotta</h4>
+            <p>A maioria dos programas premium (STARS, Impresario, Prive) exige que voce seja membro de uma rede como Virtuoso ou Signature. O caminho recomendado:</p>
+            <ul>
+                <li><strong>Fase 1 (Agora):</strong> Cadastrar nos programas de afiliados online (Booking, Hoteis.com) e comissoes diretas com hoteis individuais</li>
+                <li><strong>Fase 2 (6-12 meses):</strong> Com volume de indicacoes, buscar adesao a uma host agency brasileira que seja membro de redes internacionais</li>
+                <li><strong>Fase 3 (2-3 anos):</strong> Com volume consistente, buscar adesao propria a Preferred Hotels ou Signature Travel</li>
+                <li><strong>Fase 4 (3-5 anos):</strong> Meta aspiracional de Virtuoso, com volume de luxo consistente</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECAO 5: PROGRAMAS DE AFILIADOS -->
+<!-- ================================================ -->
+<section class="section" id="afiliados">
+    <div class="container">
+        <div class="section-label">Secao 05</div>
+        <h2>Programas de <span>Afiliados</span> para Comecar Agora</h2>
+        <p class="section-intro">Estes programas podem ser ativados imediatamente, sem requisitos de volume. Geram receita passiva conforme a audiencia da Rotta cresce.</p>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Plataforma</th>
+                        <th>Categoria</th>
+                        <th>Comissao</th>
+                        <th>Cookie</th>
+                        <th>Dificuldade</th>
+                        <th>Prioridade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Booking.com</strong></td>
+                        <td>Hoteis</td>
+                        <td>25-40% da comissao do Booking (varia com volume)</td>
+                        <td>Sessao</td>
+                        <td>Facil</td>
+                        <td><span class="priority high">Alta</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hoteis.com (Expedia)</strong></td>
+                        <td>Hoteis</td>
+                        <td>4-6% sobre reservas</td>
+                        <td>7 dias</td>
+                        <td>Facil</td>
+                        <td><span class="priority high">Alta</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>GetYourGuide</strong></td>
+                        <td>Tours & Atividades</td>
+                        <td>8% sobre vendas</td>
+                        <td>30 dias</td>
+                        <td>Facil</td>
+                        <td><span class="priority high">Alta</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Civitatis</strong></td>
+                        <td>Tours & Atividades</td>
+                        <td>5-10% sobre vendas</td>
+                        <td>30 dias</td>
+                        <td>Facil</td>
+                        <td><span class="priority high">Alta</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Seguros Promo</strong></td>
+                        <td>Seguro Viagem</td>
+                        <td>18-25% sobre vendas</td>
+                        <td>60 dias</td>
+                        <td>Facil</td>
+                        <td><span class="priority high">Alta</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>RentCars</strong></td>
+                        <td>Aluguel Carro</td>
+                        <td>5-8% sobre reservas</td>
+                        <td>30 dias</td>
+                        <td>Facil</td>
+                        <td><span class="priority medium">Media</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>America Chip / Holafly</strong></td>
+                        <td>Chip Internet</td>
+                        <td>10-18% sobre vendas</td>
+                        <td>30 dias</td>
+                        <td>Facil</td>
+                        <td><span class="priority medium">Media</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Viator (TripAdvisor)</strong></td>
+                        <td>Tours & Atividades</td>
+                        <td>8% sobre vendas</td>
+                        <td>30 dias</td>
+                        <td>Facil</td>
+                        <td><span class="priority medium">Media</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Airbnb</strong></td>
+                        <td>Hospedagem</td>
+                        <td>Programa pausado/descontinuado em muitos mercados</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td><span class="priority low">Monitorar</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Skyscanner</strong></td>
+                        <td>Passagens</td>
+                        <td>CPC (custo por clique) variavel</td>
+                        <td>Sessao</td>
+                        <td>Media</td>
+                        <td><span class="priority low">Baixa</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="info-box green">
+            <h4>Top 5 para Ativar ESTA SEMANA</h4>
+            <p>Estes 5 programas podem ser ativados em menos de 1 hora cada e ja comecam a gerar receita conforme voces publicam conteudo:</p>
+            <ul>
+                <li><strong>1. Booking.com Affiliate</strong> -- cadastro em booking.com/affiliate. Aprovacao quase imediata. Comissao mais alta do segmento hoteleiro</li>
+                <li><strong>2. Seguros Promo</strong> -- cadastro em segurospromo.com.br/parceiros. Comissao altissima (25%). Todo viajante internacional precisa</li>
+                <li><strong>3. GetYourGuide</strong> -- cadastro em partner.getyourguide.com. 8% sobre tours e atividades. Ideal para links nos roteiros da Rotta</li>
+                <li><strong>4. Civitatis</strong> -- cadastro em civitatis.com/afiliados. Forte presenca em destinos europeus que a Rotta cobre (Italia, Croacia, Espanha)</li>
+                <li><strong>5. America Chip / Holafly</strong> -- chip de internet e o produto mais facil de converter. Toda pessoa que viaja para fora precisa</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h4>Como Integrar Afiliados no Conteudo da Rotta</h4>
+            <ul>
+                <li><strong>Blog posts:</strong> Links de afiliados naturais dentro de recomendacoes nos posts do blog (ex: "Reserve seu hotel em Mendoza pelo Booking")</li>
+                <li><strong>Stories/Reels:</strong> "Arraste pra cima" ou "link na bio" com link de afiliado do Seguros Promo ou GetYourGuide</li>
+                <li><strong>Pagina de recursos:</strong> Criar uma pagina "Nossos Parceiros" ou "Recursos para sua Viagem" no site com todos os links de afiliados</li>
+                <li><strong>Roteiros PDF:</strong> Incluir links de afiliados dentro dos roteiros vendidos (hotel, seguro, tours)</li>
+                <li><strong>Email marketing (Brevo):</strong> Incluir recomendacoes com links de afiliados nos emails para a lista</li>
+                <li><strong>WhatsApp:</strong> Ao responder duvidas de seguidores, incluir links de afiliados relevantes</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECAO 6: TEMPLATE DE EMAIL -->
+<!-- ================================================ -->
+<section class="section" id="template">
+    <div class="container">
+        <div class="section-label">Secao 06</div>
+        <h2>Template de <span>Abordagem</span></h2>
+        <p class="section-intro">Modelo de email profissional para enviar a hoteis e resorts propondo parceria. Personalize os campos em destaque para cada propriedade.</p>
+
+        <!-- TEMPLATE 1: HOTEL PARCERIA -->
+        <div class="email-template">
+            <div class="email-field">
+                <div class="field-label">Assunto</div>
+                <div class="field-value">Proposta de Parceria | Rotta Curadoria x <span class="placeholder">[Nome do Hotel]</span></div>
+            </div>
+            <div class="email-field">
+                <div class="field-label">Corpo do Email</div>
+                <div class="field-value">Prezado(a) <span class="placeholder">[Nome do responsavel / Equipe de Marketing]</span>,
+
+Meu nome e Marcelo Brito, e junto com minha esposa Alexandra Dagostin somos fundadores da Rotta Curadoria (@rotta.curadoria), uma empresa de curadoria de viagens premium focada em casais e familias de alto padrao.
+
+Conhecemos o <span class="placeholder">[Nome do Hotel]</span> e ficamos encantados com <span class="placeholder">[detalhe especifico que voce admirou -- ex: "o conceito de integracao com a natureza", "a gastronomia autoral do chef", "a localizacao privilegiada"]</span>. Acreditamos que ha uma sinergia natural entre a proposta do <span class="placeholder">[Hotel]</span> e o perfil da nossa audiencia.
+
+Sobre nos:
+
+A Rotta Curadoria nasceu da paixao de um casal viajante que quer compartilhar experiencias reais e curadas com pessoas que valorizam qualidade acima de tudo. Nosso publico e composto por casais e familias brasileiros de classe A/B, entre 25 e 65 anos, que investem em experiencias memoraveis e tomam decisoes de viagem baseadas em recomendacoes de confianca.
+
+Marcelo e medico oftalmologista com mais de 22 anos de carreira e 16.000 procedimentos realizados -- o que traz uma credibilidade solida para tudo que recomendamos. Alexandra e nutricionista e cuida de toda a experiencia gastronomica e de bem-estar dos nossos roteiros.
+
+O que oferecemos:
+
+- Producao de conteudo profissional (Reels, Stories, carrosseis, blog posts) sobre a experiencia no <span class="placeholder">[Hotel]</span>
+- Exposicao organica para audiencia qualificada de alto poder aquisitivo
+- Indicacao direta de clientes para reservas (com codigo ou link de rastreamento, se desejarem)
+- Inclusao do <span class="placeholder">[Hotel]</span> nos nossos roteiros curados e guias de destino
+- Review completo e honesto no nosso blog e redes sociais
+
+O que buscamos:
+
+- Estadia cortesia para producao de conteudo (1-2 noites)
+- Possibilidade de comissao sobre reservas indicadas por nos
+- Tarifas exclusivas que possamos oferecer aos nossos clientes
+- Relacionamento de longo prazo, nao apenas uma acao pontual
+
+Nosso media kit completo esta em anexo. Ficaremos felizes em agendar uma conversa por video ou telefone para explorarmos juntos as possibilidades.
+
+Um abraco caloroso,
+
+Marcelo Brito & Alexandra Dagostin
+Rotta Curadoria
+@rotta.curadoria | rottacuradoria.com.br
+WhatsApp: (11) 96815-2123
+Email: rottacuradoria@gmail.com</div>
+            </div>
+        </div>
+
+        <!-- TEMPLATE 2: ORGAO DE TURISMO -->
+        <h3>Template para Orgaos de Turismo / CVB</h3>
+        <div class="email-template">
+            <div class="email-field">
+                <div class="field-label">Assunto</div>
+                <div class="field-value">Solicitacao de Credenciamento de Midia | Rotta Curadoria</div>
+            </div>
+            <div class="email-field">
+                <div class="field-label">Corpo do Email</div>
+                <div class="field-value">Prezada equipe da <span class="placeholder">[Secretaria de Turismo / Convention Bureau / Orgao]</span>,
+
+Somos Marcelo Brito e Alexandra Dagostin, fundadores da Rotta Curadoria (@rotta.curadoria), empresa de curadoria de viagens premium sediada no Parana.
+
+Estamos ampliando nossa cobertura editorial de destinos e temos grande interesse em <span class="placeholder">[nome do destino/regiao]</span>. Gostaríamos de nos credenciar como midia/criadores de conteudo para:
+
+- Participar de press trips e FAM trips organizadas por voces
+- Receber releases e materiais de imprensa sobre o destino
+- Explorar oportunidades de cocriacao de conteudo sobre <span class="placeholder">[destino]</span>
+
+Nossa audiencia e composta por viajantes brasileiros de classe A/B que buscam experiencias diferenciadas e estao dispostos a investir em qualidade. Produzimos conteudo em video (Reels, YouTube), texto (blog, guias) e redes sociais (Instagram, TikTok).
+
+Nosso media kit esta em anexo para sua avaliacao.
+
+Ficamos a disposicao para qualquer informacao adicional.
+
+Atenciosamente,
+
+Marcelo Brito & Alexandra Dagostin
+Rotta Curadoria
+@rotta.curadoria | rottacuradoria.com.br
+WhatsApp: (11) 96815-2123</div>
+            </div>
+        </div>
+
+        <!-- TEMPLATE 3: FOLLOW UP -->
+        <h3>Template de Follow-Up (7 dias apos primeiro email)</h3>
+        <div class="email-template">
+            <div class="email-field">
+                <div class="field-label">Assunto</div>
+                <div class="field-value">Re: Proposta de Parceria | Rotta Curadoria x <span class="placeholder">[Nome do Hotel]</span></div>
+            </div>
+            <div class="email-field">
+                <div class="field-label">Corpo do Email</div>
+                <div class="field-value">Oi, <span class="placeholder">[Nome]</span>! Tudo bem?
+
+Enviei uma proposta de parceria na semana passada e queria verificar se chegou ate voces. Sei que a rotina e corrida, entao fico a vontade se preferirem responder quando for mais conveniente.
+
+Resumidamente: somos a Rotta Curadoria, uma empresa de curadoria de viagens premium, e acreditamos que o <span class="placeholder">[Hotel]</span> seria um parceiro incrivel para nossos clientes e audiencia.
+
+Se fizer sentido, posso enviar nosso media kit atualizado ou agendar uma ligacao rapida de 15 minutos.
+
+Abraco,
+
+Marcelo & Alexandra
+Rotta Curadoria</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================================ -->
+<!-- SECAO 7: PLANO DE ACAO -->
+<!-- ================================================ -->
+<section class="section" id="plano">
+    <div class="container">
+        <div class="section-label">Secao 07</div>
+        <h2>Plano de <span>Acao</span></h2>
+        <p class="section-intro">Passo a passo priorizado para ativar parcerias. Dividido em fases para que voces possam executar sem pressa, construindo cada camada sobre a anterior.</p>
+
+        <h3>Fase 1: Fundacao (Semana 1-2) <span class="priority high">Agora</span></h3>
+        <ul class="checklist">
+            <li><strong>Cadastrar nos 5 programas de afiliados prioritarios</strong> -- Booking.com, Seguros Promo, GetYourGuide, Civitatis, America Chip/Holafly</li>
+            <li><strong>Criar pagina "Nossos Parceiros" no site</strong> -- pagina com links de afiliados organizados por categoria</li>
+            <li><strong>Atualizar o media kit</strong> -- incluir numeros atuais de seguidores, perfil demografico, exemplos de conteudo, propostas de parceria</li>
+            <li><strong>Configurar links de afiliados no Linktree</strong> -- adicionar links para seguro viagem, chip internacional</li>
+            <li><strong>Criar um CNPJ</strong> -- se ainda nao tem, abrir MEI ou ME para a Rotta (essencial para comissoes e parcerias formais)</li>
+        </ul>
+
+        <h3>Fase 2: Primeiras Parcerias Locais (Semana 3-6) <span class="priority medium">Proximo Mes</span></h3>
+        <ul class="checklist">
+            <li><strong>Abordar 3 hoteis no Parana</strong> -- Nomaa (Curitiba), Bourbon, e um hotel em Foz do Iguacu. Usar template de email acima</li>
+            <li><strong>Contatar Viaje Parana</strong> -- pedir credenciamento como midia e inclusao em press trips estaduais</li>
+            <li><strong>Contatar Visit Iguassu (CVB de Foz)</strong> -- pedir FAM trip para producao de conteudo sobre Foz</li>
+            <li><strong>Abordar 2 restaurantes premium</strong> em Maringa e Curitiba para parcerias de conteudo</li>
+            <li><strong>Incluir links de afiliados em todo conteudo</strong> -- stories, posts, blog, roteiros</li>
+        </ul>
+
+        <h3>Fase 3: Expansao Nacional (Mes 2-4) <span class="priority medium">Trimestre</span></h3>
+        <ul class="checklist">
+            <li><strong>Abordar 5 hoteis premium brasileiros</strong> -- Ponta dos Ganchos, Botanique, Txai, Nau Royal, e outro alinhado aos destinos da Rotta</li>
+            <li><strong>Contatar EMBRATUR</strong> -- credenciamento para press trips internacionais</li>
+            <li><strong>Abordar orgaos de turismo internacionais</strong> -- ENIT (Italia), Visit Croatia, Turespana -- especialmente antes da viagem a Italia</li>
+            <li><strong>Buscar parceria com cia aerea</strong> -- comecar pela assessoria de imprensa da LATAM ou Azul</li>
+            <li><strong>Abordar Relais & Chateaux Brasil</strong> -- proposta de cobertura de propriedades brasileiras</li>
+        </ul>
+
+        <h3>Fase 4: Profissionalizacao (Mes 4-12) <span class="priority low">Semestre</span></h3>
+        <ul class="checklist">
+            <li><strong>Avaliar adesao a host agency</strong> -- agencia brasileira membro de redes internacionais, para acessar programas como STARS e Impresario</li>
+            <li><strong>Buscar adesao a Preferred Hotels</strong> -- como parceiro de vendas para tarifas exclusivas</li>
+            <li><strong>Negociar contrato de embaixador</strong> -- com pelo menos 1 hotel/rede que teve bons resultados na Fase 2/3</li>
+            <li><strong>Criar programa proprio de indicacao</strong> -- sistema formal de comissao para clientes que indicam outros clientes</li>
+            <li><strong>Comecar a construir volume para Virtuoso</strong> -- meta aspiracional de 3-5 anos</li>
+        </ul>
+
+        <div class="info-box gold" style="margin-top:40px">
+            <h4>Metricas para Acompanhar</h4>
+            <ul>
+                <li><strong>Receita de afiliados:</strong> Acompanhar mensalmente por plataforma (dashboard de cada programa)</li>
+                <li><strong>Parcerias ativas:</strong> Numero de hoteis/empresas com acordo formal</li>
+                <li><strong>FAM trips realizadas:</strong> Quantas estadias cortesia conseguiram por mes</li>
+                <li><strong>Conversao de indicacao:</strong> Quantos seguidores efetivamente reservaram via links da Rotta</li>
+                <li><strong>Valor economizado:</strong> Soma de hospedagens, experiencias e produtos recebidos em permuta</li>
+                <li><strong>ROI por parceiro:</strong> Receita gerada vs. tempo investido em cada parceria</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:60px 0;text-align:center;border-top:1px solid var(--layer)">
+    <div class="container">
+        <p style="font-family:'Playfair Display',serif;font-size:24px;color:var(--gold);margin-bottom:8px">Rotta Curadoria</p>
+        <p style="font-size:14px;color:var(--dim);margin-bottom:24px">Documento interno -- Pesquisa de Parcerias</p>
+        <p style="font-size:12px;color:var(--dim)">@rotta.curadoria | rottacuradoria.com.br | (11) 96815-2123</p>
+        <p style="font-size:11px;color:var(--dim);margin-top:16px">Gerado em 28/03/2026. Comissoes e requisitos sao aproximados e devem ser verificados diretamente com cada parceiro.</p>
+    </div>
+</footer>
+
+</body>
+</html>

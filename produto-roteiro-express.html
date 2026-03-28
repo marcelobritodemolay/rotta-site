@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roteiro Express | Rotta Curadoria</title>
+    <meta name="description" content="Seu roteiro personalizado em 7 dias, sem você mexer um dedo. A partir de R$497. Curado por Marcelo & Alexandra.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);--gold-glow:rgba(197,165,114,.08);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --coral:#E8785A;--green:#4CAF7D;--blue:#5B8DEF
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;overflow-x:hidden}
+        .container{max-width:1080px;margin:0 auto;padding:0 24px}
+        .fade-up{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+        .fade-up.visible{opacity:1;transform:translateY(0)}
+        .stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}.stagger-4{transition-delay:.4s}
+        .section-label{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+        .divider{width:60px;height:1px;background:var(--gold);margin:0 auto;opacity:.3}
+
+        /* Nav */
+        nav{padding:20px 24px;display:flex;justify-content:space-between;align-items:center;max-width:1080px;margin:0 auto}
+        nav .logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--gold);text-decoration:none;letter-spacing:2px;text-transform:uppercase}
+        nav .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;margin-left:24px;transition:color .3s}
+        nav .nav-links a:hover{color:var(--gold)}
+
+        /* Breadcrumb */
+        .breadcrumb{padding:0 24px;max-width:1080px;margin:0 auto}
+        .breadcrumb a,.breadcrumb span{font-size:13px;color:var(--dim);text-decoration:none}
+        .breadcrumb a:hover{color:var(--gold)}
+        .breadcrumb .sep{margin:0 8px;color:var(--dim)}
+        .breadcrumb .current{color:var(--gold)}
+
+        /* Hero */
+        .product-hero{padding:60px 24px 80px;text-align:center;position:relative}
+        .product-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center top,var(--gold-glow) 0%,transparent 50%);pointer-events:none}
+        .product-hero .badge{display:inline-block;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid rgba(197,165,114,.3);padding:8px 24px;border-radius:100px;margin-bottom:24px}
+        .product-hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,48px);font-weight:700;line-height:1.15;margin-bottom:16px;max-width:700px;margin-left:auto;margin-right:auto}
+        .product-hero h1 em{font-style:italic;color:var(--gold)}
+        .product-hero .subtitle{font-size:18px;color:var(--muted);max-width:520px;margin:0 auto 16px;line-height:1.6}
+        .product-hero .price-block{margin:32px auto;max-width:400px}
+        .product-hero .price-main{font-family:'Playfair Display',serif;font-size:42px;color:var(--gold);font-weight:700}
+        .product-hero .price-main small{font-size:20px;color:var(--dim);font-weight:400}
+        .product-hero .price-installment{font-size:14px;color:var(--dim);margin-top:4px}
+        .product-hero .cta{display:inline-block;background:var(--gold);color:var(--bg);padding:16px 48px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s;letter-spacing:.5px;margin-top:24px}
+        .product-hero .cta:hover{background:#D4B87F;transform:translateY(-2px);box-shadow:0 12px 32px rgba(197,165,114,.2)}
+
+        /* Steps */
+        .steps-section{padding:80px 0;background:var(--card)}
+        .steps-section h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:60px}
+        .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;max-width:900px;margin:0 auto}
+        .step{text-align:center;padding:32px 24px;background:var(--bg);border-radius:16px;border:1px solid var(--layer);position:relative}
+        .step-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:700;color:var(--gold);opacity:.2;position:absolute;top:16px;right:20px}
+        .step-icon{font-size:32px;margin-bottom:16px}
+        .step h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:12px}
+        .step p{color:var(--muted);font-size:14px;line-height:1.6}
+
+        /* Includes */
+        .includes{padding:80px 0}
+        .includes h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:48px}
+        .includes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;max-width:900px;margin:0 auto}
+        .include-card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:24px;border-left:3px solid var(--gold)}
+        .include-card h4{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:8px}
+        .include-card p{color:var(--muted);font-size:14px;line-height:1.6}
+
+        /* For Who */
+        .for-who{padding:80px 0;background:var(--card)}
+        .for-who h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:48px}
+        .persona-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:900px;margin:0 auto}
+        .persona-card{background:var(--bg);border:1px solid var(--layer);border-radius:12px;padding:24px;text-align:center}
+        .persona-card .emoji{font-size:32px;margin-bottom:12px}
+        .persona-card h4{font-family:'Playfair Display',serif;font-size:17px;margin-bottom:8px}
+        .persona-card p{color:var(--muted);font-size:14px;line-height:1.6}
+
+        /* FAQ */
+        .faq{padding:80px 0}
+        .faq h2{font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:48px}
+        .faq-list{max-width:700px;margin:0 auto}
+        .faq-item{border-bottom:1px solid var(--layer);overflow:hidden}
+        .faq-q{padding:20px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:500;transition:color .3s}
+        .faq-q:hover{color:var(--gold)}
+        .faq-q .arrow{color:var(--gold);font-size:20px;transition:transform .3s}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+        .faq-a p{color:var(--muted);font-size:14px;line-height:1.7;padding-bottom:20px}
+        .faq-item.open .faq-a{max-height:300px}
+        .faq-item.open .arrow{transform:rotate(45deg)}
+
+        /* Cross-sell */
+        .cross-sell{padding:80px 0;background:var(--card)}
+        .cross-sell h2{font-family:'Playfair Display',serif;font-size:28px;text-align:center;margin-bottom:48px}
+        .cross-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;max-width:900px;margin:0 auto}
+        .cross-card{background:var(--bg);border:1px solid var(--layer);border-radius:16px;padding:28px 24px;text-align:center;transition:all .3s;text-decoration:none;color:var(--text);display:block}
+        .cross-card:hover{border-color:var(--gold);transform:translateY(-4px)}
+        .cross-card .cross-badge{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+        .cross-card h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:8px}
+        .cross-card .cross-price{font-family:'Playfair Display',serif;font-size:22px;color:var(--gold);font-weight:700;margin-bottom:12px}
+        .cross-card p{color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:16px}
+        .cross-card .cross-link{color:var(--gold);font-size:13px;font-weight:500}
+
+        /* CTA Final */
+        .cta-final{padding:80px 0;text-align:center;position:relative}
+        .cta-final::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at center,var(--gold-glow) 0%,transparent 60%);pointer-events:none}
+        .cta-final h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,36px);margin-bottom:20px;line-height:1.2}
+        .cta-final h2 em{font-style:italic;color:var(--gold)}
+        .cta-final .sub{color:var(--muted);font-size:16px;max-width:500px;margin:0 auto 32px;line-height:1.6}
+        .cta-whatsapp{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:16px 36px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px;transition:all .3s}
+        .cta-whatsapp:hover{background:#20BD5A;transform:translateY(-2px)}
+
+        /* Footer */
+        footer{padding:48px 0;text-align:center;border-top:1px solid var(--layer)}
+        footer .brand{font-family:'Playfair Display',serif;font-size:16px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:8px}
+        footer .tagline{font-size:12px;color:var(--dim);margin-bottom:16px}
+        footer .social a{color:var(--dim);text-decoration:none;margin:0 12px;font-size:13px;transition:color .3s}
+        footer .social a:hover{color:var(--gold)}
+        footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
+
+        /* Float WA */
+        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
+        .float-wa:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(37,211,102,.4)}
+
+        @media(max-width:768px){
+            .steps{grid-template-columns:1fr;max-width:400px}
+            .includes-grid{grid-template-columns:1fr}
+            .persona-grid{grid-template-columns:1fr}
+            .cross-grid{grid-template-columns:1fr}
+            nav .nav-links{display:none}
+        }
+    </style>
+</head>
+<body>
+
+<a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20o%20Roteiro%20Express" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
+
+<nav>
+    <a href="/index.html" class="logo">Rotta Curadoria</a>
+    <div class="nav-links">
+        <a href="/index.html">Home</a>
+        <a href="/index.html#produtos">Produtos</a>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20curadoria%20de%20viagem">Contato</a>
+    </div>
+</nav>
+
+<div class="breadcrumb">
+    <a href="/index.html">Home</a><span class="sep">/</span>
+    <a href="/index.html#produtos">Produtos</a><span class="sep">/</span>
+    <span class="current">Roteiro Express</span>
+</div>
+
+<!-- HERO -->
+<section class="product-hero">
+    <div class="badge fade-up">Personalizado pra você</div>
+    <h1 class="fade-up stagger-1">Seu roteiro personalizado em 7 dias,<br><em>sem você mexer um dedo</em></h1>
+    <p class="subtitle fade-up stagger-2">A gente faz toda a pesquisa, monta o roteiro dia a dia, sugere hotéis, restaurantes e experiências — tudo baseado no seu perfil e no seu orçamento.</p>
+    <div class="price-block fade-up stagger-3">
+        <div class="price-main">R$497 <small>a R$797</small></div>
+        <div class="price-installment">ou 12x de R$41 a R$66 sem juros</div>
+    </div>
+    <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20solicitar%20um%20or%C3%A7amento%20do%20Roteiro%20Express" class="cta fade-up stagger-4">Solicitar orçamento</a>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="steps-section">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Como funciona</p>
+        <h2 class="fade-up">Três passos simples</h2>
+        <div class="steps">
+            <div class="step fade-up stagger-1">
+                <div class="step-num">01</div>
+                <div class="step-icon">&#x1F4AC;</div>
+                <h3>Briefing</h3>
+                <p>Uma call de 30 minutos pra entender tudo: destino, datas, orçamento, estilo de viagem, quem vai, o que é importante pra você.</p>
+            </div>
+            <div class="step fade-up stagger-2">
+                <div class="step-num">02</div>
+                <div class="step-icon">&#x1F9ED;</div>
+                <h3>Pesquisa & Curadoria</h3>
+                <p>Em 7 dias úteis, montamos o roteiro completo com tudo personalizado. Cada recomendação é baseada na nossa experiência real.</p>
+            </div>
+            <div class="step fade-up stagger-3">
+                <div class="step-num">03</div>
+                <div class="step-icon">&#x2728;</div>
+                <h3>Entrega & Revisão</h3>
+                <p>Você recebe o documento completo + 1 revisão inclusa. Ajustamos o que precisar até ficar perfeito pra você.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- O QUE INCLUI -->
+<section class="includes">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">O que está incluso</p>
+        <h2 class="fade-up">Tudo que você precisa pra sua viagem</h2>
+        <div class="includes-grid">
+            <div class="include-card fade-up stagger-1">
+                <h4>Roteiro dia a dia</h4>
+                <p>Cada dia planejado com horários sugeridos, trajetos otimizados e alternativas para dias de chuva.</p>
+            </div>
+            <div class="include-card fade-up stagger-2">
+                <h4>Restaurantes testados</h4>
+                <p>Curadoria gastronômica da Alexandra. Cada restaurante com faixa de preço, prato recomendado e dica de reserva.</p>
+            </div>
+            <div class="include-card fade-up stagger-3">
+                <h4>Hospedagem selecionada</h4>
+                <p>3 opções de hotel/airbnb pra cada trecho, organizadas por faixa de preço. Todas com link direto pra reserva.</p>
+            </div>
+            <div class="include-card fade-up stagger-4">
+                <h4>Experiências curadas</h4>
+                <p>Passeios, tours e atividades que fazem a diferença. Nada genérico — só o que realmente vale a pena.</p>
+            </div>
+            <div class="include-card fade-up stagger-1">
+                <h4>2 calls de alinhamento</h4>
+                <p>Uma call de briefing no início + uma call de revisão na entrega. Pra garantir que ficou do jeito que você sonhou.</p>
+            </div>
+            <div class="include-card fade-up stagger-2">
+                <h4>Suporte por WhatsApp</h4>
+                <p>Dúvidas antes da viagem? A gente responde. Suporte ativo desde a entrega até o dia do embarque.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRA QUEM É -->
+<section class="for-who">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Pra quem é</p>
+        <h2 class="fade-up">Esse serviço é perfeito se você...</h2>
+        <div class="persona-grid">
+            <div class="persona-card fade-up stagger-1">
+                <div class="emoji">&#x1F46B;</div>
+                <h4>Quer personalização</h4>
+                <p>Roteiros prontos não servem pra você. Precisa de algo feito sob medida pro seu estilo, orçamento e tempo disponível.</p>
+            </div>
+            <div class="persona-card fade-up stagger-2">
+                <div class="emoji">&#x23F3;</div>
+                <h4>Não tem tempo</h4>
+                <p>Trabalho, filhos, rotina. Pesquisar destino, comparar hotel, montar roteiro — você simplesmente não tem horas pra isso.</p>
+            </div>
+            <div class="persona-card fade-up stagger-3">
+                <div class="emoji">&#x1F4A1;</div>
+                <h4>Quer dicas de quem já foi</h4>
+                <p>Não quer depender de blog genérico ou review falso. Quer recomendação de quem realmente viveu a experiência.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Dúvidas frequentes</p>
+        <h2 class="fade-up">Perguntas sobre o Roteiro Express</h2>
+        <div class="faq-list">
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Qual a diferença entre R$497 e R$797?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>R$497 é para destinos nacionais e R$797 para destinos internacionais. A diferença reflete a complexidade de pesquisa — visto, câmbio, seguro, fuso horário e logística internacional demandam mais tempo e detalhamento.</p></div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">Vocês fazem as reservas também?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>No Roteiro Express, entregamos todas as sugestões com links diretos pra você reservar. Se quiser que a gente faça as reservas por você, conheça a Curadoria Completa — onde cuidamos de tudo do zero ao embarque.</p></div>
+            </div>
+            <div class="faq-item fade-up">
+                <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">E se eu não gostar do roteiro?<span class="arrow">+</span></div>
+                <div class="faq-a"><p>Você tem 1 revisão inclusa no pacote. Na call de revisão, ajustamos tudo que precisar. Se mesmo assim não fizer sentido, conversamos sobre devolução. A gente confia no que entrega.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CROSS-SELL -->
+<section class="cross-sell">
+    <div class="container">
+        <p class="section-label fade-up" style="text-align:center">Outros produtos</p>
+        <h2 class="fade-up">Outros produtos que podem interessar</h2>
+        <div class="cross-grid">
+            <a href="/produto-escapada-romantica.html" class="cross-card fade-up stagger-1">
+                <div class="cross-badge">Romântico</div>
+                <h3>Escapada Romântica</h3>
+                <div class="cross-price">R$1.497 <small style="font-size:14px;color:var(--dim)">a R$1.997</small></div>
+                <p>Uma escapada a dois com roteiro + reservas + experiências românticas. Tudo curado e confirmado.</p>
+                <span class="cross-link">Conhecer &#x2192;</span>
+            </a>
+            <a href="/produto-rotta-crew.html" class="cross-card fade-up stagger-2">
+                <div class="cross-badge">Grupo</div>
+                <h3>Rotta Crew</h3>
+                <div class="cross-price">R$797 <small style="font-size:14px;color:var(--dim)">/pessoa</small></div>
+                <p>Viagem em grupo com roteiro coletivo, divisão de custos e coordenação completa.</p>
+                <span class="cross-link">Conhecer &#x2192;</span>
+            </a>
+            <a href="/produto-rotta-surprise.html" class="cross-card fade-up stagger-3">
+                <div class="cross-badge">Surpresa</div>
+                <h3>Rotta Surprise</h3>
+                <div class="cross-price">R$97 <small style="font-size:14px;color:var(--dim)">a R$997</small></div>
+                <p>Surpreenda seu amor com uma experiência planejada 100% em segredo.</p>
+                <span class="cross-link">Conhecer &#x2192;</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+    <div class="container">
+        <div class="divider" style="margin-bottom:48px"></div>
+        <h2 class="fade-up">Pronto pra ter o seu<br><em>roteiro personalizado?</em></h2>
+        <p class="sub fade-up">Fale com a gente, conta o que você sonha — e em 7 dias você tem tudo na mão.</p>
+        <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20solicitar%20um%20or%C3%A7amento%20do%20Roteiro%20Express" class="cta-whatsapp fade-up">&#x1F4AC; Solicitar orçamento via WhatsApp</a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <p class="brand">Rotta Curadoria</p>
+        <p class="tagline">Curado por Marcelo & Alexandra</p>
+        <div class="social">
+            <a href="https://instagram.com/rotta.curadoria">Instagram</a>
+            <a href="https://youtube.com/@rotta.curadoria">YouTube</a>
+            <a href="https://tiktok.com/@rotta.curadoria">TikTok</a>
+        </div>
+        <p class="legal">Não somos agência de viagem. Somos curadores de experiências.<br>Todos os preços são estimativas e podem variar conforme a data e destino.<br>&copy; 2026 Rotta Curadoria. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

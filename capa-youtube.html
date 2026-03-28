@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capa YouTube — Rotta Curadoria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: #F2EDE8;
+        }
+
+        /* Controls */
+        .controls {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+            background: rgba(0,0,0,.8);
+            padding: 12px 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        .controls.hidden { display: none; }
+        .controls button {
+            background: #C5A572;
+            color: #0E0E0E;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .controls button:hover { background: #D4B87F; }
+        .controls button.active { background: #25D366; color: #fff; }
+        .info {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,.8);
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            line-height: 1.6;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        .info.hidden { display: none; }
+
+        /* Banner canvas */
+        .banner-wrap {
+            width: 2560px;
+            height: 1440px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .banner {
+            width: 2560px;
+            height: 1440px;
+            background: #0E0E0E;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background watermark compass roses */
+        .watermark {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .watermark svg {
+            position: absolute;
+            opacity: 0.035;
+        }
+        .watermark .wm-1 { top: -100px; left: -80px; width: 600px; height: 600px; }
+        .watermark .wm-2 { bottom: -120px; right: -60px; width: 700px; height: 700px; transform: rotate(25deg); }
+        .watermark .wm-3 { top: 200px; right: 300px; width: 400px; height: 400px; transform: rotate(-15deg); }
+        .watermark .wm-4 { bottom: 100px; left: 400px; width: 350px; height: 350px; transform: rotate(40deg); }
+
+        /* Subtle radial glow */
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(197,165,114,.06) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        /* Golden border accents */
+        .border-top, .border-bottom {
+            position: absolute;
+            left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 5%, #C5A572 20%, #C5A572 80%, transparent 95%);
+            opacity: 0.4;
+        }
+        .border-top { top: 40px; }
+        .border-bottom { bottom: 40px; }
+        .border-left, .border-right {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, transparent 5%, #C5A572 20%, #C5A572 80%, transparent 95%);
+            opacity: 0.4;
+        }
+        .border-left { left: 40px; }
+        .border-right { right: 40px; }
+
+        /* Corner accents */
+        .corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-color: #C5A572;
+            border-style: solid;
+            opacity: 0.5;
+        }
+        .corner-tl { top: 30px; left: 30px; border-width: 2px 0 0 2px; }
+        .corner-tr { top: 30px; right: 30px; border-width: 2px 2px 0 0; }
+        .corner-bl { bottom: 30px; left: 30px; border-width: 0 0 2px 2px; }
+        .corner-br { bottom: 30px; right: 30px; border-width: 0 2px 2px 0; }
+
+        /* Main content — centered in safe zone */
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1546px;
+            height: 423px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            z-index: 2;
+        }
+
+        /* Left: compass logo */
+        .logo-area {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo-area svg {
+            width: 180px;
+            height: 180px;
+        }
+
+        /* Center: title + subtitle */
+        .title-area {
+            text-align: center;
+            flex: 1;
+        }
+        .title-area h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 88px;
+            font-weight: 700;
+            color: #F2EDE8;
+            letter-spacing: 14px;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+        .title-area .gold-line {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #C5A572, transparent);
+            margin: 0 auto 20px;
+        }
+        .title-area p {
+            font-family: 'Inter', sans-serif;
+            font-size: 26px;
+            color: #999;
+            letter-spacing: 4px;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        /* Right: handle */
+        .handle-area {
+            flex-shrink: 0;
+            text-align: center;
+        }
+        .handle-area .at-sign {
+            font-family: 'Inter', sans-serif;
+            font-size: 22px;
+            color: #C5A572;
+            letter-spacing: 2px;
+            font-weight: 500;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+        }
+
+        /* Safe zone overlay */
+        .safe-zones {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 50;
+        }
+        .safe-zones.hidden { display: none; }
+
+        /* TV safe area: full 2560x1440 */
+        .sz-tv {
+            position: absolute;
+            top: 0; left: 0;
+            width: 2560px; height: 1440px;
+            border: 3px dashed rgba(255,0,0,0.4);
+        }
+        .sz-tv::after {
+            content: 'TV / Desktop: 2560x1440';
+            position: absolute;
+            top: 8px; left: 12px;
+            font-size: 14px;
+            color: rgba(255,0,0,0.6);
+            font-family: 'Inter', monospace;
+            font-weight: 600;
+        }
+
+        /* Desktop minimum: 2560x423 centered */
+        .sz-desktop {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 2560px;
+            height: 423px;
+            transform: translateY(-50%);
+            border: 3px dashed rgba(0,150,255,0.5);
+        }
+        .sz-desktop::after {
+            content: 'Desktop mínimo: 2560x423';
+            position: absolute;
+            top: 8px; left: 12px;
+            font-size: 14px;
+            color: rgba(0,150,255,0.7);
+            font-family: 'Inter', monospace;
+            font-weight: 600;
+        }
+
+        /* Safe zone: 1546x423 centered */
+        .sz-safe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1546px;
+            height: 423px;
+            transform: translate(-50%, -50%);
+            border: 3px dashed rgba(0,255,0,0.5);
+            background: rgba(0,255,0,0.03);
+        }
+        .sz-safe::after {
+            content: 'SAFE ZONE: 1546x423 (visível em todos dispositivos)';
+            position: absolute;
+            top: 8px; left: 12px;
+            font-size: 14px;
+            color: rgba(0,255,0,0.7);
+            font-family: 'Inter', monospace;
+            font-weight: 600;
+        }
+
+        /* Tablet: 1855x423 centered */
+        .sz-tablet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1855px;
+            height: 423px;
+            transform: translate(-50%, -50%);
+            border: 3px dashed rgba(255,165,0,0.5);
+        }
+        .sz-tablet::after {
+            content: 'Tablet: 1855x423';
+            position: absolute;
+            top: -24px; left: 12px;
+            font-size: 14px;
+            color: rgba(255,165,0,0.7);
+            font-family: 'Inter', monospace;
+            font-weight: 600;
+        }
+
+        /* Mobile: 1546x423 = same as safe zone, skip duplicate */
+
+        /* Dim the outside of safe zone */
+        .sz-dim-top, .sz-dim-bottom, .sz-dim-left, .sz-dim-right {
+            position: absolute;
+            background: rgba(0,0,0,0.35);
+        }
+        .sz-dim-top { top: 0; left: 0; right: 0; height: calc(50% - 211px); }
+        .sz-dim-bottom { bottom: 0; left: 0; right: 0; height: calc(50% - 211px); }
+        .sz-dim-left { top: calc(50% - 211px); left: 0; width: calc(50% - 773px); height: 423px; }
+        .sz-dim-right { top: calc(50% - 211px); right: 0; width: calc(50% - 773px); height: 423px; }
+    </style>
+</head>
+<body>
+
+<!-- Controls -->
+<div class="controls" id="controls">
+    <button onclick="toggleSafeZones()" id="btnSafe">Mostrar Safe Zones</button>
+    <button onclick="hideUI()">Esconder UI (screenshot)</button>
+</div>
+
+<div class="info" id="info">
+    Dimensões: 2560 x 1440px &nbsp;|&nbsp; Safe zone: 1546 x 423px &nbsp;|&nbsp; Use Ctrl+Shift+S ou print screen para capturar<br>
+    Pressione <strong>ESC</strong> para restaurar a UI
+</div>
+
+<!-- Banner -->
+<div class="banner-wrap">
+    <div class="banner" id="banner">
+        <!-- Watermark compass roses -->
+        <div class="watermark">
+            <svg class="wm-1" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="90" stroke="#C5A572" stroke-width="1"/>
+                <circle cx="100" cy="100" r="70" stroke="#C5A572" stroke-width="0.5"/>
+                <path d="M100 10 L108 90 L100 70 L92 90 Z" fill="#C5A572"/>
+                <path d="M100 190 L108 110 L100 130 L92 110 Z" fill="#C5A572"/>
+                <path d="M10 100 L90 92 L70 100 L90 108 Z" fill="#C5A572"/>
+                <path d="M190 100 L110 92 L130 100 L110 108 Z" fill="#C5A572"/>
+                <path d="M30 30 L95 85 L85 85 L85 95 Z" fill="#C5A572" opacity=".5"/>
+                <path d="M170 30 L115 85 L115 95 L105 85 Z" fill="#C5A572" opacity=".5"/>
+                <path d="M30 170 L85 115 L95 115 L85 105 Z" fill="#C5A572" opacity=".5"/>
+                <path d="M170 170 L115 115 L105 115 L115 105 Z" fill="#C5A572" opacity=".5"/>
+                <text x="100" y="8" text-anchor="middle" fill="#C5A572" font-family="Playfair Display,serif" font-size="10" font-weight="700">N</text>
+                <text x="100" y="198" text-anchor="middle" fill="#C5A572" font-family="Playfair Display,serif" font-size="10" font-weight="700">S</text>
+                <text x="5" y="103" text-anchor="middle" fill="#C5A572" font-family="Playfair Display,serif" font-size="10" font-weight="700">O</text>
+                <text x="196" y="103" text-anchor="middle" fill="#C5A572" font-family="Playfair Display,serif" font-size="10" font-weight="700">L</text>
+            </svg>
+            <svg class="wm-2" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="90" stroke="#C5A572" stroke-width="1"/>
+                <circle cx="100" cy="100" r="70" stroke="#C5A572" stroke-width="0.5"/>
+                <path d="M100 10 L108 90 L100 70 L92 90 Z" fill="#C5A572"/>
+                <path d="M100 190 L108 110 L100 130 L92 110 Z" fill="#C5A572"/>
+                <path d="M10 100 L90 92 L70 100 L90 108 Z" fill="#C5A572"/>
+                <path d="M190 100 L110 92 L130 100 L110 108 Z" fill="#C5A572"/>
+                <path d="M30 30 L95 85 L85 85 L85 95 Z" fill="#C5A572" opacity=".5"/>
+                <path d="M170 30 L115 85 L115 95 L105 85 Z" fill="#C5A572" opacity=".5"/>
+                <path d="M30 170 L85 115 L95 115 L85 105 Z" fill="#C5A572" opacity=".5"/>
+                <path d="M170 170 L115 115 L105 115 L115 105 Z" fill="#C5A572" opacity=".5"/>
+            </svg>
+            <svg class="wm-3" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="90" stroke="#C5A572" stroke-width="1"/>
+                <path d="M100 10 L108 90 L100 70 L92 90 Z" fill="#C5A572"/>
+                <path d="M100 190 L108 110 L100 130 L92 110 Z" fill="#C5A572"/>
+                <path d="M10 100 L90 92 L70 100 L90 108 Z" fill="#C5A572"/>
+                <path d="M190 100 L110 92 L130 100 L110 108 Z" fill="#C5A572"/>
+            </svg>
+            <svg class="wm-4" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="90" stroke="#C5A572" stroke-width="1"/>
+                <circle cx="100" cy="100" r="60" stroke="#C5A572" stroke-width="0.5"/>
+                <path d="M100 10 L108 90 L100 70 L92 90 Z" fill="#C5A572"/>
+                <path d="M100 190 L108 110 L100 130 L92 110 Z" fill="#C5A572"/>
+                <path d="M10 100 L90 92 L70 100 L90 108 Z" fill="#C5A572"/>
+                <path d="M190 100 L110 92 L130 100 L110 108 Z" fill="#C5A572"/>
+            </svg>
+        </div>
+
+        <!-- Border accents -->
+        <div class="border-top"></div>
+        <div class="border-bottom"></div>
+        <div class="border-left"></div>
+        <div class="border-right"></div>
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <!-- Main content -->
+        <div class="content">
+            <!-- Left: Compass Rose Logo -->
+            <div class="logo-area">
+                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Outer ring -->
+                    <circle cx="100" cy="100" r="95" stroke="#C5A572" stroke-width="2"/>
+                    <circle cx="100" cy="100" r="88" stroke="#C5A572" stroke-width="0.5" opacity=".4"/>
+                    <circle cx="100" cy="100" r="75" stroke="#C5A572" stroke-width="1" opacity=".3"/>
+                    <!-- Tick marks -->
+                    <line x1="100" y1="5" x2="100" y2="15" stroke="#C5A572" stroke-width="1.5"/>
+                    <line x1="100" y1="185" x2="100" y2="195" stroke="#C5A572" stroke-width="1.5"/>
+                    <line x1="5" y1="100" x2="15" y2="100" stroke="#C5A572" stroke-width="1.5"/>
+                    <line x1="185" y1="100" x2="195" y2="100" stroke="#C5A572" stroke-width="1.5"/>
+                    <!-- Cardinal points — main arrows -->
+                    <path d="M100 8 L110 88 L100 68 L90 88 Z" fill="#C5A572"/>
+                    <path d="M100 192 L110 112 L100 132 L90 112 Z" fill="#C5A572" opacity=".5"/>
+                    <path d="M8 100 L88 90 L68 100 L88 110 Z" fill="#C5A572" opacity=".5"/>
+                    <path d="M192 100 L112 90 L132 100 L112 110 Z" fill="#C5A572"/>
+                    <!-- Intercardinal arrows -->
+                    <path d="M28 28 L92 82 L82 82 L82 92 Z" fill="#C5A572" opacity=".35"/>
+                    <path d="M172 28 L118 82 L118 92 L108 82 Z" fill="#C5A572" opacity=".35"/>
+                    <path d="M28 172 L82 118 L92 118 L82 108 Z" fill="#C5A572" opacity=".35"/>
+                    <path d="M172 172 L118 118 L108 118 L118 108 Z" fill="#C5A572" opacity=".35"/>
+                    <!-- Center circle -->
+                    <circle cx="100" cy="100" r="8" fill="#C5A572"/>
+                    <circle cx="100" cy="100" r="4" fill="#0E0E0E"/>
+                    <!-- Letters -->
+                    <text x="100" y="32" text-anchor="middle" fill="#C5A572" font-family="Playfair Display,serif" font-size="16" font-weight="700">N</text>
+                    <text x="100" y="180" text-anchor="middle" fill="#C5A572" font-family="Playfair Display,serif" font-size="16" font-weight="700">S</text>
+                    <text x="28" y="105" text-anchor="middle" fill="#C5A572" font-family="Playfair Display,serif" font-size="16" font-weight="700">O</text>
+                    <text x="172" y="105" text-anchor="middle" fill="#C5A572" font-family="Playfair Display,serif" font-size="16" font-weight="700">L</text>
+                </svg>
+            </div>
+
+            <!-- Center: Title -->
+            <div class="title-area">
+                <h1>Rotta Curadoria</h1>
+                <div class="gold-line"></div>
+                <p>Viagens curadas por quem vive cada destino</p>
+            </div>
+
+            <!-- Right: Handle -->
+            <div class="handle-area">
+                <div class="at-sign">@rotta.curadoria</div>
+            </div>
+        </div>
+
+        <!-- Safe zone overlay -->
+        <div class="safe-zones hidden" id="safeZones">
+            <div class="sz-dim-top"></div>
+            <div class="sz-dim-bottom"></div>
+            <div class="sz-dim-left"></div>
+            <div class="sz-dim-right"></div>
+            <div class="sz-tv"></div>
+            <div class="sz-desktop"></div>
+            <div class="sz-tablet"></div>
+            <div class="sz-safe"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let safeVisible = false;
+    function toggleSafeZones() {
+        safeVisible = !safeVisible;
+        document.getElementById('safeZones').classList.toggle('hidden');
+        const btn = document.getElementById('btnSafe');
+        btn.textContent = safeVisible ? 'Esconder Safe Zones' : 'Mostrar Safe Zones';
+        btn.classList.toggle('active', safeVisible);
+    }
+    function hideUI() {
+        document.getElementById('controls').classList.add('hidden');
+        document.getElementById('info').classList.add('hidden');
+        if (safeVisible) toggleSafeZones();
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            document.getElementById('controls').classList.remove('hidden');
+            document.getElementById('info').classList.remove('hidden');
+        }
+    });
+</script>
+
+</body>
+</html>
