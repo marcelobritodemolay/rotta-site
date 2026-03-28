@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teleprompter Reel 19 - Copa | Rotta Curadoria</title>
+<title>Teleprompter Reel 02 — McDonald's Italiano | Rotta Curadoria</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{--bg:#0E0D0B;--surface:#1A1A1A;--cream:#F5F0E8;--gold:#C9A96E;--gold-dim:rgba(201,169,110,0.15);--muted:#6B6560;--accent:#E8C97A;--green:#4CAF7D;--red:#E05252;--marcelo:#C9A96E;--alexandra:#E8785A}
@@ -12,38 +12,40 @@
 </head>
 <body>
 <div class="countdown-overlay" id="countdown"><div class="countdown-number" id="countNumber">3</div><div class="countdown-text">Preparando teleprompter...</div></div>
-<div class="header"><div><div class="header-logo">Rotta Curadoria</div><div class="header-sub">Teleprompter Profissional</div></div><div class="badge">Reel 19 &middot; Contra a Copa</div></div>
+<div class="header"><div><div class="header-logo">Rotta Curadoria</div><div class="header-sub">Teleprompter Profissional</div></div><div class="badge">Reel 02 &middot; McDonald's Italiano</div></div>
 <div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar"></div></div>
 <div class="legend"><div class="legend-item"><div class="legend-dot marcelo"></div>Marcelo</div><div class="legend-item"><div class="legend-dot alexandra"></div>Alexandra</div></div>
 <div class="controls"><button class="btn btn-play" id="btnPlay" onclick="startWithCountdown()">&#9654; Play</button><button class="btn btn-pause" id="btnPause" onclick="togglePause()">&#9208; Pausar</button><button class="btn btn-stop" onclick="stopScroll()">&#9632; Parar</button><div class="speed-control"><label>Velocidade</label><input type="range" id="speedSlider" min="0.3" max="3" step="0.1" value="1.0" oninput="updateSpeed()"><span class="speed-value" id="speedVal">1.0&times;</span></div></div>
 <div class="key-hint"><span class="kbd">Espaco</span> play/pausa &nbsp;|&nbsp; <span class="kbd">&uarr;&darr;</span> velocidade</div>
 <div class="script-container">
-  <div class="script-title">Enquanto Todos Vao pra Copa, Eu Iria pra...</div>
-  <div class="script-meta"><span>Reel 19</span><span>Roberto + Carolina</span><span>45&ndash;60 segundos</span><span>CTA: FUGA</span></div>
-  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo &mdash; HOOK</div><div class="block-direction">Tom provocativo. Olha direto pra camera.</div><div class="block-text">Enquanto todo mundo vai pros EUA pela Copa em 2026,<span class="pause">&mdash;</span> eu iria pra <span class="highlight">outro lugar.</span></div></div>
+  <div class="script-title">McDonald's Italiano: A Confissao</div>
+  <div class="script-meta"><span>Reel 02</span><span>Familias / Humor</span><span>45&ndash;55 segundos</span><span>CTA: ITALIA</span></div>
 
-  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Tom de concordancia rara. Ri.</div><div class="block-text">E eu concordo. <span class="highlight">Dessa vez.</span></div></div>
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra &mdash; HOOK</div><div class="block-direction">Rindo, olha pra camera. Tom de confissao.</div><div class="block-text">Se voce ta indo pra Italia e entra em panico com cardapio em italiano...<span class="pause">&mdash;</span> tenho uma <span class="highlight">confissao.</span></div></div>
 
-  <div class="divider">o problema</div>
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Tom de horror fingido. Olha pra Alexandra.</div><div class="block-text">Ale, voce nao vai contar isso.</div></div>
 
-  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Tom de analise. Gesticula.</div><div class="block-text">Copa nos EUA: passagens disparando, hoteis caros, aeroportos lotados, filas triplicadas.<span class="pause">&mdash;</span> Quem vai pros EUA em 2026 paga o <span class="highlight">DOBRO pela METADE.</span></div></div>
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Tom divertido. Olha pra camera.</div><div class="block-text">Vou sim. O restaurante favorito dos brasileiros na Italia e...<span class="pause">&mdash;</span> o <span class="highlight">McDonald's.</span></div></div>
 
-  <div class="divider">a alternativa</div>
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Horror fingido, depois ri.</div><div class="block-text">Como curador, deveria estar ofendido. Mas ela tem razao.</div></div>
 
-  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Tom animado.</div><div class="block-text">Enquanto isso, Europa mais vazia e acessivel.<span class="pause">&mdash;</span> <span class="highlight">Portugal, Espanha e Croacia</span> em Set-Out 2026: clima perfeito, precos baixos, sem multidao.</div></div>
+  <div class="divider">revelacao</div>
 
-  <div class="divider">curadoria</div>
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Tom de surpresa genuina. Conta nos dedos.</div><div class="block-text">O Mc italiano e <span class="highlight">DIFERENTE.</span> Grana Padano, trufa negra, paes artesanais.<span class="pause">&mdash;</span> McCafe com cannoli e espresso melhor que muito restaurante. Na Italia, <span class="highlight">ate fast food e gourmet.</span></div></div>
 
-  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Tom de autoridade.</div><div class="block-text">Isso e <span class="highlight">curadoria.</span> Ver o que todo mundo faz e fazer o oposto &mdash; com inteligencia.</div></div>
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Tom equilibrado. Olha pra camera.</div><div class="block-text">Eu prefiro te levar pro restaurante que so locais conhecem. Mas as vezes voce ta com crianca cansada e so quer algo rapido. O Mc italiano <span class="highlight">resolve SEM desperdicar refeicao.</span></div></div>
 
-  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Tom de quem convence.</div><div class="block-text">Quando todo mundo voltar reclamando que foi caro, voce vai ter fotos da <span class="highlight">Croacia vazia</span> no por do sol.</div></div>
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Tom de cumplicidade. Ri.</div><div class="block-text">Quantas vezes voce ficou 30 min olhando cardapio italiano <span class="highlight">sem entender nada?</span></div></div>
+
+  <div class="divider">regra do curador</div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Tom de conselho. Levanta o dedo.</div><div class="block-text">Regra: <span class="highlight">80% restaurantes incriveis.</span> 20% o que voce quiser. Sem culpa.</div></div>
 
   <div class="divider">chamada para acao</div>
 
-  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo &mdash; CTA</div><div class="block-direction">Tom de convite.</div><div class="block-text"><span class="highlight">Me segue</span> pra viajar inteligente.</div></div>
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra &mdash; CTA</div><div class="block-direction">Tom divertido.</div><div class="block-text">Manda pro amigo exigente pra comer.</div></div>
 
-  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Tom engajador.</div><div class="block-text">Comenta seu <span class="highlight">destino fora dos EUA.</span></div></div>
-
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Tom de convite.</div><div class="block-text">Comenta <span class="highlight">ITALIA</span> pra lista de restaurantes que REALMENTE valem.</div></div>
 
   <div class="closing-card"><h3>Assinatura</h3><div class="closing-signature">Curado por Marcelo &amp; Alexandra &#129517;<strong>@rotta.curadoria</strong></div></div>
 </div>

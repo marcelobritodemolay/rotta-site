@@ -3,369 +3,166 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>REEL 01 — Veredito 7 Destinos</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<title>Teleprompter Reel 01 — Veredito 7 Destinos | Rotta Curadoria</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  html { font-size: 18px; scroll-behavior: smooth; }
-  body {
-    background: #0E0E0E;
-    color: #F2EDE8;
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  .title-bar {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: linear-gradient(180deg, #0E0E0E 60%, transparent);
-    padding: 16px 24px 32px;
-  }
-  .title-bar h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; font-weight: 700; color: #C5A572;
-    line-height: 1.3;
-  }
-  .title-bar .meta {
-    font-size: 0.8rem; color: #666; margin-top: 4px;
-  }
-  .timer {
-    position: fixed; top: 16px; right: 24px; z-index: 101;
-    font-family: 'Inter', monospace; font-size: 1.6rem; font-weight: 700;
-    color: #C5A572; background: rgba(14,14,14,0.9);
-    padding: 8px 16px; border-radius: 8px;
-    border: 1px solid #333;
-    min-width: 90px; text-align: center;
-  }
-  .controls {
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-    background: linear-gradient(0deg, #0E0E0E 70%, transparent);
-    padding: 32px 24px 24px;
-    display: flex; align-items: center; justify-content: center; gap: 12px;
-    flex-wrap: wrap;
-  }
-  .controls button {
-    font-family: 'Inter', sans-serif; font-weight: 600;
-    border: none; border-radius: 8px; padding: 12px 24px;
-    font-size: 1rem; cursor: pointer; transition: all 0.2s;
-    touch-action: manipulation;
-  }
-  .btn-play { background: #C5A572; color: #0E0E0E; }
-  .btn-play:hover { background: #d4b882; }
-  .btn-play.active { background: #e74c3c; color: #fff; }
-  .btn-speed {
-    background: #1a1a1a; color: #888; border: 1px solid #333 !important;
-  }
-  .btn-speed:hover { color: #F2EDE8; border-color: #555 !important; }
-  .btn-speed.active { color: #C5A572; border-color: #C5A572 !important; }
-  .speed-label { font-size: 0.8rem; color: #555; margin: 0 4px; }
-  .script-container {
-    padding: 100px 24px 160px;
-    max-width: 900px; margin: 0 auto;
-  }
-  .block {
-    margin-bottom: 40px; padding: 20px 0;
-    border-bottom: 1px solid #1a1a1a;
-  }
-  .block:last-child { border-bottom: none; }
-  .time-marker {
-    font-size: 0.85rem; color: #444; font-weight: 600;
-    margin-bottom: 12px; letter-spacing: 0.5px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem; color: #C5A572; margin-bottom: 16px;
-    letter-spacing: 1px;
-  }
-  .line { margin-bottom: 16px; line-height: 1.7; }
-  .line .speaker {
-    font-weight: 800; font-size: 0.85rem; letter-spacing: 1.5px;
-    display: block; margin-bottom: 4px;
-  }
-  .line .text { font-size: 1.55rem; font-weight: 400; line-height: 1.6; }
-  .marcelo .speaker { color: #999; }
-  .marcelo .text { color: #F2EDE8; }
-  .alexandra .speaker { color: #C5A572; }
-  .alexandra .text { color: #C5A572; }
-  .production-notes {
-    margin-top: 60px; padding: 24px;
-    background: #141414; border-radius: 12px; border: 1px solid #222;
-  }
-  .production-notes h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; color: #C5A572; margin-bottom: 16px;
-  }
-  .production-notes ul { list-style: none; padding: 0; }
-  .production-notes li {
-    font-size: 0.95rem; color: #666; padding: 6px 0;
-    border-bottom: 1px solid #1a1a1a; line-height: 1.5;
-  }
-  .production-notes li:last-child { border-bottom: none; }
-  .production-notes li::before { content: ">>  "; color: #333; }
-  @media (min-width: 768px) {
-    .script-container { padding: 110px 48px 180px; }
-    .line .text { font-size: 1.8rem; }
-    .section-title { font-size: 1.6rem; }
-  }
-  @media (max-width: 480px) {
-    .line .text { font-size: 1.3rem; }
-    .timer { font-size: 1.2rem; }
-    .controls button { padding: 10px 16px; font-size: 0.9rem; }
-  }
+  :root{--bg:#0E0D0B;--surface:#1A1A1A;--cream:#F5F0E8;--gold:#C9A96E;--gold-dim:rgba(201,169,110,0.15);--muted:#6B6560;--accent:#E8C97A;--green:#4CAF7D;--red:#E05252;--marcelo:#C9A96E;--alexandra:#E8785A}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--cream);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+  .header{background:var(--surface);border-bottom:1px solid var(--gold-dim);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .header-logo{font-family:'Playfair Display',serif;color:var(--gold);font-size:18px;letter-spacing:0.05em}
+  .header-sub{color:var(--muted);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;margin-top:2px}
+  .badge{background:var(--gold-dim);border:1px solid var(--gold);color:var(--gold);padding:4px 12px;border-radius:20px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase}
+  .legend{display:flex;gap:20px;justify-content:center;padding:14px 32px;background:rgba(255,255,255,0.02);border-bottom:1px solid rgba(255,255,255,0.06);flex-wrap:wrap}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+  .legend-dot{width:10px;height:10px;border-radius:50%}
+  .legend-dot.marcelo{background:var(--marcelo)}
+  .legend-dot.alexandra{background:var(--alexandra)}
+  .controls{display:flex;gap:16px;justify-content:center;align-items:center;padding:18px 32px;border-bottom:1px solid rgba(255,255,255,0.06);flex-wrap:wrap}
+  .btn{padding:10px 28px;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;letter-spacing:0.05em;transition:all 0.2s}
+  .btn-play{background:var(--gold);color:var(--bg)}
+  .btn-play:hover{background:var(--accent);transform:scale(1.03)}
+  .btn-pause{background:var(--surface);color:var(--cream);border:1px solid rgba(255,255,255,0.15)}
+  .btn-pause:hover{border-color:var(--gold);color:var(--gold)}
+  .btn-stop{background:rgba(224,82,82,0.1);color:var(--red);border:1px solid rgba(224,82,82,0.3)}
+  .speed-control{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid rgba(255,255,255,0.1);padding:8px 16px;border-radius:6px}
+  .speed-control label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+  .speed-control input{width:100px;accent-color:var(--gold);cursor:pointer}
+  .speed-value{font-size:13px;color:var(--gold);font-weight:600;min-width:40px}
+  .countdown-overlay{display:none;position:fixed;inset:0;background:rgba(14,13,11,0.95);z-index:1000;justify-content:center;align-items:center;flex-direction:column;gap:16px}
+  .countdown-overlay.show{display:flex}
+  .countdown-number{font-family:'Playfair Display',serif;font-size:120px;color:var(--gold);line-height:1;animation:countPulse 1s ease-in-out}
+  @keyframes countPulse{0%{transform:scale(1.3);opacity:0.3}50%{transform:scale(1);opacity:1}100%{transform:scale(0.85);opacity:0.6}}
+  .countdown-text{color:var(--muted);font-size:16px;letter-spacing:0.15em;text-transform:uppercase}
+  .progress-bar-outer{height:3px;background:rgba(255,255,255,0.06)}
+  .progress-bar-inner{height:3px;background:linear-gradient(90deg,var(--gold),var(--accent));width:0%;transition:width 0.1s linear}
+  .script-container{max-width:860px;margin:0 auto;padding:48px 32px 120px}
+  .script-title{font-family:'Playfair Display',serif;font-size:28px;color:var(--gold);margin-bottom:8px;text-align:center}
+  .script-meta{text-align:center;color:var(--muted);font-size:13px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:48px;display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+  .block{margin-bottom:36px;padding:26px 30px;border-radius:12px;border-left:3px solid transparent}
+  .block-marcelo{border-left-color:var(--marcelo);background:rgba(201,169,110,0.04)}
+  .block-alexandra{border-left-color:var(--alexandra);background:rgba(232,120,90,0.04)}
+  .block-ambos{border-left-color:var(--accent);background:rgba(232,201,122,0.05)}
+  .block-speaker{font-size:11px;text-transform:uppercase;letter-spacing:0.15em;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .block-marcelo .block-speaker{color:var(--marcelo)}
+  .block-alexandra .block-speaker{color:var(--alexandra)}
+  .block-ambos .block-speaker{color:var(--accent)}
+  .speaker-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0}
+  .block-marcelo .speaker-icon{background:rgba(201,169,110,0.2);color:var(--marcelo)}
+  .block-alexandra .speaker-icon{background:rgba(232,120,90,0.2);color:var(--alexandra)}
+  .block-ambos .speaker-icon{background:rgba(232,201,122,0.2);color:var(--accent)}
+  .block-direction{font-size:12px;color:var(--muted);font-style:italic;margin-bottom:14px;padding:8px 14px;background:rgba(255,255,255,0.03);border-radius:6px;border:1px solid rgba(255,255,255,0.05)}
+  .block-text{font-size:27px;line-height:1.65;color:var(--cream);font-weight:300;letter-spacing:0.01em}
+  .block-text .highlight{color:var(--gold);font-weight:500}
+  .block-text .emphasis{font-style:italic}
+  .block-text .pause{display:inline-block;color:var(--muted);font-size:16px;margin:0 6px;vertical-align:middle}
+  .divider{display:flex;align-items:center;gap:16px;margin:28px 0;color:var(--muted);font-size:11px;letter-spacing:0.15em;text-transform:uppercase}
+  .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.06)}
+  .closing-card{background:linear-gradient(135deg,rgba(201,169,110,0.08),rgba(201,169,110,0.02));border:1px solid rgba(201,169,110,0.2);border-radius:12px;padding:28px 32px;margin-top:48px;text-align:center}
+  .closing-card h3{font-family:'Playfair Display',serif;color:var(--gold);font-size:18px;margin-bottom:14px}
+  .closing-signature{font-size:15px;color:var(--cream);line-height:1.9;font-weight:300}
+  .closing-signature strong{color:var(--gold);font-weight:600;display:block;font-size:17px;margin-top:14px;margin-bottom:2px}
+  .scroll-status{position:fixed;bottom:24px;right:28px;background:var(--surface);border:1px solid rgba(201,169,110,0.2);border-radius:8px;padding:8px 16px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;z-index:80}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--muted);transition:all 0.3s}
+  .dot.running{background:var(--green);box-shadow:0 0 6px var(--green);animation:blink 1s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
+  .kbd{display:inline-block;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:4px;padding:2px 8px;font-size:11px;color:var(--muted);font-family:monospace;margin:0 3px}
+  .key-hint{text-align:center;color:var(--muted);font-size:12px;padding:8px}
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:rgba(201,169,110,0.3);border-radius:3px}
+  @media(max-width:600px){.block-text{font-size:21px}.script-container{padding:28px 18px 100px}}
 </style>
 </head>
 <body>
+<div class="countdown-overlay" id="countdown"><div class="countdown-number" id="countNumber">3</div><div class="countdown-text">Preparando teleprompter...</div></div>
+<div class="header"><div><div class="header-logo">Rotta Curadoria</div><div class="header-sub">Teleprompter Profissional</div></div><div class="badge">Reel 01 &middot; Veredito 7 Destinos</div></div>
+<div class="progress-bar-outer"><div class="progress-bar-inner" id="progressBar"></div></div>
+<div class="legend"><div class="legend-item"><div class="legend-dot marcelo"></div>Marcelo</div><div class="legend-item"><div class="legend-dot alexandra"></div>Alexandra</div></div>
+<div class="controls"><button class="btn btn-play" id="btnPlay" onclick="startWithCountdown()">&#9654; Play</button><button class="btn btn-pause" id="btnPause" onclick="togglePause()">&#9208; Pausar</button><button class="btn btn-stop" onclick="stopScroll()">&#9632; Parar</button><div class="speed-control"><label>Velocidade</label><input type="range" id="speedSlider" min="0.3" max="3" step="0.1" value="1.0" oninput="updateSpeed()"><span class="speed-value" id="speedVal">1.0&times;</span></div></div>
+<div class="key-hint"><span class="kbd">Espaco</span> play/pausa &nbsp;|&nbsp; <span class="kbd">&uarr;&darr;</span> velocidade</div>
+<div class="script-container">
+  <div class="script-title">Veredito: 7 Destinos que Curamos</div>
+  <div class="script-meta"><span>Reel 01</span><span>Todas as Personas</span><span>50&ndash;65 segundos</span><span>CTA: DESTINOS</span></div>
 
-<div class="title-bar">
-  <div>
-    <h1>REEL 01 -- Meu veredito sobre os 7 destinos</h1>
-    <div class="meta">60-90s | Sala de estar ou parede escura</div>
-  </div>
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo &mdash; HOOK</div><div class="block-direction">Olha direto pra camera. Tom de autoridade. Sem sorriso.</div><div class="block-text">Esse e o nosso veredito sobre os <span class="highlight">7 destinos</span> que todo brasileiro quer conhecer.<span class="pause">&mdash;</span> E a gente <span class="highlight">nao vai romantizar nada.</span></div></div>
+
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Sorriso leve, olha pra camera. Tom de cumplicidade.</div><div class="block-text">Eu sou a Alexandra, nutricionista, e vou dar meu veredito sobre a <span class="highlight">comida</span> de cada um.</div></div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Aponta pra camera. Tom de conselho.</div><div class="block-text"><span class="highlight">Salva esse video</span> porque voce vai economizar muito dinheiro e evitar varias decepcoes.</div></div>
+
+  <div class="divider">italia</div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo &mdash; Italia</div><div class="block-direction">Tom de quem conhece. Gesticula ao falar de precos.</div><div class="block-text"><span class="highlight">Italia.</span> O queridinho dos brasileiros. Roma te deixa sem palavras, mas prepare o bolso: refeicao a partir de <span class="highlight">R$120 por pessoa.</span></div></div>
+
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Olhos brilhando. Tom apaixonado pela comida.</div><div class="block-text">Mas a comida compensa <span class="highlight">CADA centavo.</span> A pizza de la nao tem comparacao. E o gelato?<span class="pause">&mdash;</span> Esquece.</div></div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Tom de curiosidade. Levanta a sobrancelha.</div><div class="block-text">Curiosidade: Veneza ta afundando <span class="highlight">2mm por ano</span> e agora cobra <span class="highlight">5 euros</span> so pra entrar.</div></div>
+
+  <div class="divider">portugal</div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo &mdash; Portugal</div><div class="block-direction">Tom descontraido. Fala como quem recomenda.</div><div class="block-text"><span class="highlight">Portugal.</span> O mais facil pra brasileiro. Voce fala portugues, nao precisa de visto, e Lisboa e linda.</div></div>
+
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Fecha os olhos ao falar dos pasteis. Tom de saudade.</div><div class="block-text">Refeicao: <span class="highlight">R$80</span> em media. E os pasteis de nata?<span class="pause">&mdash;</span> Gente. <span class="highlight">Nao tem como descrever.</span></div></div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-text"><span class="highlight">250 dias de sol</span> por ano. Mais que a maioria da Europa.</div></div>
+
+  <div class="divider">estados unidos</div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo &mdash; EUA</div><div class="block-direction">Tom empolgado. Gesticula.</div><div class="block-text"><span class="highlight">Estados Unidos.</span> Primeiro no ranking dos sonhos. Orlando pras criancas, Nova York pra cultura.</div></div>
+
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Tom pratico. Faz conta com as maos.</div><div class="block-text">Mas refeicao simples: <span class="highlight">R$100 a 150.</span> O dolar pesa. Compensa MUITO se voce pegar passagem em promocao.</div></div>
+
+  <div class="divider">argentina</div>
+
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra &mdash; Argentina</div><div class="block-direction">Olha pro Marcelo e depois pra camera. Tom de empolgacao.</div><div class="block-text"><span class="highlight">Argentina.</span> Meninas, Buenos Aires e <span class="highlight">INCRIVEL</span> pra casais.</div></div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Tom de quem aprova. Acena com a cabeca.</div><div class="block-text">Mendoza tem vinhos espetaculares. E o melhor: ta super barato. Refeicao excelente: <span class="highlight">R$40 a 60.</span></div></div>
+
+  <div class="divider">franca</div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo &mdash; Franca</div><div class="block-direction">Tom de dica insider.</div><div class="block-text"><span class="highlight">Franca.</span> Paris e o sonho, mas vai alem da Torre Eiffel. A <span class="highlight">Provenca</span> e subestimada.</div></div>
+
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Tom de respeito pela gastronomia.</div><div class="block-text">A comida e arte. Literalmente. Mas <span class="highlight">R$150 por refeicao</span> e o normal.</div></div>
+
+  <div class="divider">chile</div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo &mdash; Chile</div><div class="block-direction">Tom de aventura. Olhos arregalados.</div><div class="block-text"><span class="highlight">Chile.</span> Do Atacama a Patagonia<span class="pause">&mdash;</span> paisagens que nao parecem reais.</div></div>
+
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-text">Refeicao: <span class="highlight">R$70.</span> E pra familias aventureiras, as criancas amam os vulcoes e lagos.</div></div>
+
+  <div class="divider">espanha</div>
+
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra &mdash; Espanha</div><div class="block-direction">Tom animado.</div><div class="block-text"><span class="highlight">Espanha.</span> Barcelona com Gaudi, Madrid com museus, praias incriveis.</div></div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Tom de pai. Sorriso.</div><div class="block-text"><span class="highlight">R$90 por refeicao.</span> E super family-friendly<span class="pause">&mdash;</span> criancas brincam nas pracas ate tarde la.</div></div>
+
+  <div class="divider">chamada para acao</div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo &mdash; CTA</div><div class="block-direction">Olha direto pra camera. Tom de convite.</div><div class="block-text"><span class="highlight">Compartilha</span> esse video com quem ta planejando viagem internacional.</div></div>
+
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-direction">Sorriso aberto. Tom engajador.</div><div class="block-text">E comenta aqui: <span class="highlight">qual desses destinos ta no topo da lista de voces?</span></div></div>
+
+  <div class="block block-marcelo"><div class="block-speaker"><span class="speaker-icon">M</span>Marcelo</div><div class="block-direction">Tom de assinatura. Abraca Alexandra de lado.</div><div class="block-text">A gente e Marcelo e Alexandra. A gente <span class="highlight">cura experiencias de viagem</span> pra casais e familias que querem viver algo de verdade.</div></div>
+
+  <div class="block block-alexandra"><div class="block-speaker"><span class="speaker-icon">A</span>Alexandra</div><div class="block-text"><span class="highlight">Me segue</span> que toda semana tem conteudo novo com a nossa opiniao honesta.</div></div>
+
+  <div class="closing-card"><h3>Assinatura</h3><div class="closing-signature">Curado por Marcelo &amp; Alexandra &#129517;<strong>@rotta.curadoria</strong></div></div>
 </div>
-
-<div class="timer" id="timer">00:00</div>
-
-<div class="script-container" id="script">
-
-  <div class="block">
-    <div class="time-marker">[0-3s]</div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Esse e o nosso veredito sobre os 7 destinos que todo brasileiro quer conhecer. E a gente nao vai romantizar nada."</span>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="time-marker">[3-5s]</div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"Eu sou a Alexandra, nutricionista, e vou dar meu veredito sobre a comida de cada um."</span>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="time-marker">[5-8s]</div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Salva esse video porque voce vai economizar muito dinheiro e evitar varias decepcoes."</span>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="time-marker">[8-16s]</div>
-    <div class="section-title">ITALIA</div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Italia. O queridinho dos brasileiros. Roma te deixa sem palavras, mas prepare o bolso: refeicao a partir de R$120 por pessoa."</span>
-    </div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"Mas a comida compensa CADA centavo. A pizza de la nao tem comparacao. E o gelato? Esquece."</span>
-    </div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Curiosidade: Veneza ta afundando 2mm por ano e agora cobra 5 euros so pra entrar."</span>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="time-marker">[16-23s]</div>
-    <div class="section-title">PORTUGAL</div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Portugal. O mais facil pra brasileiro. Voce fala portugues, nao precisa de visto, e Lisboa e linda."</span>
-    </div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"Refeicao: R$80 em media. E os pasteis de nata? Gente. Nao tem como descrever."</span>
-    </div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"250 dias de sol por ano. Mais que a maioria da Europa."</span>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="time-marker">[23-30s]</div>
-    <div class="section-title">ESTADOS UNIDOS</div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Estados Unidos. Primeiro no ranking dos sonhos em 2025. Orlando pras criancas, Nova York pra cultura."</span>
-    </div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"Mas refeicao simples: R$100 a 150. O dolar pesa. Compensa MUITO se voce pegar passagem em promocao."</span>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="time-marker">[30-37s]</div>
-    <div class="section-title">ARGENTINA</div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"Argentina. Meninas, Buenos Aires e INCRIVEL pra casais."</span>
-    </div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Mendoza tem vinhos espetaculares. E o melhor: ta super barato. Refeicao excelente: R$40 a 60."</span>
-    </div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"As sorveterias de la? As criancas piram."</span>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="time-marker">[37-44s]</div>
-    <div class="section-title">FRANCA</div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Franca. Paris e o sonho, mas vai alem da Torre Eiffel. A Provenca e subestimada."</span>
-    </div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"A comida e arte. Literalmente. Mas R$150 por refeicao e o normal."</span>
-    </div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Nao e a toa que e o pais mais visitado do mundo. 90 milhoes de turistas por ano."</span>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="time-marker">[44-50s]</div>
-    <div class="section-title">CHILE</div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Chile. Do Atacama a Patagonia -- paisagens que nao parecem reais."</span>
-    </div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"Refeicao: R$70. E pra familias aventureiras, as criancas amam os vulcoes e lagos."</span>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="time-marker">[50-56s]</div>
-    <div class="section-title">ESPANHA</div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"Espanha. Barcelona com Gaudi, Madrid com museus, praias incriveis."</span>
-    </div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"R$90 por refeicao. E super family-friendly -- criancas brincam nas pracas ate tarde la."</span>
-    </div>
-  </div>
-
-  <div class="block">
-    <div class="time-marker">[56-65s]</div>
-    <div class="section-title">CTA</div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"Compartilha esse video com quem ta planejando viagem internacional."</span>
-    </div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"E comenta aqui: qual desses destinos ta no topo da lista de voces?"</span>
-    </div>
-    <div class="line marcelo">
-      <span class="speaker">MARCELO</span>
-      <span class="text">"A gente e Marcelo e Alexandra. A gente cura experiencias de viagem pra casais e familias que querem viver algo de verdade."</span>
-    </div>
-    <div class="line alexandra">
-      <span class="speaker">ALEXANDRA</span>
-      <span class="text">"Me segue que toda semana tem conteudo novo com a nossa opiniao honesta."</span>
-    </div>
-  </div>
-
-  <div class="production-notes">
-    <h2>Notas de Producao</h2>
-    <ul>
-      <li>Camera: Frontal, ambos enquadrados. Cortes rapidos a cada destino</li>
-      <li>Marcelo fala logistica/preco. Alexandra fala gastronomia/emocao</li>
-      <li>Texto overlay: Nome do pais + bandeira + preco medio</li>
-      <li>Cenario: Parede escura ou sala de estar</li>
-      <li>Roupa: Casual elegante, cores neutras</li>
-      <li>Gravar 2x: primeiro "certinho", segundo mais solto</li>
-    </ul>
-  </div>
-</div>
-
-<div class="controls">
-  <button class="btn-speed" data-speed="0.5">Lento</button>
-  <button class="btn-speed active" data-speed="1">Normal</button>
-  <button class="btn-speed" data-speed="1.5">Rapido</button>
-  <button class="btn-speed" data-speed="2">2x</button>
-  <span class="speed-label">|</span>
-  <button class="btn-play" id="btnPlay">&#9654; Auto Scroll</button>
-</div>
-
+<div class="scroll-status"><div class="dot" id="statusDot"></div><span id="statusText">Pronto</span></div>
 <script>
-  (function() {
-    var timerSeconds = 0;
-    var timerInterval = null;
-    var timerRunning = false;
-    var scrolling = false;
-    var scrollSpeed = 1;
-    var scrollRAF = null;
-    var btnPlay = document.getElementById('btnPlay');
-    var timerEl = document.getElementById('timer');
-
-    function formatTime(s) {
-      var m = Math.floor(s / 60);
-      var sec = s % 60;
-      return String(m).padStart(2, '0') + ':' + String(sec).padStart(2, '0');
-    }
-
-    function startTimer() {
-      if (timerRunning) return;
-      timerRunning = true;
-      timerInterval = setInterval(function() {
-        timerSeconds++;
-        timerEl.textContent = formatTime(timerSeconds);
-      }, 1000);
-    }
-
-    function stopTimer() {
-      timerRunning = false;
-      clearInterval(timerInterval);
-    }
-
-    function autoScroll() {
-      if (!scrolling) return;
-      window.scrollBy(0, 0.8 * scrollSpeed);
-      scrollRAF = requestAnimationFrame(autoScroll);
-    }
-
-    btnPlay.addEventListener('click', function() {
-      if (scrolling) {
-        scrolling = false;
-        cancelAnimationFrame(scrollRAF);
-        stopTimer();
-        btnPlay.textContent = '\u25B6 Auto Scroll';
-        btnPlay.classList.remove('active');
-      } else {
-        scrolling = true;
-        startTimer();
-        btnPlay.textContent = '\u23F8 Pause';
-        btnPlay.classList.add('active');
-        autoScroll();
-      }
-    });
-
-    document.querySelectorAll('.btn-speed').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.btn-speed').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        scrollSpeed = parseFloat(btn.dataset.speed);
-      });
-    });
-
-    timerEl.addEventListener('dblclick', function() {
-      timerSeconds = 0;
-      timerEl.textContent = '00:00';
-    });
-  })();
+let scrollInterval=null,isPaused=false,isRunning=false,speed=1.0,countdownActive=false;
+function updateSpeed(){speed=parseFloat(document.getElementById('speedSlider').value);document.getElementById('speedVal').textContent=speed.toFixed(1)+'\xd7'}
+function startWithCountdown(){if(countdownActive)return;if(isRunning&&!isPaused)return;if(isPaused){resumeScroll();return}countdownActive=true;const overlay=document.getElementById('countdown');const numEl=document.getElementById('countNumber');overlay.classList.add('show');let count=3;numEl.textContent=count;triggerAnim(numEl);const iv=setInterval(()=>{count--;if(count<=0){clearInterval(iv);overlay.classList.remove('show');countdownActive=false;startScroll()}else{numEl.textContent=count;triggerAnim(numEl)}},1000)}
+function triggerAnim(el){el.style.animation='none';el.offsetHeight;el.style.animation='countPulse 1s ease-in-out'}
+function startScroll(){isRunning=true;isPaused=false;setStatus(true,'Rolando\u2026');beginLoop()}
+function resumeScroll(){isPaused=false;setStatus(true,'Rolando\u2026');document.getElementById('btnPause').textContent='\u23f8 Pausar';beginLoop()}
+function beginLoop(){if(scrollInterval)clearInterval(scrollInterval);scrollInterval=setInterval(()=>{if(!isPaused){window.scrollBy(0,speed*1.2);updateProgress()}},16)}
+function togglePause(){if(!isRunning)return;if(isPaused){resumeScroll()}else{isPaused=true;setStatus(false,'Pausado');document.getElementById('btnPause').textContent='\u25b6 Continuar'}}
+function stopScroll(){if(scrollInterval)clearInterval(scrollInterval);scrollInterval=null;isRunning=false;isPaused=false;window.scrollTo({top:0,behavior:'smooth'});setStatus(false,'Pronto');document.getElementById('progressBar').style.width='0%';document.getElementById('btnPause').textContent='\u23f8 Pausar'}
+function setStatus(running,text){document.getElementById('statusDot').className='dot'+(running?' running':'');document.getElementById('statusText').textContent=text}
+function updateProgress(){const scrollTop=window.scrollY;const docHeight=document.documentElement.scrollHeight-window.innerHeight;const pct=docHeight>0?(scrollTop/docHeight)*100:0;document.getElementById('progressBar').style.width=pct+'%'}
+document.addEventListener('keydown',(e)=>{if(e.code==='Space'){e.preventDefault();if(!isRunning)startWithCountdown();else togglePause()}if(e.code==='ArrowUp'){const s=document.getElementById('speedSlider');s.value=Math.min(3,parseFloat(s.value)+0.1);updateSpeed()}if(e.code==='ArrowDown'){const s=document.getElementById('speedSlider');s.value=Math.max(0.3,parseFloat(s.value)-0.1);updateSpeed()}});
 </script>
 </body>
 </html>
