@@ -50,6 +50,9 @@
         /* PHOTO PLACEHOLDER */
         .photo-placeholder{background:var(--card);border:1px solid var(--layer);border-radius:16px;height:320px;display:flex;align-items:center;justify-content:center;text-align:center;padding:32px;margin-bottom:48px}
         .photo-placeholder p{color:var(--dim);font-size:13px;line-height:1.6;max-width:300px}
+        .photo-real{width:100%;border-radius:12px;margin:32px 0;overflow:hidden}
+        .photo-real img{width:100%;height:auto;display:block;border-radius:12px}
+        .photo-real .caption{color:var(--dim);font-size:13px;text-align:center;margin-top:8px;font-style:italic}
 
         /* SECTIONS */
         .section{padding:48px 0;border-top:1px solid var(--layer)}
@@ -171,8 +174,9 @@
 <div class="container">
 
     <!-- PHOTO -->
-    <div class="photo-placeholder fade-up">
-        <p>Foto: vinhedos ao pe dos Andes nevados, tacas de Malbec na mesa, luz dourada de fim de tarde sobre a cordilheira</p>
+    <div class="photo-real fade-up">
+        <img src="/images/jornadas/mendoza/casal-beijo-vinhedos-andes.jpg" alt="Marcelo e Alexandra nos vinhedos de Mendoza" loading="lazy">
+        <div class="caption">Nos nos vinhedos de Mendoza — momentos que valem mais que qualquer garrafa</div>
     </div>
 
     <!-- OVERVIEW -->
