@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Painel de Controle | Rotta Curadoria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#0E0E0E;--card:#1A1A1A;--layer:#2A2A2A;
+            --gold:#C5A572;--gold-dim:rgba(197,165,114,.15);
+            --text:#F2EDE8;--muted:#999;--dim:#666;
+            --green:#4CAF7D;--red:#E85A5A;--blue:#5B8DEF;--orange:#E8A85A;--coral:#E8785A;--purple:#9B59B6
+        }
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:14px}
+
+        /* NAV */
+        .panel-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(14,14,14,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--layer);padding:12px 24px;display:flex;justify-content:space-between;align-items:center}
+        .panel-nav .brand{font-family:'Playfair Display',serif;color:var(--gold);font-size:14px;letter-spacing:2px}
+        .panel-nav .tabs{display:flex;gap:4px}
+        .panel-nav .tab{padding:6px 16px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:500;color:var(--muted);transition:all .2s;border:none;background:none}
+        .panel-nav .tab:hover{color:var(--text);background:var(--layer)}
+        .panel-nav .tab.active{color:var(--gold);background:var(--gold-dim)}
+        .panel-nav .date{color:var(--dim);font-size:11px}
+
+        /* LAYOUT */
+        .panel-content{padding:72px 24px 40px;max-width:1200px;margin:0 auto}
+        .section{display:none;animation:fadeIn .3s ease}
+        .section.active{display:block}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+        /* SECTION HEADER */
+        .section-header{margin-bottom:32px}
+        .section-header h2{font-family:'Playfair Display',serif;font-size:28px;margin-bottom:8px}
+        .section-header p{color:var(--muted);font-size:13px}
+
+        /* CARDS */
+        .card{background:var(--card);border:1px solid var(--layer);border-radius:12px;padding:20px;margin-bottom:16px;transition:border-color .2s}
+        .card:hover{border-color:rgba(197,165,114,.3)}
+        .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+        .card-title{font-weight:600;font-size:15px}
+        .card-badge{font-size:10px;font-weight:600;letter-spacing:1px;padding:3px 10px;border-radius:100px;text-transform:uppercase}
+        .badge-done{background:rgba(76,175,125,.15);color:var(--green)}
+        .badge-pending{background:rgba(232,168,90,.15);color:var(--orange)}
+        .badge-todo{background:rgba(91,141,239,.15);color:var(--blue)}
+        .badge-critical{background:rgba(232,90,90,.15);color:var(--red)}
+        .badge-info{background:rgba(155,89,182,.15);color:var(--purple)}
+
+        /* GRID */
+        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+        .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+        @media(max-width:900px){.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}}
+
+        /* STATS */
+        .stat-box{text-align:center;padding:20px}
+        .stat-box .num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--gold)}
+        .stat-box .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+
+        /* CHECKLIST */
+        .checklist{list-style:none}
+        .checklist li{padding:10px 0;border-bottom:1px solid rgba(42,42,42,.5);display:flex;align-items:flex-start;gap:10px;font-size:13px}
+        .checklist li:last-child{border-bottom:none}
+        .check{width:18px;height:18px;border-radius:4px;border:2px solid var(--layer);flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
+        .check.done{background:var(--green);border-color:var(--green)}
+        .check.done::after{content:'✓';color:#fff;font-size:11px;font-weight:700}
+        .check-text.done{text-decoration:line-through;color:var(--dim)}
+
+        /* CALENDAR */
+        .cal-week{margin-bottom:24px}
+        .cal-week-header{font-weight:600;color:var(--gold);font-size:13px;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--layer)}
+        .cal-day{display:flex;gap:12px;padding:8px 0;border-bottom:1px solid rgba(42,42,42,.3)}
+        .cal-day:last-child{border-bottom:none}
+        .cal-date{font-weight:600;color:var(--gold);min-width:40px;font-size:13px}
+        .cal-dow{color:var(--dim);min-width:30px;font-size:12px}
+        .cal-items{flex:1}
+        .cal-item{display:inline-block;font-size:11px;padding:3px 8px;border-radius:6px;margin:2px 4px 2px 0}
+        .cal-reel{background:rgba(232,90,90,.12);color:var(--coral)}
+        .cal-carousel{background:rgba(91,141,239,.12);color:var(--blue)}
+        .cal-story{background:rgba(155,89,182,.12);color:var(--purple)}
+        .cal-blog{background:rgba(76,175,125,.12);color:var(--green)}
+        .cal-photo{background:rgba(232,168,90,.12);color:var(--orange)}
+        .cal-tiktok{background:rgba(0,0,0,.3);color:#69C9D0;border:1px solid rgba(105,201,208,.2)}
+
+        /* LINKS */
+        .file-link{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card);border:1px solid var(--layer);border-radius:10px;text-decoration:none;color:var(--text);transition:all .2s;margin-bottom:8px}
+        .file-link:hover{border-color:var(--gold);transform:translateX(4px)}
+        .file-icon{font-size:20px;flex-shrink:0}
+        .file-info{flex:1}
+        .file-name{font-weight:500;font-size:13px}
+        .file-desc{font-size:11px;color:var(--dim);margin-top:2px}
+
+        /* TASK TABLE */
+        table{width:100%;border-collapse:collapse;font-size:13px}
+        th{text-align:left;color:var(--gold);font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:8px 12px;border-bottom:2px solid var(--layer)}
+        td{padding:10px 12px;border-bottom:1px solid rgba(42,42,42,.3);vertical-align:top}
+        tr:hover td{background:rgba(197,165,114,.03)}
+
+        /* PROGRESS BAR */
+        .progress-bar{height:6px;background:var(--layer);border-radius:3px;overflow:hidden;margin-top:8px}
+        .progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#D4B87F);border-radius:3px;transition:width .5s ease}
+
+        /* PRIORITY DOTS */
+        .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+        .dot-red{background:var(--red)}
+        .dot-orange{background:var(--orange)}
+        .dot-green{background:var(--green)}
+        .dot-blue{background:var(--blue)}
+
+        /* PRINT */
+        @media print{
+            .panel-nav{display:none}
+            .panel-content{padding:20px}
+            .section{display:block!important;page-break-after:always}
+        }
+
+        /* NOTES */
+        .note-box{background:rgba(197,165,114,.06);border:1px solid rgba(197,165,114,.15);border-radius:10px;padding:16px;margin-top:16px;font-size:12px;color:var(--muted);line-height:1.6}
+        .note-box strong{color:var(--gold)}
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="panel-nav">
+    <div class="brand">ROTTA — PAINEL DE CONTROLE</div>
+    <div class="tabs">
+        <button class="tab active" onclick="showSection('dashboard')">Dashboard</button>
+        <button class="tab" onclick="showSection('calendario')">Calendário</button>
+        <button class="tab" onclick="showSection('tarefas')">Tarefas</button>
+        <button class="tab" onclick="showSection('conteudo')">Conteúdo</button>
+        <button class="tab" onclick="showSection('arquivos')">Arquivos</button>
+        <button class="tab" onclick="showSection('metricas')">Métricas</button>
+    </div>
+    <div class="date" id="currentDate"></div>
+</nav>
+
+<div class="panel-content">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: DASHBOARD -->
+<!-- ============================================================ -->
+<div class="section active" id="sec-dashboard">
+    <div class="section-header">
+        <h2>Visão Geral</h2>
+        <p>Status do projeto Rotta Curadoria — atualizado em 29/03/2026</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="grid-4" style="margin-bottom:32px">
+        <div class="card stat-box">
+            <div class="num">46</div>
+            <div class="label">Páginas no Site</div>
+        </div>
+        <div class="card stat-box">
+            <div class="num">44</div>
+            <div class="label">Fotos Otimizadas</div>
+        </div>
+        <div class="card stat-box">
+            <div class="num">5</div>
+            <div class="label">Newsletters Brevo</div>
+        </div>
+        <div class="card stat-box">
+            <div class="num">7</div>
+            <div class="label">Fluxos ManyChat</div>
+        </div>
+    </div>
+
+    <!-- Infrastructure Status -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Infraestrutura Digital</div>
+            <span class="card-badge badge-done">Operacional</span>
+        </div>
+        <div class="grid-3">
+            <div><span class="dot dot-green"></span>Site Vercel — deploy automático</div>
+            <div><span class="dot dot-green"></span>DNS Cloudflare — rottacuradoria.com.br</div>
+            <div><span class="dot dot-green"></span>GitHub repo — rotta-site</div>
+            <div><span class="dot dot-green"></span>Google Ads — AW-18049767977</div>
+            <div><span class="dot dot-green"></span>Google Analytics — G-9RXC6Y341F</div>
+            <div><span class="dot dot-green"></span>Cookie Consent (LGPD/GDPR)</div>
+            <div><span class="dot dot-green"></span>Quiz → Google Sheets → Make → Brevo</div>
+            <div><span class="dot dot-green"></span>ManyChat — 7 keywords ativas</div>
+            <div><span class="dot dot-green"></span>5 newsletters persona no Brevo</div>
+            <div><span class="dot dot-green"></span>Instagram @rotta.curadoria (criador)</div>
+            <div><span class="dot dot-orange"></span>YouTube — falta banner</div>
+            <div><span class="dot dot-orange"></span>TikTok — falta bio</div>
+        </div>
+    </div>
+
+    <!-- Overall Progress -->
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Progresso Pré-Lançamento</div>
+                <span style="color:var(--gold);font-size:13px;font-weight:600">75%</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+            <ul class="checklist" style="margin-top:12px">
+                <li><div class="check done"></div><span class="check-text done">Site completo e no ar</span></li>
+                <li><div class="check done"></div><span class="check-text done">Quiz funcionando + captura leads</span></li>
+                <li><div class="check done"></div><span class="check-text done">Automação Make → Brevo</span></li>
+                <li><div class="check done"></div><span class="check-text done">ManyChat 7 fluxos</span></li>
+                <li><div class="check done"></div><span class="check-text done">Google Ads + Analytics instalados</span></li>
+                <li><div class="check done"></div><span class="check-text done">5 newsletters configuradas</span></li>
+                <li><div class="check"></div><span class="check-text">Gravar 5 Reels + 7 Stories</span></li>
+                <li><div class="check"></div><span class="check-text">Publicar grid 3×3</span></li>
+                <li><div class="check"></div><span class="check-text">Tornar perfil PÚBLICO</span></li>
+                <li><div class="check"></div><span class="check-text">Ativar campanha Google Ads</span></li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Próximas Ações Prioritárias</div>
+                <span class="card-badge badge-critical">Urgente</span>
+            </div>
+            <table>
+                <tr><td><span class="dot dot-red"></span>Gravar 5 Reels com Alexandra</td><td style="color:var(--dim)">Sábado</td></tr>
+                <tr><td><span class="dot dot-red"></span>Gravar 7 Stories "Quem Somos"</td><td style="color:var(--dim)">Sábado</td></tr>
+                <tr><td><span class="dot dot-red"></span>Foto manifesto (casal)</td><td style="color:var(--dim)">Sábado</td></tr>
+                <tr><td><span class="dot dot-orange"></span>Editar Reels (CapCut/InShot)</td><td style="color:var(--dim)">Domingo</td></tr>
+                <tr><td><span class="dot dot-orange"></span>Criar 3 carrosséis no Canva</td><td style="color:var(--dim)">Domingo</td></tr>
+                <tr><td><span class="dot dot-orange"></span>Publicar grid 3×3 + tornar público</td><td style="color:var(--dim)">Segunda</td></tr>
+                <tr><td><span class="dot dot-blue"></span>Ativar campanha Google Ads</td><td style="color:var(--dim)">24-48h</td></tr>
+                <tr><td><span class="dot dot-blue"></span>Completar banner YouTube</td><td style="color:var(--dim)">Semana 1</td></tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: CALENDÁRIO EDITORIAL -->
+<!-- ============================================================ -->
+<div class="section" id="sec-calendario">
+    <div class="section-header">
+        <h2>Calendário Editorial</h2>
+        <p>Estratégia: Grid 3×3 no dia do lançamento → mínimo 3 conteúdos/dia (Instagram + TikTok) após lançamento</p>
+    </div>
+
+    <div class="note-box" style="margin-bottom:24px">
+        <strong>Regra de Frequência Pós-Lançamento:</strong> Mínimo 3 conteúdos por dia em cada plataforma (Instagram + TikTok). Mix recomendado: 1 Reel/TikTok + 1 Carrossel/Foto + 3-5 Stories diários. Blog: 1 artigo por semana (publicado às terças).
+    </div>
+
+    <!-- LAUNCH WEEK -->
+    <div class="cal-week">
+        <div class="cal-week-header">Semana 0 — Pré-Lançamento (29/03 - 30/03)</div>
+        <div class="cal-day">
+            <span class="cal-date">29</span><span class="cal-dow">Sáb</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Gravar Reel 01: Veredito 7 Destinos</span>
+                <span class="cal-item cal-reel">Gravar Reel 16: Romântica ≠ Paris</span>
+                <span class="cal-item cal-reel">Gravar Reel 17: Pedir em Casamento</span>
+                <span class="cal-item cal-reel">Gravar Reel 06: Erros Europa</span>
+                <span class="cal-item cal-reel">Gravar Reel 19: Copa EUA</span>
+                <span class="cal-item cal-story">Gravar 7 Stories "Quem Somos"</span>
+                <span class="cal-item cal-photo">Foto Manifesto (casal)</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">30</span><span class="cal-dow">Dom</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Editar 5 Reels (CapCut)</span>
+                <span class="cal-item cal-carousel">Criar Carrossel: 5 Erros Europa</span>
+                <span class="cal-item cal-carousel">Criar Carrossel: Quanto Custa Itália</span>
+                <span class="cal-item cal-carousel">Criar Carrossel: Checklist Internacional</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="cal-week">
+        <div class="cal-week-header">Semana 1 — Lançamento (31/03 - 06/04)</div>
+        <div class="cal-day">
+            <span class="cal-date">31</span><span class="cal-dow">Seg</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Publicar Grid 3×3 (5 Reels + 3 Carrosséis + Manifesto)</span>
+                <span class="cal-item cal-story">Stories: "Estamos no ar!"</span>
+                <span class="cal-item cal-tiktok">Cross-post 3 Reels no TikTok</span>
+                <span style="display:block;margin-top:6px;font-size:11px;color:var(--gold)">⭐ TORNAR PERFIL PÚBLICO — Convidar círculo via WhatsApp</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">01</span><span class="cal-dow">Ter</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Reel: Bastidores do lançamento</span>
+                <span class="cal-item cal-carousel">Carrossel: "Por que criamos a Rotta"</span>
+                <span class="cal-item cal-story">3 Stories: Engajamento + Q&A</span>
+                <span class="cal-item cal-tiktok">TikTok: Bastidores + trend</span>
+                <span class="cal-item cal-blog">Blog: "Por que criamos a Rotta Curadoria"</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">02</span><span class="cal-dow">Qua</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Reel: Dica rápida viagem (30s)</span>
+                <span class="cal-item cal-carousel">Carrossel: 3 Destinos Subestimados</span>
+                <span class="cal-item cal-story">3 Stories: Poll + enquete destinos</span>
+                <span class="cal-item cal-tiktok">TikTok: Dica rápida adaptada</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">03</span><span class="cal-dow">Qui</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Reel: Alexandra review gastronômico</span>
+                <span class="cal-item cal-photo">Post foto: Destino + legenda storytelling</span>
+                <span class="cal-item cal-story">3 Stories: Comida + bastidores</span>
+                <span class="cal-item cal-tiktok">TikTok: Alexandra na cozinha/comida</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">04</span><span class="cal-dow">Sex</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Reel: "Quanto custa X dias em [destino]"</span>
+                <span class="cal-item cal-carousel">Carrossel: Economia de viagem</span>
+                <span class="cal-item cal-story">3 Stories: Cross-post perfil Marcelo</span>
+                <span class="cal-item cal-tiktok">TikTok: Trend + viagem</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">05</span><span class="cal-dow">Sáb</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Reel: Casal viajando — formato romântico</span>
+                <span class="cal-item cal-photo">Post foto: Paisagem + CTA quiz</span>
+                <span class="cal-item cal-story">3 Stories: Bastidores da semana</span>
+                <span class="cal-item cal-tiktok">TikTok: Casal — conteúdo leve</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">06</span><span class="cal-dow">Dom</span>
+            <div class="cal-items">
+                <span class="cal-item cal-carousel">Carrossel: Review de semana</span>
+                <span class="cal-item cal-story">3 Stories: Preparação semana 2</span>
+                <span class="cal-item cal-tiktok">TikTok: Compilação semanal</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="cal-week">
+        <div class="cal-week-header">Semana 2 — Aceleração (07/04 - 13/04)</div>
+        <div class="cal-day">
+            <span class="cal-date">07</span><span class="cal-dow">Seg</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Reel: Pilar Destinos</span>
+                <span class="cal-item cal-carousel">Carrossel: Top 5 [tema]</span>
+                <span class="cal-item cal-story">3 Stories</span>
+                <span class="cal-item cal-tiktok">TikTok: 2 conteúdos</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">08</span><span class="cal-dow">Ter</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Reel: Pilar Bastidores</span>
+                <span class="cal-item cal-photo">Post foto com storytelling</span>
+                <span class="cal-item cal-story">3 Stories</span>
+                <span class="cal-item cal-tiktok">TikTok: 2 conteúdos</span>
+                <span class="cal-item cal-blog">Blog: Artigo semanal</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">09</span><span class="cal-dow">Qua</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Reel: Pilar Economia</span>
+                <span class="cal-item cal-carousel">Carrossel: Dicas práticas</span>
+                <span class="cal-item cal-story">3 Stories</span>
+                <span class="cal-item cal-tiktok">TikTok: 2 conteúdos</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">10</span><span class="cal-dow">Qui</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Reel: Pilar Gastronomia (Alexandra)</span>
+                <span class="cal-item cal-photo">Post foto destino</span>
+                <span class="cal-item cal-story">3 Stories</span>
+                <span class="cal-item cal-tiktok">TikTok: 2 conteúdos</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">11</span><span class="cal-dow">Sex</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">Reel: Pilar Curadoria</span>
+                <span class="cal-item cal-carousel">Carrossel educativo</span>
+                <span class="cal-item cal-story">3 Stories</span>
+                <span class="cal-item cal-tiktok">TikTok: 2 conteúdos</span>
+            </div>
+        </div>
+        <div class="cal-day">
+            <span class="cal-date">12-13</span><span class="cal-dow">Fim</span>
+            <div class="cal-items">
+                <span class="cal-item cal-reel">1 Reel leve/bastidores</span>
+                <span class="cal-item cal-carousel">1 Carrossel review</span>
+                <span class="cal-item cal-story">3 Stories/dia</span>
+                <span class="cal-item cal-tiktok">TikTok: 1-2 conteúdos/dia</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- TEMPLATE WEEKS -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Template Semanal Recorrente (Semana 3+)</div>
+            <span class="card-badge badge-info">Modelo</span>
+        </div>
+        <table>
+            <thead>
+                <tr><th>Dia</th><th>Instagram</th><th>TikTok</th><th>Blog</th><th>Pilar</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Seg</strong></td><td>Reel + Carrossel + 3 Stories</td><td>2 vídeos</td><td>—</td><td>Destinos</td></tr>
+                <tr><td><strong>Ter</strong></td><td>Reel + Foto + 3 Stories</td><td>2 vídeos</td><td style="color:var(--green)">Artigo semanal</td><td>Bastidores</td></tr>
+                <tr><td><strong>Qua</strong></td><td>Reel + Carrossel + 3 Stories</td><td>2 vídeos</td><td>—</td><td>Economia</td></tr>
+                <tr><td><strong>Qui</strong></td><td>Reel + Foto + 3 Stories</td><td>2 vídeos</td><td>—</td><td>Gastronomia</td></tr>
+                <tr><td><strong>Sex</strong></td><td>Reel + Carrossel + 3 Stories</td><td>2 vídeos</td><td>—</td><td>Curadoria</td></tr>
+                <tr><td><strong>Sáb</strong></td><td>Reel + Foto + 3 Stories</td><td>1-2 vídeos</td><td>—</td><td>Mix</td></tr>
+                <tr><td><strong>Dom</strong></td><td>Carrossel + 3 Stories</td><td>1 vídeo</td><td>—</td><td>Review</td></tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <strong>Rotação dos 5 Pilares:</strong> Destinos (seg) → Bastidores (ter) → Economia (qua) → Gastronomia/Alexandra (qui) → Curadoria (sex). Fim de semana = conteúdo leve + bastidores.<br><br>
+            <strong>Meta diária mínima:</strong> 3 conteúdos feed (Instagram) + 2 TikToks + 3 Stories
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: TAREFAS -->
+<!-- ============================================================ -->
+<div class="section" id="sec-tarefas">
+    <div class="section-header">
+        <h2>Tarefas Recorrentes</h2>
+        <p>Tarefas automáticas que o Claude deve executar sem precisar ser lembrado</p>
+    </div>
+
+    <!-- DAILY -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">📅 Tarefas Diárias (Claude)</div>
+            <span class="card-badge badge-critical">Todo dia</span>
+        </div>
+        <ul class="checklist">
+            <li><div class="check"></div><span class="check-text">Responder comentários do Instagram em &lt;2h</span></li>
+            <li><div class="check"></div><span class="check-text">Engajar em 20-30 perfis de viagem (comentários genuínos)</span></li>
+            <li><div class="check"></div><span class="check-text">Verificar leads novos na planilha Google Sheets</span></li>
+            <li><div class="check"></div><span class="check-text">Verificar DMs do ManyChat e WhatsApp</span></li>
+            <li><div class="check"></div><span class="check-text">Postar mínimo 3 Stories</span></li>
+        </ul>
+    </div>
+
+    <!-- WEEKLY -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">📆 Tarefas Semanais (Claude)</div>
+            <span class="card-badge badge-pending">Toda semana</span>
+        </div>
+        <table>
+            <thead><tr><th>Tarefa</th><th>Dia</th><th>Detalhes</th></tr></thead>
+            <tbody>
+                <tr><td><span class="dot dot-red"></span><strong>Blog: Criar artigo semanal</strong></td><td>Terça</td><td>1 artigo completo com SEO, fotos, og:image. Modelo: blog-mendoza-5-dias.html. Publicar + adicionar ao blog.html</td></tr>
+                <tr><td><span class="dot dot-red"></span>Newsletter semanal</td><td>Quarta</td><td>Gerar conteúdo para 5 newsletters persona. Enviar via Brevo</td></tr>
+                <tr><td><span class="dot dot-orange"></span>Criar conteúdo feed (7 dias)</td><td>Domingo</td><td>Planejar 7 Reels + 5 Carrosséis + 2 Fotos da semana seguinte</td></tr>
+                <tr><td><span class="dot dot-orange"></span>Criar roteiros TikTok</td><td>Domingo</td><td>Adaptar conteúdo Instagram para TikTok (mín. 14 vídeos/semana)</td></tr>
+                <tr><td><span class="dot dot-blue"></span>Review de métricas</td><td>Segunda</td><td>Verificar seguidores, alcance, engajamento, leads, conversões</td></tr>
+                <tr><td><span class="dot dot-blue"></span>Cross-post perfis pessoais</td><td>Sexta</td><td>Repostar no @drmarcelobrito.oftalmo e @nutrialexandradagostin</td></tr>
+                <tr><td><span class="dot dot-blue"></span>Atualizar painel de controle</td><td>Segunda</td><td>Atualizar números, progresso, métricas neste painel</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- MONTHLY -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">📊 Tarefas Mensais (Claude)</div>
+            <span class="card-badge badge-todo">Todo mês</span>
+        </div>
+        <table>
+            <thead><tr><th>Tarefa</th><th>Quando</th><th>Detalhes</th></tr></thead>
+            <tbody>
+                <tr><td><span class="dot dot-red"></span><strong>4 artigos de blog</strong></td><td>Ao longo do mês</td><td>1/semana. Temas: destinos, dicas, custos, gastronomia. SEO otimizado</td></tr>
+                <tr><td><span class="dot dot-orange"></span>Relatório mensal de métricas</td><td>Dia 1</td><td>Comparativo com mês anterior: seguidores, leads, conversões, faturamento</td></tr>
+                <tr><td><span class="dot dot-orange"></span>Revisar calendário próximo mês</td><td>Dia 25</td><td>Planejar temas, datas especiais, oportunidades sazonais</td></tr>
+                <tr><td><span class="dot dot-blue"></span>Adicionar fotos reais ao site</td><td>Contínuo</td><td>Substituir placeholders restantes por fotos reais</td></tr>
+                <tr><td><span class="dot dot-blue"></span>Criar 1 nova página de jornada</td><td>Contínuo</td><td>21 destinos pendentes em jornadas.html</td></tr>
+                <tr><td><span class="dot dot-blue"></span>Audit do site (erros/SEO)</td><td>Dia 15</td><td>Links quebrados, meta tags, performance, mobile</td></tr>
+                <tr><td><span class="dot dot-blue"></span>Outreach parcerias (hotéis)</td><td>Dia 10</td><td>Enviar media kit para 5 hotéis boutique</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- MARCELO TASKS -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">👤 Tarefas do Marcelo + Alexandra</div>
+            <span class="card-badge badge-info">Manual</span>
+        </div>
+        <ul class="checklist">
+            <li><div class="check"></div><span class="check-text"><strong>Diário:</strong> Responder DMs pessoalmente (leads quentes)</span></li>
+            <li><div class="check"></div><span class="check-text"><strong>Diário:</strong> Gravar 1-2 Stories rápidos (bastidores, dia a dia)</span></li>
+            <li><div class="check"></div><span class="check-text"><strong>Semanal:</strong> Gravar batch de Reels (2-3h no fim de semana)</span></li>
+            <li><div class="check"></div><span class="check-text"><strong>Semanal:</strong> Revisar roteiros de vídeo do Claude antes de gravar</span></li>
+            <li><div class="check"></div><span class="check-text"><strong>Mensal:</strong> Atualizar fotos/vídeos de viagens novas</span></li>
+            <li><div class="check"></div><span class="check-text"><strong>Maio 2026:</strong> Documentar viagem Itália (Stories diários + 1 Reel/dia)</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: CONTEÚDO & BLOG -->
+<!-- ============================================================ -->
+<div class="section" id="sec-conteudo">
+    <div class="section-header">
+        <h2>Conteúdo & Blog</h2>
+        <p>Artigos publicados, roteiros de vídeo e conteúdo pendente</p>
+    </div>
+
+    <div class="note-box" style="margin-bottom:24px">
+        <strong>Frequência Blog:</strong> 1 artigo por semana (terça-feira). Modelo de referência: blog-mendoza-5-dias.html. Cada artigo inclui: SEO (title, meta description, og:tags), fotos reais, links internos para jornadas/produtos, CTA pro quiz.
+    </div>
+
+    <!-- Published Blog Posts -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Blog — Artigos Publicados</div>
+            <span class="card-badge badge-done">3 publicados</span>
+        </div>
+        <table>
+            <thead><tr><th>Artigo</th><th>Arquivo</th><th>Data</th><th>Pilar</th></tr></thead>
+            <tbody>
+                <tr><td>Mendoza em 5 Dias: Roteiro Completo</td><td>blog-mendoza-5-dias.html</td><td>Mar 2026</td><td>Destinos</td></tr>
+                <tr><td>Quanto Custa Viajar pra Itália em 2026</td><td>blog-quanto-custa-italia.html</td><td>Mar 2026</td><td>Economia</td></tr>
+                <tr><td>Croácia pra Casais: Guia Completo</td><td>blog-croacia-casais.html</td><td>Mar 2026</td><td>Destinos</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Upcoming Blog Topics -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Blog — Próximos Artigos (Fila)</div>
+            <span class="card-badge badge-todo">A criar</span>
+        </div>
+        <table>
+            <thead><tr><th>#</th><th>Tema Sugerido</th><th>Pilar</th><th>Semana</th></tr></thead>
+            <tbody>
+                <tr><td>4</td><td>10 Dicas pra Economizar na Europa (sem perder qualidade)</td><td>Economia</td><td>Sem 1</td></tr>
+                <tr><td>5</td><td>Civita di Bagnoregio: O Vilarejo que Está Morrendo</td><td>Destinos</td><td>Sem 2</td></tr>
+                <tr><td>6</td><td>O Que Comer na Itália: Guia por Alexandra</td><td>Gastronomia</td><td>Sem 3</td></tr>
+                <tr><td>7</td><td>Dolomitas: O Segredo Mais Bem Guardado da Itália</td><td>Destinos</td><td>Sem 4</td></tr>
+                <tr><td>8</td><td>Portugal pra Casais: Roteiro Romântico de 7 Dias</td><td>Destinos</td><td>Sem 5</td></tr>
+                <tr><td>9</td><td>Como Planejar uma Viagem Internacional do Zero</td><td>Curadoria</td><td>Sem 6</td></tr>
+                <tr><td>10</td><td>Espanha Além de Barcelona: Andaluzia Secreta</td><td>Destinos</td><td>Sem 7</td></tr>
+                <tr><td>11</td><td>Viagem com Filhas: O Que Aprendemos em +22 Países</td><td>Bastidores</td><td>Sem 8</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Video Scripts -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Roteiros de Vídeo — 20 Prontos</div>
+            <span class="card-badge badge-done">Nos reference files</span>
+        </div>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:12px">20 roteiros completos com Alexandra integrada. 5 com teleprompter HTML no site:</p>
+        <div class="grid-2">
+            <a href="/teleprompter/reel-01-veredito.html" class="file-link">
+                <span class="file-icon">🎬</span>
+                <div class="file-info">
+                    <div class="file-name">Reel 01 — Veredito 7 Destinos</div>
+                    <div class="file-desc">60-90s · Teleprompter pronto</div>
+                </div>
+            </a>
+            <a href="/teleprompter/reel-06-erros.html" class="file-link">
+                <span class="file-icon">🎬</span>
+                <div class="file-info">
+                    <div class="file-name">Reel 06 — Erros Europa</div>
+                    <div class="file-desc">60-75s · Teleprompter pronto</div>
+                </div>
+            </a>
+            <a href="/teleprompter/reel-16-romantica.html" class="file-link">
+                <span class="file-icon">🎬</span>
+                <div class="file-info">
+                    <div class="file-name">Reel 16 — Romântica ≠ Paris</div>
+                    <div class="file-desc">45-60s · Teleprompter pronto</div>
+                </div>
+            </a>
+            <a href="/teleprompter/reel-17-pedido.html" class="file-link">
+                <span class="file-icon">🎬</span>
+                <div class="file-info">
+                    <div class="file-name">Reel 17 — Pedir em Casamento</div>
+                    <div class="file-desc">60-75s · Teleprompter pronto</div>
+                </div>
+            </a>
+            <a href="/teleprompter/reel-19-copa.html" class="file-link">
+                <span class="file-icon">🎬</span>
+                <div class="file-info">
+                    <div class="file-name">Reel 19 — Copa EUA</div>
+                    <div class="file-desc">45-60s · Teleprompter pronto</div>
+                </div>
+            </a>
+            <a href="/teleprompter/GUIA-PRODUCAO-SABADO.html" class="file-link">
+                <span class="file-icon">📋</span>
+                <div class="file-info">
+                    <div class="file-name">Guia de Produção — Sábado</div>
+                    <div class="file-desc">Briefing completo de gravação</div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- 5 Personas -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">5 Personas — Newsletter Semanal</div>
+            <span class="card-badge badge-done">Configuradas no Brevo</span>
+        </div>
+        <table>
+            <thead><tr><th>Persona</th><th>Perfil</th><th>Produto Destaque</th><th>Newsletter</th></tr></thead>
+            <tbody>
+                <tr><td style="color:var(--coral)">Carolina</td><td>Exploradora, 28-40, R$8-15k</td><td>Roteiro Express</td><td style="color:var(--green)">✓ Pronta</td></tr>
+                <tr><td style="color:var(--blue)">Roberto</td><td>Colecionador, 35-55, R$15-40k</td><td>Rotta Surprise</td><td style="color:var(--green)">✓ Pronta</td></tr>
+                <tr><td style="color:var(--purple)">Silvia & Marcos</td><td>Casal Reconectando, 40-60, R$12-25k</td><td>Escapada Romântica</td><td style="color:var(--green)">✓ Pronta</td></tr>
+                <tr><td style="color:var(--orange)">Squad</td><td>Grupo de Amigos, multi-perfil</td><td>Rotta Crew</td><td style="color:var(--green)">✓ Pronta</td></tr>
+                <tr><td style="color:var(--green)">Lucas & Bia</td><td>Casal Celebra, 25-38, R$5-12k</td><td>Escapada Romântica</td><td style="color:var(--green)">✓ Pronta</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: ARQUIVOS DO PROJETO -->
+<!-- ============================================================ -->
+<div class="section" id="sec-arquivos">
+    <div class="section-header">
+        <h2>Arquivos do Projeto</h2>
+        <p>Todos os documentos estratégicos reunidos — clique para abrir</p>
+    </div>
+
+    <!-- PUBLIC PAGES -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Páginas Públicas (Visitante vê)</div>
+            <span class="card-badge badge-done">28 páginas</span>
+        </div>
+        <div class="grid-3">
+            <a href="/" class="file-link"><span class="file-icon">🏠</span><div class="file-info"><div class="file-name">Home (Landing Page)</div></div></a>
+            <a href="/quiz.html" class="file-link"><span class="file-icon">🎯</span><div class="file-info"><div class="file-name">Quiz do Viajante</div></div></a>
+            <a href="/sobre.html" class="file-link"><span class="file-icon">👫</span><div class="file-info"><div class="file-name">Sobre Nós</div></div></a>
+            <a href="/blog.html" class="file-link"><span class="file-icon">📝</span><div class="file-info"><div class="file-name">Blog</div></div></a>
+            <a href="/jornadas.html" class="file-link"><span class="file-icon">🗺️</span><div class="file-info"><div class="file-name">Jornadas (30 destinos)</div></div></a>
+            <a href="/portfolio.html" class="file-link"><span class="file-icon">📸</span><div class="file-info"><div class="file-name">Portfólio</div></div></a>
+            <a href="/catalogo-produtos.html" class="file-link"><span class="file-icon">🛒</span><div class="file-info"><div class="file-name">Catálogo Produtos</div></div></a>
+            <a href="/links.html" class="file-link"><span class="file-icon">🔗</span><div class="file-info"><div class="file-name">Links (Bio Instagram)</div></div></a>
+            <a href="/guia.html" class="file-link"><span class="file-icon">📖</span><div class="file-info"><div class="file-name">Guia 7 Destinos</div></div></a>
+            <a href="/comparador.html" class="file-link"><span class="file-icon">⚖️</span><div class="file-info"><div class="file-name">Comparador</div></div></a>
+        </div>
+    </div>
+
+    <!-- STRATEGY DOCS -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Documentos Estratégicos (Internos)</div>
+            <span class="card-badge badge-info">23 arquivos</span>
+        </div>
+        <div class="grid-2">
+            <a href="/apresentacao.html" class="file-link"><span class="file-icon">📊</span><div class="file-info"><div class="file-name">Plano de Negócios 2026</div><div class="file-desc">Apresentação 12 slides</div></div></a>
+            <a href="/roteiros-consolidados.html" class="file-link"><span class="file-icon">🎬</span><div class="file-info"><div class="file-name">Production Bible</div><div class="file-desc">19 roteiros + prompts + calendário</div></div></a>
+            <a href="/grid-instagram.html" class="file-link"><span class="file-icon">📱</span><div class="file-info"><div class="file-name">Grid Instagram</div><div class="file-desc">Primeiros 9 posts planejados</div></div></a>
+            <a href="/estrategia-engajamento.html" class="file-link"><span class="file-icon">💬</span><div class="file-info"><div class="file-name">Estratégia Engajamento</div><div class="file-desc">Templates DM, comentários, CRM</div></div></a>
+            <a href="/estrategia-tiktok-google.html" class="file-link"><span class="file-icon">📈</span><div class="file-info"><div class="file-name">Estratégia TikTok + Google</div><div class="file-desc">Ads e crescimento orgânico</div></div></a>
+            <a href="/emails-brevo.html" class="file-link"><span class="file-icon">📧</span><div class="file-info"><div class="file-name">25 Emails Nutrição</div><div class="file-desc">5 emails × 5 personas no Brevo</div></div></a>
+            <a href="/newsletter-templates.html" class="file-link"><span class="file-icon">📰</span><div class="file-info"><div class="file-name">Newsletter Templates</div><div class="file-desc">5 templates persona + setup Brevo</div></div></a>
+            <a href="/highlights.html" class="file-link"><span class="file-icon">⭐</span><div class="file-info"><div class="file-name">Highlights Instagram</div><div class="file-desc">8 capas + conteúdo planejado</div></div></a>
+            <a href="/media-kit.html" class="file-link"><span class="file-icon">📋</span><div class="file-info"><div class="file-name">Media Kit 2026</div><div class="file-desc">2 páginas A4 para parcerias</div></div></a>
+            <a href="/parcerias-pesquisa.html" class="file-link"><span class="file-icon">🤝</span><div class="file-info"><div class="file-name">Pesquisa de Parcerias</div><div class="file-desc">Hotéis, operadores, marcas</div></div></a>
+            <a href="/auditoria-conversao.html" class="file-link"><span class="file-icon">🔍</span><div class="file-info"><div class="file-name">Auditoria de Conversão</div><div class="file-desc">Análise de funil e otimização</div></div></a>
+            <a href="/blog-automacao.html" class="file-link"><span class="file-icon">🤖</span><div class="file-info"><div class="file-name">Blog Automação</div><div class="file-desc">Estratégia de automação</div></div></a>
+            <a href="/capa-youtube.html" class="file-link"><span class="file-icon">🎨</span><div class="file-info"><div class="file-name">Capa YouTube</div><div class="file-desc">Banner design template</div></div></a>
+            <a href="/guia-7-destinos-pdf.html" class="file-link"><span class="file-icon">📄</span><div class="file-info"><div class="file-name">Guia 7 Destinos (PDF)</div><div class="file-desc">Versão PDF do lead magnet</div></div></a>
+        </div>
+    </div>
+
+    <!-- CAROUSELS -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Carrosséis (Templates)</div>
+            <span class="card-badge badge-info">4 lotes</span>
+        </div>
+        <div class="grid-2">
+            <a href="/carrosseis.html" class="file-link"><span class="file-icon">🎠</span><div class="file-info"><div class="file-name">Carrosséis Lote 1</div><div class="file-desc">Europa, Itália, Checklist</div></div></a>
+            <a href="/carrosseis-completos.html" class="file-link"><span class="file-icon">🎠</span><div class="file-info"><div class="file-name">Carrosséis Completos</div><div class="file-desc">Coleção completa</div></div></a>
+            <a href="/carrosseis-lote2.html" class="file-link"><span class="file-icon">🎠</span><div class="file-info"><div class="file-name">Carrosséis Lote 2</div><div class="file-desc">Segundo batch</div></div></a>
+            <a href="/carrosseis-lote3.html" class="file-link"><span class="file-icon">🎠</span><div class="file-info"><div class="file-name">Carrosséis Lote 3 (44-63)</div><div class="file-desc">Terceiro batch</div></div></a>
+        </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Páginas de Produto</div>
+            <span class="card-badge badge-done">10 produtos</span>
+        </div>
+        <div class="grid-2">
+            <a href="/produto-roteiro-pdf.html" class="file-link"><span class="file-icon">📄</span><div class="file-info"><div class="file-name">Roteiro PDF</div><div class="file-desc">L1 — R$37-67</div></div></a>
+            <a href="/produto-roteiro-express.html" class="file-link"><span class="file-icon">⚡</span><div class="file-info"><div class="file-name">Roteiro Express</div><div class="file-desc">L2 — R$497-797</div></div></a>
+            <a href="/produto-escapada-romantica.html" class="file-link"><span class="file-icon">💕</span><div class="file-info"><div class="file-name">Escapada Romântica</div><div class="file-desc">L2 — R$997-1.497</div></div></a>
+            <a href="/produto-rotta-crew.html" class="file-link"><span class="file-icon">👥</span><div class="file-info"><div class="file-name">Rotta Crew</div><div class="file-desc">L2 — R$1.497-1.997</div></div></a>
+            <a href="/produto-rotta-surprise.html" class="file-link"><span class="file-icon">🎁</span><div class="file-info"><div class="file-name">Rotta Surprise</div><div class="file-desc">L2 — R$797-1.297</div></div></a>
+            <a href="/produto-surprise-mini.html" class="file-link"><span class="file-icon">✨</span><div class="file-info"><div class="file-name">Surprise Mini</div><div class="file-desc">L1 — R$97</div></div></a>
+            <a href="/produto-workshop.html" class="file-link"><span class="file-icon">🎓</span><div class="file-info"><div class="file-name">Workshop</div><div class="file-desc">L1 — R$67</div></div></a>
+            <a href="/produto-curadoria-completa.html" class="file-link"><span class="file-icon">👑</span><div class="file-info"><div class="file-name">Curadoria Completa</div><div class="file-desc">L3 — R$2.997-7.997</div></div></a>
+            <a href="/produto-travel-club.html" class="file-link"><span class="file-icon">🏆</span><div class="file-info"><div class="file-name">Travel Club Anual</div><div class="file-desc">L4 — R$8.000/ano</div></div></a>
+            <a href="/produto-viagem-bespoke.html" class="file-link"><span class="file-icon">💎</span><div class="file-info"><div class="file-name">Viagem Bespoke</div><div class="file-desc">L4 — R$15.000+</div></div></a>
+        </div>
+    </div>
+
+    <!-- JORNADAS -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Jornadas (Roteiros Detalhados)</div>
+            <span class="card-badge badge-pending">6 de 27 criadas</span>
+        </div>
+        <div class="grid-3">
+            <a href="/jornadas/croacia.html" class="file-link"><span class="file-icon">🇭🇷</span><div class="file-info"><div class="file-name">Croácia</div><div class="file-desc">✓ Pronta</div></div></a>
+            <a href="/jornadas/espanha.html" class="file-link"><span class="file-icon">🇪🇸</span><div class="file-info"><div class="file-name">Espanha</div><div class="file-desc">✓ Pronta</div></div></a>
+            <a href="/jornadas/portugal.html" class="file-link"><span class="file-icon">🇵🇹</span><div class="file-info"><div class="file-name">Portugal</div><div class="file-desc">✓ Pronta</div></div></a>
+            <a href="/jornadas/orlando.html" class="file-link"><span class="file-icon">🇺🇸</span><div class="file-info"><div class="file-name">Orlando</div><div class="file-desc">✓ Pronta</div></div></a>
+            <a href="/jornadas/gramado.html" class="file-link"><span class="file-icon">🇧🇷</span><div class="file-info"><div class="file-name">Gramado</div><div class="file-desc">✓ Pronta</div></div></a>
+            <a href="/jornadas/mendoza.html" class="file-link"><span class="file-icon">🇦🇷</span><div class="file-info"><div class="file-name">Mendoza</div><div class="file-desc">✓ Pronta</div></div></a>
+        </div>
+        <div style="margin-top:16px">
+            <p style="color:var(--dim);font-size:12px;margin-bottom:8px">21 destinos pendentes:</p>
+            <p style="color:var(--muted);font-size:11px;line-height:2">
+                Itália · Alemanha/Tcheca · Suíça/Áustria · Côte d'Azur · Nova York · Las Vegas · Califórnia/Napa · Buenos Aires · Colônia del Sacramento · Foz do Iguaçu · Fernando de Noronha · Rio de Janeiro · Fortaleza/Jericoacoara · Ilhabela · Ilha do Mel · São Miguel dos Milagres · Bonito · Chapada dos Veadeiros · Balneário Camboriú · Curitiba/Morretes · Manaus/Amazônia
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: MÉTRICAS -->
+<!-- ============================================================ -->
+<div class="section" id="sec-metricas">
+    <div class="section-header">
+        <h2>Métricas & Metas</h2>
+        <p>Acompanhamento de KPIs — atualizar semanalmente</p>
+    </div>
+
+    <!-- TARGETS -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Metas por Período</div>
+        </div>
+        <table>
+            <thead><tr><th>Métrica</th><th>30 dias</th><th>90 dias</th><th>6 meses</th><th>Atual</th></tr></thead>
+            <tbody>
+                <tr><td>Seguidores Instagram</td><td>500</td><td>2.000</td><td>5.000</td><td style="color:var(--gold);font-weight:600">—</td></tr>
+                <tr><td>Alcance/Reel</td><td>2.000</td><td>5.000</td><td>15.000</td><td style="color:var(--gold);font-weight:600">—</td></tr>
+                <tr><td>Engajamento</td><td>5%+</td><td>5%+</td><td>4%+</td><td style="color:var(--gold);font-weight:600">—</td></tr>
+                <tr><td>Leads capturados</td><td>50</td><td>200</td><td>500</td><td style="color:var(--gold);font-weight:600">—</td></tr>
+                <tr><td>Emails na base</td><td>50</td><td>200</td><td>500</td><td style="color:var(--gold);font-weight:600">—</td></tr>
+                <tr><td>Primeiro cliente</td><td>—</td><td>✓</td><td>5+ clientes</td><td style="color:var(--gold);font-weight:600">—</td></tr>
+                <tr><td>Faturamento</td><td>R$0</td><td>R$1-3k</td><td>R$5-10k</td><td style="color:var(--gold);font-weight:600">—</td></tr>
+                <tr><td>Seguidores TikTok</td><td>200</td><td>1.000</td><td>3.000</td><td style="color:var(--gold);font-weight:600">—</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Links de Monitoramento</div>
+        </div>
+        <div class="grid-2">
+            <a href="https://analytics.google.com" target="_blank" class="file-link"><span class="file-icon">📊</span><div class="file-info"><div class="file-name">Google Analytics</div><div class="file-desc">G-9RXC6Y341F</div></div></a>
+            <a href="https://ads.google.com" target="_blank" class="file-link"><span class="file-icon">📈</span><div class="file-info"><div class="file-name">Google Ads</div><div class="file-desc">AW-18049767977</div></div></a>
+            <a href="https://app.brevo.com" target="_blank" class="file-link"><span class="file-icon">📧</span><div class="file-info"><div class="file-name">Brevo (Email Marketing)</div><div class="file-desc">rottacuradoria@gmail.com</div></div></a>
+            <a href="https://manychat.com" target="_blank" class="file-link"><span class="file-icon">💬</span><div class="file-info"><div class="file-name">ManyChat</div><div class="file-desc">7 fluxos ativos</div></div></a>
+            <a href="https://docs.google.com/spreadsheets" target="_blank" class="file-link"><span class="file-icon">📋</span><div class="file-info"><div class="file-name">Google Sheets (Leads)</div><div class="file-desc">Quiz → Apps Script</div></div></a>
+            <a href="https://make.com" target="_blank" class="file-link"><span class="file-icon">⚙️</span><div class="file-info"><div class="file-name">Make (Automação)</div><div class="file-desc">Sheets → Brevo</div></div></a>
+            <a href="https://vercel.com/dashboard" target="_blank" class="file-link"><span class="file-icon">▲</span><div class="file-info"><div class="file-name">Vercel (Hosting)</div><div class="file-desc">Deploy automático</div></div></a>
+            <a href="https://dash.cloudflare.com" target="_blank" class="file-link"><span class="file-icon">☁️</span><div class="file-info"><div class="file-name">Cloudflare (DNS)</div><div class="file-desc">rottacuradoria.com.br</div></div></a>
+        </div>
+    </div>
+
+    <!-- FINANCIAL -->
+    <div class="card">
+        <div class="card-header">
+            <div class="card-title">Projeção Financeira (12 meses)</div>
+        </div>
+        <table>
+            <thead><tr><th>Período</th><th>Fase</th><th>Receita Estimada</th><th>Margem</th></tr></thead>
+            <tbody>
+                <tr><td>Mês 1-3</td><td>Investimento (conteúdo + viagem Itália)</td><td>R$0</td><td>—</td></tr>
+                <tr><td>Mês 4-6</td><td>Primeiras vendas L1-L2</td><td>R$2-8k/mês</td><td>70-85%</td></tr>
+                <tr><td>Mês 7-9</td><td>Escala L2-L3 + parcerias</td><td>R$10-25k/mês</td><td>70-85%</td></tr>
+                <tr><td>Mês 10-12</td><td>L3-L4 + Travel Club</td><td>R$30-50k/mês</td><td>70-85%</td></tr>
+                <tr style="border-top:2px solid var(--gold)"><td colspan="2"><strong>Meta Ano 1</strong></td><td style="color:var(--gold);font-weight:700">R$150-300k</td><td>70-85%</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</div><!-- end panel-content -->
+
+<script>
+// Tab navigation
+function showSection(name) {
+    document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+    document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    document.getElementById('sec-' + name).classList.add('active');
+    event.target.classList.add('active');
+}
+
+// Current date
+var d = new Date();
+var months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+document.getElementById('currentDate').textContent = d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+
+// Checklist toggle
+document.querySelectorAll('.check').forEach(function(c) {
+    c.addEventListener('click', function() {
+        this.classList.toggle('done');
+        var text = this.nextElementSibling;
+        if (text) text.classList.toggle('done');
+    });
+});
+</script>
+</body>
+</html>

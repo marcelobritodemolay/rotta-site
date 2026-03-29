@@ -14,7 +14,7 @@
         },
         roberto: {
             heroSubtitle: 'Curadoria premium pra quem valoriza tempo e quer o melhor \u2014 sem complica\u00e7\u00e3o.',
-            highlightProduct: 'curadoria-completa',
+            highlightProduct: 'rotta-surprise',
             ctaText: 'Fale com nosso curador',
             badge: 'Colecionador de Experi\u00eancias'
         },
@@ -32,7 +32,7 @@
         },
         lucas: {
             heroSubtitle: 'Aventuras rom\u00e2nticas pra casais que querem explorar o mundo juntos.',
-            highlightProduct: 'roteiro-express',
+            highlightProduct: 'escapada-romantica',
             ctaText: 'Comece sua aventura',
             badge: 'Casal que Celebra'
         }
