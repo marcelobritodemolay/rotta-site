@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18049767977"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18049767977');gtag('config','G-9RXC6Y341F');</script>
@@ -12,6 +13,9 @@
     <meta property="og:description" content="E se alguém fizesse tudo isso por você — e você só precisasse viver? Viagens curadas por Marcelo & Alexandra.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://rottacuradoria.com.br">
+    <meta property="og:image" content="https://rottacuradoria.com.br/images/about/casal-beijo-civita.jpg">
+    <meta property="og:image:width" content="720">
+    <meta property="og:image:height" content="1280">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -154,9 +158,62 @@
         footer .social a:hover{color:var(--gold)}
         footer .legal{font-size:11px;color:var(--dim);margin-top:24px;line-height:1.6}
 
+        /* ===== SCROLL PROGRESS ===== */
+        #scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold),#E8C886);width:0%;z-index:9999;transition:width .1s linear}
+
+        /* ===== HERO PARTICLES ===== */
+        .hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+        .particle{position:absolute;border-radius:50%;background:var(--gold);opacity:0;animation:float-particle linear infinite}
+        @keyframes float-particle{
+            0%{transform:translateY(100vh) scale(0);opacity:0}
+            10%{opacity:.4}
+            90%{opacity:.2}
+            100%{transform:translateY(-10vh) scale(1);opacity:0}
+        }
+        .hero-orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;animation:orb-drift ease-in-out infinite}
+        @keyframes orb-drift{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-20px)}}
+
+        /* ===== COUNTERS ===== */
+        .hero-stat .num{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);display:inline-block}
+
+        /* ===== MARQUEE ===== */
+        .marquee-wrap{overflow:hidden;padding:18px 0;background:var(--gold);margin:0}
+        .marquee-track{display:flex;width:max-content;animation:marquee-slide 25s linear infinite}
+        @keyframes marquee-slide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .marquee-item{font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--bg);padding:0 32px;white-space:nowrap}
+        .marquee-dot{color:rgba(14,14,14,.4)}
+
+        /* ===== DESTINATION CARDS with photos ===== */
+        .dest-card{text-decoration:none;color:var(--text);background:var(--bg);border:1px solid var(--layer);border-radius:16px;overflow:hidden;transition:all .4s cubic-bezier(.175,.885,.32,1.275);display:block;position:relative}
+        .dest-card:hover{border-color:var(--gold);transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.5)}
+        .dest-card-img{height:180px;background-size:cover;background-position:center;position:relative;overflow:hidden}
+        .dest-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.1) 0%,rgba(0,0,0,.6) 100%)}
+        .dest-card:hover .dest-card-img{transform:scale(1.05)}
+        .dest-card-img{transition:transform .5s ease}
+        .dest-card-header{position:absolute;bottom:0;left:0;right:0;padding:16px 20px;z-index:2;text-align:center}
+        .dest-card-body{padding:16px 20px}
+        .dest-badge{position:absolute;top:12px;right:12px;background:var(--gold);color:var(--bg);font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px;z-index:3}
+
+        /* ===== TESTIMONIALS CAROUSEL ===== */
+        .testimonial-carousel{position:relative;overflow:hidden;max-width:1000px;margin:0 auto 48px}
+        .testimonial-track{display:flex;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+        .testimonial-slide{min-width:100%;padding:0 4px}
+        .testimonial-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+        .testimonial-dots{display:flex;justify-content:center;gap:8px;margin-top:24px}
+        .t-dot{width:8px;height:8px;border-radius:50%;background:var(--layer);cursor:pointer;transition:all .3s;border:none}
+        .t-dot.active{background:var(--gold);transform:scale(1.2)}
+
+        /* ===== PRODUCT CARD 3D TILT ===== */
+        .product-card{transition:all .3s,box-shadow .3s;transform-style:preserve-3d;will-change:transform}
+
+        /* ===== SECTION REVEAL (enhanced) ===== */
+        .reveal-word{display:inline-block;opacity:0;transform:translateY(20px);transition:opacity .5s ease,transform .5s ease}
+        .reveal-word.visible{opacity:1;transform:translateY(0)}
+
         /* ===== FLOATING WHATSAPP ===== */
-        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s}
-        .float-wa:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(37,211,102,.4)}
+        .float-wa{position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 16px rgba(37,211,102,.3);z-index:1000;transition:all .3s;animation:wa-pulse 2.5s ease-in-out infinite}
+        .float-wa:hover{transform:scale(1.1);box-shadow:0 6px 24px rgba(37,211,102,.4);animation:none}
+        @keyframes wa-pulse{0%,100%{box-shadow:0 4px 16px rgba(37,211,102,.3)}50%{box-shadow:0 4px 32px rgba(37,211,102,.6),0 0 0 8px rgba(37,211,102,.1)}}
 
         /* ===== NAV ===== */
         .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 24px;background:rgba(14,14,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(42,42,42,.5)}
@@ -201,6 +258,7 @@
         <div class="nav-links">
             <a href="/index.html" class="active">Home</a>
             <a href="/index.html#produtos">Produtos</a>
+            <a href="/portfolio.html">Galeria</a>
             <a href="/blog.html">Blog</a>
             <a href="/sobre.html">Sobre</a>
             <a href="/quiz.html">Quiz</a>
@@ -214,30 +272,64 @@
 <div class="mobile-menu">
     <a href="/index.html" onclick="closeMobileMenu()">Home</a>
     <a href="/index.html#produtos" onclick="closeMobileMenu()">Produtos</a>
+    <a href="/portfolio.html" onclick="closeMobileMenu()">Galeria</a>
     <a href="/blog.html" onclick="closeMobileMenu()">Blog</a>
     <a href="/sobre.html" onclick="closeMobileMenu()">Sobre</a>
     <a href="/quiz.html" onclick="closeMobileMenu()">Quiz</a>
     <a href="#contato" onclick="closeMobileMenu()">Contato</a>
 </div>
 
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress"></div>
+
 <!-- FLOATING WHATSAPP -->
 <a href="https://wa.me/5511968152123?text=Oi!%20Vi%20o%20site%20da%20Rotta%20e%20quero%20saber%20mais" class="float-wa" title="WhatsApp">&#x1F4AC;</a>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
+    <!-- Floating particles -->
+    <div class="hero-particles" id="heroParticles"></div>
+    <!-- Soft orbs -->
+    <div class="hero-orb" style="width:400px;height:400px;background:rgba(197,165,114,.04);top:-100px;left:-100px;animation-duration:8s"></div>
+    <div class="hero-orb" style="width:300px;height:300px;background:rgba(197,165,114,.03);bottom:-80px;right:-60px;animation-duration:12s;animation-delay:-4s"></div>
     <div>
         <div class="hero-badge fade-up">Curadoria de Viagens Premium</div>
         <h1 class="fade-up stagger-1">E se alguém fizesse tudo isso por você —<br><em>e você só precisasse viver?</em></h1>
         <p class="subtitle fade-up stagger-2">Roteiros personalizados pra quem quer mais do que um destino — quer uma memória que dure pra sempre.</p>
         <a href="https://wa.me/5511968152123?text=Oi!%20Quero%20saber%20mais%20sobre%20curadoria%20de%20viagem" class="hero-cta fade-up stagger-3">Fale com a gente</a>
         <div class="hero-stats fade-up stagger-4">
-            <div class="hero-stat"><div class="num">22</div><div class="label">Países</div></div>
-            <div class="hero-stat"><div class="num">5</div><div class="label">Continentes</div></div>
-            <div class="hero-stat"><div class="num">4</div><div class="label">Filhas</div></div>
-            <div class="hero-stat"><div class="num">15+</div><div class="label">Anos viajando</div></div>
+            <div class="hero-stat"><div class="num" data-count="22">0</div><div class="label">Países</div></div>
+            <div class="hero-stat"><div class="num" data-count="5">0</div><div class="label">Continentes</div></div>
+            <div class="hero-stat"><div class="num" data-count="4">0</div><div class="label">Filhas</div></div>
+            <div class="hero-stat"><div class="num" data-count="15" data-suffix="+">0+</div><div class="label">Anos viajando</div></div>
         </div>
     </div>
 </section>
+
+<!-- MARQUEE STRIP 1 -->
+<div class="marquee-wrap">
+    <div class="marquee-track">
+        <span class="marquee-item">Mendoza <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Croácia <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Itália <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Portugal <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Espanha <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Orlando <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Rússia <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Grécia <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Japão <span class="marquee-dot">✦</span></span>
+        <!-- duplicate for seamless loop -->
+        <span class="marquee-item">Mendoza <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Croácia <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Itália <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Portugal <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Espanha <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Orlando <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Rússia <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Grécia <span class="marquee-dot">✦</span></span>
+        <span class="marquee-item">Japão <span class="marquee-dot">✦</span></span>
+    </div>
+</div>
 
 <!-- ===== PROBLEMA ===== -->
 <section class="problem">
@@ -406,47 +498,59 @@
         <h2 style="font-family:'Playfair Display',serif;font-size:32px;text-align:center;margin-bottom:16px" class="fade-up">Experiências que a gente <em style="color:var(--gold)">já viveu</em></h2>
         <p style="text-align:center;color:var(--muted);margin-bottom:48px;font-size:15px;max-width:600px;margin-left:auto;margin-right:auto" class="fade-up">Roteiros dia a dia, com orçamento real, dicas gastronômicas da Alexandra e tudo que você precisa saber antes de ir.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1000px;margin:0 auto">
-            <a href="/jornada-mendoza.html" style="text-decoration:none;color:var(--text);background:var(--bg);border:1px solid var(--layer);border-radius:16px;overflow:hidden;transition:all .3s;display:block" class="fade-up stagger-1" onmouseover="this.style.borderColor='#C5A572';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#2A2A2A';this.style.transform='translateY(0)'">
-                <div style="background:#1A1A1A;padding:24px 20px;text-align:center">
-                    <div style="font-size:28px;margin-bottom:8px">&#x1F1E6;&#x1F1F7;</div>
-                    <h3 style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:4px">Mendoza</h3>
-                    <p style="color:var(--gold);font-size:12px;letter-spacing:1px">5 DIAS · VINHOS · ANDES</p>
+            <!-- Mendoza -->
+            <a href="/jornada-mendoza.html" class="dest-card fade-up stagger-1">
+                <div class="dest-card-img" style="background-image:url('/images/jornadas/mendoza/casal-beijo-vinhedos-andes.jpg')">
+                    <div class="dest-card-header">
+                        <div style="font-size:22px;margin-bottom:4px">🇦🇷</div>
+                        <h3 style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:2px;color:#fff">Mendoza</h3>
+                        <p style="color:var(--gold);font-size:11px;letter-spacing:1px">5 DIAS · VINHOS · ANDES</p>
+                    </div>
                 </div>
-                <div style="padding:16px 20px">
+                <div class="dest-card-body">
                     <p style="color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:8px">Vinícolas, Aconcágua, asado argentino e Malbec de altitude.</p>
                     <span style="color:var(--gold);font-size:12px">R$4.370/casal &#x2192;</span>
                 </div>
             </a>
-            <a href="/jornada-croacia.html" style="text-decoration:none;color:var(--text);background:var(--bg);border:1px solid var(--layer);border-radius:16px;overflow:hidden;transition:all .3s;display:block" class="fade-up stagger-2" onmouseover="this.style.borderColor='#C5A572';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#2A2A2A';this.style.transform='translateY(0)'">
-                <div style="background:#1A1A1A;padding:24px 20px;text-align:center">
-                    <div style="font-size:28px;margin-bottom:8px">&#x1F1ED;&#x1F1F7;</div>
-                    <h3 style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:4px">Croácia</h3>
-                    <p style="color:var(--gold);font-size:12px;letter-spacing:1px">7 DIAS · ADRIÁTICO · ILHAS</p>
+            <!-- Croácia -->
+            <a href="/jornada-croacia.html" class="dest-card fade-up stagger-2">
+                <div class="dest-card-img" style="background-image:url('/images/jornadas/croacia/dubrovnik-teleferico-sunset.jpg')">
+                    <div class="dest-card-header">
+                        <div style="font-size:22px;margin-bottom:4px">🇭🇷</div>
+                        <h3 style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:2px;color:#fff">Croácia</h3>
+                        <p style="color:var(--gold);font-size:11px;letter-spacing:1px">7 DIAS · ADRIÁTICO · ILHAS</p>
+                    </div>
                 </div>
-                <div style="padding:16px 20px">
+                <div class="dest-card-body">
                     <p style="color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:8px">Split, Hvar, Dubrovnik, Lagos Plitvice e ostras de Ston.</p>
                     <span style="color:var(--gold);font-size:12px">R$9.400/casal &#x2192;</span>
                 </div>
             </a>
-            <a href="/jornada-italia.html" style="text-decoration:none;color:var(--text);background:var(--bg);border:1px solid var(--layer);border-radius:16px;overflow:hidden;transition:all .3s;display:block;position:relative" class="fade-up stagger-3" onmouseover="this.style.borderColor='#C5A572';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#2A2A2A';this.style.transform='translateY(0)'">
-                <div style="position:absolute;top:12px;right:12px;background:var(--gold);color:var(--bg);font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:0.5px">MAIO 2026</div>
-                <div style="background:#1A1A1A;padding:24px 20px;text-align:center">
-                    <div style="font-size:28px;margin-bottom:8px">&#x1F1EE;&#x1F1F9;</div>
-                    <h3 style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:4px">Itália</h3>
-                    <p style="color:var(--gold);font-size:12px;letter-spacing:1px">14 DIAS · FAMÍLIA · 5 CIDADES</p>
+            <!-- Itália -->
+            <a href="/jornada-italia.html" class="dest-card fade-up stagger-3">
+                <div class="dest-badge">MAIO 2026</div>
+                <div class="dest-card-img" style="background-image:url('/images/jornadas/italia/dolomitas/casal-lago-braies-dolomitas.jpg')">
+                    <div class="dest-card-header">
+                        <div style="font-size:22px;margin-bottom:4px">🇮🇹</div>
+                        <h3 style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:2px;color:#fff">Itália</h3>
+                        <p style="color:var(--gold);font-size:11px;letter-spacing:1px">14 DIAS · FAMÍLIA · 5 CIDADES</p>
+                    </div>
                 </div>
-                <div style="padding:16px 20px">
+                <div class="dest-card-body">
                     <p style="color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:8px">Roma, Toscana, Dolomitas, Lago di Garda. Nossa próxima jornada.</p>
                     <span style="color:var(--gold);font-size:12px">R$10.400/casal &#x2192;</span>
                 </div>
             </a>
-            <a href="/jornada-russia.html" style="text-decoration:none;color:var(--text);background:var(--bg);border:1px solid var(--layer);border-radius:16px;overflow:hidden;transition:all .3s;display:block" class="fade-up stagger-4" onmouseover="this.style.borderColor='#C5A572';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='#2A2A2A';this.style.transform='translateY(0)'">
-                <div style="background:#1A1A1A;padding:24px 20px;text-align:center">
-                    <div style="font-size:28px;margin-bottom:8px">&#x1F1F7;&#x1F1FA;</div>
-                    <h3 style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:4px">Rússia</h3>
-                    <p style="color:var(--gold);font-size:12px;letter-spacing:1px">10 DIAS · CULTURA · IMERSÃO</p>
+            <!-- Rússia -->
+            <a href="/jornada-russia.html" class="dest-card fade-up stagger-4">
+                <div class="dest-card-img" style="background-image:url('/images/jornadas/russia/moscou-praca-vermelha-sao-basilio.jpg');background-color:#1a1a1a">
+                    <div class="dest-card-header">
+                        <div style="font-size:22px;margin-bottom:4px">🇷🇺</div>
+                        <h3 style="font-family:'Playfair Display',serif;font-size:17px;margin-bottom:2px;color:#fff">Rússia</h3>
+                        <p style="color:var(--gold);font-size:11px;letter-spacing:1px">10 DIAS · CULTURA · IMERSÃO</p>
+                    </div>
                 </div>
-                <div style="padding:16px 20px">
+                <div class="dest-card-body">
                     <p style="color:var(--muted);font-size:13px;line-height:1.5;margin-bottom:8px">Moscou, São Petersburgo, Kazan e a Transiberiana.</p>
                     <span style="color:var(--gold);font-size:12px">R$7.700/casal &#x2192;</span>
                 </div>
@@ -462,45 +566,54 @@
         <h2 class="fade-up">Histórias reais de quem <em style="color:var(--gold)">viveu</em></h2>
         <p style="text-align:center;color:var(--muted);margin-bottom:48px;font-size:15px" class="fade-up">Depoimentos espontâneos de quem confiou na nossa curadoria.</p>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;max-width:1000px;margin:0 auto 48px">
-            <!-- Luty Giacobo -->
-            <div class="fade-up stagger-1" style="background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:32px 24px;position:relative">
-                <div style="font-size:32px;color:var(--gold);opacity:.15;position:absolute;top:16px;right:20px;font-family:serif">"</div>
-                <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:20px;font-style:italic">"Fizemos uma viagem em grupo com 12 pessoas maravilhosas, tudo muito bem organizado desde as passagens, hospedagem e passeios. Sabe quando tudo dá certo?? Sem nem um defeito? Tudo perfeito do início ao fim. Aproveitei cada momento dos passeios e da viagem. Organização nota 1000!!!!"</p>
-                <div style="display:flex;align-items:center;gap:12px">
-                    <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);font-weight:600">L</div>
-                    <div>
-                        <p style="font-weight:600;font-size:14px;margin:0">Luty Giacobo</p>
-                        <p style="color:var(--dim);font-size:12px;margin:0">Viagem em grupo · 12 pessoas</p>
+        <!-- Testimonials Carousel -->
+        <div class="testimonial-carousel fade-up">
+          <div class="testimonial-track" id="tTrack">
+            <!-- Slide 1 -->
+            <div class="testimonial-slide">
+              <div class="testimonial-inner">
+                <div style="background:var(--bg);border:1px solid var(--layer);border-radius:16px;padding:32px 24px;position:relative">
+                    <div style="font-size:48px;color:var(--gold);opacity:.1;position:absolute;top:12px;right:20px;font-family:serif;line-height:1">"</div>
+                    <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:20px;font-style:italic">"Fizemos uma viagem em grupo com 12 pessoas maravilhosas, tudo muito bem organizado desde as passagens, hospedagem e passeios. Sabe quando tudo dá certo?? Tudo perfeito do início ao fim. Organização nota 1000!!!!"</p>
+                    <div style="display:flex;align-items:center;gap:12px">
+                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);font-weight:600">L</div>
+                        <div><p style="font-weight:600;font-size:14px;margin:0">Luty Giacobo</p><p style="color:var(--dim);font-size:12px;margin:0">Viagem em grupo · 12 pessoas</p></div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Ana Paula Giroldo -->
-            <div class="fade-up stagger-2" style="background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:32px 24px;position:relative">
-                <div style="font-size:32px;color:var(--gold);opacity:.15;position:absolute;top:16px;right:20px;font-family:serif">"</div>
-                <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:20px;font-style:italic">"Viajar para Orlando foi simplesmente uma das experiências mais incríveis da nossa vida! Você pensou em cada detalhe do roteiro com tanto carinho que tudo aconteceu de forma leve, organizada e inesquecível. Conseguimos aproveitar ao máximo cada parque, cada passeio e cada momento, sem preocupações. Orlando é um destino encantador, mas ter um roteiro bem feito faz toda a diferença — transforma uma viagem comum em uma experiência realmente maravilhosa!"</p>
-                <div style="display:flex;align-items:center;gap:12px">
-                    <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);font-weight:600">A</div>
-                    <div>
-                        <p style="font-weight:600;font-size:14px;margin:0">Ana Paula Giroldo</p>
-                        <p style="color:var(--dim);font-size:12px;margin:0">Orlando · Roteiro familiar</p>
+                <div style="background:var(--bg);border:1px solid var(--layer);border-radius:16px;padding:32px 24px;position:relative">
+                    <div style="font-size:48px;color:var(--gold);opacity:.1;position:absolute;top:12px;right:20px;font-family:serif;line-height:1">"</div>
+                    <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:20px;font-style:italic">"Viajar para Orlando foi uma das experiências mais incríveis da nossa vida! Você pensou em cada detalhe com tanto carinho que tudo aconteceu de forma leve, organizada e inesquecível. Transforma uma viagem comum em algo realmente maravilhoso!"</p>
+                    <div style="display:flex;align-items:center;gap:12px">
+                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);font-weight:600">A</div>
+                        <div><p style="font-weight:600;font-size:14px;margin:0">Ana Paula Giroldo</p><p style="color:var(--dim);font-size:12px;margin:0">Orlando · Roteiro familiar</p></div>
                     </div>
                 </div>
+              </div>
             </div>
-
-            <!-- Vitória Santos -->
-            <div class="fade-up stagger-3" style="background:var(--card);border:1px solid var(--layer);border-radius:16px;padding:32px 24px;position:relative">
-                <div style="font-size:32px;color:var(--gold);opacity:.15;position:absolute;top:16px;right:20px;font-family:serif">"</div>
-                <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:20px;font-style:italic">"A organização da viagem que fizemos foi simplesmente incrível, tudo aconteceu da forma planejada. Cada detalhe contribuiu para que eu e minha família aproveitasse ao máximo cada momento. A experiência foi única, ficará guardada na memória, cheia de magia e emoção. Viajar para a Disney sempre foi um sonho de infância, e poder realizá-lo é algo gratificante para mim. Foi, sem dúvida, um dos momentos mais especiais da minha vida."</p>
-                <div style="display:flex;align-items:center;gap:12px">
-                    <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);font-weight:600">V</div>
-                    <div>
-                        <p style="font-weight:600;font-size:14px;margin:0">Vitória Santos</p>
-                        <p style="color:var(--dim);font-size:12px;margin:0">Disney · Sonho de infância</p>
+            <!-- Slide 2 -->
+            <div class="testimonial-slide">
+              <div class="testimonial-inner">
+                <div style="background:var(--bg);border:1px solid var(--layer);border-radius:16px;padding:32px 24px;position:relative">
+                    <div style="font-size:48px;color:var(--gold);opacity:.1;position:absolute;top:12px;right:20px;font-family:serif;line-height:1">"</div>
+                    <p style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:20px;font-style:italic">"A organização da viagem foi simplesmente incrível, tudo aconteceu da forma planejada. A experiência foi única, ficará guardada na memória, cheia de magia e emoção. Viajar para a Disney sempre foi um sonho de infância, e poder realizá-lo é algo gratificante para mim."</p>
+                    <div style="display:flex;align-items:center;gap:12px">
+                        <div style="width:40px;height:40px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--gold);font-weight:600">V</div>
+                        <div><p style="font-weight:600;font-size:14px;margin:0">Vitória Santos</p><p style="color:var(--dim);font-size:12px;margin:0">Disney · Sonho de infância</p></div>
                     </div>
                 </div>
+                <div style="background:var(--bg);border:1px solid var(--layer);border-radius:16px;padding:32px 24px;position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;border-style:dashed;border-color:var(--gold)">
+                    <div style="font-size:36px;margin-bottom:12px">🇮🇹</div>
+                    <p style="font-family:'Playfair Display',serif;font-size:15px;color:var(--gold);margin-bottom:8px">Mais depoimentos chegando...</p>
+                    <p style="color:var(--muted);font-size:13px;line-height:1.6">Nossa família vai pra Itália em Maio/2026 e vai documentar tudo em tempo real.</p>
+                    <a href="https://instagram.com/rotta.curadoria" style="color:var(--gold);font-size:13px;font-weight:500;text-decoration:none;margin-top:12px">@rotta.curadoria &#x2192;</a>
+                </div>
+              </div>
             </div>
+          </div>
+          <div class="testimonial-dots">
+            <button class="t-dot active" onclick="goSlide(0)"></button>
+            <button class="t-dot" onclick="goSlide(1)"></button>
+          </div>
         </div>
 
         <!-- Teaser Itália -->
@@ -609,8 +722,16 @@
 <script src="/js/personalize.js"></script>
 <script src="/js/cookie-consent.js"></script>
 
-<!-- SCROLL ANIMATION + FORM + MOBILE MENU -->
+<!-- SCROLL ANIMATION + FORM + MOBILE MENU + DYNAMIC EFFECTS -->
 <script>
+// ── SCROLL PROGRESS ──────────────────────────────────────
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+    const pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+    progressBar.style.width = pct + '%';
+}, { passive: true });
+
+// ── FADE-UP OBSERVER ─────────────────────────────────────
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -618,25 +739,125 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, { threshold: 0.1 });
-
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// Mobile menu
+// ── ANIMATED COUNTERS ────────────────────────────────────
+function animateCounter(el) {
+    const target = parseInt(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1200;
+    const step = target / (duration / 16);
+    let current = 0;
+    const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current) + suffix;
+        if (current >= target) clearInterval(timer);
+    }, 16);
+}
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.dataset.counted) {
+            entry.target.dataset.counted = '1';
+            animateCounter(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+// ── HERO PARTICLES ───────────────────────────────────────
+(function spawnParticles() {
+    const container = document.getElementById('heroParticles');
+    if (!container) return;
+    const count = 18;
+    for (let i = 0; i < count; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = Math.random() * 4 + 2;
+        p.style.cssText = `
+            width:${size}px;height:${size}px;
+            left:${Math.random()*100}%;
+            animation-duration:${Math.random()*12+8}s;
+            animation-delay:${Math.random()*-15}s;
+        `;
+        container.appendChild(p);
+    }
+})();
+
+// ── HERO MOUSE PARALLAX ──────────────────────────────────
+const hero = document.querySelector('.hero');
+if (hero) {
+    hero.addEventListener('mousemove', (e) => {
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        const dx = (e.clientX - cx) / cx;
+        const dy = (e.clientY - cy) / cy;
+        const h1 = hero.querySelector('h1');
+        const badge = hero.querySelector('.hero-badge');
+        if (h1) h1.style.transform = `translate(${dx * -8}px, ${dy * -4}px)`;
+        if (badge) badge.style.transform = `translate(${dx * -12}px, ${dy * -6}px)`;
+    }, { passive: true });
+    hero.addEventListener('mouseleave', () => {
+        const h1 = hero.querySelector('h1');
+        const badge = hero.querySelector('.hero-badge');
+        if (h1) h1.style.transform = '';
+        if (badge) badge.style.transform = '';
+    });
+}
+
+// ── PRODUCT CARD 3D TILT ─────────────────────────────────
+document.querySelectorAll('.product-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const rotX = (y - cy) / cy * -6;
+        const rotY = (x - cx) / cx * 6;
+        card.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-4px)`;
+    }, { passive: true });
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+    });
+});
+
+// ── TESTIMONIAL CAROUSEL ─────────────────────────────────
+let currentSlide = 0;
+const track = document.getElementById('tTrack');
+const dots = document.querySelectorAll('.t-dot');
+function goSlide(idx) {
+    currentSlide = idx;
+    if (track) track.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+}
+// auto-advance every 5s
+setInterval(() => {
+    goSlide((currentSlide + 1) % (track ? track.children.length : 1));
+}, 5000);
+
+// ── MOBILE MENU ───────────────────────────────────────────
 function closeMobileMenu() {
     document.querySelector('.hamburger').classList.remove('open');
     document.querySelector('.mobile-menu').classList.remove('open');
 }
 
-// Contact form -> WhatsApp
+// ── CONTACT FORM → WHATSAPP ──────────────────────────────
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const nome = document.getElementById('cf-nome').value.trim();
     const email = document.getElementById('cf-email').value.trim();
     const interesse = document.getElementById('cf-interesse').value;
     const msg = `Oi! Vim pelo site da Rotta.\n\nNome: ${nome}\nE-mail: ${email}\nInteresse: ${interesse}`;
-    const encoded = encodeURIComponent(msg);
-    window.open(`https://wa.me/5511968152123?text=${encoded}`, '_blank');
+    window.open(`https://wa.me/5511968152123?text=${encodeURIComponent(msg)}`, '_blank');
 });
+
+// ── NAV SCROLL SHRINK ────────────────────────────────────
+const nav = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 80
+        ? 'rgba(14,14,14,.98)'
+        : 'rgba(14,14,14,.92)';
+}, { passive: true });
 </script>
 
 </body>
